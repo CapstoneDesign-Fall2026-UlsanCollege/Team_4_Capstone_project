@@ -6,8 +6,8 @@ Complete this when your team forms. Link it in your Week 1 Launch Report and rev
 
 | Item | Details |
 |------|---------|
-| **Team name:** | [Your Team Name] |
-| **Project working title:** | [Project Name] |
+| **Team name:** | [team 4] |
+| **Project working title:** | [TBD] |
 | **Date agreed:** | September 7, 2026 |
 
 ---
