@@ -1,440 +1,149 @@
-Capstone Project Team Working Agreement
-1. Team and Project
+Team Working Agreement
 
-Team Name: Capstone Team
+Complete this when your team forms. Link it in your Week 1 Launch Report and revisit it whenever a role, schedule, project requirement, or team concern changes.
+
+Team and Project
+
+Team Name: ______________________________
+
 Project Working Title: ______________________________
+
 Date Agreed: September 7, 2026
-Team Size: 4 members
 
-Team Members
-Student	Primary Strengths / Experience	Regular Availability / Known Conflicts
-Tulsa	Project coordination, planning, organization, problem-solving	To be confirmed by team
-Devyana	Research, analysis, documentation, attention to detail	To be confirmed by team
-Prachi	Design, communication, user perspective, presentation	To be confirmed by team
-Ujwal	Technical development, testing, troubleshooting, implementation	To be confirmed by team
+Members, Strengths, and Availability
+Student	Strengths or Experience to Use	Regular Availability / Known Conflicts
+Prachi	Organization, project coordination, communication, task tracking, and team management	To be confirmed
+Tulsa	Problem-solving, research, communication, creativity, and project contribution	To be confirmed
+Devyana	Research, documentation, analysis, attention to detail, and organization	To be confirmed
+Ujwal	Technical development, implementation, troubleshooting, testing, and problem-solving	To be confirmed
+Roles for the First Sprint
 
-Note: Team members may contribute outside their primary strengths. Roles are responsibilities, not restrictions. The team will rotate responsibilities when appropriate so that knowledge and workload are shared.
+Roles can rotate as the project develops. Every team member is responsible for keeping the work, evidence, communication, and quality visible.
 
-2. Team Mission
-
-Our team will work collaboratively to deliver a capstone project that is:
-
-Technically functional and reliable.
-Clearly aligned with the project requirements and user needs.
-Supported by evidence, documentation, and testing.
-Developed through transparent and trackable contributions.
-Completed on schedule through realistic milestones.
-Professional enough to demonstrate our individual and collective skills.
-
-We will prioritize quality, accountability, communication, learning, and mutual respect throughout the project.
-
-3. Roles for the First Sprint
-Role	Student	Responsibilities
-Project / Board Coordinator	Tulsa	Maintain the GitHub Project board, keep Issues assigned, track milestones, identify blockers, and make sure next actions are visible.
-Evidence / Documentation Lead	Devyana	Maintain project documentation, meeting notes, research evidence, references, reports, screenshots, and supporting project records.
-Build / Quality Lead	Ujwal	Maintain the technical demo path, coordinate testing, identify defects, review implementation quality, and ensure major functionality is tested before release.
-UX / Communication & Presentation Lead	Prachi	Coordinate user-facing design, presentation materials, project narrative, usability feedback, and communication of project progress.
+Role	Student	What This Person Is Responsible For
+Project / Board Coordinator	Prachi	Keep GitHub Issues, owners, deadlines, milestones, and next actions current. Monitor overall project progress and help identify blockers.
+Evidence / Documentation Lead	Devyana	Keep reports, meeting notes, research, receipts, screenshots, references, and supporting documentation organized and linked.
+Build / Quality Lead	Ujwal	Keep the technical demo path, implementation progress, testing checks, bugs, and quality requirements visible.
+Communication / Presentation Lead	Tulsa	Coordinate team communication, presentation materials, project explanations, user-facing content, and preparation for project demonstrations.
 Shared Responsibilities
 
-Regardless of role, every member is responsible for:
+Although each member has a primary role, all four members agree to:
 
-Completing assigned Issues.
-Communicating blockers early.
-Reviewing teammates' substantial work.
-Keeping evidence of contributions visible.
-Following GitHub and project workflow requirements.
-Participating in meetings and decisions.
-Helping another teammate when deadlines or technical challenges require support.
-4. Role Rotation
+Contribute actively to the project.
+Complete assigned tasks by the agreed deadlines.
+Keep their work visible in GitHub.
+Communicate blockers as early as possible.
+Review teammates' substantial work when requested.
+Help maintain project quality.
+Participate in meetings and important decisions.
+Support other team members when reasonable.
+Follow the course Project Work Policy.
+Communication and Meetings
 
-Roles may rotate between sprints or milestones.
+Main Communication Channel: ______________________________
 
-A role should be transferred when:
+Secondary Communication Channel: ______________________________
 
-The current sprint is complete.
-A teammate needs experience with another responsibility.
-Workload becomes unbalanced.
-A teammate is unavailable for an extended period.
-The project enters a phase requiring different leadership.
+Normal Response Expectation:
+Team members should normally respond to important project messages within 24 hours. If a member is unavailable, they should communicate this as soon as reasonably possible.
 
-The team will record major role changes in the relevant GitHub Issue, project board, or team documentation.
-
-5. Communication Agreement
-
-Primary Communication Channel: ______________________________
-
-Secondary Communication Channel: ____________________________
-
-Normal Response Expectation
-
-Team members should normally acknowledge an important team message within 24 hours.
-
-An immediate response is not required unless the message is marked as urgent or relates to a deadline occurring within the next 24 hours.
-
-If a teammate cannot respond within the expected timeframe, they should provide a short acknowledgment when possible.
-
-Regular Meeting / Work Time
-
-Regular Meeting Day: ____________________
+Regular Meeting or Work Time:
+Day: ____________________
 Time: ____________________
-Location / Online Platform: ____________________
+Location / Platform: ____________________
 
-The team will use meetings to:
+How We Will Record Decisions and Action Items:
+Important decisions, action items, owners, and deadlines will be recorded in the relevant GitHub Issue, Project Board, meeting notes, or team documentation.
 
-Review completed work.
-Review current Issues.
-Identify blockers.
-Confirm upcoming deadlines.
-Assign or adjust responsibilities.
-Make decisions that require team input.
-6. Decision-Making
+How We Will Tell the Team About an Absence or Delayed Task:
+The team member will notify the group as soon as possible through the main communication channel and provide an updated status, expected completion time, and any blocker that is preventing progress.
 
-We will attempt to make important decisions through discussion and consensus.
+How We Work
 
-For significant decisions, the team will:
+Our team agrees to follow these working practices:
 
-Clearly define the problem.
-Identify realistic options.
-Discuss advantages and disadvantages.
-Consider project requirements and deadlines.
-Select the option that best supports the project.
-Record the decision and reasoning when appropriate.
+We create or update a GitHub Issue before starting significant work.
+We assign an owner and establish a clear, achievable Definition of Done before work begins.
+We keep the Project Board updated so the current status of work is visible.
+We divide large tasks into smaller, manageable Issues whenever possible.
+We link relevant proof, documentation, and evidence in GitHub.
+We use branches and Pull Requests for substantial changes where appropriate.
+We ask for peer review before merging substantial changes.
+We test significant functionality before considering it complete.
+We communicate blockers instead of allowing tasks to silently become overdue.
+We give feedback about the work, not the person, and assume good intent.
+We respect different ideas and technical approaches.
+We use the Project Work Policy for privacy, attribution, academic integrity, and AI responsibility.
+We do not claim another team member's work as our own.
+We maintain accurate evidence of individual and team contributions.
+Definition of Done
 
-If consensus cannot be reached after reasonable discussion, the team may use a majority decision.
+Before an assigned task is considered complete, the responsible team member should confirm that:
 
-For technical decisions, the Build / Quality Lead may provide a recommendation, but major architectural or project-impacting decisions should remain visible to the entire team.
+The agreed task requirements have been completed.
+The work has been appropriately tested.
+Any identified issues have been addressed or documented.
+Relevant documentation has been updated.
+Supporting evidence has been linked or recorded.
+Required peer review has been completed.
+The GitHub Issue has been updated.
+Any remaining limitations or follow-up work are clearly identified.
+If Work or Communication Breaks Down
 
-No individual should make a major change that significantly affects the project's scope, architecture, deadline, or deliverables without informing the team.
+If a task, deadline, or communication problem occurs, our team will follow this process:
 
-7. GitHub and Work Tracking Standards
+Raise the concern early.
+Discuss the concern privately and respectfully with the teammate as soon as possible.
 
-Our team will use GitHub as the primary source of truth for project work and evidence.
+Focus on the work.
+Name the missed, delayed, or blocked task, the relevant evidence, and the impact on the project.
 
-Before Significant Work
+Identify a realistic next step.
+Agree on what needs to happen, who will do it, and when it should be completed.
 
-Before beginning significant work, the team member should:
+Record the recovery plan.
+Add the agreed action to the relevant GitHub Issue, Project Board, or team note when appropriate.
 
-Create or update the appropriate Issue.
-Define the expected outcome.
-Identify the owner.
-Identify dependencies or blockers.
-Establish a reasonable Definition of Done.
-During Work
+Review the situation.
+Check the recovery plan at the next team meeting or earlier if the deadline requires it.
 
-Team members should:
+Escalate when necessary.
+If the concern remains unresolved, or someone cannot safely raise it with the team, contact the instructor through the course-designated channel and provide the relevant GitHub links or project evidence.
 
-Keep Issues updated.
-Use meaningful branch names.
-Make focused commits.
-Avoid unnecessarily large or unrelated changes.
-Link relevant Issues and Pull Requests.
-Communicate blockers rather than silently missing deadlines.
-Before Merging
+Handling Changes in Availability
 
-Substantial changes should:
+If a team member's schedule changes, they agree to notify the team as early as possible.
 
-Be reviewed by at least one other team member.
-Pass appropriate testing or quality checks.
-Have relevant documentation updated.
-Have evidence linked where appropriate.
-Clearly identify any known limitations.
-8. Definition of Done
+The team will review whether responsibilities or deadlines need to be adjusted. Changes will be made based on project needs rather than assigning blame.
 
-An Issue is considered Done only when the agreed acceptance criteria have been satisfied.
+If a role needs to change, the new responsibility will be recorded in the Team Working Agreement or relevant project documentation.
 
-Where applicable, Done means:
+Project Quality and Accountability
 
-The requested functionality or task has been completed.
-The implementation has been tested.
-Relevant defects have been addressed.
-Documentation has been updated.
-Required evidence has been captured.
-The work has been reviewed.
-The Issue has been updated with the final status.
-Any remaining limitations are clearly documented.
+The team agrees that quality is a shared responsibility.
 
-"Almost finished" should not be treated as "Done."
+Prachi, as Project / Board Coordinator, will help ensure that project tasks, owners, deadlines, and blockers remain visible.
 
-9. Quality Assurance
+Devyana, as Evidence / Documentation Lead, will help ensure that project evidence and documentation remain organized and complete.
 
-Quality is a shared responsibility.
+Ujwal, as Build / Quality Lead, will help ensure that technical functionality and testing remain visible and reliable.
 
-The team will use appropriate checks such as:
+Tulsa, as Communication / Presentation Lead, will help ensure that the team can clearly communicate the project's purpose, progress, results, and final outcome.
 
-Functional testing.
-User-flow testing.
-Peer review.
-Regression testing after significant changes.
-Documentation review.
-Usability checks where applicable.
-Demonstration of the primary project workflow.
+No role replaces the responsibility of the other team members to contribute to project quality.
 
-Before major demonstrations or submissions, the team will conduct a release readiness check covering:
+Agreement
 
-Functionality → Testing → Documentation → Evidence → Presentation → Submission requirements
+By signing or providing GitHub confirmation, each member agrees to follow this Team Working Agreement, communicate respectfully, raise concerns early, maintain visible project work, contribute fairly, and update this agreement when circumstances or project responsibilities change.
 
-10. Workload and Accountability
-
-We will make a reasonable effort to distribute work fairly.
-
-Workload will be evaluated based on:
-
-Complexity.
-Estimated time.
-Technical difficulty.
-Research requirements.
-Documentation requirements.
-Testing responsibilities.
-Project deadlines.
-
-Equal workload does not necessarily mean identical numbers of Issues. A technically complex Issue may require substantially more effort than several smaller Issues.
-
-If someone believes their workload is significantly unbalanced, they should raise the concern early rather than waiting until the deadline.
-
-11. Deadlines and Recovery Plans
-
-Each major milestone should have:
-
-An owner.
-A target date.
-A Definition of Done.
-A visible Issue or project-board item.
-
-If a team member realizes that they may miss a deadline, they should notify the team as early as reasonably possible.
-
-The team will then determine whether to:
-
-Reduce or divide the task.
-Reassign part of the work.
-Adjust the schedule.
-Provide technical assistance.
-Create a recovery plan.
-
-The objective is to solve the project problem rather than assign blame.
-
-12. Absence Policy
-
-If a member knows they will be absent from a meeting or unavailable for assigned work, they should notify the team as soon as possible.
-
-The message should include, when practical:
-
-Expected duration of the absence.
-Current task status.
-Any blockers.
-Whether another teammate needs to take action.
-
-If an unexpected situation occurs, the team will prioritize communication and recovery rather than assuming bad intent.
-
-13. Conflict Resolution
-
-When a disagreement occurs, we will follow this process:
-
-Step 1 — Direct Conversation
-
-The people involved should discuss the issue privately and respectfully.
-
-Step 2 — Focus on Evidence
-
-The discussion should focus on:
-
-The task.
-Requirements.
-Project evidence.
-Deadlines.
-Technical facts.
-Expected outcomes.
-
-Personal attacks, insults, or assigning negative motives are not acceptable.
-
-Step 3 — Document the Recovery Plan
-
-If necessary, the team will record the agreed next step in the relevant Issue or team note.
-
-Step 4 — Escalation
-
-If the issue cannot be resolved internally, or a member does not feel safe raising the concern with the team, the team member should contact the instructor through the course-designated channel and provide relevant project evidence.
-
-14. Feedback Standards
-
-We will give feedback that is:
-
-Specific.
-Constructive.
-Respectful.
-Focused on the work.
-Based on requirements or evidence.
-Actionable.
-
-Instead of saying:
-
-"This is bad."
-
-We will identify the specific problem and suggest an improvement.
-
-For example:
-
-"The current workflow does not handle this case. Could we add validation and test it with these two scenarios?"
-
-We will treat feedback as part of the development process rather than as personal criticism.
-
-15. AI and Academic Integrity
-
-If AI tools are used, the team will use them responsibly and in accordance with course requirements.
-
-AI may assist with activities such as:
-
-Brainstorming.
-Research organization.
-Drafting or improving documentation.
-Explaining technical concepts.
-Generating ideas for testing.
-Debugging assistance.
-
-However, team members remain responsible for verifying AI-generated information and ensuring that submitted work accurately represents their own understanding and contribution.
-
-The team will follow the Project Work Policy and applicable course requirements regarding AI disclosure, attribution, privacy, and academic integrity.
-
-We will not submit unverified AI-generated content as fact.
-
-16. Privacy and Security
-
-Team members will not place confidential, private, or sensitive information into public repositories, Issues, documentation, or AI tools unless explicitly permitted.
-
-Examples include:
-
-Passwords.
-API keys.
-Private user information.
-Authentication tokens.
-Personal records.
-Confidential project information.
-
-Secrets should be stored using appropriate secure mechanisms rather than committed to GitHub.
-
-17. Attribution and Contribution Transparency
-
-Each member's contributions should remain reasonably visible through project records such as:
-
-GitHub Issues.
-Pull Requests.
-Commits.
-Documentation.
-Meeting notes.
-Research records.
-Testing evidence.
-Presentation materials.
-
-The purpose is not to compete over the number of commits. The purpose is to maintain an accurate record of how the team contributed to the project.
-
-We will not intentionally misrepresent another person's work as our own.
-
-18. Meeting Documentation
-
-For significant meetings, the team will record:
-
-Date: ____________________
-Attendees: ____________________
-Key decisions: ____________________
-Action items: ____________________
-Owners: ____________________
-Due dates: ____________________
-Blockers: ____________________
-
-Action items should be connected to relevant GitHub Issues whenever practical.
-
-19. Project Risk Management
-
-The team will actively identify risks that could affect project success.
-
-Potential risks include:
-
-Technical implementation problems.
-Scope growth.
-Missing requirements.
-Insufficient testing.
-Team availability.
-Dependency failures.
-Integration conflicts.
-Documentation gaps.
-Last-minute submission problems.
-
-For significant risks, we will identify:
-
-Risk → Impact → Likelihood → Mitigation → Owner → Review Date
-
-The team will address risks early rather than waiting until they become emergencies.
-
-20. Scope Management
-
-We will distinguish between:
-
-Must Have — Required for the project to meet its core objectives.
-Should Have — Valuable but not essential.
-Could Have — Useful if time permits.
-Out of Scope — Not included unless the team formally changes the project scope.
-
-New ideas should not automatically become project requirements.
-
-Before adding significant scope, the team will consider:
-
-Time available.
-Technical complexity.
-Impact on existing functionality.
-Testing requirements.
-Documentation requirements.
-Course deadlines.
-21. Sprint Review
-
-At the end of each sprint, the team will review:
-
-What was completed?
-What was not completed?
-What evidence was produced?
-What problems occurred?
-What should change?
-Are responsibilities balanced?
-What are the priorities for the next sprint?
-
-The team will use the review to continuously improve its working process.
-
-22. Team Success Criteria
-
-We will consider the team successful when:
-
-Everyone understands their responsibilities.
-Work is visible and trackable.
-Important decisions are documented.
-Deadlines are actively managed.
-Blockers are raised early.
-Significant work receives peer review.
-The project is tested before demonstrations/submission.
-Documentation and evidence are complete.
-Contributions are accurately represented.
-Team members communicate respectfully.
-The final project meets its defined requirements.
-23. Agreement and Confirmation
-
-By confirming this agreement, each team member agrees to:
-
-Communicate honestly and respectfully.
-Complete assigned responsibilities.
-Raise concerns early.
-Keep project work visible.
-Maintain accurate evidence of contributions.
-Participate in reviews and decision-making.
-Follow GitHub and course policies.
-Use AI and project resources responsibly.
-Support teammates when reasonable.
-Update this agreement when roles, schedules, or project circumstances materially change.
-Student	Signature / GitHub Confirmation	Date
+Student	Signature or GitHub Confirmation	Date
+Prachi	______________________________	__________
 Tulsa	______________________________	__________
 Devyana	______________________________	__________
-Prachi	______________________________	__________
 Ujwal	______________________________	__________
-Agreement Review History
-Date	Reason for Update	Changes Made	Confirmed By
-September 7, 2026	Initial agreement	Team agreement created	All team members
-__________	__________	__________	__________
-__________	__________	__________	__________
-
-Team principle: Make the work visible, communicate early, support each other, and take collective ownership of the final result.
+Agreement Review
+Date	Reason for Review / Change	Changes Made	Confirmed By
+September 7, 2026	Initial team formation	Team Working Agreement created	All team members
+__________	____________________	____________________	____________________
+__________	____________________	____________________	____________________
+__________	____________________	____________________	____________________
