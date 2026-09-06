@@ -1,91 +1,90 @@
 # Team Working Agreement
 
-**Project:** [Project Name]  
-**Team Name:** [Team Name]  
-**Date:** September 7, 2026  
-**Team Members:** Prachi, Tulsa, Devyana, Ujwal
+Complete this when your team forms. Link it in your Week 1 Launch Report and revisit it when a role, schedule, or concern changes.
+
+## Team and Project
+
+| Item | Details |
+|------|---------|
+| **Team name:** | [Your Team Name] |
+| **Project working title:** | [Project Name] |
+| **Date agreed:** | September 7, 2026 |
 
 ---
 
-## Team Roles (First Sprint)
+## Members, Strengths, and Availability
 
-| Role | Student | Responsibility |
+| Student | Strengths or Experience to Use | Regular Availability / Known Conflicts |
+|---------|------|---|
+| Prachi | Project coordination, organization, communication, task management, leadership | [TBD] |
+| Tulsa | Communication, research, problem-solving, creativity, presentation | [TBD] |
+| Devyana | Research, documentation, organization, analysis, attention to detail | [TBD] |
+| Ujwal | Technical development, implementation, troubleshooting, testing, problem-solving | [TBD] |
+
+---
+
+## Roles for the First Sprint
+
+Roles can rotate. Every team must keep the work, evidence, and quality visible.
+
+| Role | Student | What This Person Is Responsible For |
 |------|---------|---|
-| Project Coordinator | Prachi | Track tasks, deadlines, and project progress |
-| Communication Lead | Tulsa | Presentations, user communication, documentation writing |
-| Documentation Lead | Devyana | Meeting notes, research, organization, evidence |
-| Technical Lead | Ujwal | Development, testing, technical decisions |
+| Project / Board Coordinator | Prachi | Keep Issues, owners, deadlines, and next actions current. Monitor progress and identify blockers. |
+| Evidence / Documentation Lead | Devyana | Keep reports, meeting notes, receipts, screenshots, and supporting documentation linked and organized. |
+| Build / Quality Lead | Ujwal | Keep the technical demo path, implementation progress, testing checks, and bugs visible. |
+| Communication and Presentation Lead | Tulsa | Coordinate team communication, presentations, user-facing content, and project explanations. |
+
+---
+
+## Communication and Meetings
+
+| Item | Details |
+|------|---------|
+| **Main communication channel:** | [Slack / Discord / Email / Other] |
+| **Normal response expectation:** | Team members should respond to important project messages within 24 hours |
+| **Regular meeting or work time:** | [Day, Time] |
+| **Meeting location/platform:** | [In-person / Zoom / Other] |
+| **How we will record decisions and action items:** | GitHub Issues, Project Board, meeting notes, or team documentation |
+| **How we will tell the team about an absence or delayed task:** | Notify group ASAP with status, expected completion time, and any blockers |
 
 ---
 
 ## How We Work
 
-- **Main Communication:** [Slack/Discord/Email]
-- **Meeting Time:** [Day/Time]
-- **Meeting Location:** [In-person/Zoom link]
-- **Response Time:** 24 hours for important messages
+- We create or update an Issue before starting significant work
+- We assign an owner and a small Definition of Done before work begins
+- We link proof in GitHub and ask for review before merging substantial changes
+- We give feedback about the work, not the person, and assume good intent
+- We use the Project Work Policy for privacy, attribution, and AI responsibility
+- We keep the Project Board current so everyone knows what's happening
+- We test significant work before considering it complete
+- We communicate blockers instead of allowing tasks to silently slip
 
 ---
 
-## Expectations
+## If Work or Communication Breaks Down
 
-✅ Complete assigned tasks on time  
-✅ Update GitHub Issues before starting work  
-✅ Communicate blockers immediately  
-✅ Attend team meetings  
-✅ Keep the Project Board current  
-✅ Review each other's work before merging  
-✅ Help teammates when needed  
-✅ Respect academic integrity policies  
+1. **Raise the concern** privately and respectfully with the teammate as soon as possible
 
----
+2. **Name the missed or blocked task**, the evidence, and a realistic next step in the relevant Issue or team note
 
-## If Something Goes Wrong
+3. **Agree on a recovery plan** and check it at the next team meeting
 
-1. **Raise the concern** — Talk to the teammate privately
-2. **Identify the problem** — Be specific about what's blocked
-3. **Make a plan** — Agree on next steps and new deadline
-4. **Document it** — Update GitHub Issue with the plan
-5. **Check progress** — Follow up at next meeting
-6. **Escalate if needed** — Contact instructor if still unresolved
+4. **If the concern remains unresolved**, or someone cannot safely raise it with the team, contact the instructor through the course-designated channel with the relevant GitHub links
 
 ---
 
-## Definition of Done
+## Agreement
 
-A task is done when:
-- ✅ Requirements are complete
-- ✅ Work has been reviewed
-- ✅ Tests pass (if applicable)
-- ✅ Documentation is updated
-- ✅ GitHub Issue is closed
+By signing, each member agrees to follow this plan, raise concerns early, and update it when circumstances change.
 
----
-
-## Availability
-
-| Team Member | Known Conflicts |
-|---|---|
-| Prachi | [TBD] |
-| Tulsa | [TBD] |
-| Devyana | [TBD] |
-| Ujwal | [TBD] |
-
-If availability changes, notify the team ASAP.
+| Student | Signature or GitHub Confirmation | Date |
+|---------|------|------|
+| Prachi | _________________________ | ________ |
+| Tulsa | _________________________ | ________ |
+| Devyana | _________________________ | ________ |
+| Ujwal | _________________________ | ________ |
 
 ---
 
-## Team Agreement Signatures
-
-By signing below, we agree to follow this agreement and support each other.
-
-| Name | Signature | Date |
-|------|-----------|------|
-| Prachi | _________________ | ________ |
-| Tulsa | _________________ | ________ |
-| Devyana | _________________ | ________ |
-| Ujwal | _________________ | ________ |
-
----
-
-**Our Team Principle:** Make the work visible. Communicate early. Support each other.
+**Team Commitment:** Make the work visible. Communicate early. Support each other.
