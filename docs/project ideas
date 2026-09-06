@@ -1,0 +1,44 @@
+# Five Project Ideas
+Team: [teaM_4]
+Week: 1
+
+
+## Idea 1
+**Project name:** CampusVibes
+**Target user:** College students looking for events, clubs, and activities
+**Problem:** Students miss out on relevant events/clubs because there's no centralized discovery platform; manually scrolling bulletin boards is inefficient
+**Smallest useful version:** Web app that scrapes campus event calendars + clubs directory, displays events filtered by interests (music, sports, tech, etc.)
+**Midterm demo could show:** Personalized recommendations based on past event attendance; event calendar with RSVP feature
+**Big risk / unknown:** Getting access to all event data; accurate interest profiling
+
+## Idea 2
+**Project name:** SpotFinder
+**Target user:** Students looking for quiet study spaces, lab availability, or empty classrooms
+**Problem:** No way to know if libraries, labs, or study spaces are crowded before you go; wastes time
+**Smallest useful version:** Mobile app showing live occupancy of campus spaces using anonymous WiFi data or manual check-ins
+**Midterm demo could show:** Heat map of busy areas; notifications when your favorite study spot is available
+**Big risk / unknown:** Privacy concerns with WiFi tracking; getting sensor/occupancy data
+
+## Idea 3
+**Project name:** GradeFlow
+**Target user:** Students managing multiple courses and assignments
+**Problem:** Assignments pile up; students don't know when workload peaks; no AI-based advice on when to start projects
+**Smallest useful version:** App where students input all syllabus dates + assignment details → generates smart calendar with predicted workload and "start by" dates
+**Midterm demo could show:** Workload visualization; clash detection for assignment deadlines; time management tips based on course difficulty
+**Big risk / unknown:** Accurately predicting assignment complexity; user adoption
+
+## Idea 4
+**Project name:** TutorMatch
+**Target user:** Students who want peer tutoring or want to tutor others
+**Problem:** Finding a peer tutor for niche subjects is hard; no structured way to organize tutoring sessions
+**Smallest useful version:** App with student profiles listing subjects they can tutor + subjects they need help with; matching algorithm; simple video call integration
+**Midterm demo could show:** Profile system; tutor matching; session scheduling; in-app messaging
+**Big risk / unknown:** Ensuring tutor quality; handling payment (if included)
+
+## Idea 5
+**Project name:** GreenCampus
+**Target user:** Environmentally-conscious students and campus sustainability offices
+**Problem:** Students don't know their environmental impact on campus; no easy way to track or reduce carbon footprint
+**Smallest useful version:** Mobile app that tracks student actions (dining habits, energy use, transportation) and gamifies sustainability with points/badges
+**Midterm demo could show:** Personal carbon footprint dashboard; leaderboard for eco-friendly competition; sustainability tips; integration with campus dining/transport data
+**Big risk / unknown:** Accessing real campus data; motivation/gamification strategy
