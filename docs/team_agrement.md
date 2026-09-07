@@ -31,7 +31,7 @@ Roles can rotate. Every team must keep the work, evidence, and quality visible.
 |------|---------|---|
 | Project / Board Coordinator | Prachi | Keep Issues, owners, deadlines, and next actions current. Monitor progress and identify blockers. |
 | Evidence / Documentation Lead | Devyana | Keep reports, meeting notes, receipts, screenshots, and supporting documentation linked and organized. |
-| Build / Quality Lead | Ujwal | Keep the technical demo path, implementation progress, testing checks, and bugs visible. |
+| Build / Quality Lead | Ujjal | Keep the technical demo path, implementation progress, testing checks, and bugs visible. |
 | Communication and Presentation Lead | Tulsa | Coordinate team communication, presentations, user-facing content, and project explanations. |
 
 ---
