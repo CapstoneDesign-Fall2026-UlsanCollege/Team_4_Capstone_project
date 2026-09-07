@@ -27,18 +27,18 @@ Smallest useful version: Web app that displays nearby restaurants and their menu
 Midterm demo could show: Restaurant list; menu and food prices; search and category filters; restaurant details including location and opening hours
 Big risk / unknown: Keeping restaurant and menu information accurate and up to date
 
-## Idea 4
-**Project name:** TutorMatch
-**Target user:** Students who want peer tutoring or want to tutor others
-**Problem:** Finding a peer tutor for niche subjects is hard; no structured way to organize tutoring sessions
-**Smallest useful version:** App with student profiles listing subjects they can tutor + subjects they need help with; matching algorithm; simple video call integration
-**Midterm demo could show:** Profile system; tutor matching; session scheduling; in-app messaging
-**Big risk / unknown:** Ensuring tutor quality; handling payment (if included)
+##Idea 4
+**Project name:** MediMate
+**Target user:** Foreign students and foreigners who have difficulty communicating in Korean at hospitals
+**Problem:** Many foreign patients cannot speak Korean well, making it difficult to communicate with doctors, nurses, and hospital staff.
+**Smallest useful version:** Mobile app where users select their language and find other foreign people or volunteers who can help with basic communication at hospitals.
+**Midterm demo could show:** Language-based search, helper profiles, hospital selection, help requests, and simple chat/translation features.
+**Big risk / unknown:** Finding enough reliable language helpers and protecting users' privacy.
 
-Idea 5
-Project name: CampusFood
-Target user: College students looking for affordable and convenient food options around campus
-Problem: Students don't know what restaurants and food options are available around campus, including their menus, prices, and food categories
-Smallest useful version: Web app that displays nearby restaurants and their menus, allowing students to search and filter food by restaurant, category, and price
-Midterm demo could show: Restaurant list; menu and food prices; search and category filters; restaurant details including location and opening hours
-Big risk / unknown: Keeping restaurant and menu information accurate and up to date
+##Idea 5
+**Project name:**ExpenseBuddy
+**Target user:** Students living with roommates/friends
+**Problem:** Friends have difficulty tracking who paid for shared expenses.
+**Smallest useful version:** Add an expense → select people → app calculates how much each person owes.
+**Midterm demo could show:** Monthly expense charts, payment history, and automatic settlement calculations.
+**Big risk / unknown:** Handling complicated splitting situations.
