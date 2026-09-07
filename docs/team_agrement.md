@@ -7,7 +7,7 @@ Complete this when your team forms. Link it in your Week 1 Launch Report and rev
 | Item | Details |
 |------|---------|
 | **Team name:** | [team 4] |
-| **Project working title:** | [ We will update once we pick |
+| **Project working title:** |  We will update once we pick |
 | **Date agreed:** | September 7, 2026 |
 
 ---
