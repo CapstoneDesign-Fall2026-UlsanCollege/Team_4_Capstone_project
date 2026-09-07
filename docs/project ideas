@@ -12,12 +12,12 @@ Week: 1
 **Big risk / unknown:** Getting access to all event data; accurate interest profiling
 
 ## Idea 2
-**Project name:** SpotFinder
-**Target user:** Students looking for quiet study spaces, lab availability, or empty classrooms
-**Problem:** No way to know if libraries, labs, or study spaces are crowded before you go; wastes time
-**Smallest useful version:** Mobile app showing live occupancy of campus spaces using anonymous WiFi data or manual check-ins
-**Midterm demo could show:** Heat map of busy areas; notifications when your favorite study spot is available
-**Big risk / unknown:** Privacy concerns with WiFi tracking; getting sensor/occupancy data
+**Project name:** College Lost and Found
+**Target user:** Students, faculty, and college staff members
+**Problem:** Students frequently lose items on college but there is no centralized system for reporting and finding them.
+**Smallest useful version:** A mobile-friendly web app allowing users to post lost/found listings with photos, tags, and location zones.
+**Midterm demo could show:** An interactive heat map of busy ares where items are frequently lost, alogside basic on user-generated text and images.
+**Big risk / unknown:** It may be diffult to automatically deterine whether two items are the same.
 
 ## Idea 3
 **Project name:** GradeFlow
