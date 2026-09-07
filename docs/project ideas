@@ -19,13 +19,13 @@ Week: 1
 **Midterm demo could show:** An interactive heat map of busy ares where items are frequently lost, alogside basic on user-generated text and images.
 **Big risk / unknown:** It may be diffult to automatically deterine whether two items are the same.
 
-## Idea 3
-**Project name:** GradeFlow
-**Target user:** Students managing multiple courses and assignments
-**Problem:** Assignments pile up; students don't know when workload peaks; no AI-based advice on when to start projects
-**Smallest useful version:** App where students input all syllabus dates + assignment details → generates smart calendar with predicted workload and "start by" dates
-**Midterm demo could show:** Workload visualization; clash detection for assignment deadlines; time management tips based on course difficulty
-**Big risk / unknown:** Accurately predicting assignment complexity; user adoption
+Idea 3
+Project name: CampusFood
+Target user: College students looking for affordable and convenient food options around campus
+Problem: Students don't know what restaurants and food options are available around campus, including their menus, prices, and food categories
+Smallest useful version: Web app that displays nearby restaurants and their menus, allowing students to search and filter food by restaurant, category, and price
+Midterm demo could show: Restaurant list; menu and food prices; search and category filters; restaurant details including location and opening hours
+Big risk / unknown: Keeping restaurant and menu information accurate and up to date
 
 ## Idea 4
 **Project name:** TutorMatch
