@@ -7,7 +7,7 @@ Complete this when your team forms. Link it in your Week 1 Launch Report and rev
 | Item | Details |
 |------|---------|
 | **Team name:** | [team 4] |
-| **Project working title:** | [TBD] |
+| **Project working title:** | [ We will update once we pick |
 | **Date agreed:** | September 7, 2026 |
 
 ---
@@ -16,10 +16,10 @@ Complete this when your team forms. Link it in your Week 1 Launch Report and rev
 
 | Student | Strengths or Experience to Use | Regular Availability / Known Conflicts |
 |---------|------|---|
-| Prachi | Project coordination, organization, communication, task management, leadership | [TBD] |
-| Tulsa | Communication, research, problem-solving, creativity, presentation | [TBD] |
-| Devyana | Research, documentation, organization, analysis, attention to detail | [TBD] |
-| Ujjal | Technical development, implementation, troubleshooting, testing, problem-solving | [TBD] |
+| Prachi | Project coordination, organization, communication, task management, leadership | Mostly Afternoon |
+| Tulsa | Communication, research, problem-solving, creativity, presentation | Mostly Afternoon and midnight |
+| Devyana | Research, documentation, organization, analysis, attention to detail | Mostly Afternoon and midnight |
+| Ujjal | Technical development, implementation, troubleshooting, testing, problem-solving | Mostly Midnight  |
 
 ---
 
@@ -43,7 +43,7 @@ Roles can rotate. Every team must keep the work, evidence, and quality visible.
 | **Main communication channel:** | [Slack / Discord / Email / Other] |
 | **Normal response expectation:** | Team members should respond to important project messages within 24 hours |
 | **Regular meeting or work time:** | [Day, Time] |
-| **Meeting location/platform:** | [In-person / Zoom / Other] |
+| **Meeting location/platform:** | [In-person / KakoaTalk / Other] |
 | **How we will record decisions and action items:** | GitHub Issues, Project Board, meeting notes, or team documentation |
 | **How we will tell the team about an absence or delayed task:** | Notify group ASAP with status, expected completion time, and any blockers |
 
