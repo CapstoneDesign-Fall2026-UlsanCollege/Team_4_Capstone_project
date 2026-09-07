@@ -33,7 +33,7 @@
 
 #### MediMate - Health Support Tool
 - **User Problem:** International students need language support and reliable health info
-- **Coach Rating:** 4/4 Creative Value BUT 1/4 Risk Recovery ⚠️
+- **Coach Rating:** 4/4 Creative Value BUT 1/4 Risk Recovery 
 - ** CRITICAL PIVOT:** DO NOT build live patient-volunteer matching or handle health data
 - **Action Items:**
   -  **SAFE RESHAPE:** Multilingual visit-preparation + approved-phrase tool
