@@ -82,7 +82,7 @@ By signing, each member agrees to follow this plan, raise concerns early, and up
 |---------|------|------|
 | Prachi | ____________prachi2061_____________ | __09/07/2026_____ |
 | Tulsa | _________________________ | ________ |
-| Devyana | _________________________ | ________ |
+| Devyana | DevyanaCT | 09/07/2026 |
 | Ujjal | ujjalpoudel75 | 09/07/2026 |
 
 ---
