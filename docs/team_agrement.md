@@ -19,7 +19,7 @@ Complete this when your team forms. Link it in your Week 1 Launch Report and rev
 | Prachi | Project coordination, organization, communication, task management, leadership | [TBD] |
 | Tulsa | Communication, research, problem-solving, creativity, presentation | [TBD] |
 | Devyana | Research, documentation, organization, analysis, attention to detail | [TBD] |
-| Ujwal | Technical development, implementation, troubleshooting, testing, problem-solving | [TBD] |
+| Ujjal | Technical development, implementation, troubleshooting, testing, problem-solving | [TBD] |
 
 ---
 
@@ -83,7 +83,7 @@ By signing, each member agrees to follow this plan, raise concerns early, and up
 | Prachi | _________________________ | ________ |
 | Tulsa | _________________________ | ________ |
 | Devyana | _________________________ | ________ |
-| Ujwal | _________________________ | ________ |
+| Ujjal | ujjalpoudel75 | ________ |
 
 ---
 
