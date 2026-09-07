@@ -35,10 +35,10 @@ Week: 1
 **Midterm demo could show:** Profile system; tutor matching; session scheduling; in-app messaging
 **Big risk / unknown:** Ensuring tutor quality; handling payment (if included)
 
-## Idea 5
-**Project name:** GreenCampus
-**Target user:** Environmentally-conscious students and campus sustainability offices
-**Problem:** Students don't know their environmental impact on campus; no easy way to track or reduce carbon footprint
-**Smallest useful version:** Mobile app that tracks student actions (dining habits, energy use, transportation) and gamifies sustainability with points/badges
-**Midterm demo could show:** Personal carbon footprint dashboard; leaderboard for eco-friendly competition; sustainability tips; integration with campus dining/transport data
-**Big risk / unknown:** Accessing real campus data; motivation/gamification strategy
+Idea 5
+Project name: CampusFood
+Target user: College students looking for affordable and convenient food options around campus
+Problem: Students don't know what restaurants and food options are available around campus, including their menus, prices, and food categories
+Smallest useful version: Web app that displays nearby restaurants and their menus, allowing students to search and filter food by restaurant, category, and price
+Midterm demo could show: Restaurant list; menu and food prices; search and category filters; restaurant details including location and opening hours
+Big risk / unknown: Keeping restaurant and menu information accurate and up to date
