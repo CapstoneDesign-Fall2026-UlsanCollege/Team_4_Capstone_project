@@ -81,7 +81,7 @@ By signing, each member agrees to follow this plan, raise concerns early, and up
 | Student | Signature or GitHub Confirmation | Date |
 |---------|------|------|
 | Prachi | ____________prachi2061_____________ | __09/07/2026_____ |
-| Tulsa | _________________________ | ________ |
+| Tulsa | ______tulseyy8848___________________ | ____09/07/2026____ |
 | Devyana | DevyanaCT | 09/07/2026 |
 | Ujjal | ujjalpoudel75 | 09/07/2026 |
 
