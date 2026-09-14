@@ -10,14 +10,14 @@ Post 2–3 receipts per week when contribution tracking matters.
 ## Receipt 1 Project Idea Investigation
 
 - **What I did: I compared the two main project ideas, CampusVibes and College Lost & Found, to understand which one would be more suitable for our capstone project.**
-- **Evidence link:**
+- **Evidence link:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/6
 - **How I checked it:I compared their target users, main features, usefulness, project scope, and development difficulty.**
 - **What I learned or changed:I learned that College Lost & Found has a more focused MVP and may be easier to complete, while CampusVibes could require more features and a larger scope.**
 
 ## Receipt 2 User Needs and Features
 
 - **What I did:I investigated the basic information and features that students may need when using our project.**
-- **Evidence link:**
+- **Evidence link:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/6
 - **How I checked it: I investigated the basic information and features that students may need when using our project.**
 - **What I learned or changed: I learned that keeping the main features simple, such as categories, descriptions, photos, and location, can make the system easier to use and develop.**
 
