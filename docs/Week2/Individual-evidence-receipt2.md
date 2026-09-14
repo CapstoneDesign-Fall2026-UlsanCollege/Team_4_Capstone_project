@@ -1,9 +1,9 @@
 # Individual Evidence Receipt
 
-**Student:**  
-**Team:**  
-**Week:**  
-**Date:**  
+**Student:**Tulasha
+**Team:**4-campus vibe  
+**Week:**2  
+**Date:**2026-09-14  
 
 Post 2–3 receipts per week when contribution tracking matters.
 
