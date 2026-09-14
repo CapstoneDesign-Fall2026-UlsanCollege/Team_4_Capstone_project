@@ -24,6 +24,6 @@ Post 2–3 receipts per week when contribution tracking matters.
 ## Receipt 3, optional
 
 - **What I did:** Gathered and peer-reviewed strategic project feedback on the tracking issue from my classmates to establish concrete team alignment
-- **Evidence link:** 
+- **Evidence link:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/4#issuecomment-5657822026 and 
 - **How I checked it:** Validated developer responses on our issue board regarding how changing from dynamic scraping pipelines to manual input profiles will simplify our database schema design.
 - **What I learned or changed:** The team successfully closed out the definition of done for this research issue. We can now proceed with finalizing our database tables using clean, manual schema boundaries instead of unstructured scraping columns.
