@@ -23,7 +23,7 @@ Post 2–3 receipts per week when contribution tracking matters.
 
 ## Receipt 3, optional
 
-- **What I did:**
-- **Evidence link:**
-- **How I checked it:**
-- **What I learned or changed:**
+- **What I did:Reviewed and improved the MVP features and project scope.
+- **Evidence link:
+- **How I checked it:hecked the in-scope and out-of-scope sections with the team.
+- **What I learned or changed:Learned how to keep the project realistic by focusing on the most important features.
