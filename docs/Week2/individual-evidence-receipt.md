@@ -1,8 +1,8 @@
 # Individual Evidence Receipt
 
-**Student:**  
-**Team:**  
-**Week:**  
+**Student:**  RAJBHANDARI PRACHI
+**Team:**  TEAM 4
+**Week:**  WEEK 2
 **Date:**  
 
 Post 2–3 receipts per week when contribution tracking matters.
