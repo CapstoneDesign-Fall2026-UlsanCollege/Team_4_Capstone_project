@@ -29,7 +29,7 @@ A web app where students can view campus events and club information, search for
 
 **Start → Open CampusVibes → Choose an event or club category → Search or filter → View useful information**
 
-Evidence / sketch link: [sketch]
+Evidence / sketch link: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week2/user.flow.md
 
 ## 4. In scope
 
