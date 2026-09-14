@@ -41,16 +41,16 @@ If it is not linked, it does not count.
 ## Blockers or risks
 
 | Blocker/risk | Owner | Next action |
-|Data Sourcing Complexity: Brittle web scrapers or restricted campus portal authentication walls could block automated data collection for Campus Vibes.---|All team---|Pivot the MVP data strategy toward a standard submission form for campus organizers rather than relying on automated web crawlers.
----|
-|  |  |  |
+|---|---|---|
+| Data Sourcing Complexity: Brittle web scrapers or restricted campus portal authentication walls could block automated data collection for Campus Vibes. | All team  |Pivot the MVP data strategy toward a standard submission form for campus organizers rather than relying on automated web crawlers. |
 
 ## Decision record
 
 Record only decisions that change scope, approach, ownership, or the next plan.
 
 | Decision | Why we chose it | Owner | Evidence / Issue link |
-|Selected CampusVibes as core direction---|Highest target user alignment and student engagement potential compared to traditional clones.	---|---|---|
+|---|	---|---|---|
+| Selected Campus Vibes as core direction  |	|Highest target user alignment and student engagement potential compared to traditional clones. |  |
 | Removed automated external scrapers from MVP scope	 |  |Avoids the massive engineering risk of broken scrapers or API blocks early in development.  |  |
 
 ## Next week's bridge task
