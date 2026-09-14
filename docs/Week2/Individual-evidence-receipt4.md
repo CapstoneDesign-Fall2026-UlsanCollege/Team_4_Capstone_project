@@ -1,9 +1,9 @@
 # Individual Evidence Receipt
 
-**Student:**  
-**Team:**  
-**Week:**  
-**Date:**  
+**Student:POUDEL UJJAL**  
+**Team:TEAM 4**  
+**Week:2**  
+**Date:9/14/2026**  
 
 Post 2–3 receipts per week when contribution tracking matters.
 
