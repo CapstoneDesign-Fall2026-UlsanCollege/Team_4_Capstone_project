@@ -91,5 +91,5 @@ Evidence / sketch link: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/
 ## 10. Evidence links
 
 * Planning Issue: [idea selection]
-* Weekly Report: [week 2]
+* Weekly Report: [https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5cbdc63dd29c97e036d818a99d789feac83cb7b3/docs/Week2/weekly-report.md]
 * Demo/proof links: [design document]
