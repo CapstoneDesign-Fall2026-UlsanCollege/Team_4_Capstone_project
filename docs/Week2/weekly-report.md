@@ -34,10 +34,10 @@ If it is not linked, it does not count.
 
 | Student | What they did | Evidence link |
 |---|---|---|
-| Prachi |  |  |
-| Deevyana |  |  |
-| Tulasha |  |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/e5ab1224df6c4c5333567fd4c31890a22f55e38a/docs/Week2/Individual-evidence-receipt2.md  |
-| Ujwal |   |  |
+| Prachi |  | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/4b5dc107e7482b04c0b7dca6db3e76c91b7878c0/docs/Week2/individual-evidence-receipt.md |
+| Devyana | Researched the structure of the University of Ulsan's official international student notice board to assess if dynamic campus event data can be scraped automatically for our CampusVibes MVP platform, Researched the structure of the University of Ulsan's official international student notice board to assess if dynamic campus event data can be scraped automatically for our CampusVibes MVP platform | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/4b5dc107e7482b04c0b7dca6db3e76c91b7878c0/docs/Week2/Individual-evidence-receipt3.md |
+| Tulasha |  Compared the two finalist project ideas, Campus Vibes and Campus Lost & Found, based on their purpose, target users, possible, Investigated whether Campus Vibes would be a realistic project direction for our MVP while still providing enough functionality to demonstrate our team's technical skills. |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/e5ab1224df6c4c5333567fd4c31890a22f55e38a/docs/Week2/Individual-evidence-receipt2.md  |
+| Ujjal | I compared the two main project ideas, CampusVibes and College Lost & Found, to understand which one would be more suitable for our capstone project, I investigated the basic information and features that students may need when using our project.  | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/4b5dc107e7482b04c0b7dca6db3e76c91b7878c0/docs/Week2/Individual-evidence-receipt4.md |
 
 ## Blockers or risks
 
