@@ -27,8 +27,8 @@ If it is not linked, it does not count.
 | Issue(s) |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/4, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/5, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/6, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/7  |
 | PR(s) / commits |  |
 | Screenshot / demo | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/407c9ed04039b955d306942f3acbc619b6798aad/docs/Week2/user.flow.md |
-| Test/check note |  |
-| Document update |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/407c9ed04039b955d306942f3acbc619b6798aad/docs/Week2/design-doc.md  |
+| Test/check note | https://international.ulsan.ac.kr/international/395 (Ulsan university structure check)  |
+| Document update |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/407c9ed04039b955d306942f3acbc619b6798aad/docs/Week2/design-doc.md, docs/Week2/idea-selection-table.md  |
 
 ## Individual receipts
 
