@@ -50,8 +50,8 @@ Record only decisions that change scope, approach, ownership, or the next plan.
 
 | Decision | Why we chose it | Owner | Evidence / Issue link |
 |---|	---|---|---|
-| Selected Campus Vibes as core direction  |Highest target user alignment and student engagement potential compared to traditional clones. |  |  |
-| Removed automated external scrapers from MVP scope	|Avoids the massive engineering risk of broken scrapers or API blocks early in development.  |  |  |
+| Selected Campus Vibes as core direction  |Highest target user alignment and student engagement potential compared to traditional clones. | All team |  |
+| Removed automated external scrapers from MVP scope	|Avoids the massive engineering risk of broken scrapers or API blocks early in development.  | All team  |  |
 
 ## Next week's bridge task
 
