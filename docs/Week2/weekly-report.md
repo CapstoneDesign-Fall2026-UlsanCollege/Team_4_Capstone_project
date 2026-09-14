@@ -51,8 +51,8 @@ Record only decisions that change scope, approach, ownership, or the next plan.
 
 | Decision | Why we chose it | Owner | Evidence / Issue link |
 |---|	---|---|---|
-| Selected Campus Vibes as core direction  |Highest target user alignment and student engagement potential compared to traditional clones. | All team |  |
-| Removed automated external scrapers from MVP scope	|Avoids the massive engineering risk of broken scrapers or API blocks early in development.  | All team  |  |
+| Selected Campus Vibes as core direction  |Highest target user alignment and student engagement potential compared to traditional clones. | All team | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/f2220f9d6ff9c6059ccd772b76c3860663dc1639/docs/Week2/idea-selection-table.md |
+| Removed automated external scrapers from MVP scope	|Avoids the massive engineering risk of broken scrapers or API blocks early in development.  | All team  | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/f2220f9d6ff9c6059ccd772b76c3860663dc1639/docs/Week2/idea-selection-table.md |
 
 ## Next week's bridge task
 
