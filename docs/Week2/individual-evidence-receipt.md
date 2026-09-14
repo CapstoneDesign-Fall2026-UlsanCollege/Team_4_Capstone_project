@@ -10,7 +10,7 @@ Post 2–3 receipts per week when contribution tracking matters.
 ## Receipt 1
 
 - What I did:Helped create and organize the CampusVibes user flow and design.
-- Evidence link:docs/Week2/user.flow.md
+- Evidence link:https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/05fcac9f374289dd13149219bb9b26250b15e800/docs/Week2/user.flow.md
 - How I checked it:Checked the flow and features with the team to make sure they matched our project idea.
 - What I learned or changed:Learned how to organize the main user flow and keep the MVP focused.
 
