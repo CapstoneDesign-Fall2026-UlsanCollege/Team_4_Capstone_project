@@ -24,6 +24,6 @@ Post 2–3 receipts per week when contribution tracking matters.
 ## Receipt 3 Team Discussion and Feedback
 
 - **What I did: I reviewed a teammate's investigation and provided feedback about the two project ideas.**
-- **Evidence link:**
+- **Evidence link:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/6#issuecomment-5657756180 and https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/6#issuecomment-5657877387
 - **How I checked it:I read the teammate's findings and considered the usefulness, development time, and scope of both ideas.**
 - **What I learned or changed: I learned that our final project should solve a real student problem while also being realistic to complete within the capstone schedule. This helped me understand the importance of controlling the project scope.**
