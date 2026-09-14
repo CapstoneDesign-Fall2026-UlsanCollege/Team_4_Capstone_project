@@ -1,6 +1,6 @@
 # Individual Evidence Receipt
 
-Student:  POUDEL UJJAL
+Student: Chand Thakuri Devyana
 Team: TEAM 4
 Week: WEEK 2
 Date: 
