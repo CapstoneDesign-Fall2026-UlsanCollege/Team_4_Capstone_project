@@ -3,7 +3,7 @@
 Student: Chand Thakuri Devyana
 Team: TEAM 4
 Week: WEEK 2
-Date: 
+Date: 9/14/2026
 
 Post 2–3 receipts per week when contribution tracking matters.
 
