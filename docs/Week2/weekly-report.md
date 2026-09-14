@@ -24,11 +24,11 @@ If it is not linked, it does not count.
 
 | Evidence | Link |
 |---|---|
-| Issue(s) |  |
+| Issue(s) |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/4, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/5, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/6, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/7  |
 | PR(s) / commits |  |
-| Screenshot / demo |  |
+| Screenshot / demo | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/407c9ed04039b955d306942f3acbc619b6798aad/docs/Week2/user.flow.md |
 | Test/check note |  |
-| Document update |  |
+| Document update |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/407c9ed04039b955d306942f3acbc619b6798aad/docs/Week2/design-doc.md  |
 
 ## Individual receipts
 
