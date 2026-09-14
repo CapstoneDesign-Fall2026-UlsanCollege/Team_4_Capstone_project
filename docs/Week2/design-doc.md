@@ -16,7 +16,7 @@ date: 2026-09-13
 **What problem are you solving?**
 
 College students often miss events, clubs, and activities because information is scattered across different places, such as bulletin boards, social media, club pages, and campus calendars. There is no single platform where students can easily find activities that match their interests.
----
+
 
 ## 2. Target users
 
