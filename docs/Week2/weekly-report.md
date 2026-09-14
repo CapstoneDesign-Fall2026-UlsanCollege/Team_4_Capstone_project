@@ -36,7 +36,7 @@ If it is not linked, it does not count.
 |---|---|---|
 | Prachi |  |  |
 | Deevyana |  |  |
-| Tulasha |  |  |
+| Tulasha |  |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/e5ab1224df6c4c5333567fd4c31890a22f55e38a/docs/Week2/Individual-evidence-receipt2.md  |
 | Ujwal |   |  |
 
 ## Blockers or risks
