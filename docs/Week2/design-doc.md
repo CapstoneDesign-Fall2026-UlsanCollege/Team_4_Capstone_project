@@ -1,12 +1,12 @@
 ---
-title: College Lost and Found — Design Doc v1
+title: Campus vibes — Design Doc v1
 date: 2026-09-13
 ---
 
 # Design Doc v1
 
 **Team:** Team 4 Capstone  
-**Project name:** College Lost and Found  
+**Project name:** Campus vibes
 **Last updated:** 2026-09-13
 
 ---
@@ -15,24 +15,20 @@ date: 2026-09-13
 
 **What problem are you solving?**
 
-Students frequently lose valuable items on campus (phones, wallets, keys, laptops, ID cards). Currently, they have no centralized way to report lost items or search for found items. Items are either lost forever or recovered through luck. Our app creates a searchable registry so lost items can be reunited with their owners quickly.
-
+College students often miss events, clubs, and activities because information is scattered across different places, such as bulletin boards, social media, club pages, and campus calendars. There is no single platform where students can easily find activities that match their interests.
 ---
 
 ## 2. Target users
 
 **Primary user:**  
-College students who have lost or found an item on campus and want to report it or search for it.
-
+College students looking for events, clubs, and activities that match their interests.
 **Secondary user, if any:**  
-Campus security or facilities staff who may want to view a summary of frequently lost items or hotspots.
-
+Club organizers and campus staff who post and manage events for students.
 ---
 
 ## 3. Smallest useful version
 
 **What is the smallest version that would still be useful?**
 
-A student posts a lost or found item with basic details, another student searches and filters the list, and they connect to arrange a handoff.
-
+A simple web app that collects campus events and club information in one place and allows students to filter events by categories such as music, sports, and technology.
 ### Rough user flow — 3–5 steps
