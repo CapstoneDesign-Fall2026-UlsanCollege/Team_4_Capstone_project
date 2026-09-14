@@ -9,17 +9,17 @@ Post 2–3 receipts per week when contribution tracking matters.
 
 ## Receipt 1
 
-- **What I did:**
-- **Evidence link:**
-- **How I checked it:**
-- **What I learned or changed:**
+- What I did:
+- Evidence link:
+- How I checked it:
+- What I learned or changed:
 
 ## Receipt 2
 
-- **What I did:**Create and completed docs/Week2/design-doc.md
-- **Evidence link:**https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week2/design-doc.md
-- **How I checked it:**Checked the document on GitHub to make sure all sections were completed.
-- **What I learned or changed:**Learned how to clearly describe our project idea and its main features.
+- What I did:Create and completed docs/Week2/design-doc.md
+- Evidence link:https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week2/design-doc.md
+- How I checked it:Checked the document on GitHub to make sure all sections were completed.
+- What I learned or changed:Learned how to clearly describe our project idea and its main features.
 
 ## Receipt 3, optional
 
