@@ -24,6 +24,6 @@ Post 2–3 receipts per week when contribution tracking matters.
 ## Receipt 3, optional
 
 - **What I did:Reviewed and improved the MVP features and project scope.
-- **Evidence link:
+- **Evidence link:https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/5#issuecomment-5657823563 and https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/5#issue-5442163454
 - **How I checked it:hecked the in-scope and out-of-scope sections with the team.
 - **What I learned or changed:Learned how to keep the project realistic by focusing on the most important features.
