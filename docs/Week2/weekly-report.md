@@ -53,7 +53,7 @@ Record only decisions that change scope, approach, ownership, or the next plan.
 |---|	---|---|---|
 | Selected Campus Vibes as core direction  |Highest target user alignment and student engagement potential compared to traditional clones. | All team | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/f2220f9d6ff9c6059ccd772b76c3860663dc1639/docs/Week2/idea-selection-table.md |
 | Removed automated external scrapers from MVP scope	|Avoids the massive engineering risk of broken scrapers or API blocks early in development.  | All team  | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/f2220f9d6ff9c6059ccd772b76c3860663dc1639/docs/Week2/idea-selection-table.md |
-| Use organizer submission and manual curation for the CampusVibes event flow | Keeps the MVP simple and provides a reliable way to add event information without depending on web scraping. | All team | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/407c9ed04039b955d306942f3acbc619b6798aad/docs/Week2/user.flow.md |
+| Use organizer submission and manual curation for the CampusVibes event flow | Keeps the MVP simple and provides a reliable way to add event information without depending on web scraping. | All team | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a3a8c2a3cdfcfaa650bb0b74866a3659ec30db2c/docs/Week2/user.flow.md |
 
 ## Next week's bridge task
 
