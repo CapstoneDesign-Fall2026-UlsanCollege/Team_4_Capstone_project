@@ -27,7 +27,10 @@ A web app where students can view campus events and club information, search for
 
 ### Rough user flow — 3–5 steps
 
-**Start → Open CampusVibes → Choose an event or club category → Search or filter → View useful information**
+**Start → Open CampusVibes → Search or filter curated events/clubs → View event or club information → Join or save**
+
+Event data for the MVP will come from organizer submissions and manual curation.
+Automated web scraping is deferred for future development.
 
 Evidence / sketch link: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week2/user.flow.md
 
