@@ -1,65 +1,90 @@
 # Architecture Sketch
 
-**Team: 4  
-**Project:Campus vibe  
-**Last updated:**  
+**Team:** Team 4
+**Project:** CampusVibes
+**Last updated:** Week 3
 
 ## One-sentence architecture
 
 This project uses:
 
-Frontend: Android/Kotlin + Jetpack Compose / Backend: REST API / Data: Database for events, clubs, and student activities / External services: Campus event data or APIs
+**Frontend:** React
+**Backend:** Firebase
+**Data:** Firebase Firestore for events, clubs, activities, and student-related information
+**Authentication:** Firebase Authentication
+**External services:** Campus event data or APIs, if available
 
 ## Simple diagram
-Replace this with a sketch, image, Mermaid diagram, or plain text.
 
-Student
-   ↓
-CampusVibes Android App
-   ↓
-Frontend / UI
-   ↓
-Backend / REST API
-   ↓
-Database
-   ↓
-Events / Clubs / Activities
-   ↓
-Recommendations
-
-
+```text
+                 Student
+                    ↓
+            CampusVibes Website
+                    ↓
+             React Frontend
+                    ↓
+       ┌────────────┴────────────┐
+       ↓                         ↓
+Firebase Authentication    Firebase Firestore
+       ↓                         ↓
+    Login/User              Events / Clubs
+    Accounts                / Activities
+                                  ↓
+                         Search & Filters
+                                  ↓
+                         Recommendations
+```
 
 ## Main parts
 
-| Part | What it does | Owner | Risk / uncertainty |
-|---|---|---|---|
-| UI |Login, home page, events, clubs, search, activities, and recommendations  |  |Making navigation simple and easy to use |
-| Data |Stores event, club, activity, and student-related information  |  |Getting accurate and updated campus data  |
-| Logic/API |Handles login, event search, filtering, and recommendations  |  |API connection and recommendation logic may be difficult |
-| Setup/docs |Project setup, GitHub, documentation, and architecture  |  |Keeping documentation updated with development  |
+| Part             | What it does                                                                           | Owner  | Risk / uncertainty                                             |
+| ---------------- | -------------------------------------------------------------------------------------- | ------ | -------------------------------------------------------------- |
+| UI / Frontend    | Homepage, login, navigation, events, clubs, search, activities, and recommendations    | Team 4 | Making navigation simple and learning React components         |
+| Authentication   | Handles student login and user accounts using Firebase Authentication                  | Team 4 | Firebase configuration and authentication errors               |
+| Data             | Stores event, club, activity, and student-related information using Firebase Firestore | Team 4 | Getting accurate and updated campus data                       |
+| Logic / Firebase | Handles data retrieval, search, filtering, and basic recommendation features           | Team 4 | Organizing Firebase data and implementing recommendation logic |
+| Setup / Docs     | Project setup, GitHub, documentation, and architecture                                 | Team 4 | Keeping documentation updated during development               |
 
 ## Evidence links
-Link the sketch, diagram, related Issue, or preview here.
-- GitHub repository: [Your CampusVibes repository link]
-- Project Issues: [Your GitHub Issues link]
-- Architecture sketch: [Your sketch/diagram link]
-- Project board: [Your project board link]
+
+Link the repository, issues, diagram, or project board here.
+
+* GitHub repository: [Your CampusVibes repository link]
+* Project Issues: [Your GitHub Issues link]
+* Architecture sketch: [Your sketch/diagram link]
+* Project board: [Your project board link]
 
 ## Important decisions
-| Decision | Why we chose it | Risk |
-|---|---|---|
-|Android + Kotlin  |Suitable for building a student mobile application  |Some team members may need time to learn Compose  |
-|REST AP |Allows the app to communicate with the backend |API connection errors may occur |
-|Database |Stores events, clubs, and student activity information |Database design may need changes later |
-|Search and filters |Helps students quickly find relevant events and clubs |Search results need accurate data |
-|Recommendations |Helps students discover activities based on their interests |Recommendation logic may be difficult for the MVP |
+
+| Decision                | Why we chose it                                                                                         | Risk                                                     |
+| ----------------------- | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| React                   | React provides reusable components and makes it easier to organize the project as it grows              | Team members need to learn React                         |
+| Firebase                | Firebase provides database and authentication services without requiring us to build a separate backend | Firebase configuration or connection errors may occur    |
+| Firestore Database      | Firestore can store events, clubs, activities, and user-related information                             | Database structure may need changes later                |
+| Firebase Authentication | Provides a simple way to manage student login and user accounts                                         | Authentication must be configured correctly and securely |
+| Search and Filters      | Helps students quickly find relevant events, clubs, and activities                                      | Search results depend on accurate data                   |
+| Recommendations         | Helps students discover activities based on their interests                                             | Recommendation logic may be difficult for the MVP        |
 
 ## What could break?
-- Campus event or club data may not be available or updated regularly.
-- API connection between the app and backend could fail.
-- Database structure may need to change as new features are added.
-- Recommendation features may be more difficult than expected.
-- Login and user data need to be handled securely.
-- Too many features could make the MVP difficult to complete on time.
- 
-  
+
+* Campus event or club data may not be available or updated regularly.
+* Firebase connection or configuration could cause the website to stop retrieving data.
+* The Firestore database structure may need to change as new features are added.
+* The recommendation feature may be more difficult than expected.
+* Login and student data need to be handled securely.
+* The team may need additional time to learn React.
+* Too many features could make the MVP difficult to complete on time.
+* The project could become difficult to maintain if React components and Firebase data are not organized properly.
+
+## MVP approach
+
+For the first working prototype, we will focus on:
+
+1. React homepage and navigation
+2. Firebase Authentication
+3. Firebase Firestore connection
+4. Event and club data
+5. Basic search and filtering
+6. A simple recommendation feature
+
+We will start with a simple working prototype and add more advanced features after the basic system is working.
