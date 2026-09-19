@@ -1,10 +1,26 @@
-
 # Tech Stack Comparison
 
-**Team:** team 4
+**Team:** Team 4
 **Week:** 3
 
 Compare two possible stacks. Do not research everything. Prefer boring and buildable.
+
+## Comparison Table
+
+| Criteria                     | React + Firebase                                                             | HTML/CSS/JavaScript + Firebase                                  |
+| ---------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| **Frontend**                 | React                                                                        | HTML, CSS, JavaScript                                           |
+| **Backend / Data**           | Firebase                                                                     | Firebase                                                        |
+| **Team's current knowledge** | Basic HTML, CSS, JavaScript, and Firebase                                    | Basic HTML, CSS, JavaScript, and Firebase                       |
+| **Learning required**        | React components, props, state, project structure, and Firebase integration  | Larger JavaScript project organization and Firebase integration |
+| **Development speed**        | May be slower at the beginning while learning React                          | Faster to start because the team already knows the basics       |
+| **Code organization**        | Easier to organize larger projects using reusable components                 | Can become harder to organize as the project grows              |
+| **Reusable components**      | Easy to create and reuse components                                          | More difficult to reuse across different pages                  |
+| **Project scalability**      | Suitable for adding more pages and features                                  | Suitable for a smaller or simpler project                       |
+| **Midterm demo**             | Main pages, navigation, reusable components, Firebase, and 1–2 main features | Main webpage, navigation, forms, and basic Firebase features    |
+| **Main risk**                | Learning React and managing state/Firebase configuration                     | Code can become harder to maintain as the project grows         |
+| **First feature**            | Homepage with navigation and Firebase-connected feature                      | Basic HTML homepage with CSS and JavaScript/Firebase            |
+| **Overall consideration**    | Better organization for a growing CampusVibes project                        | Simpler starting point for the team                             |
 
 ## Stack A
 
@@ -37,6 +53,7 @@ Compare two possible stacks. Do not research everything. Prefer boring and build
   As the project becomes larger, the code may become harder to organize and maintain. Reusing the same components across different pages can also be more difficult.
 * **Simplest first screen or feature:**
   A basic HTML homepage with CSS styling and a JavaScript/Firebase feature.
+
 
 ## Decision
 
