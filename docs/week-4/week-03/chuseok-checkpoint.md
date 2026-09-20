@@ -1,31 +1,83 @@
+# Week 4 Checkpoint: Chuseok Report
 
+This checkpoint replaces the standard Weekly Report for Week 4. Because this is a short holiday week, the goal is to clarify the project direction and prepare a realistic plan for the midterm demonstration. No coding or team meeting is required this week.
 
-This is the Week 4 report. It replaces the standard Weekly Report for this week.
+## Project direction
 
-This should be light. No required coding. No required team meeting.
+Our team plans to build a simple, user-focused website that demonstrates the main flow of our service. The first version will prioritize a clear user experience and a working navigation flow over advanced functionality.
 
-## Rough sketch or photo
+## Rough sketch or planned screens
 
-Our planned website will include:
+The initial website will include the following screens:
 
-- A landing page with a short explanation of the service
-- A basic login page
-- A basic sign-up page
-- A home/dashboard page for logged-in users
-- Navigation between the main pages
-- Simple user-focused features that can be demonstrated during the midterm
+1. **Landing page**
+   - Briefly explain the purpose of the service.
+   - Introduce the main benefit for users.
+   - Provide clear buttons for **Log in** and **Sign up**.
 
+2. **Sign-up page**
+   - Allow a new user to enter the information required to create an account.
+   - Provide basic validation and clear error messages.
+   - Direct the user to log in or continue to the dashboard after successful registration.
 
+3. **Login page**
+   - Allow an existing user to enter their credentials.
+   - Display a helpful message when the credentials are invalid.
+   - Redirect a successful login to the dashboard.
+
+4. **Home/dashboard page**
+   - Welcome the logged-in user.
+   - Display the main service features in a simple layout.
+   - Provide navigation to the most important actions.
+
+5. **Navigation and shared layout**
+   - Keep navigation consistent across the main pages.
+   - Make it possible to move between the landing page, authentication pages, and dashboard.
+   - Include a logout action if authentication is implemented by the midterm.
+
+The detailed visual design may change as we learn more about the service, but these screens define the minimum user flow we intend to demonstrate.
+
+## Intended user flow
+
+The minimum successful flow is:
+
+1. A visitor opens the landing page.
+2. The visitor selects **Sign up** and creates an account.
+3. The user logs in with the new account.
+4. The user is redirected to the dashboard.
+5. The user views and interacts with at least one core feature.
+6. The user can return to the main navigation or log out.
+
+If full backend authentication is not ready, we will prepare a clearly labeled prototype flow so that the page transitions and expected behavior can still be demonstrated.
 
 ## Midterm demo sentence
 
-**Our midterm demo will show:**  
-A basic working website where a user can view the landing page, create an account, log in, and access a simple dashboard with the main features of our service. The demo will focus on the overall user flow and website structure rather than complete functionality.
+**Our midterm demo will show:** A basic working website where a visitor can learn about our service, create an account, log in, and access a simple dashboard containing the first core feature. The demonstration will focus on the complete user journey, clear navigation, and the overall usability of the service rather than on advanced or unfinished functionality.
+
+## Minimum midterm requirements
+
+To keep the scope realistic, the midterm version should provide:
+
+- A functioning landing page.
+- Login and sign-up screens with basic validation.
+- Navigation between the main screens.
+- A dashboard that is visible after login.
+- At least one simple core feature or representative prototype interaction.
+- Clear feedback for successful actions and common errors.
+- A short explanation of which features are complete and which are planned for later.
 
 ## One blocker or question for Week 5
 
-Our main question for Week 5 is how we should implement and connect the login and sign-up functionality. We also need to decide which core feature should be developed first after the basic user flow is complete.
+Our main question for Week 5 is how we should implement and connect the login and sign-up functionality. We need to decide whether to use a backend authentication service, our own backend API, or a temporary prototype implementation. We also need to select the first core feature to build after the basic user flow and confirm the data that feature will require.
+
+## Week 5 priorities
+
+1. Confirm the technology and authentication approach.
+2. Finalize the page structure and basic wireframes.
+3. Assign ownership of the landing, authentication, dashboard, and core-feature work.
+4. Implement the landing page and shared navigation first.
+5. Define the success criteria for the first core feature.
 
 ## Optional: easiest first screen or interaction
 
-The easiest first screen to implement is the landing page. It will include a short description of the website and buttons that direct users to the login and sign-up pages.
+The easiest first screen to implement is the landing page. It requires limited data and can establish the visual style, layout, and navigation for the rest of the website. It will include a short service description and buttons that direct users to the login and sign-up pages.
