@@ -14,27 +14,29 @@ This project uses:
 **Authentication:** Firebase Authentication
 **External services:** Campus event data or APIs, if available
 
-## Simple diagram
+## Simple diagram in plain text
 
-```text
-                 Student
-                    ↓
-            CampusVibes Website
-                    ↓
-             React Frontend
-                    ↓
-       ┌────────────┴────────────┐
-       ↓                         ↓
-Firebase Authentication    Firebase Firestore
-       ↓                         ↓
-    Login/User              Events / Clubs
-    Accounts                / Activities
-                                  ↓
-                         Search & Filters
-                                  ↓
-                         Recommendations
-```
-
+Student
+   |
+   v
+CampusVibes Website
+   |
+   v
+React Frontend
+   |
+   +-----------------------+
+   |                       |
+   v                       v
+Firebase Authentication   Firebase Firestore
+   |                       |
+   v                       v
+Login/User Accounts       Events / Clubs / Activities
+                           |
+                           v
+                    Search & Filters
+                           |
+                           v
+                    Recommendations
 ## Main parts
 
 | Part             | What it does                                                                           | Owner  | Risk / uncertainty                                             |
