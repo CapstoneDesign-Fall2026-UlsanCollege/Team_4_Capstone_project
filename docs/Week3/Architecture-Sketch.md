@@ -46,10 +46,10 @@ Firebase
 
 Link the sketch, diagram, related Issue, or preview here.
 
-* GitHub repository: [https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project]
-* Project Issues: [https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues]
-* Architecture diagram:(https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/8a91471375d473975a8bf911941b4a54d75a62ec/docs/Week3/Architecture-Sketch.md)
-* Project board: [https://github.com/orgs/CapstoneDesign-Fall2026-UlsanCollege/projects/6]
+* GitHub repository: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project
+* Project Issues: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues
+* Architecture diagram: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/8a91471375d473975a8bf911941b4a54d75a62ec/docs/Week3/Architecture-Sketch.md
+* Project board: https://github.com/orgs/CapstoneDesign-Fall2026-UlsanCollege/projects/6
 
 ## Important decisions
 
