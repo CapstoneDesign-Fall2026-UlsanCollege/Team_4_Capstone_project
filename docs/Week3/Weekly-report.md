@@ -34,8 +34,8 @@ For Week 3, add one row for every team member. Each row needs one sentence descr
 |---|---|---|
 |Ujjal Poudel | Revised the CampusVibes user flow, updated the user-flow documentation, and documented the organizer-submission and manual-curation approach for the MVP event flow. | (https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/11fef4052eb3c4bf388c20f8c03f3c1e42961797) |
 | Prachi | Updated and revised the Group 4 Weekly Report, including project decisions, user flow, and Week 3 documentation. | (https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/f74c210ccce2a67ca91b7aef21464ce7e7874b11) |
-| Devyana | Worked on the Week 3 technical documentation, including the technology stack comparison, architecture, and wireframe documentation. | (https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/e4025bbe7538248928728742e4be1a8128e7e8f2) |
-| Tulasha |  Documented the project architecture, candidate vertical slice, Sprint 0 scope, and project risks for the CampusVibes project. | (https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/b2592234d37efdabd1e2494c99bc7c283f192982) |
+| Devyana | Worked on the Week 3 technical documentation, including the technology stack comparison, architecture, and wireframe documentation. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/tech-stack-comparison.md |
+| Tulasha |  Documented the project architecture, candidate vertical slice, Sprint 0 scope, and project risks for the CampusVibes project. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/Candidate-vertical-slice.md |
 
 ## Blockers or risks
 
