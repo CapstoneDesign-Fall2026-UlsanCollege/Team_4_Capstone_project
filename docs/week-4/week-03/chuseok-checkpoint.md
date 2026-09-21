@@ -1,7 +1,5 @@
 # Week 4 Checkpoint: Chuseok Report
 
-This checkpoint replaces the standard Weekly Report for Week 4. Because this is a short holiday week, the goal is to clarify the project direction and prepare a realistic plan for the midterm demonstration. No coding or team meeting is required this week.
-
 ## Project direction
 
 Our team plans to build a simple, user-focused website that demonstrates the main flow of our service. The first version will prioritize a clear user experience and a working navigation flow over advanced functionality.
