@@ -12,6 +12,7 @@
 
 - [x] Compare possible technology stacks and document the technology decision.
 - [x] Prepare the rough architecture, wireframe, and candidate vertical slice for the project.
+- [ ]  Prepare the Sprint 0 report and supporting evidence, including issues and owners.
 - [] Review and update the CampusVibes user flow, project decisions, risks, and Week 3 documentation.
 
 ## Evidence links
