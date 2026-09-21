@@ -20,10 +20,8 @@ In one or two sentences, what is your team now ready to build next?
 | Project purpose |CampusVibes helps college students discover campus events, clubs, and student activities in one place.  |Link to project proposal  |
 | Target user |College students who want to find and participate in campus events, clubs, and activities.  |Link to project proposa  |
 | In-scope boundary |Student login, home page, campus events, clubs, search/filter, student activity, and basic recommendations.  |Link to scope document
-Out-of-scope boundary	Complex AI recommendations, real-time chat, payment systems, advanced social networking, and unnecessary features outside the MVP.	Link to scope document
-Possible midterm demo sentence	Our midterm demo will show a student logging in, finding an event or club, viewing its details, and saving or joining an activity.	Link to candidate vertical slice  |
 | Out-of-scope boundary | Complex AI recommendations, real-time chat, payment systems, advanced social networking, and unnecessary features outside the MVP. |Link to scope document
-Possible midterm demo sentence	Our midterm demo will show a student logging in, finding an event or club, viewing its details, and saving or joining an activity.	Link to candidate vertical slice  |
+Possible midterm demo sentence |	Our midterm demo will show a student logging in, finding an event or club, viewing its details, and saving or joining an activity. |	Link to candidate vertical slice  |
 | Possible midterm demo sentence | Our midterm demo will show a student logging in, finding an event or club, viewing its details, and saving or joining an activity.  |Link to candidate vertical slice  |
 
 ## Sprint 0 exit evidence
@@ -65,12 +63,12 @@ List only the risks or incomplete items that could change the next plan. Every e
 | Risk or exception | Owner | Next action | Due or review point |
 |---|---|---|---|
 | Campus event and club information may not be available through a reliable data source |  | Decide whether to use sample data, manually collected data, or an available API/source for the MVP |Week 4  |
-|Recommendation functionality could become too complex | |Start with simple category/interests-based recommendations instead of AI | |
-|Too many features could increase the MVP scope | |Prioritize login → events → event details as the main vertical slice | |
+|Recommendation functionality could become too complex | |Start with simple category/interests-based recommendations instead of AI |Week 4-5 |
+|Too many features could increase the MVP scope | |Prioritize login → events → event details as the main vertical slice |Week 4 |
 
 ## Bridge into Week 4 and Sprint 1
 
-- **Week 4 Chuseok Checkpoint Issue:**  
+- **Week 4 Chuseok Checkpoint Issue: Create and assign the Week 4 checkpoint tasks in the GitHub Project board.  
 - **Rough sketch or photo link:**  
 - **One blocker or question for Week 5:What data source will we use for campus events and clubs in the MVP?  
 - **First action after the break:**Begin implementing the student login and home page, then connect navigation to the Events feature.  
