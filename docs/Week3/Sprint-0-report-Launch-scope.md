@@ -2,7 +2,7 @@
 
 **Team:4  
 **Sprint:** Sprint 0 — Launch and Scope  
-**Date:**  
+**Date:2026/09/22  
 **Status:** [ ] Ready to close  [ ] Ready with an explicitly owned exception
 
 Use this as a short Sprint 0 exit summary at the end of Week 3. Use it alongside the Week 3 Weekly Report; do not copy all of the same evidence into both documents. Link the work that already exists in your repository, Issues, Project board, and team documents.
@@ -17,28 +17,28 @@ In one or two sentences, what is your team now ready to build next?
 
 | Field | Current answer | Evidence link |
 |---|---|---|
-| Project purpose |CampusVibes helps college students discover campus events, clubs, and student activities in one place.  |Link to project proposal  |
-| Target user |College students who want to find and participate in campus events, clubs, and activities.  |Link to project proposa  |
-| In-scope boundary |Student login, home page, campus events, clubs, search/filter, student activity, and basic recommendations.  |Link to scope document
-| Out-of-scope boundary | Complex AI recommendations, real-time chat, payment systems, advanced social networking, and unnecessary features outside the MVP. |Link to scope document
-Possible midterm demo sentence |	Our midterm demo will show a student logging in, finding an event or club, viewing its details, and saving or joining an activity. |	Link to candidate vertical slice  |
-| Possible midterm demo sentence | Our midterm demo will show a student logging in, finding an event or club, viewing its details, and saving or joining an activity.  |Link to candidate vertical slice  |
+| Project purpose |CampusVibes helps college students discover campus events, clubs, and student activities in one place.  |docs/Week3/wireframe-Landing-page.jpg, docs/Week3/wireframe-home-page.jpg, docs/Week3/wireframe-login-page.jpg, docs/Week3/wireframe-navigate-page.jpg, docs/Week3/wireframe-notes.md, docs/Week3/wireframe-signup-page.jpg  |
+| Target user |College students who want to find and participate in campus events, clubs, and activities.  |docs/Week3/Candidate-vertical-slice.md |
+| In-scope boundary |Student login, home page, campus events, clubs, search/filter, student activity, and basic recommendations.  |docs/Week3/Candidate-vertical-slice.md
+| Out-of-scope boundary | Complex AI recommendations, real-time chat, payment systems, advanced social networking, and unnecessary features outside the MVP. |docs/Week3/Candidate-vertical-slice.md
+Possible midterm demo sentence |	Our midterm demo will show a student logging in, finding an event or club, viewing its details, and saving or joining an activity. |	docs/Week3/Candidate-vertical-slice.md  |
+| Possible midterm demo sentence | Our midterm demo will show a student logging in, finding an event or club, viewing its details, and saving or joining an activity.  |docs/Week3/Candidate-vertical-slice.md  |
 
 ## Sprint 0 exit evidence
 
 | Requirement | Evidence link | Status or short note |
 |---|---|---|
 | Team repository and Project board work |GitHub repository + Project board  | Complete / exception:  |
-| Team Working Agreement is linked and current |  | Complete / exception:  |
-| Six to ten next-work Issues exist |GitHub Issues  | Complete / exception:  |
-| Important Issues have first owners |GitHub Issues  | Complete / exception:  |
-| At least three Issues have a checkable Definition of Done |GitHub Issues  | Complete / exception:  |
-| Tech stack comparison is recorded |Tech stack comparison document  | Complete / exception:  |
-| Rough wireframe placeholders are linked |Wireframe document/sketch  | Complete / exception:  |
-| Rough architecture placeholder is linked |Architecture document/sketch  | Complete / exception:  |
-| Candidate vertical slice is linked |Candidate Vertical Slice — Week 3  | Complete / exception:  |
-| Sprint 0 Quality Quick Checks are complete |Sprint 0 Quality Quick Checks  | Complete / exception:  |
-| Week 3 Weekly Report is complete |Week 3 Weekly Report  | Complete / exception:  |
+| Team Working Agreement is linked and current |docs/Week3/Weekly-report.md  | Complete  |
+| Six to ten next-work Issues exist |[GitHub Issues ](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/16), https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/15, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/14, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/13, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/12,  https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/9, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/8 | Complete  |
+| Important Issues have first owners |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/14  | Complete   |
+| At least three Issues have a checkable Definition of Done |[GitHub Issues](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/9), https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/8, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/10  | Complete   |
+| Tech stack comparison is recorded |docs/Week3/tech-stack-comparison.md | Complete   |
+| Rough wireframe placeholders are linked |docs/Week3/wireframe-Landing-page.jpg, docs/Week3/wireframe-home-page.jpg, docs/Week3/wireframe-login-page.jpg, docs/Week3/wireframe-navigate-page.jpg, docs/Week3/wireframe-notes.md, docs/Week3/wireframe-signup-page.jpg | Complete   |
+| Rough architecture placeholder is linked |docs/Week3/Architecture-Sketch.md  | Complete   |
+| Candidate vertical slice is linked |docs/Week3/Candidate-vertical-slice.md  | Complete   |
+| Sprint 0 Quality Quick Checks are complete |Sprint 0 Quality Quick Checks  | Complete   |
+| Week 3 Weekly Report is complete |Week 3 Weekly Report  | Complete  |
 
 ## Candidate vertical slice
 
