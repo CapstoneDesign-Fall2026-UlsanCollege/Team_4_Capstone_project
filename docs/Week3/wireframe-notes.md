@@ -11,7 +11,7 @@ A wireframe can be a rough sketch, screenshot, photo, or simple diagram. It does
 * **Target user:** Visitors / students
 * **What the user does:** The visitor learns about the service and chooses **Log in** or **Sign up**.
 * **What the screen shows:** Service name, short description, main benefit, and **Log in** and **Sign up** buttons.
-* **Sketch/photo link:** 
+* **Sketch/photo link:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/20ea66f2b42bb8501788430d6d3e8220afbcf97b/docs/Week3/wireframe-Landing-page.jpeg
 
 ## Screen / interaction 2
 
@@ -19,7 +19,7 @@ A wireframe can be a rough sketch, screenshot, photo, or simple diagram. It does
 * **Target user:** New users
 * **What the user does:** The user enters the required information and creates a new account.
 * **What the screen shows:** Sign-up form, input fields, **Sign up** button, basic validation, error messages, and an option to go to the **Log in** page.
-* **Sketch/photo link:** 
+* **Sketch/photo link:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/fd01abe2130b6233835d1ea57022d88f3ef45da4/docs/Week3/wireframe-sigup-page.jpeg
 
 ## Screen / interaction 3
 
@@ -27,7 +27,7 @@ A wireframe can be a rough sketch, screenshot, photo, or simple diagram. It does
 * **Target user:** Existing users
 * **What the user does:** The user enters their account credentials and logs in.
 * **What the screen shows:** Login form, email/ID and password fields, **Log in** button, invalid-credential message, and an option to go to the **Sign up** page.
-* **Sketch/photo link:** 
+* **Sketch/photo link:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/fd01abe2130b6233835d1ea57022d88f3ef45da4/docs/Week3/wireframe-login-page.jpeg
 
 ## Screen / interaction 4
 
@@ -35,7 +35,7 @@ A wireframe can be a rough sketch, screenshot, photo, or simple diagram. It does
 * **Target user:** Logged-in users
 * **What the user does:** The user accesses the main service and interacts with the first core feature.
 * **What the screen shows:** Welcome message, navigation menu, main service features, first core feature, and logout option.
-* **Sketch/photo link:**
+* **Sketch/photo link:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/20ea66f2b42bb8501788430d6d3e8220afbcf97b/docs/Week3/wireframe-home-page.jpeg
 
 ## Screen / interaction 5
 
@@ -43,7 +43,7 @@ A wireframe can be a rough sketch, screenshot, photo, or simple diagram. It does
 * **Target user:** All website users
 * **What the user does:** The user moves between the landing page, login page, sign-up page, and dashboard.
 * **What the screen shows:** Consistent navigation across the main pages and a **Logout** option for logged-in users.
-* **Sketch/photo link:** 
+* **Sketch/photo link:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/fd01abe2130b6233835d1ea57022d88f3ef45da4/docs/Week3/wireframe-navigate-page.jpeg
 
 ## Easiest first screen to build
 
