@@ -20,7 +20,7 @@ If it is not linked, it does not count.
 
 | Evidence | Link |
 |---|---|
-| Issue(s) | [Issue #5](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/5), [Issue #8](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/8), [Issue #9](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/9), [Issue #20](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/20) |
+| Issue(s) | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues |
 | PR(s) / commits | [Commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main) |
 | Screenshot / demo | [Wireframe notes](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/wireframe-notes.md) |
 | Test/check note | [Sprint 0 report](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/Sprint-0-report-Launch-scope.md) |
