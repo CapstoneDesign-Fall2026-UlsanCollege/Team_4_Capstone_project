@@ -8,25 +8,41 @@ A wireframe can be a rough sketch, screenshot, photo, or simple diagram. It does
 ## Screen / interaction 1
 
 * **Name:** Landing Page
-* **Target user:** Visitors and university students
-* **What the user does:** The visitor learns about the service and chooses to log in or sign up.
-* **What the screen shows:** The service name, a short description of the service, the main benefit for users, and **Log in** and **Sign up** buttons.
+* **Target user:** Visitors / students
+* **What the user does:** The visitor learns about the service and chooses **Log in** or **Sign up**.
+* **What the screen shows:** Service name, short description, main benefit, and **Log in** and **Sign up** buttons.
 * **Sketch/photo link:** 
 
 ## Screen / interaction 2
 
-* **Name:** Login / Sign-up Page
-* **Target user:** New and existing users
-* **What the user does:** A new user creates an account, while an existing user enters their credentials to log in.
-* **What the screen shows:** Input fields for account information, **Log in** and **Sign up** buttons, basic validation, and clear error or success messages.
+* **Name:** Sign-up Page
+* **Target user:** New users
+* **What the user does:** The user enters the required information and creates a new account.
+* **What the screen shows:** Sign-up form, input fields, **Sign up** button, basic validation, error messages, and an option to go to the **Log in** page.
 * **Sketch/photo link:** 
 
 ## Screen / interaction 3
 
-* **Name:** Home / Dashboard
+* **Name:** Login Page
+* **Target user:** Existing users
+* **What the user does:** The user enters their account credentials and logs in.
+* **What the screen shows:** Login form, email/ID and password fields, **Log in** button, invalid-credential message, and an option to go to the **Sign up** page.
+* **Sketch/photo link:** 
+
+## Screen / interaction 4
+
+* **Name:** Home / Dashboard Page
 * **Target user:** Logged-in users
-* **What the user does:** The user views the main service features and interacts with the first core feature.
-* **What the screen shows:** A welcome message, navigation menu, main service features, and at least one simple core feature. It will also include navigation to other important pages and a logout option.
+* **What the user does:** The user accesses the main service and interacts with the first core feature.
+* **What the screen shows:** Welcome message, navigation menu, main service features, first core feature, and logout option.
+* **Sketch/photo link:**
+
+## Screen / interaction 5
+
+* **Name:** Navigation and Shared Layout
+* **Target user:** All website users
+* **What the user does:** The user moves between the landing page, login page, sign-up page, and dashboard.
+* **What the screen shows:** Consistent navigation across the main pages and a **Logout** option for logged-in users.
 * **Sketch/photo link:** 
 
 ## Easiest first screen to build
@@ -37,4 +53,4 @@ We think the easiest first screen/interaction is:
 
 Because:
 
-> **It requires limited data and does not depend on authentication or backend functionality. It will allow us to establish the basic visual style, layout, and navigation of the website first. We can then connect the Log in and Sign up buttons to the authentication pages.**
+> **It requires limited data and does not depend on backend authentication. We can use it to establish the website layout, visual style, and navigation first. The Log in and Sign up buttons can then connect the landing page to the authentication flow.**
