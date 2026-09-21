@@ -1,4 +1,3 @@
-
 # Wireframe Notes
 
 **Team:** Team 4
@@ -8,34 +7,34 @@ A wireframe can be a rough sketch, screenshot, photo, or simple diagram. It does
 
 ## Screen / interaction 1
 
-* **Name:** Home / CampusVibes Main Page
-* **Target user:** University students
-* **What the user does:** The user opens the website and browses campus events, clubs, and activities.
-* **What the screen shows:** Website logo, navigation bar, search bar, featured events, clubs, and activity categories.
+* **Name:** Landing Page
+* **Target user:** Visitors and university students
+* **What the user does:** The visitor learns about the service and chooses to log in or sign up.
+* **What the screen shows:** The service name, a short description of the service, the main benefit for users, and **Log in** and **Sign up** buttons.
 * **Sketch/photo link:** 
 
 ## Screen / interaction 2
 
-* **Name:** Events and Activities Search
-* **Target user:** Students looking for campus events and activities
-* **What the user does:** The user searches for events or uses filters such as category, date, or activity type.
-* **What the screen shows:** Search bar, filter options, and a list of matching events or activities with basic information.
+* **Name:** Login / Sign-up Page
+* **Target user:** New and existing users
+* **What the user does:** A new user creates an account, while an existing user enters their credentials to log in.
+* **What the screen shows:** Input fields for account information, **Log in** and **Sign up** buttons, basic validation, and clear error or success messages.
 * **Sketch/photo link:** 
 
 ## Screen / interaction 3
 
-* **Name:** Login / User Account
-* **Target user:** Students who want to use personalized features
-* **What the user does:** The user logs in or creates an account using Firebase Authentication.
-* **What the screen shows:** Email/ID field, password field, login button, sign-up option, and basic account information after login.
+* **Name:** Home / Dashboard
+* **Target user:** Logged-in users
+* **What the user does:** The user views the main service features and interacts with the first core feature.
+* **What the screen shows:** A welcome message, navigation menu, main service features, and at least one simple core feature. It will also include navigation to other important pages and a logout option.
 * **Sketch/photo link:** 
 
 ## Easiest first screen to build
 
 We think the easiest first screen/interaction is:
 
-> **Home / CampusVibes Main Page**
+> **Landing Page**
 
 Because:
 
-> **It mainly requires basic React components, HTML/CSS styling, and simple navigation. We can build the layout first and connect Firebase features later.**
+> **It requires limited data and does not depend on authentication or backend functionality. It will allow us to establish the basic visual style, layout, and navigation of the website first. We can then connect the Log in and Sign up buttons to the authentication pages.**
