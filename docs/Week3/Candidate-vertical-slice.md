@@ -32,9 +32,9 @@ By midterm, a user can log in, view campus events and clubs, search for activiti
 
 | Issue | Owner | Definition of Done |
 |---|---|---|
-| Create student login and home page |  | User can enter ID/email and password and successfully reach the home page |
-|Create Events and Clubs pages  |  | Events and clubs are displayed in a clear list and users can open an item |
-|Add search and filtering  |  |User can search for an event/club and filter the displayed results  |
+| Create student login and home page | prachi | User can enter ID/email and password and successfully reach the home page |
+|Create Events and Clubs pages  | devyana | Events and clubs are displayed in a clear list and users can open an item |
+|Add search and filtering  | tulasa |User can search for an event/club and filter the displayed results  |
 
 ## Biggest risk or uncertainty
 
@@ -46,10 +46,10 @@ Owner: Data/API owner
 
 ## Evidence links
 
-- Issue list:
-- Wireframe:
-- Architecture sketch:
-- Stack comparison:
+- Issue list: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/11, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/16
+- Wireframe: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/77b05cfac3a0d47327e5c0ab4349fb67065e1435/docs/Week3/wireframe-notes.md
+- Architecture sketch: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/77b05cfac3a0d47327e5c0ab4349fb67065e1435/docs/Week3/Architecture-Sketch.md
+- Stack comparison: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/77b05cfac3a0d47327e5c0ab4349fb67065e1435/docs/Week3/tech-stack-comparison.md
 
 ## Week 5 restart move
 
