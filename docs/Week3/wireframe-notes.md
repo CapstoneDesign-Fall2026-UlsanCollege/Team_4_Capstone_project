@@ -54,3 +54,13 @@ We think the easiest first screen/interaction is:
 Because:
 
 > **It requires limited data and does not depend on backend authentication. We can use it to establish the website layout, visual style, and navigation first. The Log in and Sign up buttons can then connect the landing page to the authentication flow.**
+
+Empty and Error States Summary
+
+Our wireframes will include feedback for situations where the normal flow does not work.
+
+Login error: Invalid email/ID or password.
+Loading state: Events and clubs are being loaded.
+Data error: Events or clubs cannot be loaded.
+Search empty state: No events or clubs match the search/filter.
+Detail error: Selected event or club cannot be found.
