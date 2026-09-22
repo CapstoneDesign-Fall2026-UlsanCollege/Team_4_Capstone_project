@@ -12,6 +12,8 @@ The initial website will include the following screens:
    - Briefly explain the purpose of the service.
    - Introduce the main benefit for users.
    - Provide clear buttons for **Log in** and **Sign up**.
+   - <img width="1520" height="773" alt="image" src="https://github.com/user-attachments/assets/44653cb5-ad1f-4a50-a3c7-bd35679d7774" />
+
 
 2. **Sign-up page**
    - Allow a new user to enter the information required to create an account.
