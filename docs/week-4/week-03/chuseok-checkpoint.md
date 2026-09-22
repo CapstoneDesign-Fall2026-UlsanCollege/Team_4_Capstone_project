@@ -12,28 +12,37 @@ The initial website will include the following screens:
    - Briefly explain the purpose of the service.
    - Introduce the main benefit for users.
    - Provide clear buttons for **Log in** and **Sign up**.
-   - <img width="1520" height="773" alt="image" src="https://github.com/user-attachments/assets/44653cb5-ad1f-4a50-a3c7-bd35679d7774" />
+   -<img width="358" height="345" alt="image" src="https://github.com/user-attachments/assets/f3bc34c1-53e3-4f31-b088-1bdba1bc19d1" />
+
 
 
 2. **Sign-up page**
    - Allow a new user to enter the information required to create an account.
    - Provide basic validation and clear error messages.
    - Direct the user to log in or continue to the dashboard after successful registration.
+   - <img width="366" height="581" alt="image" src="https://github.com/user-attachments/assets/afdd7b8b-10c4-4abb-ba8b-7ff88966d29e" />
+
 
 3. **Login page**
    - Allow an existing user to enter their credentials.
    - Display a helpful message when the credentials are invalid.
    - Redirect a successful login to the dashboard.
+   - <img width="323" height="358" alt="image" src="https://github.com/user-attachments/assets/086ef416-7285-408c-b023-e450c167f1c2" />
+
 
 4. **Home/dashboard page**
    - Welcome the logged-in user.
    - Display the main service features in a simple layout.
    - Provide navigation to the most important actions.
+   - <img width="1267" height="715" alt="image" src="https://github.com/user-attachments/assets/46f28773-b69a-4650-9303-91f8f594c896" />
+
 
 5. **Navigation and shared layout**
    - Keep navigation consistent across the main pages.
    - Make it possible to move between the landing page, authentication pages, and dashboard.
    - Include a logout action if authentication is implemented by the midterm.
+   - <img width="1526" height="571" alt="image" src="https://github.com/user-attachments/assets/b825eba1-c7bb-4715-9a2f-e191a6f3a089" />
+
 
 The detailed visual design may change as we learn more about the service, but these screens define the minimum user flow we intend to demonstrate.
 
