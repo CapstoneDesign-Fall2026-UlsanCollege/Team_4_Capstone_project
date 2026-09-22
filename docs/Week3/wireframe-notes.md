@@ -59,8 +59,8 @@ Empty and Error States Summary
 
 Our wireframes will include feedback for situations where the normal flow does not work.
 
-Login error: Invalid email/ID or password.
-Loading state: Events and clubs are being loaded.
-Data error: Events or clubs cannot be loaded.
-Search empty state: No events or clubs match the search/filter.
-Detail error: Selected event or club cannot be found.
+* **Login error:** Invalid email/ID or password.
+* **Loading state:** Events and clubs are being loaded.
+* **Data error:** Events or clubs cannot be loaded.
+* **Search empty state:** No events or clubs match the search/filter.
+* **Detail error:** Selected event or club cannot be found.
