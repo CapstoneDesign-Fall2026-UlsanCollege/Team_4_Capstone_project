@@ -119,7 +119,7 @@ Project planning and design materials are available in the `docs/` directory, in
 - Devyana
 - Tulsey
 - Ujjal Poudel
-- Prachi (Team Lead)
+- Prachi2061
 
 ## Instructor
 
