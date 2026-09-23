@@ -29,7 +29,7 @@ Possible midterm demo sentence |	Our midterm demo will show a student logging in
 | Requirement | Evidence link | Status or short note |
 |---|---|---|
 | Team repository and Project board work |: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project | Complete   |
-| Team Working Agreement is linked and current |docs/Week3/Weekly-report.md  | Complete  |
+| Team Working Agreement is linked and current |docs/Week3/Weekly-report.md https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/1c9336b947f5b72fa6cf2df82695b3166d9754ec/docs/Week1/team_agrement.md | Complete  |
 | Six to ten next-work Issues exist |[GitHub Issues ](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/16), https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/15, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/14, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/13, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/12,  https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/9, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/8 | Complete  |
 | Important Issues have first owners |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/14  | Complete   |
 | At least three Issues have a checkable Definition of Done |[GitHub Issues](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/9), https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/8, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/10  | Complete   |
@@ -37,8 +37,8 @@ Possible midterm demo sentence |	Our midterm demo will show a student logging in
 | Rough wireframe placeholders are linked |docs/Week3/wireframe-Landing-page.jpg, docs/Week3/wireframe-home-page.jpg, docs/Week3/wireframe-login-page.jpg, docs/Week3/wireframe-navigate-page.jpg, docs/Week3/wireframe-notes.md, docs/Week3/wireframe-signup-page.jpg | Complete   |
 | Rough architecture placeholder is linked |docs/Week3/Architecture-Sketch.md  | Complete   |
 | Candidate vertical slice is linked |docs/Week3/Candidate-vertical-slice.md  | Complete   |
-| Sprint 0 Quality Quick Checks are complete |Sprint 0 Quality Quick Checks  | Complete   |
-| Week 3 Weekly Report is complete |Week 3 Weekly Report  | Complete  |
+| Sprint 0 Quality Quick Checks are complete | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/1c9336b947f5b72fa6cf2df82695b3166d9754ec/docs/Week3/Sprint-0-report-Launch-scope.md | Complete   |
+| Week 3 Weekly Report is complete | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/1c9336b947f5b72fa6cf2df82695b3166d9754ec/docs/Week3/Weekly-report.md  | Complete  |
 
 ## Candidate vertical slice
 
