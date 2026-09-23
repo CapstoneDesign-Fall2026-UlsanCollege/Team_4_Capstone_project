@@ -94,4 +94,6 @@ If a core item is incomplete, name the owner, the reason, and the next action. A
 
 | Item | Owner | Next action | Review point |
 |---|---|---|---|
-|  |  |  |  |
+|Sprint 0 Quality Quick Checks  |  | Complete the checklist and link the supporting GitHub evidence. | Week 3  |
+|Chuseok checkpoint evidence  |  | Add the rough sketch, midterm-demo sentence, and Week 5 blocker/question. |Week 4  |
+
