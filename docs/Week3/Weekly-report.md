@@ -23,7 +23,7 @@ If it is not linked, it does not count.
 |---|---|
 | Issue(s) | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues |
 | PR(s) / commits | [Commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main) |
-| Screenshot / demo | [Wireframe notes](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/wireframe-notes.md) |
+| Screenshot / demo | [Wireframe notes](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/wireframe-notes.md https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/99a1e7c2480a0d849f70d3fcd8fb74c27a9bfc2f/docs/Week3/wireframes-empty-error.jpg |
 | Test/check note | [Sprint 0 report](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/Sprint-0-report-Launch-scope.md) |
 | Document update | [Week 3 docs](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/tree/main/docs/Week3) |
 
