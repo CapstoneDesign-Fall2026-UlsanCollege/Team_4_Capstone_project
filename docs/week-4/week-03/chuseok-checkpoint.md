@@ -61,7 +61,7 @@ If full backend authentication is not ready, we will prepare a clearly labeled p
 
 ## Midterm demo sentence
 
-**Our midterm demo will show:** A basic working website where a visitor can learn about our service, create an account, log in, and access a simple dashboard containing the first core feature. The demonstration will focus on the complete user journey, clear navigation, and the overall usability of the service rather than on advanced or unfinished functionality.
+**Our midterm demo will show:** A basic working website where a visitor can learn about CampusVibes, create an account, log in, and access a dashboard where the student can view campus events and clubs and use basic search or filtering to find relevant activities. The demonstration will focus on the complete user journey, clear navigation, and the usability of the first core feature rather than advanced functionality.
 
 ## Minimum midterm requirements
 
@@ -81,10 +81,12 @@ Our main question for Week 5 is how we should implement and connect the login an
 
 ## Week 5 priorities
 
+## Week 5 priorities
+
 1. Confirm the technology and authentication approach.
 2. Finalize the page structure and basic wireframes.
 3. Assign ownership of the landing, authentication, dashboard, and core-feature work.
-4. Implement the landing page and shared navigation first.
+4. Start implementation by creating the landing page from the approved wireframe. The first implementation task will be to build the page layout, add the service description, and connect the Log in and Sign up buttons to their respective pages. After this works, the team will implement the shared navigation.
 5. Define the success criteria for the first core feature.
 
 ## Optional: easiest first screen or interaction
