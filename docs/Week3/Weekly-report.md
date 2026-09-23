@@ -43,7 +43,7 @@ For Week 3, add one row for every team member. Each row needs one sentence descr
 | Blocker/risk | Owner | Next action |
 |---|---|---|
 | The team needs to become familiar with the selected technology stack and connect the frontend, backend, and database. | All members | Start with a simple frontend screen and connect the backend with a clear demo path. |
-| The project has several planned features, which may make the midterm scope too large. | All members | Prioritize the main event discovery and event-detail flow for the midterm demo. |
+| The project has several planned features, which may make the midterm scope too large. | Ujjal | Prioritize the main event discovery and event-detail flow for the midterm demo. |
 | Event data may be difficult to keep reliable and up to date. | All members | Use organizer submission and manual curation for the MVP and review submitted event information before displaying it. |
 
 ## Decision record
