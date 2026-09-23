@@ -28,7 +28,7 @@ Possible midterm demo sentence |	Our midterm demo will show a student logging in
 
 | Requirement | Evidence link | Status or short note |
 |---|---|---|
-| Team repository and Project board work |GitHub repository + Project board  | Complete / exception:  |
+| Team repository and Project board work |: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project | Complete   |
 | Team Working Agreement is linked and current |docs/Week3/Weekly-report.md  | Complete  |
 | Six to ten next-work Issues exist |[GitHub Issues ](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/16), https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/15, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/14, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/13, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/12,  https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/9, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/8 | Complete  |
 | Important Issues have first owners |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/14  | Complete   |
