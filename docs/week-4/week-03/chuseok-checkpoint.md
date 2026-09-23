@@ -79,7 +79,6 @@ To keep the scope realistic, the midterm version should provide:
 
 Our main question for Week 5 is how we should implement and connect the login and sign-up functionality. We need to decide whether to use a backend authentication service, our own backend API, or a temporary prototype implementation. We also need to select the first core feature to build after the basic user flow and confirm the data that feature will require.
 
-## Week 5 priorities
 
 ## Week 5 priorities
 
