@@ -64,3 +64,4 @@ Our wireframes will include feedback for situations where the normal flow does n
 * **Data error:** Events or clubs cannot be loaded.
 * **Search empty state:** No events or clubs match the search/filter.
 * **Detail error:** Selected event or club cannot be found.
+* **Evidence:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/99a1e7c2480a0d849f70d3fcd8fb74c27a9bfc2f/docs/Week3/wireframes-empty-error.jpg
