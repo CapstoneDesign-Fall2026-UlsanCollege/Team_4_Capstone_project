@@ -62,21 +62,21 @@ List only the risks or incomplete items that could change the next plan. Every e
 
 | Risk or exception | Owner | Next action | Due or review point |
 |---|---|---|---|
-| Campus event and club information may not be available through a reliable data source |  | Decide whether to use sample data, manually collected data, or an available API/source for the MVP |Week 4  |
-|Recommendation functionality could become too complex | |Start with simple category/interests-based recommendations instead of AI |Week 4-5 |
-|Too many features could increase the MVP scope | |Prioritize login → events → event details as the main vertical slice |Week 4 |
+| Campus event and club information may not be available through a reliable data source |Tulasha  | Decide whether to use sample data, manually collected data, or an available API/source for the MVP |Week 4  |
+|Recommendation functionality could become too complex |Prachi |Start with simple category/interests-based recommendations instead of AI |Week 4-5 |
+|Too many features could increase the MVP scope |Devyana and ujjwal |Prioritize login → events → event details as the main vertical slice |Week 4 |
 
 ## Bridge into Week 4 and Sprint 1
 
-- **Week 4 Chuseok Checkpoint Issue: Create and assign the Week 4 checkpoint tasks in the GitHub Project board.  
-- **Rough sketch or photo link:**  
+- **Week 4 Chuseok Checkpoint Issue: [Create and assign the Week 4 checkpoint tasks in the GitHub Project board.](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/19)  
+- **Rough sketch or photo link: docs/week-4/week-03/chuseok-checkpoint.md  
 - **One blocker or question for Week 5:What data source will we use for campus events and clubs in the MVP?  
 - **First action after the break:**Begin implementing the student login and home page, then connect navigation to the Events feature.  
 
 ## Final check
 
-- [ ] Every evidence link resolves for a reader with team-repository access.
-- [ ] The team can explain the project purpose, target user, scope boundary, and candidate slice.
-- [ ] The next work is represented by small Issues with owners and checkable completion criteria.
-- [ ] The team has not posted personal data, secrets, or unapproved real-user data.
-- [ ] This report is linked from the team’s Week 3 evidence or Weekly Report.
+- [x] Every evidence link resolves for a reader with team-repository access.
+- [x] The team can explain the project purpose, target user, scope boundary, and candidate slice.
+- [x] The next work is represented by small Issues with owners and checkable completion criteria.
+- [x] The team has not posted personal data, secrets, or unapproved real-user data.
+- [x] This report is linked from the team’s Week 3 evidence or Weekly Report.
