@@ -82,7 +82,7 @@ Our main question for Week 5 is how we should implement and connect the login an
 
 ## Week 5 priorities
 
-1. Confirm the technology and authentication approach.
+1. Check or setup the technology and authentication approach.
 2. Finalize the page structure and basic wireframes.
 3. Assign ownership of the landing, authentication, dashboard, and core-feature work.
 4. Start implementation by creating the landing page from the approved wireframe. The first implementation task will be to build the page layout, add the service description, and connect the Log in and Sign up buttons to their respective pages. After this works, the team will implement the shared navigation.
