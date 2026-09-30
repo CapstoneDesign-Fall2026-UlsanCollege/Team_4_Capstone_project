@@ -12,7 +12,7 @@ Week: 1
 **Midterm demo could show:** Personalized recommendations based on past event attendance; event calendar with RSVP feature
 **Big risk / unknown:** Getting access to all event data; accurate interest profiling
 
-## Idea 2
+## Idea 2 
 **Project name:** College Lost and Found
 **Target user:** Students, faculty, and college staff members
 **Problem:** Students frequently lose items on college but there is no centralized system for reporting and finding them.
