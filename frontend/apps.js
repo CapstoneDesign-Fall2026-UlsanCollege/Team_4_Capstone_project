@@ -39,15 +39,12 @@ const EVENTS = [
 ];
 
 /* ── Constants ── */
-const USERS_KEY   = "cv_users";
-const SESSION_KEY = "cv_session";
 const SAVED_KEY   = "cv_saved";
+let currentSession = null;
 
 /* ── Helpers ── */
 const $ = (sel) => document.querySelector(sel);
-const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
-const saveUsers = (u) => localStorage.setItem(USERS_KEY, JSON.stringify(u));
-const getSession = () => JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
+const getSession = () => currentSession;
 const getSaved = () => JSON.parse(localStorage.getItem(SAVED_KEY) || "[]");
 const saveSaved = (ids) => localStorage.setItem(SAVED_KEY, JSON.stringify(ids));
 
@@ -227,7 +224,20 @@ function checkPasswordStrength(){
 }
 
 /* ── Signup ── */
-function handleSignup(ev){
+function showAuthError(element, error){
+  const messages = {
+    "auth/email-already-in-use": "An account with this email already exists. Try logging in.",
+    "auth/invalid-credential": "Incorrect email or password.",
+    "auth/weak-password": "Choose a stronger password (at least 6 characters).",
+    "auth/invalid-email": "Enter a valid email address.",
+    "auth/too-many-requests": "Too many attempts. Please wait a moment and try again.",
+    "auth/network-request-failed": "Could not connect. Check your internet connection and try again."
+  };
+  element.textContent = messages[error.code] || "Authentication failed. Please try again.";
+  element.classList.remove("hidden");
+}
+
+async function handleSignup(ev){
   ev.preventDefault();
   const name = $("#suName"), email = $("#suEmail"), pass = $("#suPass"),
         pass2 = $("#suPass2"), interest = $("#suInterest");
@@ -239,34 +249,26 @@ function handleSignup(ev){
   ok = setErr(interest, $("#suInterestErr"), interest.value ? "" : "Pick your main interest.") && ok;
   if (!ok) return false;
 
-  const users = getUsers();
   const em = email.value.trim().toLowerCase();
   const formErr = $("#signupFormErr");
-  if (users.some(u => u.email === em)){
-    formErr.textContent = "An account with this email already exists. Try logging in.";
-    formErr.classList.remove("hidden");
-    return false;
-  }
   formErr.classList.add("hidden");
 
-  const user = {
-    id: Date.now(),
-    name: name.value.trim(),
-    email: em,
-    pass: btoa(pass.value),            // demo-grade hashing — replace with server auth in prod
-    interest: interest.value,
-    joined: new Date().toISOString()
-  };
-  users.push(user);
-  saveUsers(users);
-  startSession(user);
-  closeAuth();
-  showToast(`🎉 Welcome to CampusVibes, ${user.name.split(" ")[0]}! You're logged in.`);
+  const { auth, createUserWithEmailAndPassword, updateProfile } = window.campusFirebaseAuth;
+  try {
+    const credential = await createUserWithEmailAndPassword(auth, em, pass.value);
+    localStorage.setItem(`cv_interest_${credential.user.uid}`, interest.value);
+    await updateProfile(credential.user, { displayName: name.value.trim() });
+    startSession(credential.user, interest.value);
+    closeAuth();
+    showToast(`Welcome to CampusVibes, ${name.value.trim().split(" ")[0]}! You're logged in.`);
+  } catch (error) {
+    showAuthError(formErr, error);
+  }
   return false;
 }
 
 /* ── Login ── */
-function handleLogin(ev){
+async function handleLogin(ev){
   ev.preventDefault();
   const email = $("#loginEmail"), pass = $("#loginPass");
   const formErr = $("#loginFormErr");
@@ -275,28 +277,47 @@ function handleLogin(ev){
   ok = setErr(pass, $("#loginPassErr"), pass.value ? "" : "Enter your password.") && ok;
   if (!ok) return false;
 
-  const user = getUsers().find(u => u.email === email.value.trim().toLowerCase());
-  if (!user || user.pass !== btoa(pass.value)){
-    formErr.textContent = "Incorrect email or password.";
-    formErr.classList.remove("hidden");
-    return false;
+  const { auth, signInWithEmailAndPassword } = window.campusFirebaseAuth;
+  try {
+    const credential = await signInWithEmailAndPassword(auth, email.value.trim().toLowerCase(), pass.value);
+    formErr.classList.add("hidden");
+    startSession(credential.user);
+    closeAuth();
+    showToast(`Welcome back, ${(credential.user.displayName || credential.user.email).split(" ")[0]}!`);
+  } catch (error) {
+    showAuthError(formErr, error);
   }
-  formErr.classList.add("hidden");
-  startSession(user);
-  closeAuth();
-  showToast(`👋 Welcome back, ${user.name.split(" ")[0]}!`);
   return false;
 }
 
 /* ── Session ── */
-function startSession(user){
-  localStorage.setItem(SESSION_KEY, JSON.stringify({ id: user.id, name: user.name, email: user.email, interest: user.interest }));
+function startSession(user, interest = ""){
+  const name = user.displayName || user.name || user.email?.split("@")[0] || "Student";
+  currentSession = {
+    id: user.uid || "demo",
+    name,
+    email: user.email || "",
+    interest: interest || localStorage.getItem(`cv_interest_${user.uid}`) || user.interest || ""
+  };
   updateNav();
 }
-function logout(){
-  localStorage.removeItem(SESSION_KEY);
-  updateNav();
-  showToast("Logged out. See you at the next event! 👋");
+function syncFirebaseUser(user){
+  if (user) startSession(user);
+  else {
+    currentSession = null;
+    updateNav();
+  }
+}
+async function logout(){
+  const { auth, signOut } = window.campusFirebaseAuth;
+  try {
+    if (auth.currentUser) await signOut(auth);
+    currentSession = null;
+    updateNav();
+    showToast("Logged out. See you at the next event!");
+  } catch (error) {
+    showToast("Could not log out. Please try again.");
+  }
 }
 function updateNav(){
   const s = getSession();
