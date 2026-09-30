@@ -1,0 +1,348 @@
+
+const EVENTS = [
+  { id:1, title:"HackNight: Build-a-Thon", interest:"Tech",
+    date:"2026-09-26", time:"6:00 PM", location:"Innovation Lab, Bldg 7",
+    host:"Code Collective", emoji:"💻", hue:"#7c5cff",
+    desc:"24 hours of building, pizza, and demo prizes." },
+  { id:2, title:"Open Mic & Poetry Night", interest:"Music",
+    date:"2026-09-27", time:"7:30 PM", location:"Student Union Courtyard",
+    host:"Livewire Society", emoji:"🎤", hue:"#00e0b8",
+    desc:"Sign up or just vibe. Acoustic slots open at 7." },
+  { id:3, title:"Mural Painting Workshop", interest:"Arts",
+    date:"2026-09-29", time:"3:00 PM", location:"Arts Wing, Rm 204",
+    host:"Brush Strokes Club", emoji:"🎨", hue:"#ff8fb1",
+    desc:"Help paint the new community mural. All levels welcome." },
+  { id:4, title:"Intramural Basketball Finals", interest:"Sports",
+    date:"2026-09-30", time:"5:30 PM", location:"Main Gymnasium",
+    host:"Campus Athletics", emoji:"🏀", hue:"#ffb35c",
+    desc:"The championship game. Free entry, loud crowd." },
+  { id:5, title:"Freshers' Bonfire Social", interest:"Social",
+    date:"2026-10-02", time:"8:00 PM", location:"Lakeside Lawn",
+    host:"Student Council", emoji:"🔥", hue:"#ff6b81",
+    desc:"S'mores, music, and meeting your people." },
+  { id:6, title:"Research Skills Bootcamp", interest:"Academics",
+    date:"2026-10-03", time:"10:00 AM", location:"Library Hall B",
+    host:"Grad Student Union", emoji:"📚", hue:"#5cc8ff",
+    desc:"Citations, literature reviews, and avoiding panic." },
+  { id:7, title:"Indie Game Showcase", interest:"Tech",
+    date:"2026-10-04", time:"4:00 PM", location:"Media Centre",
+    host:"Game Devs Guild", emoji:"🕹️", hue:"#7c5cff",
+    desc:"Play student-made games, vote for the audience award." },
+  { id:8, title:"Jazz Under the Stars", interest:"Music",
+    date:"2026-10-05", time:"7:00 PM", location:"Botanical Garden",
+    host:"Campus Orchestra", emoji:"🎷", hue:"#00e0b8",
+    desc:"An evening set with the quartet. Bring a blanket." },
+  { id:9, title:"Photowalk: Golden Hour", interest:"Arts",
+    date:"2026-10-06", time:"5:00 PM", location:"Meet at Main Gate",
+    host:"Shutter Club", emoji:"📷", hue:"#ff8fb1",
+    desc:"A guided walk shooting campus at golden hour." },
+];
+
+/* ── Constants ── */
+const USERS_KEY   = "cv_users";
+const SESSION_KEY = "cv_session";
+const SAVED_KEY   = "cv_saved";
+
+/* ── Helpers ── */
+const $ = (sel) => document.querySelector(sel);
+const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
+const saveUsers = (u) => localStorage.setItem(USERS_KEY, JSON.stringify(u));
+const getSession = () => JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
+const getSaved = () => JSON.parse(localStorage.getItem(SAVED_KEY) || "[]");
+const saveSaved = (ids) => localStorage.setItem(SAVED_KEY, JSON.stringify(ids));
+
+function showToast(msg){
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.remove("hidden");
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.add("hidden"), 3200);
+}
+
+/* ── Event rendering + ONE interest filter ── */
+const GRADIENTS = (hue) =>
+  `linear-gradient(135deg, ${hue}33, ${hue}14), radial-gradient(circle at 80% 20%, ${hue}40, transparent 60%)`;
+
+function renderEvents(filter = "all"){
+  const grid = $("#eventsGrid");
+  const list = filter === "all" ? EVENTS : EVENTS.filter(e => e.interest === filter);
+  const saved = getSaved();
+  grid.innerHTML = list.map((e,i) => {
+    const d = new Date(e.date + "T00:00:00");
+    return `
+    <article class="event-card" style="animation-delay:${i*0.05}s">
+      <div class="event-banner" style="background:${GRADIENTS(e.hue)}">
+        <span>${e.emoji}</span>
+        <button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button>
+        <div class="event-date">
+          <strong>${d.getDate()}</strong>
+          <span>${d.toLocaleString("en-US",{month:"short"})}</span>
+        </div>
+      </div>
+      <div class="event-body">
+        <span class="event-tag">${e.interest}</span>
+        <h3>${e.title}</h3>
+        <div class="event-meta">
+          <span>🕐 ${e.time} · ${d.toLocaleDateString("en-US",{weekday:"long"})}</span>
+          <span>📍 ${e.location}</span>
+          <span>${e.desc}</span>
+        </div>
+        <div class="event-host">
+          <span class="host-avatar" style="background:${e.hue}">${e.host[0]}</span>
+          Hosted by ${e.host}
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+  $("#emptyState").classList.toggle("hidden", list.length > 0);
+}
+
+function renderUpcoming(){
+  const list = $("#upcomingList");
+  list.innerHTML = EVENTS.slice(0, 5).map(e => {
+    const date = new Date(e.date + "T00:00:00");
+    return `<button class="upcoming-item" data-page="discover" data-interest-jump="${e.interest}">
+      <span class="upcoming-date"><strong>${String(date.getDate()).padStart(2, "0")}</strong><span>${date.toLocaleString("en-US", {month:"short"})}</span></span>
+      <span><h3>${e.title}</h3><p>📍 ${e.location}</p></span>
+      <span class="upcoming-meta">${e.time}<br><span class="interest-mini">${e.interest}</span></span>
+    </button>`;
+  }).join("");
+}
+
+function renderSavedEvents(){
+  const saved = getSaved();
+  const grid = $("#savedGrid");
+  const list = EVENTS.filter(event => saved.includes(event.id));
+  grid.innerHTML = list.map(event => eventCardMarkup(event, saved)).join("");
+  $("#savedEmpty").classList.toggle("hidden", list.length > 0);
+  $("#statSaved").textContent = saved.length;
+  $("#savedCount").textContent = saved.length;
+}
+
+function eventCardMarkup(e, saved){
+  const d = new Date(e.date + "T00:00:00");
+  return `<article class="event-card">
+    <div class="event-banner" style="background:${GRADIENTS(e.hue)}"><span>${e.emoji}</span><button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button><div class="event-date"><strong>${d.getDate()}</strong><span>${d.toLocaleString("en-US",{month:"short"})}</span></div></div>
+    <div class="event-body"><span class="event-tag">${e.interest}</span><h3>${e.title}</h3><div class="event-meta"><span>🕐 ${e.time} · ${d.toLocaleDateString("en-US",{weekday:"long"})}</span><span>📍 ${e.location}</span><span>${e.desc}</span></div><div class="event-host"><span class="host-avatar" style="background:${e.hue}">${e.host[0]}</span>Hosted by ${e.host}</div></div>
+  </article>`;
+}
+
+function toggleSaved(id){
+  const saved = getSaved();
+  const next = saved.includes(id) ? saved.filter(item => item !== id) : [...saved, id];
+  saveSaved(next);
+  renderEvents($(".chip.active")?.dataset.interest || "all");
+  renderSavedEvents();
+  showToast(next.includes(id) ? "Event saved." : "Event removed from saved.");
+}
+
+function setupFilter(){
+  $("#filterBar").addEventListener("click", (ev) => {
+    const chip = ev.target.closest(".chip");
+    if (!chip) return;
+    document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    chip.classList.add("active");
+    renderEvents(chip.dataset.interest);
+  });
+}
+
+function showPage(page){
+  document.querySelectorAll(".page-view").forEach(view => view.classList.toggle("active", view.id === `page-${page}`));
+  document.querySelectorAll(".page-link").forEach(link => link.classList.toggle("active", link.dataset.page === page));
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+function setupPageNavigation(){
+  document.addEventListener("click", event => {
+    const saveButton = event.target.closest("[data-save]");
+    if (saveButton){
+      event.preventDefault();
+      toggleSaved(Number(saveButton.dataset.save));
+      return;
+    }
+    const pageButton = event.target.closest("[data-page]");
+    if (!pageButton) return;
+    showPage(pageButton.dataset.page);
+    const interest = pageButton.dataset.interestJump;
+    if (interest){
+      const chip = document.querySelector(`.chip[data-interest="${interest}"]`);
+      if (chip){ chip.click(); }
+    }
+  });
+}
+
+/* ── Stats ── */
+function renderStats(){
+  const eventStat = $("#statEvents");
+  if (eventStat) eventStat.textContent = EVENTS.length;
+}
+
+/* ══════════ AUTH ══════════ */
+function openAuth(tab = "login"){
+  $("#authModal").classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  switchTab(tab);
+}
+function closeAuth(){
+  $("#authModal").classList.add("hidden");
+  document.body.style.overflow = "";
+  ["loginForm","signupForm"].forEach(id => document.getElementById(id).reset());
+  document.querySelectorAll(".field-error,.form-error").forEach(el => { el.textContent=""; el.classList.add("hidden"); });
+  document.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
+}
+function closeOnBackdrop(e){ if (e.target === e.currentTarget) closeAuth(); }
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeAuth(); });
+
+function switchTab(tab){
+  const isLogin = tab === "login";
+  $("#loginForm").classList.toggle("hidden", !isLogin);
+  $("#signupForm").classList.toggle("hidden", isLogin);
+  $("#tabLogin").classList.toggle("active", isLogin);
+  $("#tabSignup").classList.toggle("active", !isLogin);
+  $("#tabSlider").classList.toggle("right", !isLogin);
+}
+
+/* ── Validation ── */
+function setErr(inputEl, errEl, msg){
+  errEl.textContent = msg;
+  inputEl.classList.toggle("invalid", !!msg);
+  return !msg;
+}
+const validEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
+
+function checkPasswordStrength(){
+  const p = $("#suPass").value;
+  const fill = $("#passMeter");
+  let score = 0;
+  if (p.length >= 8) score++;
+  if (/[A-Z]/.test(p) && /[a-z]/.test(p)) score++;
+  if (/\d/.test(p)) score++;
+  if (/[^A-Za-z0-9]/.test(p)) score++;
+  const widths = ["0%","25%","50%","75%","100%"];
+  const colors = ["var(--danger)","var(--danger)","#ffb35c","#8ee35c","var(--accent-2)"];
+  fill.style.width = widths[score];
+  fill.style.background = colors[score];
+}
+
+/* ── Signup ── */
+function handleSignup(ev){
+  ev.preventDefault();
+  const name = $("#suName"), email = $("#suEmail"), pass = $("#suPass"),
+        pass2 = $("#suPass2"), interest = $("#suInterest");
+  let ok = true;
+  ok = setErr(name, $("#suNameErr"), name.value.trim().length >= 2 ? "" : "Please enter your name.") && ok;
+  ok = setErr(email, $("#suEmailErr"), validEmail(email.value.trim()) ? "" : "Enter a valid email.") && ok;
+  ok = setErr(pass, $("#suPassErr"), pass.value.length >= 8 ? "" : "Min. 8 characters.") && ok;
+  ok = setErr(pass2, $("#suPass2Err"), pass2.value === pass.value ? "" : "Passwords don't match.") && ok;
+  ok = setErr(interest, $("#suInterestErr"), interest.value ? "" : "Pick your main interest.") && ok;
+  if (!ok) return false;
+
+  const users = getUsers();
+  const em = email.value.trim().toLowerCase();
+  const formErr = $("#signupFormErr");
+  if (users.some(u => u.email === em)){
+    formErr.textContent = "An account with this email already exists. Try logging in.";
+    formErr.classList.remove("hidden");
+    return false;
+  }
+  formErr.classList.add("hidden");
+
+  const user = {
+    id: Date.now(),
+    name: name.value.trim(),
+    email: em,
+    pass: btoa(pass.value),            // demo-grade hashing — replace with server auth in prod
+    interest: interest.value,
+    joined: new Date().toISOString()
+  };
+  users.push(user);
+  saveUsers(users);
+  startSession(user);
+  closeAuth();
+  showToast(`🎉 Welcome to CampusVibes, ${user.name.split(" ")[0]}! You're logged in.`);
+  return false;
+}
+
+/* ── Login ── */
+function handleLogin(ev){
+  ev.preventDefault();
+  const email = $("#loginEmail"), pass = $("#loginPass");
+  const formErr = $("#loginFormErr");
+  let ok = true;
+  ok = setErr(email, $("#loginEmailErr"), validEmail(email.value.trim()) ? "" : "Enter a valid email.") && ok;
+  ok = setErr(pass, $("#loginPassErr"), pass.value ? "" : "Enter your password.") && ok;
+  if (!ok) return false;
+
+  const user = getUsers().find(u => u.email === email.value.trim().toLowerCase());
+  if (!user || user.pass !== btoa(pass.value)){
+    formErr.textContent = "Incorrect email or password.";
+    formErr.classList.remove("hidden");
+    return false;
+  }
+  formErr.classList.add("hidden");
+  startSession(user);
+  closeAuth();
+  showToast(`👋 Welcome back, ${user.name.split(" ")[0]}!`);
+  return false;
+}
+
+/* ── Session ── */
+function startSession(user){
+  localStorage.setItem(SESSION_KEY, JSON.stringify({ id: user.id, name: user.name, email: user.email, interest: user.interest }));
+  updateNav();
+}
+function logout(){
+  localStorage.removeItem(SESSION_KEY);
+  updateNav();
+  showToast("Logged out. See you at the next event! 👋");
+}
+function updateNav(){
+  const s = getSession();
+  $("#mainNav").classList.toggle("hidden", !s);
+  $("#appMain").classList.toggle("hidden", !s);
+  $("#authLanding").classList.toggle("hidden", !!s);
+  $("#navAuthOut").classList.toggle("hidden", !!s);
+  $("#navAuthIn").classList.toggle("hidden", !s);
+  $("#dashboardName").textContent = s ? s.name.split(" ")[0] : "there";
+  $("#profileName").textContent = s ? s.name : "Guest student";
+  $("#profileEmail").textContent = s ? s.email : "Log in to personalize your CampusVibes profile.";
+  $("#profileAvatar").textContent = s ? s.name[0].toUpperCase() : "?";
+  if (s){
+    $("#navUsername").textContent = s.name.split(" ")[0];
+    $("#navAvatar").textContent = s.name[0].toUpperCase();
+    // If the user picked an interest at signup, gently preselect that filter
+    if (s.interest){
+      const chip = document.querySelector(`.chip[data-interest="${s.interest}"]`);
+      if (chip){
+        document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        renderEvents(s.interest);
+      }
+    }
+  }
+}
+
+/* ── Boot ── */
+document.addEventListener("DOMContentLoaded", () => {
+  renderStats();
+  renderUpcoming();
+  renderEvents("all");
+  renderSavedEvents();
+  setupFilter();
+  setupPageNavigation();
+  updateNav();
+  $("#suPass").addEventListener("input", checkPasswordStrength);
+  const enterDemo = () => {
+    startSession({name: "Alex Rivera", email: "alex@campus.edu", interest: "Tech"});
+    closeAuth();
+    showToast("Welcome to your demo dashboard.");
+  };
+  $("#demoLogin").addEventListener("click", enterDemo);
+  $("#landingDemo").addEventListener("click", enterDemo);
+  $("#suggestForm").addEventListener("submit", event => {
+    event.preventDefault();
+    event.currentTarget.reset();
+    showToast("Thanks. Your suggestion is in the queue.");
+    showPage("dashboard");
+  });
+});

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CampusVibes — Discover Campus Events</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══════════ APP NAVIGATION ══════════ -->
+<header class="nav">
+  <div class="nav-inner">
+    <button class="logo logo-button" data-page="dashboard"><span class="logo-dot"></span>Campus<span class="logo-accent">Vibes</span></button>
+    <nav class="nav-links hidden" id="mainNav" aria-label="Main navigation">
+      <button class="page-link active" data-page="dashboard">Dashboard</button>
+      <button class="page-link" data-page="discover">Discover</button>
+      <button class="page-link" data-page="saved">Saved</button>
+      <button class="page-link" data-page="suggest">Suggest</button>
+      <button class="page-link" data-page="profile">Profile</button>
+    </nav>
+    <div class="nav-auth" id="navAuthOut">
+      <button class="btn btn-ghost" onclick="openAuth('login')">Log in</button>
+      <button class="btn btn-primary" onclick="openAuth('signup')">Sign up</button>
+    </div>
+    <div class="nav-auth nav-user hidden" id="navAuthIn">
+      <div class="avatar" id="navAvatar">?</div>
+      <span class="nav-username" id="navUsername"></span>
+      <button class="btn btn-ghost btn-sm" onclick="logout()">Log out</button>
+    </div>
+  </div>
+</header>
+
+<main class="auth-landing" id="authLanding">
+  <section class="auth-landing-card">
+    <div class="auth-brand"><strong>campus<span>Vibes</span></strong><p>Find the events worth leaving the library for.</p></div>
+    <h1>Welcome back</h1>
+    <p class="auth-landing-copy">Sign in to see your campus dashboard, saved events, and suggestions.</p>
+    <div class="auth-landing-actions"><button class="btn btn-primary" onclick="openAuth('login')">Log in</button><button class="btn btn-outline" onclick="openAuth('signup')">Sign up</button></div>
+    <button class="demo-login" id="landingDemo">Continue as demo student</button>
+  </section>
+</main>
+
+<main class="app-main hidden" id="appMain">
+  <section class="page-view active" id="page-dashboard">
+    <div class="page-heading">
+      <div><p class="eyebrow" id="dashboardDate">WEDNESDAY, SEP 23</p><h1>Hey, <span id="dashboardName">there</span></h1><p>Here is what is happening around campus this week.</p></div>
+      <button class="btn btn-primary" data-page="discover">Browse events</button>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><strong id="statEvents">0</strong><span>Events curated</span></div>
+      <div class="stat-card"><strong id="statSaved">0</strong><span>Saved by you</span></div>
+      <div class="stat-card"><strong id="statSuggestions">0</strong><span>Suggestions pending</span></div>
+    </div>
+    <div class="dashboard-grid">
+      <section class="panel upcoming-panel"><div class="panel-heading"><div><h2>Coming up next</h2><p>Your next five campus moments.</p></div><button class="text-button" data-page="discover">See all</button></div><div id="upcomingList"></div></section>
+      <section class="panel quick-panel"><h2>Quick actions</h2><p>Jump back in.</p><div class="quick-actions"><button class="btn btn-primary" data-page="discover">Browse events</button><button class="btn btn-outline" data-page="suggest">Suggest an event</button><button class="btn btn-outline" data-page="saved">Saved (<span id="savedCount">0</span>)</button></div><p class="panel-note">Every listing is hand-picked and verified by the CampusVibes team. No algorithms, just good curation.</p></section>
+    </div>
+  </section>
+
+  <section class="page-view" id="page-discover">
+    <div class="page-heading compact"><div><p class="eyebrow">EXPLORE CAMPUS</p><h1>Discover events</h1><p>Find something worth showing up for.</p></div></div>
+    <div class="filter-bar" id="filterBar" role="tablist" aria-label="Filter events by interest">
+      <button class="chip active" data-interest="all">All</button><button class="chip" data-interest="Tech">💻 Tech</button><button class="chip" data-interest="Arts">🎨 Arts</button><button class="chip" data-interest="Music">🎵 Music</button><button class="chip" data-interest="Sports">🏀 Sports</button><button class="chip" data-interest="Social">🎉 Social</button><button class="chip" data-interest="Academics">📚 Academics</button>
+    </div>
+    <div class="events-grid" id="eventsGrid"></div><p class="empty-state hidden" id="emptyState">Nothing here yet. Check back after our next curation round.</p>
+  </section>
+
+  <section class="page-view" id="page-saved"><div class="page-heading compact"><div><p class="eyebrow">YOUR SHORTLIST</p><h1>Saved events</h1><p>Keep the plans you are not ready to forget.</p></div></div><div class="events-grid" id="savedGrid"></div><p class="empty-state hidden" id="savedEmpty">You have not saved any events yet. Browse Discover and tap the bookmark on an event.</p></section>
+
+  <section class="page-view" id="page-suggest"><div class="page-heading compact"><div><p class="eyebrow">ADD TO THE VIBE</p><h1>Suggest an event</h1><p>Know something the campus should not miss?</p></div></div><form class="suggest-form panel" id="suggestForm"><label>Event name<input required placeholder="e.g. Film night under the stars"></label><label>Host or club<input required placeholder="Your club name"></label><label>What is happening?<textarea required rows="4" placeholder="Tell students why they should come..."></textarea></label><button class="btn btn-primary" type="submit">Send suggestion</button></form></section>
+
+  <section class="page-view" id="page-profile"><div class="page-heading compact"><div><p class="eyebrow">YOUR CAMPUS IDENTITY</p><h1>Your profile</h1><p>Keep your interests in one place.</p></div></div><section class="profile-panel panel"><div class="profile-avatar" id="profileAvatar">?</div><div><h2 id="profileName">Guest student</h2><p id="profileEmail">Log in to personalize your CampusVibes profile.</p></div><button class="btn btn-outline" onclick="openAuth('login')">Log in</button></section></section>
+</main>
+
+<!-- ══════════ AUTH MODAL ══════════ -->
+<div class="modal-overlay hidden" id="authModal" onclick="closeOnBackdrop(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAuth()" aria-label="Close">✕</button>
+
+    <div class="auth-brand">
+      <strong>campus<span>Vibes</span></strong>
+      <p>Find the events worth leaving the library for.</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Log in</button>
+      <button class="auth-tab" id="tabSignup" onclick="switchTab('signup')">Sign up</button>
+      <span class="auth-tab-slider" id="tabSlider"></span>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm" class="auth-form" onsubmit="return handleLogin(event)" novalidate>
+      <h3>Welcome back 👋</h3>
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="you@campus.edu" autocomplete="email">
+        <span class="field-error" id="loginEmailErr"></span>
+      </div>
+      <div class="field">
+        <label for="loginPass">Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+        <span class="field-error" id="loginPassErr"></span>
+      </div>
+      <div class="form-error hidden" id="loginFormErr"></div>
+      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      <button type="button" class="demo-login" id="demoLogin">Continue as demo student</button>
+      <p class="auth-note">Demo build — data lives only in this page session.</p>
+      <p class="auth-switch">New here? <a href="#" onclick="switchTab('signup'); return false;">Create an account</a></p>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signupForm" class="auth-form hidden" onsubmit="return handleSignup(event)" novalidate>
+      <h3>Join the vibe 🎓</h3>
+      <div class="field">
+        <label for="suName">Full name</label>
+        <input type="text" id="suName" placeholder="Alex Rivera" autocomplete="name">
+        <span class="field-error" id="suNameErr"></span>
+      </div>
+      <div class="field">
+        <label for="suEmail">Campus email</label>
+        <input type="email" id="suEmail" placeholder="you@campus.edu" autocomplete="email">
+        <span class="field-error" id="suEmailErr"></span>
+      </div>
+      <div class="field">
+        <label for="suPass">Password</label>
+        <input type="password" id="suPass" placeholder="Min. 8 characters" autocomplete="new-password">
+        <span class="field-error" id="suPassErr"></span>
+        <div class="pass-meter"><div class="pass-meter-fill" id="passMeter"></div></div>
+      </div>
+      <div class="field">
+        <label for="suPass2">Confirm password</label>
+        <input type="password" id="suPass2" placeholder="Repeat password" autocomplete="new-password">
+        <span class="field-error" id="suPass2Err"></span>
+      </div>
+      <div class="field">
+        <label for="suInterest">Your main interest</label>
+        <select id="suInterest">
+          <option value="">Choose one…</option>
+          <option>Tech</option><option>Arts</option><option>Music</option>
+          <option>Sports</option><option>Social</option><option>Academics</option>
+        </select>
+        <span class="field-error" id="suInterestErr"></span>
+      </div>
+      <div class="form-error hidden" id="signupFormErr"></div>
+      <button type="submit" class="btn btn-primary btn-block">Create account</button>
+      <p class="auth-switch">Already a member? <a href="#" onclick="switchTab('login'); return false;">Log in</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast hidden" id="toast"></div>
+
+<script src="apps.js"></script>
+</body>
+</html>
