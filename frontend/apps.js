@@ -153,6 +153,8 @@ function showPage(page){
 }
 
 function setupPageNavigation(){
+  if (window.campusVibesNavigationReady) return;
+  window.campusVibesNavigationReady = true;
   document.addEventListener("click", event => {
     const saveButton = event.target.closest("[data-save]");
     if (saveButton){
@@ -323,7 +325,7 @@ function updateNav(){
 }
 
 /* ── Boot ── */
-document.addEventListener("DOMContentLoaded", () => {
+function bootCampusVibes(){
   renderStats();
   renderUpcoming();
   renderEvents("all");
@@ -345,4 +347,10 @@ document.addEventListener("DOMContentLoaded", () => {
     showToast("Thanks. Your suggestion is in the queue.");
     showPage("dashboard");
   });
-});
+}
+
+if (document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", bootCampusVibes, { once: true });
+} else {
+  bootCampusVibes();
+}
