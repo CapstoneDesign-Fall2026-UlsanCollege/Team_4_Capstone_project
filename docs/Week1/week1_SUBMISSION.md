@@ -9,7 +9,7 @@
 - **Coach Rating:** 2/4 (Creative value weak on features scope)
 - **Action Items:**
   -  **REMOVE:** Event scraping, personalization algorithm, RSVP history
-  -  **KEEP:** Hand-curated event list with one interest filter
+  -  **KEEP:** Hand-curated event list with one interest filter 
   -  **DEFER:** Recommendation engine as stretch goal
 - **Concern:** Risk of over-engineering; must validate with manual data first
 
