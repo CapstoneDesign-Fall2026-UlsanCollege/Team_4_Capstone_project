@@ -1,6 +1,6 @@
 # CampusVibes React Shell
 
-This Vite + React app is the first navigation proof for Issue #26. The existing static prototype remains in `../` while the team evaluates and builds the React flow.
+This Vite + React app is the first navigation proof for Issue #26. React mounts the existing CampusVibes page markup and loads its existing stylesheet and behavior, so the Vite preview stays aligned with the original static prototype.
 
 ## Run locally
 
@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-The landing page links to a login preview and a seeded dashboard preview. The login form only demonstrates navigation; Firebase authentication is not connected yet. Event data is local sample content.
+The page uses the original login/signup modal and dashboard navigation. Account data is currently a local demo flow; Firebase authentication is not connected yet. Event data is local sample content.
 
 ## Verify a production build
 
