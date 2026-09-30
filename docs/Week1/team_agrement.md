@@ -20,7 +20,7 @@ Complete this when your team forms. Link it in your Week 1 Launch Report and rev
 | Tulsa | Communication, research, problem-solving, creativity, presentation | Mostly Afternoon and midnight |
 | Devyana | Research, documentation, organization, analysis, attention to detail | Mostly Afternoon and midnight |
 | Ujjal | Technical development, implementation, troubleshooting, testing, problem-solving | Mostly Midnight  |
-
+ 
 ---
 
 ## Roles for the First Sprint
