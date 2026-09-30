@@ -9,7 +9,9 @@ npm install
 npm run dev
 ```
 
-The page uses the original login/signup modal and dashboard navigation. Account data is currently a local demo flow; Firebase authentication is not connected yet. Event data is local sample content.
+The page uses the original login/signup modal and dashboard navigation. Email/password accounts use Firebase Authentication; event data is local sample content.
+
+Enable the Email/Password provider under Authentication > Sign-in method in the Firebase console before testing signup and login. The Firebase web app configuration is in `src/firebase.js`.
 
 ## Verify a production build
 
