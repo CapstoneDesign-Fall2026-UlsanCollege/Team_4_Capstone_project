@@ -30,6 +30,8 @@ Complete the section for your current sprint at its final class meeting. These a
 
 - [ ] Main demo path, error/empty state, and key links or buttons have been checked.
 - [ ] Keyboard access, visible labels, and readable contrast have received a basic review.
+- [x] Login form labels are associated with their inputs; login and empty-signup validation were checked in the browser.
+- [ ] Manually confirm Tab advances through the landing and login controls; automated browser focus did not advance during this check.
 - [ ] Setup and handoff instructions work for someone outside the team.
 - [ ] The project has safe demo data and no secrets or private data in shared evidence.
 - [ ] Demo fallback and remaining blocker plan are documented.

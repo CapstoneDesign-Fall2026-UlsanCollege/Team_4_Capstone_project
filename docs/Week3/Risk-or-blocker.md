@@ -35,11 +35,31 @@ Using sample data would allow us to complete and test the main user path first. 
 
 Team 4
 
+## Firestore Event Document Shape
+
+Use the `events` collection. The Firestore document ID is the mock event `id` converted to a string (for example, `events/1`); do not duplicate it in the document fields.
+
+```json
+{
+	"title": "HackNight: Build-a-Thon",
+	"interest": "Tech",
+	"date": "2026-09-26",
+	"time": "6:00 PM",
+	"location": "Innovation Lab, Bldg 7",
+	"host": "Code Collective",
+	"emoji": "\ud83d\udcbb",
+	"hue": "#7c5cff",
+	"desc": "24 hours of building, pizza, and demo prizes."
+}
+```
+
+All fields are strings. `date` uses `YYYY-MM-DD`; `time` is a display value. This shape matches the current mock records in `frontend/apps.js` and is a contract only; Firestore reads and writes are not implemented yet.
+
 ## Next action
 
 * [ ] Check available university event data sources
-* [ ] Create 5–10 sample events for MVP testing
-* [ ] Define the Firestore event document structure
+* [x] Create 5–10 sample events for MVP testing
+* [x] Define the Firestore event document structure
 * [ ] Decide whether external event data is necessary for the MVP
 * [ ] Test search and filtering using the sample events
 
