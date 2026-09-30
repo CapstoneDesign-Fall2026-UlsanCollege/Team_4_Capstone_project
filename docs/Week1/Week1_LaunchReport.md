@@ -21,7 +21,7 @@ This is the Week 1 report. It replaces the standard Weekly Report for this week.
 Link the completed [Five Project Ideas](five-project-ideas.md) document or Issue:
 
 - docs/project ideas
-
+ 
 ## Individual Week 1 actions
 
 Each student records their preferred idea and one concern after class.
