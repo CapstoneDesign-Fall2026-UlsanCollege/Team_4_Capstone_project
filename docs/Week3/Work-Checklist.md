@@ -132,9 +132,10 @@ All Sprint 0 core items and selected stretch items have been completed.
 | Sprint 0 Quality Quick Checks | tulsey8848           | Completed and supporting GitHub evidence linked.       | Week 3       |
 | Sprint 0 Report               | tulsey8848            | Completed and evidence linked.                         | Week 3       |
 | Week 3 Weekly Report          | All members        | Contributions and evidence added to the shared report. | Week 3       |
-| Chuseok Checkpoint Issue      | prachi2061            | Created/updated with required evidence.                | Week 4       |
+| Chuseok Checkpoint Issue      | prachi2061            | Evidence is complete; authentication confirmation remains unchecked until the Issue #25 setup check is recorded. | Week 4-5 |
 | Candidate vertical slice      | tulsey8848             | Confirmed the in-scope and out-of-scope boundaries.    | Week 4       |
 | Wireframes                    | devyanaCT            | Added normal, loading, empty, and error states.        | Week 4       |
 | Architecture                  | devyanaCT            | Added main system components, dependencies, and risks. | Week 4       |
-| Firebase Authentication       | Team | Continue implementation and integration testing.       | Week 5       |
+| Firebase Authentication       | devyanaCT + Team     | Complete Issue #25 and record the Firebase-versus-mock decision by Wed 2026-09-30. | Week 5 |
+| Landing/navigation proof      | prachi2061            | Complete [Issue #21](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/21): landing page, Log in and Sign up links, dashboard shell, visible shared navigation, and a working return path. | Week 5 |
 | Sample event/club data        | Data/API owner     | Prepare sample data for vertical-slice testing.        | Week 5       |

@@ -63,6 +63,16 @@ If full backend authentication is not ready, we will prepare a clearly labeled p
 
 **Our midterm demo will show:** A basic working website where a visitor can learn about CampusVibes, create an account, log in, and access a dashboard where the student can view campus events and clubs and use basic search or filtering to find relevant activities. The demonstration will focus on the complete user journey, clear navigation, and the usability of the first core feature rather than advanced functionality.
 
+## Checkpoint submission checklist
+
+- [x] Add the landing, authentication, dashboard, and navigation sketches.
+- [x] Record the intended login -> dashboard -> core-feature flow.
+- [x] Record the midterm demo sentence and the Week 5 blocker.
+- [ ] Confirm the final authentication approach.
+   - **Owner:** @devyanaCT
+   - **Decision date:** Wed 2026-09-30
+   - **Decision boundary:** Use Firebase Authentication if the setup check in [Issue #25](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25) succeeds; otherwise use a clearly labeled mock flow for the demo only.
+
 ## Minimum midterm requirements
 
 To keep the scope realistic, the midterm version should provide:
@@ -82,10 +92,10 @@ Our main question for Week 5 is how we should implement and connect the login an
 
 ## Week 5 priorities
 
-1. Check or setup the technology and authentication approach.
+1. Complete the Firebase setup check and record whether the team will use Firebase Authentication or the clearly labeled mock fallback.
 2. Finalize the page structure and basic wireframes.
 3. Assign ownership of the landing, authentication, dashboard, and core-feature work.
-4. Start implementation by creating the landing page from the approved wireframe. The first implementation task will be to build the page layout, add the service description, and connect the Log in and Sign up buttons to their respective pages. After this works, the team will implement the shared navigation.
+4. **Prachi (@prachi2061): own [Issue #21](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/21), the first landing/navigation proof.** Its Definition of Done is: the landing page renders from the approved wireframe, Log in and Sign up navigate to their pages, the dashboard shell is reachable through the intended flow, and the shared navigation has visible labels and a working return path. This is the first implementation proof; the wider CampusVibes roadmap remains out of scope.
 5. Define the success criteria for the first core feature.
 
 ## Optional: easiest first screen or interaction
