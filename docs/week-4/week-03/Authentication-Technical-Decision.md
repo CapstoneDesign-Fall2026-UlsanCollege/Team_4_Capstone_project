@@ -35,13 +35,13 @@ to Firebase Authentication and support basic email/password login.
 
 ### Setup checklist
 
-- [ ] Create or confirm Firebase project
-- [ ] Connect Firebase to React
-- [ ] Enable Firebase Authentication
-- [ ] Enable Email/Password sign-in
-- [ ] Create a test account
-- [ ] Test login
-- [ ] Confirm successful login reaches the CampusVibe home page
+- [x] Create or confirm Firebase project
+- [x] Connect Firebase to React
+- [x] Enable Firebase Authentication
+- [x] Enable Email/Password sign-in
+- [x] Create a test account
+- [x] Test login
+- [x] Confirm successful login reaches the CampusVibe home page
 
 ## Success Condition
 
