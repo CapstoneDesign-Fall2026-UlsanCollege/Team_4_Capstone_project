@@ -69,3 +69,5 @@ Real university event data is not required for this checkpoint.
 - RSVP/registration system
 - Notifications
 - Chat
+## Evidence:
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33
