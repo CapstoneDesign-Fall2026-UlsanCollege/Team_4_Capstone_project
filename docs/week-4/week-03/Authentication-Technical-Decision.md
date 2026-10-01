@@ -60,9 +60,7 @@ implementation.
 
 ## Evidence
 
-**First setup check:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25 
-
-**Screenshots / test evidence:** 
+**Screenshots / test evidence:**  https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25 
 
 ## Current Result
 
