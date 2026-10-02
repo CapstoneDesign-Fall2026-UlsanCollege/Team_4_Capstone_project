@@ -17,6 +17,7 @@
     <nav class="nav-links hidden" id="mainNav" aria-label="Main navigation">
       <button class="page-link active" data-page="dashboard">Dashboard</button>
       <button class="page-link" data-page="discover">Discover</button>
+      <button class="page-link" data-page="chat">Assistant</button>
       <button class="page-link" data-page="saved">Saved</button>
       <button class="page-link" data-page="suggest">Suggest</button>
       <button class="page-link" data-page="profile">Profile</button>
@@ -56,7 +57,7 @@
     </div>
     <div class="dashboard-grid">
       <section class="panel upcoming-panel"><div class="panel-heading"><div><h2>Coming up next</h2><p>Your next five campus moments.</p></div><button class="text-button" data-page="discover">See all</button></div><div id="upcomingList"></div></section>
-      <section class="panel quick-panel"><h2>Quick actions</h2><p>Jump back in.</p><div class="quick-actions"><button class="btn btn-primary" data-page="discover">Browse events</button><button class="btn btn-outline" data-page="suggest">Suggest an event</button><button class="btn btn-outline" data-page="saved">Saved (<span id="savedCount">0</span>)</button></div><p class="panel-note">Every listing is hand-picked and verified by the CampusVibes team. No algorithms, just good curation.</p></section>
+      <section class="panel quick-panel"><h2>Quick actions</h2><p>Jump back in.</p><div class="quick-actions"><button class="btn btn-primary" data-page="discover">Browse events</button><button class="btn btn-outline" data-page="chat">Ask Assistant</button><button class="btn btn-outline" data-page="suggest">Suggest an event</button><button class="btn btn-outline" data-page="saved">Saved (<span id="savedCount">0</span>)</button></div><p class="panel-note">Every listing is hand-picked and verified by the CampusVibes team. No algorithms, just good curation.</p></section>
     </div>
   </section>
 
@@ -66,6 +67,26 @@
       <button class="chip active" data-interest="all">All</button><button class="chip" data-interest="Tech">💻 Tech</button><button class="chip" data-interest="Arts">🎨 Arts</button><button class="chip" data-interest="Music">🎵 Music</button><button class="chip" data-interest="Sports">🏀 Sports</button><button class="chip" data-interest="Social">🎉 Social</button><button class="chip" data-interest="Academics">📚 Academics</button>
     </div>
     <div class="events-grid" id="eventsGrid"></div><p class="empty-state hidden" id="emptyState">Nothing here yet. Check back after our next curation round.</p>
+  </section>
+
+  <section class="page-view" id="page-chat">
+    <div class="page-heading compact"><div><p class="eyebrow">ASK CAMPUSVIBES</p><h1>CampusVibes Assistant</h1><p>Get help finding events and using CampusVibes.</p></div><button class="btn btn-outline" id="chatClear" type="button">New chat</button></div>
+    <section class="chat-panel panel" aria-label="AI chat">
+      <div class="chat-messages" id="chatMessages" aria-label="Conversation" aria-live="polite" aria-relevant="additions text">
+        <div class="chat-message assistant"><div class="chat-message-label">CampusVibes Assistant</div><p>Hi! I can help you explore campus events, find listings by interest, check event details, or explain how to save one.</p></div>
+      </div>
+      <div class="chat-prompts" id="chatPrompts" aria-label="Suggested questions">
+        <button class="chat-prompt" type="button" data-prompt="Show me music events">Show me music events</button>
+        <button class="chat-prompt" type="button" data-prompt="Where is the Indie Game Showcase?">Where is an event?</button>
+        <button class="chat-prompt" type="button" data-prompt="How do I save an event?">How do I save an event?</button>
+      </div>
+      <form class="chat-form" id="chatForm">
+        <label class="sr-only" for="chatInput">Message CampusVibes Assistant</label>
+        <textarea id="chatInput" rows="1" maxlength="500" placeholder="Ask about events or CampusVibes..." required></textarea>
+        <button class="btn btn-primary" id="chatSend" type="submit">Send</button>
+      </form>
+      <p class="chat-disclaimer">This helper uses the sample events in CampusVibes. It doesn’t use an external AI service or have live campus information.</p>
+    </section>
   </section>
 
   <section class="page-view" id="page-saved"><div class="page-heading compact"><div><p class="eyebrow">YOUR SHORTLIST</p><h1>Saved events</h1><p>Keep the plans you are not ready to forget.</p></div></div><div class="events-grid" id="savedGrid"></div><p class="empty-state hidden" id="savedEmpty">You have not saved any events yet. Browse Discover and tap the bookmark on an event.</p></section>
