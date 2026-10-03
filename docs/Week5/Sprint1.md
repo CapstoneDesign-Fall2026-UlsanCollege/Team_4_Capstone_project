@@ -36,4 +36,9 @@ Real university event data is not required for this checkpoint.
 - Chat# Sprint 1 Implementation Path
 
 ## Evidence:
-**Issue:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33
+- Issue: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33
+- Wireframe: [Wireframe notes](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/wireframe-notes.md)
+- Architecture sketch: [Architecture sketch](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/Architecture-Sketch.md)
+- Stack comparison: [Stack comparison](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/tech-stack-comparison.md)
+- Design Doc v1: [Design Doc v1](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/237653ae40a13f7ec6890a6f766a0aac53796a95/docs/Week2/design-doc.md)
+- Vertical Slice Plan:[Vertical Slice Plan](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/237653ae40a13f7ec6890a6f766a0aac53796a95/docs/Week3/Candidate-vertical-slice.md)
