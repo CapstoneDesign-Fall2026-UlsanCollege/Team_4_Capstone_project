@@ -6,8 +6,7 @@
 
 ## This week's goal
 
-Build and verify one small end-to-end CampusVibe user path and prepare
-the project for the next development step.
+Build and verify one small end-to-end CampusVibe user path and prepare the project for the next development step.
 
 Our selected path is:
 
@@ -28,20 +27,20 @@ If it is not linked, it does not count.
 
 | Evidence | Link |
 |---|---|
-| Issue(s) | [Add completed end-to-end issue link] |
-| PR(s) / commits | [Add GitHub commit/PR link] |
-| Screenshot / demo | [Add screenshot or demo link] |
-| Test/check note | [Add Sprint 1 test note link] |
-| Document update | [Add Sprint 1 documentation link] |
+| Issue(s) | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33 |
+| PR(s) / commits | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits |
+| Screenshot / demo | TBD — add screenshot or Loom/demo link |
+| Test/check note | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25 |
+| Document update | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week5/Weekly-report.md |
 
 ## Individual contribution entries — one row per student
 
 | Student | What they did | Evidence link |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| DevyanaCT | Built the event detail flow and helped complete the Sprint 1 end-to-end event-viewing path; worked on Firebase/event configuration blockers. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33 ; https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35 |
+| prachi2061 | Implemented sign-up/login flow and prepared the midterm demo/test evidence for the checkpoint. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/22 ; https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/20 |
+| ujjalpoudel75 | Contributed to event organization and search-related functionality for the CampusVibe flow. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/13 ; https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/15 |
+| tulseyy8848 | Set up the project shell/navigation structure and contributed to the university clubs page work. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/27 ; https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/12 |
 
 ## Blockers or risks
 
@@ -55,7 +54,7 @@ If it is not linked, it does not count.
 | Decision | Why we chose it | Owner | Evidence / Issue link |
 |---|---|---|---|
 | Use one end-to-end path for Sprint 1: Login → Home → Events → Event Details. | A smaller working path is easier to test and demonstrate than trying to complete all features at once. | Team | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33 |
-| Use sample event data in Firestore for development and testing. | Real campus event data may not yet be available or reliable. | Team | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/36#issue-5658739340 |
+| Use sample event data in Firestore for development and testing. | Real campus event data may not yet be available or reliable. | Team | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35 |
 | Build event search and filtering next. | It extends the existing Events path and supports the planned midterm user flow. | Prachi2061 | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/34 |
 
 ## Next week's bridge task
