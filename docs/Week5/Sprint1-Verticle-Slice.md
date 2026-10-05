@@ -4,9 +4,7 @@
 **Week:** Week 7 — Sprint 1
 **Next demo date:** 10/08/2026
 
-A vertical slice is one small, visible user path through your project. It can be rough, but the path and proof must be concrete.
-
-## What we will show
+## The Goal
 
 > By the next demo, a test student can create an account, log in, reach the Home page, open the Events page, select an event, and view the event details.
 
