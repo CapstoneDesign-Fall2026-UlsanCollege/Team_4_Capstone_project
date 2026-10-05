@@ -18,7 +18,7 @@
 ### Make the work owned and buildable
 
 - [x] Create 3–5 small implementation Issues for the chosen path.
-- [ ] Give each starting Issue one first owner, a checkable Definition of Done, and any needed links.
+- [x] Give each starting Issue one first owner, a checkable Definition of Done, and any needed links.
 - [ ] Assign setup/docs, first visible screen or feature, and evidence/Weekly Report responsibilities.
 - [ ] Begin implementation: run or scaffold the project, make the first visible UI/feature step, or record a specific blocker Issue with an owner and next action.
 - [ ] Update the team's single Week 5 Weekly Report. Each student personally adds their own contribution and evidence row.
@@ -29,8 +29,8 @@
 - [ ] Vertical Slice Plan and links to current design/wireframe/architecture notes.
 - [ ] 3–5 implementation Issues with owners and checkable Definitions of Done.
 - [ ] First implementation commit/PR or an owned blocker Issue describing the next action.
-- [ ] One shared Week 5 Weekly Report with an individual evidence row for every team member.
-- [ ] A sentence naming the visible, testable proof the team will bring on Oct 8.
+- [x] One shared Week 5 Weekly Report with an individual evidence row for every team member.
+- [x] A sentence naming the visible, testable proof the team will bring on Oct 8.
 
 ## Stretch menu — choose a few after the core is complete
 
@@ -58,7 +58,7 @@
 
 ### Evidence and team practice
 
-- [ ] Make the first three Issues and their dependencies easy to see on the team Project board.
+- [x] Make the first three Issues and their dependencies easy to see on the team Project board.
 - [ ] Link the reason for the slice choice to the evidence that informed it.
 - [ ] Record how generated or outside material was reviewed and attributed, when relevant.
 - [ ] Prepare a two-minute return-from-break update: what changed, what works, and what is still uncertain.
