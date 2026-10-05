@@ -33,7 +33,7 @@ Students often miss events, club activities, and community opportunities because
 - Backend & Services: Firebase
 - Authentication: Firebase Authentication
 - Database: Firebase Firestore
-- Hosting: Firebase Hosting (planned / configurable)
+- Hosting: Vercel
 
 ## Project Vision
 
@@ -56,6 +56,10 @@ CampusVibes aims to create a vibrant campus engagement platform where students c
 ```
 
 ## Getting Started
+
+### Deploy to Vercel
+
+The Vite + React app is in `frontend/react-app`. For the deployment settings and redeployment steps, see the [Vercel deployment guide](docs/VERCEL_DEPLOYMENT.md).
 
 ### Prerequisites
 
