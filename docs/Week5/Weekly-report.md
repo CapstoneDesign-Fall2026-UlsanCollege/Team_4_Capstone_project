@@ -28,17 +28,17 @@ If it is not linked, it does not count.
 
 | Evidence | Link |
 |---|---|
-| Issue(s) | [Add completed end-to-end issue link] |
-| PR(s) / commits | [Add GitHub commit/PR link] |
-| Screenshot / demo | [Add screenshot or demo link] |
-| Test/check note | [Add Sprint 1 test note link] |
-| Document update | [Add Sprint 1 documentation link] |
+| Issue(s) | [Issue #25 — Firebase Authentication signup/login smoke test](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25), [Issue #33 — end-to-end event viewing path](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33), [Issue #34 — event search and filtering](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/34), [Issue #38 — resolved chat fetch bug](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/38), [Issue #39 — Gemini assistant scope (closed)](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/39) |
+| PR(s) / commits | [PR #37 — CampusVibes event assistant (merged)](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/37) |
+| Screenshot / demo | No separate screenshot or recording has been uploaded; the browser smoke check is described in [PR #37](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/37). |
+| Test/check note | [Manual Firebase auth smoke check](../../frontend/react-app/README.md#authentication-smoke-check--issue-25): create a test account, sign out, log back in, and confirm signed-in home/landing states. The procedure is documented, but its current run result and evidence still need to be posted to [Issue #25](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25). [PR #37 verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/37) covers the assistant build, syntax, whitespace, and browser smoke checks. |
+| Document update | [Week 5 work checklist](./week-05-work-checklist.md), [authentication smoke check](../../frontend/react-app/README.md#authentication-smoke-check--issue-25), [assistant/API scope note](../../frontend/react-app/README.md#campusvibes-assistant) |
 
 ## Individual contribution entries — one row per student
 
 | Student | What they did | Evidence link |
 |---|---|---|
-|  |  |  |
+| Prachi2061 | Contributed to the core Firebase Email/Password sign-up and login path; use the linked smoke check to verify account creation, sign-out, login, and auth-state navigation. Separately implemented the CampusVibes Assistant as stretch work: a chat-style, rules-based helper for sample-event recommendations, event details, saved events, and app navigation. The current helper makes no API calls, so the earlier unavailable-API failure is historical rather than part of the core proof. Also contributed deployment documentation. | [Firebase auth test Issue #25](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25), [end-to-end path Issue #33](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33), [merged assistant PR #37](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/37), [resolved API failure Issue #38](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/38), [Gemini scope Issue #39](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/39), [deployment docs PR #42](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/42), [deployment docs PR #44](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/44) |
 |  |  |  |
 |  |  |  |
 |  |  |  |
