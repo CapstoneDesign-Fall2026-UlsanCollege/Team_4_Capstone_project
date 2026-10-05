@@ -1,8 +1,20 @@
 # Vertical Slice Plan
 
 **Team:** Team 4
-**Week:** Week 7 — Sprint 1
+**Week:** Week 5 — Sprint 1
 **Next demo date:** 10/08/2026
+
+## Compare stacks and test the biggest risk
+
+This is a comparison of possible technology stacks for CampusVibe. “Stack A” and “Stack B” are labels for our project options.
+
+| **Question**                   | **Stack A: React + Firebase**                                                                                  | **Stack B: HTML/CSS/JavaScript + Firebase**                                                                                                     |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **First slice it can support** | A landing page, login/signup, home page, and event details connected to Firebase with sample data              | A landing page, login/signup, home page, and event details connected to Firebase with sample data                                               |
+| **Team's starting point**      | The team already has a React project and has connected Firebase to it                                          | The team has experience with basic HTML/CSS/JavaScript but would need to structure the project without React                                    |
+| **Main uncertainty**           | How smoothly can we connect the existing React pages and Firebase features into one complete user flow?        | How much additional work will be needed to manage page navigation and reusable UI without React?                                                |
+| **Smallest useful test**       | Build and test the Landing Page → Sign Up → Login → Home → Events → Event Details flow using sample event data | Build and test the same Landing Page → Sign Up → Login → Home → Events → Event Details flow without React and compare the implementation effort |
+| **Example decision**           | **Use Stack A for the first slice because the React project is already set up and Firebase is connected.**     | Keep as a simpler alternative if the React setup becomes a blocker.                                                                             |
 
 ## The Goal
 
@@ -48,9 +60,9 @@ Create 3–5 small implementation Issues. Each needs a first owner, a checkable 
 | Issue link/title                                                                                                                      | First owner | Definition of Done / proof                                                                                                     |
 | ------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | [Issue #33 — Sprint 1 Implementation Path](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33) | Team 4      | Sprint 1 path is documented and the implementation/evidence can be checked against the selected user flow.                     |
-| Authentication — Sign Up and Login                                                                                                    | Prachi2061      | A test student can create an account and log in successfully. Screenshot or test note is attached as proof.                    |
+| Authentication — Sign Up and Login                                                                                                    | Prachi2061  | A test student can create an account and log in successfully. Screenshot or test note is attached as proof.                    |
 | Home and Navigation                                                                                                                   | Team 4      | Successful login reaches Home and the user can navigate to Events. Screenshot/demo proves the navigation path.                 |
-| Events and Event Details                                                                                                              | DevyanaCT     | 5–10 sample events are displayed and selecting an event opens its details page. Screenshot/demo proves Events → Event Details. |
+| Events and Event Details                                                                                                              | DevyanaCT   | 5–10 sample events are displayed and selecting an event opens its details page. Screenshot/demo proves Events → Event Details. |
 | Sprint 1 Evidence                                                                                                                     | Team 4      | Screenshot, demo note, commit/PR, or blocker evidence is linked in the Weekly Report.                                          |
 
 ## Roles this week
@@ -61,11 +73,11 @@ Create 3–5 small implementation Issues. Each needs a first owner, a checkable 
 
 ## Risk and next action
 
-| Risk or uncertainty                                           | Owner  | Next action                                                                           | Review date      |
-| ------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------- | ---------------- |
+| Risk or uncertainty                                           | Owner      | Next action                                                                           | Review date      |
+| ------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------- | ---------------- |
 | Authentication or Firebase setup may delay the full user path | Prachi2061 | Test Sign Up → Login → Home and document any blocker immediately                      | Before next demo |
-| Reliable real university event data may not be available      | Team 4 | Use 5–10 sample events for Sprint 1                                                   | Before next demo |
-| Full path may not be completed by the checkpoint              | Team 4 | Demonstrate Events → Event Details as the fallback path and document the missing step | Before next demo |
+| Reliable real university event data may not be available      | Team 4     | Use 5–10 sample events for Sprint 1                                                   | Before next demo |
+| Full path may not be completed by the checkpoint              | Team 4     | Demonstrate Events → Event Details as the fallback path and document the missing step | Before next demo |
 
 ## Weekly Report evidence
 
