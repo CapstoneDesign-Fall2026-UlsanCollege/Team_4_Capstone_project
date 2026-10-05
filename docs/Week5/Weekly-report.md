@@ -1,6 +1,6 @@
 # Weekly Report
 
-**Team:** Team 4  
+**Team:** Team 4   
 **Week:** Sprint 1  
 **Date:** 2026-10-02  
 
