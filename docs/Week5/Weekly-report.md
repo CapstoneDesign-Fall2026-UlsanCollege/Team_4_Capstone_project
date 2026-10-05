@@ -27,7 +27,7 @@ If it is not linked, it does not count.
 
 | Evidence                      | Link                                                                                                                                                                                                                                                                                            |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Vertical Slice Plan           | [Sprint1-Verticle-Slice](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a01ab25b1103ba300c0d45918d4d3035712e72f8/docs/Week5/Sprint1-Verticle-Slice.md)                                                                                                                                                           |
+| Vertical Slice Plan           | [Sprint1-Verticle-Slice](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/488ab0d6b6c8f6d1a4f7578c62cbf3cc7ed88062/docs/Week5/Sprint1-Verticle-Slice.md)                                                                                                                                                           |
 | Stack decision and setup test | [Tech Stack Comparison](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/tech-stack-comparison.md)[issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25)                                                                                                    |
 | Implementation Issues         | [Team 4 GitHub Issues](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues)                                                                                                                                                                                  |
 | Wireframe and architecture    | [Wireframe Notes](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/wireframe-notes.md) / [Architecture Sketch](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/Architecture-Sketch.md) |
@@ -37,7 +37,7 @@ If it is not linked, it does not count.
 
 | Student | What they did | Evidence link |
 |---|---|---|
-| DevyanaCT | Worked on Firebase Authentication setup and documentation, including the technical decision boundary and fallback plan, and worked on the Events → Event Details user path for the Sprint 1 vertical slice. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33 ; https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25 ;https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35 ;[Sprint1-Verticle-Slice.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/657b83850dc6eb802eb1299da39bb1d951d0eda2/docs/Week5/Sprint1-Verticle-Slice.md)|
+| DevyanaCT | Worked on Firebase Authentication setup and documentation, including the technical decision boundary and fallback plan, and worked on the Events → Event Details user path for the Sprint 1 vertical slice. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33 ; https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25 ;https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35 ;[Sprint1-Verticle-Slice.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/488ab0d6b6c8f6d1a4f7578c62cbf3cc7ed88062/docs/Week5/Sprint1-Verticle-Slice.md)|
 | prachi2061 | Implemented sign-up/login flow and prepared the midterm demo/test evidence for the checkpoint. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/22 ; https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/20 |
 | ujjalpoudel75 | Contributed to event organization and search-related functionality for the CampusVibe flow. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/13 ; https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/15 |
 | tulseyy8848 | Set up the project shell/navigation structure and contributed to the university clubs page work. | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/27 ; https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/12 |
@@ -59,7 +59,7 @@ If it is not linked, it does not count.
 
 ## Next week's bridge task
 
-- [ ] Build event search and basic filtering.
-- [ ] Add empty-state handling when no events match the search.
-- [ ] Test search and filtering using the sample Firestore events.
-- [ ] Continue checking the availability of reliable campus event/club data.
+-  Build event search and basic filtering.
+-  Add empty-state handling when no events match the search.
+-  Test search and filtering using the sample Firestore events.
+-  Continue checking the availability of reliable campus event/club data.
