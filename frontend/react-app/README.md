@@ -18,12 +18,12 @@ Enable the Email/Password provider under Authentication > Sign-in method in the 
 Use a test-only account in the CampusVibe Firebase project; do not use personal credentials.
 
 1. Start the app with `npm run dev` and open the local URL.
-2. Sign up with a new test email and password.
+2. Sign up with a new test email, a name of at least two characters, a password of at least eight characters, the matching confirmation password, and a selected main interest.
 3. Confirm the signed-in CampusVibe home page appears.
 4. Sign out, then log in with the same test account.
 5. Confirm login returns to the signed-in home page, then sign out and confirm the landing page appears.
 
-The check passes when both signup and login complete and the auth state updates to the signed-in home page. This is a manual smoke check; Firebase Email/Password must be enabled. Track its result and evidence in [Issue #25](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25).
+The check passes when signup and login both complete, each updates the app to the signed-in home page, and signing out returns the app to the landing page. This is a manual smoke check; Firebase Email/Password must be enabled. Track its result and evidence in [Issue #25](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25).
 
 ## CampusVibes Assistant
 
