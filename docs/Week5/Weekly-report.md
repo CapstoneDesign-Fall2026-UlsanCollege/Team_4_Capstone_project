@@ -25,15 +25,15 @@ The focus was on making this path work before adding more features.
 
 If it is not linked, it does not count.
 
-| Evidence | Link |
-|---|---|
-| Issue(s) | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33 |
-| PR(s) / commits | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits |
-| Screenshot / demo | TBD — add screenshot or Loom/demo link |
-| Test/check note | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25 |
-| Document update | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week5/Weekly-report.md |
+| Evidence                      | Link                                                                                                                                                                                                                                                                                            |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Vertical Slice Plan           | [Sprint1-Verticle-Slice](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a01ab25b1103ba300c0d45918d4d3035712e72f8/docs/Week5/Sprint1-Verticle-Slice.md)                                                                                                                                                           |
+| Stack decision and setup test | [Tech Stack Comparison](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/tech-stack-comparison.md)[issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25)                                                                                                    |
+| Implementation Issues         | [Team 4 GitHub Issues](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues)                                                                                                                                                                                  |
+| Wireframe and architecture    | [Wireframe Notes](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/wireframe-notes.md) / [Architecture Sketch](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/Architecture-Sketch.md) |
+| First visible result          | **Add your actual commit / PR / screenshot link here**                                                                                                                                                                                                                                          |
+| Actual check result           | **Add the actual test note, Issue comment, or screenshot showing the result here**                                                                                                                                                                                                              |
 
-## Individual contribution entries — one row per student
 
 | Student | What they did | Evidence link |
 |---|---|---|
