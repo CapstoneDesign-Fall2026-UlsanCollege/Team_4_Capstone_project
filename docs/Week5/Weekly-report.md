@@ -33,6 +33,7 @@ If it is not linked, it does not count.
 | Screenshot / demo | No separate screenshot or recording has been uploaded; the browser smoke check is described in [PR #37](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/37). |
 | Test/check note | [Manual Firebase auth smoke check](../../frontend/react-app/README.md#authentication-smoke-check--issue-25): create a test account, sign out, log back in, and confirm signed-in home/landing states. The procedure is documented, but its current run result and evidence still need to be posted to [Issue #25](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25). [PR #37 verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/37) covers the assistant build, syntax, whitespace, and browser smoke checks. |
 | Document update | [Week 5 work checklist](./week-05-work-checklist.md), [authentication smoke check](../../frontend/react-app/README.md#authentication-smoke-check--issue-25), [assistant/API scope note](../../frontend/react-app/README.md#campusvibes-assistant) |
+| AI-use disclosure | Copilot assisted with drafting this smoke-check procedure and updating this report. The steps and scope were checked against the current app flow and linked project evidence; review this documentation before merging. |
 
 ## Individual contribution entries — one row per student
 
