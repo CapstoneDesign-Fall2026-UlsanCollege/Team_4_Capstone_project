@@ -37,6 +37,8 @@ Real university event data is not required for this checkpoint.
 
 ## Evidence:
 - Issue: https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33
+
+## References:
 - Wireframe: [Wireframe notes](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/wireframe-notes.md)
 - Architecture sketch: [Architecture sketch](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/Architecture-Sketch.md)
 - Stack comparison: [Stack comparison](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week3/tech-stack-comparison.md)
