@@ -84,7 +84,7 @@ Create 3–5 small implementation Issues. Each needs a first owner, a checkable 
 Link the team's single shared Weekly Report. Each student adds their own contribution sentence and evidence link there.
 
 * **Weekly Report:** [Weekly Report](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/cad4d4218b5dd59db970e0ce913ce884b9978527/docs/Week5/Weekly-report.md)
-* **First visible proof / commit / PR / blocker Issue:** [Issue #33](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/33)
+* **First visible proof / commit / PR / blocker Issue:** [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35))
 
 ## References
 
