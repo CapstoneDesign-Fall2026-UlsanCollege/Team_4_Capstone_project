@@ -18,7 +18,7 @@ This is a comparison of possible technology stacks for CampusVibe. “Stack A”
 
 ## The Goal
 
-> By the next demo, a test student can create an account, log in, reach the Home page, open the Events page, select an event, and view the event details.
+> By the next demo, a test student can create an account, log in, reach the Home page, click the Events browser, and view the event details.
 
 ## User path and proof
 
