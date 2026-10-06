@@ -53,8 +53,8 @@
 * [x] Add concise setup/run instructions so another teammate can start the project.
 * [x] Test the riskiest stack, API, data, or deployment assumption with one small spike.
 * [x] Add safe sample data and document any data/API limitation; do not add secrets or personal data.
-* [ ] Add one repeatable smoke check or test for the path being built.
-* [ ] Open a small PR and ask a teammate to review the change.
+* [x] Add one repeatable smoke check or test for the path being built.
+* [x] Open a small PR and ask a teammate to review the change.
 
 ### Evidence and team practice
 
