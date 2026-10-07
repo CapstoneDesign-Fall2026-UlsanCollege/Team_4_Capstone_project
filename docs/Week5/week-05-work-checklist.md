@@ -69,6 +69,12 @@ Choose at least two stretch items, or propose an equivalent extension. Explain w
 
 > Our stretch target is to add a meaningful error or empty state and complete a repeatable smoke check for the main user path. These items reduce the risk of showing a broken or unclear flow during the Oct 8 demo and make the vertical slice easier for teammates to test.
 
+> Completed an equivalent product stretch: added a chat-style CampusVibes Assistant that recommends the sample events by interest, answers basic event detail questions, lists saved events, and explains how to use the app. This gives the team an additional demonstrable interaction while keeping the selected core vertical slice unchanged. The current helper is rules-based, uses sample data, and is not Gemini-powered.
+>
+> Evidence: [PR #37 — CampusVibes event assistant](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/37) (merged), [Issue #38 — resolved chat fetch bug](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/38), and [Issue #39 — Gemini assistant scope (closed)](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/39). A separate screenshot/demo recording has not been added.
+
+This stretch is additional to the chosen Sprint 1 path; it does not replace the required core-path work or its evidence.
+
 ## Risks and exceptions
 
 If a core item is incomplete, name the owner, reason, and next action.

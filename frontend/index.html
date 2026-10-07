@@ -63,10 +63,18 @@
 
   <section class="page-view" id="page-discover">
     <div class="page-heading compact"><div><p class="eyebrow">EXPLORE CAMPUS</p><h1>Discover events</h1><p>Find something worth showing up for.</p></div></div>
-    <div class="filter-bar" id="filterBar" role="tablist" aria-label="Filter events by interest">
-      <button class="chip active" data-interest="all">All</button><button class="chip" data-interest="Tech">💻 Tech</button><button class="chip" data-interest="Arts">🎨 Arts</button><button class="chip" data-interest="Music">🎵 Music</button><button class="chip" data-interest="Sports">🏀 Sports</button><button class="chip" data-interest="Social">🎉 Social</button><button class="chip" data-interest="Academics">📚 Academics</button>
+    <div class="event-tools">
+      <label class="event-search" for="eventSearch">
+        <span class="sr-only">Search event titles</span>
+        <input id="eventSearch" type="search" placeholder="Search event titles..." autocomplete="off">
+      </label>
+      <button class="btn btn-outline btn-sm" id="clearEventFilters" type="button">Clear filters</button>
     </div>
-    <div class="events-grid" id="eventsGrid"></div><p class="empty-state hidden" id="emptyState">Nothing here yet. Check back after our next curation round.</p>
+    <p class="event-results" id="eventResults" aria-live="polite"></p>
+    <div class="filter-bar" id="filterBar" role="group" aria-label="Filter events by interest">
+      <button class="chip active" type="button" aria-pressed="true" data-interest="all">All</button><button class="chip" type="button" aria-pressed="false" data-interest="Tech">💻 Tech</button><button class="chip" type="button" aria-pressed="false" data-interest="Arts">🎨 Arts</button><button class="chip" type="button" aria-pressed="false" data-interest="Music">🎵 Music</button><button class="chip" type="button" aria-pressed="false" data-interest="Sports">🏀 Sports</button><button class="chip" type="button" aria-pressed="false" data-interest="Social">🎉 Social</button><button class="chip" type="button" aria-pressed="false" data-interest="Academics">📚 Academics</button>
+    </div>
+    <div class="events-grid" id="eventsGrid"></div><p class="empty-state hidden" id="emptyState">No events found. Try another search or category.</p>
   </section>
 
   <section class="page-view" id="page-chat">
