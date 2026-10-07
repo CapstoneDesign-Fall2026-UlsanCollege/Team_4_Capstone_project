@@ -322,3 +322,130 @@ h1,h2,h3{font-family:'Inter',sans-serif;letter-spacing:0;font-weight:600}
 @media(max-width:780px){.app-main{padding:20px 12px 45px}.nav-inner{padding:7px 12px}.nav-links{gap:1px}.page-link{padding:6px 7px;font-size:8px}}
 
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #f2f2f2;outline-offset:2px}
+
+/* Desktop-first sizing */
+body{font-size:15px}
+.nav-inner{max-width:1280px;padding:14px 28px;gap:20px}
+.logo{font-size:21px;letter-spacing:0}
+.logo-dot{display:inline-block;width:10px;height:10px}
+.nav-links{flex:1;min-width:0;justify-content:center;gap:3px}
+.page-link{font-size:14px;padding:9px 13px;border-radius:8px}
+.nav-auth{gap:10px}
+.nav-auth .btn{font-size:14px;padding:10px 16px;border-radius:9px;white-space:nowrap;flex-shrink:0}
+.nav-user{flex-shrink:0}
+.nav-user .avatar{width:34px;height:34px;font-size:14px}
+.nav-username{font-size:14px}
+.app-main{max-width:1280px;padding:42px 28px 80px;min-height:calc(100vh - 64px)}
+.page-heading{margin-bottom:28px}
+.page-heading h1{font-size:34px;letter-spacing:-.8px}
+.page-heading p:not(.eyebrow){font-size:15px;margin-top:8px}
+.eyebrow{font-size:11px;letter-spacing:1px;margin-bottom:8px}
+.page-heading .btn{font-size:14px;padding:11px 18px;border-radius:9px}
+.stat-grid{gap:16px;margin-bottom:18px}
+.stat-card{padding:20px 22px;border-radius:12px}
+.stat-card strong{font-size:26px}
+.stat-card span{font-size:13px}
+.dashboard-grid{gap:16px}
+.panel{padding:22px;border-radius:12px}
+.panel h2{font-size:18px}
+.panel-heading p,.quick-panel>p{font-size:13px}
+.text-button{font-size:13px}
+.upcoming-item{grid-template-columns:52px 1fr auto;gap:14px;padding:14px 0}
+.upcoming-date{padding:6px 4px;border-radius:8px}
+.upcoming-date strong{font-size:20px}
+.upcoming-date span{font-size:10px}
+.upcoming-item h3{font-size:14px}
+.upcoming-item p,.upcoming-meta{font-size:12px}
+.interest-mini{font-size:10px;padding:3px 7px}
+.quick-actions{gap:10px;margin:20px 0}
+.quick-actions .btn{font-size:13px;padding:10px 14px;border-radius:8px}
+.panel-note{font-size:13px}
+.filter-bar{gap:9px;margin-bottom:24px}
+.chip{font-size:13px;padding:9px 15px;border-radius:8px}
+.events-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.event-card{border-radius:12px}
+.event-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.event-banner{height:120px}
+.event-body{padding:18px;gap:9px}
+.event-body h3{font-size:18px}
+.event-meta{font-size:13px;gap:5px}
+.event-tag{font-size:10px;padding:4px 9px}
+.event-host{padding-top:10px;font-size:12px}
+.host-avatar{width:26px;height:26px;font-size:11px;background:var(--accent-grad)!important}
+.event-date{top:12px;left:12px;border-radius:8px;padding:7px 11px}
+.event-date strong{font-size:18px}
+.event-date span{font-size:9px}
+.save-event{top:12px;right:12px;width:32px;height:32px;font-size:18px;border-radius:8px}
+.empty-state{font-size:15px;padding:48px 18px}
+.suggest-form{gap:16px;max-width:620px}
+.suggest-form label{font-size:13px}
+.suggest-form input,.suggest-form textarea{font-size:14px;padding:12px;border-radius:8px}
+.suggest-form .btn{font-size:14px;padding:10px 16px}
+.profile-panel{max-width:620px;gap:18px}
+.profile-panel h2{font-size:18px}
+.profile-panel p{font-size:13px}
+.profile-avatar{width:54px;height:54px;font-size:20px}
+.profile-panel .btn{font-size:13px;padding:9px 13px}
+.auth-landing{min-height:calc(100vh - 64px);align-items:center;padding:48px 24px}
+.auth-landing-card{width:min(100%,440px);border-radius:16px;padding:36px 34px}
+.auth-landing-card h1{font-size:28px;margin-top:28px}
+.auth-brand{margin:0 0 18px}
+.auth-brand strong{font-size:22px}
+.auth-brand p{font-size:13px;margin-top:7px}
+.auth-landing-copy{font-size:14px;line-height:1.6;margin:12px auto 24px;max-width:320px}
+.auth-landing-actions{gap:10px}
+.auth-landing-actions .btn{font-size:14px;padding:12px 14px}
+.auth-landing-card .demo-login{margin-top:14px;font-size:12px;padding:8px 12px}
+.modal{max-width:440px;border-radius:16px;padding:34px}
+.modal-close{display:block}
+.auth-tabs{border-radius:10px;padding:4px;margin-bottom:24px}
+.auth-tab{font-size:14px;padding:11px}
+.auth-tab-slider{top:4px;left:4px;width:calc(50% - 4px);height:calc(100% - 8px);border-radius:7px}
+#loginForm h3{display:block}
+.auth-form h3{font-size:22px;margin-bottom:20px}
+.auth-form .field{margin-bottom:16px}
+.field label{font-size:13px;margin-bottom:6px}
+.field input,.field select{padding:12px 14px;border-radius:9px;font-size:14px}
+.field-error{font-size:12px}
+.form-error{font-size:13px;padding:10px 12px;margin-bottom:12px}
+.modal .btn{font-size:14px;padding:11px 16px;border-radius:9px}
+.demo-login{font-size:12px;padding:8px 12px;border-radius:7px}
+.auth-note{font-size:11px;margin-top:14px}
+.auth-switch{font-size:13px;margin-top:16px}
+
+@media(max-width:780px){
+  .nav-inner{padding:12px 18px;gap:14px}
+  .nav-links{justify-content:flex-start;overflow-x:auto;white-space:nowrap}
+  .page-link{font-size:12px;padding:8px 10px}
+  .nav-auth .btn{font-size:12px;padding:8px 11px}
+  .nav-username{display:none}
+  .app-main{padding:30px 20px 56px}
+  .page-heading h1{font-size:30px}
+  .stat-grid{gap:10px}
+  .stat-card{padding:15px}
+  .stat-card strong{font-size:22px}
+  .dashboard-grid{grid-template-columns:1fr}
+  .page-heading{align-items:start;flex-direction:column}
+}
+@media(max-width:640px){
+  .nav-inner{padding:10px 12px;gap:8px}
+  .logo{font-size:16px}
+  .logo-dot{width:8px;height:8px}
+  .nav-links{display:flex;flex:1;min-width:0;overflow-x:auto;gap:2px}
+  .page-link{font-size:11px;padding:8px 9px}
+  .nav-auth{display:none}
+  .app-main{padding:24px 14px 44px}
+  .page-heading h1{font-size:26px}
+  .stat-grid{gap:8px}
+  .stat-card{padding:12px 10px}
+  .stat-card strong{font-size:19px}
+  .stat-card span{font-size:10px}
+  .panel{padding:16px}
+  .events-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .event-banner{height:105px}
+  .event-body{padding:15px}
+  .auth-landing{min-height:calc(100vh - 48px);padding:28px 16px}
+  .auth-landing-card{padding:28px 22px}
+  .modal-overlay{padding:12px}
+  .modal{padding:28px 22px;max-height:94vh}
+}
