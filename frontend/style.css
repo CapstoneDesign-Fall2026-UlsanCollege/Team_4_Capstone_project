@@ -261,6 +261,12 @@ button{font-family:inherit;cursor:pointer}
 .upcoming-item h3{font-size:12px}.upcoming-item p{color:var(--muted);font-size:10px;margin-top:3px}.upcoming-meta{color:var(--muted);font-size:10px;text-align:right}.interest-mini{display:inline-block;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(124,92,255,.18);color:var(--accent-2);margin-top:4px}
 .quick-actions{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.quick-actions .btn{font-size:11px;padding:8px 11px;border-radius:7px}.panel-note{border-top:1px solid var(--border);padding-top:15px;line-height:1.55}
 .filter-bar{justify-content:flex-start;padding:0;margin:0 0 24px;max-width:none}.chip{font-size:12px;padding:8px 13px;border-radius:7px}
+.event-tools{display:flex;align-items:center;gap:10px;max-width:520px;margin-bottom:8px}
+.event-search{flex:1}
+.event-search input{width:100%;min-width:0;background:var(--bg-2);border:1px solid var(--border);border-radius:7px;padding:10px 12px;color:var(--text);font:13px 'Inter',sans-serif}
+.event-search input:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+.event-tools .btn:disabled{opacity:.5;cursor:not-allowed}
+.event-results{min-height:20px;margin-bottom:12px;color:var(--muted);font-size:11px}
 .events-grid{padding:0;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}.event-card{border-radius:10px}.event-banner{height:100px}.event-body{padding:15px}.event-body h3{font-size:16px}.event-meta{font-size:12px}.event-tag{font-size:10px;padding:3px 8px}
 .save-event{border:0;background:rgba(13,15,20,.76);color:var(--text);position:absolute;right:12px;top:12px;border-radius:6px;width:29px;height:29px;font-size:16px;cursor:pointer}.save-event.saved{color:var(--accent-2)}
 .suggest-form{max-width:620px;display:grid;gap:16px}.suggest-form label{font-size:12px;color:var(--muted);font-weight:600}.suggest-form input,.suggest-form textarea{display:block;width:100%;margin-top:7px;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:11px;color:var(--text);font:14px 'Inter',sans-serif;resize:vertical}.suggest-form input:focus,.suggest-form textarea:focus{outline:1px solid var(--accent)}.suggest-form .btn{justify-self:start}

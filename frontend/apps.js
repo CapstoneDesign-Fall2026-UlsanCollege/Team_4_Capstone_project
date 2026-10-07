@@ -41,6 +41,8 @@ const EVENTS = [
 /* ── Constants ── */
 const SAVED_KEY   = "cv_saved";
 let currentSession = null;
+let currentInterestFilter = "all";
+let currentEventSearch = "";
 
 /* ── Helpers ── */
 const $ = (sel) => document.querySelector(sel);
@@ -56,13 +58,19 @@ function showToast(msg){
   t._timer = setTimeout(() => t.classList.add("hidden"), 3200);
 }
 
-/* ── Event rendering + ONE interest filter ── */
+/* ── Event rendering and discovery filters ── */
 const GRADIENTS = (hue) =>
   `linear-gradient(135deg, ${hue}33, ${hue}14), radial-gradient(circle at 80% 20%, ${hue}40, transparent 60%)`;
 
-function renderEvents(filter = "all"){
+function renderEvents(filter = currentInterestFilter, search = currentEventSearch){
+  currentInterestFilter = filter;
+  currentEventSearch = search;
   const grid = $("#eventsGrid");
-  const list = filter === "all" ? EVENTS : EVENTS.filter(e => e.interest === filter);
+  const query = search.trim().toLocaleLowerCase();
+  const list = EVENTS.filter(event =>
+    (filter === "all" || event.interest === filter) &&
+    (!query || event.title.toLocaleLowerCase().includes(query))
+  );
   const saved = getSaved();
   grid.innerHTML = list.map((e,i) => {
     const d = new Date(e.date + "T00:00:00");
@@ -92,6 +100,8 @@ function renderEvents(filter = "all"){
     </article>`;
   }).join("");
   $("#emptyState").classList.toggle("hidden", list.length > 0);
+  $("#eventResults").textContent = `Showing ${list.length} of ${EVENTS.length} events`;
+  $("#clearEventFilters").disabled = filter === "all" && !query;
 }
 
 function renderUpcoming(){
@@ -128,7 +138,7 @@ function toggleSaved(id){
   const saved = getSaved();
   const next = saved.includes(id) ? saved.filter(item => item !== id) : [...saved, id];
   saveSaved(next);
-  renderEvents($(".chip.active")?.dataset.interest || "all");
+  renderEvents();
   renderSavedEvents();
   showToast(next.includes(id) ? "Event saved." : "Event removed from saved.");
 }
@@ -137,9 +147,26 @@ function setupFilter(){
   $("#filterBar").addEventListener("click", (ev) => {
     const chip = ev.target.closest(".chip");
     if (!chip) return;
-    document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    $("#filterBar").querySelectorAll(".chip").forEach(c => {
+      const active = c === chip;
+      c.classList.toggle("active", active);
+      c.setAttribute("aria-pressed", String(active));
+    });
     chip.classList.add("active");
     renderEvents(chip.dataset.interest);
+  });
+  $("#eventSearch").addEventListener("input", event => {
+    renderEvents(currentInterestFilter, event.currentTarget.value);
+  });
+  $("#clearEventFilters").addEventListener("click", () => {
+    $("#eventSearch").value = "";
+    $("#filterBar").querySelectorAll(".chip").forEach(chip => {
+      const active = chip.dataset.interest === "all";
+      chip.classList.toggle("active", active);
+      chip.setAttribute("aria-pressed", String(active));
+    });
+    renderEvents("all", "");
+    $("#eventSearch").focus();
   });
 }
 
@@ -470,7 +497,11 @@ function updateNav(){
     if (s.interest){
       const chip = document.querySelector(`.chip[data-interest="${s.interest}"]`);
       if (chip){
-        document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+        $("#filterBar").querySelectorAll(".chip").forEach(c => {
+          const active = c === chip;
+          c.classList.toggle("active", active);
+          c.setAttribute("aria-pressed", String(active));
+        });
         chip.classList.add("active");
         renderEvents(s.interest);
       }
