@@ -15,6 +15,7 @@
 5. Check whether the basic details of the selected event are displayed.
 
 ## Result
+We checked this by opening the Dashboard, then selecting a sample event and display event details. Expected result: the selected event's basic details should be displayed. Actual result: the tester successfully opened Events, selected a sample event, and viewed the basic event details. 
 
 * **Expected result:** The Events section opens and selecting an event displays the basic details for that event.
 * **Actual result:** The tester opened Events from the Dashboard, selected a sample event, and the basic event details were displayed successfully.
