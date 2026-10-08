@@ -18,7 +18,7 @@
 
 * **Expected result:** The Events section opens and selecting an event displays the basic details for that event.
 * **Actual result:** The tester opened Events from the Dashboard, selected a sample event, and the basic event details were displayed successfully.
-* **Proof link / screenshot:** [Add screenshot link]
+* **Proof link / screenshot:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49
 
 ## Problems found
 
