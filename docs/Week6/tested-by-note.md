@@ -3,7 +3,7 @@
 ## What we checked
 
 * **Behavior / related Issue:** Dashboard → Events → Select Event → View Basic Event Details / Week 6 Events Test Issue
-* **Tested by (a teammate other than the author):** [Teammate name]
+* **Tested by (a teammate other than the author):** Tulseyy8848
 * **Date:** 2026-10-08
 
 ## Check steps
