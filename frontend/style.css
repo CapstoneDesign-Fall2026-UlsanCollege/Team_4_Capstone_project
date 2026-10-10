@@ -455,3 +455,6 @@ body{font-size:15px}
   .modal-overlay{padding:12px}
   .modal{padding:28px 22px;max-height:94vh}
 }
+
+.logo-mark{display:block;width:32px;height:36px;object-fit:contain;flex:0 0 auto}
+@media(max-width:640px){.logo-mark{width:26px;height:29px}}
