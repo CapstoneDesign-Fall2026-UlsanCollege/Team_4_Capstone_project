@@ -1,42 +1,34 @@
 # Weekly Report
 
-**Team:**  
-**Week:**  
-**Date:**  
-
-Use one shared report per team in Weeks 2-3, 5-14, and 16. Do not create a separate Weekly Report for each student. Weeks 1, 4, and 15 have special reports. Each student must add their own contribution entry and evidence to the team's report.
+**Team:** Team 4 — CampusVibe  
+**Week:** Week 6  
+**Date:** October 11, 2026
 
 ## This week's goal
 
-What did your team try to improve this week?
-
-> 
+This week, we wanted to check whether our CampusVibe project was working correctly from the Dashboard to the Event Details page. We focused on testing the Events page with a teammate who did not build the feature and confirming that users could select an event and view its basic details.
 
 ## What we committed to do
 
-- [ ] 
-- [ ] 
-- [ ] 
+- [x] Test the Dashboard → Events → Select Event → View Event Details path.
+- [x] Ask a teammate to test the feature and record the actual result.
+- [x] Update the test issue with the result and supporting evidence.
 
 ## Evidence links
 
-If it is not linked, it does not count.
-
 | Evidence | Link |
 |---|---|
-| Issue(s) |  |
-| PR(s) / commits |  |
-| Screenshot / demo |  |
-| Test/check note |  |
-| Document update |  |
+| Issue(s) | [Events Test Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
+| PR(s) / commits | [Commit db5dad6]( https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/db5dad64f3131fb87b2d7011c86d6e2f9ecd575d) |
+| Screenshot / demo | [Screenshot Available](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
+| Test/check note | [Add tested-by note or test result link](PASTE_TEST_NOTE_LINK_HERE) |
+| Document update | [Add weekly report or project documentation link](PASTE_DOCUMENT_LINK_HERE) |
 
 ## Individual contribution entries — one row per student
 
-Keep this section inside the single shared team report. Each student must enter their own row: one sentence describing the contribution and at least one evidence link. Add rows if your team has more than three members. Do not make a separate report for each person.
-
 | Student | What they did | Evidence link |
 |---|---|---|
-|  |  |  |
+| DevyanaCT | Repeat Tested the Events to confirm the tested result→ Event Details path as a teammate and confirmed that selecting a sample event displayed its basic details. | [ repeat Events Test comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49#issuecomment-6105483528) |
 |  |  |  |
 |  |  |  |
 
@@ -44,17 +36,15 @@ Keep this section inside the single shared team report. Each student must enter 
 
 | Blocker/risk | Owner | Next action |
 |---|---|---|
-|  |  |  |
+| Event data is currently code-based sample data, and loading event data from Firebase Firestore has not yet been implemented or verified. | Tulsey8848 | Check the Firestore setup and permissions, then implement and test loading event data from Firestore. |
 
 ## Decision record
 
-Record only decisions that change scope, approach, ownership, or the next plan.
-
 | Decision | Why we chose it | Owner | Evidence / Issue link |
 |---|---|---|---|
-|  |  |  |  |
+| Continue using sample event data for the current working demonstration while tracking Firestore integration separately. | The Events → Event Details path can be demonstrated and tested before Firestore integration is complete. | Team 4 |[Blocker Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35)|
 
 ## Next week's bridge task
 
-- 
-- 
+- Investigate and set up Firestore event data so the Events page can load events from Firebase instead of relying only on code-based sample data.
+- Test the updated event-viewing path again and record the expected result, actual result, and screenshot or other proof.
