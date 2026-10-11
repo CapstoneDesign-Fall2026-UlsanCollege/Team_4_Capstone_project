@@ -29,7 +29,7 @@ This week, we wanted to check whether our CampusVibe project was working correct
 | Student | What they did | Evidence link |
 |---|---|---|
 | DevyanaCT | Repeat Tested the Events to confirm the tested result→ Event Details path as a teammate and confirmed that selecting a sample event displayed its basic details. | [ repeat Events Test comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49#issuecomment-6105483528) |
-|  |  |  |
+|Tulseyy8848  | Reviewed the CampusVibe navigation flow, organized dashboard and Event Details screenshot evidence, and documented the Week 6 testing progress and remaining Firestore integration work.  |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49  |
 |  |  |  |
 
 ## Blockers or risks
