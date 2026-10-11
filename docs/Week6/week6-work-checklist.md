@@ -1,77 +1,76 @@
 # Week 6 Work Checklist — Test the Vertical Slice
 
-**Date:** Thu 2026-10-08 to Wed 2026-10-14<br>
-**Team:** 4
-
-> Show one visible behavior, ask a teammate who did not build it to test the behavior, and record what actually happened. Keep an unfinished behavior marked incomplete; a failed test is useful evidence for the next Issue.
+**Date:** Thu 2026-10-08 to Wed 2026-10-14  
+**Team:** 4  
+**Project:** CampusVibe
 
 ## Core work — complete all
 
 ### Run one real test
 
-- [ ] Choose one small user-visible behavior from the Week 5 vertical slice.
-- [ ] Start from a clear place and write repeatable test steps.
-- [ ] State the expected result before running the test.
-- [ ] Ask a teammate other than the author to follow the steps without coaching.
-- [ ] Record the actual result, including confusing or missing behavior.
-- [ ] If the test fails, record the first failing step and keep the related Issue incomplete.
+- [x] Choose one small user-visible behavior from the Week 5 vertical slice: Dashboard → Events → Select Event → View Basic Event Details.
+- [x] Start from a clear place and write repeatable test steps.
+- [x] State the expected result before running the test.
+- [x] Ask a teammate other than the author to follow the steps. Tester: `Tulseyy8848`.
+- [x] Record the actual result. The teammate reported that the sample event opened and its basic details appeared successfully.
+- [x] No test failure was reported. If a problem is discovered during a future test, record the first failing step and keep the relevant Issue open.
 
 ### Connect the test to the work
 
-- [ ] Complete a Tested-By Note with the tester, date, steps, expected result, actual result, proof link, problem found, and next action.
-- [ ] Update the relevant Issue’s Definition of Done and status to match the result.
-- [ ] Link the commit or pull request and a screenshot, demo, or short video when safe and useful.
-- [ ] If blocked, create or update an Issue with the exact blocker, one owner, and a next action.
+- [x] Prepare the Tested-By Note with the tester, date, steps, expected result, actual result, problem found, and next action.
+- [ ] Confirm that the relevant Issue’s Definition of Done and status match the test result.
+- [ ] Link the relevant commit or pull request and attach a real screenshot, demo, or short video.
+- [x] Identify the Firebase Firestore limitation in the project work: event data is currently code-based sample data, and Firestore event loading has not yet been verified. Keep this as a separate blocker or Issue if needed.
 
 ### Record team and individual evidence
 
-- [ ] Update the team’s one shared Week 6 Weekly Report; do not create separate weekly reports.
-- [ ] Each student enters their own contribution sentence and evidence link in the shared report.
-- [ ] Each student completes and links the requested Individual Evidence Receipt.
-- [ ] Keep personal data, secrets, and unapproved real-user data out of shared evidence.
+- [ ] Update the team’s one shared Week 6 Weekly Report.
+- [ ] Add my own contribution sentence and evidence link to the shared report.
+- [ ] Complete and link my Individual Evidence Receipt.
+- [x] Keep personal data, secrets, and unapproved real-user data out of shared evidence.
 
 ## Evidence to link
 
-- [ ] Relevant implementation Issue with current Definition of Done and status.
-- [ ] Commit or pull request for the behavior tested.
-- [ ] Tested-By Note with steps, expected and actual results, and proof.
-- [ ] Screenshot, demo link, or short video that supports the claim.
-- [ ] One shared Weekly Report with a contribution/evidence row from every member.
+- [ ] Relevant implementation Issue with its current Definition of Done and status.
+- [ ] Commit or pull request for the behavior tested. Check the repository to confirm the correct link.
+- [ ] Tested-By Note containing the test steps, expected result, actual result, and proof.
+- [ ] Actual screenshot, demo link, or short video showing the Events → Event Details behavior.
+- [ ] One shared Weekly Report with a contribution and evidence row from every team member.
 - [ ] Individual Evidence Receipt from each student.
-- [ ] Any bug or blocker Issue with an owner and next action.
+- [ ] Firestore blocker Issue, if applicable, with one owner and a clear next action.
 
 ## Stretch menu — optional after the core work
 
-The core work is the floor. Choose an extension only if it helps your team test more clearly or prepare the midterm path.
-
 ### Stronger user test
 
-- [ ] Ask a teammate who was not in the implementation discussion to try the path from a clean start.
-- [ ] Test one empty, error, loading, or recovery state tied to the main path.
-- [ ] Write one success signal and show how the current test observes it.
+- [ ] Ask a teammate who was not involved in the implementation discussion to repeat the path from a clean start.
+- [ ] Test one empty, error, loading, or recovery state related to the main path.
+- [ ] Write one success signal and show how the test observes it.
 
 ### Better technical evidence
 
 - [ ] Turn the manual check into a repeatable smoke test.
-- [ ] Add a short setup note so another teammate can run the slice.
-- [ ] Fix one bug found during the test and repeat the same test.
+- [ ] Add a short setup note so another teammate can run the project locally.
+- [ ] Fix one bug found during testing and repeat the same test.
 
 ### Better midterm path
 
 - [ ] Write the first 3–5 steps of the midterm demo path.
-- [ ] List one claim the team can already prove and one claim it cannot yet prove.
-- [ ] Identify one improvement that will make the Week 7 rehearsal clearer or more reliable.
+- [x] Identify one claim the team can prove: a user can log in, open Events, select a sample event, and view its basic details, based on the reported test.
+- [x] Identify one claim the team cannot yet prove: Events are loaded from Firebase Firestore.
+- [ ] Assign one improvement that will make the Week 7 rehearsal clearer or more reliable.
 
 ## Risks and exceptions
 
-If a core item is incomplete, name the owner, reason, and next action in GitHub.
-
 | Item | Owner | Next action | Review point |
 |---|---|---|---|
-|  |  |  |  |
+| Firestore event loading has not been implemented or verified | `Tulsey8848` *(previously listed as blocker owner; confirm this assignment is still correct)* | Set up and test event retrieval from Firestore, then record the result and proof. | Before claiming Firestore event loading works |
+| Test proof and GitHub links |  Team 4 | Add the actual screenshot or recording, Tested-By Note, and correct implementation commit or PR link. | Before the Week 6 evidence review |
+| Shared team and individual evidence | Each team member | Add a contribution and evidence link to the shared Weekly Report and complete the Individual Evidence Receipt. | Before Week 6 submission |
+| Week 7 rehearsal improvement | Team 4  | Choose one improvement and create or update its GitHub Issue with an owner and next action. | Before the Week 7 rehearsal |
 
 ## Final check
 
-- [ ] Another teammate can repeat the test using the written steps.
+- [ ] Another teammate has repeated the test using the written steps, and the result is recorded.
 - [ ] The evidence supports the claim and the Issue status is honest.
 - [ ] The next midterm-demo improvement is assigned and visible in GitHub.
