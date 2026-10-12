@@ -41,7 +41,23 @@ This week, we wanted to check whether our CampusVibe project was working correct
 - **Dashboard, Discover, Assistant, and Suggest:** Updated the pages using the supplied visual references. Production builds passed, and the deployed Assistant stylesheet was checked for the new white-panel rules after deployment. A successful push can precede the live update, so the served version must be checked. Evidence: [Dashboard](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/e98abfd), [Discover](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8f69125), [Assistant](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8b8dac4), [Suggest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/3d735a3).
 - **Profile and contribution tracking:** Added the profile layout, saved-event summary, and browser-local editing for the study program and bio. The production build passed, the changes were pushed to main, and the contribution was recorded in this shared Week 6 report. Evidence: [Profile implementation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/a2ced5b), [Week 6 contribution](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/be88f08).
 
-**Validation limits:** Build and deployment checks do not replace independent workflow testing. Profile edits are browser-local; events and the Assistant use sample data. Independent desktop/mobile checks and screenshots for the updated pages remain tracked in [issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53). The earlier test in issue #49 covers the sample-event path, not every new UI interaction.
+#### Automated demo check - October 12, 2026
+
+Ran a Playwright browser smoke check against the deployed website using a disposable Firebase test account. The account was deleted after the run. This is an automated check, not a claim of independent teammate testing.
+
+| Expected behavior | Actual result |
+|---|---|
+| Signed-out users see the welcome screen; signup validates required fields and matching passwords. | Passed: the dashboard was hidden and invalid signup inputs displayed errors. |
+| Valid signup reaches the dashboard; logout returns to welcome; wrong-password login displays an error; correct login succeeds. | Passed using a real Firebase test account. |
+| Seeded events can be filtered, searched, and saved with visible feedback. | Passed: Tech showed two events, title search and empty state worked, clearing restored nine events, and saving updated Saved and the dashboard count. |
+| Assistant, prototype suggestions, and browser-local profile editing work. | Passed: the Assistant responded, suggestion submission returned to Dashboard, and profile edits survived a reload. |
+| Signed-in pages fit a mobile viewport. | Passed: Dashboard, Discover, Assistant, Saved, Suggest, and Profile had no document horizontal overflow at 390 x 844 pixels. No uncaught page errors were recorded. |
+
+The screenshot review found dark toast text on a dark background after login. Fixed the text contrast in [5185abf](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/5185abf); the production build passed.
+
+Safe visual evidence uses the built-in demo student: [Desktop dashboard](evidence/dashboard-desktop.png), [Mobile profile](evidence/profile-mobile.png). No test passwords or authentication tokens are included.
+
+**Validation limits:** Profile edits are browser-local; events and the Assistant use sample data; suggestions are a prototype confirmation rather than a backend submission. Independent teammate desktop/mobile verification remains tracked in [issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53). The automated check above supplements the earlier sample-event test in issue #49.
 
 ## Blockers or risks
 
