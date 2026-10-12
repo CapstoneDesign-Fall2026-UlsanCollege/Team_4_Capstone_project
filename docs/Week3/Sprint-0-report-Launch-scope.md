@@ -13,7 +13,7 @@ In one or two sentences, what is your team now ready to build next?
 
 > 
 
-## Project snapshot
+## Project snapshot 
 
 | Field | Current answer | Evidence link |
 |---|---|---|
