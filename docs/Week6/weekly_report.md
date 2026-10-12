@@ -35,7 +35,7 @@ This week, we wanted to check whether our CampusVibe project was working correct
 
 | Ujjal (@ujjalpoudel75) | Tested the sample Events flow and reported that opening Events and selecting an event displayed its basic details correctly. | [Recorded test result](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49#issuecomment-6055568514) |
 
-### Prachi's work and validation
+### Prachi(prachi2061) work and validation
 
 - **Logo and authentication:** Fixed the missing production logo and updated the welcome, login, and sign-up screens. Production builds passed, and the deployed logo asset returned HTTP 200. This confirmed that the injected HTML's image paths need assets available in Vite's public directory. Evidence: [Logo fix](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/75c4104), [Authentication design](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/eda4e5b).
 - **Dashboard, Discover, Assistant, and Suggest:** Updated the pages using the supplied visual references. Production builds passed, and the deployed Assistant stylesheet was checked for the new white-panel rules after deployment. A successful push can precede the live update, so the served version must be checked. Evidence: [Dashboard](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/e98abfd), [Discover](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8f69125), [Assistant](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8b8dac4), [Suggest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/3d735a3).
