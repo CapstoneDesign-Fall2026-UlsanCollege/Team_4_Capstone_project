@@ -7,7 +7,7 @@
 ## This week's goal
 
 > Our goal this week was to turn the CampusVibes idea and Week 2 user flow into a clearer development plan. We worked on the project structure, technology stack comparison, architecture, wireframe, candidate vertical slice, and the Week 3 report so the team has a smaller, more testable scope for the midterm demo.
-
+ 
 ## What we committed to do
 
 - [x] Compare possible technology stacks and document the technology decision.
