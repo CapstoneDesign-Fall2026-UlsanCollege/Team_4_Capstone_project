@@ -196,7 +196,12 @@ function setupFilter(){
 
 function showPage(page){
   document.querySelectorAll(".page-view").forEach(view => view.classList.toggle("active", view.id === `page-${page}`));
-  document.querySelectorAll(".page-link").forEach(link => link.classList.toggle("active", link.dataset.page === page));
+  document.querySelectorAll(".page-link").forEach(link => {
+    const active = link.dataset.page === page;
+    link.classList.toggle("active", active);
+    if (active) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
   window.scrollTo({top: 0, behavior: "smooth"});
 }
 

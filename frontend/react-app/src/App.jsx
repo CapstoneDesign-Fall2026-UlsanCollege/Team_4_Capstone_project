@@ -7,7 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./firebase";
-import { createIcons, ArrowRight, Bookmark, CalendarDays, GraduationCap, Hand, Lightbulb, MapPin, MessageCircle, PartyPopper, Sparkles, X } from "lucide";
+import { createIcons, ArrowRight, Bookmark, CalendarDays, Compass, GraduationCap, Hand, LayoutDashboard, Lightbulb, MapPin, MessageCircle, PartyPopper, Sparkles, UserRound, X } from "lucide";
 import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
@@ -28,7 +28,7 @@ export default function App() {
     parsedMarkup.querySelectorAll("script").forEach(script => script.remove());
     mountRef.current.innerHTML = parsedMarkup.body.innerHTML;
     window.campusRenderIcons = () => createIcons({
-      icons: { ArrowRight, Bookmark, CalendarDays, GraduationCap, Hand, Lightbulb, MapPin, MessageCircle, PartyPopper, Sparkles, X },
+      icons: { ArrowRight, Bookmark, CalendarDays, Compass, GraduationCap, Hand, LayoutDashboard, Lightbulb, MapPin, MessageCircle, PartyPopper, Sparkles, UserRound, X },
       attrs: { "aria-hidden": "true", "stroke-width": 1.8 },
     });
 
