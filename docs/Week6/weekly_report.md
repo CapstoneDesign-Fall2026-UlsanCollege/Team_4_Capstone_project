@@ -23,7 +23,7 @@ This week, we wanted to check whether our CampusVibe project was working correct
 | Screenshot / demo | [Screenshot Available](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
 | Test/check note | [Tested-By Note](tested-by-note.md) |
 | Document update | [Shared Week 6 report](weekly_report.md) |
-| Prachi's evidence | [Work and validation in this report](#prachis-work-and-validation) |
+
 
 ## Individual contribution entries — one row per student
 
