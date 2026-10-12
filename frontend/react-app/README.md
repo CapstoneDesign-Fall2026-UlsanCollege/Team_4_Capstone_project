@@ -33,6 +33,14 @@ This is an intentionally small prototype, not a generative AI chatbot. A future 
 
 The earlier local-API “Failed to fetch” failure is not reproducible in the current assistant because it no longer makes API requests. The original reproduction steps and resolution are recorded in [Issue #38](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/38).
 
+## Campus Vibe-Feed demo
+
+The signed-in header switches between the existing Community pages and Campus Vibe-Feed. The feed includes cross-college sample profiles, photo and event posts, likes, comments, interested states, saved posts, and demo friend requests.
+
+This iteration is explicitly device-local: account-scoped IndexedDB stores posts and photo blobs. It does not publish posts, photos, or friend requests to other students. Uploaded raster photos are resized before storage; up to four photos are accepted per post. Switching modes preserves the Community pages and remembers the selected workspace for each account.
+
+To check the demo, enter as a demo student, select Campus Vibe-Feed, add your college and a post with photos, then reload and re-enter the demo to confirm persistence. Check Friends, Saved posts, editing/deleting your own post, and switching back to Community. Shared multi-account posting requires a later backend iteration; this change does not alter Firebase billing or security rules.
+
 ## Verify a production build
 
 ```sh

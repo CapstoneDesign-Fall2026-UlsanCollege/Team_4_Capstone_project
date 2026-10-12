@@ -15,6 +15,7 @@
 <header class="nav">
   <div class="nav-inner">
     <button class="logo logo-button" data-page="dashboard" aria-label="CampusVibes home"><img class="logo-mark" src="/assets/campusvibes-logo.png" alt="" aria-hidden="true">Campus<span class="logo-accent">Vibes</span></button>
+    <div class="workspace-switch hidden" id="workspaceSwitch" role="group" aria-label="Workspace"><button type="button" data-workspace="community" aria-pressed="true"><i data-lucide="graduation-cap" aria-hidden="true"></i>Community</button><button type="button" data-workspace="feed" aria-pressed="false"><i data-lucide="rss" aria-hidden="true"></i>Campus Vibe-Feed</button></div>
     <nav class="nav-links hidden" id="mainNav" aria-label="Main navigation">
       <button class="page-link active" data-page="dashboard" type="button" aria-label="Dashboard" aria-current="page"><i data-lucide="layout-dashboard" aria-hidden="true"></i><span class="nav-tooltip" aria-hidden="true">Dashboard</span></button>
       <button class="page-link" data-page="discover" type="button" aria-label="Discover"><i data-lucide="compass" aria-hidden="true"></i><span class="nav-tooltip" aria-hidden="true">Discover</span></button>
@@ -144,6 +145,7 @@
 </main>
 
 <!-- ══════════ AUTH MODAL ══════════ -->
+<main class="feed-main hidden" id="feedMain"><div id="feedMount"></div></main>
 <div class="modal-overlay hidden" id="authModal" onclick="closeOnBackdrop(event)">
   <div class="modal">
     <button class="modal-close" onclick="closeAuth()" aria-label="Close">✕</button>

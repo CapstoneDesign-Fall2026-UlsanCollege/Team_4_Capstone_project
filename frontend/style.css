@@ -743,7 +743,7 @@ body:has(#appMain:not(.hidden)) #page-suggest .page-heading p:not(.eyebrow){colo
 }
 
 /* Dashboard overview and planning workspace. */
-body:has(#appMain:not(.hidden)) #mainNav{gap:12px;justify-content:center;overflow:visible;white-space:normal}
+body:has(#appMain:not(.hidden)) #mainNav{gap:20px;justify-content:center;overflow:visible;white-space:normal}
 body:has(#appMain:not(.hidden)) #mainNav .page-link{--nav-ink:#8152c8;--nav-tint:#f3edfc;position:relative;display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;padding:0;border:1px solid transparent;border-radius:8px;background:var(--nav-tint);color:var(--nav-ink);box-shadow:none}
 body:has(#appMain:not(.hidden)) #mainNav .page-link[data-page="discover"]{--nav-ink:#1b9d98;--nav-tint:#eaf9f6}
 body:has(#appMain:not(.hidden)) #mainNav .page-link[data-page="chat"]{--nav-ink:#13a89f;--nav-tint:#eafaf7}
@@ -756,12 +756,18 @@ body:has(#appMain:not(.hidden)) #mainNav .page-link:hover{border-color:var(--nav
 .nav-tooltip{position:absolute;top:calc(100% + 9px);left:50%;transform:translateX(-50%);padding:5px 9px;border:1px solid #e8deef;border-radius:5px;background:#fff;color:#61506e;font-size:11px;line-height:1.5;white-space:nowrap;box-shadow:0 4px 12px #38234c12;opacity:0;visibility:hidden;pointer-events:none;z-index:60;transition:opacity .15s}
 .page-link:hover>.nav-tooltip,.page-link:focus-visible>.nav-tooltip{opacity:1;visibility:visible}
 @media(max-width:640px){
-  body:has(#appMain:not(.hidden)) #mainNav{gap:4px;justify-content:space-between}
+  body:has(#appMain:not(.hidden)) #mainNav{gap:6px;justify-content:space-between}
   body:has(#appMain:not(.hidden)) .nav-inner{padding:14px 12px}
-  body:has(#appMain:not(.hidden)) #mainNav .page-link{width:38px;height:42px;flex-basis:38px}
+  body:has(#appMain:not(.hidden)) #mainNav .page-link{width:36px;height:42px;flex-basis:36px}
   #mainNav .page-link:first-child>.nav-tooltip{left:0;transform:none}
   #mainNav .page-link:last-child>.nav-tooltip{left:auto;right:0;transform:none}
 }
+.workspace-switch{display:flex;gap:3px;flex-shrink:0;border:1px solid #e5dded;border-radius:7px;background:#faf7fd;padding:3px}
+.workspace-switch button{display:flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:5px;padding:8px 10px;background:transparent;color:#9b87ad;font-size:10px;font-weight:600;white-space:nowrap;line-height:1.5}
+.workspace-switch button[aria-pressed=true]{background:#fff;color:#8756c6;box-shadow:0 2px 6px #5e367815}
+.workspace-switch svg{width:15px;height:15px}
+@media(max-width:1200px){body:has(#appMain:not(.hidden)) .nav-inner{flex-wrap:wrap}body:has(#appMain:not(.hidden)) #mainNav{order:3;flex-basis:100%}}
+@media(max-width:1000px){body:has(#appMain:not(.hidden)) .workspace-switch{order:2;flex-basis:100%;justify-content:center}body:has(#appMain:not(.hidden)) .nav-user{order:1;margin-left:auto}}
 body:has(#appMain:not(.hidden) #page-dashboard.active){
   background:linear-gradient(180deg,#f0e8fc99 0,#f7f8fcf0 260px,#f7f8fc 540px),url('/assets/campus-dashboard.jpg') center top/cover fixed;
 }

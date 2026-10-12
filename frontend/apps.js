@@ -195,6 +195,7 @@ function setupFilter(){
 }
 
 function showPage(page){
+  if (getSession()) switchWorkspace("community");
   document.querySelectorAll(".page-view").forEach(view => view.classList.toggle("active", view.id === `page-${page}`));
   document.querySelectorAll(".page-link").forEach(link => {
     const active = link.dataset.page === page;
@@ -340,6 +341,8 @@ function setupChat(){
 function setupPageNavigation(){
   if (window.campusVibesNavigationHandler) document.removeEventListener("click", window.campusVibesNavigationHandler);
   window.campusVibesNavigationHandler = event => {
+    const workspaceButton = event.target.closest("[data-workspace]");
+    if (workspaceButton){ switchWorkspace(workspaceButton.dataset.workspace); return; }
     const saveButton = event.target.closest("[data-save]");
     if (saveButton){
       event.preventDefault();
@@ -511,11 +514,12 @@ async function logout(){
 }
 function updateNav(){
   const s = getSession();
-  $("#mainNav").classList.toggle("hidden", !s);
-  $("#appMain").classList.toggle("hidden", !s);
   $("#authLanding").classList.toggle("hidden", !!s);
   $("#navAuthOut").classList.toggle("hidden", !!s);
   $("#navAuthIn").classList.toggle("hidden", !s);
+  $("#workspaceSwitch").classList.toggle("hidden", !s);
+  window.dispatchEvent(new CustomEvent("campus-session-change", {detail:s}));
+  switchWorkspace(s ? localStorage.getItem(`cv_workspace_${s.email}`) || "community" : "community");
   $("#dashboardName").textContent = s ? s.name.split(" ")[0] : "there";
   $("#profileName").textContent = s ? s.name : "Guest student";
   $("#profileEmail").textContent = s ? s.email : "Log in to personalize your CampusVibes profile.";
@@ -540,6 +544,18 @@ function updateNav(){
       }
     }
   }
+}
+
+function switchWorkspace(mode){
+  const session = getSession();
+  const feed = !!session && mode === "feed";
+  $("#mainNav").classList.toggle("hidden", !session || feed);
+  $("#appMain").classList.toggle("hidden", !session || feed);
+  $("#feedMain").classList.toggle("hidden", !feed);
+  document.body.classList.toggle("feed-workspace", feed);
+  document.querySelectorAll("[data-workspace]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.workspace === (feed ? "feed" : "community"))));
+  if (session) localStorage.setItem(`cv_workspace_${session.email}`, feed ? "feed" : "community");
+  window.campusRenderIcons?.();
 }
 
 /* ── Boot ── */

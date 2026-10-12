@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -7,13 +8,34 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./firebase";
-import { createIcons, ArrowRight, Bookmark, CalendarDays, Compass, GraduationCap, Hand, LayoutDashboard, Lightbulb, MapPin, MessageCircle, PartyPopper, Sparkles, UserRound, X } from "lucide";
+import {
+  createIcons,
+  ArrowRight,
+  Bookmark,
+  CalendarDays,
+  Compass,
+  GraduationCap,
+  Hand,
+  LayoutDashboard,
+  Lightbulb,
+  MapPin,
+  MessageCircle,
+  PartyPopper,
+  Rss,
+  Sparkles,
+  UserRound,
+  X,
+} from "lucide";
 import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
 
+const Feed = lazy(() => import("./Feed"));
+
 export default function App() {
   const mountRef = useRef(null);
+  const [feedTarget, setFeedTarget] = useState(null);
+  const [feedUser, setFeedUser] = useState(null);
 
   useEffect(() => {
     window.campusFirebaseAuth = {
@@ -24,33 +46,83 @@ export default function App() {
       signOut,
       updateProfile,
     };
-    const parsedMarkup = new DOMParser().parseFromString(originalMarkup, "text/html");
-    parsedMarkup.querySelectorAll("script").forEach(script => script.remove());
+    const parsedMarkup = new DOMParser().parseFromString(
+      originalMarkup,
+      "text/html",
+    );
+    parsedMarkup
+      .querySelectorAll("script")
+      .forEach((script) => script.remove());
     mountRef.current.innerHTML = parsedMarkup.body.innerHTML;
-    window.campusRenderIcons = () => createIcons({
-      icons: { ArrowRight, Bookmark, CalendarDays, Compass, GraduationCap, Hand, LayoutDashboard, Lightbulb, MapPin, MessageCircle, PartyPopper, Sparkles, UserRound, X },
-      attrs: { "aria-hidden": "true", "stroke-width": 1.8 },
-    });
+    setFeedTarget(mountRef.current.querySelector("#feedMount"));
+    const receiveSession = (event) => setFeedUser(event.detail);
+    window.addEventListener("campus-session-change", receiveSession);
+    window.campusRenderIcons = () =>
+      createIcons({
+        icons: {
+          ArrowRight,
+          Bookmark,
+          CalendarDays,
+          Compass,
+          GraduationCap,
+          Hand,
+          LayoutDashboard,
+          Lightbulb,
+          MapPin,
+          MessageCircle,
+          PartyPopper,
+          Rss,
+          Sparkles,
+          UserRound,
+          X,
+        },
+        attrs: { "aria-hidden": "true", "stroke-width": 1.8 },
+      });
 
     const appScript = document.createElement("script");
     appScript.textContent = `(() => {
       ${dashboardScript}
       ${originalScript}
-      Object.assign(window, { openAuth, closeAuth, closeOnBackdrop, switchTab, handleLogin, handleSignup, logout, syncFirebaseUser });
+      Object.assign(window, { openAuth, closeAuth, closeOnBackdrop, switchTab, handleLogin, handleSignup, logout, syncFirebaseUser, campusSwitchWorkspace: switchWorkspace });
     })();`;
     document.body.append(appScript);
-    const unsubscribeAuth = onAuthStateChanged(auth, user => window.syncFirebaseUser(user));
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) =>
+      window.syncFirebaseUser(user),
+    );
 
     return () => {
       unsubscribeAuth();
       appScript.remove();
-      document.removeEventListener("click", window.campusVibesNavigationHandler);
+      window.removeEventListener("campus-session-change", receiveSession);
+      document.removeEventListener(
+        "click",
+        window.campusVibesNavigationHandler,
+      );
       delete window.campusVibesNavigationHandler;
       delete window.campusFirebaseAuth;
       delete window.syncFirebaseUser;
       delete window.campusRenderIcons;
+      delete window.campusSwitchWorkspace;
     };
   }, []);
 
-  return <div ref={mountRef} />;
+  return (
+    <>
+      <div ref={mountRef} />
+      {feedTarget &&
+        feedUser &&
+        createPortal(
+          <Suspense
+            fallback={
+              <p role="status" className="feed-loading">
+                Loading your feed...
+              </p>
+            }
+          >
+            <Feed key={feedUser.id} user={feedUser} />
+          </Suspense>,
+          feedTarget,
+        )}
+    </>
+  );
 }
