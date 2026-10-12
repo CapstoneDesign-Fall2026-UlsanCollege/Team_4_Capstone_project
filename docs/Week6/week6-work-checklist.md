@@ -18,26 +18,26 @@
 ### Connect the test to the work
 
 - [x] Prepare the Tested-By Note with the tester, date, steps, expected result, actual result, problem found, and next action.
-- [ ] Confirm that the relevant Issue’s Definition of Done and status match the test result.
-- [ ] Link the relevant commit or pull request and attach a real screenshot, demo, or short video.
+- [x] Confirm that the relevant Issue's Definition of Done and status match the test result. Issue #49 has completed checks, teammate results, and is closed as completed.
+- [x] Link the relevant commit or pull request and attach a real screenshot, demo, or short video. Issue #49 includes commit db5dad6 and screenshots.
 - [x] Identify the Firebase Firestore limitation in the project work: event data is currently code-based sample data, and Firestore event loading has not yet been verified. Keep this as a separate blocker or Issue if needed.
 
 ### Record team and individual evidence
 
-- [ ] Update the team’s one shared Week 6 Weekly Report.
-- [ ] Add my own contribution sentence and evidence link to the shared report.
-- [ ] Complete and link my Individual Evidence Receipt.
+- [x] Update the team's one shared Week 6 Weekly Report. See [shared report](weekly_report.md).
+- [x] Add my own contribution sentence and evidence link to the shared report. Prachi's row links the implementation commits.
+- [x] Complete and link my Individual Evidence Receipt. See [Prachi's receipt](individual-evidence-receipt-prachi.md).
 - [x] Keep personal data, secrets, and unapproved real-user data out of shared evidence.
 
 ## Evidence to link
 
-- [ ] Relevant implementation Issue with its current Definition of Done and status.
-- [ ] Commit or pull request for the behavior tested. Check the repository to confirm the correct link.
-- [ ] Tested-By Note containing the test steps, expected result, actual result, and proof.
-- [ ] Actual screenshot, demo link, or short video showing the Events → Event Details behavior.
-- [ ] One shared Weekly Report with a contribution and evidence row from every team member.
+- [x] Relevant implementation Issue with its current Definition of Done and status: [#49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49).
+- [x] Commit or pull request for the behavior tested: [db5dad6](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/db5dad64f3131fb87b2d7011c86d6e2f9ecd575d).
+- [x] Tested-By Note containing the test steps, expected result, actual result, and proof: [note](tested-by-note.md).
+- [x] Actual screenshot, demo link, or short video showing the Events to Event Details behavior: attached to #49.
+- [x] One shared Weekly Report with a contribution and evidence row from every team member: [report](weekly_report.md), including Ujjal's recorded test comment.
 - [ ] Individual Evidence Receipt from each student.
-- [ ] Firestore blocker Issue, if applicable, with one owner and a clear next action.
+- [x] Firestore blocker Issue, if applicable, with one owner and a clear next action: [#35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35), owner Tulsey8848, next action to connect and test Firestore event retrieval.
 
 ## Stretch menu — optional after the core work
 
@@ -58,7 +58,7 @@
 - [ ] Write the first 3–5 steps of the midterm demo path.
 - [x] Identify one claim the team can prove: a user can log in, open Events, select a sample event, and view its basic details, based on the reported test.
 - [x] Identify one claim the team cannot yet prove: Events are loaded from Firebase Firestore.
-- [ ] Assign one improvement that will make the Week 7 rehearsal clearer or more reliable.
+- [x] Assign one improvement that will make the Week 7 rehearsal clearer or more reliable: [#53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53), owner @prachi2061, independent desktop/mobile demo testing.
 
 ## Risks and exceptions
 
@@ -71,6 +71,10 @@
 
 ## Final check
 
-- [ ] Another teammate has repeated the test using the written steps, and the result is recorded.
-- [ ] The evidence supports the claim and the Issue status is honest.
-- [ ] The next midterm-demo improvement is assigned and visible in GitHub.
+- [x] Another teammate has repeated the test using the written steps, and the result is recorded in #49.
+- [x] The evidence supports the sample-event claim and the Issue status is honest. Firestore loading and new UI workflow checks remain separate.
+- [x] The next midterm-demo improvement is assigned and visible in GitHub: #53.
+
+## Remaining team submission item
+
+Prachi's individual receipt is complete. Individual receipts from the other students have not been found in this Week 6 folder; each student should add or link their own receipt before the team marks that requirement complete. Optional stretch tasks are still optional.
