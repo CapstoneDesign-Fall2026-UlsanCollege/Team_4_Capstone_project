@@ -520,3 +520,77 @@ body:has(#authLanding:not(.hidden)) :focus-visible,.modal :focus-visible{outline
   .auth-landing-actions .btn::after{right:10px}
   .modal{padding:30px 22px;max-height:calc(100svh - 24px);overflow-y:auto}
 }
+
+/* Signed-in campus theme. */
+body:has(#appMain:not(.hidden)){
+  --text:#24222a;--muted:#827d89;--border:#eee8f2;--accent:#7541db;--accent-2:#7541db;--accent-grad:#7541db;
+  color:var(--text);
+  background:linear-gradient(125deg,rgba(91,66,229,.88),rgba(35,175,231,.8) 32%,rgba(231,130,191,.88) 65%,rgba(255,174,103,.84)),url('/assets/campus-login.jpg') center/cover fixed;
+}
+body:has(#appMain:not(.hidden)) .nav{background:transparent;border:0;padding:8px 24px 0}
+body:has(#appMain:not(.hidden)) .nav-inner{max-width:1320px;background:#fffffffa;border-radius:36px;min-height:68px;padding:14px 36px;gap:20px;box-shadow:0 0 25px #ffffff70}
+body:has(#appMain:not(.hidden)) .logo{color:#25222b;font-weight:800;font-size:22px;white-space:nowrap}
+body:has(#appMain:not(.hidden)) .logo-accent{color:#7541db}
+body:has(#appMain:not(.hidden)) .page-link{color:#55505c;font-size:14px;border:1px solid transparent}
+body:has(#appMain:not(.hidden)) .page-link.active{background:#fff;color:#6533c1;border-color:#e3d7f5;box-shadow:0 2px 10px #7541db20}
+body:has(#appMain:not(.hidden)) .page-link:hover{background:#f2ebfb;color:#6533c1}
+body:has(#appMain:not(.hidden)) .nav-user .avatar{background:#7541db;color:#fff;border-radius:50%}
+body:has(#appMain:not(.hidden)) .btn-ghost{color:#57505e;background:transparent}
+body:has(#appMain:not(.hidden)) .app-main{max-width:1320px;padding:30px 24px 64px}
+body:has(#appMain:not(.hidden)) .page-heading{color:#fff;align-items:flex-end;margin-bottom:24px}
+body:has(#appMain:not(.hidden)) .page-heading h1{font-size:36px;font-weight:800;letter-spacing:0}
+body:has(#appMain:not(.hidden)) .page-heading p,body:has(#appMain:not(.hidden)) .eyebrow{color:#fff;letter-spacing:0}
+body:has(#appMain:not(.hidden)) .page-heading .btn{background:white;color:#7541db}
+body:has(#appMain:not(.hidden)) .btn-primary{background:#7541db;color:white}
+body:has(#appMain:not(.hidden)) .btn-primary:hover{background:#6330c5}
+body:has(#appMain:not(.hidden)) .btn-outline{background:#fff;color:#7541db;border-color:#d8c8ee}
+body:has(#appMain:not(.hidden)) .btn-outline:hover{background:#f4edff}
+.stat-card{background:#fffffff2;border-color:#ffffff90;border-radius:16px;min-height:98px;padding:20px 26px;position:relative;overflow:hidden}
+.stat-card strong{font-size:34px;font-weight:700;color:#7541db}
+.stat-card span{color:#55505c;font-size:13px}
+.stat-card:nth-child(2) strong{color:#19b9aa}
+.stat-card:nth-child(3) strong{color:#f48b79}
+.stat-card:nth-child(1){border-left:6px solid #b18aed}
+.stat-card:nth-child(2){border-left:6px solid #8ae0d4}
+.stat-card:nth-child(3){border-left:6px solid #ffc3b4}
+.dashboard-grid{grid-template-columns:1.1fr 1fr;gap:16px}
+#page-dashboard .panel{background:#fffffffa;border:1px solid #ffffffa0;border-radius:16px;padding:24px;color:#24222a;box-shadow:0 8px 25px #52327315}
+#page-dashboard .panel h2{font-size:20px;font-weight:700;letter-spacing:0}
+#page-dashboard .panel-heading p,#page-dashboard .quick-panel>p{color:#827d89;font-size:13px;margin-top:6px}
+#page-dashboard .text-button{color:#7541db;font-weight:600}
+.upcoming-item{padding:10px 12px;gap:18px;border-top:1px solid #eee8f2;border-left:3px solid #9163e4;color:#24222a;min-height:66px}
+.upcoming-item:nth-child(2){border-left-color:#ee80ac}
+.upcoming-item:nth-child(3){border-left-color:#24c4b0}
+.upcoming-item:nth-child(4){border-left-color:#ffd185}
+.upcoming-item:nth-child(5){border-left-color:#bc9ceb}
+.upcoming-item:hover{background:#f6f0ff}
+.upcoming-date{background:#fff;border-color:#eee8f2;border-radius:8px;color:#7541db}
+.upcoming-item h3{font-size:14px;font-weight:700;letter-spacing:0}
+.upcoming-item p,.upcoming-meta,.upcoming-date span{color:#827d89;font-size:12px}
+.interest-mini{color:#fff;background:#ad8be5;font-size:10px}
+.upcoming-item:nth-child(2) .interest-mini{background:#ee80ac}
+.upcoming-item:nth-child(3) .interest-mini{background:#19b9aa}
+.upcoming-item:nth-child(4) .interest-mini{background:#eab55d}
+.quick-actions{gap:8px;margin:24px 0 20px}
+.quick-actions .btn{padding:11px 13px;font-size:13px;min-height:42px}
+#page-dashboard .panel-note{color:#827d89;border-color:#eee8f2;font-size:13px;line-height:1.6}
+@media(max-width:1000px){
+  body:has(#appMain:not(.hidden)) .nav-inner{flex-wrap:wrap;justify-content:space-between;padding:14px 20px;border-radius:24px}
+  body:has(#appMain:not(.hidden)) .nav-links{order:3;flex-basis:100%;justify-content:flex-start;overflow-x:auto}
+}
+@media(max-width:780px){.dashboard-grid{grid-template-columns:1fr}}
+@media(max-width:640px){
+  body:has(#appMain:not(.hidden)) .nav{padding:10px 12px 0}
+  body:has(#appMain:not(.hidden)) .logo{font-size:18px}
+  body:has(#appMain:not(.hidden)) .nav-user{display:flex}
+  body:has(#appMain:not(.hidden)) .app-main{padding:26px 16px 48px}
+  body:has(#appMain:not(.hidden)) .page-heading{align-items:flex-start}
+  body:has(#appMain:not(.hidden)) .page-heading h1{font-size:30px}
+  .stat-grid{grid-template-columns:1fr;gap:10px}
+  .stat-card{min-height:80px;padding:14px 20px}
+  .stat-card strong{font-size:28px}
+  #page-dashboard .panel{padding:20px 16px}
+  .upcoming-item{grid-template-columns:44px minmax(0,1fr) 58px;gap:10px;padding:10px 8px}
+  .upcoming-item h3{font-size:13px;overflow-wrap:anywhere}
+  .upcoming-item p,.upcoming-meta{font-size:11px}
+}
