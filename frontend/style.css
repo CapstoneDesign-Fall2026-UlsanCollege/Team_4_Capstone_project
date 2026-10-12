@@ -458,3 +458,65 @@ body{font-size:15px}
 
 .logo-mark{display:block;width:32px;height:36px;object-fit:contain;flex:0 0 auto}
 @media(max-width:640px){.logo-mark{width:26px;height:29px}}
+
+/* Colorful authentication surface, scoped away from the signed-in app. */
+body:has(#authLanding:not(.hidden)){
+  background:linear-gradient(125deg,rgba(91,33,229,.88),rgba(0,163,229,.77) 36%,rgba(255,191,91,.82) 70%,rgba(255,76,130,.9)),url('/assets/campus-login.jpg') center/cover fixed;
+}
+body:has(#authLanding:not(.hidden)) .nav{background:transparent;border:0}
+body:has(#authLanding:not(.hidden)) .nav-inner{max-width:1300px;padding:16px 28px;gap:32px}
+body:has(#authLanding:not(.hidden)) .logo{color:white;font-size:26px;font-weight:800}
+body:has(#authLanding:not(.hidden)) .logo-accent{color:#ffc463}
+body:has(#authLanding:not(.hidden)) #navAuthOut .btn-ghost{color:white;background:transparent}
+body:has(#authLanding:not(.hidden)) #navAuthOut .btn-primary{color:white;background:linear-gradient(110deg,#f45eaa,#ffb64c)}
+.auth-landing{min-height:calc(100svh - 76px);padding:40px 24px 64px}
+.auth-landing-card{width:min(100%,572px);padding:38px 36px 34px;border:1px solid #ffffff91;border-radius:24px;background:rgba(255,255,255,.92);color:#191919;box-shadow:0 20px 55px #34295830}
+.auth-landing-card .auth-brand strong,.modal .auth-brand strong{color:#191919;font-size:30px;letter-spacing:0}
+.auth-landing-card .auth-brand strong span,.modal .auth-brand strong span{color:#7842df}
+.auth-landing-card .auth-brand p,.modal .auth-brand p{color:#838383;font-size:16px;line-height:1.5;margin-top:10px}
+.auth-landing-card h1{font-size:36px;font-weight:800;margin-top:30px;letter-spacing:0}
+.auth-landing-copy{font-size:16px;color:#6d6d74;max-width:390px;line-height:1.7;margin:14px auto 30px}
+.auth-landing-actions{gap:16px}
+.auth-landing-actions .btn{position:relative;min-height:52px;font-size:16px;border-radius:14px;padding:12px 34px}
+.auth-landing-actions .btn::after{content:'\2197';position:absolute;right:16px;font-size:20px}
+.auth-landing-actions .btn-primary,.modal .btn-primary{color:white;background:#7842e5;border:1px solid #8950eb}
+.auth-landing-actions .btn-primary:hover,.modal .btn-primary:hover{background:#6530cf;color:white}
+.auth-landing-actions .btn-outline{background:#fff;color:#202025;border:1px solid #dda6c0}
+.auth-landing-actions .btn-outline:hover{background:#faf4ff;border-color:#7842df}
+.auth-divider{display:flex;align-items:center;justify-content:center;gap:14px;color:#909095;font-size:13px;margin:22px auto 16px;max-width:260px}
+.auth-divider::before,.auth-divider::after{content:'';height:1px;background:#e3dfe6;flex:1}
+.auth-landing-card .demo-login,.modal .demo-login{margin:0 auto;padding:11px 16px;font-size:14px;color:#7541d3;border:1px solid #e8e0ee;background:#f7f2fc;border-radius:12px}
+.auth-landing-card .demo-login:hover,.modal .demo-login:hover{background:#ede1ff}
+.modal-overlay{background:#25154c65;backdrop-filter:blur(8px);overflow-y:auto}
+.modal{background:#fffafc;color:#202025;border-color:#fff;border-radius:24px;max-width:480px;box-shadow:0 24px 70px #24103e40}
+.modal .auth-brand strong{font-size:24px}
+.modal .auth-brand p{font-size:13px}
+.modal-close{color:#71667d}
+.modal-close:hover{background:#efe7f8;color:#6136ba}
+.modal .auth-tabs{background:#f0eaf7;border-color:#e6ddef}
+.modal .auth-tab{color:#70647f}
+.modal .auth-tab.active{color:white}
+.modal .auth-tab-slider{background:#7842e5}
+.modal .field label{color:#5b5266}
+.modal .field input,.modal .field select{background:white;color:#202025;border-color:#ded5e8;min-height:44px}
+.modal .field input::placeholder{color:#9b929f}
+.modal .auth-note,.modal .auth-switch{color:#82758c}
+.modal .auth-switch a{color:#7541d3}
+.modal .demo-login{margin-top:14px}
+body:has(#authLanding:not(.hidden)) :focus-visible,.modal :focus-visible{outline-color:#7541d3}
+@media(max-width:640px){
+  body:has(#authLanding:not(.hidden)) .nav-inner{padding:16px;gap:14px;justify-content:space-between;flex-wrap:wrap}
+  body:has(#authLanding:not(.hidden)) .logo{font-size:20px}
+  body:has(#authLanding:not(.hidden)) #navAuthOut{display:flex;gap:4px}
+  body:has(#authLanding:not(.hidden)) #navAuthOut .btn-ghost{display:block}
+  .auth-landing{padding:24px 16px 40px}
+  .auth-landing-card{padding:30px 22px;border-radius:20px}
+  .auth-landing-card .auth-brand strong{font-size:26px}
+  .auth-landing-card .auth-brand p{font-size:14px}
+  .auth-landing-card h1{font-size:30px}
+  .auth-landing-copy{font-size:14px}
+  .auth-landing-actions{gap:10px}
+  .auth-landing-actions .btn{font-size:14px;padding:12px 24px 12px 12px}
+  .auth-landing-actions .btn::after{right:10px}
+  .modal{padding:30px 22px;max-height:calc(100svh - 24px);overflow-y:auto}
+}
