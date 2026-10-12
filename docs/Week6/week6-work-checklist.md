@@ -26,7 +26,7 @@
 
 - [x] Update the team's one shared Week 6 Weekly Report. See [shared report](weekly_report.md).
 - [x] Add my own contribution sentence and evidence link to the shared report. Prachi's row links the implementation commits.
-- [x] Complete and link my Individual Evidence Receipt. See [Prachi's receipt](individual-evidence-receipt-prachi.md).
+- [x] Record my work, evidence links, and validation in the shared report. See [Prachi's evidence in the shared report](weekly_report.md).
 - [x] Keep personal data, secrets, and unapproved real-user data out of shared evidence.
 
 ## Evidence to link
@@ -36,7 +36,7 @@
 - [x] Tested-By Note containing the test steps, expected result, actual result, and proof: [note](tested-by-note.md).
 - [x] Actual screenshot, demo link, or short video showing the Events to Event Details behavior: attached to #49.
 - [x] One shared Weekly Report with a contribution and evidence row from every team member: [report](weekly_report.md), including Ujjal's recorded test comment.
-- [ ] Individual Evidence Receipt from each student.
+- [x] Individual contribution and evidence links from each student, recorded in the [shared Week 6 report](weekly_report.md).
 - [x] Firestore blocker Issue, if applicable, with one owner and a clear next action: [#35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35), owner Tulsey8848, next action to connect and test Firestore event retrieval.
 
 ## Stretch menu — optional after the core work
@@ -66,7 +66,7 @@
 |---|---|---|---|
 | Firestore event loading has not been implemented or verified | `Tulsey8848` *(previously listed as blocker owner; confirm this assignment is still correct)* | Set up and test event retrieval from Firestore, then record the result and proof. | Before claiming Firestore event loading works |
 | Test proof and GitHub links |  Team 4 | Add the actual screenshot or recording, Tested-By Note, and correct implementation commit or PR link. | Before the Week 6 evidence review |
-| Shared team and individual evidence | Each team member | Add a contribution and evidence link to the shared Weekly Report and complete the Individual Evidence Receipt. | Before Week 6 submission |
+| Shared team and individual evidence | Each team member | Record contributions and evidence in the shared Weekly Report. | Before Week 6 submission |
 | Week 7 rehearsal improvement | Team 4  | Choose one improvement and create or update its GitHub Issue with an owner and next action. | Before the Week 7 rehearsal |
 
 ## Final check
@@ -75,6 +75,6 @@
 - [x] The evidence supports the sample-event claim and the Issue status is honest. Firestore loading and new UI workflow checks remain separate.
 - [x] The next midterm-demo improvement is assigned and visible in GitHub: #53.
 
-## Remaining team submission item
+## Evidence format
 
-Prachi's individual receipt is complete. Individual receipts from the other students have not been found in this Week 6 folder; each student should add or link their own receipt before the team marks that requirement complete. Optional stretch tasks are still optional.
+Week 6 contributions and evidence are recorded in the shared Weekly Report; separate individual receipt files are not used for this week. Independent checks of the updated pages remain tracked in issue #53. Optional stretch tasks are still optional.
