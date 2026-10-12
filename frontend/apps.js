@@ -60,7 +60,14 @@ function showToast(msg){
 
 /* ── Event rendering and discovery filters ── */
 const GRADIENTS = (hue) =>
-  `linear-gradient(135deg, ${hue}33, ${hue}14), radial-gradient(circle at 80% 20%, ${hue}40, transparent 60%)`;
+  `linear-gradient(135deg, ${hue}, #4528a8)`;
+
+function eventBannerMedia(event){
+  const images = {1:"event-laptop.jpg", 7:"event-games.jpg"};
+  return images[event.id]
+    ? `<img class="event-cover" src="/assets/${images[event.id]}" alt="" loading="lazy">`
+    : `<span>${event.emoji}</span>`;
+}
 
 function renderEvents(filter = currentInterestFilter, search = currentEventSearch){
   currentInterestFilter = filter;
@@ -77,7 +84,7 @@ function renderEvents(filter = currentInterestFilter, search = currentEventSearc
     return `
     <article class="event-card" style="animation-delay:${i*0.05}s">
       <div class="event-banner" style="background:${GRADIENTS(e.hue)}">
-        <span>${e.emoji}</span>
+        ${eventBannerMedia(e)}
         <button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button>
         <div class="event-date">
           <strong>${d.getDate()}</strong>
@@ -129,7 +136,7 @@ function renderSavedEvents(){
 function eventCardMarkup(e, saved){
   const d = new Date(e.date + "T00:00:00");
   return `<article class="event-card">
-    <div class="event-banner" style="background:${GRADIENTS(e.hue)}"><span>${e.emoji}</span><button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button><div class="event-date"><strong>${d.getDate()}</strong><span>${d.toLocaleString("en-US",{month:"short"})}</span></div></div>
+    <div class="event-banner" style="background:${GRADIENTS(e.hue)}">${eventBannerMedia(e)}<button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button><div class="event-date"><strong>${d.getDate()}</strong><span>${d.toLocaleString("en-US",{month:"short"})}</span></div></div>
     <div class="event-body"><span class="event-tag">${e.interest}</span><h3>${e.title}</h3><div class="event-meta"><span>🕐 ${e.time} · ${d.toLocaleDateString("en-US",{weekday:"long"})}</span><span>📍 ${e.location}</span><span>${e.desc}</span></div><div class="event-host"><span class="host-avatar" style="background:${e.hue}">${e.host[0]}</span>Hosted by ${e.host}</div></div>
   </article>`;
 }
