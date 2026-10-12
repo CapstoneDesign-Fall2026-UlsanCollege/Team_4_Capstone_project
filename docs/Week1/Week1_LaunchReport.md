@@ -9,7 +9,7 @@ This is the Week 1 report. It replaces the standard Weekly Report for this week.
 ## Team setup
 
 | Check | Evidence link | Confirmed by |
-|---|---|---|
+|---|---|---| 
 | Team repository exists | https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project.git | Prachi|
 | Project board exists | https://github.com/orgs/CapstoneDesign-Fall2026-UlsanCollege/projects/6 | team |
 | Every member has access |  https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/graphs/contributors or https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/8c4bcb47b76ff4cf4494385d1a5e08ccc5e59ac3/TEAM_MEMBERS.md| Tulasha and Ujjal|
