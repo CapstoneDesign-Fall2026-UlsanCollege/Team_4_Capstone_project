@@ -41,6 +41,8 @@ const EVENTS = [
 /* ── Constants ── */
 const SAVED_KEY   = "cv_saved";
 let currentSession = null;
+let currentInterestFilter = "all";
+let currentEventSearch = "";
 
 /* ── Helpers ── */
 const $ = (sel) => document.querySelector(sel);
@@ -56,20 +58,33 @@ function showToast(msg){
   t._timer = setTimeout(() => t.classList.add("hidden"), 3200);
 }
 
-/* ── Event rendering + ONE interest filter ── */
+/* ── Event rendering and discovery filters ── */
 const GRADIENTS = (hue) =>
-  `linear-gradient(135deg, ${hue}33, ${hue}14), radial-gradient(circle at 80% 20%, ${hue}40, transparent 60%)`;
+  `linear-gradient(135deg, ${hue}, #4528a8)`;
 
-function renderEvents(filter = "all"){
+function eventBannerMedia(event){
+  const images = {1:"event-laptop.jpg", 7:"event-games.jpg"};
+  return images[event.id]
+    ? `<img class="event-cover" src="/assets/${images[event.id]}" alt="" loading="lazy">`
+    : `<span>${event.emoji}</span>`;
+}
+
+function renderEvents(filter = currentInterestFilter, search = currentEventSearch){
+  currentInterestFilter = filter;
+  currentEventSearch = search;
   const grid = $("#eventsGrid");
-  const list = filter === "all" ? EVENTS : EVENTS.filter(e => e.interest === filter);
+  const query = search.trim().toLocaleLowerCase();
+  const list = EVENTS.filter(event =>
+    (filter === "all" || event.interest === filter) &&
+    (!query || event.title.toLocaleLowerCase().includes(query))
+  );
   const saved = getSaved();
   grid.innerHTML = list.map((e,i) => {
     const d = new Date(e.date + "T00:00:00");
     return `
     <article class="event-card" style="animation-delay:${i*0.05}s">
       <div class="event-banner" style="background:${GRADIENTS(e.hue)}">
-        <span>${e.emoji}</span>
+        ${eventBannerMedia(e)}
         <button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button>
         <div class="event-date">
           <strong>${d.getDate()}</strong>
@@ -92,6 +107,8 @@ function renderEvents(filter = "all"){
     </article>`;
   }).join("");
   $("#emptyState").classList.toggle("hidden", list.length > 0);
+  $("#eventResults").textContent = `Showing ${list.length} of ${EVENTS.length} events`;
+  $("#clearEventFilters").disabled = filter === "all" && !query;
 }
 
 function renderUpcoming(){
@@ -114,12 +131,26 @@ function renderSavedEvents(){
   $("#savedEmpty").classList.toggle("hidden", list.length > 0);
   $("#statSaved").textContent = saved.length;
   $("#savedCount").textContent = saved.length;
+  renderProfileDetails();
+}
+
+function renderProfileDetails(){
+  const session = getSession();
+  const key = `cv_profile_${session ? session.email : "guest"}`;
+  let details = {};
+  try { details = JSON.parse(localStorage.getItem(key) || "{}"); } catch {}
+  $("#profileProgram").textContent = details.program || "Computer Science Student";
+  $("#profileStudy").textContent = details.program || "BSc in Computer Science";
+  $("#profileBio").textContent = details.bio || "Curious builder and problem solver who loves tech, teamwork, and campus events.";
+  const saved = EVENTS.filter(event => getSaved().includes(event.id));
+  $("#profileSavedEvents").innerHTML = saved.slice(0, 3).map(event => `<button class="profile-saved-item" data-page="saved"><span class="profile-event-art">${event.emoji}</span><span><strong>${event.title}</strong><small>${event.location}</small></span><span class="profile-event-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"})}</span></button>`).join("") || '<p class="profile-empty">No saved events yet.</p>';
+  $("#profileActivity").innerHTML = saved.slice(0, 3).map(event => `<p class="profile-activity-item">Saved <strong>${event.title}</strong> to your events</p>`).join("") || '<p class="profile-empty">Your saved events will appear here.</p>';
 }
 
 function eventCardMarkup(e, saved){
   const d = new Date(e.date + "T00:00:00");
   return `<article class="event-card">
-    <div class="event-banner" style="background:${GRADIENTS(e.hue)}"><span>${e.emoji}</span><button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button><div class="event-date"><strong>${d.getDate()}</strong><span>${d.toLocaleString("en-US",{month:"short"})}</span></div></div>
+    <div class="event-banner" style="background:${GRADIENTS(e.hue)}">${eventBannerMedia(e)}<button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button><div class="event-date"><strong>${d.getDate()}</strong><span>${d.toLocaleString("en-US",{month:"short"})}</span></div></div>
     <div class="event-body"><span class="event-tag">${e.interest}</span><h3>${e.title}</h3><div class="event-meta"><span>🕐 ${e.time} · ${d.toLocaleDateString("en-US",{weekday:"long"})}</span><span>📍 ${e.location}</span><span>${e.desc}</span></div><div class="event-host"><span class="host-avatar" style="background:${e.hue}">${e.host[0]}</span>Hosted by ${e.host}</div></div>
   </article>`;
 }
@@ -128,7 +159,7 @@ function toggleSaved(id){
   const saved = getSaved();
   const next = saved.includes(id) ? saved.filter(item => item !== id) : [...saved, id];
   saveSaved(next);
-  renderEvents($(".chip.active")?.dataset.interest || "all");
+  renderEvents();
   renderSavedEvents();
   showToast(next.includes(id) ? "Event saved." : "Event removed from saved.");
 }
@@ -137,9 +168,26 @@ function setupFilter(){
   $("#filterBar").addEventListener("click", (ev) => {
     const chip = ev.target.closest(".chip");
     if (!chip) return;
-    document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    $("#filterBar").querySelectorAll(".chip").forEach(c => {
+      const active = c === chip;
+      c.classList.toggle("active", active);
+      c.setAttribute("aria-pressed", String(active));
+    });
     chip.classList.add("active");
     renderEvents(chip.dataset.interest);
+  });
+  $("#eventSearch").addEventListener("input", event => {
+    renderEvents(currentInterestFilter, event.currentTarget.value);
+  });
+  $("#clearEventFilters").addEventListener("click", () => {
+    $("#eventSearch").value = "";
+    $("#filterBar").querySelectorAll(".chip").forEach(chip => {
+      const active = chip.dataset.interest === "all";
+      chip.classList.toggle("active", active);
+      chip.setAttribute("aria-pressed", String(active));
+    });
+    renderEvents("all", "");
+    $("#eventSearch").focus();
   });
 }
 
@@ -463,6 +511,8 @@ function updateNav(){
   $("#profileName").textContent = s ? s.name : "Guest student";
   $("#profileEmail").textContent = s ? s.email : "Log in to personalize your CampusVibes profile.";
   $("#profileAvatar").textContent = s ? s.name[0].toUpperCase() : "?";
+  renderProfileDetails();
+  $("#profileEditor").classList.add("hidden");
   if (s){
     $("#navUsername").textContent = s.name.split(" ")[0];
     $("#navAvatar").textContent = s.name[0].toUpperCase();
@@ -470,7 +520,11 @@ function updateNav(){
     if (s.interest){
       const chip = document.querySelector(`.chip[data-interest="${s.interest}"]`);
       if (chip){
-        document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+        $("#filterBar").querySelectorAll(".chip").forEach(c => {
+          const active = c === chip;
+          c.classList.toggle("active", active);
+          c.setAttribute("aria-pressed", String(active));
+        });
         chip.classList.add("active");
         renderEvents(s.interest);
       }
@@ -487,6 +541,22 @@ function bootCampusVibes(){
   setupFilter();
   setupPageNavigation();
   setupChat();
+  $("#profileEdit").addEventListener("click", () => {
+    $("#editProgram").value = $("#profileProgram").textContent;
+    $("#editBio").value = $("#profileBio").textContent;
+    $("#profileEditor").classList.remove("hidden");
+    $("#editProgram").focus();
+  });
+  $("#profileCancel").addEventListener("click", () => $("#profileEditor").classList.add("hidden"));
+  $("#profileEditor").addEventListener("submit", event => {
+    event.preventDefault();
+    const session = getSession();
+    if (!session) return;
+    localStorage.setItem(`cv_profile_${session.email}`, JSON.stringify({program:$("#editProgram").value.trim(),bio:$("#editBio").value.trim()}));
+    renderProfileDetails();
+    $("#profileEditor").classList.add("hidden");
+    showToast("Profile updated.");
+  });
   updateNav();
   $("#suPass").addEventListener("input", checkPasswordStrength);
   const enterDemo = () => {
