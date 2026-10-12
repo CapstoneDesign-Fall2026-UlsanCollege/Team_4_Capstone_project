@@ -629,6 +629,49 @@ body:has(#page-discover.active) #page-discover .page-heading p:not(.eyebrow),bod
 .event-meta>span:last-child{color:#8b8490;min-height:44px}
 .event-host{font-size:13px;color:#655d6e;border-color:#e9e3ee;padding-top:12px;margin-top:auto}
 .event-host .host-avatar{background:#8548df!important;color:white;border-radius:50%;width:26px;height:26px;font-size:12px}
+body:has(#appMain:not(.hidden) #page-chat.active){
+  background:linear-gradient(110deg,rgba(231,246,253,.97),rgba(243,236,255,.94) 50%,rgba(255,223,232,.73)),url('/assets/campus-login.jpg') center/cover fixed;
+}
+body:has(#appMain:not(.hidden)) #page-chat .page-heading{color:#211747;align-items:center}
+body:has(#appMain:not(.hidden)) #page-chat .page-heading h1{font-size:42px;letter-spacing:0;font-weight:800}
+body:has(#appMain:not(.hidden)) #page-chat .page-heading .eyebrow{color:#7541db;font-weight:700}
+body:has(#appMain:not(.hidden)) #page-chat .page-heading p:not(.eyebrow){color:#554477}
+.assistant-title-accent{color:#8c45df}
+#page-chat .chat-panel{width:100%;max-width:940px;min-height:440px;background:#fffffffa;border:1px solid #ffffffc0;border-radius:16px;box-shadow:0 12px 30px #6443a51a;padding:28px 32px 24px}
+#page-chat .chat-messages{padding:0;min-height:190px;max-height:48svh;gap:18px;scrollbar-width:thin;scrollbar-color:#d7c5ef transparent}
+#page-chat .chat-message{max-width:100%;padding:12px 14px;background:transparent;border-color:transparent;color:#51475e;border-radius:8px}
+#page-chat .chat-message.assistant{position:relative;padding-left:48px;width:100%}
+#page-chat .chat-message.assistant::before{content:'';position:absolute;top:10px;left:0;width:34px;height:38px;background:url('/assets/campusvibes-logo.png') center/contain no-repeat}
+#page-chat .chat-message.user{max-width:85%;background:#f1e8ff;border-color:#e7d9fa;padding:14px 18px}
+#page-chat .chat-message-label{color:#7541db;font-size:15px;margin-bottom:12px}
+#page-chat .chat-message p{font-size:15px;line-height:1.8}
+#page-chat .chat-loading{padding:12px 48px;color:#8555bd;font-size:13px}
+#page-chat .chat-prompts{padding:20px 14px;gap:12px}
+#page-chat .chat-prompt{background:white;color:#9756cf;border-color:#ceb0e8;padding:11px 16px;min-height:42px;font-size:13px;border-radius:20px;line-height:1.4}
+#page-chat .chat-prompt:nth-child(2){color:#19a99f;border-color:#8ee0d5}
+#page-chat .chat-prompt:nth-child(3){color:#e18a73;border-color:#f1bba9}
+#page-chat .chat-prompt:hover{background:#f6f0ff}
+#page-chat .chat-prompt:nth-child(2):hover{background:#effbf9}
+#page-chat .chat-prompt:nth-child(3):hover{background:#fff5f0}
+#page-chat .chat-form{gap:14px;padding:20px 0 16px;align-items:center;border-color:#eee8f4}
+#page-chat .chat-form textarea{min-width:0;min-height:58px;padding:17px 16px;border-color:#b994ed;background:white;color:#352b43;font-size:14px;line-height:1.6;border-radius:10px;box-shadow:0 3px 10px #8d55d110}
+#page-chat .chat-form textarea:focus{outline:2px solid #ad83e4;outline-offset:2px}
+#page-chat .chat-form .btn{min-height:44px;padding:12px 20px;font-size:14px;border-radius:8px;flex-shrink:0}
+#page-chat .chat-disclaimer{padding:0 12px;color:#9161cb;font-size:12px;line-height:1.6}
+@media(max-width:640px){
+  body:has(#appMain:not(.hidden)) #page-chat .page-heading{align-items:flex-start}
+  body:has(#appMain:not(.hidden)) #page-chat .page-heading h1{font-size:30px;overflow-wrap:anywhere}
+  #page-chat .chat-panel{padding:20px 16px;min-height:440px}
+  #page-chat .chat-message.assistant{padding-left:40px}
+  #page-chat .chat-message-label{font-size:13px}
+  #page-chat .chat-message p{font-size:14px}
+  #page-chat .chat-prompts{padding:18px 0;gap:8px}
+  #page-chat .chat-prompt{font-size:12px;padding:10px 12px}
+  #page-chat .chat-form{gap:8px}
+  #page-chat .chat-form textarea{font-size:14px;padding:12px;min-height:54px}
+  #page-chat .chat-form .btn{padding:12px 14px}
+  #page-chat .chat-disclaimer{font-size:11px;padding:0}
+}
 @media(max-width:640px){
   body:has(#page-discover.active) #page-discover .page-heading h1{font-size:32px}
   #page-discover .events-grid,#page-saved .events-grid{grid-template-columns:minmax(0,1fr);gap:18px}
