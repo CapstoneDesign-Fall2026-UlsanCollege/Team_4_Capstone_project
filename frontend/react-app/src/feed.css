@@ -61,6 +61,9 @@ body.feed-workspace .nav-user {
   font-family: "Inter", sans-serif;
   letter-spacing: 0;
 }
+.feed-shell strong {
+  overflow-wrap: anywhere;
+}
 .feed-shell button,
 .feed-shell input,
 .feed-shell textarea {
@@ -650,6 +653,11 @@ body.feed-workspace .nav-user {
   font-size: 12px;
   line-height: 1.5;
   color: #836a95;
+}
+.feed-event-attachment > div {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .feed-event-attachment p {
   display: flex;
