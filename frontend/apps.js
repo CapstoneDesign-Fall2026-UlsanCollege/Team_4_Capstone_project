@@ -132,6 +132,7 @@ function renderSavedEvents(){
   $("#statSaved").textContent = saved.length;
   $("#savedCount").textContent = saved.length;
   renderProfileDetails();
+  renderDashboard();
 }
 
 function renderProfileDetails(){
@@ -159,6 +160,8 @@ function toggleSaved(id){
   const saved = getSaved();
   const next = saved.includes(id) ? saved.filter(item => item !== id) : [...saved, id];
   saveSaved(next);
+  const event = EVENTS.find(item => item.id === id);
+  if (event) recordDashboardActivity(next.includes(id) ? "saved" : "removed", event.title);
   renderEvents();
   renderSavedEvents();
   showToast(next.includes(id) ? "Event saved." : "Event removed from saved.");
@@ -330,15 +333,15 @@ function setupChat(){
 }
 
 function setupPageNavigation(){
-  if (window.campusVibesNavigationReady) return;
-  window.campusVibesNavigationReady = true;
-  document.addEventListener("click", event => {
+  if (window.campusVibesNavigationHandler) document.removeEventListener("click", window.campusVibesNavigationHandler);
+  window.campusVibesNavigationHandler = event => {
     const saveButton = event.target.closest("[data-save]");
     if (saveButton){
       event.preventDefault();
       toggleSaved(Number(saveButton.dataset.save));
       return;
     }
+    if (handleDashboardNavigation(event)) return;
     const pageButton = event.target.closest("[data-page]");
     if (!pageButton) return;
     showPage(pageButton.dataset.page);
@@ -347,7 +350,8 @@ function setupPageNavigation(){
       const chip = document.querySelector(`.chip[data-interest="${interest}"]`);
       if (chip){ chip.click(); }
     }
-  });
+  };
+  document.addEventListener("click", window.campusVibesNavigationHandler);
 }
 
 /* ── Stats ── */
@@ -513,6 +517,7 @@ function updateNav(){
   $("#profileAvatar").textContent = s ? s.name[0].toUpperCase() : "?";
   renderProfileDetails();
   $("#profileEditor").classList.add("hidden");
+  renderDashboard();
   if (s){
     $("#navUsername").textContent = s.name.split(" ")[0];
     $("#navAvatar").textContent = s.name[0].toUpperCase();
@@ -534,6 +539,7 @@ function updateNav(){
 
 /* ── Boot ── */
 function bootCampusVibes(){
+  setupDashboard();
   renderStats();
   renderUpcoming();
   renderEvents("all");
@@ -568,8 +574,9 @@ function bootCampusVibes(){
   $("#landingDemo").addEventListener("click", enterDemo);
   $("#suggestForm").addEventListener("submit", event => {
     event.preventDefault();
+    saveDashboardDraft(event.currentTarget);
     event.currentTarget.reset();
-    showToast("Thanks. Your suggestion is in the queue.");
+    showToast("Your idea is saved to your local drafts.");
     showPage("dashboard");
   });
 }
