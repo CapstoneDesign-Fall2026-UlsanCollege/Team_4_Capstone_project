@@ -10,7 +10,7 @@ The initial website will include the following screens:
 
 1. **Landing page**
    - Briefly explain the purpose of the service.
-   - Introduce the main benefit for users.
+   - Introduce the main benefit for users. 
    - Provide clear buttons for **Log in** and **Sign up**.
    -<img width="358" height="345" alt="image" src="https://github.com/user-attachments/assets/f3bc34c1-53e3-4f31-b088-1bdba1bc19d1" />
 
