@@ -637,6 +637,47 @@ body:has(#appMain:not(.hidden)) #page-chat .page-heading h1{font-size:42px;lette
 body:has(#appMain:not(.hidden)) #page-chat .page-heading .eyebrow{color:#7541db;font-weight:700}
 body:has(#appMain:not(.hidden)) #page-chat .page-heading p:not(.eyebrow){color:#554477}
 .assistant-title-accent{color:#8c45df}
+body:has(#appMain:not(.hidden) #page-profile.active){background:linear-gradient(110deg,#eee8ffd9,#e9f5ffd9,#ebcafa99),url('/assets/campus-login.jpg') center/cover fixed}
+body:has(#appMain:not(.hidden)) #page-profile{color:#252140}
+.profile-hero{display:flex;align-items:center;gap:26px;padding:32px;min-height:220px;background:linear-gradient(100deg,#f9f7fffa 30%,#f2eaffd9 65%,#ffffff55),url('/assets/campus-login.jpg') right center/cover;border:1px solid #fff;border-radius:12px;box-shadow:0 8px 24px #654a9e15}
+#page-profile .profile-avatar{width:112px;height:112px;background:#a27ce6;color:#fff;border:5px solid white;border-radius:50%;font-size:48px;box-shadow:0 4px 14px #6845a930;flex-shrink:0}
+.profile-identity{flex:1;min-width:0;max-width:650px}
+.profile-identity h1{font-size:30px;font-weight:800;letter-spacing:0;margin-bottom:8px}
+.profile-identity p{font-size:13px;line-height:1.6;color:#625777;overflow-wrap:anywhere}
+#profileBio{max-width:400px;margin:6px 0}
+#profileEmail{font-size:12px;color:#8b7b9b}
+.profile-facts{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;font-size:12px;color:#77618f}
+.profile-hero .btn{margin-left:auto;align-self:flex-end;white-space:nowrap;font-size:13px}
+.profile-columns{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;align-items:start}
+.profile-stack{display:grid;gap:18px;min-width:0}
+.profile-section{background:#ffffffed;border:1px solid #fff;border-radius:8px;padding:22px 24px;box-shadow:0 4px 15px #654a9e09;min-width:0}
+.profile-section h2{font-size:15px;font-weight:700;color:#383049;letter-spacing:0;margin-bottom:18px}
+.profile-section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.profile-section-heading .text-button{color:#7541db;font-size:12px;margin-bottom:18px}
+.profile-interests{display:flex;gap:8px;flex-wrap:wrap}
+.profile-interests span{background:#f0eafa;color:#6e5197;padding:7px 10px;border-radius:6px;font-size:12px}
+.profile-study{display:flex;align-items:center;gap:16px}
+.profile-study-mark{display:grid;place-items:center;width:64px;height:64px;border-radius:8px;background:#eee5fa;color:#9463d6;font-weight:700;flex-shrink:0}
+.profile-study h3{font-size:14px;letter-spacing:0;margin-bottom:6px}
+.profile-study p{font-size:12px;color:#96899f;line-height:1.7}
+.profile-study strong{color:#9463d6}
+.profile-clubs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.profile-clubs strong{display:block;font-size:12px;color:#514166}
+.profile-clubs span{display:block;font-size:11px;color:#9a8ca6;margin-top:5px}
+.profile-saved-item{display:grid;grid-template-columns:50px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;text-align:left;border:0;border-bottom:1px solid #f1ecf6;background:transparent;padding:10px 0;color:#463752;cursor:pointer}
+.profile-saved-item:hover{background:#faf6ff}
+.profile-event-art{display:grid;place-items:center;background:#efe6ff;width:50px;height:42px;border-radius:5px;font-size:24px}
+.profile-saved-item strong{display:block;font-size:12px;line-height:1.5}
+.profile-saved-item small{display:block;font-size:11px;color:#a093ab;margin-top:3px}
+.profile-event-date{font-size:11px;color:#9463d6;white-space:nowrap}
+.profile-activity-item{padding:12px 0;border-bottom:1px solid #f1ecf6;font-size:12px;color:#756783;line-height:1.6}
+.profile-empty{color:#96899f;font-size:13px;padding:10px 0;line-height:1.6}
+.profile-editor{background:#fff;border-radius:8px;padding:24px;margin-top:18px;display:grid;gap:16px;max-width:720px}
+.profile-editor label{font-size:13px;color:#625777}
+.profile-editor input,.profile-editor textarea{display:block;width:100%;margin-top:8px;padding:12px;font:14px 'Inter',sans-serif;border:1px solid #ded2ee;border-radius:6px;color:#383049;background:white}
+.profile-editor>div{display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:780px){.profile-columns{grid-template-columns:1fr}.profile-hero{flex-wrap:wrap;padding:24px;gap:18px}.profile-hero .btn{margin-left:0}.profile-identity{flex-basis:calc(100% - 140px)}}
+@media(max-width:480px){#page-profile .profile-avatar{width:80px;height:80px;font-size:34px}.profile-identity{flex-basis:calc(100% - 100px)}.profile-identity h1{font-size:25px}.profile-facts{gap:10px}.profile-section{padding:20px 16px}.profile-clubs{gap:10px}.profile-event-date{white-space:normal}}
 body:has(#appMain:not(.hidden) #page-suggest.active){background:linear-gradient(110deg,rgba(230,243,255,.85),rgba(235,222,249,.8) 50%,rgba(249,196,212,.3)),url('/assets/campus-login.jpg') center/cover fixed}
 body:has(#appMain:not(.hidden)) #page-suggest .page-heading{color:#211747;align-items:flex-start}
 body:has(#appMain:not(.hidden)) #page-suggest .page-heading h1{font-size:42px;letter-spacing:0;font-weight:800}

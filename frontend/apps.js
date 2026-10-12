@@ -131,6 +131,20 @@ function renderSavedEvents(){
   $("#savedEmpty").classList.toggle("hidden", list.length > 0);
   $("#statSaved").textContent = saved.length;
   $("#savedCount").textContent = saved.length;
+  renderProfileDetails();
+}
+
+function renderProfileDetails(){
+  const session = getSession();
+  const key = `cv_profile_${session ? session.email : "guest"}`;
+  let details = {};
+  try { details = JSON.parse(localStorage.getItem(key) || "{}"); } catch {}
+  $("#profileProgram").textContent = details.program || "Computer Science Student";
+  $("#profileStudy").textContent = details.program || "BSc in Computer Science";
+  $("#profileBio").textContent = details.bio || "Curious builder and problem solver who loves tech, teamwork, and campus events.";
+  const saved = EVENTS.filter(event => getSaved().includes(event.id));
+  $("#profileSavedEvents").innerHTML = saved.slice(0, 3).map(event => `<button class="profile-saved-item" data-page="saved"><span class="profile-event-art">${event.emoji}</span><span><strong>${event.title}</strong><small>${event.location}</small></span><span class="profile-event-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"})}</span></button>`).join("") || '<p class="profile-empty">No saved events yet.</p>';
+  $("#profileActivity").innerHTML = saved.slice(0, 3).map(event => `<p class="profile-activity-item">Saved <strong>${event.title}</strong> to your events</p>`).join("") || '<p class="profile-empty">Your saved events will appear here.</p>';
 }
 
 function eventCardMarkup(e, saved){
@@ -497,6 +511,8 @@ function updateNav(){
   $("#profileName").textContent = s ? s.name : "Guest student";
   $("#profileEmail").textContent = s ? s.email : "Log in to personalize your CampusVibes profile.";
   $("#profileAvatar").textContent = s ? s.name[0].toUpperCase() : "?";
+  renderProfileDetails();
+  $("#profileEditor").classList.add("hidden");
   if (s){
     $("#navUsername").textContent = s.name.split(" ")[0];
     $("#navAvatar").textContent = s.name[0].toUpperCase();
@@ -525,6 +541,22 @@ function bootCampusVibes(){
   setupFilter();
   setupPageNavigation();
   setupChat();
+  $("#profileEdit").addEventListener("click", () => {
+    $("#editProgram").value = $("#profileProgram").textContent;
+    $("#editBio").value = $("#profileBio").textContent;
+    $("#profileEditor").classList.remove("hidden");
+    $("#editProgram").focus();
+  });
+  $("#profileCancel").addEventListener("click", () => $("#profileEditor").classList.add("hidden"));
+  $("#profileEditor").addEventListener("submit", event => {
+    event.preventDefault();
+    const session = getSession();
+    if (!session) return;
+    localStorage.setItem(`cv_profile_${session.email}`, JSON.stringify({program:$("#editProgram").value.trim(),bio:$("#editBio").value.trim()}));
+    renderProfileDetails();
+    $("#profileEditor").classList.add("hidden");
+    showToast("Profile updated.");
+  });
   updateNav();
   $("#suPass").addEventListener("input", checkPasswordStrength);
   const enterDemo = () => {
