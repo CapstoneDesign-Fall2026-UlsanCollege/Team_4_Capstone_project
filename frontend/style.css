@@ -637,6 +637,29 @@ body:has(#appMain:not(.hidden)) #page-chat .page-heading h1{font-size:42px;lette
 body:has(#appMain:not(.hidden)) #page-chat .page-heading .eyebrow{color:#7541db;font-weight:700}
 body:has(#appMain:not(.hidden)) #page-chat .page-heading p:not(.eyebrow){color:#554477}
 .assistant-title-accent{color:#8c45df}
+body:has(#appMain:not(.hidden) #page-suggest.active){background:linear-gradient(110deg,rgba(230,243,255,.85),rgba(235,222,249,.8) 50%,rgba(249,196,212,.3)),url('/assets/campus-login.jpg') center/cover fixed}
+body:has(#appMain:not(.hidden)) #page-suggest .page-heading{color:#211747;align-items:flex-start}
+body:has(#appMain:not(.hidden)) #page-suggest .page-heading h1{font-size:42px;letter-spacing:0;font-weight:800}
+body:has(#appMain:not(.hidden)) #page-suggest .page-heading .eyebrow{color:#7541db;font-weight:700}
+body:has(#appMain:not(.hidden)) #page-suggest .page-heading p:not(.eyebrow){color:#554477}
+.suggest-layout{display:grid;grid-template-columns:minmax(0,720px) minmax(240px,334px);gap:44px;align-items:start}
+#page-suggest .suggest-form{width:100%;max-width:none;padding:34px 32px 30px;gap:24px;background:#fffffff7;border:1px solid #ffffffc0;border-radius:16px;box-shadow:0 12px 30px #6443a51a}
+#page-suggest .suggest-form label{font-size:14px;color:#514a59;line-height:1.5}
+#page-suggest .suggest-form input,#page-suggest .suggest-form textarea{background:#fff;color:#352b43;border-color:#e6e1eb;padding:14px;font-size:14px;margin-top:8px;border-radius:10px;min-height:48px;line-height:1.6}
+#page-suggest .suggest-form input::placeholder,#page-suggest .suggest-form textarea::placeholder{color:#a29ca9}
+#page-suggest .suggest-form textarea{min-height:96px}
+#page-suggest .suggest-form input:focus,#page-suggest .suggest-form textarea:focus{outline:2px solid #b38fe5;outline-offset:2px}
+#page-suggest .suggest-form .btn{padding:13px 20px;font-size:15px;min-height:46px;border-radius:10px;box-shadow:0 4px 12px #7541db30}
+.suggest-note{display:flex;gap:18px;align-items:flex-start;padding:30px 26px;margin-top:26px;background:#ffffffbd;border:1px solid #ffffffaa;border-radius:16px;backdrop-filter:blur(10px);box-shadow:0 8px 24px #6443a514}
+.suggest-note img{width:54px;height:54px;object-fit:contain;background:#fff;padding:10px;border-radius:50%;flex-shrink:0;box-shadow:0 3px 12px #7541db20}
+.suggest-note h2{font-size:18px;font-weight:700;color:#352b43;letter-spacing:0;margin:6px 0 10px}
+.suggest-note p{font-size:14px;line-height:1.8;color:#65576f}
+@media(max-width:900px){.suggest-layout{grid-template-columns:minmax(0,1fr);gap:20px}.suggest-note{margin-top:0;max-width:720px}}
+@media(max-width:640px){
+  body:has(#appMain:not(.hidden)) #page-suggest .page-heading h1{font-size:32px}
+  #page-suggest .suggest-form{padding:26px 20px;gap:20px}
+  .suggest-note{padding:22px 20px}
+}
 #page-chat .chat-panel{width:100%;max-width:940px;min-height:440px;background:#fffffffa;border:1px solid #ffffffc0;border-radius:16px;box-shadow:0 12px 30px #6443a51a;padding:28px 32px 24px}
 #page-chat .chat-messages{padding:0;min-height:190px;max-height:48svh;gap:18px;scrollbar-width:thin;scrollbar-color:#d7c5ef transparent}
 #page-chat .chat-message{max-width:100%;padding:12px 14px;background:transparent;border-color:transparent;color:#51475e;border-radius:8px}
