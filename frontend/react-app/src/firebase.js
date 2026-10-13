@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { connectAuthEmulator, getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,5 +17,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const useEmulators = import.meta.env.DEV && import.meta.env.VITE_FIREBASE_EMULATORS === "true" && ["localhost", "127.0.0.1"].includes(location.hostname);
+const app = initializeApp(useEmulators ? { ...firebaseConfig, projectId: "demo-campusvibe-feed" } : firebaseConfig);
 export const auth = getAuth(app);
+if (useEmulators) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
+}
