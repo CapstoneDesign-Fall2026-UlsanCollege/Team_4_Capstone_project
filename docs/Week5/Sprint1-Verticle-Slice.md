@@ -16,7 +16,7 @@ This is a comparison of possible technology stacks for CampusVibe. “Stack A”
 | **Smallest useful test**       | Build and test the Landing Page → Sign Up → Login → Home → Events → Event Details flow using sample event data | Build and test the same Landing Page → Sign Up → Login → Home → Events → Event Details flow without React and compare the implementation effort |
 | **Example decision**           | **Use Stack A for the first slice because the React project is already set up and Firebase is connected.**     | Keep as a simpler alternative if the React setup becomes a blocker.                                                                             |
 
-## The Goal
+## The Goal 
 
 > By the next demo, a test student can create an account, log in, reach the Home page, click the Events browser, and view the event details.
 
