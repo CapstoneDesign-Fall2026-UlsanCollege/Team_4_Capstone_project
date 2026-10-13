@@ -21,8 +21,7 @@
 * **Proof link / screenshot:** [Proof contained Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
 
 ## Problems found
-
-* None during the initial teammate test.
+No problems were reported during the October 11 repeat test or the October 13 independent rehearsal. Firestore event loading remains an unresolved limitation and is tracked separately.
 
 ## Repeat test
 
@@ -33,6 +32,15 @@
 * **Actual result:** The test was successful. Dashboard and after selecting a sample event, its basic details were displayed correctly.
 * **Proof link / screenshot:** [Proof Contained Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
 
+### Second Repeat Test
+
+- **Tested by:** DevyanaCT
+- **Date:** 2026-10-13
+- **What I did:** I repeated the independent rehearsal on the deployed CampusVibes website. I checked demo entry, Discover search and filters, saving events, Saved and Profile, Assistant prompt submission, suggestion submission, profile bio editing, and the desktop and mobile layouts.
+- **Expected result:** The demo features should work correctly, saved-event summaries should update, and the interface should remain readable on desktop and mobile.
+- **Actual result:** All nine test areas were reported as successful during the rehearsal.
+- **Proof link / screenshot:** [Independent Rehearsal — Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53)[Repeat Independent Rehearsal — Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63)
+
 ## Current data limitation
 
 The Events section currently uses code-based sample event data. Firebase Firestore event loading has not yet been implemented or verified. This test confirms only the current Events → Select Event → View Basic Details behavior.
@@ -41,5 +49,7 @@ The Events section currently uses code-based sample event data. Firebase Firesto
 
 ## Next action
 
-* Keep the current Events → Select Event → View Basic Details behavior available for the Week 7/midterm path.
-* Keep Firestore event loading as a separate task and test it once the integration is implemented.
+- Keep the verified Events → Select Event → View Basic Details path available for the Week 7/midterm demonstration.
+- Keep the completed October 8, October 11, and October 13 test records linked to their respective issues.
+- Keep Firestore event loading as a separate task and test it once the integration is implemented.
+- Preserve the desktop and mobile rehearsal evidence in Issue #53.
