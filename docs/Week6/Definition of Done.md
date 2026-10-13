@@ -19,7 +19,7 @@ Test the current CampusVibe Dashboard → Events → Select Event → View Basic
 ## Proof link
 
 - **Issue :** [Issue49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
-- **Tested-By Note:** [Tested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/c525c6a0c8f7d2261397dec88f7ede7808e18d9f/docs/Week6/tested-by-note.md)
+- **Tested-By Note:** [Tested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/11d7118c5ae422fbb72ca719fc15f7c1d298d3b3/docs/Week6/tested-by-note.md)
 - **Dashboard screenshot:** [ScreenShot](https://github.com/user-attachments/assets/bc04126e-ac21-48fa-ab5f-495845b271cc)
 - **Event selection and details screenshot:** [ScreenShot](https://github.com/user-attachments/assets/d3d8658b-93d4-451a-ac21-043672a35ee0)
 
