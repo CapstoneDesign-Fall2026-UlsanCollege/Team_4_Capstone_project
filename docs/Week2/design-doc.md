@@ -18,7 +18,7 @@ College students often miss events, clubs, and activities because information is
 
 * Primary user: College and university students
 * Secondary user, if any: Club organizers and campus staff
-
+   
 ## 3. Smallest useful version
 
 **What is the smallest version that would still be useful?**
