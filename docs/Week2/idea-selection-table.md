@@ -26,7 +26,7 @@ Our backup idea is: Idea 2: College Lost and Found
 > If data sourcing for campus events proves too fragmented early on, we will pivot to this reliable CRUD dashboard application. It allows students to map-tag, report, and filter misplaced items entirely through crowdsourced listings without relying on external system integration.
 
 ## Out of scope
-
+ 
 We are **not** building:
 
 - Complex web crawlers for all external social media sites: We will not build brittle automated scrapers to pull events from complex platforms like    Facebook or private Instagram feeds; data will rely on direct platform inputs or controlled, single-source calendars.
