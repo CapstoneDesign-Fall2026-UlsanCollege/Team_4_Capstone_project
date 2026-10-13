@@ -1,2 +1,5 @@
 .vercel
 .env*
+**/node_modules/
+frontend/react-app/test-results/
+frontend/react-app/playwright-report/
