@@ -18,7 +18,7 @@
 
 * **Expected result:** The Events section opens, and selecting an event displays its basic details.
 * **Actual result:** The tester opened Events from the Dashboard, selected a sample event, and viewed the basic event details successfully.
-* **Proof link / screenshot:** [Proof contained](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
+* **Proof link / screenshot:** [Proof contained Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
 
 ## Problems found
 
@@ -31,11 +31,13 @@
 * **What I did:** I repeated the test by following the written steps to open the Dashboard, navigate to Events, select a sample event, and view its details.
 * **Expected result:** The selected event's basic details should be displayed, and the written steps should be understandable without coaching.
 * **Actual result:** The test was successful. Dashboard and after selecting a sample event, its basic details were displayed correctly.
-* **Proof link / screenshot:** [Proof Contained](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
+* **Proof link / screenshot:** [Proof Contained Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
 
 ## Current data limitation
 
 The Events section currently uses code-based sample event data. Firebase Firestore event loading has not yet been implemented or verified. This test confirms only the current Events → Select Event → View Basic Details behavior.
+
+**Related Issue:** [issue49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
 
 ## Next action
 
