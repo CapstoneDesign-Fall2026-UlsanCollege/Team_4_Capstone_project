@@ -97,6 +97,16 @@ Safe visual evidence uses the built-in demo student: [Desktop dashboard](evidenc
 
 This rehearsal covers the tested demo behavior. It does not confirm that real Firestore-backed event loading works, which remains tracked separately under Issue #35.
 
+### Independent CampusVibe demo rehearsal and repeat test
+
+The report records an independent rehearsal of the deployed CampusVibe demo and a repeat test after the project changes. The checks covered entering as a demo student, Discover search and filters, saving an event, checking Saved and Profile, submitting an Assistant prompt and a suggestion, and editing the profile bio. Desktop and mobile layouts were also checked.
+
+- **Expected result:** The main demo features should work correctly, saved-event summaries should update, and the interface should remain readable on desktop and mobile.
+- **Actual result:** All tested areas were marked as passed during the rehearsal and repeat test.
+- **Proof:** [Issue #53 — Independent Rehearsal](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) and [Issue #63 — Repeat Test](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63)
+
+This rehearsal covers the tested demo behavior. It does not confirm that real Firestore-backed event loading works, which remains tracked separately under Issue #35.
+
 ## Validation limits
 
 The current evidence proves the sample-data working path, not the production Firestore-backed event data path.
