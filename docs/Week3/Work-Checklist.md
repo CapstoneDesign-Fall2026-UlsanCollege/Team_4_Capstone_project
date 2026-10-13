@@ -13,7 +13,7 @@
 * [x] Review the Week 2 investigations, decisions, uncertainty check, scope, and rough user flow.
 * [x] Create **6–10** small GitHub Issues for the first work the project needs.
 * [x] Assign first owners to the most important Issues.
-* [x] Add a checkable Definition of Done to at least three Issues.
+* [x] Add a checkable Definition of Done to at least three Issues.  
 
 ### Make the product and build plan visible
 
