@@ -1,6 +1,6 @@
 # CampusVibes React App
 
-This Vite + React app mounts the Community markup and behavior and provides the local demo and Firestore-backed shared feeds. Production shared-feed verification remains outstanding. See the [project README](../../README.md) for the current feature scope.
+This Vite + React app mounts the Community markup and behavior and provides the local demo and Firestore-backed shared feeds. The [production text-post workflow is verified](verification/shared-feed-production.md). See the [project README](../../README.md) for the current feature scope.
 
 ## Run locally
 
@@ -46,6 +46,11 @@ deletion; shared photos, likes, comments, and friend requests are not enabled.
 The shared feed needs the repository's Firestore rules and indexes installed
 in the target project. Pushing this branch does not deploy those resources.
 See [shared-feed setup and verification](verification/shared-feed.md).
+
+The rules and My posts index were deployed on October 14, 2026. The
+[production fix record](verification/shared-feed-production.md) includes the
+two-account text-post check, screenshots, and cleanup results. Reload and use
+Try again if an existing tab still displays the previous access error.
 
 ## Guest Campus Vibe-Feed Demo
 

@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "productionURL": "https://campusvibe-theta.vercel.app",
+  "checks": [
+    "Authenticated feed access",
+    "Cross-account publish and live updates",
+    "Author edit and reload persistence",
+    "My posts index query and account filtering",
+    "Author deletion",
+    "Other-account deletion denied",
+    "Signed-out read denied",
+    "Mobile layout without horizontal overflow"
+  ],
+  "pageErrors": []
+}

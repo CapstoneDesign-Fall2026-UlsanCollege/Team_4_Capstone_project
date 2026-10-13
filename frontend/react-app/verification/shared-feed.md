@@ -1,5 +1,10 @@
 # Shared Text and Event Feed
 
+Production update, October 14, 2026: the rules/indexes are now deployed and the
+two-account text-post workflow passed on the live site. See the
+[production permissions fix record](shared-feed-production.md).
+The sections below retain the original local review and setup scope.
+
 Signed-in Firebase users read the latest 50 shared posts and can publish text
 or event posts, edit their own posts, and delete their own posts. My posts uses
 an author query. Search filters the loaded page, not the entire database.
