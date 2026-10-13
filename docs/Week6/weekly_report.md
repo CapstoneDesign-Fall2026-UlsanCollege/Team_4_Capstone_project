@@ -16,10 +16,10 @@ The scope of these checks is limited to the working demo and sample-data behavio
 
 ### Sample Events → Event Details
 
-We checked the sample Events flow in the app and repeated the test on October 13 after the project changes to confirm that the event-viewing functionality was still working.
+We checked the sample Events flow in the app and repeated the test  after the project changes to confirm that the event-viewing functionality was still working.
 
 - **Expected result:** Selecting a sample event from Browse Events/Discover should open the event details view and display the event information correctly.
-- **Actual result:** The initial test and the October 13 retest were successful. We opened the updated project, navigated to Browse Events/Discover, selected a sample event, and confirmed that its basic details appeared as expected.
+- **Actual result:** The initial test and the retest were successful. We opened the updated project, navigated to Browse Events/Discover, selected a sample event, and confirmed that its basic details appeared as expected.
 - **Proof:** [Issue #49 — Original Events Test](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) and [Issue #64 — Repeat Test After Project Changes](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64).
 
 **Limitation:** This test verifies the sample-data event-viewing path only. Firestore-backed event loading remains unverified.
@@ -55,10 +55,12 @@ This confirms the tested demo behavior. It does not confirm that events load fro
 | Tested-By Note | [tested-by-note.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a9ab586bcc79da0188862eceeac1557fc5c2c5e1/docs/Week6/tested-by-note.md) |
 | Report file | [weekly_report.md](./weekly_report.md) |
 | Prachi2061 evidence | [Work and validation in this report](#prachi2061-evidence) |
-|Deployment| https://campusvibe-theta.vercel.app/ |
+|Deployment| [Deployment](https://campusvibe-theta.vercel.app/) |
 | Independent rehearsal results | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
+| Evidence tested by note| [Evidence tested by note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/6f888d673961981e5b6c49d8a26710d1d331f8a3/docs/Week6/evidence/Tested-by-note.md)|
 | Repeat Tested | [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) |
 | Repeat test after project changes | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
+| Retested by note | [Retested by note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/1d4151928d1934f2128c9127e989193b73fbab6c/docs/Week6/Retested-by-note.md)  |
 
 ## Individual contribution entries — one row per student
 
