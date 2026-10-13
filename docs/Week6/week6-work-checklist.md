@@ -65,7 +65,7 @@
 The [stretch audit](stretch-validation.md) credits existing work and explains
 the new executable test. Independent clean-start tests are recorded, but a
 teammate run from a clean checkout remains unverified. The toast contrast fix
-has a build result; a linked before/after run of that same check remains pending.
+now has a [mobile retest with before/after screenshots](professor-feedback-follow-up.md#automated-mobile-toast-retest); this automated check is separate from the existing teammate evidence.
 
 | Item | Owner | Next action | Review point |
 |---|---|---|---|

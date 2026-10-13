@@ -1,0 +1,26 @@
+{
+  "automated": true,
+  "threshold": 4.5,
+  "results": [
+    {
+      "revision": "before",
+      "viewport": "390 x 844",
+      "foreground": "rgb(36, 34, 42)",
+      "background": "rgb(21, 21, 21)",
+      "contrastRatio": 1.16,
+      "samplePathPassed": true,
+      "meetsContrastThreshold": false,
+      "uncaughtPageErrors": []
+    },
+    {
+      "revision": "after",
+      "viewport": "390 x 844",
+      "foreground": "rgb(247, 242, 255)",
+      "background": "rgb(21, 21, 21)",
+      "contrastRatio": 16.61,
+      "samplePathPassed": true,
+      "meetsContrastThreshold": true,
+      "uncaughtPageErrors": []
+    }
+  ]
+}
