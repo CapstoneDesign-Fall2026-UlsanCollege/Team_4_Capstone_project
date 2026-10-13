@@ -1,4 +1,4 @@
-# Tested-By Note — Second Test After Project Changes
+# Retested-By Note — Second Test After Project Changes
 
 ## What we checked
 
