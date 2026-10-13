@@ -12,7 +12,7 @@
   -  **KEEP:** Hand-curated event list with one interest filter 
   -  **DEFER:** Recommendation engine as stretch goal
 - **Concern:** Risk of over-engineering; must validate with manual data first
-
+  
 #### College Lost and Found - Item Recovery System
 - **User Problem:** Lost items on campus take days/weeks to recover; no efficient discovery
 - **Coach Rating:** 3/4 (Strong, contained candidate)
@@ -22,7 +22,7 @@
   -  **TESTABLE:** One complete user journey with fictional data
 - **Concern:** Low risk; clear scope boundaries
 
-#### CampusFood - Dining Directory
+#### CampusFood - Dining Directory   
 - **User Problem:** Students need quick, affordable meal options near campus
 - **Coach Rating:** 2/4 (Feasible but lacks distinctive angle)
 - **Action Items:**
