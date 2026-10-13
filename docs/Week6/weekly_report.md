@@ -35,14 +35,14 @@ This does not claim that real Firestore event data is loaded or verified yet.
 | Rehearsal / demo tracking | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
 | GitHub commit(s) | [Commit db5dad64f3131fb87b2d7011c86d6e2f9ecd575d](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/db5dad64f3131fb87b2d7011c86d6e2f9ecd575d) |
 | Screenshot / demo proof | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
-| Tested-By Note | [tested-by-note.md](./tested-by-note.md) |
+| Tested-By Note | [tested-by-note.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a9ab586bcc79da0188862eceeac1557fc5c2c5e1/docs/Week6/tested-by-note.md) |
 | Report file | [weekly_report.md](./weekly_report.md) |
 
 ## Individual contribution entries — one row per student
 
 | Student | What they did | Evidence link |
 |---|---|---|
-| `DevyanaCT` | Contributed to the Week 6 testing documentation and evidence organization, including issue/test documentation updates and screening of the recorded results. | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
+| `DevyanaCT` | Contributed to the Week 6 testing documentation and evidence organization, including issue/test documentation updates and screening of the recorded results. Repeated the test to check the feature and the written instructions. | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49), [Testes-NOte](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a9ab586bcc79da0188862eceeac1557fc5c2c5e1/docs/Week6/tested-by-note.md), [Commit](c525c6a0c8f7d2261397dec88f7ede7808e18d9f)[Commit](f6c1f41b674cb16675d729d123695c5de83a1e79) |
 | `prachi2061` | Worked on the UI improvements and build validation for the dashboard, welcome/login, suggest, profile, and related screens. Confirmed the build remained healthy after the visual updates. | [Issue #20](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/20), [Issue #22](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/22) |
 | `ujjalpoudel75` | Contributed documented evidence for the Week 6 report and the testing record, and helped capture the sample event path result in the shared report. | [weekly_report.md](./weekly_report.md) |
 | `tulseyy8848` | Reviewed the flow, organized supporting evidence, and helped document the remaining Firestore limitation and next actions. | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
@@ -53,7 +53,7 @@ This does not claim that real Firestore event data is loaded or verified yet.
 
 We checked this by doing the current sample Events flow in the app. Expected result: the user can open the Events screen, select an event, and see event details. Actual result: the event selection path worked in the current sample-data environment and the basic event details appeared correctly.
 
-Proof: the issue/test note and attached screenshots in the issue log.
+Proof: [Related-Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
 
 ### Automated smoke check
 
