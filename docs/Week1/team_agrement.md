@@ -18,13 +18,13 @@ Complete this when your team forms. Link it in your Week 1 Launch Report and rev
 |---------|------|---|
 | Prachi | Project coordination, organization, communication, task management, leadership | Mostly Afternoon |
 | Tulsa | Communication, research, problem-solving, creativity, presentation | Mostly Afternoon and midnight |
-| Devyana | Research, documentation, organization, analysis, attention to detail | Mostly Afternoon and midnight |
+| Devyana | Research, documentation, organization, analysis, attention to detail | Mostly Afternoon and midnight |  
 | Ujjal | Technical development, implementation, troubleshooting, testing, problem-solving | Mostly Midnight  |
  
 ---
 
 ## Roles for the First Sprint
-
+  
 Roles can rotate. Every team must keep the work, evidence, and quality visible.
 
 | Role | Student | What This Person Is Responsible For |
