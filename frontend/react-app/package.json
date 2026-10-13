@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test:feed-rules": "node --test tests/feed-rules.test.js",
     "test:shared-feed": "node tests/shared-feed.browser.js",
-    "test:smoke": "playwright test"
+    "test:smoke": "playwright test",
+    "test:toast-mobile": "node tests/toast-mobile.browser.js"
   },
   "dependencies": {
     "firebase": "^12.19.0",
