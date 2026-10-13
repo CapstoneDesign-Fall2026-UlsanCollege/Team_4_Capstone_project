@@ -14,9 +14,9 @@ What did your team try to improve this week?
 
 ## What we committed to do
 
-- [Review five project concepts and analyze technical and resource risks. ] 
+- [Review five project concepts and analyze technical and resource risks. ]  
 - [Complete the Idea Selection Table and finalize the project direction choice (CampusVibes) along with a clear backup plan (College Lost and Found). ] 
-- [Define explicit out-of-scope boundaries to mitigate technical over-engineering early in the development cycle. ] 
+- [Define explicit out-of-scope boundaries to mitigate technical over-engineering early in the development cycle. ]  
 
 ## Evidence links
 
