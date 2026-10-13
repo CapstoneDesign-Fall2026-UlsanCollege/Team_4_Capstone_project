@@ -53,7 +53,7 @@ const relativeTime = (value) => {
         : dateLabel(value);
 };
 
-function Avatar({ name, color = "#9167cd", small = false }) {
+export function Avatar({ name, color = "#9167cd", small = false }) {
   return (
     <span
       className={`feed-avatar ${small ? "small" : ""}`}
@@ -97,7 +97,7 @@ function Photo({ media, onOpen }) {
   );
 }
 
-function Modal({ title, children, onClose, className = "" }) {
+export function Modal({ title, children, onClose, className = "" }) {
   const ref = useRef(null);
   useEffect(() => {
     const dialog = ref.current;
@@ -136,12 +136,12 @@ function Modal({ title, children, onClose, className = "" }) {
   );
 }
 
-function Composer({ user, college, busy, onPublish }) {
-  const [body, setBody] = useState("");
-  const [campus, setCampus] = useState(college);
+export function Composer({ user, college, busy, onPublish, shared = false, initialPost = null }) {
+  const [body, setBody] = useState(initialPost?.body || "");
+  const [campus, setCampus] = useState(initialPost?.college || college);
   const [photos, setPhotos] = useState([]);
-  const [withEvent, setWithEvent] = useState(false);
-  const [event, setEvent] = useState({
+  const [withEvent, setWithEvent] = useState(!!initialPost?.event);
+  const [event, setEvent] = useState(initialPost?.event || {
     title: "",
     date: "",
     time: "",
@@ -179,8 +179,8 @@ function Composer({ user, college, busy, onPublish }) {
   const submit = async (submission) => {
     submission.preventDefault();
     setError("");
-    if (!body.trim() && !photos.length) {
-      setError("Add a thought or a photo before posting.");
+    if (!body.trim() && !photos.length && !(shared && withEvent)) {
+      setError(shared ? "Add post text or an event before publishing." : "Add a thought or a photo before posting.");
       return;
     }
     if (!campus.trim()) {
@@ -219,12 +219,13 @@ function Composer({ user, college, busy, onPublish }) {
         <Avatar name={user.name} />
         <div>
           <strong>{user.name}</strong>
-          <span>Share a campus moment</span>
+          <span>{initialPost ? "Edit post" : "Share a campus moment"}</span>
         </div>
-        <span className="feed-device-label">On this device</span>
+        <span className="feed-device-label">{shared ? "Shared" : "On this device"}</span>
       </div>
       <textarea
         aria-label="Post text"
+        disabled={busy}
         placeholder={`What's happening around your campus, ${user.name.split(" ")[0]}?`}
         value={body}
         onChange={(event) => setBody(event.target.value)}
@@ -235,6 +236,7 @@ function Composer({ user, college, busy, onPublish }) {
         <GraduationCap size={17} />
         <input
           aria-label="Your college"
+          disabled={busy}
           placeholder="Your college or university"
           value={campus}
           onChange={(event) => setCampus(event.target.value)}
@@ -242,7 +244,7 @@ function Composer({ user, college, busy, onPublish }) {
         />
       </label>
       {withEvent && (
-        <fieldset className="feed-event-fields">
+        <fieldset className="feed-event-fields" disabled={busy}>
           <legend>Event details</legend>
           <label>
             Event name
@@ -318,7 +320,7 @@ function Composer({ user, college, busy, onPublish }) {
       )}
       <footer>
         <div>
-          <button
+          {!shared && <button
             type="button"
             className="feed-composer-action"
             disabled={busy || preparing}
@@ -326,18 +328,19 @@ function Composer({ user, college, busy, onPublish }) {
           >
             <ImagePlus size={18} />
             <span>Photos</span>
-          </button>
+          </button>}
           <button
             type="button"
             className="feed-composer-action event"
             aria-pressed={withEvent}
+            disabled={busy}
             onClick={() => setWithEvent(!withEvent)}
           >
             <CalendarDays size={18} />
             <span>Event</span>
           </button>
         </div>
-        <input
+        {!shared && <input
           ref={fileInput}
           type="file"
           aria-label="Attach photos"
@@ -348,13 +351,13 @@ function Composer({ user, college, busy, onPublish }) {
             attach(Array.from(event.target.files));
             event.target.value = "";
           }}
-        />
+        />}
         <button
           className="feed-primary-button"
           type="submit"
           disabled={busy || preparing}
         >
-          {busy ? "Posting..." : "Post"}
+          {busy ? (initialPost ? "Saving..." : "Posting...") : (initialPost ? "Save changes" : "Post")}
           <Send size={15} />
         </button>
       </footer>

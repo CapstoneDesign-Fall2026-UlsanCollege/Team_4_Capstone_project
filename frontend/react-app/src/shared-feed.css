@@ -1,0 +1,13 @@
+.shared-feed-status { display:flex;align-items:center;gap:12px;margin:0 0 20px;color:#726779;font-size:12px; }
+.shared-feed-status > span:first-child { display:inline-flex;align-items:center;gap:7px;font-weight:600; }
+.shared-feed-status > span:first-child::before { content:'';width:7px;height:7px;border-radius:50%;background:#b99d70; }
+.shared-feed-status .connected::before { background:#16a08e; }
+.shared-feed-count { font-size:12px;color:#807684; }
+.shared-post-tools { display:flex;gap:8px;margin-left:auto;flex-shrink:0; }
+.shared-feed-post time { display:block;font-size:11px;color:#8f8593; }
+.shared-feed-post .feed-post-identity { min-width:0; }
+.shared-feed-post .feed-event-attachment { margin:16px 0; }
+.shared-feed-post .feed-event-attachment p { display:flex;align-items:center;gap:5px;overflow-wrap:anywhere; }
+.shared-feed-right .feed-campus-note { background:transparent;border:0; }
+.shared-feed-shell .feed-dialog .feed-composer { border:0;box-shadow:none;padding:8px 0; }
+@media(max-width:600px) { .shared-post-tools { gap:4px; }.shared-feed-post .feed-post-identity strong { font-size:13px; } }
