@@ -1,0 +1,95 @@
+import { chromium } from "playwright";
+import assert from "node:assert/strict";
+import { randomBytes } from "node:crypto";
+import { mkdir } from "node:fs/promises";
+
+const url = process.env.FEED_TEST_URL || "http://127.0.0.1:5180";
+if (!/^http:\/\/(127\.0\.0\.1|localhost):\d+\/?$/.test(url)) throw new Error("This test creates emulator accounts only. Use a localhost emulator preview URL.");
+const browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHROME_PATH ? { executablePath: process.env.PLAYWRIGHT_CHROME_PATH } : {}) });
+const errors = [], checks = [];
+const contexts = [];
+try {
+  const create = async name => {
+    const context = await browser.newContext({ viewport: { width: 1536, height: 1000 } });
+    contexts.push(context);
+    const page = await context.newPage();
+    page.on("pageerror", error => errors.push(error.message));
+    page.setDefaultTimeout(20000);
+    await page.goto(url, { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => window.campusFirebaseAuth?.auth);
+    assert.ok(await page.evaluate(() => window.campusFirebaseAuth.auth.emulatorConfig), "Auth must point to the emulator");
+    assert.equal(await page.evaluate(() => window.campusFirebaseAuth.auth.app.options.projectId), "demo-campusvibe-feed");
+    await page.locator(".auth-signup-small").click();
+    await page.locator("#suName").fill(name);
+    await page.locator("#suEmail").fill(`shared-${randomBytes(8).toString("hex")}@example.com`);
+    const password = `Cv!${randomBytes(12).toString("hex")}A1`;
+    await page.locator("#suPass").fill(password);
+    await page.locator("#suPass2").fill(password);
+    await page.locator("#suInterest").selectOption("Tech");
+    await page.locator('#signupForm button[type="submit"]').click();
+    await page.locator('[data-workspace="feed"]').click();
+    await page.locator(".shared-feed-status .connected").waitFor();
+    assert.equal(await page.getByRole("button", { name: "Photos", exact: true }).count(), 0);
+    assert.equal(await page.locator(".feed-demo-banner").count(), 0);
+    return { page, context };
+  };
+  const a = await create("Shared Alice"), b = await create("Shared Bob");
+  assert.equal(await a.page.locator("[data-shared-post]").count(), 0);
+  assert.equal(await b.page.locator("[data-shared-post]").count(), 0);
+  await a.page.getByRole("textbox", { name: "Your college", exact: true }).fill("Ulsan College");
+  await a.page.getByRole("textbox", { name: "Post text", exact: true }).fill("A shared campus meetup <script>window.bad=true</script>");
+  await a.page.getByRole("button", { name: "Event", exact: true }).click();
+  const composer = a.page.locator(".shared-feed-shell .feed-composer");
+  await composer.getByLabel("Event name", { exact: true }).fill("Across-campus meetup");
+  await composer.getByLabel("Date", { exact: true }).fill("2026-10-20");
+  await composer.getByLabel("Time", { exact: true }).fill("17:00");
+  await composer.getByLabel("Location", { exact: true }).fill("Student courtyard");
+  await a.page.getByRole("button", { name: "Post", exact: true }).click();
+  await b.page.locator("[data-shared-post]").waitFor();
+  assert.match(await b.page.locator("[data-shared-post]").textContent(), /Across-campus meetup/);
+  assert.equal(await b.page.evaluate(() => window.bad), undefined);
+  assert.equal(await b.page.getByRole("button", { name: "Edit post", exact: true }).count(), 0);
+  checks.push("Two authenticated emulator accounts see the same text/event post in real time; other-author edit controls are absent and markup stays text.");
+  await a.page.getByRole("button", { name: "Edit post", exact: true }).click();
+  const edit = a.page.getByRole("dialog", { name: "Edit post", exact: true });
+  await edit.getByRole("textbox", { name: "Post text", exact: true }).fill("Updated shared event post");
+  await edit.getByLabel("Location", { exact: true }).fill("Library lawn");
+  await edit.getByRole("button", { name: "Save changes", exact: true }).click();
+  await b.page.waitForFunction(() => document.querySelector("[data-shared-post]")?.textContent.includes("Library lawn"));
+  await b.page.reload({ waitUntil: "domcontentloaded" });
+  await b.page.locator(".shared-feed-status .connected").waitFor();
+  assert.match(await b.page.locator("[data-shared-post]").textContent(), /Updated shared event post/);
+  await b.page.getByRole("button", { name: "My posts", exact: true }).click();
+  await b.page.locator(".shared-feed-status .connected").waitFor();
+  assert.equal(await b.page.locator("[data-shared-post]").count(), 0);
+  await b.page.getByRole("button", { name: "Latest posts", exact: true }).click();
+  await b.page.locator("[data-shared-post]").waitFor();
+  checks.push("Author edits broadcast to the second account, survive reload, and are excluded from that account's My posts query.");
+  for (const width of [1536, 1024, 768, 390, 320]) {
+    await b.page.setViewportSize({ width, height: 1000 });
+    assert.ok(await b.page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1), `Overflow at ${width}px`);
+    if (process.env.FEED_SCREENSHOT_DIR && [1536, 390].includes(width)) {
+      await mkdir(process.env.FEED_SCREENSHOT_DIR, { recursive: true });
+      await b.page.screenshot({ path: `${process.env.FEED_SCREENSHOT_DIR}/shared-feed-${width}.png`, fullPage: true, animations: "disabled" });
+    }
+  }
+  await b.context.setOffline(true);
+  await b.page.waitForFunction(() => document.querySelector(".shared-feed-status").textContent.includes("Offline"));
+  assert.equal(await b.page.getByRole("button", { name: "Post", exact: true }).isDisabled(), true);
+  await b.context.setOffline(false);
+  await b.page.locator(".shared-feed-status .connected").waitFor();
+  await a.page.getByRole("button", { name: "Delete post", exact: true }).click();
+  await a.page.getByRole("dialog", { name: "Delete this post?" }).getByRole("button", { name: "Delete post", exact: true }).click();
+  await b.page.locator("[data-shared-post]").waitFor({ state: "detached" });
+  checks.push("Desktop/mobile layouts fit; offline publishing is disabled; author deletion removes the post for the second account.");
+  await b.page.locator("#navAuthIn").getByRole("button", { name: "Log out", exact: true }).click();
+  await b.page.locator("#authLanding:not(.hidden)").waitFor();
+  assert.equal(await b.page.locator(".shared-feed-shell").count(), 0);
+  await b.page.locator("#landingDemo").click();
+  await b.page.locator('[data-workspace="feed"]').click();
+  await b.page.locator(".feed-demo-banner").waitFor();
+  assert.equal(await b.page.locator(".feed-post").count(), 3);
+  assert.deepEqual(errors, []);
+  checks.push("Logout removes the shared UI; guest demo remains isolated with fictional local posts.");
+  console.log(JSON.stringify({ passed: true, checks }, null, 2));
+} finally { await browser.close(); }

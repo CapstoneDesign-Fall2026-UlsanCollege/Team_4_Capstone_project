@@ -1,11 +1,11 @@
-# CampusVibes React Shell
+# CampusVibes React App
 
-This Vite + React app is the first navigation proof for Issue #26. React mounts the existing CampusVibes page markup and loads its existing stylesheet and behavior, so the Vite preview stays aligned with the original static prototype.
+This Vite + React app mounts the Community markup and behavior and provides the local demo and Firestore-backed shared feeds. Production shared-feed verification remains outstanding. See the [project README](../../README.md) for the current feature scope.
 
 ## Run locally
 
 ```sh
-npm install
+npm ci
 npm run dev
 ```
 
@@ -37,13 +37,23 @@ This is an intentionally small prototype, not a generative AI chatbot. A future 
 
 The earlier local-API “Failed to fetch” failure is not reproducible in the current assistant because it no longer makes API requests. The original reproduction steps and resolution are recorded in [Issue #38](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/38).
 
-## Campus Vibe-Feed demo
+## Shared Campus Vibe-Feed
+
+Real Firebase accounts now open a shared text/event feed backed by the
+`campusFeedPosts` Firestore collection. Explore events still opens the
+device-local demo described below. Shared posts support author editing and
+deletion; shared photos, likes, comments, and friend requests are not enabled.
+The shared feed needs the repository's Firestore rules and indexes installed
+in the target project. Pushing this branch does not deploy those resources.
+See [shared-feed setup and verification](verification/shared-feed.md).
+
+## Guest Campus Vibe-Feed Demo
 
 The signed-in header switches between the existing Community pages and Campus Vibe-Feed. The feed includes cross-college sample profiles, photo and event posts, likes, comments, interested states, saved posts, and demo friend requests.
 
-This iteration is explicitly device-local: account-scoped IndexedDB stores posts and photo blobs. It does not publish posts, photos, or friend requests to other students. Uploaded raster photos are resized before storage; up to four photos are accepted per post. Switching modes preserves the Community pages and remembers the selected workspace for each account.
+The guest demo is device-local: IndexedDB stores posts and photo blobs. It does not publish posts, photos, or friend requests to other students. Uploaded raster photos are resized before storage; up to four photos are accepted per post. Switching modes preserves the Community pages and remembers the selected workspace.
 
-To check the demo, choose Explore events, select Campus Vibe-Feed, add your college and a post with photos, then reload, choose Explore events and select Campus Vibe-Feed again to confirm persistence. Check Friends, Saved posts, editing/deleting your own post, and switching back to Community. Shared multi-account posting requires a later backend iteration; this change does not alter Firebase billing or security rules.
+To check the demo, choose Explore events, select Campus Vibe-Feed, add your college and a post with photos, then reload, choose Explore events and select Campus Vibe-Feed again to confirm persistence. Check Friends, Saved posts, editing/deleting your own post, and switching back to Community. Guest demo activity stays separate from signed-in shared posts.
 
 ## Verify a production build
 

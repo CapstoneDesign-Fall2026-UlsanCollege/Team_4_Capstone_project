@@ -53,7 +53,7 @@ import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
 
-const Feed = lazy(() => import("./Feed"));
+const Feed = lazy(() => import("./FeedEntry"));
 
 export default function App() {
   const mountRef = useRef(null);

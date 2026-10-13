@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "test:feed-rules": "node --test tests/feed-rules.test.js",
+    "test:shared-feed": "node tests/shared-feed.browser.js",
     "test:smoke": "playwright test"
   },
   "dependencies": {
@@ -16,9 +18,14 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
+  "overrides": {
+    "@grpc/grpc-js": "1.13.6"
+  },
   "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
     "@playwright/test": "^1.64.0",
     "@vitejs/plugin-react": "^4.7.0",
+    "playwright": "^1.64.0",
     "vite": "^6.4.3"
   }
 }

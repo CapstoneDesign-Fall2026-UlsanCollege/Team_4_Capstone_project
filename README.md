@@ -1,152 +1,107 @@
 # CampusVibes
 
-CampusVibes is a student-focused campus discovery web app designed to help college students easily find events, clubs, student activities, and campus-related opportunities in one place.
+CampusVibes is a student capstone project for discovering campus activities
+and sharing campus updates. The current app uses React, Vite, and Firebase.
 
-The platform brings together event discovery, club browsing, and personalized recommendations so students can stay connected to campus life without searching across multiple platforms.
+## Current Features and Scope
 
-## Problem
+| Area | Current behavior | Data and limits |
+|---|---|---|
+| Authentication | Email/password signup, login, logout, persistence, Google sign-in and password-reset wiring | Firebase Authentication. Successful Google login and reset-email completion need separate verification. |
+| Community | Dashboard, Discover search/filters, event details, Saved, and Profile | Discover events are code-based samples; Firestore event loading remains unverified. Saved events and profile edits are browser-local. |
+| Assistant | Rules-based sample-event recommendations and event/navigation answers | Runs in the browser; no generative AI or live campus data. Accessible through demo entry. |
+| Suggest | Submit a local event idea through the prototype | Browser-local draft behavior, not backend submission or publication. |
+| Guest Campus Vibe-Feed | Text/photo/event posts, local social actions, and demo friend requests | Fictional profiles and device-local IndexedDB storage; no delivery to other students. |
+| Signed-in Campus Vibe-Feed | Shared text/event posts, My posts, author editing and deletion | Firestore integration verified locally with emulators. Production rules/index setup and production sharing remain unverified. Shared photos and social actions are not enabled. |
 
-Students often miss events, club activities, and community opportunities because information is scattered across social media pages, bulletin boards, and separate websites. CampusVibes centralizes this information into a single, easy-to-use experience.
+The shared-feed implementation is included in this checkout. The local test
+evidence does not establish that the production website has these changes or
+its Firestore configuration.
 
-## Goals
+## Run Locally
 
-- Help students discover relevant campus events and clubs
-- Make it easy to search and filter activities by interest
-- Provide a clean, responsive web experience for students
-- Support campus engagement through centralized discovery
-- Build a scalable web app using React and Firebase
+Use Node.js 20 or later and npm. Clone the repository, then install and run
+the app from its actual directory:
 
-## Features
+```sh
+git clone https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project.git
+cd Team_4_Capstone_project/frontend/react-app
+npm ci
+npm run dev
+```
 
-- User authentication and account creation
-- Event and club discovery pages
-- Search and filter by category, interest, and campus-related tags
-- Event and club detail views
-- Responsive design for desktop and mobile devices
-- Secure backend services using Firebase
-- Scalable frontend structure for future feature expansion
+Open the local URL printed by Vite. Choose **Explore events** to inspect the
+sample-data flow without creating a Firebase account.
 
-## Tech Stack
+Firebase web configuration is currently read from
+`frontend/react-app/src/firebase.js`; the app does not read
+`VITE_FIREBASE_API_KEY` or the other previously listed configuration variables.
+Firebase provider setup and authentication checks are documented in the
+[app README](frontend/react-app/README.md).
 
-- Frontend: React
-- Styling: CSS / component-based UI design
-- Backend & Services: Firebase
-- Authentication: Firebase Authentication
-- Database: Firebase Firestore
-- Hosting: Vercel
+## Checks and Evidence
 
-## Project Vision
+Run these commands from `frontend/react-app`:
 
-CampusVibes aims to create a vibrant campus engagement platform where students can quickly find opportunities that match their interests and connect with the campus community more easily.
+```sh
+npm run build
+npx playwright install chromium
+npm run test:smoke
+```
+
+The Events smoke test starts and stops a local server on port 4178 and checks
+sample-event details and empty-search recovery on desktop and mobile.
+See [Week 6 stretch evidence](docs/Week6/stretch-validation.md) for the success
+signal, original dialog-close failure, passing retest, and test limits.
+
+The shared-feed branch also provides `npm run test:feed-rules` and
+`npm run test:shared-feed`. These need local Auth/Firestore emulators;
+the browser test also needs the emulator-connected dev server.
+Follow the [shared-feed setup and verification guide](frontend/react-app/verification/shared-feed.md)
+for the required order, ports, environment flag, and screenshots.
+Java 21 or later is needed for the documented emulator setup.
+
+## Deployment
+
+Vercel serves the frontend from `frontend/react-app`. See the
+[Vercel deployment guide](docs/VERCEL_DEPLOYMENT.md).
+Pushing a feature branch does not merge it or deploy Firestore rules/indexes.
+
+Before enabling the shared feed in production, the Firebase project owner must
+review the existing production rules and integrate the permissions in
+`firestore.rules` and the indexes in `firestore.indexes.json`.
+The authored rules deny access to collections not explicitly matched.
+Production cross-account testing remains required after setup.
 
 ## Repository Structure
 
 ```text
-.
-├── README.md
-├── docs/
-│   ├── TEAM_MEMBERS.md
-│   ├── Week1/
-│   ├── Week2/
-│   ├── Week3/
-│   └── week-4/
-├── .github/
-│   └── ISSUE_TEMPLATE/
-└── src/                    # Frontend source code (to be added as the app develops)
+.github/                  Issue templates
+docs/                     Team planning, weekly reports, and evidence
+frontend/
+  index.html              Community markup mounted by React
+  apps.js                 Community behavior and sample event data
+  dashboard.js            Dashboard behavior
+  discover.js             Discover and event-detail behavior
+  react-app/
+    src/                  React app, Firebase setup, local/shared feeds
+    public/               Static assets
+    tests/                Events smoke and shared-feed checks
+    verification/         Validation notes and screenshots
+firebase.json             Emulator and Firestore resource configuration
+firestore.rules           Shared-feed access rules
+firestore.indexes.json    Shared-feed query indexes
 ```
 
-## Getting Started
+## Team and Documentation
 
-### Deploy to Vercel
+Team 4: Devyana, Tulsey, Ujjal Poudel, and Prachi2061.
+Instructor: DJ Twone.
 
-The Vite + React app is in `frontend/react-app`. For the deployment settings and redeployment steps, see the [Vercel deployment guide](docs/VERCEL_DEPLOYMENT.md).
+See [team members](docs/TEAM_MEMBERS.md), the
+[shared Week 6 report](docs/Week6/weekly_report.md), and the
+[Week 6 checklist](docs/Week6/week6-work-checklist.md) for contributions,
+test evidence, and outstanding work.
 
-### Prerequisites
-
-Before running the project locally, make sure you have the following installed:
-
-- Node.js (v18 or later recommended)
-- npm or yarn
-- Firebase project access
-
-### Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project.git
-cd Team_4_Capstone_project
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Create a Firebase configuration file or environment file for your project credentials.
-
-Example:
-
-```env
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-```
-
-4. Start the development server:
-
-```bash
-npm run dev
-```
-
-5. Open the app in your browser at the local development URL shown in the terminal.
-
-## Development Workflow
-
-The project is currently structured around a student capstone workflow, with planning and design documentation stored in the `docs/` folder. The website implementation will continue to evolve from the agreed React + Firebase architecture.
-
-## Documentation
-
-Project planning and design materials are available in the `docs/` directory, including:
-
-- Team member information
-- Week-by-week project planning notes
-- Design and architecture ideas
-- Stack comparison and technical decisions
-
-## Team
-
-- Devyana
-- Tulsey
-- Ujjal Poudel
-- Prachi2061
-
-## Instructor
-
-- DJ Twone
-
-## Roadmap
-
-- Initial project ideation and concept selection
-- Tech stack decision: React + Firebase
-- UI/UX and feature planning
-- Core user flow implementation
-- Authentication and data integration
-- Event and club discovery pages
-- Final polishing and deployment
-
-## License
-
-This project is currently for academic and collaborative capstone use. License details may be added later depending on project requirements.
-
-## Contact
-
-For questions or collaboration, please reach out through the project team or repository discussions.
-
----
-
-CampusVibes is built to make campus life easier to discover, explore, and participate in.
+This repository is for academic and collaborative capstone use.
+No general-use license is currently stated here.
