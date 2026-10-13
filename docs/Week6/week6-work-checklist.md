@@ -43,7 +43,7 @@
 
 ### Stronger user test
 
-- [ ] Ask a teammate who was not involved in the implementation discussion to repeat the path from a clean start.
+- [x] Ask a teammate who was not involved in the implementation discussion to repeat the path from a clean start.
 - [ ] Test one empty, error, loading, or recovery state related to the main path.
 - [ ] Write one success signal and show how the test observes it.
 
@@ -65,9 +65,6 @@
 | Item | Owner | Next action | Review point |
 |---|---|---|---|
 | Firestore event loading has not been implemented or verified | `Tulsey8848` *(previously listed as blocker owner; confirm this assignment is still correct)* | Set up and test event retrieval from Firestore, then record the result and proof. | Before claiming Firestore event loading works |
-| Test proof and GitHub links |  Team 4 | Add the actual screenshot or recording, Tested-By Note, and correct implementation commit or PR link. | Before the Week 6 evidence review |
-| Shared team and individual evidence | Each team member | Record contributions and evidence in the shared Weekly Report. | Before Week 6 submission |
-| Week 7 rehearsal improvement | Team 4  | Choose one improvement and create or update its GitHub Issue with an owner and next action. | Before the Week 7 rehearsal |
 
 ## Final check
 
