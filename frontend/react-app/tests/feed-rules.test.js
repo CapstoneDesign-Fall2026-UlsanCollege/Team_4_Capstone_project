@@ -8,7 +8,11 @@ before(async () => {
   env = await initializeTestEnvironment({ projectId: "demo-campusvibe-feed", firestore: { host: "127.0.0.1", port: 8080, rules: readFileSync(new URL("../../../firestore.rules", import.meta.url), "utf8") } });
 });
 beforeEach(async () => env.clearFirestore());
-after(async () => env?.cleanup());
+after(async () => {
+  if (!env) return;
+  try { await env.clearFirestore(); }
+  finally { await env.cleanup(); }
+});
 const db = uid => env.authenticatedContext(uid).firestore();
 const ref = (database, id = "post") => doc(database, "campusFeedPosts", id);
 const post = (uid = "alice", extra = {}) => ({ authorId: uid, authorName: "Alice", college: "Ulsan College", body: "A real shared text post", event: null, createdAt: serverTimestamp(), updatedAt: serverTimestamp(), ...extra });

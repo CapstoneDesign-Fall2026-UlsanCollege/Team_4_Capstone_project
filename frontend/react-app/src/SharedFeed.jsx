@@ -100,7 +100,7 @@ export default function SharedFeed({ user }) {
       </aside>
       <div className="feed-timeline">
         {failure && <div className="feed-error" role="alert"><p>{failure}</p><button type="button" disabled={busy} onClick={() => setRetry(value => value + 1)}>Try again</button></div>}
-        <Composer user={user} college={college} busy={busy || !ready} shared onPublish={publish} />
+        <Composer user={user} college={college} busy={busy} disabled={!ready} shared onPublish={publish} />
         <div className="feed-timeline-heading"><h2>{mine ? "My posts" : "Latest posts"}</h2><span className="shared-feed-count">{visible.length}{posts.length === FEED_PAGE_SIZE ? ` / latest ${FEED_PAGE_SIZE}` : ""}</span></div>
         {!ready && !posts.length && !failure && <p className="feed-loading" role="status">Connecting to the shared feed...</p>}
         {visible.map(post => <article className="feed-card feed-post shared-feed-post" key={post.id} data-shared-post={post.id}>
@@ -115,7 +115,7 @@ export default function SharedFeed({ user }) {
       <aside className="feed-right shared-feed-right"><section className="feed-campus-note"><GraduationCap size={26} /><h2>Different campuses.<br />Shared good vibes.</h2></section></aside>
     </div>
     {notice && <div className="feed-notice" role="status">{notice}</div>}
-    {editing && <Modal title="Edit post" onClose={() => { if (!busy) setEditing(null); }}><Composer key={editing.id} user={user} college={editing.college} initialPost={editing} shared busy={busy || !ready} onPublish={async value => { const success = await act(() => editSharedPost(user, editing, value), "Post updated."); if (success && alive.current) setEditing(null); return success; }} /></Modal>}
+    {editing && <Modal title="Edit post" onClose={() => { if (!busy) setEditing(null); }}><Composer key={editing.id} user={user} college={editing.college} initialPost={editing} shared busy={busy} disabled={!ready} onPublish={async value => { const success = await act(() => editSharedPost(user, editing, value), "Post updated."); if (success && alive.current) setEditing(null); return success; }} /></Modal>}
     {deleting && <Modal title="Delete this post?" onClose={() => { if (!busy) setDeleting(null); }}><p>This removes the post from the shared feed for everyone.</p><footer><button type="button" className="feed-quiet-button" disabled={busy} onClick={() => setDeleting(null)}>Keep post</button><button type="button" className="feed-danger-button" disabled={busy || !ready} onClick={async () => { const success = await act(() => deleteSharedPost(user, deleting), "Post deleted."); if (success && alive.current) setDeleting(null); }}>Delete post</button></footer></Modal>}
   </div>;
 }

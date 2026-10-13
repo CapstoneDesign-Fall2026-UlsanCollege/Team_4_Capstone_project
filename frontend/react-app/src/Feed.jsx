@@ -136,7 +136,8 @@ export function Modal({ title, children, onClose, className = "" }) {
   );
 }
 
-export function Composer({ user, college, busy, onPublish, shared = false, initialPost = null }) {
+export function Composer({ user, college, busy, disabled = false, onPublish, shared = false, initialPost = null }) {
+  const blocked = busy || disabled;
   const [body, setBody] = useState(initialPost?.body || "");
   const [campus, setCampus] = useState(initialPost?.college || college);
   const [photos, setPhotos] = useState([]);
@@ -225,7 +226,7 @@ export function Composer({ user, college, busy, onPublish, shared = false, initi
       </div>
       <textarea
         aria-label="Post text"
-        disabled={busy}
+        disabled={blocked}
         placeholder={`What's happening around your campus, ${user.name.split(" ")[0]}?`}
         value={body}
         onChange={(event) => setBody(event.target.value)}
@@ -236,7 +237,7 @@ export function Composer({ user, college, busy, onPublish, shared = false, initi
         <GraduationCap size={17} />
         <input
           aria-label="Your college"
-          disabled={busy}
+          disabled={blocked}
           placeholder="Your college or university"
           value={campus}
           onChange={(event) => setCampus(event.target.value)}
@@ -244,7 +245,7 @@ export function Composer({ user, college, busy, onPublish, shared = false, initi
         />
       </label>
       {withEvent && (
-        <fieldset className="feed-event-fields" disabled={busy}>
+        <fieldset className="feed-event-fields" disabled={blocked}>
           <legend>Event details</legend>
           <label>
             Event name
@@ -323,7 +324,7 @@ export function Composer({ user, college, busy, onPublish, shared = false, initi
           {!shared && <button
             type="button"
             className="feed-composer-action"
-            disabled={busy || preparing}
+            disabled={blocked || preparing}
             onClick={() => fileInput.current.click()}
           >
             <ImagePlus size={18} />
@@ -333,7 +334,7 @@ export function Composer({ user, college, busy, onPublish, shared = false, initi
             type="button"
             className="feed-composer-action event"
             aria-pressed={withEvent}
-            disabled={busy}
+            disabled={blocked}
             onClick={() => setWithEvent(!withEvent)}
           >
             <CalendarDays size={18} />
@@ -355,7 +356,7 @@ export function Composer({ user, college, busy, onPublish, shared = false, initi
         <button
           className="feed-primary-button"
           type="submit"
-          disabled={busy || preparing}
+          disabled={blocked || preparing}
         >
           {busy ? (initialPost ? "Saving..." : "Posting...") : (initialPost ? "Save changes" : "Post")}
           <Send size={15} />
