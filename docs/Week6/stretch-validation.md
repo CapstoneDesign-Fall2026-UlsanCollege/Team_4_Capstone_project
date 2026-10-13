@@ -109,7 +109,4 @@ npm run test:smoke
 ## Outstanding evidence
 
 The new dialog bug has linked [before](#before-fix) and [after](#after-fix)
-results. The older toast contrast fix in `5185abf` still lacks a linked
-before/after run of the same toast check. A teammate's clean-checkout run also
-remains pending; the existing independent tests should not be repeated merely
-to increase activity counts.
+results. The older toast contrast fix now has a [mobile before/after retest](professor-feedback-follow-up.md#automated-mobile-toast-retest), with screenshots and measured contrast from the actual pre-fix revision and current app. A teammate's clean-checkout run remains pending; the existing independent tests should not be repeated merely to increase activity counts.
