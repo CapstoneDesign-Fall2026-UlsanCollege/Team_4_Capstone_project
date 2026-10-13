@@ -54,7 +54,7 @@ This confirms the tested demo behavior. It does not confirm that events load fro
 | Screenshot / demo proof | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
 | Tested-By Note | [tested-by-note.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a9ab586bcc79da0188862eceeac1557fc5c2c5e1/docs/Week6/tested-by-note.md) |
 | Report file | [weekly_report.md](./weekly_report.md) |
-| Prachi2061 evidence | [Work and validation in this report](#prachi2061-evidence) |
+
 |Deployment| [Deployment](https://campusvibe-theta.vercel.app/) |
 | Independent rehearsal results | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
 | Evidence tested by note| [Evidence tested by note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/6f888d673961981e5b6c49d8a26710d1d331f8a3/docs/Week6/evidence/Tested-by-note.md)|
