@@ -30,7 +30,7 @@
 * **What I did:** I repeated the test by following the written steps to open the Dashboard, navigate to Browse or Discover Events, select a sample event, and view its details.
 * **Expected result:** The selected event's basic details should be displayed, and the written steps should be understandable without coaching.
 * **Actual result:** The test was successful. Dashboard and after selecting a sample event, its basic details were displayed correctly.
-* **Proof link / screenshot:** [Proof Contained Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)
+* **Proof link / screenshot:** [Proof Contained Issue comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64#issuecomment-6148869968)
 
 ## Next action
 
