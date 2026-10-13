@@ -14,7 +14,7 @@ Landing Page → Sign Up/Login → Home → Events → Event Details
 
 The focus was on making this path work before adding more features.
 
-## What we committed to do
+## What we committed to do 
 
 - [x] Complete the basic Firebase Authentication setup
 - [x] Complete the Events → Event Details user path
