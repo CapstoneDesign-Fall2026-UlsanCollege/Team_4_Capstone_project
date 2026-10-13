@@ -17,6 +17,8 @@ Remember me selects Firebase local persistence; unchecking it selects session pe
 
 ## Authentication smoke check — Issue #25
 
+For the redesigned login screen, see the [production screenshots, verification results, and remaining authentication checks](verification/login-redesign.md) tracked in [Issue #54](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/54).
+
 Use a test-only account in the CampusVibe Firebase project; do not use personal credentials.
 
 1. Start the app with `npm run dev` and open the local URL.
