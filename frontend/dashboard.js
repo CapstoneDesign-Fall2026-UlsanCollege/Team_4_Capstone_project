@@ -105,6 +105,7 @@ function dashboardWeekendEvents(){
 function showDashboardDialog(title, markup, eventId = ""){
   const dialog = $("#dashboardDialog");
   dialog.dataset.eventId = eventId;
+  delete dialog.dataset.discoverEvent;
   $("#dashboardDialogTitle").textContent = title;
   $("#dashboardDialogBody").innerHTML = markup;
   window.campusRenderIcons?.();
