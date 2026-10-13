@@ -101,7 +101,7 @@ function setupDiscover() {
 }
 
 function handleDiscoverNavigation(event) {
-  const detail = event.target.closest("[data-discover-event]");
+  const detail = event.target.closest("button[data-discover-event]");
   if (detail) { openDiscoverEvent(Number(detail.dataset.discoverEvent)); return true; }
   const host = event.target.closest("[data-discover-host]");
   if (host) { openDiscoverHost(host.dataset.discoverHost); return true; }

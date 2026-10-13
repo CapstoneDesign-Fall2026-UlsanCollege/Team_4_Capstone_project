@@ -47,6 +47,9 @@ To check the demo, choose Explore events, select Campus Vibe-Feed, add your coll
 
 ## Verify a production build
 
+For the checked-in desktop/mobile Events smoke test, see the
+[Week 6 run instructions and validation scope](../../docs/Week6/stretch-validation.md#run-the-checked-in-smoke-test).
+
 ```sh
 npm run build
 ```
