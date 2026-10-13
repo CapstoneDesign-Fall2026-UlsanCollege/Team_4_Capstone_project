@@ -36,16 +36,56 @@
   </div>
 </header>
 
-<main class="auth-landing" id="authLanding">
-  <section class="auth-landing-card">
-    <div class="auth-brand"><strong>campus<span>Vibes</span></strong><p>Find the events worth leaving the library for.</p></div>
-    <h1>Welcome back</h1>
-    <p class="auth-landing-copy">Sign in to see your campus dashboard, saved events, and suggestions.</p>
-    <div class="auth-landing-actions"><button class="btn btn-primary" onclick="openAuth('login')">Log in</button><button class="btn btn-outline" onclick="openAuth('signup')">Sign up</button></div>
-    <div class="auth-divider"><span>or</span></div>
-    <button class="demo-login" id="landingDemo">Continue as demo student</button>
+<main class="auth-landing auth-screen" id="authLanding">
+  <section class="auth-story" aria-labelledby="authStoryTitle">
+    <div class="auth-wordmark"><img src="/assets/campusvibes-logo.png" alt="">Campus <span>Vibes</span></div>
+    <div class="auth-story-copy">
+      <h1 id="authStoryTitle">Your campus.<br><span>Your vibe.</span></h1>
+      <p>Sign in to see your campus dashboard,<br>saved events, and suggestions.</p>
+      <div class="auth-highlights">
+        <div><span class="auth-feature-icon events"><i data-lucide="calendar-days"></i></span><p><strong>Events</strong><small>Don't miss out</small></p></div>
+        <div><span class="auth-feature-icon people"><i data-lucide="users-round"></i></span><p><strong>People</strong><small>Find your crew</small></p></div>
+        <div><span class="auth-feature-icon discover"><i data-lucide="compass"></i></span><p><strong>Discover</strong><small>Explore more</small></p></div>
+      </div>
+    </div>
+  </section>
+  <section class="auth-login-panel" aria-labelledby="landingLoginTitle">
+    <div class="auth-panel-top"><span class="auth-panel-logo"><img src="/assets/campusvibes-logo.png" alt="Campus Vibes"></span><p>New here? <button type="button" class="auth-signup-small" onclick="openAuth('signup')">Sign up</button></p></div>
+    <h2 id="landingLoginTitle">Welcome back</h2>
+    <p class="auth-panel-copy">Sign in to see your campus dashboard,<br>saved events, and suggestions.</p>
+    <form id="landingLoginForm" onsubmit="return handleLogin(event, 'landing')" novalidate>
+      <div class="auth-input-field">
+        <label for="landingEmail">Email address</label>
+        <div class="auth-input-wrap"><i data-lucide="mail"></i><input type="email" id="landingEmail" placeholder="you@campus.edu" autocomplete="username" aria-describedby="landingEmailErr" required></div>
+        <span class="field-error" id="landingEmailErr" aria-live="polite"></span>
+      </div>
+      <div class="auth-input-field">
+        <label for="landingPass">Password</label>
+        <div class="auth-input-wrap"><i data-lucide="lock-keyhole"></i><input type="password" id="landingPass" placeholder="Enter your password" autocomplete="current-password" aria-describedby="landingPassErr" required><button type="button" class="auth-eye" id="landingPasswordToggle" title="Show password" aria-label="Show password" aria-pressed="false"><i data-lucide="eye"></i></button></div>
+        <span class="field-error" id="landingPassErr" aria-live="polite"></span>
+      </div>
+      <div class="auth-options"><label><input type="checkbox" id="loginRemember" checked>Remember me</label><button type="button" class="auth-text-button" id="forgotPassword">Forgot password?</button></div>
+      <p class="auth-feedback hidden" id="landingFormErr" role="alert"></p>
+      <button type="submit" class="auth-command auth-login-command"><span>Log in</span><i data-lucide="arrow-right"></i></button>
+      <button type="button" class="auth-command auth-create-command" onclick="openAuth('signup')"><span>Sign up</span><i data-lucide="arrow-right"></i></button>
+      <div class="auth-or"><span>or</span></div>
+      <button type="button" class="auth-command auth-google-command" id="googleLogin"><img src="/assets/google-signin.svg" alt=""><span>Continue with Google</span></button>
+    </form>
+    <p class="auth-browse">Just browsing? <button type="button" class="auth-text-button" id="landingDemo" aria-label="Explore events as a demo student">Explore events</button></p>
+    <span class="auth-demo-caption">Demo events &amp; sample profiles</span>
   </section>
 </main>
+
+<dialog class="auth-reset-dialog" id="passwordResetDialog" aria-labelledby="passwordResetTitle">
+  <button type="button" class="auth-reset-close" id="closePasswordReset" title="Close" aria-label="Close password reset"><i data-lucide="x"></i></button>
+  <h2 id="passwordResetTitle">Reset your password</h2>
+  <p>Enter your account email to request a reset link.</p>
+  <form id="passwordResetForm" novalidate>
+    <div class="auth-input-field"><label for="resetEmail">Email address</label><div class="auth-input-wrap"><i data-lucide="mail"></i><input type="email" id="resetEmail" autocomplete="email" placeholder="you@campus.edu" required aria-describedby="resetEmailErr"></div><span class="field-error" id="resetEmailErr" aria-live="polite"></span></div>
+    <p id="passwordResetFeedback" class="auth-feedback hidden" role="status"></p>
+    <button type="submit" class="auth-command auth-login-command"><span>Send reset link</span><i data-lucide="arrow-right"></i></button>
+  </form>
+</dialog>
 
 <main class="app-main hidden" id="appMain">
   <section class="page-view active" id="page-dashboard">
@@ -147,7 +187,7 @@
 <!-- ══════════ AUTH MODAL ══════════ -->
 <main class="feed-main hidden" id="feedMain"><div id="feedMount"></div></main>
 <div class="modal-overlay hidden" id="authModal" onclick="closeOnBackdrop(event)">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Campus Vibes account">
     <button class="modal-close" onclick="closeAuth()" aria-label="Close">✕</button>
 
     <div class="auth-brand">

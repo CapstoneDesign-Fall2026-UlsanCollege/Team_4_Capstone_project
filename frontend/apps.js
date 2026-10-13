@@ -370,19 +370,25 @@ function renderStats(){
 
 /* ══════════ AUTH ══════════ */
 function openAuth(tab = "login"){
+  authReturnFocus = document.activeElement;
   $("#authModal").classList.remove("hidden");
   document.body.style.overflow = "hidden";
   switchTab(tab);
 }
+let authReturnFocus = null;
 function closeAuth(){
+  const wasOpen = !$("#authModal").classList.contains("hidden");
   $("#authModal").classList.add("hidden");
   document.body.style.overflow = "";
   ["loginForm","signupForm"].forEach(id => document.getElementById(id).reset());
-  document.querySelectorAll(".field-error,.form-error").forEach(el => { el.textContent=""; el.classList.add("hidden"); });
-  document.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
+  $("#authModal").querySelectorAll(".field-error,.form-error").forEach(el => { el.textContent=""; el.classList.add("hidden"); });
+  $("#authModal").querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
+  $("#landingPass").value = "";
+  $("#landingPass").type = "password";
+  updatePasswordToggle();
+  if (wasOpen && authReturnFocus?.isConnected && !getSession()) authReturnFocus.focus();
 }
 function closeOnBackdrop(e){ if (e.target === e.currentTarget) closeAuth(); }
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeAuth(); });
 
 function switchTab(tab){
   const isLogin = tab === "login";
@@ -391,12 +397,15 @@ function switchTab(tab){
   $("#tabLogin").classList.toggle("active", isLogin);
   $("#tabSignup").classList.toggle("active", !isLogin);
   $("#tabSlider").classList.toggle("right", !isLogin);
+  $(isLogin ? "#loginEmail" : "#suName").focus();
 }
 
 /* ── Validation ── */
 function setErr(inputEl, errEl, msg){
   errEl.textContent = msg;
   inputEl.classList.toggle("invalid", !!msg);
+  inputEl.setAttribute("aria-invalid", String(!!msg));
+  errEl.classList.toggle("hidden", !msg);
   return !msg;
 }
 const validEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
@@ -423,7 +432,13 @@ function showAuthError(element, error){
     "auth/weak-password": "Choose a stronger password (at least 6 characters).",
     "auth/invalid-email": "Enter a valid email address.",
     "auth/too-many-requests": "Too many attempts. Please wait a moment and try again.",
-    "auth/network-request-failed": "Could not connect. Check your internet connection and try again."
+    "auth/network-request-failed": "Could not connect. Check your internet connection and try again.",
+    "auth/popup-blocked": "Your browser blocked Google sign-in. Allow popups and try again.",
+    "auth/popup-closed-by-user": "Google sign-in was closed. Please try again when you're ready.",
+    "auth/cancelled-popup-request": "A Google sign-in window is already open.",
+    "auth/operation-not-allowed": "This sign-in method isn't enabled yet. Please use email and password.",
+    "auth/unauthorized-domain": "Google sign-in isn't configured for this website yet. Please use email and password.",
+    "auth/account-exists-with-different-credential": "This email uses another sign-in method. Please log in using that method."
   };
   element.textContent = messages[error.code] || "Authentication failed. Please try again.";
   element.classList.remove("hidden");
@@ -431,6 +446,7 @@ function showAuthError(element, error){
 
 async function handleSignup(ev){
   ev.preventDefault();
+  if (ev.currentTarget.getAttribute("aria-busy") === "true") return false;
   const name = $("#suName"), email = $("#suEmail"), pass = $("#suPass"),
         pass2 = $("#suPass2"), interest = $("#suInterest");
   let ok = true;
@@ -442,44 +458,166 @@ async function handleSignup(ev){
   if (!ok) return false;
 
   const em = email.value.trim().toLowerCase();
+  const displayName = name.value.trim();
+  const selectedInterest = interest.value;
+  const password = pass.value;
   const formErr = $("#signupFormErr");
   formErr.classList.add("hidden");
 
   const { auth, createUserWithEmailAndPassword, updateProfile } = window.campusFirebaseAuth;
+  setAuthBusy(ev.currentTarget, true);
   try {
-    const credential = await createUserWithEmailAndPassword(auth, em, pass.value);
-    localStorage.setItem(`cv_interest_${credential.user.uid}`, interest.value);
-    await updateProfile(credential.user, { displayName: name.value.trim() });
-    startSession(credential.user, interest.value);
+    await applyLoginPersistence();
+    const credential = await createUserWithEmailAndPassword(auth, em, password);
+    localStorage.setItem(`cv_interest_${credential.user.uid}`, selectedInterest);
+    await updateProfile(credential.user, { displayName });
+    startSession(credential.user, selectedInterest);
     closeAuth();
-    showToast(`Welcome to CampusVibes, ${name.value.trim().split(" ")[0]}! You're logged in.`);
+    showToast(`Welcome to CampusVibes, ${displayName.split(" ")[0]}! You're logged in.`);
   } catch (error) {
     showAuthError(formErr, error);
+  } finally {
+    setAuthBusy($("#signupForm"), false);
   }
   return false;
 }
 
 /* ── Login ── */
-async function handleLogin(ev){
+async function handleLogin(ev, scope = "modal"){
   ev.preventDefault();
-  const email = $("#loginEmail"), pass = $("#loginPass");
-  const formErr = $("#loginFormErr");
+  const inline = scope === "landing";
+  const email = $(inline ? "#landingEmail" : "#loginEmail"), pass = $(inline ? "#landingPass" : "#loginPass");
+  const formErr = $(inline ? "#landingFormErr" : "#loginFormErr");
+  const form = ev.currentTarget;
+  if (form.getAttribute("aria-busy") === "true") return false;
+  formErr.classList.add("hidden");
   let ok = true;
-  ok = setErr(email, $("#loginEmailErr"), validEmail(email.value.trim()) ? "" : "Enter a valid email.") && ok;
-  ok = setErr(pass, $("#loginPassErr"), pass.value ? "" : "Enter your password.") && ok;
-  if (!ok) return false;
+  ok = setErr(email, $(inline ? "#landingEmailErr" : "#loginEmailErr"), validEmail(email.value.trim()) ? "" : "Enter a valid email.") && ok;
+  ok = setErr(pass, $(inline ? "#landingPassErr" : "#loginPassErr"), pass.value ? "" : "Enter your password.") && ok;
+  if (!ok) { form.querySelector(".invalid").focus(); return false; }
 
   const { auth, signInWithEmailAndPassword } = window.campusFirebaseAuth;
+  const em = email.value.trim().toLowerCase(), password = pass.value;
+  setAuthBusy(form, true);
   try {
-    const credential = await signInWithEmailAndPassword(auth, email.value.trim().toLowerCase(), pass.value);
+    await applyLoginPersistence();
+    const credential = await signInWithEmailAndPassword(auth, em, password);
     formErr.classList.add("hidden");
     startSession(credential.user);
     closeAuth();
     showToast(`Welcome back, ${(credential.user.displayName || credential.user.email).split(" ")[0]}!`);
   } catch (error) {
     showAuthError(formErr, error);
+  } finally {
+    setAuthBusy(form, false);
   }
   return false;
+}
+
+function setAuthBusy(form, busy){
+  form.setAttribute("aria-busy", String(busy));
+  form.querySelectorAll("button, input, select").forEach(control => { control.disabled = busy; });
+  const submit = form.querySelector('button[type="submit"]');
+  if (submit){
+    if (busy) { submit.dataset.idleLabel = submit.innerHTML; submit.textContent = "Please wait..."; }
+    else if (submit.dataset.idleLabel) { submit.innerHTML = submit.dataset.idleLabel; delete submit.dataset.idleLabel; }
+  }
+}
+
+function applyLoginPersistence(){
+  const { auth, setPersistence, browserLocalPersistence, browserSessionPersistence } = window.campusFirebaseAuth;
+  return setPersistence(auth, $("#loginRemember").checked ? browserLocalPersistence : browserSessionPersistence);
+}
+
+async function handleGoogleLogin(){
+  const form = $("#landingLoginForm"), formErr = $("#landingFormErr");
+  if (form.getAttribute("aria-busy") === "true") return;
+  formErr.classList.add("hidden");
+  setAuthBusy(form, true);
+  const { auth, GoogleAuthProvider, signInWithPopup } = window.campusFirebaseAuth;
+  try {
+    await applyLoginPersistence();
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({prompt: "select_account"});
+    const credential = await signInWithPopup(auth, provider);
+    startSession(credential.user);
+    closeAuth();
+    showToast("Welcome to Campus Vibes!");
+  } catch (error) {
+    showAuthError(formErr, error);
+  } finally {
+    setAuthBusy(form, false);
+  }
+}
+
+function updatePasswordToggle(){
+  const shown = $("#landingPass").type === "text";
+  const button = $("#landingPasswordToggle");
+  button.setAttribute("aria-pressed", String(shown));
+  button.setAttribute("aria-label", shown ? "Hide password" : "Show password");
+  button.title = shown ? "Hide password" : "Show password";
+  button.innerHTML = `<i data-lucide="${shown ? "eye-off" : "eye"}"></i>`;
+  window.campusRenderIcons?.();
+}
+
+async function handlePasswordReset(event){
+  event.preventDefault();
+  const form = event.currentTarget, email = $("#resetEmail"), feedback = $("#passwordResetFeedback");
+  if (form.getAttribute("aria-busy") === "true") return;
+  feedback.classList.add("hidden");
+  if (!setErr(email, $("#resetEmailErr"), validEmail(email.value.trim()) ? "" : "Enter a valid email.")) { email.focus(); return; }
+  setAuthBusy(form, true);
+  feedback.classList.remove("success");
+  const { auth, sendPasswordResetEmail } = window.campusFirebaseAuth;
+  try {
+    await sendPasswordResetEmail(auth, email.value.trim().toLowerCase());
+    showResetConfirmation();
+  } catch (error) {
+    if (error.code === "auth/user-not-found") showResetConfirmation();
+    else showAuthError(feedback, error);
+  } finally {
+    setAuthBusy(form, false);
+  }
+}
+
+function showResetConfirmation(){
+  const feedback = $("#passwordResetFeedback");
+  feedback.textContent = "If an account exists for this email, you'll receive a reset link. Check your inbox and spam folder.";
+  feedback.classList.add("success");
+  feedback.classList.remove("hidden");
+}
+
+function setupAuthControls(){
+  $("#landingPasswordToggle").addEventListener("click", () => {
+    $("#landingPass").type = $("#landingPass").type === "password" ? "text" : "password";
+    updatePasswordToggle();
+  });
+  $("#googleLogin").addEventListener("click", handleGoogleLogin);
+  $("#forgotPassword").addEventListener("click", () => {
+    const form = $("#passwordResetForm");
+    if (form.getAttribute("aria-busy") !== "true"){
+      form.reset();
+      $("#resetEmail").value = $("#landingEmail").value;
+      setErr($("#resetEmail"), $("#resetEmailErr"), "");
+      $("#passwordResetFeedback").classList.add("hidden");
+    }
+    $("#passwordResetDialog").showModal();
+    $("#resetEmail").focus();
+  });
+  $("#closePasswordReset").addEventListener("click", () => $("#passwordResetDialog").close());
+  $("#passwordResetForm").addEventListener("submit", handlePasswordReset);
+  const modalKeys = event => {
+    const modal = $("#authModal");
+    if (modal.classList.contains("hidden")) return;
+    if (event.key === "Escape") { event.preventDefault(); closeAuth(); }
+    if (event.key !== "Tab") return;
+    const controls = [...modal.querySelectorAll('button, input, select, a[href]')].filter(control => !control.disabled && control.getClientRects().length);
+    const first = controls[0], last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  };
+  document.addEventListener("keydown", modalKeys);
+  window.campusAuthCleanup = () => document.removeEventListener("keydown", modalKeys);
 }
 
 /* ── Session ── */
@@ -528,6 +666,9 @@ function updateNav(){
   $("#profileEditor").classList.add("hidden");
   renderDashboard();
   if (s){
+    $("#landingFormErr").classList.add("hidden");
+    setErr($("#landingEmail"), $("#landingEmailErr"), "");
+    setErr($("#landingPass"), $("#landingPassErr"), "");
     $("#navUsername").textContent = s.name.split(" ")[0];
     $("#navAvatar").textContent = s.name[0].toUpperCase();
     // If the user picked an interest at signup, gently preselect that filter
@@ -560,6 +701,7 @@ function switchWorkspace(mode){
 
 /* ── Boot ── */
 function bootCampusVibes(){
+  setupAuthControls();
   setupDashboard();
   renderStats();
   renderUpcoming();
@@ -592,7 +734,7 @@ function bootCampusVibes(){
     showToast("Welcome to your demo dashboard.");
   };
   $("#demoLogin").addEventListener("click", enterDemo);
-  $("#landingDemo").addEventListener("click", enterDemo);
+  $("#landingDemo").addEventListener("click", () => { enterDemo(); showPage("discover"); });
   $("#suggestForm").addEventListener("submit", event => {
     event.preventDefault();
     saveDashboardDraft(event.currentTarget);

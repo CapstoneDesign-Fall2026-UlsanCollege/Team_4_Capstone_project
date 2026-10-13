@@ -6,6 +6,12 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "./firebase";
 import {
@@ -25,6 +31,11 @@ import {
   Sparkles,
   UserRound,
   X,
+  UsersRound,
+  Mail,
+  LockKeyhole,
+  Eye,
+  EyeOff,
 } from "lucide";
 import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
@@ -45,6 +56,12 @@ export default function App() {
       signInWithEmailAndPassword,
       signOut,
       updateProfile,
+      setPersistence,
+      browserLocalPersistence,
+      browserSessionPersistence,
+      sendPasswordResetEmail,
+      GoogleAuthProvider,
+      signInWithPopup,
     };
     const parsedMarkup = new DOMParser().parseFromString(
       originalMarkup,
@@ -75,6 +92,11 @@ export default function App() {
           Sparkles,
           UserRound,
           X,
+          UsersRound,
+          Mail,
+          LockKeyhole,
+          Eye,
+          EyeOff,
         },
         attrs: { "aria-hidden": "true", "stroke-width": 1.8 },
       });
@@ -103,6 +125,8 @@ export default function App() {
       delete window.syncFirebaseUser;
       delete window.campusRenderIcons;
       delete window.campusSwitchWorkspace;
+      window.campusAuthCleanup?.();
+      delete window.campusAuthCleanup;
     };
   }, []);
 

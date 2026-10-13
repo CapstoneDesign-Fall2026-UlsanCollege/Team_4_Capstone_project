@@ -9,9 +9,11 @@ npm install
 npm run dev
 ```
 
-The page uses the original login/signup modal and dashboard navigation. Email/password accounts use Firebase Authentication; event data is local sample content.
+The signed-out page has an inline login form and a signup dialog. Email/password accounts use Firebase Authentication; event data is local sample content. Explore events opens the demo Discover page.
 
 Enable the Email/Password provider under Authentication > Sign-in method in the Firebase console before testing signup and login. The Firebase web app configuration is in `src/firebase.js`.
+
+Remember me selects Firebase local persistence; unchecking it selects session persistence. Password visibility is controlled by the eye button. Forgot password sends a Firebase reset email with account-neutral confirmation. Continue with Google uses Firebase's Google popup provider; enable Google in Authentication > Sign-in method and authorize the deployed domain before testing it. Provider configuration errors are shown in the form instead of treating the user as signed in.
 
 ## Authentication smoke check — Issue #25
 
@@ -39,7 +41,7 @@ The signed-in header switches between the existing Community pages and Campus Vi
 
 This iteration is explicitly device-local: account-scoped IndexedDB stores posts and photo blobs. It does not publish posts, photos, or friend requests to other students. Uploaded raster photos are resized before storage; up to four photos are accepted per post. Switching modes preserves the Community pages and remembers the selected workspace for each account.
 
-To check the demo, enter as a demo student, select Campus Vibe-Feed, add your college and a post with photos, then reload and re-enter the demo to confirm persistence. Check Friends, Saved posts, editing/deleting your own post, and switching back to Community. Shared multi-account posting requires a later backend iteration; this change does not alter Firebase billing or security rules.
+To check the demo, choose Explore events, select Campus Vibe-Feed, add your college and a post with photos, then reload, choose Explore events and select Campus Vibe-Feed again to confirm persistence. Check Friends, Saved posts, editing/deleting your own post, and switching back to Community. Shared multi-account posting requires a later backend iteration; this change does not alter Firebase billing or security rules.
 
 ## Verify a production build
 
