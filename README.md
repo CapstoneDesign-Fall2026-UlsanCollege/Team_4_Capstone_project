@@ -14,9 +14,9 @@ and sharing campus updates. The current app uses React, Vite, and Firebase.
 | Guest Campus Vibe-Feed | Text/photo/event posts, local social actions, and demo friend requests | Fictional profiles and device-local IndexedDB storage; no delivery to other students. |
 | Signed-in Campus Vibe-Feed | Shared text/event posts, My posts, author editing and deletion | Firestore integration verified locally with emulators. Production rules/index setup and production sharing remain unverified. Shared photos and social actions are not enabled. |
 
-The shared-feed changes are on `feat/shared-text-event-feed`; they have been
-pushed but are not merged into `main`. The local test evidence does not establish
-that the production website has these changes or its Firestore configuration.
+The shared-feed implementation is included in this checkout. The local test
+evidence does not establish that the production website has these changes or
+its Firestore configuration.
 
 ## Run Locally
 
@@ -33,8 +33,6 @@ npm run dev
 Open the local URL printed by Vite. Choose **Explore events** to inspect the
 sample-data flow without creating a Firebase account.
 
-To inspect the shared-feed branch in a fresh clone, run
-`git switch feat/shared-text-event-feed` before installing dependencies.
 Firebase web configuration is currently read from
 `frontend/react-app/src/firebase.js`; the app does not read
 `VITE_FIREBASE_API_KEY` or the other previously listed configuration variables.

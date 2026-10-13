@@ -1,6 +1,6 @@
 # CampusVibes React App
 
-This Vite + React app mounts the Community markup and behavior and provides the local demo and Firestore-backed shared feeds. The shared-feed implementation is on `feat/shared-text-event-feed`; production verification remains outstanding. See the [project README](../../README.md) for the current feature scope.
+This Vite + React app mounts the Community markup and behavior and provides the local demo and Firestore-backed shared feeds. Production shared-feed verification remains outstanding. See the [project README](../../README.md) for the current feature scope.
 
 ## Run locally
 
