@@ -44,23 +44,28 @@
 ### Stronger user test
 
 - [x] Ask a teammate who was not involved in the implementation discussion to repeat the path from a clean start.
-- [ ] Test one empty, error, loading, or recovery state related to the main path.
-- [ ] Write one success signal and show how the test observes it.
+- [x] Test one empty, error, loading, or recovery state related to the main path. Already recorded in the October 12 [automated demo check](weekly_report.md#automated-demo-check---october-12-2026): empty search and recovery.
+- [x] Write one success signal and show how the test observes it. See [success signal and browser assertions](stretch-validation.md#success-signal-and-observation).
 
 ### Better technical evidence
 
-- [ ] Turn the manual check into a repeatable smoke test.
-- [ ] Add a short setup note so another teammate can run the project locally.
-- [ ] Fix one bug found during testing and repeat the same test.
+- [x] Turn the manual check into a repeatable smoke test. See [checked-in Events smoke test](../../frontend/react-app/tests/smoke/events.spec.js) and [run instructions](stretch-validation.md#run-the-checked-in-smoke-test).
+- [x] Add a short setup note so another teammate can run the project locally. Already available in the [app README](../../frontend/react-app/README.md#run-locally).
+- [x] Fix one bug found during testing and repeat the same test. The new Discover dialog-close failure and passing retest are linked in the [before/after record](stretch-validation.md#bug-found-and-same-check-retest).
 
 ### Better midterm path
 
-- [ ] Write the first 3–5 steps of the midterm demo path.
+- [x] Write the first 3–5 steps of the midterm demo path. Reuse the existing five-step [sample-event path](tested-by-note.md#check-steps) and [updated retest #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64).
 - [x] Identify one claim the team can prove: a user can log in, open Events, select a sample event, and view its basic details, based on the reported test.
 - [x] Identify one claim the team cannot yet prove: Events are loaded from Firebase Firestore.
 - [x] Assign one improvement that will make the Week 7 rehearsal clearer or more reliable: [#53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53), owner @prachi2061, independent desktop/mobile demo testing.
 
 ## Risks and exceptions
+
+The [stretch audit](stretch-validation.md) credits existing work and explains
+the new executable test. Independent clean-start tests are recorded, but a
+teammate run from a clean checkout remains unverified. The toast contrast fix
+has a build result; a linked before/after run of that same check remains pending.
 
 | Item | Owner | Next action | Review point |
 |---|---|---|---|
