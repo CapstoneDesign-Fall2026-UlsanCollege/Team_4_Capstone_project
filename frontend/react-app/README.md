@@ -39,6 +39,14 @@ The earlier local-API “Failed to fetch” failure is not reproducible in the c
 
 ## Campus Vibe-Feed demo
 
+Real Firebase accounts now open a shared text/event feed backed by the
+`campusFeedPosts` Firestore collection. Explore events still opens the
+device-local demo described below. Shared posts support author editing and
+deletion; shared photos, likes, comments, and friend requests are not enabled.
+The shared feed needs the repository's Firestore rules and indexes installed
+in the target project. Pushing this branch does not deploy those resources.
+See [shared-feed setup and verification](verification/shared-feed.md).
+
 The signed-in header switches between the existing Community pages and Campus Vibe-Feed. The feed includes cross-college sample profiles, photo and event posts, likes, comments, interested states, saved posts, and demo friend requests.
 
 This iteration is explicitly device-local: account-scoped IndexedDB stores posts and photo blobs. It does not publish posts, photos, or friend requests to other students. Uploaded raster photos are resized before storage; up to four photos are accepted per post. Switching modes preserves the Community pages and remembers the selected workspace for each account.
