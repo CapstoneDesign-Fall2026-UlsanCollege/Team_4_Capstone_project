@@ -12,11 +12,11 @@ and sharing campus updates. The current app uses React, Vite, and Firebase.
 | Assistant | Rules-based sample-event recommendations and event/navigation answers | Runs in the browser; no generative AI or live campus data. Accessible through demo entry. |
 | Suggest | Submit a local event idea through the prototype | Browser-local draft behavior, not backend submission or publication. |
 | Guest Campus Vibe-Feed | Text/photo/event posts, local social actions, and demo friend requests | Fictional profiles and device-local IndexedDB storage; no delivery to other students. |
-| Signed-in Campus Vibe-Feed | Shared text/event posts, My posts, author editing and deletion | Firestore integration verified locally with emulators. Production rules/index setup and production sharing remain unverified. Shared photos and social actions are not enabled. |
+| Signed-in Campus Vibe-Feed | Shared text/event posts, My posts, author editing and deletion | Rules/indexes deployed; production text publishing, editing, sharing, My posts, and deletion verified with two test accounts. Event attachments have emulator evidence. Shared photos and social actions are not enabled. |
 
-The shared-feed implementation is included in this checkout. The local test
-evidence does not establish that the production website has these changes or
-its Firestore configuration.
+The shared-feed implementation is included in this checkout. See the
+[production permissions fix and verification](frontend/react-app/verification/shared-feed-production.md)
+for the deployed backend configuration, screenshots, and test limits.
 
 ## Run Locally
 
@@ -71,7 +71,8 @@ Before enabling the shared feed in production, the Firebase project owner must
 review the existing production rules and integrate the permissions in
 `firestore.rules` and the indexes in `firestore.indexes.json`.
 The authored rules deny access to collections not explicitly matched.
-Production cross-account testing remains required after setup.
+Production text-post cross-account testing passed on October 14, 2026;
+future backend changes should be checked again after deployment.
 
 ## Repository Structure
 
