@@ -74,41 +74,18 @@ function renderEvents(filter = currentInterestFilter, search = currentEventSearc
   currentEventSearch = search;
   const grid = $("#eventsGrid");
   const query = search.trim().toLocaleLowerCase();
+  const saved = getSaved();
   const list = EVENTS.filter(event =>
     (filter === "all" || event.interest === filter) &&
-    (!query || event.title.toLocaleLowerCase().includes(query))
-  );
-  const saved = getSaved();
-  grid.innerHTML = list.map((e,i) => {
-    const d = new Date(e.date + "T00:00:00");
-    return `
-    <article class="event-card" style="animation-delay:${i*0.05}s">
-      <div class="event-banner" style="background:${GRADIENTS(e.hue)}">
-        ${eventBannerMedia(e)}
-        <button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button>
-        <div class="event-date">
-          <strong>${d.getDate()}</strong>
-          <span>${d.toLocaleString("en-US",{month:"short"})}</span>
-        </div>
-      </div>
-      <div class="event-body">
-        <span class="event-tag">${e.interest}</span>
-        <h3>${e.title}</h3>
-        <div class="event-meta">
-          <span>🕐 ${e.time} · ${d.toLocaleDateString("en-US",{weekday:"long"})}</span>
-          <span>📍 ${e.location}</span>
-          <span>${e.desc}</span>
-        </div>
-        <div class="event-host">
-          <span class="host-avatar" style="background:${e.hue}">${e.host[0]}</span>
-          Hosted by ${e.host}
-        </div>
-      </div>
-    </article>`;
-  }).join("");
+    (!currentSavedOnly || saved.includes(event.id)) &&
+    (!query || [event.title, event.host, event.location, event.interest].join(" ").toLocaleLowerCase().includes(query))
+  ).sort((a, b) => currentEventSort === "title" ? a.title.localeCompare(b.title) : (currentEventSort === "latest" ? -1 : 1) * a.date.localeCompare(b.date));
+  grid.innerHTML = list.map(event => discoverCardMarkup(event, saved)).join("");
   $("#emptyState").classList.toggle("hidden", list.length > 0);
   $("#eventResults").textContent = `Showing ${list.length} of ${EVENTS.length} events`;
-  $("#clearEventFilters").disabled = filter === "all" && !query;
+  $("#clearEventFilters").disabled = filter === "all" && !query && !currentSavedOnly && currentEventSort === "date";
+  renderDiscoverSidebar();
+  window.campusRenderIcons?.();
 }
 
 function renderUpcoming(){
@@ -183,13 +160,7 @@ function setupFilter(){
     renderEvents(currentInterestFilter, event.currentTarget.value);
   });
   $("#clearEventFilters").addEventListener("click", () => {
-    $("#eventSearch").value = "";
-    $("#filterBar").querySelectorAll(".chip").forEach(chip => {
-      const active = chip.dataset.interest === "all";
-      chip.classList.toggle("active", active);
-      chip.setAttribute("aria-pressed", String(active));
-    });
-    renderEvents("all", "");
+    clearDiscoverFilters();
     $("#eventSearch").focus();
   });
 }
@@ -349,6 +320,7 @@ function setupPageNavigation(){
       toggleSaved(Number(saveButton.dataset.save));
       return;
     }
+    if (handleDiscoverNavigation(event)) return;
     if (handleDashboardNavigation(event)) return;
     const pageButton = event.target.closest("[data-page]");
     if (!pageButton) return;
@@ -703,6 +675,7 @@ function switchWorkspace(mode){
 function bootCampusVibes(){
   setupAuthControls();
   setupDashboard();
+  setupDiscover();
   renderStats();
   renderUpcoming();
   renderEvents("all");

@@ -35,7 +35,7 @@ Firebase
 
 ## Main parts
 
-| Part       | What it does                                                                                                                     | Owner  | Risk / uncertainty                                                         |
+| Part       | What it does                                                                                                                     | Owner  | Risk / uncertainty                                                          |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------- | ------ | -------------------------------------------------------------------------- |
 | UI         | Provides the landing page, login/sign-up pages, Home page, Events / Clubs page, search/filtering, and Event / Club Details pages | Prachi | Learning React and keeping navigation simple                               |
 | Data       | Stores events, clubs, activities, and relevant user data using Firebase Firestore                                                | Devyana | Campus data may be incomplete or not regularly updated                     |

@@ -36,10 +36,22 @@ import {
   LockKeyhole,
   Eye,
   EyeOff,
+  Search,
+  SlidersHorizontal,
+  Monitor,
+  Paintbrush,
+  Music,
+  Trophy,
+  BookOpen,
+  RotateCcw,
+  Clock,
+  Camera,
+  Gamepad2,
 } from "lucide";
 import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
+import discoverScript from "../../discover.js?raw";
 
 const Feed = lazy(() => import("./FeedEntry"));
 
@@ -97,6 +109,17 @@ export default function App() {
           LockKeyhole,
           Eye,
           EyeOff,
+          Search,
+          SlidersHorizontal,
+          Monitor,
+          Paintbrush,
+          Music,
+          Trophy,
+          BookOpen,
+          RotateCcw,
+          Clock,
+          Camera,
+          Gamepad2,
         },
         attrs: { "aria-hidden": "true", "stroke-width": 1.8 },
       });
@@ -104,6 +127,7 @@ export default function App() {
     const appScript = document.createElement("script");
     appScript.textContent = `(() => {
       ${dashboardScript}
+      ${discoverScript}
       ${originalScript}
       Object.assign(window, { openAuth, closeAuth, closeOnBackdrop, switchTab, handleLogin, handleSignup, logout, syncFirebaseUser, campusSwitchWorkspace: switchWorkspace });
     })();`;

@@ -6,25 +6,42 @@
 
 ## This week's goal
 
-This week, we focused on verifying one visible behavior from the current CampusVibe vertical slice: the sample Events flow from the dashboard to the event details view. The goal was to record a clear beginning point, a repeatable path, an expected result, an actual result, and proof.
+This week, we focused on verifying visible behavior in the current CampusVibe vertical slice. We recorded repeatable test paths, expected and actual results, and supporting evidence.
 
-We also documented the current boundary of the test: the Events path was verified using the working sample-data flow, while Firestore-backed event loading remains unverified and is tracked separately.
+We verified the sample Events flow from the Dashboard to the event details view. We also tested the deployed CampusVibe demo after the project UI changes, including Discover, Saved, Profile, Assistant, and Suggest on desktop and mobile.
+
+The scope of these checks is limited to the working demo and sample-data behavior. Firestore-backed event loading remains unverified and is tracked separately.
 
 ## Verified behavior
 
-We checked this by following the sample Events path in the app.
+### Sample Events → Event Details
 
-- Expected result: selecting an event from the Events screen should open the event details view with the event information displayed clearly.
-- Actual result: the sample-data Events flow worked as expected in the local demo/test environment, and the app displayed the selected event details.
-- Proof: link to the issue/test note and screenshots below.
+We checked the sample Events flow in the app and repeated the test  after the project changes to confirm that the event-viewing functionality was still working.
 
-This does not claim that real Firestore event data is loaded or verified yet.
+- **Expected result:** Selecting a sample event from Browse Events/Discover should open the event details view and display the event information correctly.
+- **Actual result:** The initial test and the retest were successful. We opened the updated project, navigated to Browse Events/Discover, selected a sample event, and confirmed that its basic details appeared as expected.
+- **Proof:** [Issue #49 — Original Events Test](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) and [Issue #64 — Repeat Test After Project Changes](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64).
+
+**Limitation:** This test verifies the sample-data event-viewing path only. Firestore-backed event loading remains unverified.
+
+### Deployed demo retest — desktop and mobile
+
+The deployed CampusVibe demo was tested again after the project changes. The test covered Discover search and filters, saving an event, checking Saved and Profile, sending an Assistant prompt, submitting a suggestion, and editing the profile bio. The desktop and mobile layouts were also checked.
+
+- **Expected result:** Navigation and controls should work, saved-event summaries should update, and text should remain readable without overlap on desktop and mobile.
+- **Actual result:** The retest was successful. All tested areas were marked as passed during the rehearsal.
+- **Proof:** [Issue #53 — Independent Rehearsal](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) and [Issue #63 — Repeat Test](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63)
+
+This confirms the tested demo behavior. It does not confirm that events load from Firestore.
 
 ## What we committed to do
 
 - [x] Verify the Events → Event Details path using the current sample-data flow.
 - [x] Record the expected result and actual result.
 - [x] Link the issue, proof, and supporting documentation.
+- [x] State the remaining limitation clearly: Firestore-backed event loading is still not verified.
+- [x] Repeat the deployed demo checks after the project changes on desktop and mobile.
+- [x] Record the successful repeat-test result in Issue #63.
 - [x] State the remaining limitation clearly: Firestore-backed event loading is still not verified.
 
 ## Evidence links
@@ -35,20 +52,28 @@ This does not claim that real Firestore event data is loaded or verified yet.
 | Rehearsal / demo tracking | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
 | GitHub commit(s) | [Commit db5dad64f3131fb87b2d7011c86d6e2f9ecd575d](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/db5dad64f3131fb87b2d7011c86d6e2f9ecd575d) |
 | Screenshot / demo proof | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
-| Tested-By Note | [tested-by-note.md](./tested-by-note.md) |
+| Tested-By Note | [tested-by-note.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a9ab586bcc79da0188862eceeac1557fc5c2c5e1/docs/Week6/tested-by-note.md) |
 | Report file | [weekly_report.md](./weekly_report.md) |
 | Prachi2061 evidence | [Work and validation in this report](#prachi2061-evidence) |
+|Deployment| [Deployment](https://campusvibe-theta.vercel.app/) |
+| Independent rehearsal results | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
+| Evidence tested by note| [Evidence tested by note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/6f888d673961981e5b6c49d8a26710d1d331f8a3/docs/Week6/evidence/Tested-by-note.md)|
+| Repeat Tested | [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) |
+| Repeat test after project changes | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
+| Retested by note | [Retested by note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/1d4151928d1934f2128c9127e989193b73fbab6c/docs/Week6/Retested-by-note.md)  |
 
 ## Individual contribution entries — one row per student
 
 | Student | What they did | Evidence link |
 |---|---|---|
-| `DevyanaCT` | Contributed to the Week 6 testing documentation and evidence organization, including issue/test documentation updates and screening of the recorded results. | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
+| `DevyanaCT` | Contributed to the Week 6 testing documentation and evidence organization, including issue/test documentation updates and screening of the recorded results. Repeat test the one path, Repeated the test to check the feature and the written instruction in an independently rehearsed the deployed CampusVibes demo, Retest the updated CampusVibe project and document the Events and issue |[commits](94812d3c212ae5c68dd57e14afaadb597cf440f6) [commits](11d7118c5ae422fbb72ca719fc15f7c1d298d3b3) [commits](508787721e91e6f76c5ec3dc4019ccb330a0b837) [Testes-NOte](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a9ab586bcc79da0188862eceeac1557fc5c2c5e1/docs/Week6/tested-by-note.md), [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49), [Isseue 63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63), [Retested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a564bee469161974865fd0d6b34571d93118f0e0/docs/Week6/Retested-by-note.md)[Issue-64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)|
 | `prachi2061` | Fixed the missing production logo; updated the welcome/login, Dashboard, Discover, Assistant, Suggest, and Profile designs; added browser-local profile editing; ran production builds and automated deployment checks. | [Detailed evidence](#prachi2061-evidence), [Logo fix](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/75c4104), [Login](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/eda4e5b), [Dashboard](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/e98abfd), [Discover](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8f69125), [Assistant](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8b8dac4), [Suggest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/3d735a3), [Profile](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/a2ced5b), [Issue #20](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/20), [Issue #22](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/22) |
 | `ujjalpoudel75` | Contributed documented evidence for the Week 6 report and the testing record, and helped capture the sample event path result in the shared report. | [weekly_report.md](./weekly_report.md) |
 | `tulseyy8848` | Reviewed the flow, organized supporting evidence, and helped document the remaining Firestore limitation and next actions. | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
 
 ### Prachi2061 Evidence
+
+- **Week 6 stretch testing:** Audited the latest team evidence before choosing additional work. Added a checked-in desktop/mobile Events browser smoke test and linked the sample-event success signal to its assertions. The test found a Discover dialog-close bug; fixed the click handler and reran the same checks: four passed, and the production build passed. Evidence: [test commit 07a2a8d](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/07a2a8d), [fix commit 579dcc4](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/579dcc4), and [audit, before/after results, and run instructions](stretch-validation.md). Existing teammate work is credited there. These are local automated results; teammate clean-checkout testing and the older toast-bug retest remain unverified.
 
 - **Logo and authentication:** Fixed the missing production logo and updated the welcome, login, and sign-up screens. Production builds passed, and the deployed logo asset returned HTTP 200. This confirmed that the injected HTML's image paths need assets available in Vite's public directory. Evidence: [Logo fix](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/75c4104), [Authentication design](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/eda4e5b).
 - **Dashboard, Discover, Assistant, and Suggest:** Updated the pages using the supplied visual references. Production builds passed, and the deployed Assistant stylesheet was checked for the new white-panel rules after deployment. A successful push can precede the live update, so the served version must be checked. Evidence: [Dashboard](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/e98abfd), [Discover](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8f69125), [Assistant](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8b8dac4), [Suggest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/3d735a3).
@@ -70,27 +95,19 @@ The screenshot review found dark toast text on a dark background after login. Fi
 
 Safe visual evidence uses the built-in demo student: [Desktop dashboard](evidence/dashboard-desktop.png), [Mobile profile](evidence/profile-mobile.png). No test passwords or authentication tokens are included.
 
-**Validation limits:** Profile edits are browser-local; events and the Assistant use sample data; suggestions are a prototype rather than a backend submission. Independent teammate desktop/mobile verification remains tracked in [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53). The automated check above supplements the earlier sample-event test in Issue #49 and does not establish Firestore-backed event loading.
+**Validation limits:** Profile edits are browser-local; events and the Assistant use sample data; suggestions are a prototype rather than a backend submission. Independent teammate verification is documented separately in [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53). The automated check above supplements the earlier sample-event test in Issue #49 and does not establish Firestore-backed event loading.
 
-## Validation summary
+This rehearsal covers the tested demo behavior. It does not confirm that real Firestore-backed event loading works, which remains tracked separately under Issue #35.
 
-### Event path check
+### Independent CampusVibe demo rehearsal and repeat test
 
-We checked this by doing the current sample Events flow in the app. Expected result: the user can open the Events screen, select an event, and see event details. Actual result: the event selection path worked in the current sample-data environment and the basic event details appeared correctly.
+The report records an independent rehearsal of the deployed CampusVibe demo and a repeat test after the project changes. The checks covered entering as a demo student, Discover search and filters, saving an event, checking Saved and Profile, submitting an Assistant prompt and a suggestion, and editing the profile bio. Desktop and mobile layouts were also checked.
 
-Proof: the issue/test note and attached screenshots in the issue log.
+- **Expected result:** The main demo features should work correctly, saved-event summaries should update, and the interface should remain readable on desktop and mobile.
+- **Actual result:** All tested areas were marked as passed during the rehearsal and repeat test.
+- **Proof:** [Issue #53 — Independent Rehearsal](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) and [Issue #63 — Repeat Test](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63)
 
-### Automated smoke check
-
-We also ran a browser smoke check against the deployed app using a disposable Firebase test account. This check was useful for confirming the app responded as expected for sign-up, login, navigation, and profile editing.
-
-| Expected behavior | Actual result |
-|---|---|
-| Signed-out users see the welcome screen and invalid sign-up input shows validation errors. | Passed |
-| Valid sign-up and login work with a real Firebase test account. | Passed |
-| Seeded events can be filtered, searched, and saved with visible feedback. | Passed in the sample-data path |
-| Assistant and profile editing work in the browser. | Passed |
-| Mobile viewport still renders without horizontal overflow. | Passed |
+This rehearsal covers the tested demo behavior. It does not confirm that real Firestore-backed event loading works, which remains tracked separately under Issue #35.
 
 ## Validation limits
 
@@ -110,13 +127,15 @@ These items are tracked separately and must remain explicit in the issue notes a
 | Blocker / risk | Owner | Next action |
 |---|---|---|
 | Event data is currently sample data; Firestore event loading is not yet implemented or verified. | `tulseyy8848` | Confirm Firestore setup and permissions, then test the real event data path with a screenshot and expected/actual result. |
-| Independent rehearsal is still open for the full demo flow. | Team 4 | Complete [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) with a teammate tester and proof. |
 
 ## Decision record
 
 | Decision | Why we chose it | Owner | Evidence / issue link |
 |---|---|---|---|
 | Continue using the sample-data path for the current working demonstration while tracking Firestore integration separately. | The app path is already reproducible and testable without claiming a backend-backed event flow. | Team 4 | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
+| Complete the independent rehearsal of the deployed CampusVibes demo and record the results. | To confirm that the main demo features work for an independent tester on desktop and mobile before the demonstration. | `Prachi2061` and `tulseyy8848` | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
+| Repeat the independent rehearsal of the deployed CampusVibes demo. | To verify that the main demo features work when tested again by someone, and to confirm the results are repeatable on desktop and mobile. | `DevyanaCT` | [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) |
+| Retest the Events → Event Details path after the project changes and attach updated proof. | To confirm that the updated project still displays sample event details correctly and to document the successful retest without claiming Firestore integration is verified. | `DevyanaCT` | [Issue #63 — Repeat Test](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
 
 ## Definition of Done status
 
@@ -131,6 +150,6 @@ We are honest that:
 ## Next week's bridge task
 
 - Investigate Firestore event data setup and permissions.
-- Test the real event-loading path again and record the expected result, actual result, and proof.
-- Complete the independent desktop/mobile rehearsal in [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53).
-- Update the issue Definition of Done to reflect the verified scope and remaining limitation.
+- Test the real event-loading path and record the expected result, actual result, and proof.
+- Keep the completed independent rehearsal documented in [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53).
+- Update the issue Definition of Done to reflect the verified scope and remaining Firestore limitation.

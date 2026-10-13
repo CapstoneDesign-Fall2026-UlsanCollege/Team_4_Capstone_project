@@ -21,8 +21,7 @@
 * **Proof link / screenshot:** [Proof contained Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
 
 ## Problems found
-
-* None during the initial teammate test.
+No problems were reported during the October 11 repeat test or the October 13 independent rehearsal. Firestore event loading remains an unresolved limitation and is tracked separately.
 
 ## Repeat test
 
@@ -31,7 +30,7 @@
 * **What I did:** I repeated the test by following the written steps to open the Dashboard, navigate to Events, select a sample event, and view its details.
 * **Expected result:** The selected event's basic details should be displayed, and the written steps should be understandable without coaching.
 * **Actual result:** The test was successful. Dashboard and after selecting a sample event, its basic details were displayed correctly.
-* **Proof link / screenshot:** [Proof Contained Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
+* **Proof link / screenshot:** [Proof Contained Issue comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49#issuecomment-6105483528)
 
 ## Current data limitation
 
@@ -41,5 +40,7 @@ The Events section currently uses code-based sample event data. Firebase Firesto
 
 ## Next action
 
-* Keep the current Events → Select Event → View Basic Details behavior available for the Week 7/midterm path.
-* Keep Firestore event loading as a separate task and test it once the integration is implemented.
+- Keep the verified Events → Select Event → View Basic Details path available for the Week 7/midterm demonstration.
+- Keep the completed October 8, October 11, and October 13 test records linked to their respective issues.
+- Keep Firestore event loading as a separate task and test it once the integration is implemented.
+- Preserve the desktop and mobile rehearsal evidence in Issue #53.
