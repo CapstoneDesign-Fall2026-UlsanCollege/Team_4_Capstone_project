@@ -37,15 +37,40 @@ This does not claim that real Firestore event data is loaded or verified yet.
 | Screenshot / demo proof | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
 | Tested-By Note | [tested-by-note.md](./tested-by-note.md) |
 | Report file | [weekly_report.md](./weekly_report.md) |
+| Prachi2061 evidence | [Work and validation in this report](#prachi2061-evidence) |
 
 ## Individual contribution entries — one row per student
 
 | Student | What they did | Evidence link |
 |---|---|---|
 | `DevyanaCT` | Contributed to the Week 6 testing documentation and evidence organization, including issue/test documentation updates and screening of the recorded results. | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
-| `prachi2061` | Worked on the UI improvements and build validation for the dashboard, welcome/login, suggest, profile, and related screens. Confirmed the build remained healthy after the visual updates. | [Issue #20](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/20), [Issue #22](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/22) |
+| `prachi2061` | Fixed the missing production logo; updated the welcome/login, Dashboard, Discover, Assistant, Suggest, and Profile designs; added browser-local profile editing; ran production builds and automated deployment checks. | [Detailed evidence](#prachi2061-evidence), [Logo fix](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/75c4104), [Login](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/eda4e5b), [Dashboard](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/e98abfd), [Discover](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8f69125), [Assistant](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8b8dac4), [Suggest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/3d735a3), [Profile](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/a2ced5b), [Issue #20](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/20), [Issue #22](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/22) |
 | `ujjalpoudel75` | Contributed documented evidence for the Week 6 report and the testing record, and helped capture the sample event path result in the shared report. | [weekly_report.md](./weekly_report.md) |
 | `tulseyy8848` | Reviewed the flow, organized supporting evidence, and helped document the remaining Firestore limitation and next actions. | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
+
+### Prachi2061 Evidence
+
+- **Logo and authentication:** Fixed the missing production logo and updated the welcome, login, and sign-up screens. Production builds passed, and the deployed logo asset returned HTTP 200. This confirmed that the injected HTML's image paths need assets available in Vite's public directory. Evidence: [Logo fix](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/75c4104), [Authentication design](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/eda4e5b).
+- **Dashboard, Discover, Assistant, and Suggest:** Updated the pages using the supplied visual references. Production builds passed, and the deployed Assistant stylesheet was checked for the new white-panel rules after deployment. A successful push can precede the live update, so the served version must be checked. Evidence: [Dashboard](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/e98abfd), [Discover](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8f69125), [Assistant](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8b8dac4), [Suggest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/3d735a3).
+- **Profile and contribution tracking:** Added the profile layout, saved-event summary, and browser-local editing for the study program and bio. The production build passed, the changes were pushed to main, and the contribution was recorded in this shared Week 6 report. Evidence: [Profile implementation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/a2ced5b), [Week 6 contribution](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/be88f08).
+
+#### Automated demo check - October 12, 2026
+
+Ran a Playwright browser smoke check against the deployed website using a disposable Firebase test account. The account was deleted after the run. This is an automated check, not a claim of independent teammate testing.
+
+| Expected behavior | Actual result |
+|---|---|
+| Signed-out users see the welcome screen; signup validates required fields and matching passwords. | Passed: the dashboard was hidden and invalid signup inputs displayed errors. |
+| Valid signup reaches the dashboard; logout returns to welcome; wrong-password login displays an error; correct login succeeds. | Passed using a real Firebase test account. |
+| Seeded events can be filtered, searched, and saved with visible feedback. | Passed: Tech showed two events, title search and empty state worked, clearing restored nine events, and saving updated Saved and the dashboard count. |
+| Assistant, prototype suggestions, and browser-local profile editing work. | Passed: the Assistant responded, suggestion submission returned to Dashboard, and profile edits survived a reload. |
+| Signed-in pages fit a mobile viewport. | Passed: Dashboard, Discover, Assistant, Saved, Suggest, and Profile had no document horizontal overflow at 390 x 844 pixels. No uncaught page errors were recorded. |
+
+The screenshot review found dark toast text on a dark background after login. Fixed the text contrast in [5185abf](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/5185abf); the production build passed.
+
+Safe visual evidence uses the built-in demo student: [Desktop dashboard](evidence/dashboard-desktop.png), [Mobile profile](evidence/profile-mobile.png). No test passwords or authentication tokens are included.
+
+**Validation limits:** Profile edits are browser-local; events and the Assistant use sample data; suggestions are a prototype rather than a backend submission. Independent teammate desktop/mobile verification remains tracked in [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53). The automated check above supplements the earlier sample-event test in Issue #49 and does not establish Firestore-backed event loading.
 
 ## Validation summary
 
