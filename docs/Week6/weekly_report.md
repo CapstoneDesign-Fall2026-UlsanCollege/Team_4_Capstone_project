@@ -65,7 +65,7 @@ Limitation: Events currently use code-based sample data. This test verifies the 
 | GitHub commit(s) | [Commit db5dad64f3131fb87b2d7011c86d6e2f9ecd575d](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/db5dad64f3131fb87b2d7011c86d6e2f9ecd575d) |
 | Screenshot / demo proof | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
 | Tested-By Note | [tested-by-note.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a9ab586bcc79da0188862eceeac1557fc5c2c5e1/docs/Week6/tested-by-note.md) |
-| Report file | [weekly_report.md](./weekly_report.md) |
+| Report file | [weekly_report.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/ad1b51e4e66ac4a0ad2930a171c811a160527f5e/docs/Week6/weekly_report.md) |
 |Deployment| [Deployment](https://campusvibe-theta.vercel.app/) |
 | Independent rehearsal results | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
 | Evidence tested by note| [Evidence tested by note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/6f888d673961981e5b6c49d8a26710d1d331f8a3/docs/Week6/evidence/Tested-by-note.md)|
@@ -108,6 +108,7 @@ Ran a Playwright browser smoke check against the deployed website using a dispos
 | Seeded events can be filtered, searched, and saved with visible feedback. | Passed: Tech showed two events, title search and empty state worked, clearing restored nine events, and saving updated Saved and the dashboard count. |
 | Assistant, prototype suggestions, and browser-local profile editing work. | Passed: the Assistant responded, suggestion submission returned to Dashboard, and profile edits survived a reload. |
 | Signed-in pages fit a mobile viewport. | Passed: Dashboard, Discover, Assistant, Saved, Suggest, and Profile had no document horizontal overflow at 390 x 844 pixels. No uncaught page errors were recorded. |
+| Record the empty-search behavior as a completed stretch test. | The CampusVibe search successfully displayed a no-results message when a keyword did not match any sample events. This test verifies the existing sample-data search behavior. | ujjalpoudel75| passed and recorded |
 
 The screenshot review found dark toast text on a dark background after login. Fixed the text contrast in [5185abf](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/5185abf); the production build passed.
 
@@ -154,6 +155,7 @@ These items are tracked separately and must remain explicit in the issue notes a
 | Complete the independent rehearsal of the deployed CampusVibes demo and record the results. | To confirm that the main demo features work for an independent tester on desktop and mobile before the demonstration. | `Prachi2061` and `tulseyy8848` | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
 | Repeat the independent rehearsal of the deployed CampusVibes demo. | To verify that the main demo features work when tested again by someone, and to confirm the results are repeatable on desktop and mobile. | `DevyanaCT` | [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) |
 | Retest the Events → Event Details path after the project changes and attach updated proof. | To confirm that the updated project still displays sample event details correctly and to document the successful retest without claiming Firestore integration is verified. | `DevyanaCT` | [Issue #63 — Repeat Test](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
+
 
 ## Definition of Done status
 
