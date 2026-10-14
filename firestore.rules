@@ -20,6 +20,20 @@ service cloud.firestore {
         && data.body is string && data.body.size() <= 2000 && (data.body.size() > 0 || data.event != null)
         && validEvent(data.event) && data.createdAt is timestamp && data.updatedAt == request.time;
     }
+    function bounded(maximum) {
+      return request.query.limit != null && request.query.limit <= maximum;
+    }
+    match /campusFeedProfiles/{uid} {
+      allow get: if member();
+      allow list: if member() && bounded(100);
+      allow create, update: if member() && request.auth.uid == uid
+        && request.resource.data.keys().hasAll(['name','college','updatedAt'])
+        && request.resource.data.keys().hasOnly(['name','college','updatedAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 120
+        && request.resource.data.college is string && request.resource.data.college.size() <= 100
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if member() && request.auth.uid == uid;
+    }
     match /campusFeedPosts/{postId} {
       allow get: if member();
       allow list: if member() && request.query.limit != null && request.query.limit <= 100;

@@ -17,6 +17,16 @@ const db = uid => env.authenticatedContext(uid).firestore();
 const ref = (database, id = "post") => doc(database, "campusFeedPosts", id);
 const post = (uid = "alice", extra = {}) => ({ authorId: uid, authorName: "Alice", college: "Ulsan College", body: "A real shared text post", event: null, createdAt: serverTimestamp(), updatedAt: serverTimestamp(), ...extra });
 
+test("public feed profiles expose only bounded display data and are owner-written", async () => {
+  const profile = doc(db('alice'), 'campusFeedProfiles', 'alice');
+  const value = { name: 'Alice', college: 'Test Campus', updatedAt: serverTimestamp() };
+  await assertSucceeds(setDoc(profile, value));
+  await assertSucceeds(getDoc(doc(db('bob'), 'campusFeedProfiles', 'alice')));
+  await assertFails(setDoc(doc(db('bob'), 'campusFeedProfiles', 'alice'), value));
+  await assertFails(setDoc(profile, { ...value, email: 'private@example.com' }));
+  await assertFails(getDoc(doc(env.unauthenticatedContext().firestore(), 'campusFeedProfiles', 'alice')));
+});
+
 test("authenticated author publishes and another account reads the shared post", async () => {
   await assertSucceeds(setDoc(ref(db("alice")), post()));
   await assertSucceeds(getDoc(ref(db("bob"))));
