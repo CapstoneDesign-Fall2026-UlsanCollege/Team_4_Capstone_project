@@ -24,6 +24,27 @@ service cloud.firestore {
       return request.query.limit != null && request.query.limit <= maximum;
     }
     match /campusFeedConnections/{connectionId} {
+      function canChat() {
+        let connection = get(/databases/$(database)/documents/campusFeedConnections/$(connectionId)).data;
+        return member() && connection.status == 'accepted' && request.auth.uid in connection.members;
+      }
+      match /messages/{messageId} {
+        allow get: if canChat();
+        allow list: if canChat() && bounded(50);
+        allow create: if canChat()
+          && request.resource.data.keys().hasAll(['senderId','body','createdAt'])
+          && request.resource.data.keys().hasOnly(['senderId','body','createdAt'])
+          && request.resource.data.senderId == request.auth.uid
+          && request.resource.data.body is string && request.resource.data.body.size() > 0 && request.resource.data.body.size() <= 2000
+          && request.resource.data.createdAt == request.time;
+        allow delete: if canChat() && resource.data.senderId == request.auth.uid;
+      }
+      match /reads/{uid} {
+        allow get: if canChat();
+        allow create, update: if canChat() && request.auth.uid == uid
+          && request.resource.data.keys().hasAll(['readAt']) && request.resource.data.keys().hasOnly(['readAt'])
+          && request.resource.data.readAt == request.time;
+      }
       allow get: if member() && request.auth.uid in resource.data.members;
       allow list: if member() && bounded(100) && request.auth.uid in resource.data.members;
       allow create: if member()

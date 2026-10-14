@@ -82,6 +82,30 @@ test('friend requests require real recipients and only the recipient can accept'
   await assertSucceeds(deleteDoc(request(db('alice'))));
   await assertFails(setDoc(request(db('alice')), { ...value, status: 'accepted' }));
 });
+
+test('messages are private to accepted friends, actor-owned and immutable', async () => {
+  await setDoc(doc(db('bob'), 'campusFeedProfiles', 'bob'), { name: 'Bob', college: '', updatedAt: serverTimestamp() });
+  const connection = database => doc(database, 'campusFeedConnections', 'alice_bob');
+  await setDoc(connection(db('alice')), { senderId: 'alice', recipientId: 'bob', members: ['alice','bob'], status: 'pending', createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  const message = database => doc(database, 'campusFeedConnections', 'alice_bob', 'messages', 'one');
+  const value = { senderId: 'alice', body: 'Hello Bob', createdAt: serverTimestamp() };
+  await assertFails(setDoc(message(db('alice')), value));
+  await updateDoc(connection(db('bob')), { status: 'accepted', updatedAt: serverTimestamp() });
+  await assertFails(setDoc(message(db('bob')), value));
+  await assertSucceeds(setDoc(message(db('alice')), value));
+  await assertSucceeds(getDoc(message(db('bob'))));
+  await assertFails(getDoc(message(db('mallory'))));
+  await assertFails(getDoc(message(env.unauthenticatedContext().firestore())));
+  await assertFails(updateDoc(message(db('alice')), { body: 'Edited' }));
+  await assertFails(deleteDoc(message(db('bob'))));
+  await assertFails(setDoc(doc(db('alice'), 'campusFeedConnections','alice_bob','messages','huge'), { ...value, body: 'x'.repeat(2001) }));
+  const receipt = database => doc(database, 'campusFeedConnections', 'alice_bob', 'reads', 'bob');
+  await assertFails(setDoc(receipt(db('alice')), { readAt: serverTimestamp() }));
+  await assertSucceeds(setDoc(receipt(db('bob')), { readAt: serverTimestamp() }));
+  await deleteDoc(connection(db('bob')));
+  await assertFails(getDoc(message(db('alice'))));
+  await assertFails(setDoc(message(db('alice')), value));
+});
 test("signed-out and anonymous clients cannot access shared posts", async () => {
   await assertFails(setDoc(ref(env.unauthenticatedContext().firestore()), post()));
   await assertFails(getDoc(ref(env.unauthenticatedContext().firestore())));
