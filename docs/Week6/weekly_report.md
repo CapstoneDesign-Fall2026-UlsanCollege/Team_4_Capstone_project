@@ -73,6 +73,8 @@ Limitation: Events currently use code-based sample data. This test verifies the 
 | Repeat test after project changes | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
 | Retested by note | [Retested by note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/1d4151928d1934f2128c9127e989193b73fbab6c/docs/Week6/Retested-by-note.md)  |
 | Empty State Check | [Issue-70](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70) |
+| Definition of Done | [Definition of Done.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5e293f7c1847d7ea2f9f968a8287d08355e7ab22/docs/Week6/Definition%20of%20Done.md) |
+| Week6 Work Checklis | [Week6 Work Checklis.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5e293f7c1847d7ea2f9f968a8287d08355e7ab22/docs/Week6/week6-work-checklist.md) |
 
 ## Individual contribution entries — one row per student
 
