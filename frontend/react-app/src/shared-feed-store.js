@@ -1,7 +1,7 @@
 import { addDoc, collection, connectFirestoreEmulator, deleteDoc, doc, getFirestore, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore";
 import { auth, useEmulators } from "./firebase";
 
-const db = getFirestore(auth.app);
+export const db = getFirestore(auth.app);
 if (useEmulators) connectFirestoreEmulator(db, "127.0.0.1", 8080);
 
 export const FEED_PAGE_SIZE = 50;
@@ -16,7 +16,7 @@ export function feedError(error) {
   return error?.message || "The shared feed could not complete this request. Please retry.";
 }
 
-function account(user) {
+export function account(user) {
   if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.uid !== user.id) throw new Error("Sign in with your account to use the shared feed.");
   return auth.currentUser.uid;
 }
