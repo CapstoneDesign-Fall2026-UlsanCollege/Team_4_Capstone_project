@@ -20,6 +20,7 @@ for the deployed backend configuration, screenshots, and test limits.
 The [restored real-social feed](frontend/react-app/verification/real-social-feed.md)
 adds account-backed likes, comments, saves, and friends while retaining a
 separate fictional guest demo.
+The feed also includes [private Messages between accepted friends](frontend/react-app/verification/feed-messages.md), with live replies, unread badges, read receipts, and earlier history.
 
 ## Run Locally
 
