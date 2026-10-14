@@ -3,9 +3,11 @@ import { ArrowLeft, CalendarDays, GraduationCap, House, MapPin, Pencil, Rss, Sea
 import { Avatar, Composer, Modal } from "./Feed";
 import { deleteSharedPost, editSharedPost, feedError, FEED_PAGE_SIZE, publishSharedPost, watchSharedPosts } from "./shared-feed-store";
 import "./shared-feed.css";
+import { ensureFeedProfile, saveFeedProfile, watchFeedProfiles } from './shared-profile-store';
 
 export default function SharedFeed({ user }) {
   const [posts, setPosts] = useState([]);
+  const [profiles, setProfiles] = useState([]);
   const [mine, setMine] = useState(false);
   const [query, setQuery] = useState("");
   const [college, setCollege] = useState("");
@@ -20,6 +22,14 @@ export default function SharedFeed({ user }) {
   const locked = useRef(false);
   const alive = useRef(true);
   const ready = connected && online;
+  useEffect(() => {
+    ensureFeedProfile(user).catch(error => setFailure(feedError(error)));
+    return watchFeedProfiles(user, setProfiles, setFailure);
+  }, [user.id]);
+  useEffect(() => {
+    const own = profiles.find(profile => profile.id === user.id);
+    if (own) setCollege(own.college);
+  }, [profiles, user.id]);
   useEffect(() => {
     alive.current = true;
     const updateOnline = () => setOnline(navigator.onLine);
@@ -81,7 +91,10 @@ export default function SharedFeed({ user }) {
     }
   };
   const publish = async value => {
-    const success = await act(() => publishSharedPost(user, value), "Your post is published.");
+    const success = await act(async () => {
+      await saveFeedProfile(user, value.college);
+      await publishSharedPost(user, value);
+    }, "Your post is published.");
     if (success && alive.current) { setCollege(value.college); setMine(false); setQuery(""); }
     return success;
   };

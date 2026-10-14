@@ -140,6 +140,9 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
   const blocked = busy || disabled;
   const [body, setBody] = useState(initialPost?.body || "");
   const [campus, setCampus] = useState(initialPost?.college || college);
+  useEffect(() => {
+    if (!initialPost) setCampus(current => current || college);
+  }, [college, initialPost]);
   const [photos, setPhotos] = useState([]);
   const [withEvent, setWithEvent] = useState(!!initialPost?.event);
   const [event, setEvent] = useState(initialPost?.event || {
