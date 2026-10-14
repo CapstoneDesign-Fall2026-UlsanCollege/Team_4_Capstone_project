@@ -12,11 +12,14 @@ and sharing campus updates. The current app uses React, Vite, and Firebase.
 | Assistant | Rules-based sample-event recommendations and event/navigation answers | Runs in the browser; no generative AI or live campus data. Accessible through demo entry. |
 | Suggest | Submit a local event idea through the prototype | Browser-local draft behavior, not backend submission or publication. |
 | Guest Campus Vibe-Feed | Text/photo/event posts, local social actions, and demo friend requests | Fictional profiles and device-local IndexedDB storage; no delivery to other students. |
-| Signed-in Campus Vibe-Feed | Shared text/event posts, My posts, author editing and deletion | Rules/indexes deployed; production text publishing, editing, sharing, My posts, and deletion verified with two test accounts. Event attachments have emulator evidence. Shared photos and social actions are not enabled. |
+| Signed-in Campus Vibe-Feed | Text/event posts, likes, comments, interest, private saved posts, profiles, and friend requests | Firestore-backed data in the restored rich layout. Shared photos are disabled while billing stays off. See the social-feed verification record for tested scope and query limits. |
 
 The shared-feed implementation is included in this checkout. See the
 [production permissions fix and verification](frontend/react-app/verification/shared-feed-production.md)
 for the deployed backend configuration, screenshots, and test limits.
+The [restored real-social feed](frontend/react-app/verification/real-social-feed.md)
+adds account-backed likes, comments, saves, and friends while retaining a
+separate fictional guest demo.
 
 ## Run Locally
 

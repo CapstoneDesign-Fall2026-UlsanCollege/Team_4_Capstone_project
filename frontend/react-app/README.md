@@ -42,7 +42,10 @@ The earlier local-API “Failed to fetch” failure is not reproducible in the c
 Real Firebase accounts now open a shared text/event feed backed by the
 `campusFeedPosts` Firestore collection. Explore events still opens the
 device-local demo described below. Shared posts support author editing and
-deletion; shared photos, likes, comments, and friend requests are not enabled.
+deletion. The restored layout also provides real likes, comments, saved posts,
+interest, profiles, and friend requests. Shared photo uploads remain disabled
+because the user chose to keep billing off. See the
+[real-social feed verification and limits](verification/real-social-feed.md).
 The shared feed needs the repository's Firestore rules and indexes installed
 in the target project. Pushing this branch does not deploy those resources.
 See [shared-feed setup and verification](verification/shared-feed.md).
