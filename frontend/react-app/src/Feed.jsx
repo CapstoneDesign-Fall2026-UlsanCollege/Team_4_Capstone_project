@@ -324,6 +324,7 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
       )}
       <footer>
         <div>
+          {shared && <span title="Shared photo uploads are unavailable while billing is disabled"><button type="button" className="feed-composer-action" disabled aria-label="Photos unavailable"><ImagePlus size={18} /><span>Photos</span></button></span>}
           {!shared && <button
             type="button"
             className="feed-composer-action"
