@@ -43,6 +43,17 @@ test('reactions are uniquely keyed to the actor and cannot alter another user re
   await assertFails(setDoc(doc(db('bob'), 'campusFeedPosts', 'post', 'reactions', 'duplicate'), value));
   await assertSucceeds(deleteDoc(reaction(db('bob'))));
 });
+
+test('comments reject impersonation and outsiders cannot delete them', async () => {
+  await setDoc(ref(db('alice')), post());
+  const comment = database => doc(database, 'campusFeedPosts', 'post', 'comments', 'comment');
+  const value = { uid: 'bob', name: 'Bob', body: 'Real comment', createdAt: serverTimestamp() };
+  await assertFails(setDoc(comment(db('mallory')), value));
+  await assertSucceeds(setDoc(comment(db('bob')), value));
+  await assertFails(deleteDoc(comment(db('mallory'))));
+  await assertFails(setDoc(comment(db('bob')), { ...value, body: 'x'.repeat(501) }));
+  await assertSucceeds(deleteDoc(comment(db('alice'))));
+});
 test("signed-out and anonymous clients cannot access shared posts", async () => {
   await assertFails(setDoc(ref(env.unauthenticatedContext().firestore()), post()));
   await assertFails(getDoc(ref(env.unauthenticatedContext().firestore())));
