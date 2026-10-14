@@ -24,6 +24,13 @@ export async function loadOlderMessages(user, connectionId, cursor) {
   return { messages: snapshot.docs.map(convert).reverse(), cursor: snapshot.docs.at(-1), hasOlder: snapshot.size === 50 };
 }
 
+export function watchLoadedMessage(user, connectionId, messageId, receive, fail) {
+  account(user);
+  return onSnapshot(doc(messageCollection(connectionId), messageId), snapshot => {
+    receive(snapshot.exists() ? convert(snapshot) : null);
+  }, error => fail(messageError(error)));
+}
+
 export function sendMessage(user, connectionId, text) {
   const body = String(text || '').trim();
   if (!body || body.length > 2000) throw new Error('Write a message of up to 2,000 characters.');

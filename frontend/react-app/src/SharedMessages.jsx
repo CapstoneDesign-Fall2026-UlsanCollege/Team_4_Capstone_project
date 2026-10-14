@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowUp, CheckCheck, LoaderCircle, MessageCircle, Send, Trash2 } from 'lucide-react';
 import { Avatar } from './Feed';
-import { deleteMessage, loadOlderMessages, markConversationRead, messageError, sendMessage, watchMessages, watchReadReceipt } from './shared-messages-store';
+import { deleteMessage, loadOlderMessages, markConversationRead, messageError, sendMessage, watchLoadedMessage, watchMessages, watchReadReceipt } from './shared-messages-store';
 
 function Conversation({ user, connection, profile, ready, draft, onDraft, onBack }) {
   const [result, setResult] = useState({ messages: [], fromCache: true });
@@ -15,10 +15,19 @@ function Conversation({ user, connection, profile, ready, draft, onDraft, onBack
   const [retry, setRetry] = useState(0);
   const [visible, setVisible] = useState(document.visibilityState === 'visible');
   const alive = useRef(true);
+  const sendLock = useRef(false);
   const end = useRef(null);
   const lastRead = useRef(0);
   const peerId = connection.members.find(id => id !== user.id);
   const newest = result.messages.at(-1);
+  const loadedIds = older.map(item => item.id).join('|');
+  useEffect(() => {
+    let active = true;
+    const stops = older.map(item => watchLoadedMessage(user, connection.id, item.id, value => {
+      if (active) setOlder(current => value ? current.map(existing => existing.id === item.id ? value : existing) : current.filter(existing => existing.id !== item.id));
+    }, message => { if (active) setFailure(message); }));
+    return () => { active = false; stops.forEach(stop => stop()); };
+  }, [user.id, connection.id, loadedIds]);
   useEffect(() => {
     alive.current = true;
     setFailure('');
@@ -44,11 +53,12 @@ function Conversation({ user, connection, profile, ready, draft, onDraft, onBack
   const lastOwn = messages.filter(item => item.senderId === user.id).at(-1)?.id;
   const send = async event => {
     event.preventDefault();
-    if (busy || !ready || !draft.trim()) return;
+    if (sendLock.current || !ready || !draft.trim()) return;
+    sendLock.current = true;
     setBusy(true); setFailure('');
     try { await sendMessage(user, connection.id, draft); onDraft(''); }
     catch (error) { if (alive.current) setFailure(messageError(error)); }
-    finally { if (alive.current) setBusy(false); }
+    finally { sendLock.current = false; if (alive.current) setBusy(false); }
   };
   return <section className="feed-conversation" aria-label={`Conversation with ${profile?.name || 'your friend'}`}>
     <header><button type="button" className="feed-chat-back feed-icon-button" title="Back to conversations" aria-label="Back to conversations" onClick={onBack}><ArrowLeft size={18} /></button><Avatar name={profile?.name || 'Student'} small /><div><strong>{profile?.name || 'Student'}</strong><small>{profile?.college || 'Campus member'}</small></div></header>

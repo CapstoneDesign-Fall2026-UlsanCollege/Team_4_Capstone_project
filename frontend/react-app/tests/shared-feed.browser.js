@@ -87,6 +87,11 @@ try {
   assert.equal(history.status, 200);
   await a.page.getByRole('button', { name: 'Earlier messages', exact: true }).click();
   await a.page.getByText('History message 0', { exact: true }).waitFor();
+  await b.page.getByRole('button', { name: 'Earlier messages', exact: true }).click();
+  await b.page.getByText('History message 0', { exact: true }).waitFor();
+  a.page.once('dialog', dialog => dialog.accept());
+  await a.page.locator('[data-message="history-00"]').getByRole('button', { name: 'Delete message', exact: true }).click();
+  await b.page.getByText('History message 0', { exact: true }).waitFor({ state: 'detached' });
   checks.push('Earlier history loads beyond the 50-message live window.');
   checks.push('Private messages delivered both ways; unread/Seen state, reload persistence, sender deletion, and responsive chat passed.');
   await nav(a.page).getByRole('button', { name: 'Latest posts', exact: true }).click();
