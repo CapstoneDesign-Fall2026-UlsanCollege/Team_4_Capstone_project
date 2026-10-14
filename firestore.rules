@@ -35,6 +35,18 @@ service cloud.firestore {
       allow delete: if member() && request.auth.uid == uid;
     }
     match /campusFeedPosts/{postId} {
+      match /reactions/{reactionId} {
+        allow get: if member() && exists(/databases/$(database)/documents/campusFeedPosts/$(postId));
+        allow list: if member() && bounded(200) && exists(/databases/$(database)/documents/campusFeedPosts/$(postId));
+        allow create: if member() && exists(/databases/$(database)/documents/campusFeedPosts/$(postId))
+          && request.resource.data.keys().hasOnly(['uid','kind','createdAt'])
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.kind in ['like','interested']
+          && reactionId == request.auth.uid + '_' + request.resource.data.kind
+          && request.resource.data.createdAt == request.time;
+        allow delete: if member() && (resource.data.uid == request.auth.uid
+          || get(/databases/$(database)/documents/campusFeedPosts/$(postId)).data.authorId == request.auth.uid);
+      }
       allow get: if member();
       allow list: if member() && request.query.limit != null && request.query.limit <= 100;
       allow create: if member() && validPost(request.resource.data) && request.resource.data.createdAt == request.time;

@@ -32,6 +32,17 @@ test("authenticated author publishes and another account reads the shared post",
   await assertSucceeds(getDoc(ref(db("bob"))));
   await assertSucceeds(getDocs(query(collection(db("bob"), "campusFeedPosts"), orderBy("createdAt", "desc"), limit(50))));
 });
+
+test('reactions are uniquely keyed to the actor and cannot alter another user reaction', async () => {
+  await setDoc(ref(db('alice')), post());
+  const reaction = database => doc(database, 'campusFeedPosts', 'post', 'reactions', 'bob_like');
+  const value = { uid: 'bob', kind: 'like', createdAt: serverTimestamp() };
+  await assertSucceeds(setDoc(reaction(db('bob')), value));
+  await assertFails(setDoc(reaction(db('mallory')), value));
+  await assertFails(deleteDoc(reaction(db('mallory'))));
+  await assertFails(setDoc(doc(db('bob'), 'campusFeedPosts', 'post', 'reactions', 'duplicate'), value));
+  await assertSucceeds(deleteDoc(reaction(db('bob'))));
+});
 test("signed-out and anonymous clients cannot access shared posts", async () => {
   await assertFails(setDoc(ref(env.unauthenticatedContext().firestore()), post()));
   await assertFails(getDoc(ref(env.unauthenticatedContext().firestore())));
