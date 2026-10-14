@@ -2,7 +2,7 @@
 
 ## Issue / task
 
-Test the current CampusVibe Dashboard → Events → Select Event → View Basic Event Details behavior with a teammate, then repeat the test to check whether the written instructions are clear and easy to follow.
+Test the current CampusVibe Dashboard → Events → Select Event → View Basic Event Details behavior with a teammate, then repeat the test to check whether the written instructions are clear and easy to follow. Also test the empty state by inserting outside of sample data
 
 ## Done means
 
