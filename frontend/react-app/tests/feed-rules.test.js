@@ -94,6 +94,9 @@ test('messages are private to accepted friends, actor-owned and immutable', asyn
   await assertFails(setDoc(message(db('bob')), value));
   await assertSucceeds(setDoc(message(db('alice')), value));
   await assertSucceeds(getDoc(message(db('bob'))));
+  await assertSucceeds(getDocs(query(collection(db('bob'), 'campusFeedConnections', 'alice_bob', 'messages'), orderBy('createdAt','desc'), limit(50))));
+  await assertFails(getDocs(query(collection(db('mallory'), 'campusFeedConnections', 'alice_bob', 'messages'), limit(50))));
+  await assertFails(getDocs(query(collection(db('bob'), 'campusFeedConnections', 'alice_bob', 'messages'), limit(51))));
   await assertFails(getDoc(message(db('mallory'))));
   await assertFails(getDoc(message(env.unauthenticatedContext().firestore())));
   await assertFails(updateDoc(message(db('alice')), { body: 'Edited' }));

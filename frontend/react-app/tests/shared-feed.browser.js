@@ -44,6 +44,51 @@ try {
   await nav(b.page).getByRole('button', { name: 'Friends', exact: true }).click();
   await b.page.getByRole('button', { name: 'Accept request from Shared Alice', exact: true }).click();
   await a.page.waitForFunction(() => document.querySelector('.feed-right')?.textContent.includes('Shared Bob'));
+  await nav(a.page).getByRole('button', { name: 'Messages', exact: true }).click();
+  await a.page.getByRole('button', { name: 'Message Shared Bob', exact: true }).click();
+  await a.page.getByRole('textbox', { name: 'Message text', exact: true }).fill('Hello Bob - a real private message');
+  await a.page.getByRole('button', { name: 'Send message', exact: true }).click();
+  await nav(b.page).getByRole('button', { name: 'Messages', exact: true }).locator('.feed-nav-badge').waitFor();
+  await nav(b.page).getByRole('button', { name: 'Messages', exact: true }).click();
+  await b.page.getByRole('button', { name: 'Message Shared Alice', exact: true }).click();
+  await b.page.waitForFunction(() => document.querySelector('.feed-message-history')?.textContent.includes('Hello Bob - a real private message'));
+  await a.page.locator('.feed-message-seen').waitFor();
+  await nav(b.page).getByRole('button', { name: 'Messages', exact: true }).locator('.feed-nav-badge').waitFor({ state: 'detached' });
+  await b.page.getByRole('textbox', { name: 'Message text', exact: true }).fill('Hello Alice - replying in real time');
+  await b.page.getByRole('button', { name: 'Send message', exact: true }).click();
+  await a.page.waitForFunction(() => document.querySelector('.feed-message-history')?.textContent.includes('Hello Alice - replying in real time'));
+  for (const width of [1536, 768, 390, 320]) {
+    await a.page.setViewportSize({ width, height: 844 });
+    assert.ok(await a.page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1), `Chat overflow at ${width}px`);
+    if (process.env.FEED_SCREENSHOT_DIR && [1536, 390].includes(width)) {
+      await mkdir(process.env.FEED_SCREENSHOT_DIR, { recursive: true });
+      await a.page.screenshot({ path: `${process.env.FEED_SCREENSHOT_DIR}/messages-${width}.png`, fullPage: true, animations: 'disabled' });
+    }
+  }
+  await a.page.setViewportSize({ width: 1536, height: 1000 });
+  await b.page.reload({ waitUntil: 'domcontentloaded' });
+  await b.page.locator('.shared-feed-status .connected').waitFor();
+  await nav(b.page).getByRole('button', { name: 'Messages', exact: true }).click();
+  await b.page.getByRole('button', { name: 'Message Shared Alice', exact: true }).click();
+  await b.page.waitForFunction(() => document.querySelector('.feed-message-history')?.textContent.includes('Hello Alice - replying in real time'));
+  a.page.once('dialog', dialog => dialog.accept());
+  await a.page.getByRole('button', { name: 'Delete message', exact: true }).click();
+  await b.page.waitForFunction(() => !document.querySelector('.feed-message-history')?.textContent.includes('Hello Bob - a real private message'));
+  const sender = await a.page.evaluate(() => window.campusFirebaseAuth.auth.currentUser.uid);
+  const recipient = await b.page.evaluate(() => window.campusFirebaseAuth.auth.currentUser.uid);
+  const testToken = await a.page.evaluate(() => window.campusFirebaseAuth.auth.currentUser.getIdToken());
+  const history = await fetch('http://127.0.0.1:8080/v1/projects/demo-campusvibe-feed/databases/(default)/documents:commit', {
+    method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${testToken}` },
+    body: JSON.stringify({ writes: Array.from({ length: 51 }, (_, index) => ({
+      update: { name: `projects/demo-campusvibe-feed/databases/(default)/documents/campusFeedConnections/${sender}_${recipient}/messages/history-${String(index).padStart(2,'0')}`, fields: { senderId: { stringValue: sender }, body: { stringValue: `History message ${index}` } } },
+      updateTransforms: [{ fieldPath: 'createdAt', setToServerValue: 'REQUEST_TIME' }],
+    })) }),
+  });
+  assert.equal(history.status, 200);
+  await a.page.getByRole('button', { name: 'Earlier messages', exact: true }).click();
+  await a.page.getByText('History message 0', { exact: true }).waitFor();
+  checks.push('Earlier history loads beyond the 50-message live window.');
+  checks.push('Private messages delivered both ways; unread/Seen state, reload persistence, sender deletion, and responsive chat passed.');
   await nav(a.page).getByRole('button', { name: 'Latest posts', exact: true }).click();
   await nav(b.page).getByRole('button', { name: 'Latest posts', exact: true }).click();
   assert.equal(await a.page.locator("[data-shared-post]").count(), 0);
