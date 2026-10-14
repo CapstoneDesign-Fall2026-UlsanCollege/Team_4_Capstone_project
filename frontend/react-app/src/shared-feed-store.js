@@ -1,4 +1,4 @@
-import { addDoc, collection, connectFirestoreEmulator, deleteDoc, doc, getFirestore, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, connectFirestoreEmulator, doc, getDocs, getFirestore, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
 import { auth, useEmulators } from "./firebase";
 
 export const db = getFirestore(auth.app);
@@ -59,5 +59,13 @@ export async function editSharedPost(user, post, value) {
 
 export async function deleteSharedPost(user, post) {
   if (account(user) !== post.authorId) throw new Error("Only the author can delete this post.");
-  return deleteDoc(doc(posts(), post.id));
+  const reference = doc(posts(), post.id);
+  const [reactions, comments] = await Promise.all([
+    getDocs(query(collection(reference, 'reactions'), limit(200))),
+    getDocs(query(collection(reference, 'comments'), limit(100))),
+  ]);
+  const batch = writeBatch(db);
+  for (const snapshot of [reactions, comments]) snapshot.docs.forEach(item => batch.delete(item.ref));
+  batch.delete(reference);
+  return batch.commit();
 }

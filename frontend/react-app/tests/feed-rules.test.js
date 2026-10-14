@@ -50,6 +50,7 @@ test('comments reject impersonation and outsiders cannot delete them', async () 
   const value = { uid: 'bob', name: 'Bob', body: 'Real comment', createdAt: serverTimestamp() };
   await assertFails(setDoc(comment(db('mallory')), value));
   await assertSucceeds(setDoc(comment(db('bob')), value));
+  await assertFails(updateDoc(comment(db('bob')), { uid: 'alice' }));
   await assertFails(deleteDoc(comment(db('mallory'))));
   await assertFails(setDoc(comment(db('bob')), { ...value, body: 'x'.repeat(501) }));
   await assertSucceeds(deleteDoc(comment(db('alice'))));
@@ -59,6 +60,7 @@ test('saved posts belong only to their owner and require an existing post', asyn
   await setDoc(ref(db('alice')), post());
   const saved = database => doc(database, 'campusFeedProfiles', 'bob', 'savedPosts', 'post');
   await assertSucceeds(setDoc(saved(db('bob')), { createdAt: serverTimestamp() }));
+  await assertFails(updateDoc(saved(db('bob')), { createdAt: serverTimestamp() }));
   await assertFails(getDoc(saved(db('alice'))));
   await assertFails(deleteDoc(saved(db('alice'))));
   await assertSucceeds(deleteDoc(saved(db('bob'))));
@@ -71,12 +73,14 @@ test('friend requests require real recipients and only the recipient can accept'
   const value = { senderId: 'alice', recipientId: 'bob', members: ['alice','bob'], status: 'pending', createdAt: serverTimestamp(), updatedAt: serverTimestamp() };
   await assertFails(setDoc(request(db('mallory')), value));
   await assertSucceeds(setDoc(request(db('alice')), value));
+  await assertFails(setDoc(doc(db('bob'), 'campusFeedConnections', 'bob_alice'), { ...value, senderId: 'bob', recipientId: 'alice', members: ['bob','alice'] }));
   await assertFails(getDoc(request(db('mallory'))));
   await assertFails(updateDoc(request(db('alice')), { status: 'accepted', updatedAt: serverTimestamp() }));
   await assertFails(updateDoc(request(db('bob')), { members: ['bob','mallory'], status: 'accepted', updatedAt: serverTimestamp() }));
   await assertSucceeds(updateDoc(request(db('bob')), { status: 'accepted', updatedAt: serverTimestamp() }));
   await assertFails(deleteDoc(request(db('mallory'))));
   await assertSucceeds(deleteDoc(request(db('alice'))));
+  await assertFails(setDoc(request(db('alice')), { ...value, status: 'accepted' }));
 });
 test("signed-out and anonymous clients cannot access shared posts", async () => {
   await assertFails(setDoc(ref(env.unauthenticatedContext().firestore()), post()));
