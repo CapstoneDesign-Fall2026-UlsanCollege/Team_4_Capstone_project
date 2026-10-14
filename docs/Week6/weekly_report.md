@@ -34,6 +34,17 @@ The deployed CampusVibe demo was tested again after the project changes. The tes
 
 This confirms the tested demo behavior. It does not confirm that events load from Firestore.
 
+### Stretch test — Empty Search State
+**Status:** Completed — Pass
+
+**What we tested:** We tested how CampusVibe behaves when a user searches for an event that does not exist in the current sample data.
+
+**Expected result:** The website should clearly indicate when no matching events are found.
+**Actual result:** The test was successful. The website handled the unmatched search without errors and indicated that no matching events were found.
+Proof: Empty-search test screenshot
+
+Limitation: Events currently use code-based sample data. This test verifies the current search behavior only and does not verify Firestore-backed event loading.
+
 ## What we committed to do
 
 - [x] Verify the Events → Event Details path using the current sample-data flow.
@@ -43,6 +54,7 @@ This confirms the tested demo behavior. It does not confirm that events load fro
 - [x] Repeat the deployed demo checks after the project changes on desktop and mobile.
 - [x] Record the successful repeat-test result in Issue #63.
 - [x] State the remaining limitation clearly: Firestore-backed event loading is still not verified.
+- [x] test the Empty Search State
 
 ## Evidence links
 
@@ -54,13 +66,13 @@ This confirms the tested demo behavior. It does not confirm that events load fro
 | Screenshot / demo proof | [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
 | Tested-By Note | [tested-by-note.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a9ab586bcc79da0188862eceeac1557fc5c2c5e1/docs/Week6/tested-by-note.md) |
 | Report file | [weekly_report.md](./weekly_report.md) |
-
 |Deployment| [Deployment](https://campusvibe-theta.vercel.app/) |
 | Independent rehearsal results | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
 | Evidence tested by note| [Evidence tested by note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/6f888d673961981e5b6c49d8a26710d1d331f8a3/docs/Week6/evidence/Tested-by-note.md)|
 | Repeat Tested | [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) |
 | Repeat test after project changes | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
 | Retested by note | [Retested by note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/1d4151928d1934f2128c9127e989193b73fbab6c/docs/Week6/Retested-by-note.md)  |
+| Empty State Check | [Issue-70](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70) |
 
 ## Individual contribution entries — one row per student
 
@@ -68,7 +80,7 @@ This confirms the tested demo behavior. It does not confirm that events load fro
 |---|---|---|
 | `DevyanaCT` | Contributed to the Week 6 testing documentation and evidence organization, including issue/test documentation updates and screening of the recorded results. Repeat test the one path, Repeated the test to check the feature and the written instruction in an independently rehearsed the deployed CampusVibes demo, Retest the updated CampusVibe project and document the Events and issue |[commits](94812d3c212ae5c68dd57e14afaadb597cf440f6) [commits](11d7118c5ae422fbb72ca719fc15f7c1d298d3b3) [commits](508787721e91e6f76c5ec3dc4019ccb330a0b837) [Testes-NOte](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a9ab586bcc79da0188862eceeac1557fc5c2c5e1/docs/Week6/tested-by-note.md), [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49), [Isseue 63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63), [Retested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a564bee469161974865fd0d6b34571d93118f0e0/docs/Week6/Retested-by-note.md)[Issue-64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)|
 | `prachi2061` | Fixed the missing production logo; updated the welcome/login, Dashboard, Discover, Assistant, Suggest, and Profile designs; added browser-local profile editing; ran production builds and automated deployment checks. | [Detailed evidence](#prachi2061-evidence), [Logo fix](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/75c4104), [Login](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/eda4e5b), [Dashboard](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/e98abfd), [Discover](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8f69125), [Assistant](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/8b8dac4), [Suggest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/3d735a3), [Profile](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/a2ced5b), [Issue #20](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/20), [Issue #22](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/22) |
-| `ujjalpoudel75` | Contributed documented evidence for the Week 6 report and the testing record, and helped capture the sample event path result in the shared report. | [weekly_report.md](./weekly_report.md) |
+| `ujjalpoudel75` | Contributed documented evidence for the Week 6 report and the testing record, and helped capture the sample event path result in the shared report, Tested the CampusVibe event search using a keyword that matched no events. The website displayed the empty state, and clearing the search restored the event list tested. | [weekly_report.md](./weekly_report.md) , [#70](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70). |
 | `tulseyy8848` | contributed to Week 6 by reviewing and documenting the CampusVibe testing results. I helped verify the Events → Event Details flow using sample event data and recorded the repeat-test results in GitHub Issues #49 and #64. I also helped organize screenshot evidence and document the remaining limitation that Firestore-backed event loading has not yet been verified. | [[Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) ](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53 https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63 |
 
 ### Prachi2061 Evidence
