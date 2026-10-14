@@ -54,6 +54,16 @@ test('comments reject impersonation and outsiders cannot delete them', async () 
   await assertFails(setDoc(comment(db('bob')), { ...value, body: 'x'.repeat(501) }));
   await assertSucceeds(deleteDoc(comment(db('alice'))));
 });
+
+test('saved posts belong only to their owner and require an existing post', async () => {
+  await setDoc(ref(db('alice')), post());
+  const saved = database => doc(database, 'campusFeedProfiles', 'bob', 'savedPosts', 'post');
+  await assertSucceeds(setDoc(saved(db('bob')), { createdAt: serverTimestamp() }));
+  await assertFails(getDoc(saved(db('alice'))));
+  await assertFails(deleteDoc(saved(db('alice'))));
+  await assertSucceeds(deleteDoc(saved(db('bob'))));
+  await assertFails(setDoc(doc(db('bob'), 'campusFeedProfiles', 'bob', 'savedPosts', 'missing'), { createdAt: serverTimestamp() }));
+});
 test("signed-out and anonymous clients cannot access shared posts", async () => {
   await assertFails(setDoc(ref(env.unauthenticatedContext().firestore()), post()));
   await assertFails(getDoc(ref(env.unauthenticatedContext().firestore())));

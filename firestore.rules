@@ -24,6 +24,14 @@ service cloud.firestore {
       return request.query.limit != null && request.query.limit <= maximum;
     }
     match /campusFeedProfiles/{uid} {
+      match /savedPosts/{postId} {
+        allow get: if member() && request.auth.uid == uid;
+        allow list: if member() && request.auth.uid == uid && bounded(50);
+        allow create: if member() && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['createdAt']) && request.resource.data.createdAt == request.time
+          && exists(/databases/$(database)/documents/campusFeedPosts/$(postId));
+        allow delete: if member() && request.auth.uid == uid;
+      }
       allow get: if member();
       allow list: if member() && bounded(100);
       allow create, update: if member() && request.auth.uid == uid
