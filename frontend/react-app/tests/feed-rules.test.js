@@ -17,10 +17,70 @@ const db = uid => env.authenticatedContext(uid).firestore();
 const ref = (database, id = "post") => doc(database, "campusFeedPosts", id);
 const post = (uid = "alice", extra = {}) => ({ authorId: uid, authorName: "Alice", college: "Ulsan College", body: "A real shared text post", event: null, createdAt: serverTimestamp(), updatedAt: serverTimestamp(), ...extra });
 
+test("public feed profiles expose only bounded display data and are owner-written", async () => {
+  const profile = doc(db('alice'), 'campusFeedProfiles', 'alice');
+  const value = { name: 'Alice', college: 'Test Campus', updatedAt: serverTimestamp() };
+  await assertSucceeds(setDoc(profile, value));
+  await assertSucceeds(getDoc(doc(db('bob'), 'campusFeedProfiles', 'alice')));
+  await assertFails(setDoc(doc(db('bob'), 'campusFeedProfiles', 'alice'), value));
+  await assertFails(setDoc(profile, { ...value, email: 'private@example.com' }));
+  await assertFails(getDoc(doc(env.unauthenticatedContext().firestore(), 'campusFeedProfiles', 'alice')));
+});
+
 test("authenticated author publishes and another account reads the shared post", async () => {
   await assertSucceeds(setDoc(ref(db("alice")), post()));
   await assertSucceeds(getDoc(ref(db("bob"))));
   await assertSucceeds(getDocs(query(collection(db("bob"), "campusFeedPosts"), orderBy("createdAt", "desc"), limit(50))));
+});
+
+test('reactions are uniquely keyed to the actor and cannot alter another user reaction', async () => {
+  await setDoc(ref(db('alice')), post());
+  const reaction = database => doc(database, 'campusFeedPosts', 'post', 'reactions', 'bob_like');
+  const value = { uid: 'bob', kind: 'like', createdAt: serverTimestamp() };
+  await assertSucceeds(setDoc(reaction(db('bob')), value));
+  await assertFails(setDoc(reaction(db('mallory')), value));
+  await assertFails(deleteDoc(reaction(db('mallory'))));
+  await assertFails(setDoc(doc(db('bob'), 'campusFeedPosts', 'post', 'reactions', 'duplicate'), value));
+  await assertSucceeds(deleteDoc(reaction(db('bob'))));
+});
+
+test('comments reject impersonation and outsiders cannot delete them', async () => {
+  await setDoc(ref(db('alice')), post());
+  const comment = database => doc(database, 'campusFeedPosts', 'post', 'comments', 'comment');
+  const value = { uid: 'bob', name: 'Bob', body: 'Real comment', createdAt: serverTimestamp() };
+  await assertFails(setDoc(comment(db('mallory')), value));
+  await assertSucceeds(setDoc(comment(db('bob')), value));
+  await assertFails(updateDoc(comment(db('bob')), { uid: 'alice' }));
+  await assertFails(deleteDoc(comment(db('mallory'))));
+  await assertFails(setDoc(comment(db('bob')), { ...value, body: 'x'.repeat(501) }));
+  await assertSucceeds(deleteDoc(comment(db('alice'))));
+});
+
+test('saved posts belong only to their owner and require an existing post', async () => {
+  await setDoc(ref(db('alice')), post());
+  const saved = database => doc(database, 'campusFeedProfiles', 'bob', 'savedPosts', 'post');
+  await assertSucceeds(setDoc(saved(db('bob')), { createdAt: serverTimestamp() }));
+  await assertFails(updateDoc(saved(db('bob')), { createdAt: serverTimestamp() }));
+  await assertFails(getDoc(saved(db('alice'))));
+  await assertFails(deleteDoc(saved(db('alice'))));
+  await assertSucceeds(deleteDoc(saved(db('bob'))));
+  await assertFails(setDoc(doc(db('bob'), 'campusFeedProfiles', 'bob', 'savedPosts', 'missing'), { createdAt: serverTimestamp() }));
+});
+
+test('friend requests require real recipients and only the recipient can accept', async () => {
+  await setDoc(doc(db('bob'), 'campusFeedProfiles', 'bob'), { name: 'Bob', college: '', updatedAt: serverTimestamp() });
+  const request = database => doc(database, 'campusFeedConnections', 'alice_bob');
+  const value = { senderId: 'alice', recipientId: 'bob', members: ['alice','bob'], status: 'pending', createdAt: serverTimestamp(), updatedAt: serverTimestamp() };
+  await assertFails(setDoc(request(db('mallory')), value));
+  await assertSucceeds(setDoc(request(db('alice')), value));
+  await assertFails(setDoc(doc(db('bob'), 'campusFeedConnections', 'bob_alice'), { ...value, senderId: 'bob', recipientId: 'alice', members: ['bob','alice'] }));
+  await assertFails(getDoc(request(db('mallory'))));
+  await assertFails(updateDoc(request(db('alice')), { status: 'accepted', updatedAt: serverTimestamp() }));
+  await assertFails(updateDoc(request(db('bob')), { members: ['bob','mallory'], status: 'accepted', updatedAt: serverTimestamp() }));
+  await assertSucceeds(updateDoc(request(db('bob')), { status: 'accepted', updatedAt: serverTimestamp() }));
+  await assertFails(deleteDoc(request(db('mallory'))));
+  await assertSucceeds(deleteDoc(request(db('alice'))));
+  await assertFails(setDoc(request(db('alice')), { ...value, status: 'accepted' }));
 });
 test("signed-out and anonymous clients cannot access shared posts", async () => {
   await assertFails(setDoc(ref(env.unauthenticatedContext().firestore()), post()));

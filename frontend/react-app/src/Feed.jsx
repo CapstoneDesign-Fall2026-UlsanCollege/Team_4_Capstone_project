@@ -140,6 +140,9 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
   const blocked = busy || disabled;
   const [body, setBody] = useState(initialPost?.body || "");
   const [campus, setCampus] = useState(initialPost?.college || college);
+  useEffect(() => {
+    if (!initialPost) setCampus(current => current || college);
+  }, [college, initialPost]);
   const [photos, setPhotos] = useState([]);
   const [withEvent, setWithEvent] = useState(!!initialPost?.event);
   const [event, setEvent] = useState(initialPost?.event || {
@@ -321,6 +324,7 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
       )}
       <footer>
         <div>
+          {shared && <span title="Shared photo uploads are unavailable while billing is disabled"><button type="button" className="feed-composer-action" disabled aria-label="Photos unavailable"><ImagePlus size={18} /><span>Photos</span></button></span>}
           {!shared && <button
             type="button"
             className="feed-composer-action"
@@ -366,7 +370,7 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
   );
 }
 
-function Post({
+export function Post({
   post,
   user,
   busy,
@@ -375,6 +379,7 @@ function Post({
   onDelete,
   onPhoto,
   onCopy,
+  shared = false,
 }) {
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState("");
@@ -389,7 +394,7 @@ function Post({
         : [...current[field], user.id],
     }));
   return (
-    <article className="feed-card feed-post" data-feed-post={post.id}>
+    <article className="feed-card feed-post" data-feed-post={post.id} data-shared-post={shared ? post.id : undefined}>
       <header>
         <Avatar name={post.authorName} color={profile?.color} />
         <div className="feed-post-identity">
@@ -437,7 +442,7 @@ function Post({
                   }}
                 >
                   <Pencil size={15} />
-                  Edit text
+                  {shared ? 'Edit post' : 'Edit text'}
                 </button>
                 <button
                   type="button"
@@ -543,7 +548,7 @@ function Post({
                 <strong>{item.name}</strong>
                 <p>{item.body}</p>
               </div>
-              {item.authorId === user.id && (
+              {(item.authorId === user.id || (shared && post.authorId === user.id)) && (
                 <button
                   type="button"
                   className="feed-icon-button"

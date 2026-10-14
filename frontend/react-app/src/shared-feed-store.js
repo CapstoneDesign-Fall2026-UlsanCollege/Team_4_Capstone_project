@@ -1,7 +1,7 @@
-import { addDoc, collection, connectFirestoreEmulator, deleteDoc, doc, getFirestore, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, connectFirestoreEmulator, doc, getDocs, getFirestore, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
 import { auth, useEmulators } from "./firebase";
 
-const db = getFirestore(auth.app);
+export const db = getFirestore(auth.app);
 if (useEmulators) connectFirestoreEmulator(db, "127.0.0.1", 8080);
 
 export const FEED_PAGE_SIZE = 50;
@@ -16,7 +16,7 @@ export function feedError(error) {
   return error?.message || "The shared feed could not complete this request. Please retry.";
 }
 
-function account(user) {
+export function account(user) {
   if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.uid !== user.id) throw new Error("Sign in with your account to use the shared feed.");
   return auth.currentUser.uid;
 }
@@ -59,5 +59,13 @@ export async function editSharedPost(user, post, value) {
 
 export async function deleteSharedPost(user, post) {
   if (account(user) !== post.authorId) throw new Error("Only the author can delete this post.");
-  return deleteDoc(doc(posts(), post.id));
+  const reference = doc(posts(), post.id);
+  const [reactions, comments] = await Promise.all([
+    getDocs(query(collection(reference, 'reactions'), limit(200))),
+    getDocs(query(collection(reference, 'comments'), limit(100))),
+  ]);
+  const batch = writeBatch(db);
+  for (const snapshot of [reactions, comments]) snapshot.docs.forEach(item => batch.delete(item.ref));
+  batch.delete(reference);
+  return batch.commit();
 }
