@@ -12,6 +12,7 @@ Test the current CampusVibe Dashboard → Events → Select Event → View Basic
 - [x] The expected result and actual result are recorded in the Tested-By Note.
 - [x] Evidence links to the screenshots and Tested-By Note are attached.
 - [x] The updated project was retested and the successful result was recorded with new screenshots in Issue #64.
+- [x] Empty state test was done
 
 ## How we will check it
 
@@ -27,6 +28,7 @@ Test the current CampusVibe Dashboard → Events → Select Event → View Basic
 - **Dashboard screenshot:** [View screenshot](https://github.com/user-attachments/assets/bc04126e-ac21-48fa-ab5f-495845b271cc)
 - **Event selection and details screenshot:** [View screenshot](https://github.com/user-attachments/assets/d3d8658b-93d4-451a-ac21-043672a35ee0)
 - **Additional retest screenshots:** Attached to [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64).
+- **Empty state test:** [issue70](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70)
 
 **Limitation:** The Events page currently displays code-based sample data. Firestore-backed event loading has not yet been verified. This test confirms only that users can select a sample event and view its basic details; it does not confirm that events are retrieved from Firebase Firestore.
 
