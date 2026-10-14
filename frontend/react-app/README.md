@@ -57,6 +57,10 @@ Try again if an existing tab still displays the previous access error.
 
 ## Guest Campus Vibe-Feed Demo
 
+Signed-in members can use the [Messages section](verification/feed-messages.md)
+to communicate with accepted friends. Conversations use real Firestore data;
+guest demo mode has no real-account messaging.
+
 The signed-in header switches between the existing Community pages and Campus Vibe-Feed. The feed includes cross-college sample profiles, photo and event posts, likes, comments, interested states, saved posts, and demo friend requests.
 
 The guest demo is device-local: IndexedDB stores posts and photo blobs. It does not publish posts, photos, or friend requests to other students. Uploaded raster photos are resized before storage; up to four photos are accepted per post. Switching modes preserves the Community pages and remembers the selected workspace.

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, Bookmark, GraduationCap, House, Rss, Search, UserRound, Users } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Bookmark, GraduationCap, House, MessageCircle, Rss, Search, UserRound, Users } from 'lucide-react';
 import { Avatar, Composer, Modal } from './Feed';
 import { deleteSharedPost, editSharedPost, feedError, FEED_PAGE_SIZE, publishSharedPost, watchSharedPosts } from './shared-feed-store';
 import { ensureFeedProfile, saveFeedProfile, watchFeedProfiles } from './shared-profile-store';
@@ -7,6 +7,8 @@ import { watchConnections } from './shared-friends-store';
 import { watchSavedPostContent, watchSavedPosts } from './shared-saved-store';
 import SharedFriends from './SharedFriends';
 import SharedPost from './SharedPost';
+import SharedMessages from './SharedMessages';
+import useMessageInbox from './use-message-inbox';
 import './shared-feed.css';
 
 export default function SharedFeed({ user }) {
@@ -31,6 +33,7 @@ export default function SharedFeed({ user }) {
   const alive = useRef(true);
   const mine = view === 'mine';
   const ready = connected && online;
+  const messaging = useMessageInbox(user, connections);
   const friends = connections.filter(item => item.status === 'accepted').map(item => item.members.find(id => id !== user.id));
   const incoming = connections.filter(item => item.status === 'pending' && item.recipientId === user.id);
   useEffect(() => {
@@ -129,18 +132,18 @@ export default function SharedFeed({ user }) {
   return <div className="feed-shell shared-feed-shell">
     <div className="feed-heading">
       <div><span className="feed-eyebrow"><Rss size={14} />ACROSS CAMPUSES</span><h1>Campus Vibe-Feed</h1></div>
-      <label className="feed-search"><Search size={17} /><input type="search" aria-label={view === 'friends' ? 'Search people' : 'Search shared posts'} placeholder={view === 'friends' ? 'Search people or colleges...' : 'Search posts or colleges...'} value={query} onChange={event => setQuery(event.target.value)} /></label>
+      <label className="feed-search"><Search size={17} /><input type="search" aria-label={view === 'messages' ? 'Search conversations' : view === 'friends' ? 'Search people' : 'Search shared posts'} placeholder={view === 'messages' ? 'Search conversations...' : view === 'friends' ? 'Search people or colleges...' : 'Search posts or colleges...'} value={query} onChange={event => setQuery(event.target.value)} /></label>
     </div>
     <div className="shared-feed-status" role="status"><span className={ready ? 'connected' : ''}>{ready ? 'Online' : !online ? 'Offline' : failure ? 'Unavailable' : 'Connecting'}</span>{!ready && busy && <span>Waiting for server confirmation</span>}</div>
-    <div className="feed-layout shared-feed-layout">
+    <div className={`feed-layout shared-feed-layout ${view === 'messages' ? 'is-messages' : ''}`}>
       <aside className="feed-left">
         <div className="feed-current-user"><Avatar name={user.name} /><div><strong>{user.name}</strong><span>{college || 'Your campus connection'}</span></div></div>
-        <nav aria-label="Shared feed navigation">{[['feed', 'Latest posts', House], ['friends', 'Friends', Users], ['saved', 'Saved posts', Bookmark], ['mine', 'My posts', UserRound]].map(([id, title, Icon]) => <button key={id} type="button" className={view === id ? 'active' : ''} aria-current={view === id ? 'page' : undefined} onClick={() => selectView(id)}><Icon size={19} /><span>{title}</span>{id === 'friends' && incoming.length > 0 && <span className="feed-nav-badge">{incoming.length}</span>}</button>)}</nav>
+        <nav aria-label="Shared feed navigation">{[['feed', 'Latest posts', House], ['friends', 'Friends', Users], ['messages', 'Messages', MessageCircle], ['saved', 'Saved posts', Bookmark], ['mine', 'My posts', UserRound]].map(([id, title, Icon]) => <button key={id} type="button" aria-label={title} aria-describedby={id === 'messages' && messaging.unreadCount > 0 ? 'feed-messages-unread' : undefined} className={view === id ? 'active' : ''} aria-current={view === id ? 'page' : undefined} onClick={() => selectView(id)}><Icon size={19} /><span>{title}</span>{id === 'friends' && incoming.length > 0 && <span className="feed-nav-badge">{incoming.length}</span>}{id === 'messages' && messaging.unreadCount > 0 && <span id="feed-messages-unread" className="feed-nav-badge" aria-label={`${messaging.unreadCount} unread conversations`}>{messaging.unreadCount}</span>}</button>)}</nav>
         <button type="button" className="feed-community-link" onClick={() => window.campusSwitchWorkspace('community')}><ArrowLeft size={16} />Back to Community</button>
       </aside>
       <div className="feed-timeline">
         {failure && <div className="feed-error" role="alert"><p>{failure}</p><button type="button" disabled={busy} onClick={() => setRetry(value => value + 1)}>Try again</button></div>}
-        {view === 'friends' ? <SharedFriends user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
+        {view === 'messages' ? <SharedMessages user={user} profiles={profiles} connections={connections} query={query} ready={ready} {...messaging} /> : view === 'friends' ? <SharedFriends user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
           {view !== 'saved' && <Composer user={user} college={college} busy={busy} disabled={!ready} shared onPublish={publish} />}
           <div className="feed-timeline-heading"><h2>{heading}</h2><span className="shared-feed-count">{visible.length}{view !== 'saved' && posts.length === FEED_PAGE_SIZE ? ' / latest 50' : ''}</span></div>
           {view === 'feed' && <div className="feed-filter-tabs" role="group" aria-label="Post audience"><button type="button" aria-pressed={filter === 'all'} className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>All posts</button><button type="button" aria-pressed={filter === 'friends'} className={filter === 'friends' ? 'active' : ''} onClick={() => setFilter('friends')}>Friends</button></div>}
