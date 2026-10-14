@@ -11,6 +11,19 @@ Checked and completed on October 14, 2026.
 | Label automated and teammate results separately | Earlier browser checks are explicitly automated in the report; the teammate note identifies Tulseyy8848 and DevyanaCT. | Preserved. The new check below is automated. |
 | Mobile toast retest with before/after proof | No linked same-path before/after screenshots were found in the reviewed evidence. | Completed below. |
 
+## Team Feedback Status - October 14
+
+This is an audit of existing records, not a new test or a claim that a teammate
+tested the subsequently added real social feed and Messages.
+
+| Before-Wednesday action | Current evidence | Remaining work |
+|---|---|---|
+| Link the actual result and Firestore limit in the Events Definition of Done | [#49 repeat result](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49#issuecomment-6105483528) and [Definition of Done](Definition%20of%20Done.md) record the sample-event pass and limitation. | Keep Discover event loading separate under #35. |
+| Named independent rehearsal, expected/actual results, desktop/mobile screenshots | [DevyanaCT result](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53#issuecomment-6141158476) identifies the tester, October 13 date, production URL, expected/actual result, and passing demo scope. [Tulseyy8848 screenshots](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53#issuecomment-6138295370) provide desktop/mobile evidence. | #53 is still open. The exact deployed commit was not recorded; a clean-checkout run and independent testing of the newer real social/chat features are not established by these receipts. |
+| Keep sample-data boundaries visible | #35 remains open; Events/Discover uses sample events, Community Profile edits are browser-local, and the demo Assistant/suggestions remain prototypes. | Real Firestore Feed posts/social/chat do not resolve Discover event loading. Shared photos remain deferred with billing off. |
+| Individual receipts for all enrolled logins | The [report contribution table](weekly_report.md#individual-contribution-entries--one-row-per-student) links records for `DevyanaCT`, `prachi2061`, `ujjalpoudel75`, and `tulseyy8848`. | Each student should confirm their own attribution; this audit does not create tests or endorsements on their behalf. |
+| Prachi mobile toast stretch | Same-path automated comparison and screenshots below show 1.16:1 before and 16.61:1 after. | Completed for the documented local demo path, not a new independent rehearsal. |
+
 ## Automated Mobile Toast Retest
 
 Expected: the mobile sample-event path still works after the toast-contrast
