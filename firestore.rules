@@ -23,6 +23,26 @@ service cloud.firestore {
     function bounded(maximum) {
       return request.query.limit != null && request.query.limit <= maximum;
     }
+    match /campusFeedConnections/{connectionId} {
+      allow get: if member() && request.auth.uid in resource.data.members;
+      allow list: if member() && bounded(100) && request.auth.uid in resource.data.members;
+      allow create: if member()
+        && request.resource.data.keys().hasAll(['senderId','recipientId','members','status','createdAt','updatedAt'])
+        && request.resource.data.keys().hasOnly(['senderId','recipientId','members','status','createdAt','updatedAt'])
+        && request.resource.data.senderId == request.auth.uid
+        && request.resource.data.recipientId is string && request.resource.data.recipientId != request.auth.uid
+        && connectionId == request.auth.uid + '_' + request.resource.data.recipientId
+        && request.resource.data.members == [request.auth.uid, request.resource.data.recipientId]
+        && request.resource.data.status == 'pending'
+        && request.resource.data.createdAt == request.time && request.resource.data.updatedAt == request.time
+        && exists(/databases/$(database)/documents/campusFeedProfiles/$(request.resource.data.recipientId))
+        && !exists(/databases/$(database)/documents/campusFeedConnections/$(request.resource.data.recipientId + '_' + request.auth.uid));
+      allow update: if member() && resource.data.recipientId == request.auth.uid
+        && resource.data.status == 'pending' && request.resource.data.status == 'accepted'
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','updatedAt']);
+      allow delete: if member() && request.auth.uid in resource.data.members;
+    }
     match /campusFeedProfiles/{uid} {
       match /savedPosts/{postId} {
         allow get: if member() && request.auth.uid == uid;
