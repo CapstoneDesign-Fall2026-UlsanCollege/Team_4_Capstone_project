@@ -8,3 +8,4 @@ ui-debug*.log
 frontend/react-app/dist/
 frontend/react-app/test-results/
 frontend/react-app/playwright-report/
+.vscode/
