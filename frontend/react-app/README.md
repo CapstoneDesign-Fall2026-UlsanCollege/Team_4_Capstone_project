@@ -45,6 +45,12 @@ The reference-style profile uses the signed-in name/email and a computed complet
 
 Share profile opens a text preview with email excluded by default. It shares/copies text, not a public profile URL. Settings explains the browser-local boundary and offers a confirmed reset that leaves account/shared data and event saves unchanged. Run `npm run test:profile` and `npm run test:smoke`; see [profile evidence and limits](verification/profile.md).
 
+## Progress Badges
+
+Dashboard progress now awards badges at levels 1, 2, 3, 5, and 10. View details shows earned/locked badges, earn dates, required levels/points, and the next target. Current points retain the original calculation: 20 per currently saved Community event plus 30 per recorded dashboard draft, with one level per 100 points. Earned badges remain unlocked when the current score decreases and after reload, provided browser storage is available. Awards are scoped to the account ID in this browser, not Firestore or a verified leaderboard.
+
+The Suggest form/review queue does not add points to the legacy dashboard-draft count. With nine sample events and no recorded drafts, saving every event reaches 180 points/level 2; higher tiers need additional qualifying records. No new points sources or Firebase permissions were added. Run `npm run test:badges`; see [badge rules, persistence, screenshots, and verification](verification/progress-badges.md).
+
 This is not a generative AI chatbot. No external model, API key, billing change, live campus feed, or private-message access is involved. Questions do not automatically save events; the student chooses the bookmark control. Run `npm run test:assistant` for the pure engine, storage, and worker checks, and `npm run test:smoke` for desktop/mobile flows.
 
 The earlier local-API “Failed to fetch” failure is not reproducible in the current assistant because it no longer makes API requests. The original reproduction steps and resolution are recorded in [Issue #38](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/38).
