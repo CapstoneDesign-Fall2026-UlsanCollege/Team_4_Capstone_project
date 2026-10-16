@@ -12,6 +12,7 @@
     "test:suggestions": "node tests/suggestions.browser.js",
     "test:assistant": "node --test tests/assistant.test.js",
     "test:profile": "node --test tests/profile.test.js",
+    "test:badges": "node --test tests/progress-badges.test.js",
     "test:smoke": "playwright test",
     "test:toast-mobile": "node tests/toast-mobile.browser.js"
   },
