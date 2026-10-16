@@ -6,17 +6,17 @@ Complete the section for your current sprint at its final class meeting. These a
 
 - [x] Every member can access the repository and board.
 - [x] Meaningful work has an Issue, owner, and Definition of Done.
-- [ ] The project purpose, target user, and scope boundary are visible.
-- [ ] The team agreement is linked and current.
+- [x] The project purpose, target user, and scope boundary are visible.
+- [x] The team agreement is linked and current.
 - [x] No personal data, secrets, or unapproved real-user data has been posted.
 
 ## Sprint 1 - Vertical Slice (Week 7)
 
-- [ ] One small end-to-end user path works or its blocker is clearly documented.
-- [ ] The path has a screenshot, demo, or test note.
+- [x] One small end-to-end user path works or its blocker is clearly documented.
+- [x] The path has a screenshot, demo, or test note.
 - [ ] The team can explain what happens when the main path cannot complete.
-- [ ] The README or setup note tells another person how to view or run the current work.
-- [ ] The team has checked that no secrets or private data are in its shared evidence.
+- [x] The README or setup note tells another person how to view or run the current work.
+- [x] The team has checked that no secrets or private data are in its shared evidence.
 
 ## Sprint 2 - MVP and Freeze (Week 11)
 
