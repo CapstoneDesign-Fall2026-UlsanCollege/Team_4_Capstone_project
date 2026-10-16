@@ -23,6 +23,51 @@ service cloud.firestore {
     function bounded(maximum) {
       return request.query.limit != null && request.query.limit <= maximum;
     }
+    function suggestionReviewer() {
+      return member() && exists(/databases/$(database)/documents/campusSuggestionReviewers/$(request.auth.uid))
+        && get(/databases/$(database)/documents/campusSuggestionReviewers/$(request.auth.uid)).data.enabled == true;
+    }
+    function suggestionOwner(id) {
+      return member() && get(/databases/$(database)/documents/campusSuggestionOwners/$(id)).data.uid == request.auth.uid;
+    }
+    function validSuggestion(data) {
+      return data.keys().hasAll(['name','host','authorName','anonymous','category','date','location','description','createdAt','status','reviewNote','reviewerId','reviewedAt'])
+        && data.keys().hasOnly(['name','host','authorName','anonymous','category','date','location','description','createdAt','status','reviewNote','reviewerId','reviewedAt'])
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+        && data.host is string && data.host.size() <= 100
+        && data.authorName is string && data.authorName.size() <= 120 && data.anonymous is bool
+        && (data.anonymous ? (data.authorName == '' && data.host == '') : (data.authorName.size() > 0 && data.host.size() > 0))
+        && data.category in ['All','Tech','Arts','Music','Sports','Social','Academics']
+        && data.date is string && (data.date == '' || data.date.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$'))
+        && data.location is string && data.location.size() <= 120
+        && data.description is string && data.description.size() > 0 && data.description.size() <= 500;
+    }
+    match /campusSuggestionReviewers/{uid} {
+      allow get: if member() && request.auth.uid == uid;
+    }
+    match /campusSuggestionOwners/{id} {
+      allow get: if member() && (resource == null || resource.data.uid == request.auth.uid);
+      allow list: if member() && bounded(50) && resource.data.uid == request.auth.uid;
+      allow create: if member() && request.resource.data.keys().hasAll(['uid','createdAt'])
+        && request.resource.data.keys().hasOnly(['uid','createdAt']) && request.resource.data.uid == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.createdAt == request.time
+        && getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.status == 'pending';
+    }
+    match /campusSuggestions/{id} {
+      allow get: if suggestionReviewer() || suggestionOwner(id);
+      allow list: if suggestionReviewer() && bounded(100);
+      allow create: if member() && validSuggestion(request.resource.data)
+        && request.resource.data.createdAt == request.time && request.resource.data.status == 'pending'
+        && request.resource.data.reviewNote == '' && request.resource.data.reviewerId == '' && request.resource.data.reviewedAt == null
+        && getAfter(/databases/$(database)/documents/campusSuggestionOwners/$(id)).data.uid == request.auth.uid
+        && getAfter(/databases/$(database)/documents/campusSuggestionOwners/$(id)).data.createdAt == request.time;
+      allow update: if suggestionReviewer() && resource.data.status == 'pending'
+        && request.resource.data.status in ['approved','declined']
+        && request.resource.data.reviewNote is string && request.resource.data.reviewNote.size() <= 500
+        && request.resource.data.reviewerId == request.auth.uid && request.resource.data.reviewedAt == request.time
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','reviewNote','reviewerId','reviewedAt']);
+    }
     match /campusFeedConnections/{connectionId} {
       function canChat() {
         let connection = get(/databases/$(database)/documents/campusFeedConnections/$(connectionId)).data;

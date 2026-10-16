@@ -148,13 +148,3 @@ function handleDashboardNavigation(event){
   if (card) { openDashboardEvent(Number(card.dataset.dashboardEvent)); return true; }
   return false;
 }
-
-function saveDashboardDraft(form){
-  const data = readDashboardData();
-  const inputs = form.querySelectorAll("input");
-  const draft = {name: inputs[0].value.trim(), host: inputs[1].value.trim(), description: form.querySelector("textarea").value.trim(), at: new Date().toISOString()};
-  data.drafts.push(draft);
-  localStorage.setItem(dashboardStorageKey(), JSON.stringify(data));
-  recordDashboardActivity("suggested", draft.name);
-  renderDashboard();
-}

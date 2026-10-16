@@ -747,13 +747,6 @@ function bootCampusVibes(){
   };
   $("#demoLogin").addEventListener("click", enterDemo);
   $("#landingDemo").addEventListener("click", () => { enterDemo(); showPage("discover"); });
-  $("#suggestForm").addEventListener("submit", event => {
-    event.preventDefault();
-    saveDashboardDraft(event.currentTarget);
-    event.currentTarget.reset();
-    showToast("Your idea is saved to your local drafts.");
-    showPage("dashboard");
-  });
 }
 
 if (document.readyState === "loading"){

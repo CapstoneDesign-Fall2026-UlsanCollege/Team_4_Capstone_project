@@ -54,10 +54,12 @@ import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
 
 const Feed = lazy(() => import("./FeedEntry"));
+const Suggestions = lazy(() => import("./Suggestions"));
 
 export default function App() {
   const mountRef = useRef(null);
   const [feedTarget, setFeedTarget] = useState(null);
+  const [suggestTarget, setSuggestTarget] = useState(null);
   const [feedUser, setFeedUser] = useState(null);
 
   useEffect(() => {
@@ -84,6 +86,7 @@ export default function App() {
       .forEach((script) => script.remove());
     mountRef.current.innerHTML = parsedMarkup.body.innerHTML;
     setFeedTarget(mountRef.current.querySelector("#feedMount"));
+    setSuggestTarget(mountRef.current.querySelector("#suggestMount"));
     const receiveSession = (event) => setFeedUser(event.detail);
     window.addEventListener("campus-session-change", receiveSession);
     window.campusRenderIcons = () =>
@@ -159,6 +162,11 @@ export default function App() {
   return (
     <>
       <div ref={mountRef} />
+      {suggestTarget && feedUser && createPortal(
+        <Suspense fallback={<p role="status">Loading suggestions...</p>}>
+          <Suggestions key={feedUser.id} user={feedUser} />
+        </Suspense>, suggestTarget,
+      )}
       {feedTarget &&
         feedUser &&
         createPortal(
