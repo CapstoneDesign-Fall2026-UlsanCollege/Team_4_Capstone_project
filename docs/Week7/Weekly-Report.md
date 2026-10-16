@@ -24,7 +24,9 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 | Screenshot / demo | [Evidence link](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/tree/c559945d2d721dd4e1b57ac895448717b714c7d5/docs/Week6/evidence) |
 | Test/check note | [Retested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/bc14dc96bbbb9555f246bb9a7f8f1e8a93f2d3ab/docs/Week6/Retested-by-note.md) [Demo-tested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/bc14dc96bbbb9555f246bb9a7f8f1e8a93f2d3ab/docs/Week6/evidence/Tested-by-note.md) |
 |Deployment| [Deployment](https://campusvibe-theta.vercel.app/) |
-| Team-agreement | [Team-agreement](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/e1a1fb2c7e2c40bd98bd4ea4e362762f8cbf046e/docs/Week1/team_agrement.md)
+| Team-agreement | [Team-agreement](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/e1a1fb2c7e2c40bd98bd4ea4e362762f8cbf046e/docs/Week1/team_agrement.md) |
+| Sprint1 Quality check | [sprint-quality-quick-check](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5672689bb30aa48d1cd88c0c269d0640bf592145/docs/Week7/sprint-quality-quick-checks.md) |
+| Work Checklist | [Week7 Work Checklist](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5672689bb30aa48d1cd88c0c269d0640bf592145/docs/Week7/week7-work.checklist.md)
 | Document update | Link this Week 7 report in the team's repository after committing it. |
 
 ## References Links
