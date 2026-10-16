@@ -52,14 +52,17 @@ import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
+import eventCatalog from "../../events.json";
 
 const Feed = lazy(() => import("./FeedEntry"));
 const Suggestions = lazy(() => import("./Suggestions"));
+const Assistant = lazy(() => import("./Assistant"));
 
 export default function App() {
   const mountRef = useRef(null);
   const [feedTarget, setFeedTarget] = useState(null);
   const [suggestTarget, setSuggestTarget] = useState(null);
+  const [assistantTarget, setAssistantTarget] = useState(null);
   const [feedUser, setFeedUser] = useState(null);
 
   useEffect(() => {
@@ -87,6 +90,7 @@ export default function App() {
     mountRef.current.innerHTML = parsedMarkup.body.innerHTML;
     setFeedTarget(mountRef.current.querySelector("#feedMount"));
     setSuggestTarget(mountRef.current.querySelector("#suggestMount"));
+    setAssistantTarget(mountRef.current.querySelector("#assistantMount"));
     const receiveSession = (event) => setFeedUser(event.detail);
     window.addEventListener("campus-session-change", receiveSession);
     window.campusRenderIcons = () =>
@@ -129,6 +133,7 @@ export default function App() {
 
     const appScript = document.createElement("script");
     appScript.textContent = `(() => {
+      const EVENTS = ${JSON.stringify(eventCatalog)};
       ${dashboardScript}
       ${discoverScript}
       ${originalScript}
@@ -152,6 +157,7 @@ export default function App() {
       delete window.syncFirebaseUser;
       delete window.campusRenderIcons;
       delete window.campusSwitchWorkspace;
+      delete window.campusAssistant;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
       window.campusNavigationCleanup?.();
@@ -162,6 +168,11 @@ export default function App() {
   return (
     <>
       <div ref={mountRef} />
+      {assistantTarget && feedUser && createPortal(
+        <Suspense fallback={<p role="status">Loading the local assistant...</p>}>
+          <Assistant key={feedUser.id} user={feedUser} />
+        </Suspense>, assistantTarget,
+      )}
       {suggestTarget && feedUser && createPortal(
         <Suspense fallback={<p role="status">Loading suggestions...</p>}>
           <Suggestions key={feedUser.id} user={feedUser} />

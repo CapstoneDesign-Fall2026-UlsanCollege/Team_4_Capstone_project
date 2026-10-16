@@ -1,42 +1,4 @@
 
-const EVENTS = [
-  { id:1, title:"HackNight: Build-a-Thon", interest:"Tech", photo:"event-laptop.jpg",
-    date:"2026-09-26", time:"6:00 PM", location:"Innovation Lab, Bldg 7",
-    host:"Code Collective", emoji:"💻", hue:"#7c5cff",
-    desc:"24 hours of building, pizza, and demo prizes." },
-  { id:2, title:"Open Mic & Poetry Night", interest:"Music", photo:"event-open-mic.jpg",
-    date:"2026-09-27", time:"7:30 PM", location:"Student Union Courtyard",
-    host:"Livewire Society", emoji:"🎤", hue:"#00e0b8",
-    desc:"Sign up or just vibe. Acoustic slots open at 7." },
-  { id:3, title:"Mural Painting Workshop", interest:"Arts", photo:"event-painting.jpg",
-    date:"2026-09-29", time:"3:00 PM", location:"Arts Wing, Rm 204",
-    host:"Brush Strokes Club", emoji:"🎨", hue:"#ff8fb1",
-    desc:"Help paint the new community mural. All levels welcome." },
-  { id:4, title:"Intramural Basketball Finals", interest:"Sports", photo:"event-basketball.jpg",
-    date:"2026-09-30", time:"5:30 PM", location:"Main Gymnasium",
-    host:"Campus Athletics", emoji:"🏀", hue:"#ffb35c",
-    desc:"The championship game. Free entry, loud crowd." },
-  { id:5, title:"Freshers' Bonfire Social", interest:"Social", photo:"event-bonfire.jpg",
-    date:"2026-10-02", time:"8:00 PM", location:"Lakeside Lawn",
-    host:"Student Council", emoji:"🔥", hue:"#ff6b81",
-    desc:"S'mores, music, and meeting your people." },
-  { id:6, title:"Research Skills Bootcamp", interest:"Academics", photo:"event-research.jpg",
-    date:"2026-10-03", time:"10:00 AM", location:"Library Hall B",
-    host:"Grad Student Union", emoji:"📚", hue:"#5cc8ff",
-    desc:"Citations, literature reviews, and avoiding panic." },
-  { id:7, title:"Indie Game Showcase", interest:"Tech", photo:"event-games.jpg",
-    date:"2026-10-04", time:"4:00 PM", location:"Media Centre",
-    host:"Game Devs Guild", emoji:"🕹️", hue:"#7c5cff",
-    desc:"Play student-made games, vote for the audience award." },
-  { id:8, title:"Jazz Under the Stars", interest:"Music", photo:"event-jazz.jpg",
-    date:"2026-10-05", time:"7:00 PM", location:"Botanical Garden",
-    host:"Campus Orchestra", emoji:"🎷", hue:"#00e0b8",
-    desc:"An evening set with the quartet. Bring a blanket." },
-  { id:9, title:"Photowalk: Golden Hour", interest:"Arts", photo:"event-photowalk.jpg",
-    date:"2026-10-06", time:"5:00 PM", location:"Meet at Main Gate",
-    host:"Shutter Club", emoji:"📷", hue:"#ff8fb1",
-    desc:"A guided walk shooting campus at golden hour." },
-];
 
 /* ── Constants ── */
 const SAVED_KEY   = "cv_saved";
@@ -47,7 +9,10 @@ let currentEventSearch = "";
 /* ── Helpers ── */
 const $ = (sel) => document.querySelector(sel);
 const getSession = () => currentSession;
-const getSaved = () => JSON.parse(localStorage.getItem(SAVED_KEY) || "[]");
+const getSaved = () => {
+  try { const value = JSON.parse(localStorage.getItem(SAVED_KEY) || "[]"); return Array.isArray(value) ? [...new Set(value.filter(id => EVENTS.some(event => event.id === id)))] : []; }
+  catch { return []; }
+};
 const saveSaved = (ids) => localStorage.setItem(SAVED_KEY, JSON.stringify(ids));
 
 function showToast(msg){
@@ -138,6 +103,7 @@ function toggleSaved(id){
   const saved = getSaved();
   const next = saved.includes(id) ? saved.filter(item => item !== id) : [...saved, id];
   saveSaved(next);
+  window.dispatchEvent(new Event("campus-saved-change"));
   const event = EVENTS.find(item => item.id === id);
   if (event) recordDashboardActivity(next.includes(id) ? "saved" : "removed", event.title);
   renderEvents();
@@ -199,138 +165,6 @@ function showPage(page, record = true){
   });
   if (record) recordNavigationRoute("community", page);
   window.scrollTo({top: 0, behavior: "instant"});
-}
-
-let lastSuggestedEvents = [];
-
-const CAMPUS_INTERESTS = {
-  tech: ["tech", "technology", "coding", "programming", "game"],
-  arts: ["art", "arts", "painting", "photo", "photography", "creative"],
-  music: ["music", "concert", "jazz", "poetry", "open mic"],
-  sports: ["sport", "sports", "basketball", "fitness", "athletic"],
-  social: ["social", "friends", "meet people", "meeting people", "fun"],
-  academics: ["academic", "academics", "study", "research", "learning"],
-};
-
-function formatCampusEvent(event){
-  const date = new Date(`${event.date}T00:00:00`);
-  const weekday = date.toLocaleDateString("en-US", { weekday: "long" });
-  const monthDay = date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  return `${event.emoji} ${event.title} — ${weekday}, ${monthDay} at ${event.time}, ${event.location}. Hosted by ${event.host}.`;
-}
-
-function createCampusReply(question){
-  const query = question.toLowerCase();
-  const category = Object.entries(CAMPUS_INTERESTS)
-    .find(([, terms]) => terms.some(term =>
-      term.includes(" ") ? query.includes(term) : new RegExp(`\\b${term}\\b`).test(query)
-    ))?.[0];
-  const interest = category
-    ? category.charAt(0).toUpperCase() + category.slice(1)
-    : null;
-  const wantsSavedList = /\bsaved events\b|\bmy saved\b|\bshow\b.{0,24}\bsaved\b|\blist\b.{0,24}\bsaved\b|\bwhat did i save\b|\bshortlist\b/.test(query);
-  const events = wantsSavedList
-    ? EVENTS.filter(event => getSaved().includes(event.id))
-    : EVENTS.filter(event => !interest || event.interest === interest);
-  const wantsLocation = /\bwhere\b|\blocation\b/.test(query);
-  const wantsTime = /\bwhen\b|\bdate\b|\btime\b/.test(query);
-  const eventMatch = EVENTS.find(event =>
-    query.includes(event.title.toLowerCase())
-    || query.includes(event.host.toLowerCase())
-  ) || (/\b(it|that|there)\b/.test(query) && lastSuggestedEvents.length === 1
-    ? lastSuggestedEvents[0]
-    : null);
-
-  if (/^(hi|hello|hey|good morning|good afternoon)\b/.test(query)){
-    return "Hi! I can help you explore the events listed in CampusVibes, find events by interest, check event details, or explain how to save one. What are you looking for?";
-  }
-  if (eventMatch && (wantsLocation || wantsTime || query.includes(eventMatch.title.toLowerCase()))){
-    lastSuggestedEvents = [eventMatch];
-    return `${formatCampusEvent(eventMatch)} This is sample event data, so please verify details before attending.`;
-  }
-  if (/how (do|can) i save|save an event|bookmark/.test(query)){
-    return "Open Discover and select the star on an event to save it. You can find your saved events under Saved in the navigation.";
-  }
-  if (wantsSavedList){
-    lastSuggestedEvents = events;
-    return events.length
-      ? `You have ${events.length} saved event${events.length === 1 ? "" : "s"}:\n${events.map(formatCampusEvent).join("\n")}`
-      : "You haven’t saved any events yet. Browse Discover and select the star on an event to add it to Saved.";
-  }
-  if (/suggest|submit|add an event/.test(query)){
-    return "Use Suggest in the navigation to send an event name, host, and description. Suggestions enter the team’s review queue; they aren’t published automatically.";
-  }
-  if (/how (do|can) i (find|browse)|discover/.test(query)){
-    return "Open Discover to browse the sample events. Use the interest filters to narrow the list, and select a star to save an event.";
-  }
-  if (interest || /\bevents?\b|\bwhat('?s| is) happening\b|\bweekend\b|\bactivities\b/.test(query)){
-    lastSuggestedEvents = events.slice(0, 4);
-    if (!events.length){
-      return `I don’t see any ${interest ? `${interest.toLowerCase()} ` : ""}events in the current sample list. Try another interest or browse Discover.`;
-    }
-    const heading = interest
-      ? `Here are events in the ${interest} category:`
-      : "Here are a few events currently listed in the sample data:";
-    return `${heading}\n${lastSuggestedEvents.map(formatCampusEvent).join("\n")}\nEvent listings are sample data; verify details before attending.`;
-  }
-  if (/help|what can you do|who are you/.test(query)){
-    return "I’m the CampusVibes helper. I can search sample campus events, find listings by interest, check event time/location, explain Saved and Suggest, and show your saved events. I can’t answer general questions or access live campus information.";
-  }
-  return "I can help with CampusVibes: try “show music events,” “where is Jazz Under the Stars?”, “how do I save an event?”, or “show my saved events.” I only know the sample events and app features shown here.";
-}
-
-function appendChatMessage(role, text){
-  const message = document.createElement("div");
-  message.className = `chat-message ${role}`;
-  const label = document.createElement("div");
-  label.className = "chat-message-label";
-  label.textContent = role === "user" ? "You" : "CampusVibes Assistant";
-  const content = document.createElement("p");
-  content.textContent = text;
-  message.append(label, content);
-  $("#chatMessages").append(message);
-  $("#chatMessages").scrollTop = $("#chatMessages").scrollHeight;
-}
-
-function clearChatConversation(){
-  lastSuggestedEvents = [];
-  const messages = $("#chatMessages");
-  if (!messages) return;
-  messages.innerHTML = "";
-  appendChatMessage("assistant", "Hi! I can help you explore campus events, find listings by interest, check event details, or explain how to save one.");
-  $("#chatPrompts")?.classList.remove("hidden");
-}
-
-function sendChatMessage(text){
-  const message = text.trim();
-  if (!message) return;
-
-  appendChatMessage("user", message);
-  $("#chatInput").value = "";
-  $("#chatPrompts").classList.add("hidden");
-  appendChatMessage("assistant", createCampusReply(message));
-  $("#chatInput").focus();
-}
-
-function setupChat(){
-  $("#chatForm").addEventListener("submit", event => {
-    event.preventDefault();
-    sendChatMessage($("#chatInput").value);
-  });
-  $("#chatInput").addEventListener("keydown", event => {
-    if (event.key === "Enter" && !event.shiftKey){
-      event.preventDefault();
-      $("#chatForm").requestSubmit();
-    }
-  });
-  $("#chatPrompts").addEventListener("click", event => {
-    const prompt = event.target.closest(".chat-prompt");
-    if (prompt) sendChatMessage(prompt.dataset.prompt || prompt.textContent);
-  });
-  $("#chatClear").addEventListener("click", () => {
-    clearChatConversation();
-    $("#chatInput").focus();
-  });
 }
 
 function setupPageNavigation(){
@@ -630,8 +464,9 @@ function startSession(user, interest = ""){
 function syncFirebaseUser(user){
   if (user) startSession(user);
   else {
+    // Firebase's initial signed-out callback can arrive after demo entry.
+    if (currentSession?.id === "demo") return;
     currentSession = null;
-    clearChatConversation();
     updateNav();
   }
 }
@@ -706,6 +541,16 @@ function switchWorkspace(mode, record = true){
 
 /* ── Boot ── */
 function bootCampusVibes(){
+  window.campusAssistant = {
+    getSaved,
+    saveEvent(id) { if (getSession() && EVENTS.some(event => event.id === id)) toggleSaved(id); },
+    openEvent(id) { if (getSession() && EVENTS.some(event => event.id === id)) openDiscoverEvent(id); },
+    navigate(page) {
+      if (!getSession()) return;
+      if (page === "feed") switchWorkspace("feed");
+      else if (["dashboard","discover","saved","suggest","profile"].includes(page)) showPage(page);
+    },
+  };
   window.addEventListener("popstate", restoreNavigationRoute);
   window.addEventListener("hashchange", restoreNavigationRoute);
   window.campusNavigationCleanup = () => {
@@ -721,7 +566,6 @@ function bootCampusVibes(){
   renderSavedEvents();
   setupFilter();
   setupPageNavigation();
-  setupChat();
   $("#profileEdit").addEventListener("click", () => {
     $("#editProgram").value = $("#profileProgram").textContent;
     $("#editBio").value = $("#profileBio").textContent;

@@ -136,25 +136,7 @@
     <dialog class="dashboard-dialog discover-filter-dialog" id="discoverFilterDialog" aria-labelledby="discoverFilterTitle"><div class="dashboard-section-heading"><h2 id="discoverFilterTitle">Event filters</h2><button class="dashboard-icon-button" id="closeDiscoverFilters" type="button" aria-label="Close event filters" title="Close event filters"><i data-lucide="x" aria-hidden="true"></i></button></div><form id="discoverFilterForm"><label>Category<select id="discoverCategory"><option value="all">All categories</option><option>Tech</option><option>Arts</option><option>Music</option><option>Sports</option><option>Social</option><option>Academics</option></select></label><label>Sort by<select id="discoverSort"><option value="date">Date: earliest first</option><option value="latest">Date: latest first</option><option value="title">Title: A to Z</option></select></label><label class="discover-checkbox"><input id="discoverSavedOnly" type="checkbox">Saved events only</label><button class="btn btn-primary" type="submit">Apply filters</button></form></dialog>
   </section>
 
-  <section class="page-view" id="page-chat">
-    <div class="page-heading compact"><div><p class="eyebrow">ASK CAMPUSVIBES</p><h1>CampusVibes <span class="assistant-title-accent">Assistant</span></h1><p>Get help finding events and using CampusVibes.</p></div><button class="btn btn-outline" id="chatClear" type="button">New chat</button></div>
-    <section class="chat-panel panel" aria-label="AI chat">
-      <div class="chat-messages" id="chatMessages" aria-label="Conversation" aria-live="polite" aria-relevant="additions text">
-        <div class="chat-message assistant"><div class="chat-message-label">CampusVibes Assistant</div><p>Hi! I can help you explore campus events, find listings by interest, check event details, or explain how to save one.</p></div>
-      </div>
-      <div class="chat-prompts" id="chatPrompts" aria-label="Suggested questions">
-        <button class="chat-prompt" type="button" data-prompt="Show me music events">Show me music events</button>
-        <button class="chat-prompt" type="button" data-prompt="Where is the Indie Game Showcase?">Where is an event?</button>
-        <button class="chat-prompt" type="button" data-prompt="How do I save an event?">How do I save an event?</button>
-      </div>
-      <form class="chat-form" id="chatForm">
-        <label class="sr-only" for="chatInput">Message CampusVibes Assistant</label>
-        <textarea id="chatInput" rows="1" maxlength="500" placeholder="Ask about events or CampusVibes..." required></textarea>
-        <button class="btn btn-primary" id="chatSend" type="submit">Send</button>
-      </form>
-      <p class="chat-disclaimer">This helper uses the sample events in CampusVibes. It doesn’t use an external AI service or have live campus information.</p>
-    </section>
-  </section>
+  <section class="page-view" id="page-chat"><div id="assistantMount"></div></section>
 
   <section class="page-view" id="page-saved"><div class="page-heading compact"><div><p class="eyebrow">YOUR SHORTLIST</p><h1>Saved events</h1><p>Keep the plans you are not ready to forget.</p></div></div><div class="events-grid" id="savedGrid"></div><p class="empty-state hidden" id="savedEmpty">You have not saved any events yet. Browse Discover and tap the bookmark on an event.</p></section>
 
