@@ -1,38 +1,38 @@
 
 const EVENTS = [
-  { id:1, title:"HackNight: Build-a-Thon", interest:"Tech",
+  { id:1, title:"HackNight: Build-a-Thon", interest:"Tech", photo:"event-laptop.jpg",
     date:"2026-09-26", time:"6:00 PM", location:"Innovation Lab, Bldg 7",
     host:"Code Collective", emoji:"💻", hue:"#7c5cff",
     desc:"24 hours of building, pizza, and demo prizes." },
-  { id:2, title:"Open Mic & Poetry Night", interest:"Music",
+  { id:2, title:"Open Mic & Poetry Night", interest:"Music", photo:"event-open-mic.jpg",
     date:"2026-09-27", time:"7:30 PM", location:"Student Union Courtyard",
     host:"Livewire Society", emoji:"🎤", hue:"#00e0b8",
     desc:"Sign up or just vibe. Acoustic slots open at 7." },
-  { id:3, title:"Mural Painting Workshop", interest:"Arts",
+  { id:3, title:"Mural Painting Workshop", interest:"Arts", photo:"event-painting.jpg",
     date:"2026-09-29", time:"3:00 PM", location:"Arts Wing, Rm 204",
     host:"Brush Strokes Club", emoji:"🎨", hue:"#ff8fb1",
     desc:"Help paint the new community mural. All levels welcome." },
-  { id:4, title:"Intramural Basketball Finals", interest:"Sports",
+  { id:4, title:"Intramural Basketball Finals", interest:"Sports", photo:"event-basketball.jpg",
     date:"2026-09-30", time:"5:30 PM", location:"Main Gymnasium",
     host:"Campus Athletics", emoji:"🏀", hue:"#ffb35c",
     desc:"The championship game. Free entry, loud crowd." },
-  { id:5, title:"Freshers' Bonfire Social", interest:"Social",
+  { id:5, title:"Freshers' Bonfire Social", interest:"Social", photo:"event-bonfire.jpg",
     date:"2026-10-02", time:"8:00 PM", location:"Lakeside Lawn",
     host:"Student Council", emoji:"🔥", hue:"#ff6b81",
     desc:"S'mores, music, and meeting your people." },
-  { id:6, title:"Research Skills Bootcamp", interest:"Academics",
+  { id:6, title:"Research Skills Bootcamp", interest:"Academics", photo:"event-research.jpg",
     date:"2026-10-03", time:"10:00 AM", location:"Library Hall B",
     host:"Grad Student Union", emoji:"📚", hue:"#5cc8ff",
     desc:"Citations, literature reviews, and avoiding panic." },
-  { id:7, title:"Indie Game Showcase", interest:"Tech",
+  { id:7, title:"Indie Game Showcase", interest:"Tech", photo:"event-games.jpg",
     date:"2026-10-04", time:"4:00 PM", location:"Media Centre",
     host:"Game Devs Guild", emoji:"🕹️", hue:"#7c5cff",
     desc:"Play student-made games, vote for the audience award." },
-  { id:8, title:"Jazz Under the Stars", interest:"Music",
+  { id:8, title:"Jazz Under the Stars", interest:"Music", photo:"event-jazz.jpg",
     date:"2026-10-05", time:"7:00 PM", location:"Botanical Garden",
     host:"Campus Orchestra", emoji:"🎷", hue:"#00e0b8",
     desc:"An evening set with the quartet. Bring a blanket." },
-  { id:9, title:"Photowalk: Golden Hour", interest:"Arts",
+  { id:9, title:"Photowalk: Golden Hour", interest:"Arts", photo:"event-photowalk.jpg",
     date:"2026-10-06", time:"5:00 PM", location:"Meet at Main Gate",
     host:"Shutter Club", emoji:"📷", hue:"#ff8fb1",
     desc:"A guided walk shooting campus at golden hour." },
@@ -62,11 +62,12 @@ function showToast(msg){
 const GRADIENTS = (hue) =>
   `linear-gradient(135deg, ${hue}, #4528a8)`;
 
+function eventPhoto(event){
+  return `/assets/${event.photo}`;
+}
+
 function eventBannerMedia(event){
-  const images = {1:"event-laptop.jpg", 7:"event-games.jpg"};
-  return images[event.id]
-    ? `<img class="event-cover" src="/assets/${images[event.id]}" alt="" loading="lazy">`
-    : `<span>${event.emoji}</span>`;
+  return `<img class="event-cover" src="${eventPhoto(event)}" alt="" loading="lazy">`;
 }
 
 function renderEvents(filter = currentInterestFilter, search = currentEventSearch){

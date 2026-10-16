@@ -12,9 +12,7 @@ const DISCOVER_STYLES = {
 function discoverAttribute(value) { return dashboardText(value).replace(/"/g, "&quot;"); }
 
 function discoverPhotoMarkup(event, extraClass = "") {
-  const atlas = event.interest === "Sports" ? 2 : event.id === 3 ? 1 : event.interest === "Social" ? 0 : null;
-  const photo = event.id === 1 ? "event-laptop.jpg" : event.id === 7 ? "event-games.jpg" : event.interest === "Music" ? "feed-music.jpg" : event.interest === "Academics" ? "campus-login.jpg" : "campus-dashboard.jpg";
-  return `<span class="discover-image ${extraClass} ${atlas !== null ? "discover-atlas" : ""}" ${atlas !== null ? `style="--photo-column:${atlas}"` : ""}><img src="/assets/${atlas !== null ? "discover-campus-atlas.png" : photo}" alt="" loading="lazy"></span>`;
+  return `<span class="discover-image ${extraClass}"><img src="${eventPhoto(event)}" alt="" loading="lazy"></span>`;
 }
 
 function discoverSaveMarkup(event, saved, extraClass = "") {
