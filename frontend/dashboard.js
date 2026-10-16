@@ -33,7 +33,7 @@ function dashboardDateKey(date){
 }
 
 function dashboardPhoto(event){
-  return `/assets/${event.id === 1 ? "event-laptop.jpg" : event.id === 7 ? "event-games.jpg" : "event-community.jpg"}`;
+  return eventPhoto(event);
 }
 
 function activityTime(value){
