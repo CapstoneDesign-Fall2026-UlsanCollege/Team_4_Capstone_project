@@ -148,4 +148,3 @@ function handleDashboardNavigation(event){
   if (card) { openDashboardEvent(Number(card.dataset.dashboardEvent)); return true; }
   return false;
 }
-

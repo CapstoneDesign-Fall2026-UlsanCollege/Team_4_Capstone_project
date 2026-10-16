@@ -4,6 +4,12 @@ This Vite + React app mounts the Community markup and behavior and provides the 
 
 ## Run locally
 
+The [Suggest page and review queue](verification/suggestions.md) include account-private
+browser drafts, real Firestore submissions, anonymous reviewer attribution,
+personal submission status, and admin-authorized approve/decline decisions.
+Use `npm run test:suggestions` with the documented local emulators. Attachments
+remain disabled, and approval does not publish a Discover event.
+
 ```sh
 npm ci
 npm run dev

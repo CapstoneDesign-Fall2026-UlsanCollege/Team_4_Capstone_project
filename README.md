@@ -10,7 +10,7 @@ and sharing campus updates. The current app uses React, Vite, and Firebase.
 | Authentication | Email/password signup, login, logout, persistence, Google sign-in and password-reset wiring | Firebase Authentication. Successful Google login and reset-email completion need separate verification. |
 | Community | Dashboard, Discover search/filters, event details, Saved, and Profile | Discover events are code-based samples; Firestore event loading remains unverified. Saved events and profile edits are browser-local. |
 | Assistant | Rules-based sample-event recommendations and event/navigation answers | Runs in the browser; no generative AI or live campus data. Accessible through demo entry. |
-| Suggest | Submit a local event idea through the prototype | Browser-local draft behavior, not backend submission or publication. |
+| Suggest | Draft event ideas, submit for team review, and track decisions | Private browser-local drafts; signed-in submissions and reviewer decisions persist in Firestore. Anonymous ideas hide name/club from reviewers, not project administrators. Attachments remain off. [Scope and tests](frontend/react-app/verification/suggestions.md). |
 | Guest Campus Vibe-Feed | Text/photo/event posts, local social actions, and demo friend requests | Fictional profiles and device-local IndexedDB storage; no delivery to other students. |
 | Signed-in Campus Vibe-Feed | Text/event posts, likes, comments, interest, private saved posts, profiles, and friend requests | Firestore-backed data in the restored rich layout. Shared photos are disabled while billing stays off. See the social-feed verification record for tested scope and query limits. |
 
