@@ -9,9 +9,12 @@ export function cleanContext(value, known) {
 }
 export function cleanSession(value, events) {
   const known = new Set(events.map(event => event.id));
+  const seen = new Set();
   const messages = (Array.isArray(value?.messages) ? value.messages : []).slice(-MAX_MESSAGES).flatMap(message => {
     if (!message || !['user','assistant'].includes(message.role) || typeof message.text !== 'string' || !message.text.trim() || message.text.length > (message.role === 'user' ? 500 : 6000)) return [];
-    return [{ id: typeof message.id === 'string' && /^[a-zA-Z0-9-]{1,80}$/.test(message.id) ? message.id : crypto.randomUUID(), role: message.role, text: message.text, eventIds: message.role === 'assistant' ? cleanIds(message.eventIds,known,4) : [], pages: message.role === 'assistant' && Array.isArray(message.pages) ? [...new Set(message.pages.filter(page => pages.has(page)))] : [] }];
+    const id = typeof message.id === 'string' && /^[a-zA-Z0-9-]{1,80}$/.test(message.id) && !seen.has(message.id) ? message.id : crypto.randomUUID();
+    seen.add(id);
+    return [{ id, role: message.role, text: message.text, eventIds: message.role === 'assistant' ? cleanIds(message.eventIds,known,4) : [], pages: message.role === 'assistant' && Array.isArray(message.pages) ? [...new Set(message.pages.filter(page => pages.has(page)))] : [] }];
   });
   return { messages, draft: typeof value?.draft === 'string' ? value.draft.slice(0,500) : '', context: messages.some(message => message.role === 'assistant') ? cleanContext(value?.context,known) : cleanContext(null,known) };
 }

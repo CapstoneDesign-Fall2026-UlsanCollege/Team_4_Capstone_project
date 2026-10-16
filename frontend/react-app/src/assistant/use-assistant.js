@@ -41,7 +41,8 @@ export function useAssistant(user, events, getSaved) {
   }
   function clear() {
     generation.current++; runner.current?.stop(); failed.current = null; lock.current = false;
-    setBusy(false); setError(''); setSession(cleanSession(null,events));
+    const fresh = cleanSession(null,events); latest.current = fresh;
+    setBusy(false); setError(''); setSession(fresh);
     try { sessionStorage.removeItem(key); } catch { setWarning('Chat history could not be cleared from browser storage.'); }
   }
   return { ...session, busy, error, warning, send: text => run(text), retry: () => failed.current && run(failed.current,true), stop: () => runner.current?.stop(), clear, setDraft: draft => setSession(value => ({ ...value, draft: draft.slice(0,500) })) };

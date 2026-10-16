@@ -17,11 +17,16 @@ export function createAssistantRunner(factory = () => new Worker(new URL('./work
         const id = crypto.randomUUID();
         try {
           if (!worker) {
-            worker = factory();
-            worker.onmessage = ({ data }) => { if (data.id === pending?.id) finish(data.error ? new Error(data.error) : null,data.result); };
-            worker.onerror = event => { event.preventDefault?.(); worker?.terminate(); worker = null; finish(new Error('The local helper could not start. Reconnect to load its assets, then retry.')); };
+            const instance = factory(); worker = instance;
+            instance.onmessage = ({ data }) => {
+              if (worker !== instance || !pending || data?.id !== pending.id) return;
+              if (data.error) finish(new Error(String(data.error).slice(0,300)));
+              else if (typeof data.result?.text !== 'string' || !data.result.text || data.result.text.length > 6000 || !Array.isArray(data.result.eventIds)) finish(new Error('The local helper returned an invalid response. Please retry.'));
+              else finish(null,data.result);
+            };
+            instance.onerror = event => { if (worker !== instance) return; event.preventDefault?.(); worker.terminate(); worker = null; finish(new Error('The local helper could not start. Reconnect to load its assets, then retry.')); };
           }
-          pending = { id, resolve, reject, timer: setTimeout(() => { worker?.terminate(); worker = null; finish(new Error('The local helper took too long. Please retry.')); },timeout) };
+          pending = { id, resolve, reject, timer: setTimeout(() => { if (pending?.id !== id) return; worker?.terminate(); worker = null; finish(new Error('The local helper took too long. Please retry.')); },timeout) };
           worker.postMessage({ id, request });
         } catch { worker?.terminate(); worker = null; if (pending) finish(new Error('The local helper is unavailable in this browser.')); else reject(new Error('The local helper is unavailable in this browser.')); }
       });

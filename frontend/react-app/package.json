@@ -10,6 +10,7 @@
     "test:feed-rules": "node --test tests/feed-rules.test.js",
     "test:shared-feed": "node tests/shared-feed.browser.js",
     "test:suggestions": "node tests/suggestions.browser.js",
+    "test:assistant": "node --test tests/assistant.test.js",
     "test:smoke": "playwright test",
     "test:toast-mobile": "node tests/toast-mobile.browser.js"
   },
