@@ -1,4 +1,5 @@
 import { createEventSearch, knownEvents, normalize, reply } from './search.js';
+import { handleComparison, handleInterests } from './interests.js';
 
 export const WELCOME = 'Hi! I can help you explore campus events, find listings by interest, check event details, or explain how to save one.';
 
@@ -14,9 +15,11 @@ export function createAssistant(events) {
     if (/\b(how|where)\b.*\b(message|friends|feed)\b/.test(normalized)) return reply('Open Campus Vibe-Feed and Friends to connect with another account. Private Messages are available after the friendship is accepted. This local helper cannot read your private conversations.', [], { pages: ['feed'] });
     if (/^(help|what can you do|who are you|are you ai)$/.test(normalized)) return reply('I am a free local CampusVibes helper, not a generative AI service. I can search the sample listings, check dates and locations, compare events, and help with Saved and Suggest. I do not have live campus information.', [], { pages: ['discover','saved','suggest'] });
     if (/\b(book|rsvp|buy|purchase|register|ticket|price|cost|free entry)\b/.test(normalized)) return reply('I cannot book places or verify tickets, prices, or availability. Check the listed host before attending. The event listings here are samples.', search(text));
+    const special = handleComparison(tools) || handleInterests(tools);
+    if (special) return special;
+    if (/^(show |find |list |browse )?(all )?(campus )?(events|activities|listings)$/.test(normalized)) return reply('Here are the sample events. Ask for more to continue the list.', events);
     const found = search(text);
     if (found.length) return reply(found.length === 1 ? 'Here is the matching sample event. Its listed date, time, location, and host are shown below.' : 'These sample listings match your question. Choose an event for its full details.', found);
-    if (/^(show |find |list |browse )?(all )?(campus )?(events|activities|listings)$/.test(normalized)) return reply('Here are the sample events. Ask for more to continue the list.', events);
     return reply('I could not match that to the sample listings. Try an event title, host, location, or interest. I cannot answer general questions or check live campus news.', [], { pages: ['discover'] });
   };
 }
