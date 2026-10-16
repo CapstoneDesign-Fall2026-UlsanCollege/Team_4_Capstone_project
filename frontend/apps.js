@@ -165,8 +165,30 @@ function setupFilter(){
   });
 }
 
-function showPage(page){
-  if (getSession()) switchWorkspace("community");
+function readNavigationRoute(){
+  if (location.hash === "#/feed") return {workspace: "feed"};
+  const match = /^#\/community\/(dashboard|discover|chat|saved|suggest|profile)$/.exec(location.hash);
+  return match ? {workspace: "community", page: match[1]} : null;
+}
+
+function recordNavigationRoute(workspace, page, replace = false){
+  if (!getSession()) return;
+  const hash = workspace === "feed" ? "#/feed" : `#/community/${page}`;
+  if (location.hash === hash) return;
+  history[replace ? "replaceState" : "pushState"](null, "", hash);
+}
+
+function restoreNavigationRoute(){
+  if (!getSession()) return;
+  const route = readNavigationRoute();
+  if (route?.workspace === "feed") switchWorkspace("feed", false);
+  else showPage(route?.page || "dashboard", false);
+}
+
+function showPage(page, record = true){
+  if (!document.getElementById(`page-${page}`)?.classList.contains("page-view")) return;
+  if (getSession()) switchWorkspace("community", false);
+  document.querySelectorAll("#appMain dialog[open]").forEach(dialog => dialog.close());
   document.querySelectorAll(".page-view").forEach(view => view.classList.toggle("active", view.id === `page-${page}`));
   document.querySelectorAll(".page-link").forEach(link => {
     const active = link.dataset.page === page;
@@ -174,7 +196,8 @@ function showPage(page){
     if (active) link.setAttribute("aria-current", "page");
     else link.removeAttribute("aria-current");
   });
-  window.scrollTo({top: 0, behavior: "smooth"});
+  if (record) recordNavigationRoute("community", page);
+  window.scrollTo({top: 0, behavior: "instant"});
 }
 
 let lastSuggestedEvents = [];
@@ -629,7 +652,15 @@ function updateNav(){
   $("#navAuthIn").classList.toggle("hidden", !s);
   $("#workspaceSwitch").classList.toggle("hidden", !s);
   window.dispatchEvent(new CustomEvent("campus-session-change", {detail:s}));
-  switchWorkspace(s ? localStorage.getItem(`cv_workspace_${s.email}`) || "community" : "community");
+  if (s){
+    const route = readNavigationRoute();
+    if (route) restoreNavigationRoute();
+    else {
+      const workspace = localStorage.getItem(`cv_workspace_${s.email}`) || "community";
+      switchWorkspace(workspace, false);
+      recordNavigationRoute(workspace, document.querySelector(".page-view.active")?.id.slice(5) || "dashboard", true);
+    }
+  } else switchWorkspace("community", false);
   $("#dashboardName").textContent = s ? s.name.split(" ")[0] : "there";
   $("#profileName").textContent = s ? s.name : "Guest student";
   $("#profileEmail").textContent = s ? s.email : "Log in to personalize your CampusVibes profile.";
@@ -659,7 +690,7 @@ function updateNav(){
   }
 }
 
-function switchWorkspace(mode){
+function switchWorkspace(mode, record = true){
   const session = getSession();
   const feed = !!session && mode === "feed";
   $("#mainNav").classList.toggle("hidden", !session || feed);
@@ -668,11 +699,18 @@ function switchWorkspace(mode){
   document.body.classList.toggle("feed-workspace", feed);
   document.querySelectorAll("[data-workspace]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.workspace === (feed ? "feed" : "community"))));
   if (session) localStorage.setItem(`cv_workspace_${session.email}`, feed ? "feed" : "community");
+  if (record) recordNavigationRoute(feed ? "feed" : "community", document.querySelector(".page-view.active")?.id.slice(5) || "dashboard");
   window.campusRenderIcons?.();
 }
 
 /* ── Boot ── */
 function bootCampusVibes(){
+  window.addEventListener("popstate", restoreNavigationRoute);
+  window.addEventListener("hashchange", restoreNavigationRoute);
+  window.campusNavigationCleanup = () => {
+    window.removeEventListener("popstate", restoreNavigationRoute);
+    window.removeEventListener("hashchange", restoreNavigationRoute);
+  };
   setupAuthControls();
   setupDashboard();
   setupDiscover();

@@ -151,6 +151,8 @@ export default function App() {
       delete window.campusSwitchWorkspace;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
+      window.campusNavigationCleanup?.();
+      delete window.campusNavigationCleanup;
     };
   }, []);
 
