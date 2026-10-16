@@ -52,6 +52,7 @@ import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
+import eventCatalog from "../../events.json";
 
 const Feed = lazy(() => import("./FeedEntry"));
 const Suggestions = lazy(() => import("./Suggestions"));
@@ -129,6 +130,7 @@ export default function App() {
 
     const appScript = document.createElement("script");
     appScript.textContent = `(() => {
+      const EVENTS = ${JSON.stringify(eventCatalog)};
       ${dashboardScript}
       ${discoverScript}
       ${originalScript}
