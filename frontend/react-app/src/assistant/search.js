@@ -28,8 +28,9 @@ export function createEventSearch(events) {
 }
 
 export function knownEvents(events, ids) {
-  const valid = new Set(Array.isArray(ids) ? ids.filter(Number.isInteger) : []);
-  return events.filter(event => valid.has(event.id));
+  const valid = [...new Set(Array.isArray(ids) ? ids.filter(Number.isInteger) : [])];
+  const index = new Map(events.map(event => [event.id,event]));
+  return valid.map(id => index.get(id)).filter(Boolean);
 }
 
 export function reply(text, matches = [], extra = {}) {
