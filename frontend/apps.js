@@ -9,7 +9,10 @@ let currentEventSearch = "";
 /* ── Helpers ── */
 const $ = (sel) => document.querySelector(sel);
 const getSession = () => currentSession;
-const getSaved = () => JSON.parse(localStorage.getItem(SAVED_KEY) || "[]");
+const getSaved = () => {
+  try { const value = JSON.parse(localStorage.getItem(SAVED_KEY) || "[]"); return Array.isArray(value) ? [...new Set(value.filter(id => EVENTS.some(event => event.id === id)))] : []; }
+  catch { return []; }
+};
 const saveSaved = (ids) => localStorage.setItem(SAVED_KEY, JSON.stringify(ids));
 
 function showToast(msg){
@@ -100,6 +103,7 @@ function toggleSaved(id){
   const saved = getSaved();
   const next = saved.includes(id) ? saved.filter(item => item !== id) : [...saved, id];
   saveSaved(next);
+  window.dispatchEvent(new Event("campus-saved-change"));
   const event = EVENTS.find(item => item.id === id);
   if (event) recordDashboardActivity(next.includes(id) ? "saved" : "removed", event.title);
   renderEvents();
@@ -535,6 +539,16 @@ function switchWorkspace(mode, record = true){
 
 /* ── Boot ── */
 function bootCampusVibes(){
+  window.campusAssistant = {
+    getSaved,
+    saveEvent(id) { if (getSession() && EVENTS.some(event => event.id === id)) toggleSaved(id); },
+    openEvent(id) { if (getSession() && EVENTS.some(event => event.id === id)) openDiscoverEvent(id); },
+    navigate(page) {
+      if (!getSession()) return;
+      if (page === "feed") switchWorkspace("feed");
+      else if (["dashboard","discover","saved","suggest","profile"].includes(page)) showPage(page);
+    },
+  };
   window.addEventListener("popstate", restoreNavigationRoute);
   window.addEventListener("hashchange", restoreNavigationRoute);
   window.campusNavigationCleanup = () => {

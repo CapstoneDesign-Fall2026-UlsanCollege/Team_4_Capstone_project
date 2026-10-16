@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 
-export default function AssistantMessage({ message, children }) {
+export default function AssistantMessage({ message, children, copyText = message.text }) {
   const [copied,setCopied] = useState(false);
   const [copyError,setCopyError] = useState('');
   async function copy() {
-    try { await navigator.clipboard.writeText(message.text); setCopied(true); setCopyError(''); }
+    try { await navigator.clipboard.writeText(copyText); setCopied(true); setCopyError(''); }
     catch { setCopyError('Copy is unavailable. Select the text to copy it.'); }
   }
   return <article className={`assistant-message assistant-message-${message.role}`} data-chat-message={message.role}>

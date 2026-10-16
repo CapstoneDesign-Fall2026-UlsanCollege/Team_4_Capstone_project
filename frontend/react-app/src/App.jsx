@@ -157,6 +157,7 @@ export default function App() {
       delete window.syncFirebaseUser;
       delete window.campusRenderIcons;
       delete window.campusSwitchWorkspace;
+      delete window.campusAssistant;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
       window.campusNavigationCleanup?.();
