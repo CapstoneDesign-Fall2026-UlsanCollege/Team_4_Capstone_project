@@ -50,6 +50,8 @@ test('composer preserves multiline drafts and logout clears tab history', async 
   await expect(input).toHaveValue('How do I save an event?\n');
   await page.getByRole('button',{ name:'Send message',exact:true }).click();
   await expect(page.getByRole('log')).toContainText('only change your saved list');
+  await page.evaluate(() => window.syncFirebaseUser(null));
+  await expect(page.locator('#page-chat')).toBeVisible();
   await input.fill('An unfinished question');
   await page.reload();
   await page.evaluate(() => document.querySelector('#demoLogin').click());

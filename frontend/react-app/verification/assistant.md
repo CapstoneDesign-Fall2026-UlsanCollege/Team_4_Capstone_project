@@ -33,6 +33,7 @@ reported rather than labeled as successful answers.
 
 - `npm run test:assistant`: all 26 unit checks passed for grounding, search, date validity/timezone, saved restrictions, comparisons, ambiguity, pagination, bounded/private history, cancellation, stale worker events, timeout, duplicate sends, and malformed worker output.
 - Four new Playwright desktop/mobile checks passed search, follow-up selection, details, explicit saving, Saved integration, Back navigation, reload recovery, New chat, multiline input, draft recovery, and logout clearing. These create no real accounts or shared records.
+- The broader regression run exposed a delayed Firebase signed-out callback clearing an explicitly entered demo session after reload. The callback now preserves an existing demo session; explicit logout still clears it. A browser regression exercises this callback without granting real authentication or shared-data access.
 - Production build passed with the existing large shared-feed bundle warning. `git diff --check` passed.
 - The initial long-running development preview failed to load the new modules during browser QA. A fresh Vite preview with `--force` loaded successfully and the same checks passed; this was not relabeled as a successful initial run.
 - Inspected screenshots: [desktop greeting](assistant/assistant-empty-desktop.png), [mobile greeting](assistant/assistant-empty-mobile.png), [desktop results](assistant/assistant-results-desktop.png), [mobile results](assistant/assistant-results-mobile.png).

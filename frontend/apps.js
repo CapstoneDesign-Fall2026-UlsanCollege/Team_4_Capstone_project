@@ -464,6 +464,8 @@ function startSession(user, interest = ""){
 function syncFirebaseUser(user){
   if (user) startSession(user);
   else {
+    // Firebase's initial signed-out callback can arrive after demo entry.
+    if (currentSession?.id === "demo") return;
     currentSession = null;
     updateNav();
   }
