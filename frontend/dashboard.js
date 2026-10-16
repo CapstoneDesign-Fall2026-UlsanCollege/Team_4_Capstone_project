@@ -20,6 +20,7 @@ function recordDashboardActivity(type, title){
   data.activity.unshift({type, title, at: new Date().toISOString()});
   data.activity = data.activity.slice(0, 30);
   localStorage.setItem(dashboardStorageKey(), JSON.stringify(data));
+  window.dispatchEvent(new Event("campus-profile-change"));
 }
 
 function dashboardWeekStart(){
