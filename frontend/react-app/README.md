@@ -37,9 +37,9 @@ The check passes when signup and login both complete, each updates the app to th
 
 ## CampusVibes Assistant
 
-The assistant works directly in the browser using the sample events already in the app. It can suggest events by interest, answer basic event time and location questions, list saved events, and explain how to use Discover, Saved, and Suggest. It does not need an API key, a separate server, or a sign-in, and it does not answer general questions or access live campus information.
+The assistant is a free local helper using the shared sample event catalog. It supports typo-tolerant search, interest/date filters, comparisons, saved-event questions, follow-up references, and explicit bookmark/detail controls. Chat and draft history stays in the current browser tab under the current account key and is cleared on logout. Demo entry works without a Firebase login. See [behavior, privacy, and verification](verification/assistant.md).
 
-This is an intentionally small prototype, not a generative AI chatbot. A future iteration can connect Gemini through a secured backend to answer broader questions. If the team wants chat requests to trigger CampusVibes actions or change app features, those capabilities must be implemented as explicit, permission-checked tools; a model should not execute arbitrary code or silently modify the app.
+This is not a generative AI chatbot. No external model, API key, billing change, live campus feed, or private-message access is involved. Questions do not automatically save events; the student chooses the bookmark control. Run `npm run test:assistant` for the pure engine, storage, and worker checks, and `npm run test:smoke` for desktop/mobile flows.
 
 The earlier local-API “Failed to fetch” failure is not reproducible in the current assistant because it no longer makes API requests. The original reproduction steps and resolution are recorded in [Issue #38](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/38).
 
