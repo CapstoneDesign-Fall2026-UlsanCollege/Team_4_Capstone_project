@@ -1,7 +1,7 @@
 import { after, before, beforeEach, test } from "node:test";
 import { readFileSync } from "node:fs";
 import { assertFails, assertSucceeds, initializeTestEnvironment } from "@firebase/rules-unit-testing";
-import { collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, setDoc, Timestamp, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, setDoc, Timestamp, updateDoc, where, writeBatch } from "firebase/firestore";
 
 let env;
 before(async () => {
@@ -16,6 +16,71 @@ after(async () => {
 const db = uid => env.authenticatedContext(uid).firestore();
 const ref = (database, id = "post") => doc(database, "campusFeedPosts", id);
 const post = (uid = "alice", extra = {}) => ({ authorId: uid, authorName: "Alice", college: "Ulsan College", body: "A real shared text post", event: null, createdAt: serverTimestamp(), updatedAt: serverTimestamp(), ...extra });
+
+const suggestion = (extra = {}) => ({ name: 'Campus film night', host: 'Film Club', authorName: 'Alice', anonymous: false, category: 'Arts', date: '2026-11-10', location: 'Campus lawn', description: 'A student film night.', createdAt: serverTimestamp(), status: 'pending', reviewNote: '', reviewerId: '', reviewedAt: null, ...extra });
+function suggest(database, uid = 'alice', extra = {}, id = 'idea') {
+  const batch = writeBatch(database);
+  batch.set(doc(database, 'campusSuggestionOwners', id), { uid, createdAt: serverTimestamp() });
+  batch.set(doc(database, 'campusSuggestions', id), suggestion(extra));
+  return batch.commit();
+}
+async function grantReviewer(uid = 'reviewer') {
+  await env.withSecurityRulesDisabled(context => setDoc(doc(context.firestore(), 'campusSuggestionReviewers', uid), { enabled: true }));
+}
+
+test('suggestions require an authenticated owner and an atomic private receipt', async () => {
+  await assertSucceeds(getDoc(doc(db('alice'), 'campusSuggestionOwners', 'missing')));
+  await assertFails(setDoc(doc(db('alice'), 'campusSuggestions', 'unpaired'), suggestion()));
+  await assertFails(suggest(db('mallory'), 'alice'));
+  await assertFails(suggest(env.unauthenticatedContext().firestore()));
+  await assertFails(suggest(env.authenticatedContext('guest', { firebase: { sign_in_provider: 'anonymous' } }).firestore(), 'guest'));
+  await assertFails(suggest(db('alice'), 'alice', { ownerId: 'alice' }));
+  await assertFails(suggest(db('alice'), 'alice', { description: 'x'.repeat(501) }));
+  await assertFails(suggest(db('alice'), 'alice', { status: 'approved' }));
+  await assertFails(suggest(db('alice'), 'alice', { anonymous: true }));
+  await assertSucceeds(suggest(db('alice')));
+  await assertFails(suggest(db('alice')));
+});
+
+test('anonymous queue records hide ownership from reviewers and other students', async () => {
+  await grantReviewer();
+  await assertSucceeds(suggest(db('alice'), 'alice', { anonymous: true, host: '', authorName: '' }));
+  await assertSucceeds(getDoc(doc(db('reviewer'), 'campusSuggestions', 'idea')));
+  await assertFails(getDoc(doc(db('reviewer'), 'campusSuggestionOwners', 'idea')));
+  await assertFails(getDoc(doc(db('bob'), 'campusSuggestionOwners', 'idea')));
+  await assertFails(getDoc(doc(db('bob'), 'campusSuggestions', 'idea')));
+  await assertSucceeds(getDoc(doc(db('alice'), 'campusSuggestions', 'idea')));
+  await assertSucceeds(getDocs(query(collection(db('alice'), 'campusSuggestionOwners'), where('uid','==','alice'), limit(50))));
+  await assertFails(getDocs(query(collection(db('bob'), 'campusSuggestionOwners'), limit(50))));
+  await assertFails(deleteDoc(doc(db('alice'), 'campusSuggestionOwners', 'idea')));
+});
+
+test('reviewer roles cannot be self-granted and queue reads are bounded', async () => {
+  await assertFails(setDoc(doc(db('alice'), 'campusSuggestionReviewers', 'alice'), { enabled: true }));
+  await grantReviewer();
+  await suggest(db('alice'));
+  await assertSucceeds(getDoc(doc(db('reviewer'), 'campusSuggestionReviewers', 'reviewer')));
+  await assertFails(getDoc(doc(db('alice'), 'campusSuggestionReviewers', 'reviewer')));
+  await assertSucceeds(getDocs(query(collection(db('reviewer'), 'campusSuggestions'), orderBy('createdAt','desc'), limit(100))));
+  await assertFails(getDocs(query(collection(db('reviewer'), 'campusSuggestions'), limit(101))));
+  await assertFails(getDocs(collection(db('reviewer'), 'campusSuggestions')));
+  await assertFails(getDocs(query(collection(db('alice'), 'campusSuggestions'), limit(100))));
+});
+
+test('only reviewers decide once and cannot rewrite an idea or its identity', async () => {
+  await grantReviewer();
+  await suggest(db('alice'));
+  const target = database => doc(database, 'campusSuggestions', 'idea');
+  const decision = { status: 'approved', reviewNote: 'Ready for planning', reviewerId: 'reviewer', reviewedAt: serverTimestamp() };
+  await assertFails(updateDoc(target(db('alice')), decision));
+  await assertFails(updateDoc(target(db('reviewer')), { ...decision, name: 'Changed idea' }));
+  await assertFails(updateDoc(target(db('reviewer')), { ...decision, reviewerId: 'alice' }));
+  await assertFails(updateDoc(target(db('reviewer')), { ...decision, reviewNote: 'x'.repeat(501) }));
+  await assertSucceeds(updateDoc(target(db('reviewer')), decision));
+  await assertSucceeds(getDoc(target(db('alice'))));
+  await assertFails(updateDoc(target(db('reviewer')), { ...decision, status: 'declined' }));
+  await assertFails(deleteDoc(target(db('alice'))));
+});
 
 test("public feed profiles expose only bounded display data and are owner-written", async () => {
   const profile = doc(db('alice'), 'campusFeedProfiles', 'alice');
