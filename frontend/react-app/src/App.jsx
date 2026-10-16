@@ -47,7 +47,13 @@ import {
   Clock,
   Camera,
   Gamepad2,
+  Award,
+  Medal,
+  ShieldCheck,
+  Crown,
+  Check,
 } from "lucide";
+import { createBadgeTracker } from "./progress-badges";
 import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
@@ -68,6 +74,7 @@ export default function App() {
   const [feedUser, setFeedUser] = useState(null);
 
   useEffect(() => {
+    window.campusBadgeProgress = createBadgeTracker();
     window.campusFirebaseAuth = {
       auth,
       createUserWithEmailAndPassword,
@@ -130,6 +137,11 @@ export default function App() {
           Clock,
           Camera,
           Gamepad2,
+          Award,
+          Medal,
+          ShieldCheck,
+          Crown,
+          Check,
         },
         attrs: { "aria-hidden": "true", "stroke-width": 1.8 },
       });
@@ -162,10 +174,13 @@ export default function App() {
       delete window.campusSwitchWorkspace;
       delete window.campusAssistant;
       delete window.campusProfile;
+      delete window.campusBadgeProgress;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
       window.campusNavigationCleanup?.();
       delete window.campusNavigationCleanup;
+      window.campusBadgeCleanup?.();
+      delete window.campusBadgeCleanup;
     };
   }, []);
 

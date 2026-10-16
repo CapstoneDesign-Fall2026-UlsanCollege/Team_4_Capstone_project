@@ -862,6 +862,29 @@ body:has(#appMain:not(.hidden)) #page-dashboard .dashboard-welcome .eyebrow{colo
 .progress-points{text-align:center;flex-shrink:0}
 .progress-points strong{display:block;color:#9b71cc;font-size:16px;line-height:1.2}
 .progress-points span{display:block;color:#aa94c4;font-size:9px}
+.progress-copy small{display:block;font-size:9px;line-height:1.5;color:#92829f;margin-top:4px}
+.progress-ring span{max-width:48px;text-align:center;overflow-wrap:anywhere}
+.progress-points{max-width:76px;overflow-wrap:anywhere}
+.progress-storage-warning{font-size:11px;line-height:1.7;color:#986343;background:#fff8eb;border:1px solid #efdfbd;border-radius:5px;padding:9px 11px;margin-top:12px;overflow-wrap:anywhere}
+#dashboardDialog[data-progress-badges=true]{width:min(680px,calc(100% - 32px))}
+#dashboardDialog[data-progress-badges=true]>.dashboard-section-heading{position:sticky;top:0;z-index:1;background:#fff;padding-bottom:12px}
+.progress-detail-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px 14px;border-bottom:1px solid #eee8f3;background:#faf8fd;color:#8c7b9c;font-size:11px;line-height:1.7}
+.progress-detail-summary strong{color:#69517e;font-size:15px;font-weight:650}
+.dashboard-dialog p.progress-detail-next{font-size:12px;line-height:1.7;margin:15px 0 18px;color:#887397;overflow-wrap:anywhere}
+.progress-detail-next strong{font-weight:600;color:#7f4cb4}
+.progress-badge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.progress-badge{display:flex;align-items:center;gap:15px;min-width:0;min-height:128px;padding:17px 15px;border:1px solid #e9e2ef;border-radius:6px;background:#fff}
+.progress-badge.is-earned{border-color:var(--badge-color);background:var(--badge-tint)}
+.progress-badge-art{display:grid;place-items:center;width:52px;height:58px;flex:0 0 52px;border-radius:7px;background:#ffffffb0;color:var(--badge-color)}
+.dashboard-dialog .progress-badge-art .lucide{width:34px;height:34px;stroke-width:1.6}
+.progress-badge.is-locked .progress-badge-art{background:#f5f3f8;color:#b9afc4}
+.progress-badge>div{min-width:0;flex:1}.progress-badge h3{font:650 13px/1.5 'Inter',sans-serif;letter-spacing:0;color:#655074;margin:5px 0;overflow-wrap:anywhere}
+.progress-badge-status{display:flex;align-items:center;gap:4px;font-size:10px;line-height:1.5;color:#83738d}.progress-badge.is-earned .progress-badge-status{color:#357f73}
+.dashboard-dialog .progress-badge-status .lucide{width:11px;height:11px;flex:0 0 11px}
+.dashboard-dialog .progress-badge p{font-size:10px;line-height:1.6;color:#8d799d;margin:0}.progress-badge small{display:block;font-size:9px;line-height:1.7;color:#9a87aa;margin-top:5px;overflow-wrap:anywhere}
+.dashboard-dialog p.progress-detail-rules{font-size:11px;line-height:1.9;color:#8c799b;margin:19px 0 9px}
+.dashboard-dialog p.progress-detail-boundary{font-size:10px;line-height:1.8;color:#9f8dad;margin:0}
+@media(max-width:480px){.progress-badge-grid{grid-template-columns:minmax(0,1fr)}.progress-badge{min-height:112px;padding:14px 16px}.progress-badge h3{font-size:14px}.progress-badge small{font-size:10px}.progress-detail-summary{justify-content:start;gap:8px 16px}.progress-detail-summary>span:first-child{flex-basis:100%}.dashboard-dialog p.progress-detail-next{font-size:12px}.progress-badge-art{width:47px;height:52px;flex-basis:47px}}
 .dashboard-weekend{grid-column:1 / span 2;display:flex;align-items:center;gap:12px;border-radius:8px;background:linear-gradient(100deg,#9e74d9,#b897df 40%,#d1b4e4);color:#fff;padding:11px 20px;margin:0 20px}
 .dashboard-weekend>.lucide{color:#ffd370;width:24px!important;height:24px!important}
 .dashboard-weekend strong{font-size:12px;font-weight:700}

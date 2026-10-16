@@ -50,6 +50,24 @@ function dashboardActivityMarkup(activity){
   return activity.map(item => `<div class="dashboard-activity-row"><i data-lucide="${item.type === "suggested" ? "lightbulb" : "bookmark"}" aria-hidden="true"></i><p>${labels[item.type] || "Viewed"} <strong>${dashboardText(item.title)}</strong></p><time datetime="${dashboardText(item.at)}">${activityTime(item.at)}</time></div>`).join("") || '<p class="dashboard-empty">Your next campus plan starts with one save.</p>';
 }
 
+function dashboardBadgeState(){
+  return window.campusBadgeProgress(getSession(),getSaved().length*20+readDashboardData().drafts.length*30);
+}
+
+function progressBadgeMarkup(badge, points){
+  const date=badge.earnedAt ? new Intl.DateTimeFormat("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"Asia/Seoul"}).format(new Date(badge.earnedAt)) : "";
+  return `<article class="progress-badge ${badge.earned ? "is-earned" : "is-locked"}" data-badge="${badge.id}" style="--badge-color:${badge.color};--badge-tint:${badge.tint}"><span class="progress-badge-art"><i data-lucide="${badge.icon}" aria-hidden="true"></i></span><div><span class="progress-badge-status"><i data-lucide="${badge.earned ? "check" : "lock-keyhole"}" aria-hidden="true"></i>${badge.earned ? "Earned" : "Locked"}</span><h3>${dashboardText(badge.name)}</h3><p>Level ${badge.level} &middot; ${badge.points} points</p><small>${badge.earned ? `Earned ${dashboardText(date)}` : `${Math.max(0,badge.points-points)} points to go`}</small></div></article>`;
+}
+
+function progressDetailsMarkup(progress){
+  return `<div class="progress-detail-summary"><span><strong>${progress.points}</strong> current points</span><span>Level <strong>${progress.level}</strong></span><span><strong>${progress.earnedCount} / ${progress.badges.length}</strong> badges earned</span></div><p class="progress-detail-next">${progress.nextBadge ? `Next badge: <strong>${dashboardText(progress.nextBadge.name)}</strong> at Level ${progress.nextBadge.level} &middot; ${progress.pointsToNextBadge} points to go` : "All current badges earned."}</p><div class="progress-badge-grid">${progress.badges.map(badge => progressBadgeMarkup(badge,progress.points)).join("")}</div><p class="progress-detail-rules">20 points per currently saved event; 30 per recorded dashboard draft. Every 100 points adds a level. Removing saves can lower current points and level; earned badges stay unlocked.</p><p class="progress-detail-boundary">Badges stay in this browser for this account. Community saves are browser-wide, not account-private. These are planning milestones, not attendance or verified campus achievements.</p>${progress.warning ? `<p class="progress-storage-warning" role="status">${dashboardText(progress.warning)}</p>` : ""}`;
+}
+
+function refreshProgressDialog(progress){
+  const dialog=$("#dashboardDialog");
+  if (dialog.open && dialog.dataset.progressBadges === "true") $("#dashboardDialogBody").innerHTML=progressDetailsMarkup(progress);
+}
+
 function renderDashboard(){
   const start = dashboardWeekStart();
   const end = new Date(start);
@@ -80,13 +98,23 @@ function renderDashboard(){
   $("#dashboardRecommendations").innerHTML = recommendations.map(event => `<article class="dashboard-recommendation" style="--event-color:${event.hue}"><button class="recommendation-open" data-dashboard-event="${event.id}" type="button"><img src="${dashboardPhoto(event)}" alt="" loading="lazy"><span><strong>${event.title}</strong><small><i data-lucide="map-pin" aria-hidden="true"></i>${event.location}</small><span class="recommendation-tag">${event.interest}</span></span></button><button class="dashboard-save ${saved.includes(event.id) ? "is-saved" : ""}" data-save="${event.id}" aria-pressed="${saved.includes(event.id)}" aria-label="${saved.includes(event.id) ? "Remove from saved" : "Save"}: ${event.title}" title="${saved.includes(event.id) ? "Remove from saved" : "Save event"}"><i data-lucide="bookmark" aria-hidden="true"></i></button></article>`).join("");
   $("#dashboardActivity").innerHTML = dashboardActivityMarkup(data.activity.slice(0, 3));
 
-  const points = saved.length * 20 + data.drafts.length * 30;
-  const level = Math.floor(points / 100) + 1;
-  $("#progressPoints").textContent = points;
-  $("#progressLevel").textContent = `Lv. ${level}`;
-  $("#progressRing").style.setProperty("--progress", `${points % 100}%`);
-  $("#progressTitle").textContent = points ? "Exploring is your vibe" : "Your campus journey starts here";
-  $("#progressCopy").textContent = points ? "Keep making plans that feel like you." : "Save something that sparks your interest.";
+  const progress=dashboardBadgeState();
+  $("#progressPoints").textContent=progress.points;
+  $("#progressLevel").textContent=`Lv. ${progress.level}`;
+  $("#progressRing").style.setProperty("--progress",`${progress.levelPercent}%`);
+  $("#progressRing").setAttribute("aria-valuenow",String(progress.levelPercent));
+  $("#progressRing").setAttribute("aria-valuetext",`Level ${progress.level}; ${progress.levelPercent} of 100 points toward the next level`);
+  $("#progressRank").textContent=progress.currentBadge.name;
+  $("#progressSymbol").innerHTML=`<i data-lucide="${progress.currentBadge.icon}" aria-hidden="true"></i>`;
+  $("#progressSymbol").style.color=progress.currentBadge.color;
+  $("#progressTitle").textContent=`${progress.currentBadge.name} badge`;
+  $("#progressCopy").textContent=progress.nextBadge ? `${progress.pointsToNextBadge} points to ${progress.nextBadge.name}` : "All current badges earned";
+  $("#progressBadgeCount").textContent=`${progress.earnedCount} / ${progress.badges.length} badges earned`;
+  $("#progressStorageWarning").textContent=progress.warning;
+  $("#progressStorageWarning").classList.toggle("hidden",!progress.warning);
+  const newMilestones=progress.newlyEarned.filter(badge => badge.level>1);
+  $("#progressBadgeAnnouncement").textContent=newMilestones.length ? `Badge unlocked: ${newMilestones.map(badge => badge.name).join(", ")}` : "";
+  refreshProgressDialog(progress);
   const weekend = dashboardWeekendEvents();
   $("#weekendNote").textContent = `${weekend.length} campus events in the sample weekend.`;
   if ($("#dashboardDialog").open && $("#dashboardDialog").dataset.eventId) {
@@ -107,6 +135,7 @@ function showDashboardDialog(title, markup, eventId = ""){
   const dialog = $("#dashboardDialog");
   dialog.dataset.eventId = eventId;
   delete dialog.dataset.discoverEvent;
+  delete dialog.dataset.progressBadges;
   $("#dashboardDialogTitle").textContent = title;
   $("#dashboardDialogBody").innerHTML = markup;
   window.campusRenderIcons?.();
@@ -136,7 +165,13 @@ function setupDashboard(){
   });
   $("#exploreWeekend").addEventListener("click", () => showDashboardDialog("Your sample weekend", dashboardAgendaMarkup(dashboardWeekendEvents())));
   $("#viewDashboardActivity").addEventListener("click", () => showDashboardDialog("Your activity", dashboardActivityMarkup(readDashboardData().activity)));
-  $("#viewProgress").addEventListener("click", () => showDashboardDialog("Your vibes progress", '<p>Each saved event earns 20 points. Each locally drafted idea earns 30 points. Every 100 points unlocks the next Explorer level.</p><p class="dashboard-detail-description">This progress reflects your plans in this browser, not event attendance.</p>'));
+  $("#viewProgress").addEventListener("click", () => {
+    showDashboardDialog("Your badges",progressDetailsMarkup(dashboardBadgeState()));
+    $("#dashboardDialog").dataset.progressBadges="true";
+  });
+  const syncBadges=event => { if (getSession() && (!event.key || event.key === SAVED_KEY || event.key === dashboardStorageKey() || event.key.startsWith("cv_progress_badges_"))) renderDashboard(); };
+  window.addEventListener("storage",syncBadges);
+  window.campusBadgeCleanup=() => window.removeEventListener("storage",syncBadges);
 }
 
 function handleDashboardNavigation(event){
