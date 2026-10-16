@@ -57,12 +57,14 @@ import eventCatalog from "../../events.json";
 const Feed = lazy(() => import("./FeedEntry"));
 const Suggestions = lazy(() => import("./Suggestions"));
 const Assistant = lazy(() => import("./Assistant"));
+const Profile = lazy(() => import("./Profile"));
 
 export default function App() {
   const mountRef = useRef(null);
   const [feedTarget, setFeedTarget] = useState(null);
   const [suggestTarget, setSuggestTarget] = useState(null);
   const [assistantTarget, setAssistantTarget] = useState(null);
+  const [profileTarget, setProfileTarget] = useState(null);
   const [feedUser, setFeedUser] = useState(null);
 
   useEffect(() => {
@@ -91,6 +93,7 @@ export default function App() {
     setFeedTarget(mountRef.current.querySelector("#feedMount"));
     setSuggestTarget(mountRef.current.querySelector("#suggestMount"));
     setAssistantTarget(mountRef.current.querySelector("#assistantMount"));
+    setProfileTarget(mountRef.current.querySelector("#profileMount"));
     const receiveSession = (event) => setFeedUser(event.detail);
     window.addEventListener("campus-session-change", receiveSession);
     window.campusRenderIcons = () =>
@@ -158,6 +161,7 @@ export default function App() {
       delete window.campusRenderIcons;
       delete window.campusSwitchWorkspace;
       delete window.campusAssistant;
+      delete window.campusProfile;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
       window.campusNavigationCleanup?.();
@@ -168,6 +172,11 @@ export default function App() {
   return (
     <>
       <div ref={mountRef} />
+      {profileTarget && feedUser && createPortal(
+        <Suspense fallback={<p role="status">Loading your profile...</p>}>
+          <Profile key={feedUser.id} user={feedUser} />
+        </Suspense>, profileTarget,
+      )}
       {assistantTarget && feedUser && createPortal(
         <Suspense fallback={<p role="status">Loading the local assistant...</p>}>
           <Assistant key={feedUser.id} user={feedUser} />

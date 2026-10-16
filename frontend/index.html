@@ -145,23 +145,7 @@
   </section>
 
   <section class="page-view" id="page-profile">
-    <header class="profile-hero">
-      <div class="profile-avatar" id="profileAvatar">?</div>
-      <div class="profile-identity"><h1 id="profileName">Guest student</h1><p id="profileProgram">Computer Science Student</p><p id="profileBio">Curious builder and problem solver who loves tech, teamwork, and campus events.</p><p id="profileEmail"></p><div class="profile-facts"><span>2nd Year</span><span>North Campus</span><span>CampusVibes student</span></div></div>
-      <button class="btn btn-primary" id="profileEdit" type="button">Edit profile</button>
-    </header>
-    <form class="profile-editor hidden" id="profileEditor"><label>Study program<input id="editProgram" maxlength="80" required></label><label>About you<textarea id="editBio" maxlength="240" rows="3" required></textarea></label><div><button class="btn btn-primary" type="submit">Save changes</button><button class="btn btn-outline" id="profileCancel" type="button">Cancel</button></div></form>
-    <div class="profile-columns">
-      <div class="profile-stack">
-        <section class="profile-section"><h2>Interests</h2><div class="profile-interests"><span>Coding</span><span>AI &amp; ML</span><span>Hackathons</span><span>Basketball</span><span>Photography</span></div></section>
-        <section class="profile-section"><h2>Study Program</h2><div class="profile-study"><div class="profile-study-mark" aria-hidden="true">CS</div><div><h3 id="profileStudy">BSc in Computer Science</h3><p>Faculty of Engineering</p><p>Expected graduation: <strong>May 2028</strong></p></div></div></section>
-        <section class="profile-section"><h2>Campus Involvement</h2><div class="profile-clubs"><div><strong>Coding Club</strong><span>Member</span></div><div><strong>Tech Society</strong><span>Member</span></div><div><strong>Event Crew</strong><span>Volunteer</span></div></div></section>
-      </div>
-      <div class="profile-stack">
-        <section class="profile-section"><div class="profile-section-heading"><h2>Saved Events</h2><button class="text-button" data-page="saved">View all</button></div><div id="profileSavedEvents"></div></section>
-        <section class="profile-section"><div class="profile-section-heading"><h2>Recent Activity</h2><button class="text-button" data-page="saved">View all</button></div><div id="profileActivity"></div></section>
-      </div>
-    </div>
+    <div id="profileMount"></div>
   </section>
   <dialog class="dashboard-dialog" id="dashboardDialog" aria-labelledby="dashboardDialogTitle"><div class="dashboard-section-heading"><h2 id="dashboardDialogTitle"></h2><button class="dashboard-icon-button" id="closeDashboardDialog" type="button" aria-label="Close" title="Close"><i data-lucide="x" aria-hidden="true"></i></button></div><div id="dashboardDialogBody"></div></dialog>
 </main>
