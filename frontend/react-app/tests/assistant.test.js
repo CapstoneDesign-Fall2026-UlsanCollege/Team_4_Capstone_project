@@ -4,7 +4,8 @@ import { readFileSync } from 'node:fs';
 import { createAssistant } from '../src/assistant/engine.js';
 import { todayInSeoul, validDate } from '../src/assistant/dates.js';
 import { createEventSearch, knownEvents } from '../src/assistant/search.js';
-import { assistantSessionKey, cleanSession, loadSession, MAX_MESSAGES, saveSession } from '../src/assistant/session.js';
+import { assistantSessionKey, cleanSession, conversationList, loadSession, MAX_ANSWERS, MAX_CONVERSATIONS, MAX_MESSAGES, saveSession, startConversation, toggleSavedAnswer } from '../src/assistant/session.js';
+import { filterCatalog } from '../src/assistant/filters.js';
 import { createAssistantRunner } from '../src/assistant/runner.js';
 
 const events = JSON.parse(readFileSync(new URL('../../events.json',import.meta.url),'utf8'));
@@ -157,4 +158,58 @@ test('malformed worker replies fail visibly rather than adding an empty response
 test('restored message keys cannot collide', () => {
   const result = cleanSession({ messages:[{ id:'same',role:'user',text:'one' },{ id:'same',role:'user',text:'two' }] },events);
   assert.notEqual(result.messages[0].id,result.messages[1].id);
+});
+
+test('workspace filters combine category, exact location, and real Seoul dates', () => {
+  assert.deepEqual(filterCatalog(events,{ category:'Music',location:'Botanical Garden' },'2026-10-16').map(event => event.id),[8]);
+  assert.deepEqual(filterCatalog(events,{ date:'today' },'2026-10-03').map(event => event.id),[6]);
+  assert.deepEqual(filterCatalog(events,{ date:'weekend' },'2026-09-27').map(event => event.id),[1,2]);
+  assert.deepEqual(ask('all events',{ filters:{ date:'week' } }).eventIds,[]);
+  assert.deepEqual(ask('all events',{ filters:{ category:'Music' } }).eventIds,[2,8]);
+});
+
+test('filters also constrain saved results, follow-ups, and host lookup', () => {
+  const filters = { category:'Music',location:'Botanical Garden' };
+  assert.deepEqual(ask('saved events',{ filters,savedIds:[1,2,8] }).eventIds,[8]);
+  assert.deepEqual(ask('first one',{ filters,context:{ eventIds:[1,8],candidates:[1,8],offset:0 } }).eventIds,[8]);
+  assert.deepEqual(ask('Events by Code Collective').eventIds,[1]);
+  assert.match(ask('How do I join a club?').text,/no verified club directory/);
+  assert.match(ask('How do I save an event?',{ filters:{ date:'today' } }).text,/only change/);
+});
+
+test('new chat archives and restores independent conversation drafts and context', () => {
+  const first = cleanSession({ messages:[{ id:'q',role:'user',text:'music events' },{ id:'a',role:'assistant',text:'Music',eventIds:[2,8] }],draft:'unfinished',context:{ eventIds:[2,8],candidates:[2,8],offset:2 } },events);
+  const fresh = startConversation(first,events);
+  assert.equal(fresh.messages.length,0);
+  assert.equal(fresh.conversations.length,1);
+  assert.notEqual(fresh.activeId,first.activeId);
+  const restored = startConversation(fresh,events,first.activeId);
+  assert.equal(restored.draft,'unfinished');
+  assert.deepEqual(restored.context.eventIds,[2,8]);
+  assert.equal(conversationList(restored).length,1);
+  assert.equal(startConversation(restored,events,'unknown'),restored);
+});
+
+test('saved answers survive a new chat and remain explicitly removable', () => {
+  const initial = cleanSession({ messages:[{ id:'q',role:'user',text:'How do I save?' },{ id:'a',role:'assistant',text:'Use the bookmark.',pages:['saved'] }] },events);
+  const saved = toggleSavedAnswer(initial,'a',events);
+  assert.equal(saved.savedAnswers[0].question,'How do I save?');
+  const fresh = startConversation(saved,events);
+  assert.equal(fresh.savedAnswers.length,1);
+  assert.equal(toggleSavedAnswer(fresh,'a',events).savedAnswers.length,0);
+  assert.equal(toggleSavedAnswer(fresh,'nonexistent',events),fresh);
+});
+
+test('restored conversation notebooks are bounded and sanitize saved capabilities', () => {
+  const dirty = { conversations:Array.from({length:50},(_,i) => ({ id:`thread-${i}`,messages:[{ id:'q',role:'user',text:'Test' }] })),savedAnswers:Array.from({length:50},(_,i) => ({ id:`answer-${i}`,role:'assistant',text:'Saved',question:'x'.repeat(800),eventIds:[1,999],pages:['saved','javascript:bad'] })) };
+  const clean = cleanSession(dirty,events);
+  assert.equal(clean.conversations.length,MAX_CONVERSATIONS);
+  assert.equal(clean.savedAnswers.length,MAX_ANSWERS);
+  assert.deepEqual(clean.savedAnswers[0].eventIds,[1]);
+  assert.deepEqual(clean.savedAnswers[0].pages,['saved']);
+  assert.equal(clean.savedAnswers[0].question.length,500);
+  assert.equal(conversationList(clean).length,MAX_CONVERSATIONS);
+  const storage = fakeStorage();
+  saveSession(storage,assistantSessionKey('alice'),clean,events);
+  assert.equal(loadSession(storage,assistantSessionKey('bob'),events).savedAnswers.length,0);
 });

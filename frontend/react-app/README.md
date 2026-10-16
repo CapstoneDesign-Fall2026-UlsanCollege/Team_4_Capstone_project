@@ -37,7 +37,7 @@ The check passes when signup and login both complete, each updates the app to th
 
 ## CampusVibes Assistant
 
-The assistant is a free local helper using the shared sample event catalog. It supports typo-tolerant search, interest/date filters, comparisons, saved-event questions, follow-up references, and explicit bookmark/detail controls. Chat and draft history stays in the current browser tab under the current account key and is cleared on logout. Demo entry works without a Firebase login. See [behavior, privacy, and verification](verification/assistant.md).
+The assistant is a free local helper using the shared sample event catalog. The corrected-reference workspace includes a navigation rail, mascot greeting, question tiles, category/date/location filters, recent conversation restore/delete, and explicitly saved answers. It also supports typo-tolerant search, comparisons, saved-event questions, follow-ups, and bookmark/detail controls. History, drafts, and saved answers stay in the current browser tab under the current account key and are cleared on logout. New chat keeps earlier threads in Recent conversations. Attach/Voice remain disabled; sample host listings are not verified club memberships. Demo entry works without a Firebase login. See [behavior, privacy, and verification](verification/assistant.md).
 
 This is not a generative AI chatbot. No external model, API key, billing change, live campus feed, or private-message access is involved. Questions do not automatically save events; the student chooses the bookmark control. Run `npm run test:assistant` for the pure engine, storage, and worker checks, and `npm run test:smoke` for desktop/mobile flows.
 

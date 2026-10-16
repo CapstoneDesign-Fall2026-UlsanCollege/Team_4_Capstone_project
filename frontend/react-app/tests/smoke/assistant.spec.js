@@ -5,6 +5,9 @@ async function enter(page) {
   await page.locator('#landingDemo').click();
   await page.locator('#mainNav [data-page=chat]').click();
   await expect(page.locator('#chatInput')).toBeVisible();
+  const rail = await page.locator('.assistant-rail').boundingBox();
+  const panel = await page.locator('.assistant-panel').boundingBox();
+  if (page.viewportSize().width > 640) expect(rail.x + rail.width).toBeLessThan(panel.x);
 }
 
 test('local assistant searches follows up opens details and saves only on explicit clicks', async ({ page }, testInfo) => {
@@ -12,7 +15,8 @@ test('local assistant searches follows up opens details and saves only on explic
   page.on('pageerror', error => errors.push(error.message));
   await enter(page);
   await page.screenshot({ path:testInfo.outputPath('assistant-empty.png'), fullPage:true });
-  await page.getByRole('button',{ name:'Show me music events',exact:true }).click();
+  await page.locator('#chatInput').fill('Show me music events');
+  await page.locator('#chatInput').press('Enter');
   const log = page.getByRole('log',{ name:'Conversation' });
   await expect(log.locator('[data-assistant-event]')).toHaveCount(2);
   await expect(log).toContainText('Jazz Under the Stars');
@@ -37,7 +41,7 @@ test('local assistant searches follows up opens details and saves only on explic
   await expect(page.getByRole('log')).toContainText('where is the second one');
   await page.getByRole('button',{ name:'New chat',exact:true }).click();
   await expect(page.getByRole('log').locator('[data-chat-message=user]')).toHaveCount(0);
-  await expect(page.getByRole('button',{ name:'Show me music events',exact:true })).toBeVisible();
+  await expect(page.getByRole('button',{ name:'Find events this week',exact:false })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(errors).toEqual([]);
 });
@@ -59,4 +63,69 @@ test('composer preserves multiline drafts and logout clears tab history', async 
   await page.getByRole('button',{ name:'Log out',exact:true }).click();
   await expect(page.locator('#authLanding')).toBeVisible();
   expect(await page.evaluate(() => sessionStorage.getItem('cv_assistant_session_demo'))).toBeNull();
+});
+
+test('reference workspace filters, restores conversations, and keeps real saved answers', async ({ page },testInfo) => {
+  await enter(page);
+  const log = page.getByRole('log',{ name:'Conversation' });
+  const activity = page.getByRole('complementary',{ name:'Assistant activity' });
+  await expect(activity).toContainText('No conversations yet');
+  await expect(activity).toContainText('No saved answers yet');
+  await expect(page.getByRole('button',{ name:'Attach file (unavailable)',exact:true })).toBeDisabled();
+  await expect(page.getByRole('button',{ name:'Voice input (unavailable)',exact:true })).toBeDisabled();
+  await expect(page.locator('.assistant-mascot')).toBeVisible();
+  expect(await page.locator('.assistant-mascot').evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+  await page.getByRole('button',{ name:'Filter music events',exact:true }).click();
+  await page.getByRole('combobox',{ name:'Filter by location' }).selectOption('Botanical Garden');
+  await page.locator('#chatInput').fill('all events');
+  await page.locator('#chatInput').press('Enter');
+  await expect(log.locator('[data-assistant-event]')).toHaveCount(1);
+  await expect(log).toContainText('Jazz Under the Stars');
+  await log.getByRole('button',{ name:'Save answer',exact:true }).click();
+  await expect(activity).toContainText('all events');
+  await page.getByRole('button',{ name:'New chat',exact:true }).click();
+  await expect(log.locator('[data-chat-message=user]')).toHaveCount(0);
+  await expect(activity.getByRole('button',{ name:'all events',exact:true })).toHaveCount(2);
+  await page.locator('#chatInput').fill('How do I save an event?');
+  await page.locator('#chatInput').press('Enter');
+  await expect(log).toContainText('only change your saved list');
+  await activity.locator('.assistant-sidebar-section').first().getByRole('button',{ name:'all events',exact:true }).click();
+  await expect(log).toContainText('Jazz Under the Stars');
+  await expect(log).not.toContainText('only change your saved list');
+  await page.screenshot({ path:testInfo.outputPath('assistant-workspace-history.png'),fullPage:true,animations:'disabled' });
+  await activity.locator('.assistant-sidebar-section').last().getByRole('button',{ name:'all events',exact:true }).click();
+  const dialog = page.getByRole('dialog',{ name:'Saved answer',exact:true });
+  await expect(dialog).toContainText('Jazz Under the Stars');
+  await page.keyboard.press('Escape');
+  await expect(dialog).not.toBeVisible();
+  await page.reload();
+  await page.evaluate(() => document.querySelector('#demoLogin').click());
+  await expect(activity).toContainText('How do I save an event?');
+  await expect(activity.locator('.assistant-sidebar-section').last()).toContainText('all events');
+  await page.getByRole('button',{ name:'View all saved answers',exact:true }).click();
+  await page.getByRole('button',{ name:'Remove saved answer: all events',exact:true }).click();
+  await expect(page.getByRole('dialog')).toContainText('No saved answers yet');
+  await page.keyboard.press('Escape');
+  await page.getByRole('button',{ name:'View all conversations',exact:true }).click();
+  await page.getByRole('button',{ name:'Delete conversation: all events',exact:true }).click();
+  await expect(page.getByRole('dialog')).not.toContainText('all events');
+  await page.keyboard.press('Escape');
+  await page.getByRole('button',{ name:'Log out',exact:true }).click();
+  expect(await page.evaluate(() => sessionStorage.getItem('cv_assistant_session_demo'))).toBeNull();
+});
+
+test('date filters show honest empty results and sample host controls use catalog data', async ({ page }) => {
+  await enter(page);
+  await page.getByRole('combobox',{ name:'Filter by date' }).selectOption('today');
+  await page.locator('#chatInput').fill('all events');
+  await page.locator('#chatInput').press('Enter');
+  await expect(page.getByRole('log')).toContainText('No sample events match the selected filters');
+  await page.getByRole('button',{ name:'Clear search filters',exact:true }).click();
+  await page.getByRole('navigation',{ name:'Assistant workspace navigation' }).getByRole('button',{ name:'Clubs',exact:true }).click();
+  const hosts = page.getByRole('dialog',{ name:'Sample event hosts',exact:true });
+  await expect(hosts).toContainText('Membership and contact details are not verified');
+  await hosts.getByRole('button',{ name:'Code Collective',exact:true }).click();
+  await expect(hosts).not.toBeVisible();
+  await expect(page.getByRole('log').locator('[data-chat-message=assistant]').last()).toContainText('HackNight');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

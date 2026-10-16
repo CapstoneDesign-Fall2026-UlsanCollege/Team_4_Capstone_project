@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { todayInSeoul } from './dates.js';
 import { createAssistantRunner } from './runner.js';
-import { assistantSessionKey, cleanSession, loadSession, MAX_MESSAGES, saveSession } from './session.js';
+import { assistantSessionKey, cleanSession, loadSession, MAX_MESSAGES, saveSession, startConversation, toggleSavedAnswer } from './session.js';
 
 export function useAssistant(user, events, getSaved) {
   const key = assistantSessionKey(user.id);
@@ -22,16 +22,16 @@ export function useAssistant(user, events, getSaved) {
   }, [key]);
   useEffect(() => { if (!saveSession(storage.current,key,session,events)) setWarning('Chat history could not be saved in this tab.'); },[session,key]);
 
-  async function run(text, retry = false) {
+  async function run(text, retry = false, filters = {}) {
     if (lock.current || !text.trim() || text.length > 500) return;
     lock.current = true; setBusy(true); setError('');
     const turn = generation.current;
     const prior = latest.current;
-    failed.current = text;
+    failed.current = { text, filters };
     if (!retry) setSession(value => ({ ...value, draft: '', messages: [...value.messages,{ id: crypto.randomUUID(), role:'user', text: text.trim(), eventIds: [], pages: [] }].slice(-MAX_MESSAGES) }));
     runner.current ||= createAssistantRunner();
     try {
-      const result = await runner.current.ask({ text: text.trim(), savedIds: getSaved(), context: prior.context, interest: user.interest, today: todayInSeoul() });
+      const result = await runner.current.ask({ text: text.trim(), savedIds: getSaved(), context: prior.context, filters, interest: user.interest, today: todayInSeoul() });
       if (!alive.current || turn !== generation.current) return;
       const message = { ...result, id: crypto.randomUUID(), role:'assistant' };
       setSession(value => cleanSession({ ...value, messages: [...value.messages,message].slice(-MAX_MESSAGES), context: result.context },events));
@@ -39,11 +39,19 @@ export function useAssistant(user, events, getSaved) {
     } catch (failure) { if (alive.current && turn === generation.current) setError(failure.message || 'The local helper could not finish. Retry your question.'); }
     finally { if (turn === generation.current) { lock.current = false; if (alive.current) setBusy(false); } }
   }
-  function clear() {
+  function changeConversation(id) {
+    if (id === latest.current.activeId) return;
     generation.current++; runner.current?.stop(); failed.current = null; lock.current = false;
-    const fresh = cleanSession(null,events); latest.current = fresh;
+    const fresh = startConversation(latest.current,events,id); latest.current = fresh;
     setBusy(false); setError(''); setSession(fresh);
-    try { sessionStorage.removeItem(key); } catch { setWarning('Chat history could not be cleared from browser storage.'); }
   }
-  return { ...session, busy, error, warning, send: text => run(text), retry: () => failed.current && run(failed.current,true), stop: () => runner.current?.stop(), clear, setDraft: draft => setSession(value => ({ ...value, draft: draft.slice(0,500) })) };
+  function removeConversation(id) {
+    if (id === latest.current.activeId) {
+      generation.current++; runner.current?.stop(); failed.current = null; lock.current = false;
+      setBusy(false); setError('');
+      const fresh = cleanSession({ ...latest.current, activeId:crypto.randomUUID(), messages:[], draft:'', context:null },events);
+      latest.current = fresh; setSession(fresh);
+    } else setSession(value => ({ ...value, conversations:value.conversations.filter(item => item.id !== id) }));
+  }
+  return { ...session, busy, error, warning, send: (text,filters) => run(text,false,filters), retry: () => failed.current && run(failed.current.text,true,failed.current.filters), stop: () => runner.current?.stop(), clear: () => changeConversation(), openConversation:changeConversation, removeConversation, toggleAnswer: id => setSession(value => toggleSavedAnswer(value,id,events)), setDraft: draft => setSession(value => ({ ...value, draft: draft.slice(0,500) })) };
 }
