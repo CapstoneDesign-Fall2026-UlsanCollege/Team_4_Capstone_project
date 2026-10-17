@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { CloudCheck, LoaderCircle, RotateCcw as RetryIcon } from 'lucide-react';
 import { createAccountStore } from './account-store';
+import { useProfilePhoto } from './profile-photo-store';
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -77,6 +78,21 @@ export default function App() {
   const [account,setAccount] = useState(null);
   const [accountStatus,setAccountStatus] = useState({ready:false,pending:false,error:''});
   const [syncTarget,setSyncTarget] = useState(null);
+  const navPhoto = useProfilePhoto(feedUser?.id !== 'demo' ? feedUser?.id : '');
+  useEffect(() => {
+    const paint = () => {
+      const avatar = document.getElementById('navAvatar');
+      if (!avatar) return;
+      avatar.replaceChildren(document.createTextNode(feedUser?.name?.trim().charAt(0).toUpperCase() || '?'));
+      if (!navPhoto.photo || auth.currentUser?.uid !== feedUser?.id) return;
+      const img = document.createElement('img');
+      img.src = navPhoto.photo; img.alt = ''; img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;';
+      img.onerror = () => avatar.replaceChildren(document.createTextNode(feedUser?.name?.trim().charAt(0).toUpperCase() || '?'));
+      avatar.replaceChildren(img);
+    };
+    paint(); window.addEventListener('campus-avatar-refresh', paint);
+    return () => window.removeEventListener('campus-avatar-refresh', paint);
+  }, [feedUser?.id, feedUser?.name, navPhoto.photo]);
 
   useEffect(() => {
     const demoBadges=createBadgeTracker();
