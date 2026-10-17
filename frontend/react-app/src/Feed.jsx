@@ -387,6 +387,10 @@ export function Post({
 }) {
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState("");
+  const [commentPending, setCommentPending] = useState(false);
+  const [commentFailure, setCommentFailure] = useState('');
+  const commentRevision = useRef(0);
+  const commentLock = useRef(false);
   const profile = person(post.authorId);
   const liked = post.likes.includes(user.id);
   const saved = post.savedBy.includes(user.id);
@@ -441,6 +445,7 @@ export function Post({
               <>
                 <button
                   type="button"
+                  disabled={shared && !!post.deleting}
                   onClick={(event) => {
                     event.currentTarget.closest("details").open = false;
                     onEdit(post);
@@ -465,6 +470,7 @@ export function Post({
         </details>
       </header>
       {post.body && <p className="feed-post-body">{post.body}</p>}
+      {shared && post.deleting && <p className="feed-loading" role="status">Deletion pending</p>}
       {!!post.images.length && (
         <div className="feed-post-photos" data-count={post.images.length}>
           {post.images.map((media, index) => (
@@ -579,22 +585,33 @@ export function Post({
           <form
             onSubmit={async (event) => {
               event.preventDefault();
-              if (!comment.trim()) return;
+              if (busy || commentLock.current || !comment.trim()) return;
+              commentLock.current = true;
+              setCommentPending(true);
+              setCommentFailure('');
+              const revision = commentRevision.current;
               const text = comment.trim();
-              const changed = await onChange((current) => ({
-                ...current,
-                comments: [
-                  ...current.comments,
-                  {
-                    id: crypto.randomUUID(),
-                    authorId: user.id,
-                    name: user.name,
-                    body: text,
-                    createdAt: Date.now(),
-                  },
-                ],
-              }));
-              if (changed) setComment("");
+              try {
+                const changed = await onChange((current) => ({
+                  ...current,
+                  comments: [
+                    ...current.comments,
+                    {
+                      id: crypto.randomUUID(),
+                      authorId: user.id,
+                      name: user.name,
+                      body: text,
+                      createdAt: Date.now(),
+                    },
+                  ],
+                }));
+                if (changed && revision === commentRevision.current) setComment('');
+              } catch (error) {
+                setCommentFailure(error.message || 'Could not send your comment. Your draft is unchanged.');
+              } finally {
+                commentLock.current = false;
+                setCommentPending(false);
+              }
             }}
           >
             <Avatar name={user.name} memberId={shared ? user.id : undefined} small />
@@ -602,7 +619,8 @@ export function Post({
               aria-label="Write a comment"
               placeholder="Write a comment..."
               value={comment}
-              onChange={(event) => setComment(event.target.value)}
+              onChange={(event) => { commentRevision.current += 1; setComment(event.target.value); }}
+              disabled={shared && !!post.deleting}
               maxLength={500}
               required
             />
@@ -611,11 +629,12 @@ export function Post({
               className="feed-icon-button"
               aria-label="Send comment"
               title="Send comment"
-              disabled={busy || !comment.trim()}
+              disabled={busy || commentPending || !comment.trim()}
             >
               <ArrowUp size={18} />
             </button>
           </form>
+          {commentFailure && <p className="feed-error" role="alert">{commentFailure}</p>}
         </section>
       )}
     </article>
