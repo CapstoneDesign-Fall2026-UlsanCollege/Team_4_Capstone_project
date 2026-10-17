@@ -10,7 +10,7 @@ const expect = baseExpect.configure({ timeout: 30000 });
 if (!/^http:\/\/(127\.0\.0\.1|localhost):\d+\/?$/.test(url)) throw new Error('Use a localhost emulator preview only.');
 const browser = await chromium.launch({ channel: 'chrome' }), contexts = [], users = [], errors = [];
 const project = 'demo-campusvibe-feed', endpoint = `http://${process.env.FIRESTORE_EMULATOR_HOST || '127.0.0.1:8180'}/v1/projects/${project}/databases/(default)/documents`;
-const output = new URL('../verification/profile-photos/', import.meta.url);
+const output = new URL('profile-photos/', process.env.CAMPUS_TEST_ARTIFACTS_URL || new URL('../verification/', import.meta.url));
 await mkdir(output, { recursive: true });
 const nav = page => page.getByRole('navigation', { name: 'Shared feed navigation' });
 const directoryFixtures = Array.from({ length: 100 }, (_, index) => `!photo-directory-${String(index).padStart(3, '0')}`);

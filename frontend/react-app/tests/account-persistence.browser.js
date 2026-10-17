@@ -9,7 +9,7 @@ const url=process.env.ACCOUNT_TEST_URL || 'http://127.0.0.1:5186';
 if(!/^http:\/\/(127\.0\.0\.1|localhost):\d+\/?$/.test(url))throw new Error('This harness requires the local Firebase emulators.');
 const project='demo-campusvibe-feed',browser=await chromium.launch({channel:'chrome'}),contexts=[],users=[],errors=[];
 const firestore=process.env.FIRESTORE_EMULATOR_HOST || '127.0.0.1:8080',authHost=process.env.FIREBASE_AUTH_EMULATOR_HOST || '127.0.0.1:9099';
-const output=new URL('../verification/account-persistence/',import.meta.url);
+const output=new URL('account-persistence/',process.env.CAMPUS_TEST_ARTIFACTS_URL || new URL('../verification/',import.meta.url));
 await mkdir(output,{recursive:true});
 const saved=page=>expect(page.locator('.account-sync-status')).toHaveText('Saved to your account',{timeout:25000});
 async function context(){const ctx=await browser.newContext({viewport:{width:1440,height:1000}});contexts.push(ctx);const page=await ctx.newPage();page.setDefaultTimeout(25000);page.on('pageerror',error=>errors.push(error.message));return {ctx,page};}

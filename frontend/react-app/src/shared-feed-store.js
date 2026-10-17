@@ -1,4 +1,4 @@
-import { addDoc, collection, connectFirestoreEmulator, doc, getDocs, getFirestore, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
+import { addDoc, collection, connectFirestoreEmulator, doc, getDocFromServer, getDocsFromServer, getFirestore, limit, onSnapshot, orderBy, query, runTransaction, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
 import { auth, useEmulators } from "./firebase";
 
 export const db = getFirestore(auth.app);
@@ -60,12 +60,42 @@ export async function editSharedPost(user, post, value) {
 export async function deleteSharedPost(user, post) {
   if (account(user) !== post.authorId) throw new Error("Only the author can delete this post.");
   const reference = doc(posts(), post.id);
-  const [reactions, comments] = await Promise.all([
-    getDocs(query(collection(reference, 'reactions'), limit(200))),
-    getDocs(query(collection(reference, 'comments'), limit(100))),
-  ]);
-  const batch = writeBatch(db);
-  for (const snapshot of [reactions, comments]) snapshot.docs.forEach(item => batch.delete(item.ref));
-  batch.delete(reference);
-  return batch.commit();
+  const exists = await runTransaction(db, async transaction => {
+    const snapshot = await transaction.get(reference);
+    const uid = account(user);
+    if (!snapshot.exists()) return false;
+    if (snapshot.data().authorId !== uid) throw new Error('Only the author can delete this post.');
+    if (!snapshot.data().deleting) transaction.update(reference, { deleting: true, updatedAt: serverTimestamp() });
+    return true;
+  }).catch(async error => {
+    const snapshot = await getDocFromServer(reference);
+    const uid = account(user);
+    if (!snapshot.exists()) return false;
+    if (snapshot.data().authorId === uid && snapshot.data().deleting === true) return true;
+    throw error;
+  });
+  if (!exists) return;
+  try {
+    // Freeze child creation before draining every server-confirmed page. Keep the parent for retries.
+    for (const [name, size] of [['reactions', 200], ['comments', 100]]) {
+      while (true) {
+        account(user);
+        const page = await getDocsFromServer(query(collection(reference, name), limit(size)));
+        if (page.empty) break;
+        const batch = writeBatch(db);
+        page.docs.forEach(item => batch.delete(item.ref));
+        await batch.commit();
+      }
+    }
+    await runTransaction(db, async transaction => {
+      const snapshot = await transaction.get(reference);
+      if (!snapshot.exists()) return;
+      if (snapshot.data().authorId !== account(user)) throw new Error('Only the author can delete this post.');
+      transaction.delete(reference);
+    });
+  } catch (error) {
+    account(user);
+    if (!(await getDocFromServer(reference)).exists()) return;
+    throw new Error('Post deletion is incomplete. Reconnect and retry Delete post to finish removing it.', { cause: error });
+  }
 }

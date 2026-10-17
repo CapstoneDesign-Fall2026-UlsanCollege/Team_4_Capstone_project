@@ -32,7 +32,7 @@ export default function SharedPost({ post, user, saved, busy, act, fail, onEdit,
     if (removed) return act(() => deleteComment(user, post.id, removed.id), 'Comment deleted.');
     return false;
   };
-  return <Post post={value} user={user} shared busy={busy} onChange={change} onEdit={onEdit} onDelete={onDelete} onPhoto={() => {}} onCopy={() => act(async () => {
+  return <Post post={value} user={user} shared busy={busy || !!post.deleting} onChange={change} onEdit={onEdit} onDelete={onDelete} onPhoto={() => {}} onCopy={() => act(async () => {
     if (!navigator.clipboard) throw new Error('Clipboard access is unavailable.');
     await navigator.clipboard.writeText(post.body || post.event?.title || '');
   }, 'Post text copied.')} />;

@@ -31,6 +31,7 @@ export default function SharedFeed({ user }) {
   const [retry, setRetry] = useState(0);
   const [editing, setEditing] = useState(null);
   const [deleting, setDeleting] = useState(null);
+  const [messageDrafts, setMessageDrafts] = useState({});
   const locked = useRef(false);
   const alive = useRef(true);
   const mine = view === 'mine';
@@ -137,6 +138,10 @@ export default function SharedFeed({ user }) {
     return success;
   };
   const selectView = value => { setView(value); setQuery(''); };
+  const updateMessageDraft = (id, value, submitted) => setMessageDrafts(current => {
+    if (submitted !== undefined && current[id] !== submitted) return current;
+    return { ...current, [id]: value };
+  });
   const source = view === 'saved' ? savedIds.map(id => savedContent[id]).filter(Boolean) : posts;
   const visible = source.filter(post =>
     (view !== 'feed' || filter !== 'friends' || post.authorId === user.id || friends.includes(post.authorId)) &&
@@ -156,7 +161,7 @@ export default function SharedFeed({ user }) {
       </aside>
       <div className="feed-timeline">
         {failure && <div className="feed-error" role="alert"><p>{failure}</p><button type="button" disabled={busy} onClick={() => setRetry(value => value + 1)}>Try again</button></div>}
-        {view === 'messages' ? <SharedMessages user={user} profiles={profiles} connections={connections} query={query} ready={ready} {...messaging} /> : view === 'friends' ? <SharedFriends user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
+        {view === 'messages' ? <SharedMessages user={user} profiles={profiles} connections={connections} query={query} ready={ready} drafts={messageDrafts} onDraft={updateMessageDraft} {...messaging} /> : view === 'friends' ? <SharedFriends user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
           {view !== 'saved' && <Composer user={user} college={college} busy={busy} disabled={!ready} shared onPublish={publish} />}
           <div className="feed-timeline-heading"><h2>{heading}</h2><span className="shared-feed-count">{visible.length}{view !== 'saved' && posts.length === FEED_PAGE_SIZE ? ' / latest 50' : ''}</span></div>
           {view === 'feed' && <div className="feed-filter-tabs" role="group" aria-label="Post audience"><button type="button" aria-pressed={filter === 'all'} className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>All posts</button><button type="button" aria-pressed={filter === 'friends'} className={filter === 'friends' ? 'active' : ''} onClick={() => setFilter('friends')}>Friends</button></div>}
