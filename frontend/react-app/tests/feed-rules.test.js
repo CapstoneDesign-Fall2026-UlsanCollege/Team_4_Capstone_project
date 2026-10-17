@@ -243,7 +243,43 @@ test("only the author may edit or delete, and author/timestamps stay immutable",
   await assertFails(updateDoc(ref(alice), { authorName: "Bob", updatedAt: serverTimestamp() }));
   await assertFails(updateDoc(ref(alice), { createdAt: Timestamp.fromMillis(0), updatedAt: serverTimestamp() }));
   await assertSucceeds(updateDoc(ref(alice), { body: "Updated by Alice", updatedAt: serverTimestamp() }));
+  await assertFails(deleteDoc(ref(alice)));
+  await assertSucceeds(updateDoc(ref(alice), { deleting: true, updatedAt: serverTimestamp() }));
   await assertSucceeds(deleteDoc(ref(alice)));
+});
+
+test('post deletion is author-only, irreversible and blocks new child records, edits and bookmarks', async () => {
+  const alice=db('alice'), bob=db('bob');
+  await setDoc(ref(alice),post());
+  const mark={deleting:true,updatedAt:serverTimestamp()};
+  await assertFails(updateDoc(ref(bob),mark));
+  await assertFails(setDoc(ref(alice,'new-deleting'),post('alice',{deleting:true})));
+  await assertFails(updateDoc(ref(alice),{deleting:'yes',updatedAt:serverTimestamp()}));
+  await assertFails(updateDoc(ref(alice),{...mark,body:'Changed while marking'}));
+  await assertSucceeds(updateDoc(ref(alice),mark));
+  await assertFails(updateDoc(ref(alice),{deleting:false,updatedAt:serverTimestamp()}));
+  await assertFails(updateDoc(ref(alice),{body:'Too late',updatedAt:serverTimestamp()}));
+  await assertFails(setDoc(doc(bob,'campusFeedPosts','post','comments','late'),{uid:'bob',name:'Bob',body:'Too late',createdAt:serverTimestamp()}));
+  await assertFails(setDoc(doc(bob,'campusFeedPosts','post','reactions','bob_like'),{uid:'bob',kind:'like',createdAt:serverTimestamp()}));
+  await assertFails(setDoc(doc(bob,'campusFeedProfiles','bob','savedPosts','post'),{createdAt:serverTimestamp()}));
+  await assertSucceeds(getDocs(query(collection(alice,'campusFeedPosts','post','comments'),limit(100))));
+  await assertSucceeds(deleteDoc(doc(alice,'campusFeedPosts','post','comments','already-cleaned')));
+  await assertFails(deleteDoc(ref(bob)));
+  await assertSucceeds(deleteDoc(ref(alice)));
+});
+
+test('atomic writes cannot add a comment, reaction or bookmark while freezing or deleting its parent', async () => {
+  const alice=db('alice');await setDoc(ref(alice),post());
+  for(const child of ['comment','reaction','saved']){
+    const batch=writeBatch(alice);batch.update(ref(alice),{deleting:true,updatedAt:serverTimestamp()});
+    if(child === 'comment')batch.set(doc(alice,'campusFeedPosts','post','comments','late'),{uid:'alice',name:'Alice',body:'Late',createdAt:serverTimestamp()});
+    if(child === 'reaction')batch.set(doc(alice,'campusFeedPosts','post','reactions','alice_like'),{uid:'alice',kind:'like',createdAt:serverTimestamp()});
+    if(child === 'saved')batch.set(doc(alice,'campusFeedProfiles','alice','savedPosts','post'),{createdAt:serverTimestamp()});
+    await assertFails(batch.commit());
+  }
+  await updateDoc(ref(alice),{deleting:true,updatedAt:serverTimestamp()});
+  const batch=writeBatch(alice);batch.delete(ref(alice));batch.set(doc(alice,'campusFeedPosts','post','comments','after-delete'),{uid:'alice',name:'Alice',body:'Late',createdAt:serverTimestamp()});
+  await assertFails(batch.commit());
 });
 test("server timestamps and bounded queries are required", async () => {
   const alice = db("alice");

@@ -13,7 +13,8 @@ service cloud.firestore {
     }
     function validPost(data) {
       return data.keys().hasAll(['authorId','authorName','college','body','event','createdAt','updatedAt'])
-        && data.keys().hasOnly(['authorId','authorName','college','body','event','createdAt','updatedAt'])
+        && data.keys().hasOnly(['authorId','authorName','college','body','event','createdAt','updatedAt','deleting'])
+        && data.get('deleting', false) is bool
         && data.authorId is string && data.authorId == request.auth.uid
         && data.authorName is string && data.authorName.size() > 0 && data.authorName.size() <= 120
         && data.college is string && data.college.size() > 0 && data.college.size() <= 100
@@ -136,7 +137,7 @@ service cloud.firestore {
         allow list: if member() && request.auth.uid == uid && bounded(50);
         allow create: if member() && request.auth.uid == uid
           && request.resource.data.keys().hasOnly(['createdAt']) && request.resource.data.createdAt == request.time
-          && exists(/databases/$(database)/documents/campusFeedPosts/$(postId));
+          && getAfter(/databases/$(database)/documents/campusFeedPosts/$(postId)).data.get('deleting', false) == false;
         allow delete: if member() && request.auth.uid == uid;
       }
       allow get: if member();
@@ -150,36 +151,43 @@ service cloud.firestore {
       allow delete: if member() && request.auth.uid == uid;
     }
     match /campusFeedPosts/{postId} {
+      function activePost() {
+        return getAfter(/databases/$(database)/documents/campusFeedPosts/$(postId)).data.get('deleting', false) == false;
+      }
       match /comments/{commentId} {
         allow get: if member() && exists(/databases/$(database)/documents/campusFeedPosts/$(postId));
         allow list: if member() && bounded(100) && exists(/databases/$(database)/documents/campusFeedPosts/$(postId));
-        allow create: if member() && exists(/databases/$(database)/documents/campusFeedPosts/$(postId))
+        allow create: if member() && activePost()
           && request.resource.data.keys().hasOnly(['uid','name','body','createdAt'])
           && request.resource.data.uid == request.auth.uid
           && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 120
           && request.resource.data.body is string && request.resource.data.body.size() > 0 && request.resource.data.body.size() <= 500
           && request.resource.data.createdAt == request.time;
-        allow delete: if member() && (resource.data.uid == request.auth.uid
-          || get(/databases/$(database)/documents/campusFeedPosts/$(postId)).data.authorId == request.auth.uid);
+        allow delete: if member() && (get(/databases/$(database)/documents/campusFeedPosts/$(postId)).data.authorId == request.auth.uid
+          || (resource != null && resource.data.uid == request.auth.uid));
       }
       match /reactions/{reactionId} {
         allow get: if member() && exists(/databases/$(database)/documents/campusFeedPosts/$(postId));
         allow list: if member() && bounded(200) && exists(/databases/$(database)/documents/campusFeedPosts/$(postId));
-        allow create: if member() && exists(/databases/$(database)/documents/campusFeedPosts/$(postId))
+        allow create: if member() && activePost()
           && request.resource.data.keys().hasOnly(['uid','kind','createdAt'])
           && request.resource.data.uid == request.auth.uid
           && request.resource.data.kind in ['like','interested']
           && reactionId == request.auth.uid + '_' + request.resource.data.kind
           && request.resource.data.createdAt == request.time;
-        allow delete: if member() && (resource.data.uid == request.auth.uid
-          || get(/databases/$(database)/documents/campusFeedPosts/$(postId)).data.authorId == request.auth.uid);
+        allow delete: if member() && (get(/databases/$(database)/documents/campusFeedPosts/$(postId)).data.authorId == request.auth.uid
+          || (resource != null && resource.data.uid == request.auth.uid));
       }
       allow get: if member();
       allow list: if member() && request.query.limit != null && request.query.limit <= 100;
-      allow create: if member() && validPost(request.resource.data) && request.resource.data.createdAt == request.time;
+      allow create: if member() && validPost(request.resource.data) && request.resource.data.createdAt == request.time
+        && !request.resource.data.keys().hasAny(['deleting']);
       allow update: if member() && resource.data.authorId == request.auth.uid && validPost(request.resource.data)
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['body','college','event','updatedAt']);
-      allow delete: if member() && resource.data.authorId == request.auth.uid;
+        && resource.data.get('deleting', false) == false
+        && (request.resource.data.get('deleting', false) == true
+          ? request.resource.data.diff(resource.data).affectedKeys().hasOnly(['deleting','updatedAt'])
+          : request.resource.data.diff(resource.data).affectedKeys().hasOnly(['body','college','event','updatedAt']));
+      allow delete: if member() && resource.data.authorId == request.auth.uid && resource.data.get('deleting', false) == true;
     }
   }
 }
