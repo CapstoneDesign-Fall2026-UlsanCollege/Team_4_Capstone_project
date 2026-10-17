@@ -21,5 +21,5 @@ export const useEmulators = import.meta.env.DEV && import.meta.env.VITE_FIREBASE
 const app = initializeApp(useEmulators ? { ...firebaseConfig, projectId: "demo-campusvibe-feed" } : firebaseConfig);
 export const auth = getAuth(app);
 if (useEmulators) {
-  connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
+  connectAuthEmulator(auth, `http://127.0.0.1:${Number(import.meta.env.VITE_FIREBASE_AUTH_EMULATOR_PORT) || 9099}`, { disableWarnings: true });
 }
