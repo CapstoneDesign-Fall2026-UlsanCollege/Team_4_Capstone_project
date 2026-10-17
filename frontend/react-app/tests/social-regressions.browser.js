@@ -31,7 +31,15 @@ async function adminCommit(writes){
   const result=await fetch(`${endpoint}:commit`,{method:'POST',headers:{Authorization:'Bearer owner','Content-Type':'application/json'},body:JSON.stringify({writes})});
   assert.equal(result.status,200,await result.text());
 }
-async function children(id,name){const response=await fetch(`${endpoint}/campusFeedPosts/${id}/${name}?pageSize=1000`,{headers:{Authorization:'Bearer owner'}});assert.ok(response.ok);const data=await response.json();assert.equal(data.nextPageToken,undefined);return data.documents || [];}
+async function children(id,name){
+  const records=[];let pageToken;
+  do{
+    const params=new URLSearchParams({pageSize:'1000',...(pageToken ? {pageToken} : {})});
+    const response=await fetch(`${endpoint}/campusFeedPosts/${id}/${name}?${params}`,{headers:{Authorization:'Bearer owner'}});assert.ok(response.ok);
+    const data=await response.json();records.push(...(data.documents || []));pageToken=data.nextPageToken;
+  }while(pageToken);
+  return records;
+}
 async function seed(id,uid){
   const records=[...Array.from({length:201},(_,index)=>({name:`${prefix}/campusFeedPosts/${id}/reactions/seed-${index}_like`,fields:{uid:{stringValue:`seed-${index}`},kind:{stringValue:'like'}}})),...Array.from({length:101},(_,index)=>({name:`${prefix}/campusFeedPosts/${id}/comments/seed-${index}`,fields:{uid:{stringValue:uid},name:{stringValue:'Regression Bob'},body:{stringValue:`Seeded comment ${index}`}}}))];
   await adminCommit(records.map(update=>({update,updateTransforms:[{fieldPath:'createdAt',setToServerValue:'REQUEST_TIME'}]})));
