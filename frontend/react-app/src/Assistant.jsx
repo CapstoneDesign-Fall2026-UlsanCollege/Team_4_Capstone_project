@@ -19,8 +19,8 @@ const prompts = [
 const railLinks = [['Home',House,'dashboard'],['Events',CalendarDays,'discover'],['Clubs',UsersRound,'clubs'],['Saved',Bookmark,'saved'],['Feed',MessageCircle,'feed'],['Profile',UserRound,'profile']];
 const titleOf = conversation => conversation.messages.find(message => message.role === 'user')?.text || 'Conversation';
 
-export default function Assistant({ user }) {
-  const chat = useAssistant(user,events,saved);
+export default function Assistant({ user,account }) {
+  const chat = useAssistant(user,events,saved,account);
   const [savedIds,setSavedIds] = useState(saved);
   const [actionError,setActionError] = useState('');
   const [filters,setFilters] = useState(defaultFilters);
@@ -82,7 +82,7 @@ export default function Assistant({ user }) {
             <div className="assistant-composer-tools"><div className="assistant-input-modes"><span title="Attachments are unavailable in the local helper"><button type="button" disabled aria-label="Attach file (unavailable)"><Paperclip size={16} />Attach</button></span><span title="Voice input is unavailable in the local helper"><button type="button" disabled aria-label="Voice input (unavailable)"><Mic size={17} />Voice</button></span></div><span className="assistant-character-count" aria-hidden="true">{chat.draft.length} / 500</span>{chat.busy ? <button className="assistant-send" type="button" onClick={chat.stop} aria-label="Stop response" title="Stop response"><Square size={17} />Stop</button> : <button className="assistant-send" id="chatSend" type="submit" disabled={!chat.draft.trim()} aria-label="Send message" title="Send message"><Send size={17} />Send</button>}</div>
           </form>
         </section>
-        <div className="assistant-footnote"><ShieldCheck size={22} /><p>Local helper &middot; Sample events &middot; History in this tab only<br />No external AI service or live campus information.</p></div>
+        <div className="assistant-footnote"><ShieldCheck size={22} /><p>Local helper &middot; Sample events &middot; {account ? 'History saved to your account' : 'History in this tab only'}<br />No external AI service or live campus information.</p></div>
       </div>
       <aside className="assistant-sidebar" aria-label="Assistant activity">
         <section className="assistant-ready"><BadgeCheck size={29} /><div><h2>{chat.busy ? 'Working locally' : 'Assistant ready'}</h2><p>CampusVibes sample catalog<br />Private to this browser tab</p></div><span aria-hidden="true" /></section>
