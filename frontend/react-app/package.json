@@ -9,6 +9,8 @@
     "preview": "vite preview",
     "test:feed-rules": "node --test tests/feed-rules.test.js",
     "test:shared-feed": "node tests/shared-feed.browser.js",
+    "test:social-components": "node tests/social-components.browser.js",
+    "test:social-regressions": "node tests/social-regressions.browser.js",
     "test:suggestions": "node tests/suggestions.browser.js",
     "test:assistant": "node --test tests/assistant.test.js",
     "test:profile": "node --test tests/profile.test.js",
