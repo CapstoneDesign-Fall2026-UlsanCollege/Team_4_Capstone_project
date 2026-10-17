@@ -3,24 +3,33 @@ import { todayInSeoul } from './dates.js';
 import { createAssistantRunner } from './runner.js';
 import { assistantSessionKey, cleanSession, loadSession, MAX_MESSAGES, saveSession, startConversation, toggleSavedAnswer } from './session.js';
 
-export function useAssistant(user, events, getSaved) {
+export function useAssistant(user, events, getSaved, account) {
   const key = assistantSessionKey(user.id);
   const storage = useRef(null);
   try { storage.current = window.sessionStorage; } catch { storage.current = null; }
-  const [session,setSession] = useState(() => loadSession(storage.current,key,events));
+  const [session,setSession] = useState(() => account ? account.read('assistant') : loadSession(storage.current,key,events));
   const [busy,setBusy] = useState(false);
   const [error,setError] = useState('');
   const [warning,setWarning] = useState('');
   const runner = useRef(null), lock = useRef(false), alive = useRef(true), failed = useRef(null), latest = useRef(session), generation = useRef(0);
   latest.current = session;
+  const remote=useRef(account ? JSON.stringify(account.read('assistant')) : '');
+  useEffect(()=>account?.subscribe(()=>{
+    const value=account.read('assistant'),json=JSON.stringify(value);
+    if(json !== remote.current){remote.current=json;if(json !== JSON.stringify(latest.current) && !lock.current){latest.current=value;setSession(value);}}
+    if(!account.status().error)setWarning('');
+  }),[account]);
   useEffect(() => {
     alive.current = true;
-    const flush = () => saveSession(storage.current,key,latest.current,events);
-    const logout = event => { if (!event.detail || event.detail.id !== user.id) { generation.current++; runner.current?.stop(); try { sessionStorage.removeItem(key); } catch { /* Storage errors are already surfaced by autosave. */ } } };
+    const flush = () => {if(!account)saveSession(storage.current,key,latest.current,events);};
+    const logout = event => { if (!event.detail || event.detail.id !== user.id) { generation.current++; runner.current?.stop(); if(!account)try { sessionStorage.removeItem(key); } catch { /* Storage errors are already surfaced by autosave. */ } } };
     window.addEventListener('pagehide',flush); window.addEventListener('campus-session-change',logout);
     return () => { alive.current = false; runner.current?.stop(); window.removeEventListener('pagehide',flush); window.removeEventListener('campus-session-change',logout); };
   }, [key]);
-  useEffect(() => { if (!saveSession(storage.current,key,session,events)) setWarning('Chat history could not be saved in this tab.'); },[session,key]);
+  useEffect(() => {
+    if(account){try{account.stage('assistant',session);}catch(error){setWarning(error.message);}}
+    else if (!saveSession(storage.current,key,session,events)) setWarning('Chat history could not be saved in this tab.');
+  },[session,key,account]);
 
   async function run(text, retry = false, filters = {}) {
     if (lock.current || !text.trim() || text.length > 500) return;

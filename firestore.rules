@@ -23,6 +23,17 @@ service cloud.firestore {
     function bounded(maximum) {
       return request.query.limit != null && request.query.limit <= maximum;
     }
+    match /campusAccountData/{uid}/state/{section} {
+      function ownAccount() { return member() && request.auth.uid == uid; }
+      function knownSection() { return section in ['profile','saved','dashboard','badges','suggestion','assistant']; }
+      allow get: if ownAccount() && knownSection();
+      allow create, update: if ownAccount() && knownSection()
+        && request.resource.data.keys().hasAll(['version','value','updatedAt'])
+        && request.resource.data.keys().hasOnly(['version','value','updatedAt'])
+        && request.resource.data.version == 1 && request.resource.data.value is string
+        && request.resource.data.value.size() <= (section == 'assistant' ? 200000 : 20000)
+        && request.resource.data.updatedAt == request.time;
+    }
     function suggestionReviewer() {
       return member() && exists(/databases/$(database)/documents/campusSuggestionReviewers/$(request.auth.uid))
         && get(/databases/$(database)/documents/campusSuggestionReviewers/$(request.auth.uid)).data.enabled == true;

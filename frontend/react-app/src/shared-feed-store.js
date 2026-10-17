@@ -2,7 +2,7 @@ import { addDoc, collection, connectFirestoreEmulator, doc, getDocs, getFirestor
 import { auth, useEmulators } from "./firebase";
 
 export const db = getFirestore(auth.app);
-if (useEmulators) connectFirestoreEmulator(db, "127.0.0.1", 8080);
+if (useEmulators) connectFirestoreEmulator(db, "127.0.0.1", Number(import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT) || 8080);
 
 export const FEED_PAGE_SIZE = 50;
 const posts = () => collection(db, "campusFeedPosts");

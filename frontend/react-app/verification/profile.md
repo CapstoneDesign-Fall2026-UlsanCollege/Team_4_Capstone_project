@@ -1,5 +1,9 @@
 # Profile Reference Workspace
 
+Persistence update: signed-in profiles, saves, and activity now use private
+Firestore account records. See [current account persistence](account-persistence.md).
+The browser-local behavior and results below document the original release and demo.
+
 Updated October 17, 2026, using the supplied profile reference.
 
 ## Implemented

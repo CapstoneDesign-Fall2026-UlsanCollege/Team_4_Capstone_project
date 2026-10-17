@@ -1,5 +1,9 @@
 # Event Suggestions and Team Review
 
+Persistence update: signed-in unsent drafts now sync privately to the account.
+See [current account persistence](account-persistence.md). The browser-draft
+behavior and dated checks below describe the original release; demo drafts stay local.
+
 ## Behavior
 
 The Suggest page follows the supplied reference: paired name/club and date/place

@@ -5,7 +5,8 @@ import { collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, ser
 
 let env;
 before(async () => {
-  env = await initializeTestEnvironment({ projectId: "demo-campusvibe-feed", firestore: { host: "127.0.0.1", port: 8080, rules: readFileSync(new URL("../../../firestore.rules", import.meta.url), "utf8") } });
+  const endpoint=new URL(`http://${process.env.FIRESTORE_EMULATOR_HOST || '127.0.0.1:8080'}`);
+  env = await initializeTestEnvironment({ projectId: "demo-campusvibe-feed", firestore: { host: endpoint.hostname, port: Number(endpoint.port), rules: readFileSync(new URL("../../../firestore.rules", import.meta.url), "utf8") } });
 });
 beforeEach(async () => env.clearFirestore());
 after(async () => {
@@ -27,6 +28,30 @@ function suggest(database, uid = 'alice', extra = {}, id = 'idea') {
 async function grantReviewer(uid = 'reviewer') {
   await env.withSecurityRulesDisabled(context => setDoc(doc(context.firestore(), 'campusSuggestionReviewers', uid), { enabled: true }));
 }
+
+test('private account records survive owner reads but cannot be accessed by another account or guest',async()=>{
+  const path=database=>doc(database,'campusAccountData','alice','state','profile');
+  const value={version:1,value:JSON.stringify({bio:'Private profile'}),updatedAt:serverTimestamp()};
+  await assertSucceeds(setDoc(path(db('alice')),value));
+  await assertSucceeds(getDoc(path(db('alice'))));
+  await assertFails(getDoc(path(db('bob'))));
+  await assertFails(setDoc(path(db('bob')),value));
+  await assertFails(getDoc(path(env.unauthenticatedContext().firestore())));
+  await assertFails(getDoc(path(env.authenticatedContext('alice',{firebase:{sign_in_provider:'anonymous'}}).firestore())));
+});
+
+test('account records reject unknown sections, oversized values, extra fields, fake timestamps, listing and deletion',async()=>{
+  const database=db('alice'),base=['campusAccountData','alice','state'];
+  const value={version:1,value:'{}',updatedAt:serverTimestamp()};
+  await assertFails(setDoc(doc(database,...base,'roles'),value));
+  await assertFails(setDoc(doc(database,...base,'saved'),{...value,admin:true}));
+  await assertFails(setDoc(doc(database,...base,'saved'),{...value,value:'x'.repeat(20001)}));
+  await assertFails(setDoc(doc(database,...base,'assistant'),{...value,value:'x'.repeat(200001)}));
+  await assertFails(setDoc(doc(database,...base,'profile'),{...value,updatedAt:Timestamp.fromMillis(1)}));
+  for(const name of ['profile','saved','dashboard','badges','suggestion','assistant'])await assertSucceeds(setDoc(doc(database,...base,name),value));
+  await assertFails(getDocs(collection(database,...base)));
+  await assertFails(deleteDoc(doc(database,...base,'profile')));
+});
 
 test('suggestions require an authenticated owner and an atomic private receipt', async () => {
   await assertSucceeds(getDoc(doc(db('alice'), 'campusSuggestionOwners', 'missing')));
