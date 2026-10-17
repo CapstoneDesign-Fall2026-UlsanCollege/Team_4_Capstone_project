@@ -1,5 +1,6 @@
-import { addDoc, collection, connectFirestoreEmulator, doc, getDocFromServer, getDocsFromServer, getFirestore, limit, onSnapshot, orderBy, query, runTransaction, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
+import { addDoc, collection, connectFirestoreEmulator, doc, getDocFromServer, getDocsFromServer, getFirestore, limit, onSnapshot, orderBy, query, runTransaction, serverTimestamp, setDoc, updateDoc, where, writeBatch } from "firebase/firestore";
 import { auth, useEmulators } from "./firebase";
+import { forgetFeedPhoto, photoRequest, uploadFeedPhoto } from './shared-photo-store';
 
 export const db = getFirestore(auth.app);
 if (useEmulators) connectFirestoreEmulator(db, "127.0.0.1", Number(import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT) || 8080);
@@ -26,14 +27,14 @@ export function validateSharedPost(value) {
   const college = String(value.college || "").trim();
   if (!college || college.length > 100) throw new Error("Enter a college name of up to 100 characters.");
   if (body.length > 2000) throw new Error("Post text must be 2,000 characters or fewer.");
-  if (value.images?.length) throw new Error("Photo uploads are not enabled for the shared feed.");
+  if (value.images && (!Array.isArray(value.images) || value.images.length > 1)) throw new Error('Add one photo per shared post.');
   let event = null;
   if (value.event) {
     event = Object.fromEntries(["title", "date", "time", "location"].map(key => [key, String(value.event[key] || "").trim()]));
     const date = new Date(`${event.date}T00:00:00Z`);
     if (!event.title || event.title.length > 100 || !event.location || event.location.length > 120 || !/^\d{4}-\d{2}-\d{2}$/.test(event.date) || Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== event.date || (event.time && !/^([01]\d|2[0-3]):[0-5]\d$/.test(event.time))) throw new Error("Add a valid event name, date, time, and location.");
   }
-  if (!body && !event) throw new Error("Add post text or an event before publishing.");
+  if (!body && !event && !value.images?.length) throw new Error("Add post text, a photo, or an event before publishing.");
   return { body, college, event };
 }
 
@@ -49,7 +50,31 @@ export async function publishSharedPost(user, value) {
   const authorId = account(user);
   const payload = validateSharedPost(value);
   const authorName = user.name.trim().slice(0, 120) || "Student";
-  return addDoc(posts(), { ...payload, authorId, authorName, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  const media = value.images?.[0];
+  if (!media) return addDoc(posts(), { ...payload, authorId, authorName, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  if (!media.blob || !/^[A-Za-z0-9]{20}$/.test(media.id)) throw new Error('Choose a photo before publishing.');
+  const reference = doc(posts(), media.id);
+  const existing = await getDocFromServer(reference);
+  if (existing.exists()) {
+    if (existing.data().authorId === authorId && existing.data().photo && !existing.data().deleting) return reference;
+    throw new Error('This post cannot be retried. Choose the photo again.');
+  }
+  try {
+    const photo = await uploadFeedPhoto(user, media, reference.id);
+    account(user);
+    await setDoc(reference, { ...payload, photo, authorId, authorName, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    forgetFeedPhoto(media);
+    return reference;
+  } catch (error) {
+    // Never discard an asset if a post was committed despite a lost acknowledgement.
+    try {
+      account(user);
+      const snapshot = await getDocFromServer(reference);
+      if (snapshot.exists() && snapshot.data().authorId === authorId && snapshot.data().photo) return reference;
+      if (!snapshot.exists()) { await photoRequest(user, { action: 'discard', postId: reference.id }); forgetFeedPhoto(media); }
+    } catch { /* Keep the stable photo ID so the next submission can retry safely. */ }
+    throw error;
+  }
 }
 
 export async function editSharedPost(user, post, value) {
@@ -76,6 +101,8 @@ export async function deleteSharedPost(user, post) {
   });
   if (!exists) return;
   try {
+    const frozen = await getDocFromServer(reference);
+    if (frozen.exists() && frozen.data().photo) await photoRequest(user, { action: 'delete', postId: post.id });
     // Freeze child creation before draining every server-confirmed page. Keep the parent for retries.
     for (const [name, size] of [['reactions', 200], ['comments', 100]]) {
       while (true) {
