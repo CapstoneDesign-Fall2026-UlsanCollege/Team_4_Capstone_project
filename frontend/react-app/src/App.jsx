@@ -47,21 +47,34 @@ import {
   Clock,
   Camera,
   Gamepad2,
+  Award,
+  Medal,
+  ShieldCheck,
+  Crown,
+  Check,
 } from "lucide";
+import { createBadgeTracker } from "./progress-badges";
 import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
 import ThemeToggle from "./ThemeToggle";
-
+import eventCatalog from "../../events.json";
 const Feed = lazy(() => import("./FeedEntry"));
+const Suggestions = lazy(() => import("./Suggestions"));
+const Assistant = lazy(() => import("./Assistant"));
+const Profile = lazy(() => import("./Profile"));
 
 export default function App() {
   const mountRef = useRef(null);
   const [feedTarget, setFeedTarget] = useState(null);
+  const [suggestTarget, setSuggestTarget] = useState(null);
+  const [assistantTarget, setAssistantTarget] = useState(null);
+  const [profileTarget, setProfileTarget] = useState(null);
   const [feedUser, setFeedUser] = useState(null);
 
   useEffect(() => {
+    window.campusBadgeProgress = createBadgeTracker();
     window.campusFirebaseAuth = {
       auth,
       createUserWithEmailAndPassword,
@@ -85,6 +98,9 @@ export default function App() {
       .forEach((script) => script.remove());
     mountRef.current.innerHTML = parsedMarkup.body.innerHTML;
     setFeedTarget(mountRef.current.querySelector("#feedMount"));
+    setSuggestTarget(mountRef.current.querySelector("#suggestMount"));
+    setAssistantTarget(mountRef.current.querySelector("#assistantMount"));
+    setProfileTarget(mountRef.current.querySelector("#profileMount"));
     const receiveSession = (event) => setFeedUser(event.detail);
     window.addEventListener("campus-session-change", receiveSession);
     window.campusRenderIcons = () =>
@@ -121,12 +137,18 @@ export default function App() {
           Clock,
           Camera,
           Gamepad2,
+          Award,
+          Medal,
+          ShieldCheck,
+          Crown,
+          Check,
         },
         attrs: { "aria-hidden": "true", "stroke-width": 1.8 },
       });
 
-    const appScript = document.createElement("script");
+    const appScript = documegnt.createElement("script");
     appScript.textContent = `(() => {
+      const EVENTS = ${JSON.stringify(eventCatalog)};
       ${dashboardScript}
       ${discoverScript}
       ${originalScript}
@@ -150,8 +172,15 @@ export default function App() {
       delete window.syncFirebaseUser;
       delete window.campusRenderIcons;
       delete window.campusSwitchWorkspace;
+      delete window.campusAssistant;
+      delete window.campusProfile;
+      delete window.campusBadgeProgress;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
+      window.campusNavigationCleanup?.();
+      delete window.campusNavigationCleanup;
+      window.campusBadgeCleanup?.();
+      delete window.campusBadgeCleanup;
     };
   }, []);
 
@@ -159,6 +188,21 @@ export default function App() {
     <>
       <ThemeToggle />
       <div ref={mountRef} />
+      {profileTarget && feedUser && createPortal(
+        <Suspense fallback={<p role="status">Loading your profile...</p>}>
+          <Profile key={feedUser.id} user={feedUser} />
+        </Suspense>, profileTarget,
+      )}
+      {assistantTarget && feedUser && createPortal(
+        <Suspense fallback={<p role="status">Loading the local assistant...</p>}>
+          <Assistant key={feedUser.id} user={feedUser} />
+        </Suspense>, assistantTarget,
+      )}
+      {suggestTarget && feedUser && createPortal(
+        <Suspense fallback={<p role="status">Loading suggestions...</p>}>
+          <Suggestions key={feedUser.id} user={feedUser} />
+        </Suspense>, suggestTarget,
+      )}
       {feedTarget &&
         feedUser &&
         createPortal(

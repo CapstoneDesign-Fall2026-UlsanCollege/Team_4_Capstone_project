@@ -68,7 +68,7 @@ If full backend authentication is not ready, we will prepare a clearly labeled p
 - [x] Add the landing, authentication, dashboard, and navigation sketches.
 - [x] Record the intended login -> dashboard -> core-feature flow.
 - [x] Record the midterm demo sentence and the Week 5 blocker.
-- [ ] Confirm the final authentication approach.
+- [x] Confirm the final authentication approach.
    - **Owner:** @devyanaCT
    - **Decision date:** Wed 2026-09-30
    - **Decision boundary:** Use Firebase Authentication if the setup check in [Issue #25](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/25) succeeds; otherwise use a clearly labeled mock flow for the demo only.

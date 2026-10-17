@@ -105,7 +105,7 @@
       <div class="dashboard-side">
         <section class="panel quick-panel"><h2>Quick actions</h2><div class="quick-actions"><button class="quick-action" data-page="discover"><i data-lucide="calendar-days" aria-hidden="true"></i><span>Browse<br>events</span></button><button class="quick-action" data-page="chat"><i data-lucide="message-circle" aria-hidden="true"></i><span>Ask<br>Assistant</span></button><button class="quick-action" data-page="suggest"><i data-lucide="lightbulb" aria-hidden="true"></i><span>Suggest an<br>event</span></button><button class="quick-action" data-page="saved"><i data-lucide="bookmark" aria-hidden="true"></i><span>Saved (<span id="savedCount">0</span>)</span></button></div></section>
         <section class="panel dashboard-activity-panel"><div class="dashboard-section-heading"><h2>Recent activity</h2><button class="text-button" id="viewDashboardActivity" type="button">View all</button></div><div id="dashboardActivity" aria-live="polite"></div></section>
-        <section class="panel dashboard-progress-panel"><div class="dashboard-section-heading"><h2>Your vibes progress</h2><button class="text-button" id="viewProgress" type="button">View details</button></div><div class="vibes-progress"><div class="progress-symbol"><i data-lucide="graduation-cap" aria-hidden="true"></i></div><div class="progress-copy"><h3 id="progressTitle">Your campus journey starts here</h3><p id="progressCopy">Save something that sparks your interest.</p></div><div class="progress-ring" id="progressRing"><strong id="progressLevel">Lv. 1</strong><span>Explorer</span></div><div class="progress-points"><strong id="progressPoints">0</strong><span>points</span></div></div></section>
+        <section class="panel dashboard-progress-panel"><div class="dashboard-section-heading"><h2>Your vibes progress</h2><button class="text-button" id="viewProgress" type="button">View details</button></div><div class="vibes-progress"><div class="progress-symbol" id="progressSymbol"><i data-lucide="compass" aria-hidden="true"></i></div><div class="progress-copy"><h3 id="progressTitle">Explorer badge</h3><p id="progressCopy">100 points to Campus Scout</p><small id="progressBadgeCount">0 / 5 badges earned</small></div><div class="progress-ring" id="progressRing" role="progressbar" aria-label="Progress to next level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><strong id="progressLevel">Lv. 1</strong><span id="progressRank">Explorer</span></div><div class="progress-points"><strong id="progressPoints">0</strong><span>points</span></div></div><p id="progressBadgeAnnouncement" class="sr-only" role="status" aria-live="polite"></p><p id="progressStorageWarning" class="progress-storage-warning hidden" role="status"></p></section>
       </div>
       <aside class="dashboard-weekend"><i data-lucide="party-popper" aria-hidden="true"></i><div><strong>Don't miss out!</strong><p id="weekendNote"></p></div><button class="btn" id="exploreWeekend" type="button">Explore now<i data-lucide="arrow-right" aria-hidden="true"></i></button></aside>
     </div>
@@ -115,7 +115,7 @@
     <div class="discover-layout">
       <div class="discover-main">
         <div class="discover-hero">
-          <div class="discover-intro"><p class="discover-eyebrow">YOUR NEXT CAMPUS MOMENT</p><h1>Discover events</h1><p>Find what moves you. Join events, meet people,<br>and make every day on campus count.</p>
+          <div class="discover-intro"><p class="discover-eyebrow">SAMPLE EVENTS &middot; ILLUSTRATIVE PHOTOS</p><h1>Discover events</h1><p>Find what moves you. Join events, meet people,<br>and make every day on campus count.</p>
             <div class="event-tools"><label class="event-search" for="eventSearch"><i data-lucide="search" aria-hidden="true"></i><span class="sr-only">Search events, hosts, locations, or interests</span><input id="eventSearch" type="search" placeholder="Search events, hosts, or interests..." autocomplete="off"></label><button class="discover-filter-button" id="discoverFiltersButton" type="button" aria-label="More event filters" title="More event filters"><i data-lucide="sliders-horizontal" aria-hidden="true"></i></button></div>
           </div>
           <div class="discover-hero-photo discover-image discover-atlas" style="--photo-column:0"><img src="/assets/discover-campus-atlas.png" alt="Illustration of university friends chatting on campus"></div>
@@ -136,59 +136,16 @@
     <dialog class="dashboard-dialog discover-filter-dialog" id="discoverFilterDialog" aria-labelledby="discoverFilterTitle"><div class="dashboard-section-heading"><h2 id="discoverFilterTitle">Event filters</h2><button class="dashboard-icon-button" id="closeDiscoverFilters" type="button" aria-label="Close event filters" title="Close event filters"><i data-lucide="x" aria-hidden="true"></i></button></div><form id="discoverFilterForm"><label>Category<select id="discoverCategory"><option value="all">All categories</option><option>Tech</option><option>Arts</option><option>Music</option><option>Sports</option><option>Social</option><option>Academics</option></select></label><label>Sort by<select id="discoverSort"><option value="date">Date: earliest first</option><option value="latest">Date: latest first</option><option value="title">Title: A to Z</option></select></label><label class="discover-checkbox"><input id="discoverSavedOnly" type="checkbox">Saved events only</label><button class="btn btn-primary" type="submit">Apply filters</button></form></dialog>
   </section>
 
-  <section class="page-view" id="page-chat">
-    <div class="page-heading compact"><div><p class="eyebrow">ASK CAMPUSVIBES</p><h1>CampusVibes <span class="assistant-title-accent">Assistant</span></h1><p>Get help finding events and using CampusVibes.</p></div><button class="btn btn-outline" id="chatClear" type="button">New chat</button></div>
-    <section class="chat-panel panel" aria-label="AI chat">
-      <div class="chat-messages" id="chatMessages" aria-label="Conversation" aria-live="polite" aria-relevant="additions text">
-        <div class="chat-message assistant"><div class="chat-message-label">CampusVibes Assistant</div><p>Hi! I can help you explore campus events, find listings by interest, check event details, or explain how to save one.</p></div>
-      </div>
-      <div class="chat-prompts" id="chatPrompts" aria-label="Suggested questions">
-        <button class="chat-prompt" type="button" data-prompt="Show me music events">Show me music events</button>
-        <button class="chat-prompt" type="button" data-prompt="Where is the Indie Game Showcase?">Where is an event?</button>
-        <button class="chat-prompt" type="button" data-prompt="How do I save an event?">How do I save an event?</button>
-      </div>
-      <form class="chat-form" id="chatForm">
-        <label class="sr-only" for="chatInput">Message CampusVibes Assistant</label>
-        <textarea id="chatInput" rows="1" maxlength="500" placeholder="Ask about events or CampusVibes..." required></textarea>
-        <button class="btn btn-primary" id="chatSend" type="submit">Send</button>
-      </form>
-      <p class="chat-disclaimer">This helper uses the sample events in CampusVibes. It doesn’t use an external AI service or have live campus information.</p>
-    </section>
-  </section>
+  <section class="page-view" id="page-chat"><div id="assistantMount"></div></section>
 
   <section class="page-view" id="page-saved"><div class="page-heading compact"><div><p class="eyebrow">YOUR SHORTLIST</p><h1>Saved events</h1><p>Keep the plans you are not ready to forget.</p></div></div><div class="events-grid" id="savedGrid"></div><p class="empty-state hidden" id="savedEmpty">You have not saved any events yet. Browse Discover and tap the bookmark on an event.</p></section>
 
   <section class="page-view" id="page-suggest">
-    <div class="page-heading compact"><div><p class="eyebrow">ADD TO THE VIBE</p><h1>Suggest an event</h1><p>Know something the campus should not miss?</p></div></div>
-    <div class="suggest-layout">
-      <form class="suggest-form panel" id="suggestForm">
-        <label>Event name<input required placeholder="e.g. Film night under the stars"></label>
-        <label>Host or club<input required placeholder="Your club name"></label>
-        <label>What is happening?<textarea required rows="4" placeholder="Tell students why they should come..."></textarea></label>
-        <button class="btn btn-primary" type="submit">Send suggestion</button>
-      </form>
-      <aside class="suggest-note"><img src="/assets/campusvibes-logo.png" alt="" aria-hidden="true"><div><h2>Make it awesome</h2><p>Add as much detail as you can so others can get excited about your idea!</p></div></aside>
-    </div>
+    <div id="suggestMount"></div>
   </section>
 
   <section class="page-view" id="page-profile">
-    <header class="profile-hero">
-      <div class="profile-avatar" id="profileAvatar">?</div>
-      <div class="profile-identity"><h1 id="profileName">Guest student</h1><p id="profileProgram">Computer Science Student</p><p id="profileBio">Curious builder and problem solver who loves tech, teamwork, and campus events.</p><p id="profileEmail"></p><div class="profile-facts"><span>2nd Year</span><span>North Campus</span><span>CampusVibes student</span></div></div>
-      <button class="btn btn-primary" id="profileEdit" type="button">Edit profile</button>
-    </header>
-    <form class="profile-editor hidden" id="profileEditor"><label>Study program<input id="editProgram" maxlength="80" required></label><label>About you<textarea id="editBio" maxlength="240" rows="3" required></textarea></label><div><button class="btn btn-primary" type="submit">Save changes</button><button class="btn btn-outline" id="profileCancel" type="button">Cancel</button></div></form>
-    <div class="profile-columns">
-      <div class="profile-stack">
-        <section class="profile-section"><h2>Interests</h2><div class="profile-interests"><span>Coding</span><span>AI &amp; ML</span><span>Hackathons</span><span>Basketball</span><span>Photography</span></div></section>
-        <section class="profile-section"><h2>Study Program</h2><div class="profile-study"><div class="profile-study-mark" aria-hidden="true">CS</div><div><h3 id="profileStudy">BSc in Computer Science</h3><p>Faculty of Engineering</p><p>Expected graduation: <strong>May 2028</strong></p></div></div></section>
-        <section class="profile-section"><h2>Campus Involvement</h2><div class="profile-clubs"><div><strong>Coding Club</strong><span>Member</span></div><div><strong>Tech Society</strong><span>Member</span></div><div><strong>Event Crew</strong><span>Volunteer</span></div></div></section>
-      </div>
-      <div class="profile-stack">
-        <section class="profile-section"><div class="profile-section-heading"><h2>Saved Events</h2><button class="text-button" data-page="saved">View all</button></div><div id="profileSavedEvents"></div></section>
-        <section class="profile-section"><div class="profile-section-heading"><h2>Recent Activity</h2><button class="text-button" data-page="saved">View all</button></div><div id="profileActivity"></div></section>
-      </div>
-    </div>
+    <div id="profileMount"></div>
   </section>
   <dialog class="dashboard-dialog" id="dashboardDialog" aria-labelledby="dashboardDialogTitle"><div class="dashboard-section-heading"><h2 id="dashboardDialogTitle"></h2><button class="dashboard-icon-button" id="closeDashboardDialog" type="button" aria-label="Close" title="Close"><i data-lucide="x" aria-hidden="true"></i></button></div><div id="dashboardDialogBody"></div></dialog>
 </main>

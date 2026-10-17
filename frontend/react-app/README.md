@@ -4,6 +4,12 @@ This Vite + React app mounts the Community markup and behavior and provides the 
 
 ## Run locally
 
+The [Suggest page and review queue](verification/suggestions.md) include account-private
+browser drafts, real Firestore submissions, anonymous reviewer attribution,
+personal submission status, and admin-authorized approve/decline decisions.
+Use `npm run test:suggestions` with the documented local emulators. Attachments
+remain disabled, and approval does not publish a Discover event.
+
 ```sh
 npm ci
 npm run dev
@@ -31,9 +37,21 @@ The check passes when signup and login both complete, each updates the app to th
 
 ## CampusVibes Assistant
 
-The assistant works directly in the browser using the sample events already in the app. It can suggest events by interest, answer basic event time and location questions, list saved events, and explain how to use Discover, Saved, and Suggest. It does not need an API key, a separate server, or a sign-in, and it does not answer general questions or access live campus information.
+The assistant is a free local helper using the shared sample event catalog. The corrected-reference workspace includes a navigation rail, mascot greeting, question tiles, category/date/location filters, recent conversation restore/delete, and explicitly saved answers. It also supports typo-tolerant search, comparisons, saved-event questions, follow-ups, and bookmark/detail controls. History, drafts, and saved answers stay in the current browser tab under the current account key and are cleared on logout. New chat keeps earlier threads in Recent conversations. Attach/Voice remain disabled; sample host listings are not verified club memberships. Demo entry works without a Firebase login. See [behavior, privacy, and verification](verification/assistant.md).
 
-This is an intentionally small prototype, not a generative AI chatbot. A future iteration can connect Gemini through a secured backend to answer broader questions. If the team wants chat requests to trigger CampusVibes actions or change app features, those capabilities must be implemented as explicit, permission-checked tools; a model should not execute arbitrary code or silently modify the app.
+## Profile Workspace
+
+The reference-style profile uses the signed-in name/email and a computed completion checklist. Study details, bio, interests, and followed sample hosts are editable and stored under the existing account email key in this browser; earlier program/bio edits remain readable. Saved-event actions use the existing Community list, and activity comes from recorded dashboard actions, not a fabricated timeline. Following a sample host is not joining a club. Shared photo uploads remain off.
+
+Share profile opens a text preview with email excluded by default. It shares/copies text, not a public profile URL. Settings explains the browser-local boundary and offers a confirmed reset that leaves account/shared data and event saves unchanged. Run `npm run test:profile` and `npm run test:smoke`; see [profile evidence and limits](verification/profile.md).
+
+## Progress Badges
+
+Dashboard progress now awards badges at levels 1, 2, 3, 5, and 10. View details shows earned/locked badges, earn dates, required levels/points, and the next target. Current points retain the original calculation: 20 per currently saved Community event plus 30 per recorded dashboard draft, with one level per 100 points. Earned badges remain unlocked when the current score decreases and after reload, provided browser storage is available. Awards are scoped to the account ID in this browser, not Firestore or a verified leaderboard.
+
+The Suggest form/review queue does not add points to the legacy dashboard-draft count. With nine sample events and no recorded drafts, saving every event reaches 180 points/level 2; higher tiers need additional qualifying records. No new points sources or Firebase permissions were added. Run `npm run test:badges`; see [badge rules, persistence, screenshots, and verification](verification/progress-badges.md).
+
+This is not a generative AI chatbot. No external model, API key, billing change, live campus feed, or private-message access is involved. Questions do not automatically save events; the student chooses the bookmark control. Run `npm run test:assistant` for the pure engine, storage, and worker checks, and `npm run test:smoke` for desktop/mobile flows.
 
 The earlier local-API “Failed to fetch” failure is not reproducible in the current assistant because it no longer makes API requests. The original reproduction steps and resolution are recorded in [Issue #38](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/38).
 
