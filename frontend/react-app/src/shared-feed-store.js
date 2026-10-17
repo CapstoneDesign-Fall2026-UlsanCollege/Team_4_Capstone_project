@@ -67,6 +67,12 @@ export async function deleteSharedPost(user, post) {
     if (snapshot.data().authorId !== uid) throw new Error('Only the author can delete this post.');
     if (!snapshot.data().deleting) transaction.update(reference, { deleting: true, updatedAt: serverTimestamp() });
     return true;
+  }).catch(async error => {
+    const snapshot = await getDocFromServer(reference);
+    const uid = account(user);
+    if (!snapshot.exists()) return false;
+    if (snapshot.data().authorId === uid && snapshot.data().deleting === true) return true;
+    throw error;
   });
   if (!exists) return;
   try {

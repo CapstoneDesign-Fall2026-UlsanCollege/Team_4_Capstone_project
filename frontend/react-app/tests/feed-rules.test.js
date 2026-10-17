@@ -257,6 +257,7 @@ test('post deletion is author-only, irreversible and blocks new child records, e
   await assertFails(updateDoc(ref(alice),{deleting:'yes',updatedAt:serverTimestamp()}));
   await assertFails(updateDoc(ref(alice),{...mark,body:'Changed while marking'}));
   await assertSucceeds(updateDoc(ref(alice),mark));
+  await assertSucceeds(updateDoc(ref(alice),mark));
   await assertFails(updateDoc(ref(alice),{deleting:false,updatedAt:serverTimestamp()}));
   await assertFails(updateDoc(ref(alice),{body:'Too late',updatedAt:serverTimestamp()}));
   await assertFails(setDoc(doc(bob,'campusFeedPosts','post','comments','late'),{uid:'bob',name:'Bob',body:'Too late',createdAt:serverTimestamp()}));
