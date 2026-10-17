@@ -27,6 +27,7 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 | Team-agreement | [Team-agreement](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/e1a1fb2c7e2c40bd98bd4ea4e362762f8cbf046e/docs/Week1/team_agrement.md) |
 | Sprint1 Quality check | [sprint-quality-quick-check](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5672689bb30aa48d1cd88c0c269d0640bf592145/docs/Week7/sprint-quality-quick-checks.md) |
 | Work Checklist | [Week7 Work Checklist](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5672689bb30aa48d1cd88c0c269d0640bf592145/docs/Week7/week7-work.checklist.md)
+| Midterm demo preparation | [Preparation issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74)
 | Document update | Link this Week 7 report in the team's repository after committing it. |
 
 ## References Links
