@@ -12,6 +12,8 @@
     "test:suggestions": "node tests/suggestions.browser.js",
     "test:assistant": "node --test tests/assistant.test.js",
     "test:profile": "node --test tests/profile.test.js",
+    "test:profile-photos": "node --test tests/profile-photo.test.js",
+    "test:profile-photos-browser": "node tests/profile-photos.browser.js",
     "test:badges": "node --test tests/progress-badges.test.js",
     "test:account": "node --test tests/account-sync.test.js",
     "test:account-browser": "node tests/account-persistence.browser.js",
