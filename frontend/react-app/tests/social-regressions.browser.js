@@ -82,7 +82,8 @@ try{
   console.log('PASS: native Firestore cleanup removes 201 reactions and 101 comments; a non-author cannot bypass the server ownership check.');
 
   let retry=await makePost(alice,'Resume an interrupted post deletion.');await seed(retry.id,bob.uid);
-  await alice.page.evaluate(async id=>{const {db}=await import('/src/shared-feed-store.js'),{doc,updateDoc,serverTimestamp}=await import('/node_modules/.vite/deps/firebase_firestore.js');await updateDoc(doc(db,'campusFeedPosts',id),{deleting:true,updatedAt:serverTimestamp()});},retry.id);
+  const marking=await fetch(`${endpoint}:commit`,{method:'POST',headers:{Authorization:`Bearer ${alice.token}`,'Content-Type':'application/json'},body:JSON.stringify({writes:[{update:{name:`${prefix}/campusFeedPosts/${retry.id}`,fields:{deleting:{booleanValue:true}}},updateMask:{fieldPaths:['deleting']},updateTransforms:[{fieldPath:'updatedAt',setToServerValue:'REQUEST_TIME'}]}]})});
+  assert.equal(marking.status,200,await marking.text());
   await adminCommit((await children(retry.id,'comments')).slice(0,30).map(item=>({delete:item.name})));
   await nav(bob.page).getByRole('button',{name:'Latest posts',exact:true}).click();
   const peer=bob.page.locator(`[data-shared-post="${retry.id}"]`);await expect(peer.getByRole('status')).toHaveText('Deletion pending');await expect(peer.getByRole('button',{name:'Like',exact:true})).toBeDisabled();
