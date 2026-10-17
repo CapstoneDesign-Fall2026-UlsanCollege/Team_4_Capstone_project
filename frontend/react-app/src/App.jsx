@@ -146,7 +146,7 @@ export default function App() {
         attrs: { "aria-hidden": "true", "stroke-width": 1.8 },
       });
 
-    const appScript = documegnt.createElement("script");
+    const appScript = document.createElement("script");
     appScript.textContent = `(() => {
       const EVENTS = ${JSON.stringify(eventCatalog)};
       ${dashboardScript}
