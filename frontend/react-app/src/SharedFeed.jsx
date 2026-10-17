@@ -70,7 +70,7 @@ export default function SharedFeed({ user }) {
       watchSavedPosts(user, guarded(setSavedIds), guarded(setFailure)),
     ];
     return () => { active = false; stops.forEach(stop => stop()); };
-  }, [user.id, retry]);
+  }, [user.id, user.name, retry]);
   useEffect(() => {
     const own = profiles.find(profile => profile.id === user.id);
     if (own) setCollege(own.college);

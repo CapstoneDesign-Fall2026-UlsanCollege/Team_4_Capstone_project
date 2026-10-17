@@ -453,7 +453,7 @@ function setupAuthControls(){
 
 /* ── Session ── */
 function startSession(user, interest = ""){
-  const name = user.displayName || user.name || user.email?.split("@")[0] || "Student";
+  const name = user.displayName || user.name || "Student";
   currentSession = {
     id: user.uid || "demo",
     name,

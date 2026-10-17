@@ -2,6 +2,7 @@ export const PHOTO_MAX_LENGTH = 16384;
 export const PHOTO_MAX_INPUT = 5 * 1024 * 1024;
 export const memberId = uid => typeof uid === 'string' && uid !== 'demo' ? uid : '';
 export const memberLabel = (name, uid) => `${name || 'Student'}${memberId(uid) ? `, member ${uid}` : ''}`;
+export const publicMemberName = displayName => typeof displayName === 'string' && displayName.trim() ? displayName.trim().slice(0, 120) : 'Student';
 
 export function validProfilePhoto(value) {
   return typeof value === 'string' && value.length <= PHOTO_MAX_LENGTH && /^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]+={0,2}$/.test(value);
