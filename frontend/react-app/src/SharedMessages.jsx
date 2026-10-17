@@ -5,7 +5,7 @@ import MemberId from './MemberId';
 import { memberLabel } from './profile-photo';
 import { deleteMessage, loadOlderMessages, markConversationRead, messageError, sendMessage, watchLoadedMessage, watchMessages, watchReadReceipt } from './shared-messages-store';
 
-function Conversation({ user, connection, profile, ready, draft, onDraft, onBack }) {
+function Conversation({ user, connection, profile, ready, draft, onDraft, onSent, onBack }) {
   const [result, setResult] = useState({ messages: [], fromCache: true });
   const [older, setOlder] = useState([]);
   const [cursor, setCursor] = useState(null);
@@ -58,7 +58,8 @@ function Conversation({ user, connection, profile, ready, draft, onDraft, onBack
     if (sendLock.current || !ready || !draft.trim()) return;
     sendLock.current = true;
     setBusy(true); setFailure('');
-    try { await sendMessage(user, connection.id, draft); onDraft(''); }
+    const submitted = draft;
+    try { await sendMessage(user, connection.id, submitted); onSent(submitted); }
     catch (error) { if (alive.current) setFailure(messageError(error)); }
     finally { sendLock.current = false; if (alive.current) setBusy(false); }
   };
@@ -86,9 +87,8 @@ function Conversation({ user, connection, profile, ready, draft, onDraft, onBack
   </section>;
 }
 
-export default function SharedMessages({ user, profiles, connections, query, ready, inbox, unread }) {
+export default function SharedMessages({ user, profiles, connections, query, ready, inbox, unread, drafts, onDraft }) {
   const [selected, setSelected] = useState(null);
-  const [drafts, setDrafts] = useState({});
   const friends = connections.filter(item => item.status === 'accepted');
   const active = friends.find(item => item.id === selected);
   const list = friends.filter(item => {
@@ -101,6 +101,6 @@ export default function SharedMessages({ user, profiles, connections, query, rea
       const profile = profiles.find(value => value.id === peerId);
       return <button type="button" key={item.id} className={active?.id === item.id ? 'active' : ''} aria-label={`Message ${memberLabel(profile?.name, peerId)}`} aria-current={active?.id === item.id ? 'page' : undefined} onClick={() => setSelected(item.id)}><Avatar name={profile?.name || 'Student'} memberId={peerId} small /><span><strong>{profile?.name || 'Student'}</strong><MemberId uid={peerId} /><small>{inbox[item.id]?.error ? 'Unavailable' : inbox[item.id]?.latest?.body || profile?.college || 'Start a conversation'}</small></span>{unread(item.id) && <span className="feed-unread-dot" aria-label="Unread messages" />}</button>;
     })}{!list.length && <p className="feed-side-empty">{query ? 'No matching friends' : 'No accepted friends yet'}</p>}</aside>
-    {active ? <Conversation key={active.id} user={user} connection={active} profile={profiles.find(value => value.id === active.members.find(id => id !== user.id))} ready={ready} draft={drafts[active.id] || ''} onDraft={value => setDrafts(current => ({ ...current, [active.id]: value }))} onBack={() => setSelected(null)} /> : <div className="feed-chat-empty"><MessageCircle size={32} /><p>{friends.length ? 'Select a conversation' : 'No conversations yet'}</p></div>}
+    {active ? <Conversation key={active.id} user={user} connection={active} profile={profiles.find(value => value.id === active.members.find(id => id !== user.id))} ready={ready} draft={drafts[active.id] || ''} onDraft={value => onDraft(active.id, value)} onSent={submitted => onDraft(active.id, '', submitted)} onBack={() => setSelected(null)} /> : <div className="feed-chat-empty"><MessageCircle size={32} /><p>{friends.length ? 'Select a conversation' : 'No conversations yet'}</p></div>}
   </div>;
 }
