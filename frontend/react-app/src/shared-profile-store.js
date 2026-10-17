@@ -23,3 +23,10 @@ export function watchFeedProfiles(user, receive, fail) {
     receive(snapshot.docs.map(item => ({ ...item.data(), id: item.id })));
   }, error => fail(feedError(error)));
 }
+
+export function watchFeedProfile(user, uid, receive, fail) {
+  account(user);
+  return onSnapshot(doc(db, 'campusFeedProfiles', uid), snapshot => {
+    receive(snapshot.exists() ? { ...snapshot.data(), id: snapshot.id } : null);
+  }, error => fail(feedError(error)));
+}

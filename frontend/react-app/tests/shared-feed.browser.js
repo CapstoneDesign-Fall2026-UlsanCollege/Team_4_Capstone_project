@@ -42,15 +42,15 @@ try {
   await bobProfile.waitFor();
   await bobProfile.getByRole('button', { name: 'Add friend', exact: true }).click();
   await nav(b.page).getByRole('button', { name: 'Friends', exact: true }).click();
-  await b.page.getByRole('button', { name: 'Accept request from Shared Alice', exact: true }).click();
+  await b.page.getByRole('button', { name: /^Accept request from Shared Alice, member / }).click();
   await a.page.waitForFunction(() => document.querySelector('.feed-right')?.textContent.includes('Shared Bob'));
   await nav(a.page).getByRole('button', { name: 'Messages', exact: true }).click();
-  await a.page.getByRole('button', { name: 'Message Shared Bob', exact: true }).click();
+  await a.page.getByRole('button', { name: /^Message Shared Bob, member / }).click();
   await a.page.getByRole('textbox', { name: 'Message text', exact: true }).fill('Hello Bob - a real private message');
   await a.page.getByRole('button', { name: 'Send message', exact: true }).click();
   await nav(b.page).getByRole('button', { name: 'Messages', exact: true }).locator('.feed-nav-badge').waitFor();
   await nav(b.page).getByRole('button', { name: 'Messages', exact: true }).click();
-  await b.page.getByRole('button', { name: 'Message Shared Alice', exact: true }).click();
+  await b.page.getByRole('button', { name: /^Message Shared Alice, member / }).click();
   await b.page.waitForFunction(() => document.querySelector('.feed-message-history')?.textContent.includes('Hello Bob - a real private message'));
   await a.page.locator('.feed-message-seen').waitFor();
   await nav(b.page).getByRole('button', { name: 'Messages', exact: true }).locator('.feed-nav-badge').waitFor({ state: 'detached' });
@@ -69,7 +69,7 @@ try {
   await b.page.reload({ waitUntil: 'domcontentloaded' });
   await b.page.locator('.shared-feed-status .connected').waitFor();
   await nav(b.page).getByRole('button', { name: 'Messages', exact: true }).click();
-  await b.page.getByRole('button', { name: 'Message Shared Alice', exact: true }).click();
+  await b.page.getByRole('button', { name: /^Message Shared Alice, member / }).click();
   await b.page.waitForFunction(() => document.querySelector('.feed-message-history')?.textContent.includes('Hello Alice - replying in real time'));
   a.page.once('dialog', dialog => dialog.accept());
   await a.page.getByRole('button', { name: 'Delete message', exact: true }).click();

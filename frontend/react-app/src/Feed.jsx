@@ -27,6 +27,8 @@ import {
 } from "lucide-react";
 import { loadFeed, PEOPLE, preparePhoto, saveFeed } from "./feed-store";
 import "./feed.css";
+import { useProfilePhoto } from './profile-photo-store';
+import MemberId from './MemberId';
 
 const initials = (name) =>
   name
@@ -53,14 +55,16 @@ const relativeTime = (value) => {
         : dateLabel(value);
 };
 
-export function Avatar({ name, color = "#9167cd", small = false }) {
+export function Avatar({ name = 'Student', color = "#9167cd", small = false, memberId }) {
+  const { photo } = useProfilePhoto(memberId);
+  const [broken, setBroken] = useState('');
   return (
     <span
       className={`feed-avatar ${small ? "small" : ""}`}
       style={{ "--avatar-color": color }}
       aria-hidden="true"
     >
-      {initials(name)}
+      {photo && broken !== photo ? <img src={photo} alt="" onError={() => setBroken(photo)} /> : initials(name)}
     </span>
   );
 }
@@ -220,7 +224,7 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
   return (
     <form className="feed-card feed-composer" onSubmit={submit}>
       <div className="feed-composer-heading">
-        <Avatar name={user.name} />
+        <Avatar name={user.name} memberId={shared ? user.id : undefined} />
         <div>
           <strong>{user.name}</strong>
           <span>{initialPost ? "Edit post" : "Share a campus moment"}</span>
@@ -396,9 +400,10 @@ export function Post({
   return (
     <article className="feed-card feed-post" data-feed-post={post.id} data-shared-post={shared ? post.id : undefined}>
       <header>
-        <Avatar name={post.authorName} color={profile?.color} />
+        <Avatar name={post.authorName} color={profile?.color} memberId={shared ? post.authorId : undefined} />
         <div className="feed-post-identity">
           <strong>{post.authorName}</strong>
+          {shared && <MemberId uid={post.authorId} />}
           <span>
             {post.college} <span aria-hidden="true">·</span>{" "}
             <time dateTime={new Date(post.createdAt).toISOString()}>
@@ -542,10 +547,12 @@ export function Post({
               <Avatar
                 name={item.name}
                 color={person(item.authorId)?.color}
+                memberId={shared ? item.authorId : undefined}
                 small
               />
               <div>
                 <strong>{item.name}</strong>
+                {shared && <MemberId uid={item.authorId} />}
                 <p>{item.body}</p>
               </div>
               {(item.authorId === user.id || (shared && post.authorId === user.id)) && (
@@ -590,7 +597,7 @@ export function Post({
               if (changed) setComment("");
             }}
           >
-            <Avatar name={user.name} small />
+            <Avatar name={user.name} memberId={shared ? user.id : undefined} small />
             <input
               aria-label="Write a comment"
               placeholder="Write a comment..."

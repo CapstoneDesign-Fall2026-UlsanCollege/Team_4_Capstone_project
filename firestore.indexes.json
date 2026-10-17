@@ -1,4 +1,4 @@
 {
   "indexes": [{ "collectionGroup": "campusFeedPosts", "queryScope": "COLLECTION", "fields": [{ "fieldPath": "authorId", "order": "ASCENDING" }, { "fieldPath": "createdAt", "order": "DESCENDING" }] }],
-  "fieldOverrides": []
+  "fieldOverrides": [{ "collectionGroup": "campusProfilePhotos", "fieldPath": "photo", "indexes": [] }]
 }

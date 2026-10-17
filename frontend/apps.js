@@ -473,7 +473,7 @@ function syncFirebaseUser(user){
   }
 }
 async function logout(){
-  if (window.campusAccount?.status().pending && !window.confirm("Some changes have not synced to your account. Logging out now can lose them. Log out anyway?")) return;
+  if ((window.campusAccount?.status().pending || window.campusPhotoPending) && !window.confirm("Some changes have not synced to your account. Logging out now can lose them. Log out anyway?")) return;
   const { auth, signOut } = window.campusFirebaseAuth;
   try {
     if (auth.currentUser) await signOut(auth);
@@ -509,6 +509,7 @@ function updateNav(){
     setErr($("#landingPass"), $("#landingPassErr"), "");
     $("#navUsername").textContent = s.name.split(" ")[0];
     $("#navAvatar").textContent = s.name[0].toUpperCase();
+    window.dispatchEvent(new Event('campus-avatar-refresh'));
     // If the user picked an interest at signup, gently preselect that filter
     if (s.interest){
       const chip = document.querySelector(`.chip[data-interest="${s.interest}"]`);

@@ -9,12 +9,12 @@ and sharing campus updates. The current app uses React, Vite, and Firebase.
 |---|---|---|
 | Authentication | Email/password signup, login, logout, persistence, Google sign-in and password-reset wiring | Firebase Authentication. Successful Google login and reset-email completion need separate verification. |
 | Community | Dashboard, Discover search/filters, event details, Saved, and Profile | Discover events remain code-based samples. Signed-in saves and activity sync privately through Firestore; demo records stay browser-local. |
-| Profile | Reference-style identity header, completion checklist, editable study/bio/interests, saved-event actions, activity, host follows, and text sharing | Real sign-in name/email; private account-backed edits. No public directory, uploaded photos, claimed club membership, or attendance totals. [Persistence and evidence](frontend/react-app/verification/account-persistence.md). |
+| Profile | Identity header, account-backed profile photos, completion checklist, editable study/bio/interests, saved-event actions, activity, host follows, and text sharing | Study edits stay private. Small profile photos and member IDs are shared with signed-in members; email stays private. No claimed club membership or attendance totals. [Photo privacy and checks](frontend/react-app/verification/profile-photos.md). |
 | Progress Badges | Automatically unlock Explorer, Campus Scout, Pathfinder, Vibe Maker, and Campus Legend at level milestones | Signed-in awards sync between devices and survive a lower score. Demo awards remain local. Existing points rules are unchanged; not verified attendance. [Persistence and evidence](frontend/react-app/verification/account-persistence.md). |
 | Assistant | Reference workspace with navigation rail, mascot, filters, conversations, saved answers, comparisons, and bookmarks/details | Free local answer engine; signed-in history/drafts/answers persist privately in Firestore after logout. Demo history remains tab-local. No AI service/live campus data; Attach/Voice unavailable. |
 | Suggest | Draft event ideas, submit for team review, and track decisions | Signed-in drafts, submissions and decisions persist in Firestore. Demo drafts stay local. Anonymous ideas hide attribution from reviewers, not project administrators. Approval does not publish a Discover event; attachments remain off. |
 | Guest Campus Vibe-Feed | Text/photo/event posts, local social actions, and demo friend requests | Fictional profiles and device-local IndexedDB storage; no delivery to other students. |
-| Signed-in Campus Vibe-Feed | Text/event posts, likes, comments, interest, private saved posts, profiles, and friend requests | Firestore-backed data in the restored rich layout. Shared photos are disabled while billing stays off. See the social-feed verification record for tested scope and query limits. |
+| Signed-in Campus Vibe-Feed | Text/event posts, likes, comments, interest, private saved posts, profile thumbnails, distinct member IDs, and friend requests | Firestore-backed data in the restored rich layout. Shared post-photo attachments remain disabled while billing stays off. See the social-feed verification record for tested scope and query limits. |
 
 The shared-feed implementation is included in this checkout. See the
 [production permissions fix and verification](frontend/react-app/verification/shared-feed-production.md)
@@ -23,6 +23,8 @@ The [restored real-social feed](frontend/react-app/verification/real-social-feed
 adds account-backed likes, comments, saves, and friends while retaining a
 separate fictional guest demo.
 The feed also includes [private Messages between accepted friends](frontend/react-app/verification/feed-messages.md), with live replies, unread badges, read receipts, and earlier history.
+
+[Profile photos and complete member IDs](frontend/react-app/verification/profile-photos.md) distinguish students with the same display name in Friends and Messages. Photos are optional; messages remain addressed by account ID, and shared identity does not expose account email or private study details.
 
 The [account persistence guide](frontend/react-app/verification/account-persistence.md)
 explains server-confirmed saves, offline retry, legacy browser-data migration,

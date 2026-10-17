@@ -10,7 +10,12 @@ body:has(#appMain:not(.hidden) #page-profile.active) .nav-inner{max-width:1460px
 .cvp-hero-content{display:flex;flex-direction:column;justify-content:space-between;gap:22px;padding:26px 0 19px 22px;min-width:0}
 .cvp-intro{display:flex;align-items:center;gap:21px;min-width:0}
 .cvp-avatar{position:relative;display:grid;place-items:center;flex:0 0 120px;width:120px;height:120px;background:#9562dc;color:#fff;border:5px solid #fff;border-radius:50%;box-shadow:0 2px 12px #68479d14;font:600 60px 'Inter',sans-serif}
-.cvp-avatar>span{position:absolute;bottom:-6px;left:calc(50% - 15px);display:grid;place-items:center;width:30px;height:30px;border:3px solid #fff;background:#8c5ad5;border-radius:50%;color:#fff}
+.cvp-avatar>span,.cvp-avatar>button{position:absolute;bottom:-6px;left:calc(50% - 15px);display:grid;place-items:center;width:30px;height:30px;border:3px solid #fff;background:#8c5ad5;border-radius:50%;color:#fff;padding:0}
+.cvp-avatar>img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.cvp-avatar>button{cursor:pointer}.cvp-avatar>button:disabled{opacity:.5;cursor:wait}
+.cvp-member-id{display:flex;align-items:center;gap:5px;flex-wrap:wrap}.cvp-member-id code{overflow-wrap:anywhere;word-break:break-all;font-size:10px;user-select:all}
+.cvp-photo-preview{width:128px;height:128px;margin:20px auto;border-radius:50%;overflow:hidden;background:#eee5fb;display:grid;place-items:center;color:#7541c9;font-size:50px}
+.cvp-photo-preview img{width:100%;height:100%;object-fit:cover}.cvp-photo-tools{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.cvp-photo-editor>p{text-align:center}
 .cvp-identity{min-width:0;flex:1}.cvp-identity h1{display:flex;align-items:center;gap:12px;font:800 25px/1.4 'Sora',sans-serif;letter-spacing:0;color:#211936;overflow-wrap:anywhere;margin:0 0 7px}.cvp-identity h1 svg{color:#46a0df;flex:0 0 17px}
 .cvp-identity p{font:11px/1.7 'Inter',sans-serif;color:#777085;overflow-wrap:anywhere;margin:6px 0}.cvp-identity #profileBio{max-width:380px;margin:7px 0}.cvp-identity .cvp-email{display:flex;gap:6px;align-items:center;margin-top:9px}.cvp-email>svg{flex:0 0 13px}
 .cvp-facts{display:flex;flex-wrap:wrap;gap:9px 17px;margin-top:12px;color:#827492;font:10px/1.5 'Inter',sans-serif}.cvp-facts>span{display:flex;align-items:center;gap:5px;min-width:0;overflow-wrap:anywhere}.cvp-facts svg{flex:0 0 13px}
