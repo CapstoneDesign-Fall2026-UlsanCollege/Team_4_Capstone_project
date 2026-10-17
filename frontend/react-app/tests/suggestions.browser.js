@@ -6,7 +6,7 @@ import { mkdir } from 'node:fs/promises';
 const url = process.env.SUGGEST_TEST_URL || 'http://127.0.0.1:5186';
 if (!/^http:\/\/(127\.0\.0\.1|localhost):\d+\/?$/.test(url)) throw new Error('Use an emulator-backed localhost preview only.');
 const project = 'demo-campusvibe-feed';
-const rest = `http://127.0.0.1:8080/v1/projects/${project}/databases/(default)/documents`;
+const rest = `http://${process.env.FIRESTORE_EMULATOR_HOST || '127.0.0.1:8080'}/v1/projects/${project}/databases/(default)/documents`;
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const contexts = [], users = [], errors = [], ids = [];
 async function admin(path, body) {
@@ -34,7 +34,7 @@ try {
     await page.locator('#signupForm button[type=submit]').click();
     await page.locator('#appMain').waitFor({ state: 'visible' });
     const uid = await page.evaluate(() => window.campusFirebaseAuth.auth.currentUser.uid);
-    users.push(uid);
+    users.push({uid,token:await page.evaluate(()=>window.campusFirebaseAuth.auth.currentUser.getIdToken())});
     await page.locator('#mainNav [data-page=suggest]').click();
     await page.locator('#suggestName').waitFor();
     return { page, uid };
@@ -58,7 +58,7 @@ try {
   assert.equal(await page.locator('#suggestName').inputValue(), 'Anonymous campus film night');
   assert.equal(await page.locator('#suggestAnonymous').isChecked(), true);
   assert.equal(await page.locator('#suggestDate').inputValue(), '2026-11-20');
-  const submittedDraft = await page.evaluate(uid => JSON.parse(localStorage.getItem(`cv_suggestion_draft_${uid}`)), author.uid);
+  const submittedDraft = await page.evaluate(() => window.campusAccount.read('suggestion'));
   await page.getByRole('button', { name: 'Send suggestion', exact: true }).click();
   let item = page.locator('.suggestion-receipt').filter({ hasText: 'Anonymous campus film night' });
   await item.waitFor();
@@ -77,7 +77,7 @@ try {
   item = page.locator('.suggestion-receipt').filter({ hasText: 'Anonymous campus film night' });
   await item.locator('.suggestion-status.approved').waitFor();
   assert.ok((await item.textContent()).includes('confirm venue first'));
-  await page.evaluate(({ uid, value }) => localStorage.setItem(`cv_suggestion_draft_${uid}`, JSON.stringify(value)), { uid: author.uid, value: submittedDraft });
+  await page.evaluate(async value => {await window.campusAccount.write('suggestion',value);}, submittedDraft);
   await page.reload();
   await page.locator('#suggestName').waitFor();
   await page.getByRole('button', { name: 'Send suggestion', exact: true }).click();
@@ -102,7 +102,7 @@ try {
   await page.locator('#suggestDescription').fill('A private draft for retry testing.');
   await author.page.context().setOffline(true);
   await page.getByRole('button', { name: 'Send suggestion', exact: true }).click();
-  await page.getByRole('alert').filter({ hasText: 'offline' }).waitFor();
+  await page.getByRole('alert').filter({ hasText: /offline/i }).waitFor();
   assert.equal(await page.locator('#suggestName').inputValue(), 'Draft survives a failed send');
   await author.page.context().setOffline(false);
   await page.locator('#suggestName').fill('Film night under the stars');
@@ -118,6 +118,9 @@ try {
 } finally {
   await browser.close();
   for (const id of ids) { await admin(`campusSuggestions/${id}`); await admin(`campusSuggestionOwners/${id}`); }
-  for (const uid of users) { await admin(`campusSuggestionReviewers/${uid}`); await admin(`campusFeedProfiles/${uid}`); }
-  await fetch(`http://127.0.0.1:9099/emulator/v1/projects/${project}/accounts`, { method: 'DELETE' });
+  for (const {uid,token} of users) {
+    await admin(`campusSuggestionReviewers/${uid}`);await admin(`campusFeedProfiles/${uid}`);
+    for(const name of ['profile','saved','dashboard','badges','suggestion','assistant'])await admin(`campusAccountData/${uid}/state/${name}`);
+    await fetch(`http://${process.env.FIREBASE_AUTH_EMULATOR_HOST || '127.0.0.1:9099'}/identitytoolkit.googleapis.com/v1/accounts:delete?key=emulator`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token})});
+  }
 }

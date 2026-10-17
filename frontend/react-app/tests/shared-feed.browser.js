@@ -77,7 +77,7 @@ try {
   const sender = await a.page.evaluate(() => window.campusFirebaseAuth.auth.currentUser.uid);
   const recipient = await b.page.evaluate(() => window.campusFirebaseAuth.auth.currentUser.uid);
   const testToken = await a.page.evaluate(() => window.campusFirebaseAuth.auth.currentUser.getIdToken());
-  const history = await fetch('http://127.0.0.1:8080/v1/projects/demo-campusvibe-feed/databases/(default)/documents:commit', {
+  const history = await fetch(`http://${process.env.FIRESTORE_EMULATOR_HOST || '127.0.0.1:8080'}/v1/projects/demo-campusvibe-feed/databases/(default)/documents:commit`, {
     method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${testToken}` },
     body: JSON.stringify({ writes: Array.from({ length: 51 }, (_, index) => ({
       update: { name: `projects/demo-campusvibe-feed/databases/(default)/documents/campusFeedConnections/${sender}_${recipient}/messages/history-${String(index).padStart(2,'0')}`, fields: { senderId: { stringValue: sender }, body: { stringValue: `History message ${index}` } } },

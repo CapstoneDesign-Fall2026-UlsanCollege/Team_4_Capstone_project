@@ -13,6 +13,8 @@
     "test:assistant": "node --test tests/assistant.test.js",
     "test:profile": "node --test tests/profile.test.js",
     "test:badges": "node --test tests/progress-badges.test.js",
+    "test:account": "node --test tests/account-sync.test.js",
+    "test:account-browser": "node tests/account-persistence.browser.js",
     "test:smoke": "playwright test",
     "test:toast-mobile": "node tests/toast-mobile.browser.js"
   },
