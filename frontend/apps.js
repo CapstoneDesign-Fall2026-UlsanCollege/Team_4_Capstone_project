@@ -10,10 +10,11 @@ let currentEventSearch = "";
 const $ = (sel) => document.querySelector(sel);
 const getSession = () => currentSession;
 const getSaved = () => {
+  if (getSession() && getSession().id !== "demo") return window.campusAccount?.read("saved") || [];
   try { const value = JSON.parse(localStorage.getItem(SAVED_KEY) || "[]"); return Array.isArray(value) ? [...new Set(value.filter(id => EVENTS.some(event => event.id === id)))] : []; }
   catch { return []; }
 };
-const saveSaved = (ids) => localStorage.setItem(SAVED_KEY, JSON.stringify(ids));
+const saveSaved = (ids) => getSession()?.id !== "demo" && getSession() ? window.campusAccount.write("saved",ids) : localStorage.setItem(SAVED_KEY, JSON.stringify(ids));
 
 function showToast(msg){
   const t = $("#toast");
@@ -90,16 +91,25 @@ function eventCardMarkup(e, saved){
   </article>`;
 }
 
+let savedWrites=Promise.resolve();
 function toggleSaved(id){
+  const ownerId=getSession()?.id,ownerAccount=window.campusAccount;
+  savedWrites=savedWrites.then(async()=>{
+  if(getSession()?.id !== ownerId || window.campusAccount !== ownerAccount)return;
+  try {
   const saved = getSaved();
   const next = saved.includes(id) ? saved.filter(item => item !== id) : [...saved, id];
-  saveSaved(next);
+  await saveSaved(next);
+  if(getSession()?.id !== ownerId || window.campusAccount !== ownerAccount)return;
   window.dispatchEvent(new Event("campus-saved-change"));
   const event = EVENTS.find(item => item.id === id);
   if (event) recordDashboardActivity(next.includes(id) ? "saved" : "removed", event.title);
   renderEvents();
   renderSavedEvents();
   showToast(next.includes(id) ? "Event saved." : "Event removed from saved.");
+  } catch(error){showToast(error.message || "Could not save this event. Retry account sync.");}
+  });
+  return savedWrites;
 }
 
 function setupFilter(){
@@ -463,6 +473,7 @@ function syncFirebaseUser(user){
   }
 }
 async function logout(){
+  if (window.campusAccount?.status().pending && !window.confirm("Some changes have not synced to your account. Logging out now can lose them. Log out anyway?")) return;
   const { auth, signOut } = window.campusFirebaseAuth;
   try {
     if (auth.currentUser) await signOut(auth);
@@ -490,8 +501,8 @@ function updateNav(){
     }
   } else switchWorkspace("community", false);
   $("#dashboardName").textContent = s ? s.name.split(" ")[0] : "there";
-  renderProfileDetails();
-  renderDashboard();
+  renderEvents();
+  renderSavedEvents();
   if (s){
     $("#landingFormErr").classList.add("hidden");
     setErr($("#landingEmail"), $("#landingEmailErr"), "");
@@ -529,6 +540,10 @@ function switchWorkspace(mode, record = true){
 
 /* ── Boot ── */
 function bootCampusVibes(){
+  window.campusAccountRefresh=()=>{
+    renderEvents();renderSavedEvents();window.campusRenderIcons?.();
+    window.dispatchEvent(new Event("campus-saved-change"));
+  };
   window.campusAssistant = {
     getSaved,
     saveEvent(id) { if (getSession() && EVENTS.some(event => event.id === id)) toggleSaved(id); },

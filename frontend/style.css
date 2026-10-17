@@ -862,6 +862,9 @@ body:has(#appMain:not(.hidden)) #page-dashboard .dashboard-welcome .eyebrow{colo
 .progress-points{text-align:center;flex-shrink:0}
 .progress-points strong{display:block;color:#9b71cc;font-size:16px;line-height:1.2}
 .progress-points span{display:block;color:#aa94c4;font-size:9px}
+.account-sync-status{max-width:1404px;margin:6px auto 0;padding:6px 28px;display:flex;align-items:center;justify-content:flex-end;gap:8px;font:500 11px/1.6 'Inter',sans-serif;color:#24816f}
+.account-sync-status>span{display:flex;align-items:center;gap:6px;min-width:0;overflow-wrap:anywhere}.account-sync-status svg{flex-shrink:0}.account-sync-status.is-error{color:#ac415d}.account-sync-status button{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;border:1px solid #e4c5ce;border-radius:5px;background:#fff;color:inherit}
+@media(max-width:640px){.account-sync-status{padding:6px 16px;justify-content:flex-start}}
 .progress-copy small{display:block;font-size:9px;line-height:1.5;color:#92829f;margin-top:4px}
 .progress-ring span{max-width:48px;text-align:center;overflow-wrap:anywhere}
 .progress-points{max-width:76px;overflow-wrap:anywhere}

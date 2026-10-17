@@ -1,6 +1,7 @@
 const dashboardStorageKey = () => `cv_dashboard_${getSession()?.email || "guest"}`;
 
 function readDashboardData(){
+  if (getSession() && getSession().id !== "demo") return window.campusAccount?.read("dashboard") || {activity:[],drafts:[]};
   try {
     const data = JSON.parse(localStorage.getItem(dashboardStorageKey()) || "{}");
     return {activity: Array.isArray(data.activity) ? data.activity : [], drafts: Array.isArray(data.drafts) ? data.drafts : []};
@@ -16,10 +17,11 @@ function dashboardText(value){
 }
 
 function recordDashboardActivity(type, title){
-  const data = readDashboardData();
+  const data = structuredClone(readDashboardData());
   data.activity.unshift({type, title, at: new Date().toISOString()});
   data.activity = data.activity.slice(0, 30);
-  localStorage.setItem(dashboardStorageKey(), JSON.stringify(data));
+  if (getSession() && getSession().id !== "demo") window.campusAccount.stage("dashboard",data);
+  else localStorage.setItem(dashboardStorageKey(), JSON.stringify(data));
   window.dispatchEvent(new Event("campus-profile-change"));
 }
 
@@ -60,7 +62,8 @@ function progressBadgeMarkup(badge, points){
 }
 
 function progressDetailsMarkup(progress){
-  return `<div class="progress-detail-summary"><span><strong>${progress.points}</strong> current points</span><span>Level <strong>${progress.level}</strong></span><span><strong>${progress.earnedCount} / ${progress.badges.length}</strong> badges earned</span></div><p class="progress-detail-next">${progress.nextBadge ? `Next badge: <strong>${dashboardText(progress.nextBadge.name)}</strong> at Level ${progress.nextBadge.level} &middot; ${progress.pointsToNextBadge} points to go` : "All current badges earned."}</p><div class="progress-badge-grid">${progress.badges.map(badge => progressBadgeMarkup(badge,progress.points)).join("")}</div><p class="progress-detail-rules">20 points per currently saved event; 30 per recorded dashboard draft. Every 100 points adds a level. Removing saves can lower current points and level; earned badges stay unlocked.</p><p class="progress-detail-boundary">Badges stay in this browser for this account. Community saves are browser-wide, not account-private. These are planning milestones, not attendance or verified campus achievements.</p>${progress.warning ? `<p class="progress-storage-warning" role="status">${dashboardText(progress.warning)}</p>` : ""}`;
+  const boundary=getSession()?.id !== "demo" ? "Badges are saved privately to your account and sync between devices. These are planning milestones, not attendance or verified campus achievements." : "Badges stay in this browser for this account. Community saves are browser-wide, not account-private. These are planning milestones, not attendance or verified campus achievements.";
+  return `<div class="progress-detail-summary"><span><strong>${progress.points}</strong> current points</span><span>Level <strong>${progress.level}</strong></span><span><strong>${progress.earnedCount} / ${progress.badges.length}</strong> badges earned</span></div><p class="progress-detail-next">${progress.nextBadge ? `Next badge: <strong>${dashboardText(progress.nextBadge.name)}</strong> at Level ${progress.nextBadge.level} &middot; ${progress.pointsToNextBadge} points to go` : "All current badges earned."}</p><div class="progress-badge-grid">${progress.badges.map(badge => progressBadgeMarkup(badge,progress.points)).join("")}</div><p class="progress-detail-rules">20 points per currently saved event; 30 per recorded dashboard draft. Every 100 points adds a level. Removing saves can lower current points and level; earned badges stay unlocked.</p><p class="progress-detail-boundary">${boundary}</p>${progress.warning ? `<p class="progress-storage-warning" role="status">${dashboardText(progress.warning)}</p>` : ""}`;
 }
 
 function refreshProgressDialog(progress){
