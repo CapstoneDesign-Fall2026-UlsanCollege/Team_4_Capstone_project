@@ -3,7 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#111111" />
+    <meta name="theme-color" content="#f7f8fc" />
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("campusvibes-theme");
+          if (theme !== "dark" && theme !== "light") theme = "light";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (e) {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
     <meta name="description" content="Discover campus events, clubs, and student activities with CampusVibes." />
     <title>CampusVibes — Discover Campus Events</title>
   </head>

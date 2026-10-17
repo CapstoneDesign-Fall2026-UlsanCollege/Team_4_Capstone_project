@@ -52,6 +52,7 @@ import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
+import ThemeToggle from "./ThemeToggle";
 
 const Feed = lazy(() => import("./FeedEntry"));
 
@@ -156,6 +157,7 @@ export default function App() {
 
   return (
     <>
+      <ThemeToggle />
       <div ref={mountRef} />
       {feedTarget &&
         feedUser &&

@@ -1,0 +1,316 @@
+.theme-toggle {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 120;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e5dcf0;
+  border-radius: 50%;
+  background: #fff;
+  color: #7541db;
+  box-shadow: 0 8px 24px #3b245018;
+  cursor: pointer;
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+.theme-toggle:hover {
+  background: #f4edff;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] .theme-toggle {
+  background: #1c1828;
+  border-color: #3a334c;
+  color: #d7c4ff;
+  box-shadow: 0 8px 24px #0006;
+}
+html[data-theme="dark"] .theme-toggle:hover {
+  background: #2a2438;
+}
+
+html[data-theme="dark"] body:has(#appMain:not(.hidden)),
+html[data-theme="dark"] body:has(#appMain:not(.hidden) #page-dashboard.active),
+html[data-theme="dark"] body:has(#appMain:not(.hidden) #page-discover.active),
+html[data-theme="dark"] body:has(#appMain:not(.hidden) #page-saved.active),
+html[data-theme="dark"] body:has(#appMain:not(.hidden) #page-chat.active),
+html[data-theme="dark"] body:has(#appMain:not(.hidden) #page-profile.active),
+html[data-theme="dark"] body:has(#appMain:not(.hidden) #page-suggest.active),
+html[data-theme="dark"] body.feed-workspace {
+  --text: #ece8f4;
+  --muted: #a49bb3;
+  --border: #3a334c;
+  --accent: #b892ff;
+  --accent-2: #b892ff;
+  --accent-grad: #b892ff;
+  color: #ece8f4;
+  background: #121018 !important;
+}
+
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) .nav-inner,
+html[data-theme="dark"] body.feed-workspace .nav-inner {
+  background: #1c1828;
+  border-color: #3a334c;
+  box-shadow: none;
+}
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) .logo,
+html[data-theme="dark"] body.feed-workspace .logo,
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) .btn-ghost,
+html[data-theme="dark"] body.feed-workspace .nav-auth .btn-ghost,
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) .nav-username {
+  color: #ece8f4;
+}
+html[data-theme="dark"] .workspace-switch {
+  background: #161320;
+  border-color: #3a334c;
+}
+html[data-theme="dark"] .workspace-switch button {
+  color: #9b90ad;
+}
+html[data-theme="dark"] .workspace-switch button[aria-pressed="true"] {
+  background: #2a2438;
+  color: #d7c4ff;
+  box-shadow: none;
+}
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) #mainNav .page-link {
+  --nav-tint: #2a2438;
+}
+html[data-theme="dark"] .nav-tooltip {
+  background: #1c1828;
+  border-color: #3a334c;
+  color: #d7cfe4;
+}
+
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) .page-heading,
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) .page-heading p,
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) .eyebrow,
+html[data-theme="dark"] body:has(#page-discover.active) #page-discover .page-heading,
+html[data-theme="dark"] body:has(#page-saved.active) #page-saved .page-heading,
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) #page-chat .page-heading,
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) #page-suggest .page-heading,
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) #page-profile {
+  color: #ece8f4;
+}
+html[data-theme="dark"] body:has(#page-discover.active) #page-discover .page-heading p:not(.eyebrow),
+html[data-theme="dark"] body:has(#page-saved.active) #page-saved .page-heading p:not(.eyebrow),
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) #page-chat .page-heading p:not(.eyebrow),
+html[data-theme="dark"] body:has(#appMain:not(.hidden)) #page-suggest .page-heading p:not(.eyebrow) {
+  color: #b7aec6;
+}
+
+html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] #page-dashboard .stat-card,
+html[data-theme="dark"] #page-dashboard .panel,
+html[data-theme="dark"] .week-overview,
+html[data-theme="dark"] .week-day,
+html[data-theme="dark"] .event-card,
+html[data-theme="dark"] #page-discover .discover-event-card,
+html[data-theme="dark"] #page-discover .discover-stats,
+html[data-theme="dark"] #page-discover .discover-picks,
+html[data-theme="dark"] #page-discover .discover-crews,
+html[data-theme="dark"] #page-discover .chip,
+html[data-theme="dark"] #page-discover .event-search,
+html[data-theme="dark"] #page-discover .discover-filter-button,
+html[data-theme="dark"] #page-chat .chat-panel,
+html[data-theme="dark"] #page-suggest .suggest-form,
+html[data-theme="dark"] .suggest-note,
+html[data-theme="dark"] .profile-hero,
+html[data-theme="dark"] .profile-section,
+html[data-theme="dark"] .profile-editor,
+html[data-theme="dark"] .dashboard-dialog {
+  background: #1c1828 !important;
+  border-color: #3a334c !important;
+  color: #ece8f4;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] .week-day-first,
+html[data-theme="dark"] .week-day:hover,
+html[data-theme="dark"] .upcoming-item:hover,
+html[data-theme="dark"] .quick-action:hover,
+html[data-theme="dark"] .dashboard-save:hover,
+html[data-theme="dark"] .calendar-event-row:hover,
+html[data-theme="dark"] .profile-saved-item:hover {
+  background: #2a2438;
+}
+
+html[data-theme="dark"] #page-dashboard,
+html[data-theme="dark"] #page-dashboard .upcoming-item,
+html[data-theme="dark"] .recommendation-open,
+html[data-theme="dark"] .calendar-event-row strong,
+html[data-theme="dark"] .profile-identity h1,
+html[data-theme="dark"] .profile-section h2,
+html[data-theme="dark"] .suggest-note h2,
+html[data-theme="dark"] #page-discover .discover-intro h1,
+html[data-theme="dark"] #page-discover .discover-event-body h3,
+html[data-theme="dark"] #page-discover .discover-pick-open strong,
+html[data-theme="dark"] #page-discover .discover-crew-grid > button {
+  color: #ece8f4;
+}
+
+html[data-theme="dark"] .dashboard-welcome p:not(.eyebrow),
+html[data-theme="dark"] .week-overview .dashboard-section-heading p,
+html[data-theme="dark"] #page-dashboard .stat-card span,
+html[data-theme="dark"] #page-dashboard .upcoming-item p,
+html[data-theme="dark"] #page-dashboard .upcoming-meta,
+html[data-theme="dark"] .recommendation-open small,
+html[data-theme="dark"] .dashboard-activity-row p,
+html[data-theme="dark"] .progress-copy p,
+html[data-theme="dark"] .profile-identity p,
+html[data-theme="dark"] #profileEmail,
+html[data-theme="dark"] .profile-facts,
+html[data-theme="dark"] .profile-study p,
+html[data-theme="dark"] .profile-clubs span,
+html[data-theme="dark"] .profile-empty,
+html[data-theme="dark"] .suggest-note p,
+html[data-theme="dark"] #page-discover .discover-intro > p:not(.discover-eyebrow),
+html[data-theme="dark"] #page-discover .discover-event-meta p,
+html[data-theme="dark"] #page-discover .discover-event-description,
+html[data-theme="dark"] #page-discover .discover-host,
+html[data-theme="dark"] #page-discover .event-results {
+  color: #aaa2b8;
+}
+
+html[data-theme="dark"] #page-dashboard .stat-symbol,
+html[data-theme="dark"] #page-dashboard .quick-action .lucide,
+html[data-theme="dark"] .profile-interests span,
+html[data-theme="dark"] .profile-study-mark,
+html[data-theme="dark"] .profile-event-art,
+html[data-theme="dark"] .recommendation-tag {
+  background: #2a2438;
+}
+
+html[data-theme="dark"] .progress-ring::before {
+  background: #1c1828;
+}
+
+html[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select,
+html[data-theme="dark"] #page-suggest .suggest-form input,
+html[data-theme="dark"] #page-suggest .suggest-form textarea,
+html[data-theme="dark"] .profile-editor input,
+html[data-theme="dark"] .profile-editor textarea,
+html[data-theme="dark"] #page-chat .chat-form textarea,
+html[data-theme="dark"] #page-discover .event-search input,
+html[data-theme="dark"] .discover-filter-dialog select {
+  background: #161320 !important;
+  color: #ece8f4 !important;
+  border-color: #3a334c !important;
+}
+
+html[data-theme="dark"] #page-chat .chat-message {
+  color: #d7cfe4;
+}
+html[data-theme="dark"] #page-chat .chat-message.user,
+html[data-theme="dark"] #page-chat .chat-prompt {
+  background: #2a2438;
+  border-color: #3a334c;
+  color: #d7c4ff;
+}
+html[data-theme="dark"] .save-event {
+  background: #1c1828;
+  color: #d7c4ff;
+}
+html[data-theme="dark"] .event-tag {
+  background: #163832;
+  border-color: #163832;
+}
+
+html[data-theme="dark"] body:has(#authLanding:not(.hidden)) {
+  background: #0b0a12 !important;
+}
+html[data-theme="dark"] .auth-login-panel,
+html[data-theme="dark"] .auth-reset-dialog {
+  background: #1c1828;
+  color: #ece8f4;
+}
+html[data-theme="dark"] .auth-login-panel h2,
+html[data-theme="dark"] .auth-input-field label {
+  color: #ece8f4;
+}
+html[data-theme="dark"] .auth-panel-copy,
+html[data-theme="dark"] .auth-browse,
+html[data-theme="dark"] .auth-demo-caption {
+  color: #aaa2b8;
+}
+html[data-theme="dark"] .auth-input-wrap {
+  background: #161320;
+  border-color: #3a334c;
+  color: #9b90ad;
+}
+html[data-theme="dark"] .auth-input-wrap input {
+  color: #ece8f4;
+}
+html[data-theme="dark"] .auth-signup-small,
+html[data-theme="dark"] .auth-create-command,
+html[data-theme="dark"] .auth-google-command {
+  background: #161320;
+  color: #ece8f4;
+  border-color: #3a334c;
+}
+
+html[data-theme="dark"] body.feed-workspace {
+  background: #121018 !important;
+  color: #ece8f4;
+}
+html[data-theme="dark"] .feed-shell,
+html[data-theme="dark"] .feed-heading h1,
+html[data-theme="dark"] .feed-current-user strong,
+html[data-theme="dark"] .feed-composer-heading strong,
+html[data-theme="dark"] .feed-post-identity strong,
+html[data-theme="dark"] .feed-message-inbox h2,
+html[data-theme="dark"] .feed-message-inbox strong,
+html[data-theme="dark"] .feed-conversation header strong {
+  color: #ece8f4;
+}
+html[data-theme="dark"] .feed-search,
+html[data-theme="dark"] .feed-card,
+html[data-theme="dark"] .feed-filter,
+html[data-theme="dark"] .feed-composer textarea,
+html[data-theme="dark"] .feed-left nav small,
+html[data-theme="dark"] .feed-messenger,
+html[data-theme="dark"] .shared-feed-shell .feed-request button,
+html[data-theme="dark"] .feed-message-compose textarea {
+  background: #1c1828 !important;
+  border-color: #3a334c !important;
+  color: #ece8f4;
+}
+html[data-theme="dark"] .feed-left nav button.active,
+html[data-theme="dark"] .feed-message-inbox > button.active,
+html[data-theme="dark"] .shared-feed-shell .feed-filter-tabs button.active,
+html[data-theme="dark"] .outgoing .feed-message-bubble {
+  background: #2a2438;
+  color: #d7c4ff;
+}
+html[data-theme="dark"] .feed-left nav button:hover,
+html[data-theme="dark"] .feed-message-bubble {
+  background: #221d2e;
+  color: #ece8f4;
+}
+html[data-theme="dark"] .feed-eyebrow,
+html[data-theme="dark"] .feed-demo-banner,
+html[data-theme="dark"] .feed-current-user span:not(.feed-avatar),
+html[data-theme="dark"] .shared-feed-status,
+html[data-theme="dark"] .feed-message-inbox small,
+html[data-theme="dark"] .feed-conversation header small,
+html[data-theme="dark"] .feed-chat-empty {
+  color: #aaa2b8;
+}
+
+html[data-theme="dark"] .modal,
+html[data-theme="dark"] .dashboard-dialog {
+  background: #1c1828;
+  color: #ece8f4;
+  border-color: #3a334c;
+}
+html[data-theme="dark"] .dashboard-dialog::backdrop {
+  background: #07060ccc;
+}
