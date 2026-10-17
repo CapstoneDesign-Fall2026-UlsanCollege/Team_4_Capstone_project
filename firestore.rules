@@ -11,14 +11,25 @@ service cloud.firestore {
         && event.date is string && event.date.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
         && event.time is string && (event.time == '' || event.time.matches('^([01][0-9]|2[0-3]):[0-5][0-9]$')));
     }
-    function validPost(data) {
+    function validFeedPhoto(photo, postId) {
+      let publicId = 'campusvibe-feed/' + request.auth.uid + '/' + postId;
+      return photo == null || (photo is map && photo.keys().hasAll(['publicId','src','width','height'])
+        && photo.keys().hasOnly(['publicId','src','width','height'])
+        && request.auth.uid.matches('^[A-Za-z0-9_-]{1,128}$') && postId.matches('^[A-Za-z0-9]{20}$')
+        && photo.publicId == publicId && photo.src is string
+        && photo.src.matches('^https://res[.]cloudinary[.]com/ghr7xnsl/image/upload/v[0-9]+/' + publicId + '[.]jpg$')
+        && photo.width is int && photo.width > 0 && photo.width <= 1280
+        && photo.height is int && photo.height > 0 && photo.height <= 1280);
+    }
+    function validPost(data, postId) {
       return data.keys().hasAll(['authorId','authorName','college','body','event','createdAt','updatedAt'])
-        && data.keys().hasOnly(['authorId','authorName','college','body','event','createdAt','updatedAt','deleting'])
+        && data.keys().hasOnly(['authorId','authorName','college','body','event','createdAt','updatedAt','deleting','photo'])
         && data.get('deleting', false) is bool
         && data.authorId is string && data.authorId == request.auth.uid
         && data.authorName is string && data.authorName.size() > 0 && data.authorName.size() <= 120
         && data.college is string && data.college.size() > 0 && data.college.size() <= 100
-        && data.body is string && data.body.size() <= 2000 && (data.body.size() > 0 || data.event != null)
+        && validFeedPhoto(data.get('photo', null), postId)
+        && data.body is string && data.body.size() <= 2000 && (data.body.size() > 0 || data.event != null || data.get('photo', null) != null)
         && validEvent(data.event) && data.createdAt is timestamp && data.updatedAt == request.time;
     }
     function bounded(maximum) {
@@ -150,6 +161,21 @@ service cloud.firestore {
         && request.resource.data.updatedAt == request.time;
       allow delete: if member() && request.auth.uid == uid;
     }
+    match /campusFeedPhotoUploads/{uid} {
+      function validCounter() {
+        return request.resource.data.keys().hasAll(['count','windowStart'])
+          && request.resource.data.keys().hasOnly(['count','windowStart'])
+          && request.resource.data.count is int && request.resource.data.count > 0 && request.resource.data.count <= 20
+          && request.resource.data.windowStart is timestamp;
+      }
+      allow get: if member() && request.auth.uid == uid;
+      allow create: if member() && request.auth.uid == uid && validCounter()
+        && request.resource.data.count == 1 && request.resource.data.windowStart == request.time;
+      allow update: if member() && request.auth.uid == uid && validCounter()
+        && (request.time >= resource.data.windowStart + duration.value(24, 'h')
+          ? request.resource.data.count == 1 && request.resource.data.windowStart == request.time
+          : request.resource.data.count == resource.data.count + 1 && request.resource.data.windowStart == resource.data.windowStart);
+    }
     match /campusFeedPosts/{postId} {
       function activePost() {
         return getAfter(/databases/$(database)/documents/campusFeedPosts/$(postId)).data.get('deleting', false) == false;
@@ -180,9 +206,9 @@ service cloud.firestore {
       }
       allow get: if member();
       allow list: if member() && request.query.limit != null && request.query.limit <= 100;
-      allow create: if member() && validPost(request.resource.data) && request.resource.data.createdAt == request.time
+      allow create: if member() && validPost(request.resource.data, postId) && request.resource.data.createdAt == request.time
         && !request.resource.data.keys().hasAny(['deleting']);
-      allow update: if member() && resource.data.authorId == request.auth.uid && validPost(request.resource.data)
+      allow update: if member() && resource.data.authorId == request.auth.uid && validPost(request.resource.data, postId)
         && (request.resource.data.get('deleting', false) == true
           ? request.resource.data.diff(resource.data).affectedKeys().hasOnly(['deleting','updatedAt'])
           : resource.data.get('deleting', false) == false

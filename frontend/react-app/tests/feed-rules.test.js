@@ -142,6 +142,33 @@ test("authenticated author publishes and another account reads the shared post",
   await assertSucceeds(getDocs(query(collection(db("bob"), "campusFeedPosts"), orderBy("createdAt", "desc"), limit(50))));
 });
 
+test('photo posts allow an owner-bound Cloudinary reference but not arbitrary URLs or another author asset', async () => {
+  const id = '01234567890123456789';
+  const photo = { publicId: `campusvibe-feed/alice/${id}`, src: `https://res.cloudinary.com/ghr7xnsl/image/upload/v123/campusvibe-feed/alice/${id}.jpg`, width: 640, height: 480 };
+  for (const invalid of [{ ...photo, src: 'https://example.com/tracker.jpg' }, { ...photo, width: 1281 }, { ...photo, publicId: `campusvibe-feed/bob/${id}` }, { ...photo, secret: 'not stored' }]) await assertFails(setDoc(ref(db('alice'), id), post('alice', { body: '', photo: invalid })));
+  await assertSucceeds(setDoc(ref(db('alice'), id), post('alice', { body: '', photo })));
+  await assertSucceeds(getDoc(ref(db('bob'), id)));
+  await assertFails(updateDoc(ref(db('alice'), id), { photo: null, updatedAt: serverTimestamp() }));
+  await assertSucceeds(updateDoc(ref(db('alice'), id), { body: 'A caption edit keeps the photo.', updatedAt: serverTimestamp() }));
+  await assertFails(getDoc(ref(env.unauthenticatedContext().firestore(), id)));
+});
+
+test('photo upload counters cannot be impersonated, deleted, rolled back, reset early or exceed twenty', async () => {
+  const path = database => doc(database, 'campusFeedPhotoUploads', 'alice');
+  await assertSucceeds(getDoc(path(db('alice'))));
+  await assertFails(getDoc(path(db('bob'))));
+  await assertFails(setDoc(path(db('bob')), { count: 1, windowStart: serverTimestamp() }));
+  await assertFails(setDoc(path(db('alice')), { count: 20, windowStart: serverTimestamp() }));
+  await assertSucceeds(setDoc(path(db('alice')), { count: 1, windowStart: serverTimestamp() }));
+  await assertFails(updateDoc(path(db('alice')), { count: 1, windowStart: serverTimestamp() }));
+  await assertFails(updateDoc(path(db('alice')), { count: 0 }));
+  for (let count = 2; count <= 20; count++) await assertSucceeds(updateDoc(path(db('alice')), { count }));
+  await assertFails(updateDoc(path(db('alice')), { count: 21 }));
+  await assertFails(deleteDoc(path(db('alice'))));
+  await env.withSecurityRulesDisabled(context => setDoc(path(context.firestore()), { count: 20, windowStart: Timestamp.fromMillis(Date.now() - 25 * 3600000) }));
+  await assertSucceeds(setDoc(path(db('alice')), { count: 1, windowStart: serverTimestamp() }));
+});
+
 test('reactions are uniquely keyed to the actor and cannot alter another user reaction', async () => {
   await setDoc(ref(db('alice')), post());
   const reaction = database => doc(database, 'campusFeedPosts', 'post', 'reactions', 'bob_like');
