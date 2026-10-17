@@ -41,8 +41,8 @@ function ReviewItem({ item, user, canReview }) {
   </article>;
 }
 
-export default function Suggestions({ user }) {
-  const [draft, setDraft] = useState(() => loadDraft(user));
+export default function Suggestions({ user,account }) {
+  const [draft, setDraft] = useState(() => account ? account.read('suggestion') : loadDraft(user));
   const [saved, setSaved] = useState('');
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
@@ -58,10 +58,17 @@ export default function Suggestions({ user }) {
   latestDraft.current = draft;
   const alive = useRef(true);
   const demo = user.id === 'demo';
+  const cloudDraft=useRef(account ? JSON.stringify(account.read('suggestion')) : '');
+  useEffect(()=>account?.subscribe(()=>{
+    const value=account.read('suggestion'),json=JSON.stringify(value);
+    if(json !== cloudDraft.current){cloudDraft.current=json;if(json !== JSON.stringify(latestDraft.current)){latestDraft.current=value;setDraft(value);}}
+    const status=account.sectionStatus('suggestion');setSaved(current=>current ? status.error ? 'Draft has not synced' : status.pending ? 'Syncing draft...' : 'Draft saved to your account' : current);
+  }),[account]);
 
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
   useEffect(() => {
     const flush = () => {
+      if(account)return;
       const value = latestDraft.current;
       if (value.name || value.host || value.description || value.date || value.location || value.category !== 'All' || value.anonymous) {
         try { localStorage.setItem(draftKey(user), JSON.stringify(value)); } catch { /* The visible autosave state reports storage errors. */ }
@@ -82,19 +89,20 @@ export default function Suggestions({ user }) {
     return tab === 'mine' ? watchMySuggestions(user, receive, fail) : watchReviewQueue(user, receive, fail);
   }, [tab, user.id, reviewer, demo]);
   useEffect(() => {
+    if(account)return;
     if (!draft.name && !draft.host && !draft.description && !draft.date && !draft.location && draft.category === 'All' && !draft.anonymous) return;
     setSaved('Saving draft...');
     const timer = setTimeout(() => persist(draft), 450);
     return () => clearTimeout(timer);
   }, [draft]);
 
-  function persist(value) {
-    try { localStorage.setItem(draftKey(user), JSON.stringify(value)); setSaved('Draft saved in this browser'); return true; }
-    catch { setSaved('Draft could not be saved'); setError('Browser storage is unavailable. Keep this page open to avoid losing your draft.'); return false; }
+  async function persist(value) {
+    try { if(account)await account.write('suggestion',value);else localStorage.setItem(draftKey(user), JSON.stringify(value)); setSaved(account ? 'Draft saved to your account' : 'Draft saved in this browser'); return true; }
+    catch(error) { setSaved('Draft could not be saved'); setError(account ? error.message : 'Browser storage is unavailable. Keep this page open to avoid losing your draft.'); return false; }
   }
-  function change(key, value) { setDraft(current => ({ ...current, [key]: value })); setNotice(''); setError(''); }
-  function save() {
-    if (persist(draft)) setNotice('Draft saved successfully. You can continue in this browser anytime.');
+  function change(key, value) { const next={...latestDraft.current,[key]:value};latestDraft.current=next;setDraft(next);setNotice('');setError('');if(account){try{account.stage('suggestion',next);setSaved('Syncing draft...');}catch(error){setError(error.message);}} }
+  async function save() {
+    if (await persist(draft)) setNotice(account ? 'Draft saved to your account. You can continue on another device.' : 'Draft saved successfully. You can continue in this browser anytime.');
   }
   async function send(event) {
     event.preventDefault();
@@ -103,10 +111,13 @@ export default function Suggestions({ user }) {
     if (demo) { persist(draft); setError('Sign in to send to the team review queue. Demo ideas remain private drafts in this browser.'); return; }
     sendLock.current = true; setBusy(true);
     try {
+      if(account)await account.write('suggestion',draft);
       await submitSuggestion(user, draft);
       if (!alive.current) return;
       try { localStorage.removeItem(draftKey(user)); } catch { /* A confirmed submission must not be reported as a failed send. */ }
-      setDraft(freshDraft()); setSaved(''); setNotice('Suggestion sent. It is pending team review.'); setTab('mine');
+      const next=freshDraft();
+      if(account)try{await account.write('suggestion',next);}catch{setError('Suggestion was sent, but clearing the draft has not synced. Retry account sync.');}
+      setDraft(next); setSaved(''); setNotice('Suggestion sent. It is pending team review.'); setTab('mine');
     } catch (failure) { if (alive.current) setError(suggestionError(failure)); }
     finally { sendLock.current = false; if (alive.current) setBusy(false); }
   }
@@ -126,7 +137,7 @@ export default function Suggestions({ user }) {
           <label htmlFor="suggestDescription">What&apos;s happening?<textarea id="suggestDescription" name="description" required rows={3} maxLength={500} placeholder="Tell students why they should come..." value={draft.description} onChange={event => change('description', event.target.value)} /><span className="suggestion-counter" aria-live="off">{draft.description.length} / 500</span></label>
           <div className="suggestion-pair suggestion-extras"><div><span className="suggestion-field-title">Poster or attachment <span>(optional)</span></span><button type="button" className="suggestion-upload" disabled title="Photo and file uploads are deferred while billing stays off"><CloudUpload size={23} /><span>Attachments unavailable<small>Text suggestions are open</small></span></button></div><div><label className="suggestion-toggle-label" htmlFor="suggestAnonymous">Submit anonymously</label><div className="suggestion-anonymous"><input id="suggestAnonymous" type="checkbox" role="switch" checked={draft.anonymous} onChange={event => change('anonymous', event.target.checked)} aria-describedby="suggestPrivacy" /><p id="suggestPrivacy">Your name and club won&apos;t be shown to reviewers.<span title="Project administrators can access ownership records. Avoid identifying details in your description."> Not anonymous to project administrators.</span></p></div></div></div>
         </fieldset>
-        <footer className="suggestion-actions"><button type="button" className="suggestion-secondary" disabled={busy} onClick={save}><Save size={16} />Save draft</button><span>{saved || 'Drafts stay in this browser.'}</span><button type="submit" className="suggestion-primary" disabled={busy}>{busy ? <LoaderCircle size={16} className="suggestion-spin" /> : <Send size={16} />}{busy ? 'Sending...' : 'Send suggestion'}</button></footer>
+        <footer className="suggestion-actions"><button type="button" className="suggestion-secondary" disabled={busy} onClick={save}><Save size={16} />Save draft</button><span>{saved || (account ? 'Private account draft' : 'Drafts stay in this browser.')}</span><button type="submit" className="suggestion-primary" disabled={busy}>{busy ? <LoaderCircle size={16} className="suggestion-spin" /> : <Send size={16} />}{busy ? 'Sending...' : 'Send suggestion'}</button></footer>
       </form>
       <aside className="suggestion-tips"><div className="suggestion-tip-heading"><span><Lightbulb size={24} /></span><div><h2>Make it a standout idea</h2><p>Great suggestions help build an amazing campus.</p></div></div><ul>{[['Be clear and specific', 'Include what, when, where, and who it is for.'],['Explain the impact', 'Share how it benefits students or the community.'],['Think inclusive', 'Ideas that welcome everyone tend to get the most support.'],['Make it memorable', 'Give your idea a name students will remember.']].map(([title, text]) => <li key={title}><CheckCircle2 size={19} /><div><strong>{title}</strong><p>{text}</p></div></li>)}</ul><div className="suggestion-tip-photo"><img src="/assets/campus-login.jpg" alt="University campus" /><span><CalendarDays size={28} />Your next campus moment</span></div></aside>
     </div> : <section className="suggestion-list" aria-label={tab === 'review' ? 'Team review queue' : 'My submitted suggestions'}>
