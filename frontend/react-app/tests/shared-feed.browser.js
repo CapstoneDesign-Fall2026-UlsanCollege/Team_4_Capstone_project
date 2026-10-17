@@ -31,7 +31,7 @@ try {
     if (await page.locator('#signupFormErr').isVisible()) throw new Error(await page.locator('#signupFormErr').textContent());
     await page.locator('[data-workspace="feed"]').click();
     await page.locator(".shared-feed-status .connected").waitFor();
-    assert.equal(await page.getByRole("button", { name: "Photos", exact: true }).count(), 0);
+    assert.equal(await page.getByRole("button", { name: "Photos", exact: true }).isEnabled(), true);
     assert.equal(await page.locator(".feed-demo-banner").count(), 0);
     return { page, context };
   };
@@ -145,8 +145,8 @@ try {
   assert.equal(await b.page.locator("[data-shared-post]").count(), 0);
   await b.page.getByRole("button", { name: "Latest posts", exact: true }).click();
   await b.page.locator("[data-shared-post]").waitFor();
-  await b.page.getByRole('button', { name: 'Photos unavailable', exact: true }).waitFor();
-  assert.equal(await b.page.getByRole('button', { name: 'Photos unavailable', exact: true }).isDisabled(), true);
+  await b.page.getByRole('button', { name: 'Photos', exact: true }).waitFor();
+  assert.equal(await b.page.getByRole('button', { name: 'Photos', exact: true }).isEnabled(), true);
   await b.page.getByRole('textbox', { name: 'Your college', exact: true }).fill('Another Test Campus');
   await b.page.getByRole('textbox', { name: 'Post text', exact: true }).fill('Bob real friend post');
   await b.page.getByRole('button', { name: 'Post', exact: true }).click();

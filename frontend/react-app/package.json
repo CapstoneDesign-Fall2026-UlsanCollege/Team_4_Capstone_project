@@ -11,6 +11,8 @@
     "test:shared-feed": "node tests/shared-feed.browser.js",
     "test:social-components": "node tests/social-components.browser.js",
     "test:social-regressions": "node tests/social-regressions.browser.js",
+    "test:feed-photos": "node --test tests/feed-photo.test.js tests/feed-photo-api.test.js",
+    "test:feed-photos-browser": "node tests/feed-photos.browser.js",
     "test:suggestions": "node tests/suggestions.browser.js",
     "test:assistant": "node --test tests/assistant.test.js",
     "test:profile": "node --test tests/profile.test.js",
@@ -23,6 +25,7 @@
     "test:toast-mobile": "node tests/toast-mobile.browser.js"
   },
   "dependencies": {
+    "cloudinary": "^2.11.0",
     "firebase": "^12.19.0",
     "fuse.js": "^7.5.0",
     "lucide": "^1.55.0",

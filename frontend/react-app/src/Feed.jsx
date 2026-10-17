@@ -29,6 +29,7 @@ import { loadFeed, PEOPLE, preparePhoto, saveFeed } from "./feed-store";
 import "./feed.css";
 import { useProfilePhoto } from './profile-photo-store';
 import MemberId from './MemberId';
+import { feedPhotoMedia, prepareFeedPhoto } from './feed-photo';
 
 const initials = (name) =>
   name
@@ -69,7 +70,7 @@ export function Avatar({ name = 'Student', color = "#9167cd", small = false, mem
   );
 }
 
-function Photo({ media, onOpen }) {
+export function Photo({ media, onOpen }) {
   const [source, setSource] = useState(media.src || "");
   useEffect(() => {
     if (!media.blob) {
@@ -85,6 +86,8 @@ function Photo({ media, onOpen }) {
       src={source || undefined}
       alt={media.alt || "Shared campus photo"}
       loading="lazy"
+      width={media.width}
+      height={media.height}
     />
   );
   return onOpen ? (
@@ -147,7 +150,7 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
   useEffect(() => {
     if (!initialPost) setCampus(current => current || college);
   }, [college, initialPost]);
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState(() => shared ? feedPhotoMedia(initialPost?.photo) : []);
   const [withEvent, setWithEvent] = useState(!!initialPost?.event);
   const [event, setEvent] = useState(initialPost?.event || {
     title: "",
@@ -158,6 +161,8 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
   const [preparing, setPreparing] = useState(false);
   const [error, setError] = useState("");
   const fileInput = useRef(null);
+  const attachmentLock = useRef(false);
+  const submitLock = useRef(false);
   const alive = useRef(true);
   useEffect(() => {
     alive.current = true;
@@ -169,26 +174,30 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
     if (college) setCampus(college);
   }, [college]);
   const attach = async (files) => {
+    if (attachmentLock.current || blocked || !files.length) return;
     setError("");
-    if (files.length + photos.length > 4) {
-      setError("You can add up to four photos to one post.");
+    if (files.length + photos.length > (shared ? 1 : 4)) {
+      setError(shared ? 'Add one photo per shared post.' : "You can add up to four photos to one post.");
       return;
     }
+    attachmentLock.current = true;
     setPreparing(true);
     try {
-      const prepared = await Promise.all(files.map(preparePhoto));
+      const prepared = await Promise.all(files.map(shared ? prepareFeedPhoto : preparePhoto));
       if (alive.current) setPhotos((current) => [...current, ...prepared]);
     } catch (failure) {
       if (alive.current) setError(failure.message);
     } finally {
+      attachmentLock.current = false;
       if (alive.current) setPreparing(false);
     }
   };
   const submit = async (submission) => {
     submission.preventDefault();
+    if (submitLock.current || attachmentLock.current || blocked) return;
     setError("");
     if (!body.trim() && !photos.length && !(shared && withEvent)) {
-      setError(shared ? "Add post text or an event before publishing." : "Add a thought or a photo before posting.");
+      setError(shared ? "Add post text, a photo, or an event before publishing." : "Add a thought or a photo before posting.");
       return;
     }
     if (!campus.trim()) {
@@ -202,7 +211,9 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
       setError("Add an event name, date, and location.");
       return;
     }
-    const published = await onPublish({
+    submitLock.current = true;
+    let published;
+    try { published = await onPublish({
       body: body.trim(),
       college: campus.trim(),
       images: photos,
@@ -213,7 +224,8 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
             location: event.location.trim(),
           }
         : null,
-    });
+    }); } catch (failure) { setError(failure.message || 'Your post was not published. Please retry.'); }
+    finally { submitLock.current = false; }
     if (published) {
       setBody("");
       setPhotos([]);
@@ -301,17 +313,18 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
           {photos.map((photo, index) => (
             <div key={photo.id}>
               <Photo media={photo} />
-              <button
+              {!(shared && initialPost) && <button
                 type="button"
                 className="feed-icon-button"
                 title="Remove photo"
                 aria-label={`Remove photo ${index + 1}`}
+                disabled={blocked || preparing}
                 onClick={() =>
                   setPhotos(photos.filter((item) => item.id !== photo.id))
                 }
               >
                 <X size={15} />
-              </button>
+              </button>}
             </div>
           ))}
         </div>
@@ -328,16 +341,16 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
       )}
       <footer>
         <div>
-          {shared && <span title="Shared photo uploads are unavailable while billing is disabled"><button type="button" className="feed-composer-action" disabled aria-label="Photos unavailable"><ImagePlus size={18} /><span>Photos</span></button></span>}
-          {!shared && <button
+          <button
             type="button"
             className="feed-composer-action"
-            disabled={blocked || preparing}
+            disabled={blocked || preparing || (shared && (!!initialPost || photos.length > 0))}
+            title={shared && initialPost ? 'Photos cannot be changed after publishing' : shared ? 'Attach one JPG, PNG, or WebP photo' : 'Attach photos'}
             onClick={() => fileInput.current.click()}
           >
             <ImagePlus size={18} />
             <span>Photos</span>
-          </button>}
+          </button>
           <button
             type="button"
             className="feed-composer-action event"
@@ -349,18 +362,19 @@ export function Composer({ user, college, busy, disabled = false, onPublish, sha
             <span>Event</span>
           </button>
         </div>
-        {!shared && <input
+        <input
           ref={fileInput}
           type="file"
           aria-label="Attach photos"
-          accept="image/jpeg,image/png,image/webp,image/gif"
-          multiple
+          accept={shared ? 'image/jpeg,image/png,image/webp' : 'image/jpeg,image/png,image/webp,image/gif'}
+          multiple={!shared}
+          disabled={blocked || preparing || (shared && !!initialPost)}
           hidden
           onChange={(event) => {
             attach(Array.from(event.target.files));
             event.target.value = "";
           }}
-        />}
+        />
         <button
           className="feed-primary-button"
           type="submit"

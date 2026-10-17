@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
-import { Post } from './Feed';
+import { Modal, Photo, Post } from './Feed';
+import { feedPhotoMedia } from './feed-photo';
 import { addComment, deleteComment, setReaction, watchComments, watchReactions } from './shared-social-store';
 import { setSavedPost } from './shared-saved-store';
 
 export default function SharedPost({ post, user, saved, busy, act, fail, onEdit, onDelete }) {
   const [reactions, setReactions] = useState([]);
   const [comments, setComments] = useState([]);
+  const [openedPhoto, setOpenedPhoto] = useState(null);
   useEffect(() => {
     const stopReactions = watchReactions(user, post.id, setReactions, fail);
     const stopComments = watchComments(user, post.id, setComments, fail);
     return () => { stopReactions(); stopComments(); };
   }, [user.id, post.id, fail]);
   const value = {
-    ...post, images: [], createdAt: post.createdAt || Date.now(),
+    ...post, images: feedPhotoMedia(post.photo), createdAt: post.createdAt || Date.now(),
     likes: reactions.filter(item => item.kind === 'like').map(item => item.uid),
     interested: reactions.filter(item => item.kind === 'interested').map(item => item.uid),
     savedBy: saved ? [user.id] : [],
@@ -32,8 +34,8 @@ export default function SharedPost({ post, user, saved, busy, act, fail, onEdit,
     if (removed) return act(() => deleteComment(user, post.id, removed.id), 'Comment deleted.');
     return false;
   };
-  return <Post post={value} user={user} shared busy={busy || !!post.deleting} onChange={change} onEdit={onEdit} onDelete={onDelete} onPhoto={() => {}} onCopy={() => act(async () => {
+  return <><Post post={value} user={user} shared busy={busy || !!post.deleting} onChange={change} onEdit={onEdit} onDelete={onDelete} onPhoto={({ images, index }) => setOpenedPhoto(images[index])} onCopy={() => act(async () => {
     if (!navigator.clipboard) throw new Error('Clipboard access is unavailable.');
     await navigator.clipboard.writeText(post.body || post.event?.title || '');
-  }, 'Post text copied.')} />;
+  }, 'Post text copied.')} />{openedPhoto && <Modal title="Post photo" onClose={() => setOpenedPhoto(null)} className="feed-lightbox"><Photo media={openedPhoto} /></Modal>}</>;
 }
