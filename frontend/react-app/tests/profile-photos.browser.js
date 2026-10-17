@@ -25,6 +25,7 @@ async function enter(credentials, signup = false) {
   assert.ok(await page.evaluate(() => window.campusFirebaseAuth.auth.emulatorConfig));
   assert.equal(await page.evaluate(() => window.campusFirebaseAuth.auth.app.options.projectId), project);
   if (signup) {
+    await page.route('**/v1/accounts:update*', async route => { await new Promise(resolve => setTimeout(resolve, 1500)); await route.continue(); });
     await page.locator('.auth-signup-small').click();
     for (const [id, value] of [['suName', credentials.name], ['suEmail', credentials.email], ['suPass', credentials.password], ['suPass2', credentials.password]]) await page.locator(`#${id}`).fill(value);
     await page.locator('#suInterest').selectOption('Tech'); await page.locator('#signupForm button[type=submit]').click();
@@ -61,6 +62,11 @@ async function editPhoto(person, color) {
 }
 try {
   const owner = await enter(credentials('Photo Tester'), true), first = await enter(credentials('Same Name'), true), second = await enter(credentials('Same Name'), true);
+  for (const person of [owner, first, second]) await expect.poll(async () => {
+    const result = await fetch(`${endpoint}/campusFeedProfiles/${person.uid}`, { headers: { Authorization: 'Bearer owner' } }).then(response => response.json());
+    return result.fields?.name?.stringValue;
+  }).toBe(person.credentials.name);
+  console.log('PASS: shared profiles converge to the completed signup display name, even when Auth name updates are delayed.');
   const red = await editPhoto(first, '#c33e53'), blue = await editPhoto(second, '#206bb5'); assert.notEqual(red, blue);
   await first.page.getByRole('button', { name: 'Change profile photo', exact: true }).click();
   const input = first.page.getByLabel('Choose profile photo', { exact: true });
@@ -165,7 +171,7 @@ try {
   assert.deepEqual(errors, []); console.log('PASS: desktop/320px/390px layouts fit, thumbnails have nonblank pixels, and logout/demo does not retain the previous avatar.');
 } finally {
   await Promise.all(contexts.map(context => context.close()));
-  const docs = await fetch(`${endpoint}/campusFeedPosts`).then(response => response.json());
+  const docs = await fetch(`${endpoint}/campusFeedPosts`, { headers: { Authorization: 'Bearer owner' } }).then(response => response.json());
   for (const item of docs.documents || []) if (users.some(user => user.uid === item.fields.authorId?.stringValue)) await fetch(`http://${process.env.FIRESTORE_EMULATOR_HOST || '127.0.0.1:8180'}/v1/${item.name}`, { method: 'DELETE', headers: { Authorization: 'Bearer owner' } });
   for (const user of users) {
     await fetch(`${endpoint}/campusProfilePhotos/${user.uid}`, { method: 'DELETE', headers: { Authorization: 'Bearer owner' } });

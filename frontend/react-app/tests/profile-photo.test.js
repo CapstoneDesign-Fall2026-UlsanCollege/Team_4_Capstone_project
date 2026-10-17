@@ -1,6 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { memberId, memberLabel, PHOTO_MAX_LENGTH, validatePhotoFile, validProfilePhoto } from '../src/profile-photo.js';
+import { memberId, memberLabel, PHOTO_MAX_LENGTH, publicMemberName, validatePhotoFile, validProfilePhoto } from '../src/profile-photo.js';
+
+test('shared names use the completed Auth display name, not an email-derived session fallback', () => {
+  assert.equal(publicMemberName(null), 'Student');
+  assert.equal(publicMemberName(''), 'Student');
+  assert.equal(publicMemberName('  Same Name  '), 'Same Name');
+  assert.equal(publicMemberName('x'.repeat(140)).length, 120);
+});
 
 test('same names retain their complete distinct member identifiers, not an ambiguous prefix', () => {
   assert.notEqual(memberLabel('Alex', 'same-prefix-one'), memberLabel('Alex', 'same-prefix-two'));
