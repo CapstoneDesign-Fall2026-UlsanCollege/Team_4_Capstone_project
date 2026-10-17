@@ -1,5 +1,10 @@
 # Local CampusVibes Assistant
 
+Persistence update: signed-in history, drafts, and saved answers now persist
+privately through Firestore across devices/logout. The answer engine remains
+local and free. See [current account persistence](account-persistence.md).
+The tab-only storage statements below describe the original release and demo mode.
+
 Updated October 16, 2026, following the supplied reference and the user's explicit
 choice to keep the free local helper. This is not generative AI or live campus
 information. There is no AI API, model key, backend endpoint, or billing change.

@@ -1,5 +1,9 @@
 # Level Progress Badges
 
+Persistence update: signed-in awards now sync privately through Firestore;
+demo awards retain the browser-local model described below. Thresholds and
+scoring are unchanged. See [current account persistence](account-persistence.md).
+
 Implemented October 17, 2026 for the Dashboard's Your vibes progress panel.
 
 ## Rules
