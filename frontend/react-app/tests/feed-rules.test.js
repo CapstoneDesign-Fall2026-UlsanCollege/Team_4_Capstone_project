@@ -117,6 +117,25 @@ test("public feed profiles expose only bounded display data and are owner-writte
   await assertFails(getDoc(doc(env.unauthenticatedContext().firestore(), 'campusFeedProfiles', 'alice')));
 });
 
+test('profile thumbnails allow member reads, owner replacement/removal, but no directory listing or impersonation', async () => {
+  const photo = database => doc(database, 'campusProfilePhotos', 'alice');
+  const value = { photo: 'data:image/jpeg;base64,/9j/AAAA==', updatedAt: serverTimestamp() };
+  await assertSucceeds(setDoc(photo(db('alice')), value));
+  await assertSucceeds(getDoc(photo(db('bob'))));
+  await assertFails(setDoc(photo(db('bob')), value));
+  await assertFails(deleteDoc(photo(db('bob'))));
+  await assertFails(getDocs(query(collection(db('alice'), 'campusProfilePhotos'), limit(100))));
+  await assertFails(getDoc(photo(env.unauthenticatedContext().firestore())));
+  const anonymous = env.authenticatedContext('alice', { firebase: { sign_in_provider: 'anonymous' } }).firestore();
+  await assertFails(getDoc(photo(anonymous)));
+  await assertFails(setDoc(photo(anonymous), value));
+  for (const invalid of [42, 'https://example.com/photo.jpg', 'data:image/svg+xml;base64,AAAA', `data:image/jpeg;base64,/9j/${'A'.repeat(16384)}`]) await assertFails(setDoc(photo(db('alice')), { ...value, photo: invalid }));
+  await assertFails(setDoc(photo(db('alice')), { ...value, email: 'private@example.com' }));
+  await assertFails(setDoc(photo(db('alice')), { ...value, updatedAt: Timestamp.fromMillis(1) }));
+  await assertSucceeds(setDoc(photo(db('alice')), { ...value, photo: 'data:image/jpeg;base64,/9j/BBBB==' }));
+  await assertSucceeds(deleteDoc(photo(db('alice'))));
+});
+
 test("authenticated author publishes and another account reads the shared post", async () => {
   await assertSucceeds(setDoc(ref(db("alice")), post()));
   await assertSucceeds(getDoc(ref(db("bob"))));
