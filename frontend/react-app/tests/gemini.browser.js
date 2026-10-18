@@ -44,6 +44,11 @@ async function consent(page){
 }
 try{
   const page=await setup();await enter(page,alice);
+  for(const text of ['hi how are you','hey how are yoi']){
+    await send(page,text);await expect(page.getByRole('log').locator('[data-response-source=local]').last()).toContainText('here and ready to help');
+    await expect(page.getByRole('log').locator('.assistant-event-row')).toHaveCount(0);assert.equal(sent.length,0);
+  }
+  await page.getByRole('button',{name:'New chat',exact:true}).click();
   await send(page,'private-local@example.com');await expect(page.getByRole('log').locator('[data-response-source=local]')).toHaveCount(1);assert.equal(sent.length,0);
   await page.getByRole('button',{name:'Gemini AI',exact:true}).click();await page.getByRole('dialog',{name:'Use Gemini AI',exact:true}).getByRole('button',{name:'Cancel',exact:true}).click();assert.equal(sent.length,0);
   await consent(page);await send(page,'Help me plan a study week.');await expect(page.getByRole('log')).toContainText('conversational AI answer');
@@ -60,12 +65,14 @@ try{
   await send(page,'A new independent question.');await expect(page.getByRole('log')).toContainText('conversational AI answer');await expect(page.getByRole('log')).not.toContainText('old response');
   for(const width of[1440,390,320]){
     await page.setViewportSize({width,height:1000});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    const mode=await page.getByRole('group',{name:'Assistant mode',exact:true}).boundingBox(),composer=await page.locator('#chatForm').boundingBox();
+    assert.ok(composer.y>=mode.y+mode.height&&composer.y-mode.y-mode.height<24,'The mode switch stays beside the composer.');
     if(process.env.CAMPUS_TEST_ARTIFACTS_URL){const output=new URL('gemini/',process.env.CAMPUS_TEST_ARTIFACTS_URL);await mkdir(output,{recursive:true});await page.screenshot({path:fileURLToPath(new URL(`assistant-${width}.png`,output)),fullPage:true});}
   }
   await expect(page.locator('.account-sync-status')).toHaveText('Saved to your account');
   await page.getByRole('button',{name:'Log out',exact:true}).click();
   await expect(page.locator('.auth-signup-small')).toBeVisible();await enter(page,bob);
-  await expect(page.getByRole('button',{name:'Local',exact:true})).toHaveAttribute('aria-pressed','true');await expect(page.getByRole('log')).not.toContainText('study week');
+  await expect(page.getByRole('button',{name:'Local helper',exact:true})).toHaveAttribute('aria-pressed','true');await expect(page.getByRole('log')).not.toContainText('study week');
   assert.deepEqual(errors,[]);
-  console.log('PASS: explicit age/privacy opt-in, no local/private history forwarding, AI follow-ups, saved source labels across reload, honest quota fallback, cancellation and stale-response isolation, account isolation and desktop/mobile fit. Gemini requests mocked: no model tokens consumed.');
+  console.log('PASS: local greetings and typo do not show event cards; mode switch stays next to composer; explicit age/privacy opt-in, no local/private history forwarding, AI follow-ups, saved source labels across reload, honest quota fallback, cancellation and stale-response isolation, account isolation and desktop/mobile fit. Gemini requests mocked: no model tokens consumed.');
 }finally{release?.();await browser.close();}
