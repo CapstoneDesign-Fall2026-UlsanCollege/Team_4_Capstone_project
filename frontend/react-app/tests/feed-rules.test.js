@@ -169,6 +169,22 @@ test('photo upload counters cannot be impersonated, deleted, rolled back, reset 
   await assertSucceeds(setDoc(path(db('alice')), { count: 1, windowStart: serverTimestamp() }));
 });
 
+test('AI usage records are owner-private, enforce cooldown and cannot be rolled back or reset early', async () => {
+  const path=database=>doc(database,'campusAssistantUsage','alice');
+  const value={count:1,windowStart:serverTimestamp(),lastRequestAt:serverTimestamp()};
+  await assertSucceeds(getDoc(path(db('alice'))));await assertFails(getDoc(path(db('bob'))));
+  await assertFails(setDoc(path(db('bob')),value));await assertFails(setDoc(path(env.unauthenticatedContext().firestore()),value));
+  await assertSucceeds(setDoc(path(db('alice')),value));
+  await assertFails(updateDoc(path(db('alice')),{count:2,lastRequestAt:serverTimestamp()}));
+  await assertFails(setDoc(path(db('alice')),value));await assertFails(deleteDoc(path(db('alice'))));
+  const previous={count:19,windowStart:Timestamp.fromMillis(Date.now()-60000),lastRequestAt:Timestamp.fromMillis(Date.now()-10000)};
+  await env.withSecurityRulesDisabled(context=>setDoc(path(context.firestore()),previous));
+  await assertSucceeds(updateDoc(path(db('alice')),{count:20,lastRequestAt:serverTimestamp()}));
+  await assertFails(updateDoc(path(db('alice')),{count:21,lastRequestAt:serverTimestamp()}));
+  await env.withSecurityRulesDisabled(context=>setDoc(path(context.firestore()),{...previous,count:20,windowStart:Timestamp.fromMillis(Date.now()-25*3600000)}));
+  await assertSucceeds(setDoc(path(db('alice')),value));
+});
+
 test('reactions are uniquely keyed to the actor and cannot alter another user reaction', async () => {
   await setDoc(ref(db('alice')), post());
   const reaction = database => doc(database, 'campusFeedPosts', 'post', 'reactions', 'bob_like');
