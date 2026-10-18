@@ -3,6 +3,18 @@ body:has(#appMain:not(.hidden) #page-chat.active){background:linear-gradient(#fa
 body:has(#appMain:not(.hidden) #page-chat.active) .app-main{max-width:1512px;padding:30px 32px 40px 128px}
 body:has(#appMain:not(.hidden) #page-chat.active) .nav-inner{max-width:1448px}
 .campus-assistant{color:#625d71;letter-spacing:0;margin:0 auto;min-width:0}
+.assistant-mode{display:inline-flex;flex-wrap:wrap;gap:2px;margin-top:14px;padding:3px;border:1px solid #d9e6e4;border-radius:6px;background:#f6f9f9;max-width:100%}
+.assistant-mode button{display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:7px 12px;border:1px solid transparent;border-radius:4px;background:transparent;color:#5e6c70;font:600 11px 'Inter',sans-serif;cursor:pointer}
+.assistant-mode button[aria-pressed=true]{border-color:#b6d9d3;background:#fff;color:#087b73}
+.assistant-mode button:disabled{opacity:.5;cursor:not-allowed}
+.assistant-source-label{display:block;margin:-3px 0 8px;font-size:10px;line-height:1.5;color:#3d7771}
+.assistant-provider-notice{padding:10px 12px;margin:12px 0;background:#fff8e9;border:1px solid #e9d6a3;border-radius:6px;color:#806226;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.assistant-consent{font-size:12px;line-height:1.8;overflow-wrap:anywhere}
+.assistant-consent p{margin:0 0 15px}.assistant-consent a{color:#126f71}
+.assistant-consent label{display:flex;align-items:flex-start;gap:10px;margin:15px 0;min-width:0}.assistant-consent input{flex:0 0 16px;width:16px;height:16px;margin:3px 0 0;accent-color:#187e77}
+.assistant-consent footer{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;margin-top:22px}
+.assistant-consent footer button{display:flex;align-items:center;justify-content:center;gap:7px;min-height:40px;max-width:100%;padding:9px 12px;border:1px solid #b7d2cc;border-radius:5px;background:#fff;color:#286c63;font:600 12px 'Inter',sans-serif;cursor:pointer}
+.assistant-consent footer button:last-child{background:#167a70;border-color:#167a70;color:#fff}.assistant-consent footer button:disabled{opacity:.45;cursor:not-allowed}
 .assistant-rail{position:fixed;top:110px;left:0;width:84px;bottom:24px;display:flex;align-items:center;flex-direction:column;gap:14px;border-right:1px solid #e8e5ef;z-index:2}
 .assistant-rail button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:68px;min-height:58px;border:0;border-radius:6px;background:transparent;color:#888198;font:10px/1.4 'Inter',sans-serif;cursor:pointer}
 .assistant-rail button:hover{background:#f0eafa;color:#7f4ac9}

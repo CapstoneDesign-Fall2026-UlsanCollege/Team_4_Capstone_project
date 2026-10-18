@@ -16,7 +16,7 @@ function cleanConversation(value, events) {
     if (!message || !['user','assistant'].includes(message.role) || typeof message.text !== 'string' || !message.text.trim() || message.text.length > (message.role === 'user' ? 500 : 6000)) return [];
     const id = typeof message.id === 'string' && /^[a-zA-Z0-9-]{1,80}$/.test(message.id) && !seen.has(message.id) ? message.id : crypto.randomUUID();
     seen.add(id);
-    return [{ id, role: message.role, text: message.text, eventIds: message.role === 'assistant' ? cleanIds(message.eventIds,known,4) : [], pages: message.role === 'assistant' && Array.isArray(message.pages) ? [...new Set(message.pages.filter(page => pages.has(page)))] : [] }];
+    return [{ id, role: message.role, text: message.text, eventIds: message.role === 'assistant' ? cleanIds(message.eventIds,known,4) : [], pages: message.role === 'assistant' && Array.isArray(message.pages) ? [...new Set(message.pages.filter(page => pages.has(page)))] : [], ...(['gemini','local'].includes(message.source) ? { source:message.source } : {}) }];
   });
   return { messages, draft: typeof value?.draft === 'string' ? value.draft.slice(0,500) : '', context: messages.some(message => message.role === 'assistant') ? cleanContext(value?.context,known) : cleanContext(null,known) };
 }

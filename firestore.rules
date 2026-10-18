@@ -176,6 +176,22 @@ service cloud.firestore {
           ? request.resource.data.count == 1 && request.resource.data.windowStart == request.time
           : request.resource.data.count == resource.data.count + 1 && request.resource.data.windowStart == resource.data.windowStart);
     }
+    match /campusAssistantUsage/{uid} {
+      function validUsage() {
+        return request.resource.data.keys().hasAll(['count','windowStart','lastRequestAt'])
+          && request.resource.data.keys().hasOnly(['count','windowStart','lastRequestAt'])
+          && request.resource.data.count is int && request.resource.data.count > 0 && request.resource.data.count <= 20
+          && request.resource.data.windowStart is timestamp && request.resource.data.lastRequestAt == request.time;
+      }
+      allow get: if member() && request.auth.uid == uid;
+      allow create: if member() && request.auth.uid == uid && validUsage()
+        && request.resource.data.count == 1 && request.resource.data.windowStart == request.time;
+      allow update: if member() && request.auth.uid == uid && validUsage()
+        && request.time >= resource.data.lastRequestAt + duration.value(3, 's')
+        && (request.time >= resource.data.windowStart + duration.value(24, 'h')
+          ? request.resource.data.count == 1 && request.resource.data.windowStart == request.time
+          : request.resource.data.count == resource.data.count + 1 && request.resource.data.windowStart == resource.data.windowStart);
+    }
     match /campusFeedPosts/{postId} {
       function activePost() {
         return getAfter(/databases/$(database)/documents/campusFeedPosts/$(postId)).data.get('deleting', false) == false;
