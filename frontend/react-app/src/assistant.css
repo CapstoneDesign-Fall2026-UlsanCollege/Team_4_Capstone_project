@@ -3,7 +3,7 @@ body:has(#appMain:not(.hidden) #page-chat.active){background:linear-gradient(#fa
 body:has(#appMain:not(.hidden) #page-chat.active) .app-main{max-width:1512px;padding:30px 32px 40px 128px}
 body:has(#appMain:not(.hidden) #page-chat.active) .nav-inner{max-width:1448px}
 .campus-assistant{color:#625d71;letter-spacing:0;margin:0 auto;min-width:0}
-.assistant-mode{display:inline-flex;flex-wrap:wrap;gap:2px;margin-top:14px;padding:3px;border:1px solid #d9e6e4;border-radius:6px;background:#f6f9f9;max-width:100%}
+.assistant-mode{display:inline-flex;flex-wrap:wrap;gap:2px;margin:0 0 10px;padding:3px;border:1px solid #d9e6e4;border-radius:6px;background:#f6f9f9;max-width:100%}
 .assistant-mode button{display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:7px 12px;border:1px solid transparent;border-radius:4px;background:transparent;color:#5e6c70;font:600 11px 'Inter',sans-serif;cursor:pointer}
 .assistant-mode button[aria-pressed=true]{border-color:#b6d9d3;background:#fff;color:#087b73}
 .assistant-mode button:disabled{opacity:.5;cursor:not-allowed}
