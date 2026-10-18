@@ -18,24 +18,26 @@
 ## What works now
 
 - Landing page, account registration/login, Firebase Authentication, and dashboard navigation.
-- Students can browse code-based sample events, select an event, and view its basic details.
-- The deployed demo rehearsal covered search/filtering, saving events, Saved summary, Profile, Assistant prompt, suggestions, and profile editing on desktop and mobile.
-- The Events → Event Details flow was tested successfully by a teammate, including a retest by DevyanaCT on October 13, 2026.
+- Students can browse sample campus events, use search and filtering, select an event, and view basic event details.
+- The AI Assistant can suggest events based on students' interests using the available sample event data.
+- The deployed demo includes features such as saving events, viewing the Saved summary, editing the profile, and submitting suggestions.
+- The Events → Event Details flow and the independent deployed-demo rehearsal have been tested successfully.
 
 ## What does not work yet
 
-- **Firestore event loading is not yet verified.** The current Events page uses code-based sample event data. We must not claim that events are loaded from Firestore until the connection and data retrieval are tested successfully.
-- Advanced functionality, such as AI-powered recommendations, ticket purchasing, push notifications, and student chat, is outside the current midterm demo scope.
-
+- **Firestore event loading is not yet verified.** The Events page and interest-based recommendations currently rely on available sample event data. Firestore integration must be tested before claiming that events are retrieved from Firestore.
+- Advanced features such as ticket purchasing, push notifications, and student chat are outside the current midterm demo scope.
 ## Evidence links
 
 - **Repository:** [CampusVibe Team 4 repository](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project)
 - **Weekly Report:** Link the Week 7–8 report in the repository.
-- **Demo/proof:** Link the successful independent deployed-demo rehearsal evidence in Issue #53.
+- **Demo/proof:** [Demo link](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53)
 - **Important PRs/Issues:**
-  - Issue #49 — Events → Event Details behavior test.
-  - Issue #53 — Independent deployed-demo rehearsal.
-  - Issue #63 — Retest evidence and follow-up record, where applicable.
+  - Issue #64 — [Events → Event Details behavior test.](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)
+  - Issue #70 — [Empty Search / No-Events State](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70)
+  - Issue #53 — [Independent deployed-demo rehearsal.](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53)
+  - Issue #63 — [Retest evidence and follow-up record](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63)
+  - Issue #35 — [Firestore limitation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35)
   - Commits: `2a240ff`, `d82a4b6`, `37be8f4`.
 
 ## Contribution summary
