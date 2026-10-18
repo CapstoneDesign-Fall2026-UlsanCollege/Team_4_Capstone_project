@@ -20,7 +20,7 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 | Evidence | Link |
 |---|---|
 | Issue(s) | [Issue #64 — Events → Event Details test after updates](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) · [Issue #53 — Independent demo rehearsal](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project/issues/53) [Issue #70 - Test Empty Search / No-Events State](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70)|
-| PR(s) / commits | `2a240ff`, `d82a4b6`, `37be8f4` — [View repository commits](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project/commits) |
+| PR(s) / commits | `2a240ff`, `d82a4b6`, `37be8f4` — [View repository commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main/) |
 | Screenshot / demo | [Evidence link](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/tree/c559945d2d721dd4e1b57ac895448717b714c7d5/docs/Week6/evidence) |
 | Test/check note | [Retested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/bc14dc96bbbb9555f246bb9a7f8f1e8a93f2d3ab/docs/Week6/Retested-by-note.md) [Demo-tested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/bc14dc96bbbb9555f246bb9a7f8f1e8a93f2d3ab/docs/Week6/evidence/Tested-by-note.md) |
 |Deployment| [Deployment](https://campusvibe-theta.vercel.app/) |
