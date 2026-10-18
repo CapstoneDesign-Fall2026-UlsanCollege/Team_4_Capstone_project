@@ -80,10 +80,13 @@ test('daily limits stop provider requests and atomic admission retries do not du
   const race=setup({count:3,conflict:true});assert.equal((await race.invoke()).statusCode,200);assert.equal(race.calls.writes.length,2);assert.equal(race.calls.provider.length,1);
 });
 
-test('quota, provider failures and malformed answers are sanitized and explicitly allow local fallback',async()=>{
+test('quota, provider failures and malformed answers are sanitized and explicitly allow local fallback',async context=>{
+  const log=context.mock.method(console,'warn',()=>{});
   for(const state of [{configured:false},{providerError:Object.assign(new Error(env.GEMINI_API_KEY),{status:429})},{providerError:new Error(env.GEMINI_API_KEY)},{reply:'not-json'},{reply:{text:'',eventIds:[],pages:[]}}]){
     const {invoke}=setup(state),result=await invoke();assert.ok([429,502,503].includes(result.statusCode));assert.equal(result.body.fallback,true);assert.equal(JSON.stringify(result.body).includes(env.GEMINI_API_KEY),false);
   }
+  assert.equal(log.mock.calls.length,2);
+  for(const call of log.mock.calls){assert.deepEqual(Object.keys(call.arguments[1]).sort(),['cancelled','elapsedMs','status']);assert.equal(JSON.stringify(call.arguments).includes(env.GEMINI_API_KEY),false);}
 });
 
 test('remote runner sends only its bounded body and handles quota fallback without leaking tokens into JSON',async()=>{
