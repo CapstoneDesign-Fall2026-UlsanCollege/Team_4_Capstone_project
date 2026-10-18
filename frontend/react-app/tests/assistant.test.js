@@ -29,6 +29,21 @@ test('unknown questions never invent records', () => {
   assert.deepEqual(ask('quantum-teleportation-zqx').eventIds,[]);
   assert.match(ask('what can you do').text,/not a generative AI/);
 });
+
+test('conversational greetings never become fuzzy event recommendations', () => {
+  for (const text of ['hi how are you', 'Hi, how are you?', 'hey how are yoi', 'Hello there! How are you doing today?', 'how r u', "how's it going", "what's up"]){
+    const result=ask(text);
+    assert.match(result.text,/here and ready to help/);
+    assert.deepEqual(result.eventIds,[]);
+  }
+  assert.deepEqual(ask('hi how are you',{context:{eventIds:[7]},filters:{date:'today'}}).eventIds,[]);
+  assert.match(ask('hi how are you',{filters:{date:'today'}}).text,/here and ready to help/);
+});
+
+test('greeting words do not block an actual event question', () => {
+  assert.deepEqual(ask('Hi, where is the Indie Game Showcase?').eventIds,[7]);
+  assert.deepEqual(ask('Hello, show me music events').eventIds,[2,8]);
+});
 test('event lookup is grounded in known records', () => {
   assert.deepEqual(ask('Where is the Indie Game Showcase?').eventIds,[7]);
   assert.equal(knownEvents(events,[7,1,7,999,'2']).map(event => event.id).join(','),'7,1');

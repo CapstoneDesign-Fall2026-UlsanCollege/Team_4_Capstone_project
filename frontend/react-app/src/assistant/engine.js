@@ -16,7 +16,8 @@ export function createAssistant(events) {
     const catalog = filterCatalog(events,request.filters,request.today);
     const search = request.filters ? createEventSearch(catalog) : catalogSearch;
     const tools = { events:catalog, search, text, normalized, context: cleanContext(request.context,new Set(catalog.map(event => event.id))), saved: knownEvents(catalog, request.savedIds), interest: request.interest || '', today: request.today };
-    if (/^(hi|hello|hey|good morning|good afternoon)$/.test(normalized)) return reply(WELCOME);
+    if (/^(?:(?:hi|hello|hey)(?: there)? )?(?:how (?:are|r) (?:you|u|yoi|ya)(?: doing)?(?: today)?|how s it going|what s up)$/.test(normalized)) return reply("Hi! I'm here and ready to help.");
+    if (/^(hi|hello|hey|good morning|good afternoon|good evening)(?: there)?$/.test(normalized)) return reply(WELCOME);
     if (/\b(how|can i)\b.*\b(save|bookmark)\b/.test(normalized)) return reply('Use the bookmark on an event card, then open Saved. Signed-in saves sync to your account; demo saves stay in this browser. I only change your saved list when you choose a bookmark button.', [], { pages: ['saved','discover'] });
     if (/\b(submit|propose|suggest an event|how.*suggest)\b/.test(normalized)) return reply('Open Suggest to draft an idea. Signed-in students can send it to the team review queue; demo drafts stay in this browser. Approval does not automatically publish an event.', [], { pages: ['suggest'] });
     if (/\b(how|where)\b.*\b(message|friends|feed)\b/.test(normalized)) return reply('Open Campus Vibe-Feed and Friends to connect with another account. Private Messages are available after the friendship is accepted. This local helper cannot read your private conversations.', [], { pages: ['feed'] });
