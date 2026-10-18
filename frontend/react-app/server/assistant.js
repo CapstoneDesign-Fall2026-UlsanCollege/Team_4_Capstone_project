@@ -72,11 +72,15 @@ export function createAssistantHandler({ env = process.env, request = fetch, gen
       let generated;
       const cancellation = new AbortController();
       const abort = () => cancellation.abort();
+      const started = Date.now();
       req.once?.('aborted', abort);
       res.once?.('close', abort);
       try {
-        generated = await run({ model: GEMINI_MODEL, contents: [...body.history.map(item => ({ role: item.role === 'assistant' ? 'model' : 'user', parts: [{ text: item.text }] })), { role: 'user', parts: [{ text: body.text.trim() }] }], config: { systemInstruction: `${instruction}\nREFERENCE DATA:\n${context}`, responseMimeType: 'application/json', responseJsonSchema: schema, maxOutputTokens: AI_OUTPUT_TOKENS, thinkingConfig: { thinkingLevel: ThinkingLevel.LOW }, httpOptions: { timeout: 35000 }, abortSignal: AbortSignal.any([cancellation.signal, AbortSignal.timeout(40000)]) } });
-      } catch (failure) { throw error(failure.status === 429 ? 429 : 503, 'Gemini is temporarily unavailable or its free allowance is used. The local helper is still available.', true); }
+        generated = await run({ model: GEMINI_MODEL, contents: [...body.history.map(item => ({ role: item.role === 'assistant' ? 'model' : 'user', parts: [{ text: item.text }] })), { role: 'user', parts: [{ text: body.text.trim() }] }], config: { systemInstruction: `${instruction}\nREFERENCE DATA:\n${context}`, responseMimeType: 'application/json', responseJsonSchema: schema, maxOutputTokens: AI_OUTPUT_TOKENS, thinkingConfig: { thinkingLevel: ThinkingLevel.LOW }, httpOptions: { timeout: 35000, retryOptions: { attempts: 1 } }, abortSignal: AbortSignal.any([cancellation.signal, AbortSignal.timeout(40000)]) } });
+      } catch (failure) {
+        console.warn('Gemini provider request failed', { status: Number.isInteger(failure.status) ? failure.status : null, cancelled: cancellation.signal.aborted, elapsedMs: Date.now() - started });
+        throw error(failure.status === 429 ? 429 : 503, 'Gemini is temporarily unavailable or its free allowance is used. The local helper is still available.', true);
+      }
       finally { req.removeListener?.('aborted',abort); res.removeListener?.('close',abort); }
       let answer;
       try { answer = cleanAiReply(JSON.parse(generated.text), events); } catch { throw error(502, 'Gemini could not finish a valid answer. The local helper is still available.', true); }
