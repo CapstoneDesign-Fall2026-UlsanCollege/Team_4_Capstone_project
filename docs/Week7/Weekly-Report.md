@@ -19,15 +19,19 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 
 | Evidence | Link |
 |---|---|
-| Issue(s) | [Issue #64 — Events → Event Details test after updates](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) · [Issue #53 — Independent demo rehearsal](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project/issues/53) [Issue #70 - Test Empty Search / No-Events State](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70)|
-| PR(s) / commits | `2a240ff`, `d82a4b6`, `37be8f4` — [View repository commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main/) |
+| Events → Event Details retest | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
+| Independent deployed-demo rehearsal | [Issue #53](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project/issues/53) |
+| Empty-search/no-events test | [Issue #70](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70) |
+| Theme-toggle code | [Theme-toggle commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) |
+| Theme-toggle visual evidence | [Theme-toggle-evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md) |
+| PR(s) / commits | [View repository commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main/) |
 | Screenshot / demo | [Evidence link](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/tree/c559945d2d721dd4e1b57ac895448717b714c7d5/docs/Week6/evidence) |
 | Test/check note | [Retested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/bc14dc96bbbb9555f246bb9a7f8f1e8a93f2d3ab/docs/Week6/Retested-by-note.md) [Demo-tested-by-note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/bc14dc96bbbb9555f246bb9a7f8f1e8a93f2d3ab/docs/Week6/evidence/Tested-by-note.md) |
 |Deployment| [Deployment](https://campusvibe-theta.vercel.app/) |
 | Team-agreement | [Team-agreement](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/e1a1fb2c7e2c40bd98bd4ea4e362762f8cbf046e/docs/Week1/team_agrement.md) |
 | Sprint1 Quality check | [sprint-quality-quick-check](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5672689bb30aa48d1cd88c0c269d0640bf592145/docs/Week7/sprint-quality-quick-checks.md) |
 | Work Checklist | [Week7 Work Checklist](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5672689bb30aa48d1cd88c0c269d0640bf592145/docs/Week7/week7-work.checklist.md)
-| Midterm demo preparation | [Preparation issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74)
+| Midterm demo preparation | [Preparation issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) |
 | Document update | Link this Week 7 report in the team's repository after committing it. |
 
 ## References Links
@@ -42,8 +46,6 @@ Each student must confirm their own row and attach evidence of their actual work
 | Student | What they did | Evidence link |
 |---|---|---|
 | Prachi2061 |  |   |
-| Student | What they did | Evidence link |
-|---|---|---|
 | DevyanaCT | Independently tested and retested the Events → Event Details flow and recorded the test results. Added a light/dark theme toggle. Verified the deployed CampusVibes demo across desktop and mobile and contributed testing evidence for midterm preparation. | [Issue #64 — Events → Event Details retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) · [Issue #53 — Retested Independent demo rehearsal](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) · [Theme-toggle code change](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) · [Theme-toggle-evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md) |
 | Ujjalpoudel75 |  Independently tested the deployed CampusVibes demo as a non-UI author; verified the student user flow, Discover event search and filtering, saving events, Saved page, Profile, and Assistant suggestions; recorded desktop and mobile test results, and documented the Firestore event-data loading limitation as noted in the blockers.  | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) , [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)  |
 | Tulseyy8848 | Independently tested the deployed CampusVibes demo as a non-UI-author; verified the demo student flow, Discover event search and filtering, saving events, Saved page, Profile, and Assistant suggestions; recorded test results and reported findings for desktop and mobile testing. | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53), [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
