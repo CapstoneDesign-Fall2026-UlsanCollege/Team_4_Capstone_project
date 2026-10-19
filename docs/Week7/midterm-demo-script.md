@@ -21,12 +21,14 @@
 - Students can browse sample campus events, use search and filtering, select an event, and view basic event details.
 - The AI Assistant can suggest events based on students' interests using the available sample event data.
 - The deployed demo includes features such as saving events, viewing the Saved summary, editing the profile, and submitting suggestions.
+- Students can connect with other students, make friends, and chat through CampusVibe.
+- The Messages section displays a message count and conversation previews, helping students identify their messages.
 - The Events → Event Details flow and the independent deployed-demo rehearsal have been tested successfully.
 
 ## What does not work yet
 
 - **Firestore event loading is not yet verified.** The Events page and interest-based recommendations currently rely on available sample event data. Firestore integration must be tested before claiming that events are retrieved from Firestore.
-- Advanced features such as ticket purchasing, push notifications, and student chat are outside the current midterm demo scope.
+- Advanced features such as ticket purchasing and push notifications, are outside the current midterm demo scope.
 ## Evidence links
 
 - **Repository:** [CampusVibe Team 4 repository](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project)
