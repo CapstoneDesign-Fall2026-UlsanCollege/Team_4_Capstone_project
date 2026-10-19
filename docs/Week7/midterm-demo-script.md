@@ -63,7 +63,7 @@
 | Prachi2061 |  |  |
 | DevyanaCT | Independently tested and retested the Events → Event Details flow ; added a theme toggle for switching between light and dark modes; verified deployed demo features across desktop and mobile, contributed testing evidence, actual results, and midterm demo verification. | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64), [commits](108d8b69181859d4c1ff2d6e049b26d353f9a094) [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)|
 | Ujjalpoudel75 |  |  |
-| Tulseyy8848 |  |  |
+| Tulseyy8848 | Independently tested the deployed CampusVibes demo as a non-UI-author; verified the demo student flow, Discover event search and filtering, saving events, Saved page, Profile, and Assistant suggestions; recorded test results and reported findings for desktop and mobile testing. | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53), [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
 
 ## Next steps after midterm
 
