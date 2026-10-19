@@ -44,7 +44,7 @@ Each student must confirm their own row and attach evidence of their actual work
 | Prachi2061 |  |   |
 | DevyanaCT |   |   |
 | Ujjalpoudel75 |    |   |
-| Tulseyy8848 |   |   |
+| Tulseyy8848 | Independently tested the deployed CampusVibes demo as a non-UI-author; verified the demo student flow, Discover event search and filtering, saving events, Saved page, Profile, and Assistant suggestions; recorded test results and reported findings for desktop and mobile testing. | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53), [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
 
 ## Blockers or risks
 
