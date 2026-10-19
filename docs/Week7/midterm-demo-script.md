@@ -61,7 +61,7 @@
 | Student | What they contributed | Evidence link |
 |---|---|---|
 | Prachi2061 |  |  |
-| DevyanaCT | Independently tested and retested the Events → Event Details flow; contributed testing evidence and demo verification. | Issue #49 / Issue #63 |
+| DevyanaCT | Independently tested and retested the Events → Event Details flow ; added a theme toggle for switching between light and dark modes; verified deployed demo features across desktop and mobile, contributed testing evidence, actual results, and midterm demo verification. | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64), [commits](108d8b69181859d4c1ff2d6e049b26d353f9a094) [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)|
 | Ujjalpoudel75 |  |  |
 | Tulseyy8848 |  |  |
 
