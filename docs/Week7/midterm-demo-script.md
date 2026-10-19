@@ -22,6 +22,7 @@
 - The AI Assistant can suggest events based on students' interests using the available sample event data.
 - The deployed demo includes features such as saving events, viewing the Saved summary, editing the profile, and submitting suggestions.
 - Students can connect with other students, make friends, and chat through CampusVibe.
+- Students can toggle between light mode and dark mode to change the website's appearance.
 - The Messages section displays a message count and conversation previews, helping students identify their messages.
 - The Events → Event Details flow and the independent deployed-demo rehearsal have been tested successfully.
 
