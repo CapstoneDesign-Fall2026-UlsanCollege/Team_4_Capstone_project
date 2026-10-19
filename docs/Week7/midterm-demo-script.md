@@ -1,73 +1,82 @@
 # Midterm Demo Script
 
 **Team:** Team 4  
-**Week:** 7–8  
+**Week:** 7–8
 
 ## Opening
 
 - **Project name:** CampusVibes
 - **Target users:** University students who want to discover campus events, clubs, and activities.
-- **Problem:** Students need a simple and accessible way to find campus activities and explore relevant events without navigating a confusing website.
+- **Problem:** Students need a simple and accessible way to find campus activities without navigating a confusing website.
+- **Goal:** Demonstrate the current working user journey, explain supporting features, and clearly identify remaining limitations.
 
-## Demo path
+## Demo Path — Frozen Midterm Scope
 
-1. Open the CampusVibes website and introduce the project. Show the landing page and explain its purpose.
-2. Demonstrate account creation or login, then access the student dashboard.
-3. Open Discover/Events, demonstrate the available search and filtering behavior, select an event, and show its basic details.
+1. **Landing Page:** Open the deployed CampusVibes website and introduce the project's purpose.
+2. **Authentication:** Demonstrate the verified email/password login flow and enter the student dashboard.
+3. **Dashboard:** Briefly introduce the main navigation.
+4. **Discover / Events:** Open the Events page and demonstrate the available sample events, search, and filtering behavior.
+5. **Event Details:** Select an event and show its basic details. Explain that the current Events page uses code-based sample data and that Firestore event loading has not yet been verified.
+6. **Supporting Features:** Briefly mention the Assistant, Saved Events, Profile, social features, and light/dark theme toggle. Demonstrate additional features only if time permits and their behavior has been verified.
+
+**Demo boundary:** The main demonstration focuses on the tested user journey from the landing page and login through event discovery and event details. Supporting features are additional project work and do not replace the core demonstration path.
 
 ## What Works Now
 
-- **Authentication:** Email/password registration, login, logout, and persistent authentication state through Firebase Authentication.
-- **Community:** Dashboard navigation, Discover search and filters, event details, Saved, and Profile.
-- **Events:** Students can browse sample campus events, search and filter them, select an event, and view basic event details.
-- **Assistant:** Suggests events based on students' interests using available sample event data.
-- **Profile:** Students can view and edit profile information, including their bio and interests, and access profile-related features.
-- **Saved Events:** Students can save events and view their Saved summary.
-- **Student Connections and Chat:** Students can connect with other students, make friends, and chat through CampusVibe.
-- **Messaging Indicators:** The Messages section displays conversation previews, a message count, and online-status indicators within the website.
-- **Campus Vibe-Feed:** The project includes social-feed functionality for signed-in students, including posts and social interactions, according to the implemented features.
+### Core Midterm Demo
+
+- **Authentication:** Email/password registration and login are implemented with Firebase Authentication. Demonstrate logout and authentication persistence only to the extent they have been verified.
+- **Dashboard and Navigation:** Students can access the dashboard and navigate between the main sections.
+- **Event Discovery:** Students can browse code-based sample events and use the implemented search and filtering features.
+- **Event Details:** Students can select an event and view its basic details. The Events → Event Details flow has been tested.
+- **Testing:** The Events → Event Details flow and independent deployed-demo rehearsal have recorded evidence.
+
+### Supporting Features
+
+- **Saved Events:** Students can save events and view the Saved summary.
+- **Profile:** Students can view and edit supported profile information.
+- **Assistant:** Provides event suggestions using available sample data through a local answer engine.
 - **Suggestions:** Students can submit event ideas through the Suggest feature.
-- **Progress Badges:** The project includes progress badges and milestone-related functionality.
-- **Light/Dark Mode:** Students can toggle between light and dark themes.
-- **Testing:** The Events → Event Details flow and the independent deployed-demo rehearsal have been tested successfully.
+- **Social Features:** The project includes student connections, messaging, and feed functionality, subject to documented demo-data and persistence limitations.
+- **Light/Dark Mode:** Students can switch between light and dark themes.
 
 ## What Does Not Work Yet / Limitations
 
-- **Firestore Event Loading:** Event browsing and interest-based recommendations currently use code-based sample data. Firestore event loading has not yet been verified.
-- **Google Sign-In and Password Reset:** The functionality requires separate verification before claiming both flows work successfully end to end.
-- **Push Notifications:** Browser and mobile push notifications are not implemented. The current message count and conversation previews are in-app indicators, not device notifications.
-- **Campus Vibe-Feed Attachments:** Shared post-photo attachments remain disabled while billing is unavailable, according to the project feature notes.
-- **Assistant Limitations:** The Assistant uses a local answer engine rather than a live AI service or live campus data. Attachment and voice features are unavailable.
-- **Event Suggestions:** Approval of a suggestion does not automatically publish it as an event in Discover.
-- **Guest Social Features:** Guest-mode posts and friend requests use local demo data and do not get delivered to other students.
-- **Data Persistence:** Some demo records are stored locally in the browser rather than synced across accounts or devices. Persistence varies by feature and sign-in status.
-- **Ticket Purchasing:** Ticket purchasing is not included in the current midterm demo scope.
-  
-## Evidence links
+- **Firestore Event Loading:** The Events page currently uses code-based sample data. Firestore event-data loading has not been verified.
+- **Google Sign-In and Password Reset:** End-to-end success requires separate verification.
+- **Push Notifications:** Browser and mobile push notifications are not implemented. In-app message counts and conversation previews are not device notifications.
+- **Assistant:** Uses a local answer engine rather than a live AI service or live campus data. Voice and attachment features are unavailable.
+- **Data Persistence:** Some demo records are stored locally in the browser and may not sync across accounts or devices.
+- **Guest Social Features:** Guest-mode posts and friend requests use local demo data and are not delivered to other students.
+- **Feed Attachments:** Post-photo attachments remain disabled while billing is unavailable, according to the project notes.
+- **Event Suggestions:** Approving a suggestion does not automatically publish it in Discover.
+- **Ticket Purchasing:** Ticket purchasing is outside the current midterm scope.
 
-- **Repository:** [CampusVibe Team 4 repository](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project)
-- **Weekly Report:** Link the Week 7–8 report in the repository.
-- **Demo/proof:** [Demo link](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53)
-- **Important PRs/Issues:**
-  - Issue #64 — [Events → Event Details behavior test.](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)
-  - Issue #70 — [Empty Search / No-Events State](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70)
-  - Issue #53 — [Independent deployed-demo rehearsal.](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53)
-  - Issue #63 — [Retest evidence and follow-up record](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63)
-  - Issue #35 — [Firestore limitation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35)
-  - Commits: [Repo Commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main/)
+## Evidence Links
 
-## Contribution summary
+- **Repository:** [CampusVibes Team 4 Repository](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project)
+- **Deployment:** [CampusVibes Website](https://campusvibe-theta.vercel.app/)
+- **Independent Demo Rehearsal:** [Issue #53](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project/issues/53)
+- **Events → Event Details Test:** [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)
+- **Empty Search / No-Events Test:** [Issue #70](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70)
+- **Retest Evidence and Follow-up:** [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63)
+- **Firestore Limitation:** [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35)
+- **Theme Toggle :** [Theme-toggle code commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) [*Theme toggle evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md)
+- **Repository Commits:** [View commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main/)
 
-| Student | What they contributed | Evidence link |
+## Contribution Summary
+
+| Student | Contribution | Evidence |
 |---|---|---|
-| Prachi2061 |  |  |
-| DevyanaCT | Independently tested and retested the Events → Event Details flow ; added a theme toggle for switching between light and dark modes; verified deployed demo features across desktop and mobile, contributed testing evidence, actual results, and midterm demo verification. | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64), [commits](108d8b69181859d4c1ff2d6e049b26d353f9a094) [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)|
-| Ujjalpoudel75 |  |  |
-| Tulseyy8848 | Independently tested the deployed CampusVibes demo as a non-UI-author; verified the demo student flow, Discover event search and filtering, saving events, Saved page, Profile, and Assistant suggestions; recorded test results and reported findings for desktop and mobile testing. | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53), [Issue #49](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49) |
+| Prachi2061 | Add the student's confirmed contribution and evidence link. | Add the relevant issue, commit, or screenshot link. |
+| DevyanaCT | Independently tested and retested the Events → Event Details flow, added a light/dark theme toggle, and contributed deployed-demo testing evidence and midterm verification. | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64), [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63), [Theme-toggle commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) |
+| Ujjalpoudel75 | Add the student's confirmed contribution and evidence link. | Add the relevant issue, commit, or screenshot link. |
+| Tulseyy8848 |  |  |
 
-## Next steps after midterm
+## Next Steps After Midterm
 
-- Verify Firestore access and event-data loading, then update the relevant issue with actual test results.
-- Keep the demo scope frozen; fix only critical bugs that affect the demonstration.
-- Maintain clear evidence for testing, contributions, and known limitations.
-- After the midterm, prioritize verified improvements based on testing results and professor feedback.
+- Verify Firestore access and event-data loading, then record the actual test results in the relevant issue.
+- Keep the main demonstration scope focused on the tested user journey.
+- Fix critical bugs that could interrupt the demonstration.
+- Maintain direct evidence links for testing, individual contributions, and known limitations.
+- Prioritize future improvements based on test results and professor feedback.
