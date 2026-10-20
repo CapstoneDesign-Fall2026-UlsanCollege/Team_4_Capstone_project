@@ -60,7 +60,9 @@ Each student must confirm their own row and attach evidence of their actual work
 
 | Decision | Why we chose it | Owner | Evidence / Issue link |
 |---|---|---|---|
-| Keep the Firestore limitation explicit in the presentation and report. | The current Events page uses code-based sample data; Firestore event loading must be verified before claiming it works. | Confirm with the team | [Issue #49](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project/issues/49) , [issue 35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) |
+| Keep the Firestore limitation explicit in the presentation and report. | The Events page currently uses code-based sample data. Firestore event loading has not been verified, so we must not claim that event data is loaded from Firestore. | prachi2061 | [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) |
+| Freeze the main midterm demo scope around the tested user journey. | Focusing on the core journey makes the demonstration clear, manageable, and supported by existing test evidence. | Team 4 | [Midterm preparation issue #74](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) |
+| Treat Saved Events, Profile, Assistant, Suggestions, social features, and the light/dark theme toggle as supporting features. | These features may be mentioned briefly or demonstrated if time permits and their behavior has been verified. They should not distract from the main demo flow. | Team 4 | [Independent demo rehearsal — Issue #53](https://github.com/Capstone-Design-Team-4/Team_4_Capstone_project/issues/53) · [Theme-toggle commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) |
 
 ## Next week's bridge task
 
