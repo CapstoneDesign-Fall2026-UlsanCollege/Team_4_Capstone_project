@@ -50,6 +50,13 @@
 - **Event Suggestions:** Approving a suggestion does not automatically publish it in Discover.
 - **Ticket Purchasing:** Ticket purchasing is outside the current midterm scope.
 
+## Failure and Fallback
+
+- **Empty search:** Show the no-events message, choose Clear filters and reopen a sample event. This recovery passed in the [October 20 technical check](./Evidence/core-path-2026-10-20/check-note.md).
+- **Login/network interruption:** State that the login path is blocked, read the connection error and retry after connectivity is restored. The technical check deliberately blocked only the sign-in request and verified a successful real retry; it did not observe an actual Firebase outage.
+- **If the live demo still fails:** Show the linked, dated desktop/mobile screenshots and label them as recorded evidence. Do not claim screenshots prove the current live system works, or silently substitute demo access for the frozen email/password path.
+- **Human check still pending:** Each speaker must explain this fallback during the real 3-5 minute rehearsal. Passing browser automation does not confirm the team's explanation or presentation timing.
+
 ## Evidence Links
 
 - **Repository:** [CampusVibes Team 4 Repository](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project)
@@ -60,16 +67,17 @@
 - **Retest Evidence and Follow-up:** [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63)
 - **Firestore Limitation:** [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35)
 - **Theme Toggle:** [Theme-toggle code commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) · [Theme toggle evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md)
-- **Weekly Report and Individual Receipt:** [Week 7 report](./Weekly-Report.md) · [prachi2061](./individual-evidence-receipt-prachi2061.md)
+- **Weekly Report and Individual Receipt:** [Week 7 report](./Weekly-Report.md) · [prachi2061](../../evidence-receipt-prachi2061.md)
+- **Current Core/Fallback Proof:** [October 20 automated production run](./Evidence/core-path-2026-10-20/check-note.md), separate from the pending narrated rehearsal.
 - **Repository Commits:** [View commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main/)
 
 ## Contribution Summary
 
 | Student | Contribution | Evidence |
 |---|---|---|
-| prachi2061 | Fixed navigation and event imagery; implemented signed-in persistence and supporting suggestion, photo, profile/badge and Gemini releases with automated regression coverage. Keep the core sample-event path reliable and explain the unresolved Firestore boundary. Independent rehearsal results belong to the named teammates, not the feature author. | [Individual receipt and exact commits](./individual-evidence-receipt-prachi2061.md) · [PR #75](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/75) · [PR #77](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/77) |
+| prachi2061 | Fixed navigation and event imagery; implemented signed-in persistence and supporting suggestion, photo, profile/badge and Gemini releases with automated regression coverage. Keep the core sample-event path reliable and explain the unresolved Firestore boundary. Independent rehearsal results belong to the named teammates, not the feature author. | [Individual receipt and exact commits](../../evidence-receipt-prachi2061.md) · [PR #75](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/75) · [PR #77](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/77) |
 | DevyanaCT | Independently tested and retested the Events → Event Details flow, added a light/dark theme toggle, and contributed deployed-demo testing evidence and midterm verification. | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64), [Issue #63](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63), [Theme-toggle commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) |
-| Ujjalpoudel75 | Add the student's confirmed contribution and evidence link. | Add the relevant issue, commit, or screenshot link. |
+| ujjalpoudel75 | Visible recorded work: the empty-search/no-events test in Issue #70. Confirm the contribution and your own Week 7 receipt before presenting; unverified organisation/submission work is not part of this frozen path. | [Your result - Issue #70](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70) · [Receipt status and next action](./Weekly-Report.md#current-receipt-and-speaker-follow-up) |
 | Tulseyy8848 |Tested the CampusVibes user flow and deployed demo, checked event discovery and filtering, saved events, profile and assistant features, and reviewed desktop/mobile layouts. Recorded testing evidence and retest results. Identified the limitation that sample events were displayed, but persistent Firestore saving was not verified.  |https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63, https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74  |
 
 ## Next Steps After Midterm
