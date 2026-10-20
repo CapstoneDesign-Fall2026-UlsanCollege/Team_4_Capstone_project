@@ -66,8 +66,6 @@ All four report rows are populated, but only one dedicated Week 7 receipt is lin
 | `ujjalpoudel75` | [Your empty-search result #70](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70) visible; dedicated Week 7 receipt not yet linked. | Confirm that your row matches your own performed checks, add your receipt and agree your speaking part. Do not count unverified organisation/submission work as a delivered core feature. |
 | `tulseyy8848` | [Your desktop/mobile evidence in #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53#issuecomment-6138295370) visible; dedicated Week 7 receipt not yet linked. | Add your own receipt, confirm your role, and help Team 4 record the actual timed run and Firestore limitation in #74. |
 
-Use `tulseyy8848` for new evidence. Existing documents use `Tulseyy8848` / `Tulsey8`; older metadata uses `tulasha87`. These aliases do not identify additional current members. Speaker assignments remain unconfirmed.
-
 ## Blockers or risks
 
 | Blocker/risk | Owner | Next action |
