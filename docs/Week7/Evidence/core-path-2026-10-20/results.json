@@ -1,0 +1,53 @@
+{
+  "type": "Codex-assisted automated production browser check for prachi2061; not independent teammate testing or a narrated 3-5 minute presentation",
+  "startedAt": "2026-10-20T08:01:55.038Z",
+  "deployment": {
+    "id": "dpl_8RCLmACQsRj6GkaEQnCV3F1HwbDb",
+    "commit": "e715e319da4fd2c677b02d8a5e17f0773b108675",
+    "url": "https://campusvibe-theta.vercel.app"
+  },
+  "views": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "expected": "Signed-out production landing -> email/password login -> Dashboard -> Discover -> Tech filter/HackNight search -> exact sample Event Details. Empty search clears and restores the same event; a deliberately blocked sign-in fails visibly and succeeds after the block is removed.",
+      "automatedCoreElapsedMs": 6596,
+      "coreActual": "PASS: Firebase email/password sign-in, Dashboard navigation, Tech filter/search, and HackNight: Build-a-Thon title/time/location/host/description/photo verified.",
+      "emptyStateActual": "No events found. Try another search or category.",
+      "emptySearchRecoveryMs": 662,
+      "simulatedLoginFailureObservedMs": 118,
+      "loginFailureActual": "Could not connect. Check your internet connection and try again.",
+      "loginRetryMs": 1860,
+      "retryActual": "PASS: after removing the injected network block, the same valid login reaches the signed-in app with server-acknowledged account state.",
+      "uncaughtPageErrors": []
+    },
+    {
+      "name": "mobile-viewport",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "expected": "Signed-out production landing -> email/password login -> Dashboard -> Discover -> Tech filter/HackNight search -> exact sample Event Details. Empty search clears and restores the same event; a deliberately blocked sign-in fails visibly and succeeds after the block is removed.",
+      "automatedCoreElapsedMs": 3985,
+      "coreActual": "PASS: Firebase email/password sign-in, Dashboard navigation, Tech filter/search, and HackNight: Build-a-Thon title/time/location/host/description/photo verified.",
+      "emptyStateActual": "No events found. Try another search or category.",
+      "emptySearchRecoveryMs": 645,
+      "simulatedLoginFailureObservedMs": 108,
+      "loginFailureActual": "Could not connect. Check your internet connection and try again.",
+      "loginRetryMs": 1771,
+      "retryActual": "PASS: after removing the injected network block, the same valid login reaches the signed-in app with server-acknowledged account state.",
+      "uncaughtPageErrors": []
+    }
+  ],
+  "cleanup": {
+    "privateAccountDocumentsRemoved": 1,
+    "memberProfileRemoved": true,
+    "authenticationAccountsRemoved": 1
+  },
+  "status": "passed",
+  "browser": "155.0.8059.85",
+  "finishedAt": "2026-10-20T08:02:20.627Z"
+}
