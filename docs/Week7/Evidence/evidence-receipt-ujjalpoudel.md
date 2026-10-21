@@ -2,174 +2,144 @@
 # Individual Evidence Receipt — Ujjal Poudel
 
 **Student:** Ujjal Poudel  
-**GitHub Username:** ujjalpoudel75  
-**Team:** Team 4 – CampusVibes  
-**Week:** 7 (October 15–21, 2026)  
-**Role:** Student-Flow Testing, Search Verification, and Midterm Evidence Support  
-**Project:** CampusVibes
+**GitHub username:** `ujjalpoudel75`  
+**Team / Project:** Team 4 — CampusVibes  
+**Week:** Week 7 (October 15–21, 2026)  
+**Role:** Search Requirements, Student-Flow Testing, and Event-Submission Planning  
+**Evidence reviewed:** October 21, 2026 (KST)
 
 ## 1. Introduction
 
-This receipt documents my individual contributions to the CampusVibes project, focusing on functional testing, event discovery verification, and preparation of supporting evidence for the midterm demonstration.
+This receipt records my own verifiable contributions to the CampusVibes project for Week 7 midterm preparation. My primary Week 7 evidence is the completed empty-search/no-events test (Issue #70). I also documented the requirements for Search Events and Clubs (Issue #13) and Events Organisation Dashboard and Event Submission (Issue #15). My earlier Events → Event Details test (Issue #49) is included as supporting evidence and is not presented as a new Week 7 test.
 
-My main responsibility was to check the application from a student's perspective, record expected and actual test results, and confirm whether the current event discovery features behaved correctly.
+I distinguish **completed test evidence**, **issue planning/requirements**, and **features still under development**. I do not claim to have personally implemented other teammates' code or verified workflows that are still unfinished.
 
-## 2. Evidence Receipt 1: Empty Search / No-Events Testing
+## 2. Receipt 1 — Empty Search / No-Events Test (Primary Week 7 Evidence)
 
-**Issue:** #70 – Test Empty Search / No-Events State  
-**Status:** Completed  
-**Assigned to:** ujjalpoudel75
+**Issue:** #70 — Test Empty Search / No-Events State  
+**Issue status:** Closed (October 18, 2026)  
+**My contribution:** Created and took ownership of the test issue, documented the test steps, expected result, actual result, and proof checklist.
 
-### What I Did
+### What I tested
 
-I tested how the CampusVibes website behaves when a user searches for an event that does not exist in the available sample event data.
+I checked how the deployed CampusVibes application responds when a student searches for an event that is not present in the sample event catalog.
 
-I checked whether the website displayed an appropriate message instead of returning an error or incorrect event information.
+**Test steps:**
 
-### Test Steps
+1. Open the CampusVibes application.
+2. Go to the Events / Discover section.
+3. Enter a keyword that matches no sample event (for example, `xyz12345`).
+4. Observe the displayed results and any errors.
+5. Record the outcome and screenshot evidence in the issue.
 
-1. Opened the CampusVibes website.
-2. Navigated to the Discover / Events page.
-3. Entered a search keyword that did not match any sample events.
-4. Observed the search results.
-5. Recorded the expected and actual behavior.
+**Expected result:** The application should indicate that there are no matching events rather than displaying incorrect results or failing.
 
-### Expected Result
+**Actual recorded result — PASS:** The search completed without errors and indicated that no matching events were found. Issue #70 records the expected and actual outcome and has its screenshot-evidence checklist marked complete.
 
-The application should clearly indicate that no matching events were found.
+**What I learned:** Negative test cases are important for student-facing search. A clear no-results state helps users understand that the search worked but returned no match.
 
-### Actual Result
-
-**PASS**
-
-The search was completed successfully without errors.
-
-When a keyword without a matching event was searched, the application displayed an appropriate no-results indication.
-
-The expected and actual results were recorded in Issue #70, along with the screenshot evidence checklist.
-
-### What I Learned
-
-I learned that testing unsuccessful searches is important because users may search for events that are not available.
-
-Displaying clear feedback improves usability and helps students understand the search results.
-
-### Evidence Link
-
-Issue #70 – Empty Search / No-Events Test:
-
+**Evidence URL:**  
 https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70
 
-## 3. Evidence Receipt 2: Events → Event Details Testing
+**Limit:** This verifies the current search behavior with **code-based sample event data**, not Firestore event loading.
 
-**Issue:** #49 – Test Event Details Behavior  
-**My Test Date:** October 8, 2026  
-**Result:** Passed
+## 3. Receipt 2 — Search Events and Clubs Requirements
 
-### What I Did
+**Issue:** #13 — Search Events and Clubs  
+**Issue status:** Closed (October 18, 2026)  
+**My contribution:** Created the issue on September 17, 2026 and specified the student search requirements and expected flow.
 
-I participated in testing the existing Events → Event Details functionality.
+### What I contributed
 
-I opened the Events section, selected a sample event, and checked whether the application displayed its basic information correctly.
+I described how a student should be able to find campus events and clubs using keywords. The issue defines a Search page and input field; search for events and clubs; matching-result display; no-results feedback; and opening the selected event or club detail page.
 
-This was an earlier contribution that supports the Week 7 midterm preparation, not a new Week 7 retest.
+**Expected flow:** Student Home → Search → Enter Keyword → View Results → Select Event/Club → View Details.
 
-### Test Steps
+### Evidence and outcome
 
-1. Opened the CampusVibes application.
-2. Navigated to the Events section.
-3. Selected an available sample event.
-4. Checked the event details displayed.
+Issue #13 is closed. My personal evidence for a specific working search case is the successful **empty-search/no-events** test in Issue #70. The closure of Issue #13 does not, by itself, show that I personally wrote the search implementation or independently tested every event-and-club requirement.
 
-### Expected Result
+**What I learned:** Writing a clear user flow and Definition of Done helps the team implement and check features against the same expectations.
 
-The application should display the basic details of the selected event correctly.
+**Evidence URL:**  
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/13
 
-### Actual Result
+## 4. Receipt 3 — Events Organisation Dashboard and Event Submission Planning
 
-**PASS**
+**Issue:** #15 — Events Organisation Dashboard and Event Submission  
+**Issue status:** Open  
+**My contribution:** Created the issue on September 17, 2026 and documented the planned organiser-facing workflow and acceptance requirements.
 
-The selected event's basic details were displayed as expected.
+### What I contributed
 
-I personally recorded my successful test result in the comment section of Issue #49 on October 8.
+I defined the intended workflow for organisers to submit event information to the team for review before an event is displayed to students. The issue covers an organiser dashboard, an event submission form, required-field validation, storing submitted event data, review and approval, publishing approved events, and opening approved event details.
 
-### What I Learned
+**Planned flow:** Organisation Dashboard → Submit Event → Enter Event Information → Submit → Review → Approve → Student Event Listing.
 
-I gained experience testing the connection between event browsing and event details.
+### Current status and scope decision
 
-I also learned the importance of recording test results so that other teammates can verify the functionality.
+The team has delivered a **partial Suggest/review workflow** through PR #78, but the complete organiser-dashboard path in Issue #15 remains open. In particular, approval does **not** automatically publish an event to Discover, and the final published-event acceptance checks remain unverified. That implementation and its verification were documented by another contributor; I am claiming my issue/requirements contribution, **not** authorship of that implementation.
 
-### Evidence Link
+**Decision: The full organisation dashboard and event-submission/publication workflow is a POST-MIDTERM EXTENSION, not part of the frozen midterm demo path.** It should be demonstrated as completed only after the full submission → approval → student listing → details flow is actually implemented and verified.
 
-Issue #49 – Events → Event Details:
+**What I learned:** Defining a feature does not mean it is complete. An open issue and incomplete acceptance checks need to be reported clearly rather than shown as a finished demo feature.
 
+**Evidence URLs:**  
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/15  
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/78
+
+## 5. Receipt 4 — Events → Event Details Test (Earlier Supporting Evidence)
+
+**Issue:** #49 — Test Event → Event Details Behavior  
+**My recorded test date:** October 8, 2026 (**before Week 7**)
+
+I tested the existing Events flow, selected a sample event, and checked that its basic event details appeared.
+
+- **Expected result:** The selected event's detail view opens and shows the event information.
+- **Actual result — PASS:** I commented in Issue #49 that the Events flow worked as expected and displayed the selected sample event details correctly.
+- **Attribution:** This is my own October 8 comment, not a new Week 7 retest. Later retesting by teammates is their work.
+
+**Evidence URL:**  
 https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49
 
-## 4. Evidence Receipt 3: Week 7 Testing and Midterm Preparation Support
+## 6. Expected vs Actual Results and Contribution Summary
 
-### What I Contributed
+| Evidence item | Expected / intended outcome | Verified result or current status | My role |
+| --- | --- | --- | --- |
+| Issue #70 — Empty Search / No-Events | An unmatched query produces a clear no-results state | **PASS** — no-results feedback appeared without error; issue closed | My Week 7 test issue and recorded result |
+| Issue #13 — Search Events and Clubs | Students can search events/clubs and navigate results | **Closed issue**; my independently documented search test is the Issue #70 no-results case | Requirements and user-flow definition |
+| Issue #15 — Organisation Dashboard / Event Submission | Organisers submit; team reviews; approved events appear in Discover | **OPEN** — partial Suggest/review exists; automatic publication to Discover not complete | Requirements and post-midterm planning |
+| Issue #49 — Events → Event Details | Selecting a sample event opens its basic details | **PASS** — my October 8 comment | Earlier supporting test, not new Week 7 work |
 
-My completed empty-search test provided evidence for the team's Week 7 functional testing.
+## 7. Frozen Midterm Demo Boundary and Risks
 
-The shared Weekly Report includes my contribution to verifying how the deployed application handles searches without matching events.
+According to the team's Week 7 midterm preparation issue, the **frozen core demo** is:
 
-I also contributed earlier evidence for the Events → Event Details flow, which is part of the midterm demonstration path.
+**Landing Page → Email/Password Login → Dashboard → Discover/Events → Search/Filter → Select Event → Event Details.**
 
-### Verified Contributions
+My Issue #70 evidence directly supports the **Search/Filter** part of this path. My Issue #49 comment is earlier supporting evidence for **Event Details**.
 
-- Tested empty-search / no-events behavior.
-- Recorded expected and actual search results.
-- Confirmed successful no-results handling.
-- Documented the test in GitHub Issue #70.
-- Previously recorded a successful Events → Event Details test in Issue #49.
-- Provided supporting test evidence for the team's midterm readiness documentation.
+The **full organisation dashboard, event submission, review-to-publication flow (Issue #15)** is **outside the frozen path** and belongs to **post-midterm work**. The partial Suggest/review feature may be mentioned as supporting work only with its limits clearly stated; it must not be described as automatic publication of approved events.
 
-### Evidence Links
+**Known limitation:** Discover currently uses code-based sample event data. Firestore Events loading remains unverified, so my search and event-detail tests do not establish a live Firestore event catalog.
 
-Week 7 Weekly Report:
+The team's final timed, narrated **3–5-minute rehearsal** and individual speaking assignments are still to be confirmed and recorded. I do not claim a completed personal timed rehearsal without its own evidence.
 
-https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Weekly-Report.md
+**Scope and limitation evidence:**  
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74  
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35
 
-Midterm Preparation Issue #74:
+## 8. Evidence Links for the Week 7 Report
 
-https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74
+- **Issue #70 — My empty-search test:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70
+- **Issue #13 — Search Events and Clubs requirements:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/13
+- **Issue #15 — Organisation Dashboard and Submission (open):** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/15
+- **Issue #49 — My earlier Event Details comment:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49
+- **Week 7 Weekly Report:** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Weekly-Report.md
+- **Midterm Demo Scope (Issue #74):** https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74
 
-## 5. Expected vs Actual Results Comparison
+## 9. Conclusion
 
-| Test Scenario | Expected Result | Actual Result | Status |
-|---|---|---|---|
-| Empty event search | Display no matching events | Appropriate no-results indication appeared without errors | PASS |
-| Event selection | Open selected event details | Basic event details displayed correctly | PASS |
-| No-results error handling | Search should not fail | No error reported during the recorded test | PASS |
+My main documented Week 7 contribution was testing the empty-search/no-events case and recording its successful result in Issue #70. I also contributed the student search requirements in the closed Issue #13 and the organiser submission requirements in the still-open Issue #15. My October 8 Events → Event Details test in Issue #49 is earlier supporting evidence.
 
-**Note:** The Event Details result was recorded on October 8. The empty-search result is my primary Week 7 evidence.
-
-## 6. Limitations and Challenges
-
-The current Events section uses code-based sample event data.
-
-Although the empty-search and event-detail tests were successful, these results do not prove that Firebase Firestore event loading works correctly.
-
-The final timed team rehearsal and individual presentation responsibilities must also be confirmed separately.
-
-I documented only the functionality that was actually tested, without claiming unverified features.
-
-## 7. Lessons Learned
-
-Through this contribution, I learned:
-
-1. How to test application features from the user's perspective.
-2. Why both successful and empty search results should be tested.
-3. How to compare expected and actual results.
-4. How GitHub Issues help organize testing evidence.
-5. Why technical limitations must be explained accurately in project reports.
-
-## 8. Conclusion
-
-During Week 7, my main documented contribution to CampusVibes was testing and verifying the empty-search / no-events functionality.
-
-I confirmed that the application handled a search without matching events successfully and recorded the result in GitHub Issue #70.
-
-My earlier Event Details test in Issue #49 also provides supporting evidence for the project's main student journey.
-
-These contributions support the team's preparation for the midterm demonstration and help establish that the currently tested features behave as expected.
+For the midterm, I will report the tested **student search flow** and its limitations accurately. The full **organisation/event-submission workflow remains a post-midterm extension** and will not be represented as part of the completed frozen demo.
