@@ -14,7 +14,7 @@ Complete the section for your current sprint at its final class meeting. These a
 
 - [x] One small end-to-end user path works or its blocker is clearly documented.
 - [x] The path has a screenshot, demo, or test note.
-- [ ] The team can explain what happens when the main path cannot complete.
+- [x] The team can explain what happens when the main path cannot complete.
 - [x] The README or setup note tells another person how to view or run the current work.
 - [x] The team has checked that no secrets or private data are in its shared evidence.
 
