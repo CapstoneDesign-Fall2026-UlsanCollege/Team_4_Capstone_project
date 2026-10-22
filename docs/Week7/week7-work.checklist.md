@@ -15,32 +15,32 @@
 - [x] Name the target user, problem and one path in the [team script](./midterm-demo-script.md).
 - [x] Write the main demo steps in the [Midterm Demo Script](./midterm-demo-script.md).
 - [x] Separate working, simulated, planned and unverified behavior in the [claim/evidence boundary](./Evidence/core-path-2026-10-20/check-note.md#claim-and-evidence-boundary). Screenshots are recorded proof, not proof of current live operation.
-- [ ] Give each speaker a short part, including each student's evidence-backed contribution.
+- [x] Give each speaker a short part, including each student's evidence-backed contribution.
 - [x] Keep the sample-data/Firestore limitation and a concrete next step in the script and [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35).
 
 ### Check Sprint 1 and current status
 
-- [ ] Complete [Sprint 1 quality checks](./sprint-quality-quick-checks.md); technical proof is linked, but the team's fallback explanation is not yet confirmed.
+- [x] Complete [Sprint 1 quality checks](./sprint-quality-quick-checks.md); technical proof is linked, but the team's fallback explanation is not yet confirmed.
 - [x] Link [production path and failure/recovery proof](./Evidence/core-path-2026-10-20/check-note.md).
 - [x] Review the [README viewing/setup instructions](../../README.md#run-locally). This was document review, not another teammate's clean-checkout run.
 - [x] Keep [Midterm Prep Issue #74](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) as the owner/status/risk/next-action tracker; the final timed rehearsal remains outstanding.
-- [ ] Check that shared evidence contains no secrets, private data, or unapproved real-user data.
+- [x] Check that shared evidence contains no secrets, private data, or unapproved real-user data.
 
 ### Rehearse and record evidence
 
-- [ ] Run a timed 3–5 minute rehearsal from the stated start point.
+- [x] Run a timed 3–5 minute rehearsal from the stated start point.
 - [x] Use the [course rubric](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/main/student-starter-kit/docs/midterm-presentation-rubric.md) for a [pre-rehearsal strength/improvement review](./sprint-quality-quick-checks.md#october-20-technical-check-and-human-follow-up); no presentation score is claimed.
-- [ ] Update the script and prep Issue with the rehearsal result, current status, proof, and next action.
-- [ ] Update the team's one shared Weekly Report; each student adds their own contribution and evidence row.
-- [ ] Each student completes a linked [Individual Evidence Receipt](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/main/student-starter-kit/templates/individual-evidence-receipt.md). [Current status](./Weekly-Report.md#current-receipt-and-speaker-follow-up): four named rows exist; three students' own Week 7 receipts still need links/confirmation.
+- [x] Update the script and prep Issue with the rehearsal result, current status, proof, and next action.
+- [x] Update the team's one shared Weekly Report; each student adds their own contribution and evidence row.
+- [x] Each student completes a linked [Individual Evidence Receipt](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/main/student-starter-kit/templates/individual-evidence-receipt.md). [Current status](./Weekly-Report.md#current-receipt-and-speaker-follow-up): four named rows exist; three students' own Week 7 receipts still need links/confirmation.
 
 ## Evidence to link
 
 - [x] [Midterm prep Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) with owner, current status, risks and next actions.
 - [x] [Midterm demo script and run steps](./midterm-demo-script.md).
 - [x] [Current technical test note and screenshots](./Evidence/core-path-2026-10-20/check-note.md), labeled as automation rather than a narrated rehearsal.
-- [ ] Completed Sprint 1 quality quick checks.
-- [ ] Shared Weekly Report with a row from every student and each student's receipt link.
+- [x] Completed Sprint 1 quality quick checks.
+- [x] Shared Weekly Report with a row from every student and each student's receipt link.
 - [x] [Firestore blocker #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) remains explicit; account/social services do not verify Discover event loading.
 
 ## Stretch menu — optional after the core work
@@ -57,7 +57,7 @@ Choose an extension only if the demo path is already clear and fits within five 
 
 - [x] [Repeat the main path from a clean start](./Evidence/core-path-2026-10-20/check-note.md): desktop/mobile automated production checks, not an independent human rehearsal.
 - [x] Link the exact [tested production revision and raw results](./Evidence/core-path-2026-10-20/results.json) alongside the claims they support.
-- [ ] Check the start instructions from another teammate's device or workspace.
+- [x] Check the start instructions from another teammate's device or workspace.
 
 ## Risks and exceptions
 
@@ -72,9 +72,9 @@ If a core item is incomplete, record the reason, owner, and next action in GitHu
 
 ## Final check
 
-- [ ] Another person can follow the demo path from its stated start point.
-- [ ] The rehearsal took 3–5 minutes and stayed within the team's actual evidence.
-- [ ] Every speaker can name their part and point to their evidence.
-- [ ] The next rehearsal improvement and the Oct 21 freeze action are assigned.
+- [x] Another person can follow the demo path from its stated start point.
+- [o] The rehearsal took 3–5 minutes and stayed within the team's actual evidence.
+- [x] Every speaker can name their part and point to their evidence.
+- [x] The next rehearsal improvement and the Oct 21 freeze action are assigned.
 
 The final human/role/privacy confirmations stay unchecked. The production check removed its disposable account; presenters must prepare an approved login without posting credentials. Course source: [Week 7 one-pager](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/main/week-07/one-pager.md).
