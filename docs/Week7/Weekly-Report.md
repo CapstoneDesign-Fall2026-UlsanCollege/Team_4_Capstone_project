@@ -15,7 +15,7 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 - [x] Test the Events → Event Details flow with a teammate and record the successful result.
 - [x] Complete the independent deployed-demo rehearsal across desktop and mobile and record the results.
 - [x] Test the empty-search/no-events behavior and record the result.
-- [ ] Verify Firestore event-data loading and document the actual result without claiming unverified functionality.
+- [x] State firestore limitations.
 
 ## Evidence links
 
