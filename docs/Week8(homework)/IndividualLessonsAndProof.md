@@ -26,11 +26,30 @@
 
 ## 3. Ujjalpoudel75
 
-**Lesson:** [Write what you personally learned in Week 8.]
+**Lesson:** During Week 8, I learned the importance of preparing a clear project demonstration and supporting our work with actual testing evidence. Through the CampusVibes midterm preparation, I understood that testing should include not only successful searches but also cases where no matching events are found. I also learned how important it is to distinguish completed features from planned or unverified functionality. Our current Discover page uses sample event data, and Firestore event loading has not yet been verified.
 
-**My contributions:** [Describe your own work.]
+**My contributions:** I participated in the final CampusVibes midterm team rehearsal on October 22, 2026, where we reviewed the main application flow, presentation preparation, and individual contributions. My earlier work also supported the midterm preparation. I tested the empty-search/no-events behavior and documented the successful result with screenshot evidence in Issue #70. I previously defined the Search Events and Clubs requirements in Issue #13 and documented the Events Organisation Dashboard and Event Submission requirements in Issue #15. The full event-submission workflow remains a planned post-midterm extension.
 
-**Proof:** [Add at least one link to your own evidence.]
+**Proof:**
+
+Issue #74 — Final Midterm Team Rehearsal (Week 8):
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6330730005
+
+Issue #70 — Empty Search / No-Events Test:
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/70
+
+Issue #13 — Search Events and Clubs Requirements:
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/13
+
+Issue #15 — Events Organisation Dashboard and Event Submission Planning:
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/15
+
+Issue #49 — Events → Event Details Testing:
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49
+
+My Week 7 Individual Evidence Receipt:
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/evidence-receipt-ujjalpoudel.md
+
 
 ## 4. Prachi2061
 
