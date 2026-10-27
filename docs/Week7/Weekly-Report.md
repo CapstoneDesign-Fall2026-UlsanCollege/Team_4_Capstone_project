@@ -51,7 +51,7 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 | Document update | [Week 7 report](./Weekly-Report.md) · [Prachi's individual evidence receipt](./Evidence/evidence-receipt-prachi2061.md) · [DevyanaCT's individual evidence receipt](./Evidence/evidence-receipt-devyanact.md) | 
 | October 20 production core/fallback check | [Automated check note, timings and proof](./Evidence/core-path-2026-10-20/check-note.md) - not the narrated team rehearsal |
 
-The independent rehearsal in Issue #53 was recorded on October 13. It does not independently verify the extensions released on October 16-18. Their PRs contain separately labeled automated checks. A final timed team rehearsal is still pending in Issue #74; no new rehearsal is claimed by this documentation update.
+The independent rehearsal in Issue #53 was recorded on October 13. It does not independently verify the extensions released on October 16–18. Their PRs contain separately labeled automated checks. The final team rehearsal has been completed, and screenshots are attached to Issue #74 as supporting evidence. The elapsed time was not recorded, so no exact duration is claimed.
 
 ## References Links
 [Design-doc-v1](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/bc14dc96bbbb9555f246bb9a7f8f1e8a93f2d3ab/docs/Week2/design-doc.md)
@@ -102,3 +102,4 @@ All four report rows are populated, but only one dedicated Week 7 receipt is lin
 - **MVP/core-path action — Owner: Team 4.** Keep the frozen user journey as the MVP and address only critical demonstration issues. Record any changes and supporting evidence in Issue #74.
 - **Firestore verification — Owner: Tulseyy8848, pending team confirmation.** Verify Firestore access and event retrieval if access is available. Record the actual result and evidence in Issue #35. If verification is blocked, document the blocker and next step. Until verified, continue to describe the Events page as using code-based sample data.
 - Ensure every student has one contribution entry with at least one working evidence link.
+- **Final timed team rehearsal — Owner: Team 4.** Completed. Supporting screenshots are being added to [Issue #74 — Midterm Preparation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74). The exact duration and detailed results are not claimed unless separately recorded.
