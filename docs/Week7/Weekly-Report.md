@@ -17,6 +17,20 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 - [x] Test the empty-search/no-events behavior and record the result.
 - [x] State firestore limitations.
 
+## Lessons Learned
+
+### Course Lesson
+
+**Lesson:** We learned that testing and documenting actual results are important in software development. Implementing a feature does not automatically prove that it works; we need test evidence to support our claims.
+
+**Evidence:** [Issue #64 — Events → Event Details Retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) and [Issue #53 — Independent Deployed-Demo Rehearsal](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53).
+
+### Project Lesson
+
+**Lesson:** We learned that CampusVibes should prioritize a reliable core user journey before expanding supporting features. We must also distinguish code-based sample event data from verified Firestore event loading. The current Events page uses code-based sample data, and Firestore event loading remains unverified.
+
+**Evidence:** [Issue #64 — Events → Event Details Retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) and [Issue #35 — Firestore Limitation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35).
+
 ## Evidence links
 
 | Evidence | Link |
@@ -78,13 +92,13 @@ All four report rows are populated, but only one dedicated Week 7 receipt is lin
 |---|---|---|---|
 | Keep the Firestore limitation explicit in the presentation and report. | The Events page currently uses code-based sample data. Firestore event loading has not been verified, so we must not claim that event data is loaded from Firestore. | prachi2061 | [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) |
 | Freeze the main midterm demo scope around the tested user journey. | Focusing on the core journey makes the demonstration clear, manageable, and supported by existing test evidence. | Team 4 | [Midterm preparation issue #74](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) |
+| MVP decision | Keep the MVP focused on the tested core user journey: Landing Page → Login → Dashboard → Discover/Events → Search/Filters → Event Details. Supporting features remain secondary until the core path and data boundary are settled. | Team 4 | [Issue #74 — Midterm Preparation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) · [Issue #35 — Firestore Limitation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) |
 | Treat Saved Events, Profile, Assistant, Suggestions, social features, badges/photos, and the light/dark theme toggle as supporting features outside the frozen timed path. | Mention extensions after the core flow using their own release evidence; do not treat the October 13 rehearsal as verification of later releases. No new features are required for the midterm. | Team 4 | [Midterm scope - Issue #74](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) · [Extension receipts](./Evidence/evidence-receipt-prachi2061.md) · [Theme-toggle evidence](./Evidence/theme-toggle.md) |
 
 **Frozen timed path:** Landing page → email/password login → dashboard → Discover/Events → search/filter → select an event → Event Details. State that the event catalog is code-based sample data; real account, social, or AI services do not resolve Issue #35.
 
 ## Next week's bridge task
 
-- Rehearse the frozen path above and record the actual date, named tester, browser/device and desktop/mobile view, elapsed time, expected/actual result, evidence, remaining limitation, and next action in Issue #74. Until then, the final timed rehearsal remains pending.
-- Verify Firestore event loading if access is available; otherwise, retain the documented limitation.
+- **MVP/core-path action — Owner: Team 4.** Keep the frozen user journey as the MVP and address only critical demonstration issues. Record any changes and supporting evidence in Issue #74.
+- **Firestore verification — Owner: Tulseyy8848, pending team confirmation.** Verify Firestore access and event retrieval if access is available. Record the actual result and evidence in Issue #35. If verification is blocked, document the blocker and next step. Until verified, continue to describe the Events page as using code-based sample data.
 - Ensure every student has one contribution entry with at least one working evidence link.
-- Fix only critical demonstration issues and prepare a clear explanation of what works now versus what remains unfinished.
