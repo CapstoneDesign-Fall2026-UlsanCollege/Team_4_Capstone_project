@@ -86,21 +86,6 @@ Each student must review their own row, confirm that it accurately describes the
 | Ujjalpoudel75 | Add a sentence describing your own work completed this week. Earlier evidence includes testing empty-search/no-events behavior; link evidence for any new work. | [ |
 | Prachi2061 | Add a sentence describing your own work completed this week and link the relevant implementation, test, or documentation evidence. | |
 
-### Week 8 Lesson and Proof 
-
-### DevyanaCT
-
-**Lesson:** During Week 8, I learned how important clear documentation and testing evidence are when presenting a software project. I learned to explain our application's main user journey, identify my individual contributions, and describe current limitations honestly instead of claiming that unverified features are complete.
-
-**My work:** I contributed to the CampusVibes presentation and rehearsal preparation, updated project documentation, independently tested the Events → Event Details flow, and implemented the light/dark theme toggle.
-
-**Proof:**
-- [Issue #64 — Events → Event Details retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)
-- [Issue #74 — Final midterm rehearsal and documentation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74)
-- [Theme toggle commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) [Theme-toggle evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md) 
-- **My documentation:** [Week 8 Weekly Report](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/86caec9f5f3adb1908efc11a7e915a953a402d8e/docs/Week8(homework)/Weekly-Report.md)
-- **Final rehearsal documentation and screenshots:** [Issue #74 — Midterm Preparation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) [evidence comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6433579630)
-
 ## Blockers or risks
 
 | Blocker/risk | Owner | Next action |
