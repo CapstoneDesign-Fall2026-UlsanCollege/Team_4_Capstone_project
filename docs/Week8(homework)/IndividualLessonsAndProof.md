@@ -15,13 +15,14 @@
 
 ## 2. Tulseyy8848
 
-**Lesson:** In Week 8, I learned how to independently test a deployed web application as a non-UI-author, verify the main user journey, and document test results and findings. I also learned the importance of checking functionality across desktop and mobile devices.
+**Lesson:** In Week 8, I learned how to independently test a deployed web application as a non-UI-author, verify the main user journey, and document test results and findings. I also learned the importance of testing functionality across desktop and mobile devices and documenting midterm preparation progress, responsibilities, and remaining tasks.
 
-**My contributions:** I independently tested the deployed CampusVibes demo as a non-UI-author. I verified the demo student flow, Discover event search and filtering, saving events, the Saved page, Profile, and Assistant suggestions. I recorded test results and reported findings related to desktop and mobile testing.
+**My contributions:** I independently tested the deployed CampusVibes demo as a non-UI-author. I verified the demo student flow, Discover event search and filtering, saving events, the Saved page, Profile, and Assistant suggestions. I recorded test results and reported findings related to desktop and mobile testing. I also helped document the team's midterm preparation in GitHub issues, including testing progress, final rehearsal requirements, team responsibilities, and the Firestore limitation.
 
 **Proof:**
 - [Issue #53 – Independent Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53)
 - [Issue #49 – Testing Evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
+- [Issue #74 – Midterm Preparation, Final Rehearsal, and Firestore Limitation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74)
 
 ## 3. Ujjalpoudel75
 
