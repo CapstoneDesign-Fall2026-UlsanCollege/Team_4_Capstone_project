@@ -80,11 +80,25 @@ Each student must review their own row, confirm that it accurately describes the
 
 | Student | What they did | Evidence link |
 |---|---|---|
-| DevyanaCT | Independently tested and retested the Events → Event Details flow and recorded the test results. Added a light/dark theme toggle. Verified the deployed CampusVibes demo across desktop and mobile and contributed testing evidence for midterm preparation, and prepared and updated project documentation, including the weekly report and rehearsal evidence record | [Issue #64 — Events → Event Details retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) · [Issue #63 — Independent demo retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63) · [Theme-toggle code change](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) · [Theme-toggle evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md) [Commit](929aa364d0579650c69812fb65dcdb10fa785716) [commit2](39373a3946a3698b0298581875354034bbcc79b3) [Issue #74 – Midterm Preparation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74)|
+| DevyanaCT | Independently tested and retested the Events → Event Details flow and recorded the test results. Added a light/dark theme toggle. Verified the deployed CampusVibes demo across desktop and mobile and contributed testing evidence for midterm preparation, and prepared and updated project documentation, including the weekly report and rehearsal evidence record | [Issue #64 — Events → Event Details retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)  [Issue #63 — Independent demo retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/63)  [Theme-toggle code change](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094)  [Theme-toggle evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md) [Commit](929aa364d0579650c69812fb65dcdb10fa785716) [commit2](39373a3946a3698b0298581875354034bbcc79b3) [Issue #74 – Midterm Preparation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74)|
 | Tulseyy8848 | Add a sentence describing your own work completed this week and link evidence for that work. | |
 | Ujjalpoudel75 | Add a sentence describing your own work completed this week. Earlier evidence includes testing empty-search/no-events behavior; link evidence for any new work. | [ |
 | Prachi2061 | Add a sentence describing your own work completed this week and link the relevant implementation, test, or documentation evidence. | |
 
+### Week 8 Lesson and Proof 
+
+### DevyanaCT
+
+**Lesson:** During Week 8, I learned how important clear documentation and testing evidence are when presenting a software project. I learned to explain our application's main user journey, identify my individual contributions, and describe current limitations honestly instead of claiming that unverified features are complete.
+
+**My work:** I contributed to the CampusVibes presentation and rehearsal preparation, updated project documentation, independently tested the Events → Event Details flow, and implemented the light/dark theme toggle.
+
+**Proof:**
+- [Issue #64 — Events → Event Details retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)
+- [Issue #74 — Final midterm rehearsal and documentation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74)
+- [Theme toggle commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) [Theme-toggle evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md) 
+- **My documentation:** [Week 8 Weekly Report]()
+- **Final rehearsal documentation and screenshots:** [Issue #74 — Midterm Preparation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) [evidence comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6433579630)
 
 ## Blockers or risks
 
