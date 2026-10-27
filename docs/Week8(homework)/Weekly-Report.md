@@ -34,6 +34,7 @@ If it is not linked, it does not count.
 | Pull requests and implementation checks | [PR #75](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/75) and [PR #77](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/77) |
 | Course lesson / class evidence | Add the relevant course note, class screenshot, or source link before submission. |
 | Test/check note | [Issue #64 – Event Details retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
+| Individual Week 8 lessons and proof | [Individual Lessons and Proof](IndividualLessonsAndProof.md) |
 
 **Reference:** [Weekly-report-week7](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/929aa364d0579650c69812fb65dcdb10fa785716/docs/Week7/Weekly-Report.md)
 
@@ -97,7 +98,7 @@ Each student must review their own row, confirm that it accurately describes the
 - [Issue #64 — Events → Event Details retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64)
 - [Issue #74 — Final midterm rehearsal and documentation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74)
 - [Theme toggle commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) [Theme-toggle evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md) 
-- **My documentation:** [Week 8 Weekly Report]()
+- **My documentation:** [Week 8 Weekly Report](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/86caec9f5f3adb1908efc11a7e915a953a402d8e/docs/Week8(homework)/Weekly-Report.md)
 - **Final rehearsal documentation and screenshots:** [Issue #74 — Midterm Preparation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) [evidence comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6433579630)
 
 ## Blockers or risks
