@@ -15,11 +15,13 @@
 
 ## 2. Tulseyy8848
 
-**Lesson:** [Write what you personally learned in Week 8.]
+**Lesson:** In Week 8, I learned how to independently test a deployed web application as a non-UI-author, verify the main user journey, and document test results and findings. I also learned the importance of checking functionality across desktop and mobile devices.
 
-**My contributions:** [Describe your own work.]
+**My contributions:** I independently tested the deployed CampusVibes demo as a non-UI-author. I verified the demo student flow, Discover event search and filtering, saving events, the Saved page, Profile, and Assistant suggestions. I recorded test results and reported findings related to desktop and mobile testing.
 
-**Proof:** [Add at least one link to your own evidence.]
+**Proof:**
+- [Issue #53 – Independent Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53)
+- [Issue #49 – Testing Evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/49)
 
 ## 3. Ujjalpoudel75
 
