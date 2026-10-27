@@ -15,7 +15,7 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 - [x] Test the Events → Event Details flow with a teammate and record the successful result.
 - [x] Complete the independent deployed-demo rehearsal across desktop and mobile and record the results.
 - [x] Test the empty-search/no-events behavior and record the result.
-- [x] State firestore limitations.
+- [x] Document firestore limitations.
 
 ## Lessons Learned
 
@@ -48,7 +48,7 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 | Sprint1 Quality check | [sprint-quality-quick-check](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5672689bb30aa48d1cd88c0c269d0640bf592145/docs/Week7/sprint-quality-quick-checks.md) |
 | Work Checklist | [Week7 Work Checklist](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/5672689bb30aa48d1cd88c0c269d0640bf592145/docs/Week7/week7-work.checklist.md) |
 | Midterm demo preparation | [Preparation issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74) |
-| Document update | [Week 7 report](./Weekly-Report.md) · [Prachi's individual evidence receipt](./Evidence/evidence-receipt-prachi2061.md) · [DevyanaCT's individual evidence receipt](./Evidence/evidence-receipt-devyanact.md) | |
+| Document update | [Week 7 report](./Weekly-Report.md) · [Prachi's individual evidence receipt](./Evidence/evidence-receipt-prachi2061.md) · [DevyanaCT's individual evidence receipt](./Evidence/evidence-receipt-devyanact.md) | 
 | October 20 production core/fallback check | [Automated check note, timings and proof](./Evidence/core-path-2026-10-20/check-note.md) - not the narrated team rehearsal |
 
 The independent rehearsal in Issue #53 was recorded on October 13. It does not independently verify the extensions released on October 16-18. Their PRs contain separately labeled automated checks. A final timed team rehearsal is still pending in Issue #74; no new rehearsal is claimed by this documentation update.
