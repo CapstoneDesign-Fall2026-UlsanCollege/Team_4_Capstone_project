@@ -32,7 +32,7 @@ If it is not linked, it does not count.
 | Deployed application | [CampusVibes website](https://campusvibe-theta.vercel.app/) |
 | Theme toggle implementation | [Theme toggle commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) |
 | Pull requests and implementation checks | [PR #75](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/75) and [PR #77](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/77) |
-| Course lesson / class evidence | Add the relevant course note, class screenshot, or source link before submission. |
+| Course lesson / class evidence | [Week 8 course guidance](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/main/student-week-one-pagers/week-08-2026-10-22-midterm-presentations.md)|
 | Test/check note | [Issue #64 – Event Details retest](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
 | Individual Week 8 lessons and proof | [Individual Lessons and Proof](IndividualLessonsAndProof.md) |
 
