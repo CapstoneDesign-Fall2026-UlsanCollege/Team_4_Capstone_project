@@ -49,9 +49,9 @@ Choose an extension only if the demo path is already clear and fits within five 
 
 ### Stronger presentation
 
-- [ ] Ask a person outside the build discussion to follow the run steps without coaching.
-- [ ] Rehearse a recovery or fallback if the live environment fails.
-- [ ] Make one simple slide that shows the user, problem, and scope boundary.
+- [x] Ask a person outside the build discussion to follow the run steps without coaching.
+- [x] Rehearse a recovery or fallback if the live environment fails.
+- [x] Make one simple slide that shows the user, problem, and scope boundary.
 
 ### Stronger evidence
 
