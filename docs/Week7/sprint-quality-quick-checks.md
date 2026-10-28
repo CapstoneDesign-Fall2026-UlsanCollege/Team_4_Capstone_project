@@ -14,7 +14,7 @@ Complete the section for your current sprint at its final class meeting. These a
 
 - [x] One small end-to-end user path works or its blocker is clearly documented.
 - [x] The path has a screenshot, demo, or test note.
-- [x] The team can explain what happens when the main path cannot complete.
+- [ ] The team can explain what happens when the main path cannot complete; record the detailed human explanation/result in the replacement rehearsal, rather than inferring it from automation.
 - [x] The README or setup note tells another person how to view or run the current work.
 - [x] The team has checked that no secrets or private data are in its shared evidence.
 
@@ -22,7 +22,7 @@ Complete the section for your current sprint at its final class meeting. These a
 
 The [production core/fallback record](./Evidence/core-path-2026-10-20/check-note.md) verifies email/password login, Dashboard -> Discover -> search/filter -> Event Details from clean desktop/mobile browser contexts. It also records empty-search recovery and an injected sign-in network failure followed by a real successful retry. Exact revision, browser/viewports, expected/actual results, timings and screenshots are linked there.
 
-These are Codex-assisted automated checks for `prachi2061`, not independent teammate testing or the 3-5 minute presentation. The unchecked team-explanation item above stays pending until the speakers actually explain the fallback. The [demo script](./midterm-demo-script.md#failure-and-fallback) now states it explicitly. Existing historical checkmarks do not certify new human activity or a fresh clean-checkout run.
+These are Codex-assisted automated checks for `prachi2061`, not independent teammate testing or the 3-5 minute presentation. The [demo script](./midterm-demo-script.md#failure-and-fallback) states the fallback. **October 28 review:** the [October 22 team record](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6330730005) reports a completed rehearsal, but its detailed outcome and duration were not recorded. The team-explanation item above remains unverified, not a claim that nobody explained it. Record the measured replacement and actual human result. Existing historical checkmarks do not certify new human activity or a fresh clean-checkout run.
 
 The new proof uses only a synthetic account, masks login inputs, and records deletion of the account and its test records. Each member must still review their own shared material before the final presentation. Discover remains code-based sample data; Firestore event loading is unverified in [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35).
 

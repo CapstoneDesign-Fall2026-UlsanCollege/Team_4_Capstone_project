@@ -53,8 +53,18 @@ https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/
 
 ## 4. Prachi2061
 
-**Lesson:** [Write what you personally learned in Week 8.]
+**Canonical login:** `prachi2061`. **Reflection recorded:** 2026-10-28 (Asia/Seoul), with Codex assistance for the documentation audit and drafting. This follow-up uses dated evidence; it is not a new application test.
 
-**My contributions:** [Describe your own work.]
+**Course lesson:** A contribution or demo claim needs evidence that matches exactly what was checked. A screenshot can support the reported rehearsal, but it cannot supply an unrecorded duration or detailed outcome. A working implementation, a technical test and an independent teammate result are different kinds of evidence. This follows the [Week 8 course guidance](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/main/student-week-one-pagers/week-08-2026-10-22-midterm-presentations.md), which asks us to explain the current project and contributions using linked GitHub evidence.
 
-**Proof:** [Add at least one link to your own evidence.]
+**Course-lesson proof:** DevyanaCT's [October 22 rehearsal record](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6330730005) names all four participants, including me, but now explicitly says the duration and detailed outcome were not recorded. The [October 27 screenshot comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6433579630) supplies supporting images without filling those gaps. I will not claim a timed result from them.
+
+**Project lesson:** More features do not settle the core event-data risk. I implemented navigation, image consistency and supporting account/social/Assistant features, but Discover still receives code-based sample events. Real authentication or persistent account data does not demonstrate that event records came from Firestore. The useful priority is one reliable, explainable core path, not a wider feature tour.
+
+**Project-lesson proof:** My [Week 7 receipt and implementation links](../Week7/Evidence/evidence-receipt-prachi2061.md) retain the original work dates. The [October 20 production result](../Week7/Evidence/core-path-2026-10-20/check-note.md) is my Codex-assisted technical evidence, not independent human testing. The [October 28 source/evidence audit](./Evidence/feedback-audit-2026-10-28.md#current-data-boundary) traces the JSON event catalog; [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) remains open for live Event retrieval.
+
+**My contributions in this follow-up:** Reviewed the current feedback against the repository and Issue #74, identified what teammates had already completed, documented the remaining measured-rehearsal gap, completed my course/project reflection and linked the exact evidence. Earlier feature implementation and October 20 tests are background, not newly claimed Week 8 code or October 28 testing. The October 22 participation is credited to the teammate-authored rehearsal record, not presented as my own independent test.
+
+**MVP decision:** GAP remains for Firestore event loading; the sample-data core has existing technical proof, not verified live campus data. Keep Landing -> Login -> Dashboard -> Discover/Events -> Search/Filters -> Event Details as the core. Assistant, social/Messages, Profile, Suggestions, badges, photos and theme behavior stay outside it unless separately agreed and verified.
+
+**My Week 9 action:** Lead the source/acceptance-evidence handoff for existing Issue #35 and coordinate the missing timed-result follow-up in Issue #74. Preserve the issue's existing data owner, confirm responsibilities with the team and record a real pass/fail/blocker result only after an actual test. Do not expand the scope to replace that evidence.
