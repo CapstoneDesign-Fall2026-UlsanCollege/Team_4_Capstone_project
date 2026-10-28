@@ -73,7 +73,7 @@ If a core item is incomplete, record the reason, owner, and next action in GitHu
 ## Final check
 
 - [x] Another person can follow the demo path from its stated start point.
-- [o] The rehearsal took 3–5 minutes and stayed within the team's actual evidence.
+- [x] The rehearsal took 3–5 minutes and stayed within the team's actual evidence.
 - [x] Every speaker can name their part and point to their evidence.
 - [x] The next rehearsal improvement and the Oct 21 freeze action are assigned.
 
