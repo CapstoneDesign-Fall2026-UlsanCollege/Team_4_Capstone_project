@@ -68,3 +68,5 @@ https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/
 **MVP decision:** GAP remains for Firestore event loading; the sample-data core has existing technical proof, not verified live campus data. Keep Landing -> Login -> Dashboard -> Discover/Events -> Search/Filters -> Event Details as the core. Assistant, social/Messages, Profile, Suggestions, badges, photos and theme behavior stay outside it unless separately agreed and verified.
 
 **My Week 9 action:** Lead the source/acceptance-evidence handoff for existing Issue #35 and coordinate the missing timed-result follow-up in Issue #74. Preserve the issue's existing data owner, confirm responsibilities with the team and record a real pass/fail/blocker result only after an actual test. Do not expand the scope to replace that evidence.
+
+**class evidence:** | [Week 8 course guidance](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/main/student-week-one-pagers/week-08-2026-10-22-midterm-presentations.md)
