@@ -99,7 +99,6 @@ Each student must review their own row, confirm that it accurately describes the
 |---|---|---|
 | Firestore event loading has not been tested yet. | Issue #35 currently names Tulsey8848 (`tulseyy8848`); confirm implementation owner with Team 4. `prachi2061` owns the source/acceptance-evidence handoff. | Follow the [proposed retrieval check](./week9-handoff.md#proposed-firestore-acceptance-check), then record a real pass/fail/blocker result in Issue #35. No test is claimed here. |
 | The exact rehearsal duration and detailed outcome were not recorded. | Team 4; `prachi2061` coordinates the missing-result follow-up. | Arrange a short measured replacement, name the actual tester/speakers, and post device/view, duration, expected/actual outcome, issues, proof and next action in Issue #74. Existing screenshots do not recover the missing values. |
-| Individual contribution evidence may be incomplete. | Each student | Confirm your own contribution row and provide at least one relevant evidence link. |
 | Scope growth could hide the unresolved core/data decision. | Team 4 | Use the linked Week 9 course guidance to agree the finish/cut list before expanding features. Keep the MVP GAP and sample-data labels until evidence or an explicit revised contract changes the assessment. |
 
 ## Decision record
