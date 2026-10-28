@@ -68,7 +68,8 @@
 - **Firestore Limitation:** [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35)
 - **Theme Toggle:** [Theme-toggle code commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094) · [Theme toggle evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md)
 - **Weekly Report and Individual Receipts:** [Week 7 report](./Weekly-Report.md) · [Prachi's receipt](./Evidence/evidence-receipt-prachi2061.md) · [DevyanaCT's receipt](./Evidence/evidence-receipt-devyanact.md) · [ujjalpoudel75's receipt](./Evidence/evidence-receipt-ujjalpoudel.md) · [tulseyy8848's receipt](./Evidence/evidence-recepit-tulasha.md)
-- **Current Core/Fallback Proof:** [October 20 automated production run](./Evidence/core-path-2026-10-20/check-note.md), separate from the pending narrated rehearsal.
+- **Current Core/Fallback Proof:** [October 20 automated production run](./Evidence/core-path-2026-10-20/check-note.md), separate from the reported October 22 rehearsal and its unrecorded duration/outcome.
+- **Team Rehearsal:** [October 22 participant/result record](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6330730005) and [October 27 supporting screenshots](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6433579630). A measured replacement is still needed; do not infer timing from the screenshots.
 - **Repository Commits:** [View commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main/)
 
 ## Contribution Summary
@@ -82,7 +83,7 @@
 
 ## Next Steps After Midterm
 
-**Before presenting:** Issue #74 still needs the final 3-5 minute team rehearsal. Record the real tester, date, browser/device and desktop/mobile view, elapsed time, expected/actual result, screenshots or result link, remaining Firestore limitation, and next action. This script update is not a completed timed rehearsal or a confirmed speaking-role assignment.
+**October 28 evidence handoff:** Issue #74 reports the team rehearsed on October 22, and supporting screenshots are now linked. Actual duration and detailed outcome were not recorded. Arrange a short measured replacement and record its real tester/speakers, date/time, browser/device and view, elapsed time, expected/actual outcome, issues, proof, limitation and next action. This script update is not that run. [Prachi's Week 9 handoff](../Week8%28homework%29/week9-handoff.md) keeps the Firestore boundary and extension cut list explicit.
 
 - Verify Firestore access and event-data loading, then record the actual test results in the relevant issue.
 - Keep the main demonstration scope focused on the tested user journey.
