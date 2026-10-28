@@ -51,7 +51,9 @@ Improve CampusVibes' readiness for the midterm demonstration by verifying the cu
 | Document update | [Week 7 report](./Weekly-Report.md) · [Prachi's individual evidence receipt](./Evidence/evidence-receipt-prachi2061.md) · [DevyanaCT's individual evidence receipt](./Evidence/evidence-receipt-devyanact.md) | 
 | October 20 production core/fallback check | [Automated check note, timings and proof](./Evidence/core-path-2026-10-20/check-note.md) - not the narrated team rehearsal |
 
-The independent rehearsal in Issue #53 was recorded on October 13. It does not independently verify the extensions released on October 16–18. Their PRs contain separately labeled automated checks. The final team rehearsal has been completed, and screenshots are attached to Issue #74 as supporting evidence. The elapsed time was not recorded, so no exact duration is claimed.
+- **Team Rehearsal:** [October 22 participant/result record](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6330730005) and [October 27 supporting screenshots](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/74#issuecomment-6433579630). A measured replacement is still needed; do not infer timing from the screenshots.
+
+The independent demo rehearsal in Issue #53 was recorded on October 13. It does not independently verify the extensions released on October 16–18. Their PRs contain separately labeled automated checks. The final team rehearsal has been completed, and screenshots are attached to Issue #74 as supporting evidence. The elapsed time was not recorded, so no exact duration is claimed.
 
 ## References Links
 [Design-doc-v1](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/bc14dc96bbbb9555f246bb9a7f8f1e8a93f2d3ab/docs/Week2/design-doc.md)
