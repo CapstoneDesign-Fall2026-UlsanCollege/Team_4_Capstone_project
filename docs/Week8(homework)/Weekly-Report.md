@@ -16,7 +16,7 @@ Our team completed the final midterm rehearsal on October 22, 2026, and attached
 - [x] Attach the available rehearsal screenshots to Issue #74.
 - [x] Review existing testing evidence for event details, independent demo testing, and empty-search behavior.
 - [x] Document the current Firestore limitation accurately.
-- [ ] Ensure every enrolled student has confirmed their own contribution and evidence link.
+- [x] Ensure every enrolled student has confirmed their own contribution and evidence link.
 
 ## Evidence links
 
