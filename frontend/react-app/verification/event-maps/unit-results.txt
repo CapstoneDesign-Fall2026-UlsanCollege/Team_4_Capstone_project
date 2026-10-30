@@ -1,0 +1,55 @@
+TAP version 13
+# Subtest: every current event has a venue-specific map search without a guessed pin
+ok 1 - every current event has a venue-specific map search without a guessed pin
+  ---
+  duration_ms: 3.9621
+  ...
+# Subtest: an organizer address provides a precise query and directions without asking for GPS
+ok 2 - an organizer address provides a precise query and directions without asking for GPS
+  ---
+  duration_ms: 0.3441
+  ...
+# Subtest: a valid organizer pin takes precedence over a venue name or address
+ok 3 - a valid organizer pin takes precedence over a venue name or address
+  ---
+  duration_ms: 0.2421
+  ...
+# Subtest: zero coordinates and coordinate boundaries are valid
+ok 4 - zero coordinates and coordinate boundaries are valid
+  ---
+  duration_ms: 0.4808
+  ...
+# Subtest: invalid, partial and string coordinates never become an invented pin
+ok 5 - invalid, partial and string coordinates never become an invented pin
+  ---
+  duration_ms: 0.4093
+  ...
+# Subtest: invalid coordinates can still use an explicitly supplied address
+ok 6 - invalid coordinates can still use an explicitly supplied address
+  ---
+  duration_ms: 0.1864
+  ...
+# Subtest: missing and whitespace-only venues have an unavailable state
+ok 7 - missing and whitespace-only venues have an unavailable state
+  ---
+  duration_ms: 0.1561
+  ...
+# Subtest: query punctuation, Unicode and HTML cannot change the URL origin or parameters
+ok 8 - query punctuation, Unicode and HTML cannot change the URL origin or parameters
+  ---
+  duration_ms: 1.1838
+  ...
+# Subtest: URL length limits fail safely instead of silently truncating an address
+ok 9 - URL length limits fail safely instead of silently truncating an address
+  ---
+  duration_ms: 1.5143
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 145.588
