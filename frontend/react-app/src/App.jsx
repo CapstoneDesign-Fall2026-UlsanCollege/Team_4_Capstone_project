@@ -63,6 +63,7 @@ import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
 import ThemeToggle from "./ThemeToggle";
 import eventCatalog from "../../events.json";
+import { getEventMapLinks } from './event-maps';
 const Feed = lazy(() => import("./FeedEntry"));
 const Suggestions = lazy(() => import("./Suggestions"));
 const Assistant = lazy(() => import("./Assistant"));
@@ -96,6 +97,7 @@ export default function App() {
 
   useEffect(() => {
     const demoBadges=createBadgeTracker();
+    window.campusEventMapLinks = getEventMapLinks;
     let activeAccount=null,unsubscribeAccount=null,accountBadges=null;
     window.campusBadgeProgress = (user,points) => {
       if (!user || user.id === 'demo') return demoBadges(user,points);
@@ -225,6 +227,7 @@ export default function App() {
       delete window.campusAssistant;
       delete window.campusProfile;
       delete window.campusBadgeProgress;
+      delete window.campusEventMapLinks;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
       window.campusNavigationCleanup?.();
