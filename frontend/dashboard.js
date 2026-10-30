@@ -16,6 +16,50 @@ function dashboardText(value){
   return element.innerHTML;
 }
 
+function eventMapLinkMarkup(event){
+  const map = window.campusEventMapLinks?.(event);
+  if (!map) return dashboardText(event.location || "Location to be confirmed");
+  const link = document.createElement("a");
+  link.className = "event-map-inline";
+  link.href = map.search;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = map.venue;
+  link.title = `Search ${map.venue} on Google Maps (opens in a new tab)`;
+  link.setAttribute("aria-label", link.title);
+  return link.outerHTML;
+}
+
+function eventLocationMarkup(event){
+  const map = window.campusEventMapLinks?.(event);
+  const section = document.createElement("section");
+  section.className = "event-location";
+  section.setAttribute("aria-label", "Event location");
+  section.innerHTML = '<h3><i data-lucide="map-pin" aria-hidden="true"></i>Location</h3><p class="event-location-venue"></p><p class="event-location-status"></p><div class="event-location-actions"></div>';
+  section.querySelector(".event-location-venue").textContent = map?.venue || event.location || "Location to be confirmed";
+  section.querySelector(".event-location-status").textContent = map?.status || "Map location not available";
+  if (map?.address && map.address !== map.venue) {
+    const address = document.createElement("p");
+    address.className = "event-location-address";
+    address.textContent = map.address;
+    section.querySelector(".event-location-status").before(address);
+  }
+  for (const [href, label, icon] of [[map?.search, "Open map", "map-pin"], [map?.directions, "Directions", "compass"]]) {
+    if (!href) continue;
+    const link = document.createElement("a");
+    link.className = "event-location-action";
+    link.href = href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.innerHTML = `<i data-lucide="${icon}" aria-hidden="true"></i>`;
+    link.append(document.createTextNode(label));
+    link.setAttribute("aria-label", `${label === "Directions" ? "Get directions to" : "Search"} ${map.venue} on Google Maps (opens in a new tab)`);
+    link.title = link.getAttribute("aria-label");
+    section.querySelector(".event-location-actions").append(link);
+  }
+  return section.outerHTML;
+}
+
 function recordDashboardActivity(type, title){
   const data = structuredClone(readDashboardData());
   data.activity.unshift({type, title, at: new Date().toISOString()});
@@ -153,7 +197,7 @@ function openDashboardEvent(id){
   const event = EVENTS.find(item => item.id === id);
   if (!event) return;
   const saved = getSaved().includes(id);
-  showDashboardDialog(event.title, `<img class="dashboard-detail-image" src="${dashboardPhoto(event)}" alt=""><span class="recommendation-tag">${event.interest}</span><p class="dashboard-detail-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", {weekday:"long",month:"long",day:"numeric"})} · ${event.time}</p><p>${event.location}</p><p class="dashboard-detail-description">${event.desc}</p><p class="dashboard-detail-host">Hosted by ${event.host}</p><button class="btn btn-primary" data-save="${id}" aria-pressed="${saved}"><i data-lucide="bookmark" aria-hidden="true"></i>${saved ? "Remove from saved" : "Save event"}</button>`, String(id));
+  showDashboardDialog(event.title, `<img class="dashboard-detail-image" src="${dashboardPhoto(event)}" alt=""><span class="recommendation-tag">${event.interest}</span><p class="dashboard-detail-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", {weekday:"long",month:"long",day:"numeric"})} · ${event.time}</p>${eventLocationMarkup(event)}<p class="dashboard-detail-description">${event.desc}</p><p class="dashboard-detail-host">Hosted by ${event.host}</p><button class="btn btn-primary" data-save="${id}" aria-pressed="${saved}"><i data-lucide="bookmark" aria-hidden="true"></i>${saved ? "Remove from saved" : "Save event"}</button>`, String(id));
 }
 
 function setupDashboard(){

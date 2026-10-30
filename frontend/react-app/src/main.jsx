@@ -5,6 +5,7 @@ import { applyTheme, readStoredTheme } from "./theme";
 import "../../style.css";
 import "./auth.css";
 import "./discover.css";
+import "./event-maps.css";
 import "./theme.css";
 
 applyTheme(readStoredTheme());
