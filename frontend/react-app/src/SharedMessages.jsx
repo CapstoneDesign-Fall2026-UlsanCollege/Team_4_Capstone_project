@@ -87,23 +87,25 @@ function Conversation({ user, connection, profile, ready, draft, onDraft, onSent
   </section>;
 }
 
-export default function SharedMessages({ user, profiles, connections, query, ready, inbox, unread, drafts, onDraft, notification }) {
+export default function SharedMessages({ user, profiles, connections, query, ready, connectionsReady = ready, inbox, unread, drafts, onDraft, notification }) {
   const [selected, setSelected] = useState(null);
   useEffect(() => {
     if (notification?.userId === user.id && notification.item.kind === 'message') setSelected(notification.item.parentId);
   }, [notification?.requestId, user.id]);
   const friends = connections.filter(item => item.status === 'accepted');
   const active = friends.find(item => item.id === selected);
+  const unavailable = selected && !active;
+  const emptyText = unavailable ? connectionsReady ? 'This conversation is unavailable in your current connections.' : 'Loading conversation...' : friends.length ? 'Select a conversation' : 'No conversations yet';
   const list = friends.filter(item => {
     const profile = profiles.find(value => value.id === item.members.find(id => id !== user.id));
     return `${profile?.name || ''} ${profile?.college || ''} ${item.members.find(id => id !== user.id)}`.toLowerCase().includes(query.toLowerCase());
   }).sort((a, b) => (inbox[b.id]?.latest?.createdAt || 0) - (inbox[a.id]?.latest?.createdAt || 0));
-  return <div className={`feed-messenger ${active ? 'has-conversation' : ''}`}>
+  return <div className={`feed-messenger ${active || unavailable ? 'has-conversation' : ''}`}>
     <aside className="feed-message-inbox" aria-label="Conversations"><h2>Messages</h2>{list.map(item => {
       const peerId = item.members.find(id => id !== user.id);
       const profile = profiles.find(value => value.id === peerId);
       return <button type="button" key={item.id} className={active?.id === item.id ? 'active' : ''} aria-label={`Message ${memberLabel(profile?.name, peerId)}`} aria-current={active?.id === item.id ? 'page' : undefined} onClick={() => setSelected(item.id)}><Avatar name={profile?.name || 'Student'} memberId={peerId} small /><span><strong>{profile?.name || 'Student'}</strong><MemberId uid={peerId} /><small>{inbox[item.id]?.error ? 'Unavailable' : inbox[item.id]?.latest?.body || profile?.college || 'Start a conversation'}</small></span>{unread(item.id) && <span className="feed-unread-dot" aria-label="Unread messages" />}</button>;
-    })}{!list.length && <p className="feed-side-empty">{query ? 'No matching friends' : 'No accepted friends yet'}</p>}</aside>
-    {active ? <Conversation key={active.id} user={user} connection={active} profile={profiles.find(value => value.id === active.members.find(id => id !== user.id))} ready={ready} draft={drafts[active.id] || ''} onDraft={value => onDraft(active.id, value)} onSent={submitted => onDraft(active.id, '', submitted)} onBack={() => setSelected(null)} /> : <div className="feed-chat-empty"><MessageCircle size={32} /><p>{friends.length ? 'Select a conversation' : 'No conversations yet'}</p></div>}
+    })}{!list.length && <p className="feed-side-empty">{!connectionsReady ? 'Loading conversations...' : query ? 'No matching friends' : 'No accepted friends yet'}</p>}</aside>
+    {active ? <Conversation key={active.id} user={user} connection={active} profile={profiles.find(value => value.id === active.members.find(id => id !== user.id))} ready={ready} draft={drafts[active.id] || ''} onDraft={value => onDraft(active.id, value)} onSent={submitted => onDraft(active.id, '', submitted)} onBack={() => setSelected(null)} /> : <div className="feed-chat-empty" role={unavailable ? 'status' : undefined}><MessageCircle size={32} /><p>{emptyText}</p>{unavailable && <button type="button" className="feed-quiet-button" onClick={() => setSelected(null)}>Back to conversations</button>}</div>}
   </div>;
 }
