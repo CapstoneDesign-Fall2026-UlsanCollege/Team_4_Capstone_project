@@ -64,6 +64,7 @@ import discoverScript from "../../discover.js?raw";
 import ThemeToggle from "./ThemeToggle";
 import eventCatalog from "../../events.json";
 import { getEventMapLinks } from './event-maps';
+import { createEventJourneyController } from './event-journey';
 import Notifications from './Notifications';
 const Feed = lazy(() => import("./FeedEntry"));
 const Suggestions = lazy(() => import("./Suggestions"));
@@ -101,6 +102,9 @@ export default function App() {
   useEffect(() => {
     const demoBadges=createBadgeTracker();
     window.campusEventMapLinks = getEventMapLinks;
+    const eventJourney = createEventJourneyController();
+    window.campusEventJourney = eventJourney;
+    let journeyUserId = null;
     let activeAccount=null,unsubscribeAccount=null,accountBadges=null;
     window.campusBadgeProgress = (user,points) => {
       if (!user || user.id === 'demo') return demoBadges(user,points);
@@ -129,6 +133,8 @@ export default function App() {
       .querySelectorAll("script")
       .forEach((script) => script.remove());
     mountRef.current.innerHTML = parsedMarkup.body.innerHTML;
+    const journeyDialog = mountRef.current.querySelector('#dashboardDialog');
+    journeyDialog.addEventListener('close', eventJourney.clear);
     setFeedTarget(mountRef.current.querySelector("#feedMount"));
     setSuggestTarget(mountRef.current.querySelector("#suggestMount"));
     setAssistantTarget(mountRef.current.querySelector("#assistantMount"));
@@ -137,6 +143,7 @@ export default function App() {
     setSyncTarget(mountRef.current.querySelector('#accountSyncMount'));
     const receiveSession = event => {
       const user=event.detail;
+      if (journeyUserId !== user?.id) { eventJourney.clear(); journeyUserId = user?.id; }
       setNotificationRequest(current => current?.userId === user?.id ? current : null);
       if (activeAccount?.user.id !== user?.id) {
         unsubscribeAccount?.();activeAccount?.close();activeAccount=null;accountBadges=null;
@@ -233,6 +240,9 @@ export default function App() {
       delete window.campusProfile;
       delete window.campusBadgeProgress;
       delete window.campusEventMapLinks;
+      journeyDialog.removeEventListener('close', eventJourney.clear);
+      eventJourney.clear();
+      delete window.campusEventJourney;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
       window.campusNavigationCleanup?.();
