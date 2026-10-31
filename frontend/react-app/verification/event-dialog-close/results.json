@@ -1,0 +1,107 @@
+{
+  "recordedAt": "2026-10-31T19:13:40.113Z",
+  "owner": "prachi2061",
+  "assistance": "Codex-assisted reproduction, implementation, review and automated checks.",
+  "issue": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/128",
+  "baseline": {
+    "commit": "96fab182b69b3023f99a87d37f293e3dc95a7c2a",
+    "measurements": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "scrollTop": 657,
+        "modal": {
+          "top": 67.5,
+          "bottom": 832.5
+        },
+        "close": {
+          "top": -564.5,
+          "bottom": -532.5
+        },
+        "closeWithinModal": false,
+        "scope": "Automated local guest/sample-data check; no real transit routing or teammate testing."
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 694,
+        "modal": {
+          "top": 63.296875,
+          "bottom": 780.6875
+        },
+        "close": {
+          "top": -609.703125,
+          "bottom": -577.703125
+        },
+        "closeWithinModal": false,
+        "scope": "Automated local guest/sample-data check; no real transit routing or teammate testing."
+      }
+    ],
+    "regression": "Both mobile light/dark tests failed at closeVisible before applying the CSS fix."
+  },
+  "fixed": {
+    "commit": "ec0a48a6fea22b8f1a2734c1909d072b491fc0d9",
+    "measurements": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "scrollTop": 685,
+        "modal": {
+          "top": 67.5,
+          "bottom": 832.5
+        },
+        "close": {
+          "top": 100.5,
+          "bottom": 144.5
+        },
+        "closeWithinModal": true,
+        "scope": "Automated local guest/sample-data check; no real transit routing or teammate testing."
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 707,
+        "modal": {
+          "top": 63.296875,
+          "bottom": 780.6875
+        },
+        "close": {
+          "top": 92.296875,
+          "bottom": 136.296875
+        },
+        "closeWithinModal": true,
+        "scope": "Automated local guest/sample-data check; no real transit routing or teammate testing."
+      }
+    ],
+    "behavior": "An opaque theme-aware sticky header retains title/Close while the body scrolls. Close is 44 by 44 CSS pixels."
+  },
+  "validation": {
+    "browser": "Google Chrome, headless Playwright; desktop 1440x900 and mobile viewport 390x844.",
+    "tests": {
+      "passed": 34,
+      "failed": 0,
+      "files": [
+        "event-dialog-close.spec.js",
+        "event-journey.spec.js",
+        "event-maps.spec.js",
+        "events.spec.js"
+      ]
+    },
+    "command": "SMOKE_BROWSER_CHANNEL=chrome npm run test:smoke -- tests/smoke/event-dialog-close.spec.js tests/smoke/event-journey.spec.js tests/smoke/event-maps.spec.js tests/smoke/events.spec.js",
+    "workingDirectory": "frontend/react-app",
+    "build": "Root npm run build passed; existing large-bundle warning remains.",
+    "regressionTest": {
+      "path": "frontend/react-app/tests/smoke/event-dialog-close.spec.js",
+      "sha256": "3b0c100203412f7f60246573808a3f1a3573036e5ba8d87f506f213923889878"
+    }
+  },
+  "scope": "Actual before/fixed local browser captures, using guest/sample event data and a synthetic address. Mobile viewport, not a physical-device or independent teammate check. No live bus coverage, Firestore event loading or rehearsal duration is verified here. Team documents and rehearsal files were not changed."
+}

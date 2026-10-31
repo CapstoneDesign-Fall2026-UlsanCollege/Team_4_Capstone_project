@@ -33,6 +33,23 @@
 .event-location-action:hover { border-color: #159eaa; color: #117d87; }
 html[data-theme="dark"] .event-location-action:hover { color: #66d7d0; }
 
+#dashboardDialog:has([data-event-journey]) {
+  --event-dialog-surface: #fff;
+  scroll-padding-top: 110px;
+}
+#dashboardDialog:has([data-event-journey]) > .dashboard-section-heading {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  align-items: center;
+  padding-block: 8px;
+  background: var(--event-dialog-surface);
+  box-shadow: 0 -24px 0 var(--event-dialog-surface), 0 1px 0 var(--border);
+}
+#dashboardDialog:has([data-event-journey]) #dashboardDialogTitle { min-width: 0; overflow-wrap: anywhere; }
+#dashboardDialog:has([data-event-journey]) #closeDashboardDialog { flex: 0 0 44px; width: 44px; height: 44px; }
+html[data-theme="dark"] #dashboardDialog:has([data-event-journey]) { --event-dialog-surface: #1c1828; }
+
 .event-journey {
   margin-top: 18px;
   padding: 18px;
