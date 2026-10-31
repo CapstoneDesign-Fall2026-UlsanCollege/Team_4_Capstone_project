@@ -1,4 +1,7 @@
 import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+
+const events = JSON.parse(readFileSync(new URL('../../../events.json', import.meta.url), 'utf8'));
 
 async function openTrip(page) {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
@@ -31,26 +34,65 @@ async function delayedLocation(page) {
   });
 }
 
-test('sample venues require a destination and never request location automatically', async ({ page }) => {
+test('the event destination is prefilled without an automatic location request and can be restored', async ({ page }) => {
   await delayedLocation(page);
   const mapRequests = [];
   page.on('request', request => { if (request.url().includes('google.com/maps/')) mapRequests.push(request.url()); });
   const planner = await openTrip(page);
-  await expect(planner.getByLabel('Destination address or coordinates')).toHaveValue('');
-  await expect(planner).toContainText('no confirmed address');
+  const destination = planner.getByLabel('Destination address or coordinates');
+  await expect(destination).toHaveValue(events[0].location);
+  await expect(planner).toContainText('address is not confirmed');
   const route = planner.locator('[data-journey-route]');
-  await expect(route).toHaveAttribute('aria-disabled', 'true');
-  expect(await route.getAttribute('href')).toBeNull();
+  await expect(route).toHaveAttribute('aria-disabled', 'false');
+  expect(new URL(await route.getAttribute('href')).searchParams.get('destination')).toBe(events[0].location);
   await expect(planner.locator('[data-journey-distance]')).not.toContainText('km');
   expect(await page.evaluate(() => window.locationCalls)).toBe(0);
   expect(mapRequests).toEqual([]);
-  await planner.getByLabel('Destination address or coordinates').fill('Campus Road 12, Test City');
+  await destination.fill('');
+  await expect(route).toHaveAttribute('aria-disabled', 'true');
+  await planner.getByRole('button', { name: 'Use event location', exact: true }).click();
+  await expect(destination).toHaveValue(events[0].location);
   await expect(route).toHaveAttribute('aria-disabled', 'false');
   expect(new URL(await route.getAttribute('href')).searchParams.has('origin')).toBe(false);
   await planner.getByLabel('Destination address or coordinates').fill('울'.repeat(200));
   await planner.getByLabel('Starting point', { exact: true }).fill('산'.repeat(200));
   await expect(route).toHaveAttribute('aria-disabled', 'true');
   await expect(planner).toContainText('Shorten an address or use coordinates');
+});
+
+test('selecting each event fills its own destination while the starting point can be typed', async ({ page }) => {
+  const planner = await openTrip(page);
+  for (const [index, event] of events.entries()) {
+    if (index > 0) {
+      await page.locator('#closeDashboardDialog').click();
+      await page.locator(`#eventsGrid [data-discover-event="${event.id}"]`).click();
+      await planner.locator('summary').click();
+    }
+    await expect(planner.getByLabel('Destination address or coordinates')).toHaveValue(event.location);
+    const origin = planner.getByLabel('Starting point', { exact: true });
+    await expect(origin).toHaveValue('');
+    await origin.fill('Public starting station');
+    const route = new URL(await planner.locator('[data-journey-route]').getAttribute('href'));
+    expect(route.searchParams.get('destination')).toBe(event.location);
+    expect(route.searchParams.get('origin')).toBe('Public starting station');
+  }
+});
+
+test('an organizer address fills the destination and missing location data does not reuse a previous venue', async ({ page }) => {
+  const planner = await openTrip(page);
+  await page.evaluate(() => window.campusEventJourney.attach(document.querySelector('[data-event-journey]'), {
+    id: 201, location: 'Synthetic venue name', mapLocation: { address: '123 Synthetic Campus Road, Test City' },
+  }));
+  await planner.locator('summary').click();
+  await expect(planner.getByLabel('Destination address or coordinates')).toHaveValue('123 Synthetic Campus Road, Test City');
+  await expect(planner).toContainText('organizer-provided address or pin');
+  await page.evaluate(() => window.campusEventJourney.attach(document.querySelector('[data-event-journey]'), { id: 202 }));
+  await planner.locator('summary').click();
+  await expect(planner.getByLabel('Destination address or coordinates')).toHaveValue('');
+  await expect(planner).toContainText('This event has no location yet');
+  await expect(planner.locator('[data-journey-route]')).toHaveAttribute('aria-disabled', 'true');
+  expect(await planner.locator('[data-journey-route]').getAttribute('href')).toBeNull();
+  await expect(planner.getByRole('button', { name: 'Use event location', exact: true })).toHaveCount(0);
 });
 
 test('home address, travel modes and nearby stops open the intended map only on demand', async ({ page, context }) => {
@@ -93,6 +135,12 @@ test('location permission supplies a route and an explicitly straight-line dista
   await context.grantPermissions(['geolocation']);
   await context.setGeolocation({ latitude: 51.5074, longitude: -0.1278, accuracy: 50 });
   const planner = await openTrip(page);
+  await planner.getByRole('button', { name: 'Use my current location', exact: true }).click();
+  await expect(planner.getByRole('status')).toContainText('Current location ready');
+  await expect(planner.getByLabel('Destination address or coordinates')).toHaveValue(events[0].location);
+  const eventRoute = new URL(await planner.locator('[data-journey-route]').getAttribute('href'));
+  expect(eventRoute.searchParams.get('origin')).toBe('51.5074,-0.1278');
+  expect(eventRoute.searchParams.get('destination')).toBe(events[0].location);
   // Synthetic organizer coordinates, not a claimed real location for sample event 1.
   await page.evaluate(() => window.campusEventJourney.attach(document.querySelector('[data-event-journey]'), {
     id: 101, location: 'Synthetic test venue', mapLocation: { latitude: 51.5, longitude: -0.12 },
@@ -150,12 +198,13 @@ test('saving retains a trip, while closing or opening another event clears priva
   await page.locator('#eventsGrid [data-discover-event="1"]').click();
   await planner.locator('summary').click();
   await expect(planner.getByLabel('Starting point', { exact: true })).toHaveValue('');
-  await expect(planner.getByLabel('Destination address or coordinates')).toHaveValue('');
+  await expect(planner.getByLabel('Destination address or coordinates')).toHaveValue(events[0].location);
   await planner.getByLabel('Starting point', { exact: true }).fill('Another private origin');
   await page.evaluate(() => window.campusAssistant.openEvent(2));
   await planner.locator('summary').click();
   await expect(planner.getByLabel('Starting point', { exact: true })).toHaveValue('');
   await expect(page.locator('#dashboardDialogTitle')).toHaveText('Open Mic & Poetry Night');
+  await expect(planner.getByLabel('Destination address or coordinates')).toHaveValue(events[1].location);
 });
 
 test('closing the dialog or changing account invalidates pending location callbacks', async ({ page }) => {
