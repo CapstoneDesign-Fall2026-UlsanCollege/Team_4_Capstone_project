@@ -24,6 +24,7 @@
     "test:account": "node --test tests/account-sync.test.js",
     "test:account-browser": "node tests/account-persistence.browser.js",
     "test:notifications": "node --test tests/notifications.test.js",
+    "test:maps": "node --test tests/event-maps.test.js",
     "test:notifications-rules": "npm run test:notifications-rules --workspace @campusvibes/backend",
     "test:notifications-browser": "node tests/notifications.browser.js",
     "test:smoke": "playwright test",

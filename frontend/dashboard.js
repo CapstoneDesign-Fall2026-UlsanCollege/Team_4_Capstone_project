@@ -57,6 +57,10 @@ function eventLocationMarkup(event){
     link.title = link.getAttribute("aria-label");
     section.querySelector(".event-location-actions").append(link);
   }
+  const journey = document.createElement("div");
+  journey.dataset.eventJourney = "";
+  journey.dataset.eventId = String(event.id);
+  section.append(journey);
   return section.outerHTML;
 }
 
@@ -190,6 +194,8 @@ function showDashboardDialog(title, markup, eventId = ""){
   delete dialog.dataset.progressBadges;
   $("#dashboardDialogTitle").textContent = title;
   $("#dashboardDialogBody").innerHTML = markup;
+  const journey = dialog.querySelector("[data-event-journey]");
+  window.campusEventJourney?.attach(journey, EVENTS.find(event => event.id === Number(journey?.dataset.eventId)));
   window.campusRenderIcons?.();
   if (!dialog.open) dialog.showModal();
 }
