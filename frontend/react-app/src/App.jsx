@@ -64,6 +64,7 @@ import discoverScript from "../../discover.js?raw";
 import ThemeToggle from "./ThemeToggle";
 import eventCatalog from "../../events.json";
 import { getEventMapLinks } from './event-maps';
+import Notifications from './Notifications';
 const Feed = lazy(() => import("./FeedEntry"));
 const Suggestions = lazy(() => import("./Suggestions"));
 const Assistant = lazy(() => import("./Assistant"));
@@ -75,6 +76,8 @@ export default function App() {
   const [suggestTarget, setSuggestTarget] = useState(null);
   const [assistantTarget, setAssistantTarget] = useState(null);
   const [profileTarget, setProfileTarget] = useState(null);
+  const [notificationsTarget, setNotificationsTarget] = useState(null);
+  const [notificationRequest, setNotificationRequest] = useState(null);
   const [feedUser, setFeedUser] = useState(null);
   const [account,setAccount] = useState(null);
   const [accountStatus,setAccountStatus] = useState({ready:false,pending:false,error:''});
@@ -130,9 +133,11 @@ export default function App() {
     setSuggestTarget(mountRef.current.querySelector("#suggestMount"));
     setAssistantTarget(mountRef.current.querySelector("#assistantMount"));
     setProfileTarget(mountRef.current.querySelector("#profileMount"));
+    setNotificationsTarget(mountRef.current.querySelector('#notificationsMount'));
     setSyncTarget(mountRef.current.querySelector('#accountSyncMount'));
     const receiveSession = event => {
       const user=event.detail;
+      setNotificationRequest(current => current?.userId === user?.id ? current : null);
       if (activeAccount?.user.id !== user?.id) {
         unsubscribeAccount?.();activeAccount?.close();activeAccount=null;accountBadges=null;
         if (user && user.id !== 'demo') {
@@ -237,10 +242,27 @@ export default function App() {
     };
   }, []);
 
+  const selectedNotification = notificationRequest?.userId === feedUser?.id ? notificationRequest : null;
+  const followNotification = item => {
+    if (!feedUser) return;
+    setNotificationRequest({ userId: feedUser.id, item, requestId: crypto.randomUUID() });
+    if (item.workspace === 'feed') { window.campusSwitchWorkspace?.('feed'); return; }
+    if (item.kind.startsWith('suggestion-')) { window.campusAssistant?.navigate('suggest'); return; }
+    if (item.kind === 'badge') {
+      window.campusAssistant?.navigate('dashboard');
+      document.querySelector('#viewProgress')?.click();
+      return;
+    }
+    const eventId = Number(item.sourceId.split('_')[0]);
+    window.campusAssistant?.navigate('discover');
+    if (eventCatalog.some(event => event.id === eventId)) window.campusAssistant?.openEvent(eventId);
+  };
+
   return (
     <>
       <ThemeToggle />
       <div ref={mountRef} />
+      {notificationsTarget && feedUser && createPortal(<Notifications key={feedUser.id} user={feedUser} onOpen={followNotification} />, notificationsTarget)}
       {syncTarget && account && createPortal(<div className={`account-sync-status ${accountStatus.error ? 'is-error' : ''}`} role="status" aria-live="polite"><span>{accountStatus.error ? <RetryIcon size={15} /> : !accountStatus.ready || accountStatus.pending ? <LoaderCircle size={15} /> : <CloudCheck size={15} />}{accountStatus.error || (!accountStatus.ready ? 'Loading your account...' : accountStatus.pending ? 'Syncing changes. Keep this page open.' : 'Saved to your account')}</span>{accountStatus.error && <button type="button" title="Retry account sync" aria-label="Retry account sync" onClick={()=>account.retry()}><RetryIcon size={15} /></button>}</div>,syncTarget)}
       {profileTarget && feedUser && (feedUser.id === 'demo' || accountStatus.ready) && createPortal(
         <Suspense fallback={<p role="status">Loading your profile...</p>}>
@@ -254,7 +276,7 @@ export default function App() {
       )}
       {suggestTarget && feedUser && (feedUser.id === 'demo' || accountStatus.ready) && createPortal(
         <Suspense fallback={<p role="status">Loading suggestions...</p>}>
-          <Suggestions key={feedUser.id} user={feedUser} account={account} />
+          <Suggestions key={feedUser.id} user={feedUser} account={account} notification={selectedNotification} />
         </Suspense>, suggestTarget,
       )}
       {feedTarget &&
@@ -267,7 +289,7 @@ export default function App() {
               </p>
             }
           >
-            <Feed key={feedUser.id} user={feedUser} />
+            <Feed key={feedUser.id} user={feedUser} notification={selectedNotification} />
           </Suspense>,
           feedTarget,
         )}
