@@ -61,6 +61,7 @@ export function getEventMapLinks(event) {
   return {
     venue: venue || address || 'Event location',
     address,
+    destination: query,
     search: search.href,
     directions: hasPin || address ? directions.href : null,
     status: hasPin ? 'Organizer-provided pin' : address ? 'Organizer-provided address' : 'Venue name only - address not confirmed',

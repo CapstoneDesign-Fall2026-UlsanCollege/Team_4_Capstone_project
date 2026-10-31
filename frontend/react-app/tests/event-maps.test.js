@@ -13,6 +13,7 @@ test('every current event has a venue-specific map search without a guessed pin'
     assert.equal(url.pathname, '/maps/search/');
     assert.equal(url.searchParams.get('api'), '1');
     assert.equal(url.searchParams.get('query'), event.location);
+    assert.equal(new URL(getJourneyLinks({ destination: links.destination }).route).searchParams.get('destination'), event.location);
     assert.equal(links.directions, null);
     assert.equal(links.status, 'Venue name only - address not confirmed');
   }
@@ -21,6 +22,7 @@ test('every current event has a venue-specific map search without a guessed pin'
 test('an organizer address provides a precise query and directions without asking for GPS', () => {
   const links = getEventMapLinks({ location: 'Library', mapLocation: { address: '  123 Campus Road, Test City  ' } });
   assert.equal(new URL(links.search).searchParams.get('query'), '123 Campus Road, Test City');
+  assert.equal(new URL(getJourneyLinks({ destination: links.destination }).route).searchParams.get('destination'), '123 Campus Road, Test City');
   const directions = new URL(links.directions);
   assert.equal(directions.pathname, '/maps/dir/');
   assert.equal(directions.searchParams.get('api'), '1');
@@ -32,6 +34,7 @@ test('an organizer address provides a precise query and directions without askin
 test('a valid organizer pin takes precedence over a venue name or address', () => {
   const links = getEventMapLinks({ location: 'Test venue', mapLocation: { latitude: 35.5, longitude: 129.4, address: 'Test address' } });
   assert.equal(new URL(links.search).searchParams.get('query'), '35.5,129.4');
+  assert.equal(new URL(getJourneyLinks({ destination: links.destination }).route).searchParams.get('destination'), '35.5,129.4');
   assert.equal(new URL(links.directions).searchParams.get('destination'), '35.5,129.4');
   assert.equal(links.status, 'Organizer-provided pin');
 });

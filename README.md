@@ -33,7 +33,7 @@ These screenshots were captured from the local guest demo. The mobile image uses
 
 | Area | Implemented behavior |
 |---|---|
-| **Event discovery** | Dashboard, event search and interest filters, sorting, event details, bookmarks, and Google Maps venue links. A trip planner accepts a starting address or optional current location, opens bus/train, walking, driving or cycling directions, and searches nearby bus stops. |
+| **Event discovery** | Dashboard, event search and interest filters, sorting, event details, bookmarks, and Google Maps venue links. The trip planner fills the destination from the selected event and accepts a typed starting point or optional current location. It opens bus/train, walking, driving or cycling directions and searches nearby bus stops. |
 | **Campus Vibe-Feed** | Shared text and event posts, one compressed photo per post through Cloudinary, likes, comments, interest, and private saved posts. |
 | **Friends and messages** | Friend requests, accepted-friend conversations, unread indicators, read receipts, and earlier message history. Avatars and member IDs distinguish people with the same name. |
 | **Notifications** | One header inbox for both workspaces, Community/Feed filters, unread-only filtering, source links, and account-persistent read status. The inbox displays the latest 50 alerts. |
@@ -44,7 +44,7 @@ These screenshots were captured from the local guest demo. The mobile image uses
 
 ### Scope and limitations
 
-- Events and their venue names are samples. Map searches do not establish a verified real-world pin. Trip planning needs an organizer-provided address/pin or a real destination entered by the user for that trip. Google Maps supplies route distances, times and transit services where available; CampusVibes only estimates straight-line distance when both endpoints have coordinates. Starting points stay in memory for the open dialog and are cleared on close or account change.
+- Events and their venue names are samples. The trip destination automatically uses the event’s organizer-provided pin/address when present, otherwise its venue name, with an explicit unconfirmed-address note. Users can correct the destination for their trip or restore the event location; map searches do not establish a verified real-world pin. Google Maps supplies route distances, times and transit services where available; CampusVibes only estimates straight-line distance when both endpoints have coordinates. Starting points stay in memory for the open dialog and are cleared on close or account change.
 - Suggestion approval records a review decision; it does not publish an event into Discover. Suggestion attachments and Assistant Attach/Voice controls are unavailable.
 - Gemini has no live web search or access to private student messages. Its availability depends on server configuration and provider limits.
 - Badges represent planning progress, not verified attendance or club membership.

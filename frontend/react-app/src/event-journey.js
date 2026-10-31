@@ -42,10 +42,12 @@ export function createEventJourneyController() {
     target.querySelector('[data-journey-clear]').hidden = !state.origin && !state.position && !state.locating;
     const hint = target.querySelector('[data-journey-destination-hint]');
     hint.textContent = !state.destination.trim()
-      ? 'This venue has no confirmed address. Enter the real address to plan your trip.'
+      ? state.initialDestination ? 'Destination is empty. Use event location below, or enter an address.' : 'This event has no location yet. Enter a destination address to plan your trip.'
       : !links ? 'These addresses are too long for Maps. Shorten an address or use coordinates.'
-      : state.destination === state.initialDestination ? 'Check the organizer’s location before travelling.'
-      : 'This destination is only for your trip; the event listing is unchanged.';
+      : state.destination !== state.initialDestination ? 'This destination is only for your trip; the event listing is unchanged.'
+      : state.venueOnly ? 'Filled from the event’s venue name. Its address is not confirmed; check the destination in Maps before travelling.'
+      : 'Filled from the event’s organizer-provided address or pin. Check the destination before travelling.';
+    target.querySelector('[data-journey-reset-destination]').hidden = !state.initialDestination || state.destination === state.initialDestination;
     target.querySelector('[data-journey-origin]').value = state.position ? 'Current location' : state.origin;
     for (const button of target.querySelectorAll('[data-journey-mode]')) {
       button.setAttribute('aria-pressed', String(button.dataset.journeyMode === state.mode));
@@ -93,13 +95,13 @@ export function createEventJourneyController() {
   function attach(element, event) {
     if (!element || !event) { clear(); return; }
     const map = getEventMapLinks(event);
-    const pin = mapCoordinates(event.mapLocation);
-    const destination = map?.directions ? pin ? `${pin.latitude},${pin.longitude}` : map.address : '';
+    const destination = map?.destination || '';
     const key = JSON.stringify([event.id, event.location, destination]);
     if (state?.key !== key) {
       clear();
-      state = { key, initialDestination: destination, destination, origin: '', position: null, mode: 'transit', message: '', locating: false, expanded: false };
+      state = { key, initialDestination: destination, destination, venueOnly: Boolean(map && !map.directions), origin: '', position: null, mode: 'transit', message: '', locating: false, expanded: false };
     }
+    state.venueOnly = Boolean(map && !map.directions);
     target = element;
     target.className = 'event-journey';
     target.setAttribute('role', 'region');
@@ -111,6 +113,7 @@ export function createEventJourneyController() {
         <input data-journey-destination type="text" maxlength="200" autocomplete="off" placeholder="Full venue address, city, or latitude, longitude" aria-describedby="journey-destination-hint">
       </label>
       <p class="journey-hint" id="journey-destination-hint" data-journey-destination-hint></p>
+      <div class="journey-location-actions"><button type="button" data-journey-reset-destination hidden>Use event location</button></div>
       <label class="journey-field">Starting point
         <input data-journey-origin type="text" maxlength="200" autocomplete="off" placeholder="Home address, station, or landmark" aria-describedby="journey-privacy">
       </label>
@@ -127,6 +130,11 @@ export function createEventJourneyController() {
     target.querySelector('[data-journey-destination]').value = state.destination;
     target.querySelector('[data-journey-destination]').addEventListener('input', event => {
       state.destination = event.target.value;
+      update();
+    });
+    target.querySelector('[data-journey-reset-destination]').addEventListener('click', () => {
+      state.destination = state.initialDestination;
+      target.querySelector('[data-journey-destination]').value = state.destination;
       update();
     });
     target.querySelector('[data-journey-origin]').addEventListener('input', event => {
