@@ -33,7 +33,7 @@ These screenshots were captured from the local guest demo. The mobile image uses
 
 | Area | Implemented behavior |
 |---|---|
-| **Event discovery** | Dashboard, event search and interest filters, sorting, event details, bookmarks, and external Google Maps venue links. |
+| **Event discovery** | Dashboard, event search and interest filters, sorting, event details, bookmarks, and Google Maps venue links. A trip planner accepts a starting address or optional current location, opens bus/train, walking, driving or cycling directions, and searches nearby bus stops. |
 | **Campus Vibe-Feed** | Shared text and event posts, one compressed photo per post through Cloudinary, likes, comments, interest, and private saved posts. |
 | **Friends and messages** | Friend requests, accepted-friend conversations, unread indicators, read receipts, and earlier message history. Avatars and member IDs distinguish people with the same name. |
 | **Notifications** | One header inbox for both workspaces, Community/Feed filters, unread-only filtering, source links, and account-persistent read status. The inbox displays the latest 50 alerts. |
@@ -44,7 +44,7 @@ These screenshots were captured from the local guest demo. The mobile image uses
 
 ### Scope and limitations
 
-- Events and their venue names are samples. Map searches do not establish a verified real-world pin; directions require an organizer-provided address or coordinates.
+- Events and their venue names are samples. Map searches do not establish a verified real-world pin. Trip planning needs an organizer-provided address/pin or a real destination entered by the user for that trip. Google Maps supplies route distances, times and transit services where available; CampusVibes only estimates straight-line distance when both endpoints have coordinates. Starting points stay in memory for the open dialog and are cleared on close or account change.
 - Suggestion approval records a review decision; it does not publish an event into Discover. Suggestion attachments and Assistant Attach/Voice controls are unavailable.
 - Gemini has no live web search or access to private student messages. Its availability depends on server configuration and provider limits.
 - Badges represent planning progress, not verified attendance or club membership.
@@ -147,6 +147,7 @@ Keep credentials out of Git and never prefix server secrets with `VITE_`. Set th
 | `npm run test:assistant --workspace frontend/react-app` | Check the local Assistant engine, search, and conversation behavior. |
 | `npm run test:account --workspace frontend/react-app` | Check account persistence and synchronization logic. |
 | `npm run test:notifications --workspace frontend/react-app` | Check notification types, source keys, filtering, and activity mapping. |
+| `npm run test:maps --workspace frontend/react-app` | Check map URLs, trip modes, safe address encoding, coordinate validation and straight-line distance. |
 | `npm run test:smoke` | Run the desktop/mobile browser suite. |
 | `npm run test:rules` | Check Firestore permissions against a running local emulator. |
 
