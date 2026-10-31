@@ -6,7 +6,7 @@ import { collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, ser
 let env;
 before(async () => {
   const endpoint=new URL(`http://${process.env.FIRESTORE_EMULATOR_HOST || '127.0.0.1:8080'}`);
-  env = await initializeTestEnvironment({ projectId: "demo-campusvibe-feed", firestore: { host: endpoint.hostname, port: Number(endpoint.port), rules: readFileSync(new URL("../../../firestore.rules", import.meta.url), "utf8") } });
+  env = await initializeTestEnvironment({ projectId: "demo-campusvibe-feed", firestore: { host: endpoint.hostname, port: Number(endpoint.port), rules: readFileSync(new URL("../firebase/firestore.rules", import.meta.url), "utf8") } });
 });
 beforeEach(async () => env.clearFirestore());
 after(async () => {

@@ -7,15 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test:feed-rules": "node --test tests/feed-rules.test.js",
+    "test:feed-rules": "npm run test:feed-rules --workspace @campusvibes/backend",
     "test:shared-feed": "node tests/shared-feed.browser.js",
     "test:social-components": "node tests/social-components.browser.js",
     "test:social-regressions": "node tests/social-regressions.browser.js",
-    "test:feed-photos": "node --test tests/feed-photo.test.js tests/feed-photo-api.test.js",
+    "test:feed-photos": "node --test tests/feed-photo.test.js && npm run test:feed-photos --workspace @campusvibes/backend",
     "test:feed-photos-browser": "node tests/feed-photos.browser.js",
     "test:suggestions": "node tests/suggestions.browser.js",
     "test:assistant": "node --test tests/assistant.test.js",
-    "test:gemini": "node --test tests/gemini.test.js",
+    "test:gemini": "node --test tests/gemini.test.js && npm run test:assistant --workspace @campusvibes/backend",
     "test:gemini-browser": "node tests/gemini.browser.js",
     "test:profile": "node --test tests/profile.test.js",
     "test:profile-photos": "node --test tests/profile-photo.test.js",
@@ -24,14 +24,13 @@
     "test:account": "node --test tests/account-sync.test.js",
     "test:account-browser": "node tests/account-persistence.browser.js",
     "test:notifications": "node --test tests/notifications.test.js",
-    "test:notifications-rules": "node --test tests/notifications-rules.test.js",
+    "test:notifications-rules": "npm run test:notifications-rules --workspace @campusvibes/backend",
     "test:notifications-browser": "node tests/notifications.browser.js",
     "test:smoke": "playwright test",
     "test:toast-mobile": "node tests/toast-mobile.browser.js"
   },
   "dependencies": {
-    "@google/genai": "^2.30.0",
-    "cloudinary": "^2.11.0",
+    "@campusvibes/backend": "*",
     "firebase": "^12.19.0",
     "fuse.js": "^7.5.0",
     "lucide": "^1.55.0",
@@ -39,11 +38,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
-  "overrides": {
-    "@grpc/grpc-js": "1.13.6"
-  },
   "devDependencies": {
-    "@firebase/rules-unit-testing": "^5.0.2",
     "@playwright/test": "^1.64.0",
     "@vitejs/plugin-react": "^4.7.0",
     "playwright": "^1.64.0",

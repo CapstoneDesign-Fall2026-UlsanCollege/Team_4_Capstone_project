@@ -1,8 +1,8 @@
 import { GoogleGenAI, ThinkingLevel } from '@google/genai';
-import catalog from '../../events.json' with { type: 'json' };
-import { AI_DAILY_LIMIT, AI_OUTPUT_TOKENS, GEMINI_MODEL, cleanAiReply, sensitivePrompt } from '../src/assistant/ai-contract.js';
-import { filterCatalog } from '../src/assistant/filters.js';
-import { todayInSeoul } from '../src/assistant/dates.js';
+import catalog from '../../frontend/events.json' with { type: 'json' };
+import { AI_DAILY_LIMIT, AI_OUTPUT_TOKENS, GEMINI_MODEL, cleanAiReply, sensitivePrompt } from '../../frontend/react-app/src/assistant/ai-contract.js';
+import { filterCatalog } from '../../frontend/react-app/src/assistant/filters.js';
+import { todayInSeoul } from '../../frontend/react-app/src/assistant/dates.js';
 
 const firebaseKey = 'AIzaSyAn8ES7j5qykoUvXJtHF-_lF-9AyypaZEs';
 const error = (status, message, fallback = false) => Object.assign(new Error(message), { status, fallback });

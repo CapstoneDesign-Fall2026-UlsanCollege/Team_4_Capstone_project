@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
-import { FEED_PHOTO_BYTES, FEED_PHOTO_CLOUD, FEED_PHOTO_DAILY_LIMIT, FEED_PHOTO_EDGE, validFeedPhoto } from '../src/feed-photo.js';
+import { FEED_PHOTO_BYTES, FEED_PHOTO_CLOUD, FEED_PHOTO_DAILY_LIMIT, FEED_PHOTO_EDGE, validFeedPhoto } from '../../frontend/react-app/src/feed-photo.js';
 
 const firebaseKey = 'AIzaSyAn8ES7j5qykoUvXJtHF-_lF-9AyypaZEs';
 const productionProject = 'campus-vibe-7a95a';

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createPhotoHandler } from '../server/feed-photo.js';
-import { FEED_PHOTO_BYTES } from '../src/feed-photo.js';
+import { createPhotoHandler } from '../src/feed-photo.js';
+import { FEED_PHOTO_BYTES } from '../../frontend/react-app/src/feed-photo.js';
 
 const postId = '01234567890123456789';
 const image = 'data:image/jpeg;base64,/9j/AAAA';
