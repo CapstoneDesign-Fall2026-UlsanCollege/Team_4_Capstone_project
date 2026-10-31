@@ -165,6 +165,15 @@ try {
   await openPanel(alice.page);
   if(process.env.NOTIFICATION_SCREENSHOT_DIR) await alice.page.screenshot({path:`${process.env.NOTIFICATION_SCREENSHOT_DIR}/notifications-dark.png`});
   await alice.page.keyboard.press('Escape');
+  await source(bob,'shared-friends-store','removeConnection',[{id:connectionId,members:[bob.uid,alice.uid]}]);
+  await alice.page.setViewportSize({width:390,height:844});
+  await openPanel(alice.page,'feed');
+  await panel(alice.page).getByRole('button').filter({hasText:'Notification Bob sent you a message'}).click();
+  await expect(alice.page.locator('.feed-messenger [role=status]')).toContainText('This conversation is unavailable in your current connections.');
+  await expect(alice.page.getByRole('textbox',{name:'Message text',exact:true})).toHaveCount(0);
+  await alice.page.getByRole('button',{name:'Back to conversations',exact:true}).click();
+  await expect(alice.page.getByRole('complementary',{name:'Conversations',exact:true})).toBeVisible();
+  console.log('PASS: an old message alert after real connection deletion shows its unavailable state on mobile and returns to the inbox without rendering a message composer.');
   await alice.page.waitForFunction(()=>!window.campusAccount.status().pending);
   await alice.page.getByRole('button',{name:'Log out',exact:true}).click();
   await expect(bell(alice.page)).toHaveCount(0);
