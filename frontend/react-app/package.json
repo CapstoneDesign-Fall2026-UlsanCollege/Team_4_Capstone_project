@@ -23,6 +23,9 @@
     "test:badges": "node --test tests/progress-badges.test.js",
     "test:account": "node --test tests/account-sync.test.js",
     "test:account-browser": "node tests/account-persistence.browser.js",
+    "test:notifications": "node --test tests/notifications.test.js",
+    "test:notifications-rules": "node --test tests/notifications-rules.test.js",
+    "test:notifications-browser": "node tests/notifications.browser.js",
     "test:smoke": "playwright test",
     "test:toast-mobile": "node tests/toast-mobile.browser.js"
   },
