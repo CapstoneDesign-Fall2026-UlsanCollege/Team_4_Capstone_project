@@ -41,7 +41,7 @@ function ReviewItem({ item, user, canReview }) {
   </article>;
 }
 
-export default function Suggestions({ user,account }) {
+export default function Suggestions({ user,account,notification }) {
   const [draft, setDraft] = useState(() => account ? account.read('suggestion') : loadDraft(user));
   const [saved, setSaved] = useState('');
   const [error, setError] = useState('');
@@ -59,6 +59,14 @@ export default function Suggestions({ user,account }) {
   const alive = useRef(true);
   const demo = user.id === 'demo';
   const cloudDraft=useRef(account ? JSON.stringify(account.read('suggestion')) : '');
+  useEffect(() => {
+    if (notification?.userId === user.id && notification.item.kind.startsWith('suggestion-')) setTab('mine');
+  }, [notification?.requestId, user.id]);
+  useEffect(() => {
+    if (tab !== 'mine' || !notification?.item.kind.startsWith('suggestion-')) return;
+    const element = document.querySelector(`[data-suggestion-id="${CSS.escape(notification.item.sourceId)}"]`);
+    if (element) { element.tabIndex = -1; element.scrollIntoView({ block: 'center' }); element.focus({ preventScroll: true }); }
+  }, [tab, rows, notification?.requestId]);
   useEffect(()=>account?.subscribe(()=>{
     const value=account.read('suggestion'),json=JSON.stringify(value);
     if(json !== cloudDraft.current){cloudDraft.current=json;if(json !== JSON.stringify(latestDraft.current)){latestDraft.current=value;setDraft(value);}}

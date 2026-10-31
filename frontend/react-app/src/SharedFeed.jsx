@@ -12,7 +12,7 @@ import SharedMessages from './SharedMessages';
 import useMessageInbox from './use-message-inbox';
 import './shared-feed.css';
 
-export default function SharedFeed({ user }) {
+export default function SharedFeed({ user, notification }) {
   const [posts, setPosts] = useState([]);
   const [directory, setProfiles] = useState([]);
   const [extraProfiles, setExtraProfiles] = useState({});
@@ -32,6 +32,8 @@ export default function SharedFeed({ user }) {
   const [editing, setEditing] = useState(null);
   const [deleting, setDeleting] = useState(null);
   const [messageDrafts, setMessageDrafts] = useState({});
+  const [notificationPost, setNotificationPost] = useState(null);
+  const [notificationMissing, setNotificationMissing] = useState(false);
   const locked = useRef(false);
   const alive = useRef(true);
   const mine = view === 'mine';
@@ -39,6 +41,26 @@ export default function SharedFeed({ user }) {
   const messaging = useMessageInbox(user, connections);
   const friends = connections.filter(item => item.status === 'accepted').map(item => item.members.find(id => id !== user.id));
   const incoming = connections.filter(item => item.status === 'pending' && item.recipientId === user.id);
+  const notificationItem = notification?.userId === user.id && notification.item.workspace === 'feed' ? notification.item : null;
+  useEffect(() => {
+    if (!notificationItem) return;
+    setQuery(''); setFilter('all'); setNotificationPost(null); setNotificationMissing(false);
+    if (notificationItem.kind === 'message') { setView('messages'); return; }
+    if (notificationItem.kind.startsWith('friend-')) { setView('friends'); setQuery(notificationItem.actorId); return; }
+    setView('feed');
+    const postId = notificationItem.kind === 'post-published' ? notificationItem.sourceId : notificationItem.parentId;
+    let active = true;
+    const stop = watchSavedPostContent(user, postId, value => {
+      if (!active) return;
+      setNotificationPost(value?.deleting ? null : value); setNotificationMissing(!value || value.deleting === true);
+    }, message => { if (active) setFailure(message); });
+    return () => { active = false; stop(); };
+  }, [notification?.requestId, user.id]);
+  useEffect(() => {
+    if (!notificationPost || view !== 'feed') return;
+    const element = document.querySelector(`[data-shared-post="${CSS.escape(notificationPost.id)}"]`);
+    if (element) { element.tabIndex = -1; element.scrollIntoView({ block: 'center' }); element.focus({ preventScroll: true }); }
+  }, [notificationPost?.id, notification?.requestId, view]);
   // Resolve contacts and exact member-ID searches even outside the first 100 directory entries.
   const searchedId = /^[A-Za-z0-9_-]{20,128}$/.test(query.trim()) ? query.trim() : '';
   const neededIds = [...new Set([user.id, ...connections.flatMap(item => item.members), ...posts.map(item => item.authorId), ...Object.values(savedContent).filter(Boolean).map(item => item.authorId), searchedId].filter(Boolean))].filter(id => !directory.some(item => item.id === id)).sort();
@@ -142,7 +164,7 @@ export default function SharedFeed({ user }) {
     if (submitted !== undefined && current[id] !== submitted) return current;
     return { ...current, [id]: value };
   });
-  const source = view === 'saved' ? savedIds.map(id => savedContent[id]).filter(Boolean) : posts;
+  const source = view === 'saved' ? savedIds.map(id => savedContent[id]).filter(Boolean) : view === 'feed' && notificationPost && !posts.some(item => item.id === notificationPost.id) ? [notificationPost, ...posts] : posts;
   const visible = source.filter(post =>
     (view !== 'feed' || filter !== 'friends' || post.authorId === user.id || friends.includes(post.authorId)) &&
     [post.body, post.college, post.authorName, post.event?.title, post.event?.location].join(' ').toLowerCase().includes(query.toLowerCase()));
@@ -161,7 +183,8 @@ export default function SharedFeed({ user }) {
       </aside>
       <div className="feed-timeline">
         {failure && <div className="feed-error" role="alert"><p>{failure}</p><button type="button" disabled={busy} onClick={() => setRetry(value => value + 1)}>Try again</button></div>}
-        {view === 'messages' ? <SharedMessages user={user} profiles={profiles} connections={connections} query={query} ready={ready} drafts={messageDrafts} onDraft={updateMessageDraft} {...messaging} /> : view === 'friends' ? <SharedFriends user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
+        {view === 'messages' ? <SharedMessages user={user} profiles={profiles} connections={connections} query={query} ready={ready} drafts={messageDrafts} onDraft={updateMessageDraft} notification={notification} {...messaging} /> : view === 'friends' ? <SharedFriends user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
+          {notificationMissing && view === 'feed' && <p className="feed-side-empty" role="status">This post is no longer available.</p>}
           {view !== 'saved' && <Composer user={user} college={college} busy={busy} disabled={!ready} shared onPublish={publish} />}
           <div className="feed-timeline-heading"><h2>{heading}</h2><span className="shared-feed-count">{visible.length}{view !== 'saved' && posts.length === FEED_PAGE_SIZE ? ' / latest 50' : ''}</span></div>
           {view === 'feed' && <div className="feed-filter-tabs" role="group" aria-label="Post audience"><button type="button" aria-pressed={filter === 'all'} className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>All posts</button><button type="button" aria-pressed={filter === 'friends'} className={filter === 'friends' ? 'active' : ''} onClick={() => setFilter('friends')}>Friends</button></div>}

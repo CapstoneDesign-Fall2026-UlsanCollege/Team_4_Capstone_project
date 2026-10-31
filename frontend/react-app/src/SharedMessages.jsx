@@ -87,8 +87,11 @@ function Conversation({ user, connection, profile, ready, draft, onDraft, onSent
   </section>;
 }
 
-export default function SharedMessages({ user, profiles, connections, query, ready, inbox, unread, drafts, onDraft }) {
+export default function SharedMessages({ user, profiles, connections, query, ready, inbox, unread, drafts, onDraft, notification }) {
   const [selected, setSelected] = useState(null);
+  useEffect(() => {
+    if (notification?.userId === user.id && notification.item.kind === 'message') setSelected(notification.item.parentId);
+  }, [notification?.requestId, user.id]);
   const friends = connections.filter(item => item.status === 'accepted');
   const active = friends.find(item => item.id === selected);
   const list = friends.filter(item => {

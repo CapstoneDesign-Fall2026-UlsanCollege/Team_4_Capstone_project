@@ -1,6 +1,7 @@
-import { addDoc, collection, connectFirestoreEmulator, doc, getDocFromServer, getDocsFromServer, getFirestore, limit, onSnapshot, orderBy, query, runTransaction, serverTimestamp, setDoc, updateDoc, where, writeBatch } from "firebase/firestore";
+import { collection, connectFirestoreEmulator, doc, getDocFromServer, getDocsFromServer, getFirestore, limit, onSnapshot, orderBy, query, runTransaction, serverTimestamp, updateDoc, where, writeBatch } from "firebase/firestore";
 import { auth, useEmulators } from "./firebase";
 import { forgetFeedPhoto, photoRequest, uploadFeedPhoto } from './shared-photo-store';
+import { writeNotification } from './notification-write';
 
 export const db = getFirestore(auth.app);
 if (useEmulators) connectFirestoreEmulator(db, "127.0.0.1", Number(import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT) || 8080);
@@ -51,7 +52,13 @@ export async function publishSharedPost(user, value) {
   const payload = validateSharedPost(value);
   const authorName = user.name.trim().slice(0, 120) || "Student";
   const media = value.images?.[0];
-  if (!media) return addDoc(posts(), { ...payload, authorId, authorName, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+  if (!media) {
+    const reference = doc(posts()), batch = writeBatch(db);
+    batch.set(reference, { ...payload, authorId, authorName, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    writeNotification(batch, db, user, authorId, { kind: 'post-published', sourceId: reference.id });
+    await batch.commit();
+    return reference;
+  }
   if (!media.blob || !/^[A-Za-z0-9]{20}$/.test(media.id)) throw new Error('Choose a photo before publishing.');
   const reference = doc(posts(), media.id);
   const existing = await getDocFromServer(reference);
@@ -62,7 +69,10 @@ export async function publishSharedPost(user, value) {
   try {
     const photo = await uploadFeedPhoto(user, media, reference.id);
     account(user);
-    await setDoc(reference, { ...payload, photo, authorId, authorName, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    const batch = writeBatch(db);
+    batch.set(reference, { ...payload, photo, authorId, authorName, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    writeNotification(batch, db, user, authorId, { kind: 'post-published', sourceId: reference.id });
+    await batch.commit();
     forgetFeedPhoto(media);
     return reference;
   } catch (error) {

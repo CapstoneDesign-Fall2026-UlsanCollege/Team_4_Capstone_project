@@ -35,6 +35,79 @@ service cloud.firestore {
     function bounded(maximum) {
       return request.query.limit != null && request.query.limit <= maximum;
     }
+    match /campusAccountData/{uid}/notifications/{notificationId} {
+      function validNotification() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['kind','sourceId','parentId','actorId','actorName','title','createdAt'])
+          && data.keys().hasOnly(['kind','sourceId','parentId','actorId','actorName','title','createdAt','readAt'])
+          && data.kind is string && data.sourceId is string && data.sourceId.matches('^[A-Za-z0-9_-]{1,200}$')
+          && data.parentId is string && data.parentId.matches('^[A-Za-z0-9_-]{0,200}$')
+          && notificationId == data.kind + '_' + data.parentId + '_' + data.sourceId
+          && data.actorId == request.auth.uid && data.actorName is string && data.actorName.size() > 0 && data.actorName.size() <= 120
+          && data.title is string && data.title.size() <= 140 && data.createdAt is timestamp
+          && (!data.keys().hasAny(['readAt']) || data.readAt is timestamp);
+      }
+      function postInteraction(data) {
+        let parent = getAfter(/databases/$(database)/documents/campusFeedPosts/$(data.parentId)).data;
+        let childCollection = data.kind == 'comment' ? 'comments' : 'reactions';
+        let source = getAfter(/databases/$(database)/documents/campusFeedPosts/$(data.parentId)/$(childCollection)/$(data.sourceId)).data;
+        return uid != request.auth.uid && parent.authorId == uid && parent.get('deleting', false) == false
+          && source.uid == request.auth.uid && source.createdAt == request.time && data.createdAt == request.time && data.title == ''
+          && (data.kind == 'comment' || source.kind == data.kind);
+      }
+      function connectionUpdate(data) {
+        let source = getAfter(/databases/$(database)/documents/campusFeedConnections/$(data.sourceId)).data;
+        return data.parentId == '' && data.createdAt == request.time && data.title == ''
+          && (data.kind == 'friend-request'
+            ? source.senderId == request.auth.uid && source.recipientId == uid && source.status == 'pending' && source.createdAt == request.time
+            : source.recipientId == request.auth.uid && source.senderId == uid && source.status == 'accepted' && source.updatedAt == request.time);
+      }
+      function messageUpdate(data) {
+        let parent = getAfter(/databases/$(database)/documents/campusFeedConnections/$(data.parentId)).data;
+        let source = getAfter(/databases/$(database)/documents/campusFeedConnections/$(data.parentId)/messages/$(data.sourceId)).data;
+        return uid != request.auth.uid && parent.status == 'accepted' && uid in parent.members && request.auth.uid in parent.members
+          && source.senderId == request.auth.uid && source.createdAt == request.time && data.createdAt == request.time && data.title == '';
+      }
+      function ownPost(data) {
+        let source = getAfter(/databases/$(database)/documents/campusFeedPosts/$(data.sourceId)).data;
+        return uid == request.auth.uid && data.parentId == '' && data.title == ''
+          && source.authorId == uid && source.createdAt == request.time && data.createdAt == request.time;
+      }
+      function ownActivity(data) {
+        let section = data.kind == 'badge' ? 'badges' : 'dashboard';
+        return uid == request.auth.uid && data.parentId == section && data.createdAt == request.time
+          && getAfter(/databases/$(database)/documents/campusAccountData/$(uid)/state/$(section)).data.updatedAt == request.time;
+      }
+      function ownSuggestion(data) {
+        let source = getAfter(/databases/$(database)/documents/campusSuggestions/$(data.sourceId)).data;
+        let owner = getAfter(/databases/$(database)/documents/campusSuggestionOwners/$(data.sourceId)).data;
+        return uid == request.auth.uid && owner.uid == uid && data.parentId == 'suggestion' && data.title == source.name
+          && (data.kind == 'suggestion-sent'
+            ? source.status == 'pending' && source.createdAt == request.time && data.createdAt == request.time
+            : source.status in ['approved','declined'] && data.kind == 'suggestion-' + source.status
+              && source.reviewedAt is timestamp && data.createdAt == source.reviewedAt);
+      }
+      function validSource() {
+        let data = request.resource.data;
+        return data.kind in ['like','interested','comment'] ? postInteraction(data)
+          : data.kind in ['friend-request','friend-accepted'] ? connectionUpdate(data)
+          : data.kind == 'message' ? messageUpdate(data)
+          : data.kind == 'post-published' ? ownPost(data)
+          : data.kind in ['event-saved','badge'] ? ownActivity(data)
+          : data.kind in ['suggestion-sent','suggestion-approved','suggestion-declined'] ? ownSuggestion(data) : false;
+      }
+      allow get: if member() && request.auth.uid == uid;
+      allow list: if member() && request.auth.uid == uid && bounded(50);
+      allow create: if member() && validNotification() && !request.resource.data.keys().hasAny(['readAt']) && validSource();
+      allow update: if member() && ((request.auth.uid == uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['readAt'])
+          && request.resource.data.readAt is timestamp && request.resource.data.readAt <= resource.data.createdAt
+          && request.resource.data.readAt <= request.time
+          && (!resource.data.keys().hasAny(['readAt']) || request.resource.data.readAt >= resource.data.readAt))
+        || (validNotification() && validSource()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['actorName','title','createdAt'])));
+      allow delete: if member() && request.auth.uid == uid;
+    }
     match /campusAccountData/{uid}/state/{section} {
       function ownAccount() { return member() && request.auth.uid == uid; }
       function knownSection() { return section in ['profile','saved','dashboard','badges','suggestion','assistant']; }

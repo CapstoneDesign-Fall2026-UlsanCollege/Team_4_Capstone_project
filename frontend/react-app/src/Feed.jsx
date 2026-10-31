@@ -771,7 +771,7 @@ function Friends({ data, query, busy, onChange }) {
   );
 }
 
-export default function Feed({ user }) {
+export default function Feed({ user, notification }) {
   const [data, setData] = useState(null);
   const [view, setView] = useState("home");
   const [filter, setFilter] = useState("all");
@@ -786,6 +786,14 @@ export default function Feed({ user }) {
   const locked = useRef(false);
   const alive = useRef(true);
   const noticeTimer = useRef(null);
+  useEffect(() => {
+    if (notification?.userId === user.id && notification.item.workspace === 'feed') { setView('mine'); setFilter('all'); setQuery(''); }
+  }, [notification?.requestId, user.id]);
+  useEffect(() => {
+    if (view !== 'mine' || !notification?.item || !data) return;
+    const element = document.querySelector(`[data-feed-post="${CSS.escape(notification.item.sourceId)}"]`);
+    if (element) { element.tabIndex = -1; element.scrollIntoView({ block: 'center' }); element.focus({ preventScroll: true }); }
+  }, [view, data, notification?.requestId]);
   const notify = (message) => {
     setNotice(message);
     clearTimeout(noticeTimer.current);
@@ -842,13 +850,14 @@ export default function Feed({ user }) {
     setQuery("");
   };
   const publish = async (value) => {
+    const postId = crypto.randomUUID();
     const published = await change((state) => ({
       ...state,
       college: value.college,
       posts: [
         {
           ...value,
-          id: crypto.randomUUID(),
+          id: postId,
           authorId: user.id,
           authorName: user.name,
           createdAt: Date.now(),
@@ -864,6 +873,7 @@ export default function Feed({ user }) {
       selectView("home");
       setFilter("all");
       notify("Your post is saved to this device.");
+      window.dispatchEvent(new CustomEvent('campus-local-notification', { detail: { userId: user.id, source: { kind: 'post-published', sourceId: postId } } }));
     }
     return published;
   };

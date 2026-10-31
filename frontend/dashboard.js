@@ -66,6 +66,10 @@ function recordDashboardActivity(type, title){
   data.activity = data.activity.slice(0, 30);
   if (getSession() && getSession().id !== "demo") window.campusAccount.stage("dashboard",data);
   else localStorage.setItem(dashboardStorageKey(), JSON.stringify(data));
+  if (getSession()?.id === 'demo' && type === 'saved') {
+    const event = EVENTS.find(item => item.title === title);
+    if (event) window.dispatchEvent(new CustomEvent('campus-local-notification', { detail: { userId: 'demo', source: { kind: 'event-saved', parentId: 'dashboard', sourceId: `${event.id}_${Date.parse(data.activity[0].at)}`, title } } }));
+  }
   window.dispatchEvent(new Event("campus-profile-change"));
 }
 
@@ -160,6 +164,7 @@ function renderDashboard(){
   $("#progressStorageWarning").textContent=progress.warning;
   $("#progressStorageWarning").classList.toggle("hidden",!progress.warning);
   const newMilestones=progress.newlyEarned.filter(badge => badge.level>1);
+  if (getSession()?.id === 'demo') for (const badge of newMilestones) window.dispatchEvent(new CustomEvent('campus-local-notification', { detail: { userId: 'demo', source: { kind: 'badge', parentId: 'badges', sourceId: badge.id, title: badge.name } } }));
   $("#progressBadgeAnnouncement").textContent=newMilestones.length ? `Badge unlocked: ${newMilestones.map(badge => badge.name).join(", ")}` : "";
   refreshProgressDialog(progress);
   const weekend = dashboardWeekendEvents();
