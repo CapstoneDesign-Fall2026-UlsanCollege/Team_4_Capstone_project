@@ -1,0 +1,17 @@
+{
+  "name": "campusvibes",
+  "private": true,
+  "type": "module",
+  "workspaces": ["frontend/react-app", "backend"],
+  "scripts": {
+    "dev": "npm run dev --workspace frontend/react-app --",
+    "build": "npm run build --workspace frontend/react-app --",
+    "test:backend": "npm run test --workspace backend --",
+    "test:rules": "npm run test:rules --workspace backend --",
+    "test:smoke": "npm run test:smoke --workspace frontend/react-app --",
+    "firebase:deploy": "firebase deploy --only firestore --config backend/firebase/firebase.json"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "1.13.6"
+  }
+}

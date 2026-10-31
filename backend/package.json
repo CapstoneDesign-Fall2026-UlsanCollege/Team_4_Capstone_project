@@ -1,0 +1,28 @@
+{
+  "name": "@campusvibes/backend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./assistant": "./src/assistant.js",
+    "./feed-photo": "./src/feed-photo.js",
+    "./api/assistant": "./api/assistant.js",
+    "./api/feed-photo": "./api/feed-photo.js"
+  },
+  "scripts": {
+    "test": "node --test tests/assistant-api.test.js tests/feed-photo-api.test.js",
+    "test:rules": "node --test --test-concurrency=1 tests/feed-rules.test.js tests/notifications-rules.test.js",
+    "test:feed-rules": "node --test tests/feed-rules.test.js",
+    "test:notifications-rules": "node --test tests/notifications-rules.test.js",
+    "test:assistant": "node --test tests/assistant-api.test.js",
+    "test:feed-photos": "node --test tests/feed-photo-api.test.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.30.0",
+    "cloudinary": "^2.11.0"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
+    "firebase": "^12.19.0"
+  }
+}

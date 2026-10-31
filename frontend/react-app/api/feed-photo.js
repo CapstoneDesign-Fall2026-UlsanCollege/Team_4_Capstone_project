@@ -1,3 +1,1 @@
-import { createPhotoHandler } from '../server/feed-photo.js';
-
-export default createPhotoHandler();
+export { default } from '@campusvibes/backend/api/feed-photo';

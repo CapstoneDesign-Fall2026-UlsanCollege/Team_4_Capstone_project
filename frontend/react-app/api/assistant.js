@@ -1,3 +1,1 @@
-import { createAssistantHandler } from '../server/assistant.js';
-
-export default createAssistantHandler();
+export { default } from '@campusvibes/backend/api/assistant';
