@@ -3,8 +3,8 @@ import { account, db, feedError } from './shared-feed-store';
 import { writeNotification } from './notification-write';
 
 export function watchConnections(user, receive, fail) {
-  return onSnapshot(query(collection(db, 'campusFeedConnections'), where('members', 'array-contains', account(user)), limit(100)), snapshot => {
-    receive(snapshot.docs.map(item => ({ ...item.data(), id: item.id })));
+  return onSnapshot(query(collection(db, 'campusFeedConnections'), where('members', 'array-contains', account(user)), limit(100)), { includeMetadataChanges: true }, snapshot => {
+    receive(snapshot.docs.map(item => ({ ...item.data(), id: item.id })), { fromCache: snapshot.metadata.fromCache });
   }, error => fail(feedError(error)));
 }
 

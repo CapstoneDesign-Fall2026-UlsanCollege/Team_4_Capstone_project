@@ -19,11 +19,13 @@ export default function Notifications({ user, onOpen }) {
   const demo = user.id === 'demo', panelId = useId();
   const [items, setItems] = useState([]), [open, setOpen] = useState(false), [workspace, setWorkspace] = useState('all');
   const [unreadOnly, setUnreadOnly] = useState(false), [failure, setFailure] = useState(''), [ready, setReady] = useState(demo);
+  const [inboxFailure, setInboxFailure] = useState(''), [suggestionFailure, setSuggestionFailure] = useState('');
   const [busy, setBusy] = useState(false), [retry, setRetry] = useState(0), [online, setOnline] = useState(navigator.onLine);
   const [now, setNow] = useState(Date.now()), [top, setTop] = useState(90);
   const trigger = useRef(null), dialog = useRef(null), alive = useRef(true), locked = useRef(false), current = useRef(items);
   current.current = items;
   const all = recentNotifications(items), unread = all.filter(notificationUnread), visible = recentNotifications(items, workspace, unreadOnly);
+  const failures = [failure, inboxFailure, suggestionFailure].filter(Boolean);
 
   useEffect(() => {
     alive.current = true;
@@ -64,24 +66,27 @@ export default function Notifications({ user, onOpen }) {
     if (demo) return;
     let active = true;
     const reviews = new Set();
-    setReady(false); setFailure('');
-    const fail = message => { if (active) { setFailure(message); setReady(false); } };
+    setReady(false); setFailure(''); setInboxFailure(''); setSuggestionFailure('');
+    const fail = message => { if (active) { setInboxFailure(message); setReady(false); } };
     const timeout = setTimeout(() => fail('Notifications have not connected. Check your connection and retry.'), 15000);
     const stops = [];
     try {
       stops.push(watchNotifications(user, (rows, metadata) => {
         if (!active) return;
         setItems(rows);
-        if (!metadata.fromCache) { clearTimeout(timeout); setReady(true); setFailure(''); }
+        if (!metadata.fromCache) { clearTimeout(timeout); setReady(true); setInboxFailure(''); }
       }, fail));
+    } catch (error) { fail(notificationError(error)); }
+    try {
       stops.push(watchMySuggestions(user, rows => {
+        if (!active) return;
         for (const row of rows.filter(item => ['approved','declined'].includes(item.status))) {
           if (reviews.has(row.id)) continue;
           reviews.add(row.id);
-          ensureSuggestionNotification(user, row).catch(error => { reviews.delete(row.id); if (active) setFailure(notificationError(error)); });
+          ensureSuggestionNotification(user, row).catch(error => { reviews.delete(row.id); if (active) setSuggestionFailure(notificationError(error)); });
         }
-      }, () => { if (active) setFailure('Suggestion notifications could not connect. Retry notifications.'); }));
-    } catch (error) { fail(notificationError(error)); }
+      }, () => { if (active) setSuggestionFailure('Suggestion notifications could not connect. Retry notifications.'); }));
+    } catch (error) { if (active) setSuggestionFailure(notificationError(error)); }
     return () => { active = false; clearTimeout(timeout); stops.forEach(stop => stop()); };
   }, [demo, user.id, retry]);
   useEffect(() => {
@@ -128,9 +133,9 @@ export default function Notifications({ user, onOpen }) {
           <button type="button" className="notification-icon-button" title="Close notifications" aria-label="Close notifications" onClick={close}><X size={19} /></button></div>
         </header>
         <div className="notification-filters"><div className="notification-tabs" role="group" aria-label="Notification workspace">{[['all','All'],['community','Community'],['feed','Vibe-Feed']].map(([value,label]) => <button key={value} type="button" aria-pressed={workspace === value} onClick={() => setWorkspace(value)}>{label}</button>)}</div><label className="notification-unread-filter"><input type="checkbox" checked={unreadOnly} onChange={event => setUnreadOnly(event.target.checked)} />Unread only</label></div>
-        {failure && <div className="notification-error" role="alert"><p>{failure}</p>{!demo && <button type="button" className="notification-icon-button" title="Retry notifications" aria-label="Retry notifications" onClick={() => setRetry(value => value + 1)}><RefreshCw size={17} /></button>}</div>}
+        {failures.length > 0 && <div className="notification-error" role="alert"><div>{failures.map((message, index) => <p key={index}>{message}</p>)}</div>{!demo && <button type="button" className="notification-icon-button" title="Retry notifications" aria-label="Retry notifications" onClick={() => setRetry(value => value + 1)}><RefreshCw size={17} /></button>}</div>}
         {!demo && !online && <p className="notification-connection" role="status">Offline. Read status has not synced.</p>}
-        {!ready && !failure ? <div className="notification-empty" role="status"><LoaderCircle size={24} className="notification-spinner" /><p>Loading notifications...</p></div>
+        {!ready && !inboxFailure ? <div className="notification-empty" role="status"><LoaderCircle size={24} className="notification-spinner" /><p>Loading notifications...</p></div>
           : !visible.length ? <div className="notification-empty"><Bell size={27} /><p>{unreadOnly ? 'No unread notifications here.' : 'No recent notifications here.'}</p></div>
           : <ul className="notification-list">{visible.map(item => {
             const copy = notificationCopy(item), Icon = icons[item.kind];

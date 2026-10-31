@@ -17,6 +17,7 @@ export default function SharedFeed({ user, notification }) {
   const [directory, setProfiles] = useState([]);
   const [extraProfiles, setExtraProfiles] = useState({});
   const [connections, setConnections] = useState([]);
+  const [connectionsReady, setConnectionsReady] = useState(false);
   const [savedIds, setSavedIds] = useState([]);
   const [savedContent, setSavedContent] = useState({});
   const [view, setView] = useState('feed');
@@ -86,10 +87,13 @@ export default function SharedFeed({ user, notification }) {
   useEffect(() => {
     let active = true;
     const guarded = setter => value => { if (active) setter(value); };
+    setConnectionsReady(false);
     ensureFeedProfile(user).catch(error => { if (active) setFailure(feedError(error)); });
     const stops = [
       watchFeedProfiles(user, guarded(setProfiles), guarded(setFailure)),
-      watchConnections(user, guarded(setConnections), guarded(setFailure)),
+      watchConnections(user, (items, metadata) => {
+        if (active) { setConnections(items); setConnectionsReady(!metadata.fromCache); }
+      }, message => { if (active) { setConnectionsReady(false); setFailure(message); } }),
       watchSavedPosts(user, guarded(setSavedIds), guarded(setFailure)),
     ];
     return () => { active = false; stops.forEach(stop => stop()); };
@@ -183,7 +187,7 @@ export default function SharedFeed({ user, notification }) {
       </aside>
       <div className="feed-timeline">
         {failure && <div className="feed-error" role="alert"><p>{failure}</p><button type="button" disabled={busy} onClick={() => setRetry(value => value + 1)}>Try again</button></div>}
-        {view === 'messages' ? <SharedMessages user={user} profiles={profiles} connections={connections} query={query} ready={ready} drafts={messageDrafts} onDraft={updateMessageDraft} notification={notification} {...messaging} /> : view === 'friends' ? <SharedFriends user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
+        {view === 'messages' ? <SharedMessages user={user} profiles={profiles} connections={connections} connectionsReady={connectionsReady} query={query} ready={ready} drafts={messageDrafts} onDraft={updateMessageDraft} notification={notification} {...messaging} /> : view === 'friends' ? <SharedFriends user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
           {notificationMissing && view === 'feed' && <p className="feed-side-empty" role="status">This post is no longer available.</p>}
           {view !== 'saved' && <Composer user={user} college={college} busy={busy} disabled={!ready} shared onPublish={publish} />}
           <div className="feed-timeline-heading"><h2>{heading}</h2><span className="shared-feed-count">{visible.length}{view !== 'saved' && posts.length === FEED_PAGE_SIZE ? ' / latest 50' : ''}</span></div>
