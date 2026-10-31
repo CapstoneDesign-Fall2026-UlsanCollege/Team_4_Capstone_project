@@ -42,10 +42,10 @@ Our final demo will prove:
 
 | Part | Owner | Issue link |
 |---|---|---|
-| Authentication: Google sign-in and password reset | Prachi2061 (proposed; confirm with team) | [Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) |
+| Authentication: Google sign-in and password reset | Prachi2061 (proposed; confirm with team) | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
 | Main event discovery and event details testing | DevyanaCT (proposed) | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
-| Independent deployed website testing | Ujjalpoudel75 (confirm ownership with team) | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
-| Firestore event loading verification | Firebase / database developer (confirm with team) | [Create or add the Firestore testing issue] |
+| Independent deployed website testing | Prachi2061(Author) Tulseyy8848(Independent tester) DevyanaCT(Retester) | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) |
+| Firestore event loading verification | Firebase / database developer (confirm with team) | [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) |
 
 ## MVP completion rule
 
