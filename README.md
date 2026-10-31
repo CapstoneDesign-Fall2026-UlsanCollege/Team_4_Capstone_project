@@ -1,120 +1,239 @@
-# CampusVibes
+<div align="center">
+  <img src="frontend/react-app/public/assets/campusvibes-logo.png" alt="CampusVibes logo" width="76" />
+  <h1>CampusVibes</h1>
+  <p><strong>Discover campus events. Share campus moments. Stay connected.</strong></p>
+  <p>Team 4 · Ulsan College · Capstone Design, Fall 2026</p>
+  <p>
+    <a href="https://campusvibe-theta.vercel.app/">Live website</a> ·
+    <a href="#quick-start">Quick start</a> ·
+    <a href="#project-structure">Project structure</a> ·
+    <a href="#testing">Testing</a> ·
+    <a href="#team">Team</a>
+  </p>
+</div>
 
-CampusVibes is a student capstone project for discovering campus activities
-and sharing campus updates. The current app uses React, Vite, and Firebase.
+CampusVibes brings event discovery, campus updates, and student conversations into two connected workspaces: **Community** and **Campus Vibe-Feed**. It combines a React interface with Firebase account persistence and server-side integrations for AI conversations and photo sharing.
 
-## Current Features and Scope
+> **Current data boundary:** Discover displays nine code-based sample events from [the event catalog](frontend/events.json). Live Firestore event loading remains unverified. Signed-in account records, shared Feed posts, messages, suggestions, and notifications use real Firestore data. Guest demo activity stays in the browser.
 
-| Area | Current behavior | Data and limits |
-|---|---|---|
-| Authentication | Email/password signup, login, logout, persistence, Google sign-in and password-reset wiring | Firebase Authentication. Successful Google login and reset-email completion need separate verification. |
-| Community | Dashboard, Discover search/filters, event details, Saved, and Profile | Discover events remain code-based samples. Signed-in saves and activity sync privately through Firestore; demo records stay browser-local. |
-| Profile | Identity header, account-backed profile photos, completion checklist, editable study/bio/interests, saved-event actions, activity, host follows, and text sharing | Study edits stay private. Small profile photos and member IDs are shared with signed-in members; email stays private. No claimed club membership or attendance totals. [Photo privacy and checks](frontend/react-app/verification/profile-photos.md). |
-| Progress Badges | Automatically unlock Explorer, Campus Scout, Pathfinder, Vibe Maker, and Campus Legend at level milestones | Signed-in awards sync between devices and survive a lower score. Demo awards remain local. Existing points rules are unchanged; not verified attendance. [Persistence and evidence](frontend/react-app/verification/account-persistence.md). |
-| Assistant | Reference workspace with navigation rail, mascot, filters, conversations, saved answers, comparisons, and bookmarks/details | Free local answer engine; signed-in history/drafts/answers persist privately in Firestore after logout. Demo history remains tab-local. No AI service/live campus data; Attach/Voice unavailable. |
-| Suggest | Draft event ideas, submit for team review, and track decisions | Signed-in drafts, submissions and decisions persist in Firestore. Demo drafts stay local. Anonymous ideas hide attribution from reviewers, not project administrators. Approval does not publish a Discover event; attachments remain off. |
-| Guest Campus Vibe-Feed | Text/photo/event posts, local social actions, and demo friend requests | Fictional profiles and device-local IndexedDB storage; no delivery to other students. |
-| Signed-in Campus Vibe-Feed | Text/event posts, likes, comments, interest, private saved posts, profile thumbnails, distinct member IDs, and friend requests | Firestore-backed data in the restored rich layout. Shared post-photo attachments remain disabled while billing stays off. See the social-feed verification record for tested scope and query limits. |
+## Preview
 
-The shared-feed implementation is included in this checkout. See the
-[production permissions fix and verification](frontend/react-app/verification/shared-feed-production.md)
-for the deployed backend configuration, screenshots, and test limits.
-The [restored real-social feed](frontend/react-app/verification/real-social-feed.md)
-adds account-backed likes, comments, saves, and friends while retaining a
-separate fictional guest demo.
-The feed also includes [private Messages between accepted friends](frontend/react-app/verification/feed-messages.md), with live replies, unread badges, read receipts, and earlier history.
+![CampusVibes Discover page showing sample events in the desktop guest demo](.github/assets/campusvibes-desktop.png)
 
-[Profile photos and complete member IDs](frontend/react-app/verification/profile-photos.md) distinguish students with the same display name in Friends and Messages. Photos are optional; messages remain addressed by account ID, and shared identity does not expose account email or private study details.
+<details>
+  <summary>View mobile event details</summary>
+  <p align="center">
+    <img src=".github/assets/campusvibes-mobile.png" alt="Sample event details in a 390-pixel mobile browser viewport" width="300" />
+  </p>
+</details>
 
-The [account persistence guide](frontend/react-app/verification/account-persistence.md)
-explains server-confirmed saves, offline retry, legacy browser-data migration,
-private access rules, concurrency, and the distinction between real accounts and demo mode.
+These screenshots were captured from the local guest demo. The mobile image uses a browser viewport, not a physical-device test.
 
-## Run Locally
+## Features
 
-Use Node.js 20 or later and npm. Clone the repository, then install and run
-the app from its actual directory:
+| Area | Implemented behavior |
+|---|---|
+| **Event discovery** | Dashboard, event search and interest filters, sorting, event details, bookmarks, and external Google Maps venue links. |
+| **Campus Vibe-Feed** | Shared text and event posts, one compressed photo per post through Cloudinary, likes, comments, interest, and private saved posts. |
+| **Friends and messages** | Friend requests, accepted-friend conversations, unread indicators, read receipts, and earlier message history. Avatars and member IDs distinguish people with the same name. |
+| **Notifications** | One header inbox for both workspaces, Community/Feed filters, unread-only filtering, source links, and account-persistent read status. The inbox displays the latest 50 alerts. |
+| **Event suggestions** | Saved drafts, a shared review queue, reviewer decisions, and personal submission status. Anonymous submissions hide attribution from reviewers; project administrators retain access. |
+| **Profile and badges** | Optional profile photo, editable bio/study details/interests, saved-event activity, and persistent progress badges. |
+| **Assistant** | A local event helper with category/date/location filters and optional Gemini conversations for signed-in users, with privacy confirmation, usage controls, and local fallback. |
+| **Authentication and persistence** | Firebase email/password accounts, Google sign-in and password-reset flows, session preferences, and private account synchronization. |
+
+### Scope and limitations
+
+- Events and their venue names are samples. Map searches do not establish a verified real-world pin; directions require an organizer-provided address or coordinates.
+- Suggestion approval records a review decision; it does not publish an event into Discover. Suggestion attachments and Assistant Attach/Voice controls are unavailable.
+- Gemini has no live web search or access to private student messages. Its availability depends on server configuration and provider limits.
+- Badges represent planning progress, not verified attendance or club membership.
+- Google sign-in and reset-email completion require their own provider-enabled verification; other passing checks do not establish those outcomes.
+
+## Quick start
+
+Use **Node.js 24.x** for parity with the deployment, and npm. Run commands from the repository root unless stated otherwise.
 
 ```sh
 git clone https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project.git
-cd Team_4_Capstone_project/frontend/react-app
+cd Team_4_Capstone_project
 npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. Choose **Explore events** to inspect the
-sample-data flow without creating a Firebase account.
+Open the URL printed by Vite. Choose **Explore events** to use the guest demo without creating an account. Real-account features require Firebase Authentication and the project's Firestore permissions.
 
-Firebase web configuration is currently read from
-`frontend/react-app/src/firebase.js`; the app does not read
-`VITE_FIREBASE_API_KEY` or the other previously listed configuration variables.
-Firebase provider setup and authentication checks are documented in the
-[app README](frontend/react-app/README.md).
-
-## Checks and Evidence
-
-Run these commands from `frontend/react-app`:
+For a production build:
 
 ```sh
 npm run build
+```
+
+The build output is `frontend/react-app/dist/`. Local development also mounts the backend handlers at `/api/assistant` and `/api/feed-photo`.
+
+## Project structure
+
+```text
+Team_4_Capstone_project/
+├── backend/
+│   ├── api/                 Server API entry points
+│   ├── src/                 Gemini and Cloudinary request handlers
+│   ├── firebase/            Firebase configs, Firestore rules and indexes
+│   ├── tests/               Backend API and database-permission checks
+│   └── package.json         Backend dependencies and scripts
+├── frontend/
+│   ├── index.html           Community markup mounted by React
+│   ├── apps.js              Authentication, navigation and Community behavior
+│   ├── dashboard.js         Dashboard interactions and progress
+│   ├── discover.js          Event discovery and details
+│   ├── events.json          Sample event catalog
+│   └── react-app/
+│       ├── api/             Thin Vercel adapters to backend/api/
+│       ├── src/             React UI, client stores and portable helpers
+│       ├── public/          App assets
+│       ├── tests/           Frontend unit and browser checks
+│       └── verification/    Dated test receipts and screenshots
+├── docs/                    Team reports, planning and evidence
+├── .github/                 Issue templates and README images
+├── firebase.json            Root CLI compatibility configuration
+├── package.json             npm workspace and root commands
+└── package-lock.json        Shared dependency lockfile
+```
+
+The root Firebase configuration points to the resources in `backend/firebase/`. The small `frontend/react-app/api/` adapters preserve the existing Vercel deployment layout; server logic and provider dependencies belong to the backend package.
+
+### Architecture
+
+```mermaid
+flowchart LR
+    UI["Frontend: React + Vite"] --> Catalog["Sample event catalog"]
+    UI -->|"Sign-in and account/shared records"| Firebase["Firebase Auth + Firestore"]
+    UI -->|"/api/assistant and /api/feed-photo"| API["Backend: Vercel Functions"]
+    API -->|"Identity, ownership and usage checks"| Firebase
+    API -->|"Optional conversations"| Gemini["Gemini"]
+    API -->|"Photo operations"| Cloudinary["Cloudinary"]
+    API -.->|"Public sample context"| Catalog
+```
+
+## Configuration
+
+### Firebase
+
+This checkout targets the Team 4 Firebase project. Browser configuration is in [src/firebase.js](frontend/react-app/src/firebase.js), and access rules and indexes are in [backend/firebase](backend/firebase/). The app does not read `VITE_FIREBASE_API_KEY` configuration variables.
+
+Real sign-in requires the appropriate Firebase providers and authorized domains. Connecting a different Firebase project also requires updating the backend handlers' identity/project settings and deploying matching rules and indexes.
+
+### Optional AI and photo services
+
+For local provider integrations, create `frontend/react-app/.env.local`. The Vite development server reads these **server-side** variables:
+
+```dotenv
+GEMINI_API_KEY=replace_with_your_gemini_key
+CLOUDINARY_CLOUD_NAME=ghr7xnsl
+CLOUDINARY_API_KEY=replace_with_your_cloudinary_key
+CLOUDINARY_API_SECRET=replace_with_your_cloudinary_secret
+```
+
+The Cloudinary cloud name must match `FEED_PHOTO_CLOUD` in [the photo contract](frontend/react-app/src/feed-photo.js). Photo uploads use Cloudinary; they do not use a Firebase Storage bucket.
+
+Keep credentials out of Git and never prefix server secrets with `VITE_`. Set the same variables in Vercel's environment settings for the deployment environments that need them. Missing provider configuration leaves the local Assistant available and prevents shared photo uploads; text posts remain available.
+
+## Testing
+
+| Command, from the repository root | Purpose |
+|---|---|
+| `npm run build` | Build the production frontend. |
+| `npm run test:backend` | Check backend authentication, request validation, ownership, provider behavior, and limits with controlled fixtures. |
+| `npm run test:assistant --workspace frontend/react-app` | Check the local Assistant engine, search, and conversation behavior. |
+| `npm run test:account --workspace frontend/react-app` | Check account persistence and synchronization logic. |
+| `npm run test:notifications --workspace frontend/react-app` | Check notification types, source keys, filtering, and activity mapping. |
+| `npm run test:smoke` | Run the desktop/mobile browser suite. |
+| `npm run test:rules` | Check Firestore permissions against a running local emulator. |
+
+Install the browser once before running the smoke suite:
+
+```sh
 npx playwright install chromium
 npm run test:smoke
 ```
 
-The Events smoke test starts and stops a local server on port 4178 and checks
-sample-event details and empty-search recovery on desktop and mobile.
-See [Week 6 stretch evidence](docs/Week6/stretch-validation.md) for the success
-signal, original dialog-close failure, passing retest, and test limits.
+The browser suite manages its preview server on port **4178**. An installed Google Chrome can also be selected with `SMOKE_BROWSER_CHANNEL=chrome`.
 
-The shared-feed branch also provides `npm run test:feed-rules` and
-`npm run test:shared-feed`. These need local Auth/Firestore emulators;
-the browser test also needs the emulator-connected dev server.
-Follow the [shared-feed setup and verification guide](frontend/react-app/verification/shared-feed.md)
-for the required order, ports, environment flag, and screenshots.
-Java 21 or later is needed for the documented emulator setup.
+<details>
+<summary>Run the Firestore permission checks locally</summary>
+
+Install the Firebase CLI and Java 21 or later. In one terminal, start the isolated demo emulators:
+
+```sh
+firebase emulators:start --project demo-campusvibe-feed --config backend/firebase/firebase.account-test.json --only auth,firestore
+```
+
+In a second PowerShell terminal, run:
+
+```powershell
+$env:FIRESTORE_EMULATOR_HOST = "127.0.0.1:8180"
+npm run test:rules
+```
+
+To connect the development app and backend handlers to those same emulators, use these variables before starting the dev server:
+
+```powershell
+$env:VITE_FIREBASE_EMULATORS = "true"
+$env:VITE_FIREBASE_AUTH_EMULATOR_PORT = "9199"
+$env:VITE_FIREBASE_FIRESTORE_EMULATOR_PORT = "8180"
+$env:FIREBASE_AUTH_EMULATOR_HOST = "127.0.0.1:9199"
+$env:FIRESTORE_EMULATOR_HOST = "127.0.0.1:8180"
+npm run dev
+```
+
+The client emulator switch is restricted to development on localhost. The test project ID is `demo-campusvibe-feed`.
+
+</details>
+
+Feature-specific [verification records](frontend/react-app/verification/) contain dated screenshots and test scopes. Automated browser checks and mobile viewports supplement the team's independent rehearsal evidence; they do not replace it. Older receipts describe the version they tested.
 
 ## Deployment
 
-Vercel serves the frontend from `frontend/react-app`. See the
-[Vercel deployment guide](docs/VERCEL_DEPLOYMENT.md).
-Pushing a feature branch does not merge it or deploy Firestore rules/indexes.
+The current Vercel project uses:
 
-Before enabling the shared feed in production, the Firebase project owner must
-review the existing production rules and integrate the permissions in
-`firestore.rules` and the indexes in `firestore.indexes.json`.
-The authored rules deny access to collections not explicitly matched.
-Production text-post cross-account testing passed on October 14, 2026;
-future backend changes should be checked again after deployment.
+| Setting | Value |
+|---|---|
+| Root directory | `frontend/react-app` |
+| Framework | Vite |
+| Install command | `npm install` |
+| Build command | `npm run build` |
+| Output directory | `dist` |
+| Source files outside the root directory | Included, for the backend workspace |
 
-## Repository Structure
+Application deployments and Firebase resource deployments are separate. The project owner can deploy the checked-in Firestore resources with an explicit target project:
 
-```text
-.github/                  Issue templates
-docs/                     Team planning, weekly reports, and evidence
-frontend/
-  index.html              Community markup mounted by React
-  apps.js                 Community behavior and sample event data
-  dashboard.js            Dashboard behavior
-  discover.js             Discover and event-detail behavior
-  react-app/
-    src/                  React app, Firebase setup, local/shared feeds
-    public/               Static assets
-    tests/                Events smoke and shared-feed checks
-    verification/         Validation notes and screenshots
-firebase.json             Emulator and Firestore resource configuration
-firestore.rules           Shared-feed access rules
-firestore.indexes.json    Shared-feed query indexes
+```sh
+npm run firebase:deploy -- --project YOUR_FIREBASE_PROJECT_ID
 ```
 
-## Team and Documentation
+An application push alone does not deploy Firestore rules or indexes.
 
-Team 4: Devyana, Tulsey, Ujjal Poudel, and Prachi2061.
-Instructor: DJ Twone.
+## Contributing and project records
 
-See [team members](docs/TEAM_MEMBERS.md), the
-[shared Week 6 report](docs/Week6/weekly_report.md), and the
-[Week 6 checklist](docs/Week6/week6-work-checklist.md) for contributions,
-test evidence, and outstanding work.
+Use focused branches and pull requests. Link the relevant issue, include the actual check or result, and distinguish implemented behavior from planned work and known limitations.
 
-This repository is for academic and collaborative capstone use.
-No general-use license is currently stated here.
+- [Issues and tracked work](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues)
+- [Pull requests](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pulls)
+- [Team documentation](docs/)
+- [Week 9 report](docs/Week9/Weekly-Report.md)
+- [Feature verification records](frontend/react-app/verification/)
+
+## Team
+
+| Member | GitHub |
+|---|---|
+| Devyana | [DevyanaCT](https://github.com/DevyanaCT) |
+| Tulsey | [tulseyy8848](https://github.com/tulseyy8848) |
+| Ujjal Poudel | [ujjalpoudel75](https://github.com/ujjalpoudel75) |
+| Prachi | [prachi2061](https://github.com/prachi2061) |
+
+Instructor: **DJ Twone**. See [team members](docs/TEAM_MEMBERS.md) for the shared team record.
+
+## License
+
+This is an academic capstone repository. No project license has been specified.
