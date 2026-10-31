@@ -1,5 +1,6 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, limit, onSnapshot, orderBy, query, serverTimestamp, setDoc, startAfter } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, limit, onSnapshot, orderBy, query, serverTimestamp, setDoc, startAfter, writeBatch } from 'firebase/firestore';
 import { account, db } from './shared-feed-store';
+import { writeNotification } from './notification-write';
 
 export function messageError(error) {
   if (error?.code === 'permission-denied') return 'This conversation is no longer available.';
@@ -31,10 +32,17 @@ export function watchLoadedMessage(user, connectionId, messageId, receive, fail)
   }, error => fail(messageError(error)));
 }
 
-export function sendMessage(user, connectionId, text) {
+export async function sendMessage(user, connectionId, text) {
   const body = String(text || '').trim();
   if (!body || body.length > 2000) throw new Error('Write a message of up to 2,000 characters.');
-  return addDoc(messageCollection(connectionId), { senderId: account(user), body, createdAt: serverTimestamp() });
+  const uid = account(user), connection = await getDoc(doc(db, 'campusFeedConnections', connectionId));
+  account(user);
+  const reference = doc(messageCollection(connectionId)), batch = writeBatch(db);
+  batch.set(reference, { senderId: uid, body, createdAt: serverTimestamp() });
+  const recipient = connection.data()?.members?.find(id => id !== uid);
+  if (recipient) writeNotification(batch, db, user, recipient, { kind: 'message', parentId: connectionId, sourceId: reference.id });
+  await batch.commit();
+  return reference;
 }
 
 export function deleteMessage(user, connectionId, messageId) {

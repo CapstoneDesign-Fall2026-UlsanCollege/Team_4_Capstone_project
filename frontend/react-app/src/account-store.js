@@ -3,6 +3,8 @@ import { auth } from './firebase';
 import { db } from './shared-feed-store';
 import { cleanAccountSection,encodeAccountSection,legacyAccountData,mergeBadges,mergeDashboard,mergeSavedEvents } from './account-data.js';
 import { createAccountSync } from './account-sync.js';
+import { accountNotifications } from './notifications-model.js';
+import { writeNotification } from './notification-write';
 
 export function createAccountStore(user,events) {
   function owner() {
@@ -22,7 +24,9 @@ export function createAccountStore(user,events) {
         const previous=snapshot.exists() ? cleanAccountSection(name,JSON.parse(snapshot.data().value),user,events) : null;
         if(ifMissing && snapshot.exists()) return previous;
         const data=name === 'badges' ? mergeBadges(previous,value) : name === 'saved' ? mergeSavedEvents(base || [],value,previous || []) : name === 'dashboard' ? mergeDashboard(previous,value) : value;
-        transaction.set(reference,payload(data));return data;
+        transaction.set(reference,payload(data));
+        if (!ifMissing) for (const source of accountNotifications(name,previous,data,events)) writeNotification(transaction,db,user,user.id,source);
+        return data;
       });
       await setDoc(reference,payload(value));return value;
     },

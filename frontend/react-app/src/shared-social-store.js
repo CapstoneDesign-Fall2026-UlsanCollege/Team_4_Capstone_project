@@ -1,5 +1,6 @@
-import { addDoc, collection, deleteDoc, doc, limit, onSnapshot, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, limit, onSnapshot, orderBy, query, serverTimestamp, writeBatch } from 'firebase/firestore';
 import { account, db, feedError } from './shared-feed-store';
+import { writeNotification } from './notification-write';
 
 export function watchReactions(user, postId, receive, fail) {
   account(user);
@@ -8,11 +9,17 @@ export function watchReactions(user, postId, receive, fail) {
   }, error => fail(feedError(error)));
 }
 
-export function setReaction(user, postId, kind, active) {
+export async function setReaction(user, postId, kind, active) {
   const uid = account(user);
   if (!['like', 'interested'].includes(kind)) throw new Error('Unknown reaction.');
   const reference = doc(db, 'campusFeedPosts', postId, 'reactions', `${uid}_${kind}`);
-  return active ? setDoc(reference, { uid, kind, createdAt: serverTimestamp() }) : deleteDoc(reference);
+  if (!active) return deleteDoc(reference);
+  const post = await getDoc(doc(db, 'campusFeedPosts', postId));
+  account(user);
+  const batch = writeBatch(db);
+  batch.set(reference, { uid, kind, createdAt: serverTimestamp() });
+  if (post.exists() && post.data().authorId !== uid) writeNotification(batch, db, user, post.data().authorId, { kind, parentId: postId, sourceId: reference.id });
+  await batch.commit();
 }
 
 export function watchComments(user, postId, receive, fail) {
@@ -22,12 +29,18 @@ export function watchComments(user, postId, receive, fail) {
   }, error => fail(feedError(error)));
 }
 
-export function addComment(user, postId, text) {
+export async function addComment(user, postId, text) {
   const body = String(text || '').trim();
   if (!body || body.length > 500) throw new Error('Write a comment of up to 500 characters.');
-  return addDoc(collection(db, 'campusFeedPosts', postId, 'comments'), {
-    uid: account(user), name: String(user.name || 'Student').slice(0, 120), body, createdAt: serverTimestamp(),
+  const uid = account(user), post = await getDoc(doc(db, 'campusFeedPosts', postId));
+  account(user);
+  const reference = doc(collection(db, 'campusFeedPosts', postId, 'comments')), batch = writeBatch(db);
+  batch.set(reference, {
+    uid, name: String(user.name || 'Student').slice(0, 120), body, createdAt: serverTimestamp(),
   });
+  if (post.exists() && post.data().authorId !== uid) writeNotification(batch, db, user, post.data().authorId, { kind: 'comment', parentId: postId, sourceId: reference.id });
+  await batch.commit();
+  return reference;
 }
 
 export function deleteComment(user, postId, commentId) {

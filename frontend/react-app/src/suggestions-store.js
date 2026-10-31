@@ -1,6 +1,7 @@
 import { collection, doc, getDocFromServer, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where, writeBatch } from 'firebase/firestore';
 import { auth } from './firebase';
 import { db } from './shared-feed-store';
+import { writeNotification } from './notification-write';
 
 export const SUGGESTION_CATEGORIES = ['All', 'Tech', 'Arts', 'Music', 'Sports', 'Social', 'Academics'];
 
@@ -42,6 +43,7 @@ export async function submitSuggestion(user, value) {
   batch.set(doc(db, 'campusSuggestions', value.id), {
     ...payload, createdAt: serverTimestamp(), status: 'pending', reviewNote: '', reviewerId: '', reviewedAt: null,
   });
+  writeNotification(batch, db, user, uid, { kind: 'suggestion-sent', parentId: 'suggestion', sourceId: value.id, title: payload.name });
   await batch.commit();
   return value.id;
 }
