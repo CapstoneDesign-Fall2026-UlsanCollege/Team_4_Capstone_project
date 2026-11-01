@@ -50,7 +50,7 @@ Each student must complete their own entry and add at least one evidence link.
 | Blocker/risk | Owner | Next action |
 |---|---|---|
 | Firestore event loading remains unverified. | Prachi2061 and Ujjalpoudel75 | Verify database loading and record the actual result. |
-| Google sign-in and password reset are not yet completed and tested. | Authentication developer | Complete configuration and perform end-to-end testing. |
+| Google sign-in and password reset are not yet completed and tested. | Authentication developer(Prachi2061) Tester(Ujjalpoudel75) | Complete configuration and perform end-to-end testing. |
 | Some supporting features need additional regression testing. | DevyanaCT | Test important supporting features and document any issues. |
 | Individual code ownership and AI-use records need review. | All team members | Review commits and document individual contributions. |
 
