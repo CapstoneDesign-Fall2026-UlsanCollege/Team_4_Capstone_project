@@ -35,6 +35,7 @@ If it is not linked, it does not count.
 | Week 9 Action Plan | [Week 9 Action Plan](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/Week9-Action-Plan.md) |
 | Sprint quality check | [Sprint Quality Quick Check](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/Sprint-quality-quick-check.md) |
 | MVP contract | [MVP Contract](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/MVP-Contract.md) |
+| Supporting Features Regression Testing | [Related Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133)
 
 ## Supporting Features Regression Testing
 
