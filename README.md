@@ -48,7 +48,7 @@ These screenshots were captured from the local guest demo. The mobile image uses
 - Suggestion approval records a review decision; it does not publish an event into Discover. Suggestion attachments and Assistant Attach/Voice controls are unavailable.
 - Gemini has no live web search or access to private student messages. Its availability depends on server configuration and provider limits.
 - Badges represent planning progress, not verified attendance or club membership.
-- Google sign-in and reset-email completion require their own provider-enabled verification; other passing checks do not establish those outcomes.
+- Google sign-in reaches Google's account page on the production site in desktop/mobile viewport checks. Completing a real-account login, restoring that session and receiving a reset email still require separate verification.
 
 ## Quick start
 
@@ -123,6 +123,8 @@ This checkout targets the Team 4 Firebase project. Browser configuration is in [
 
 Real sign-in requires the appropriate Firebase providers and authorized domains. Connecting a different Firebase project also requires updating the backend handlers' identity/project settings and deploying matching rules and indexes.
 
+For Google sign-in, enable the Google provider and add the exact website hostname under **Firebase Authentication → Settings → Authorized domains**. Production uses `campusvibe-theta.vercel.app`; a Vercel deployment does not update this Firebase list. An omitted hostname produces `auth/unauthorized-domain`.
+
 ### Optional AI and photo services
 
 For local provider integrations, create `frontend/react-app/.env.local`. The Vite development server reads these **server-side** variables:
@@ -148,6 +150,7 @@ Keep credentials out of Git and never prefix server secrets with `VITE_`. Set th
 | `npm run test:account --workspace frontend/react-app` | Check account persistence and synchronization logic. |
 | `npm run test:notifications --workspace frontend/react-app` | Check notification types, source keys, filtering, and activity mapping. |
 | `npm run test:maps --workspace frontend/react-app` | Check map URLs, trip modes, safe address encoding, coordinate validation and straight-line distance. |
+| `npm run test:google-signin-live --workspace frontend/react-app` | Check the live Firebase domain allowlist, Google account-page handoff and popup-dismissal recovery on desktop/mobile viewports; no credentials are entered. |
 | `npm run test:smoke` | Run the desktop/mobile browser suite. |
 | `npm run test:rules` | Check Firestore permissions against a running local emulator. |
 
@@ -159,6 +162,8 @@ npm run test:smoke
 ```
 
 The browser suite manages its preview server on port **4178**. An installed Google Chrome can also be selected with `SMOKE_BROWSER_CHANNEL=chrome`.
+
+The live Google readiness check uses installed Chrome by default and targets the production URL. Set `GOOGLE_SIGNIN_TEST_URL` to check another configured website and `SMOKE_BROWSER_CHANNEL` to select a different installed browser channel. It checks provider-page readiness; it does not complete an account login or send a password-reset email.
 
 <details>
 <summary>Run the Firestore permission checks locally</summary>

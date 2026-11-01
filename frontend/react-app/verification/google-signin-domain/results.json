@@ -1,0 +1,74 @@
+{
+  "owner": "prachi2061",
+  "assistance": "Codex-assisted diagnosis, narrow Firebase configuration repair and automated verification.",
+  "configurationCheckedAt": "2026-11-01T15:06:11.600Z",
+  "liveCheckedAt": "2026-11-01T15:08:25.702Z",
+  "project": "campus-vibe-7a95a",
+  "productionHostname": "campusvibe-theta.vercel.app",
+  "before": {
+    "errorCode": "auth/unauthorized-domain",
+    "authorizedDomains": [
+      "localhost",
+      "campus-vibe-7a95a.firebaseapp.com",
+      "campus-vibe-7a95a.web.app"
+    ],
+    "observedMessage": "Google sign-in isn't configured for this website yet. Please use email and password."
+  },
+  "repair": {
+    "endpointField": "authorizedDomains",
+    "updateMask": "authorizedDomains",
+    "existingDomainsPreserved": true,
+    "googleProviderAlreadyEnabled": true,
+    "googleOAuthClientAlreadyConfigured": true,
+    "authorizedDomainsAfter": [
+      "localhost",
+      "campus-vibe-7a95a.firebaseapp.com",
+      "campus-vibe-7a95a.web.app",
+      "campusvibe-theta.vercel.app"
+    ],
+    "note": "Only the exact production hostname was appended. Provider credentials, active CLI account, billing and other authentication settings were not changed."
+  },
+  "liveResults": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "siteDomain": "campusvibe-theta.vercel.app",
+      "projectId": "campus-vibe-7a95a",
+      "authorizedDomain": true,
+      "googlePage": {
+        "origin": "https://accounts.google.com",
+        "path": "/v3/signin/identifier"
+      },
+      "popupDismissed": true,
+      "credentialsEntered": false,
+      "accountSignInCompleted": false,
+      "result": "PASS"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "siteDomain": "campusvibe-theta.vercel.app",
+      "projectId": "campus-vibe-7a95a",
+      "authorizedDomain": true,
+      "googlePage": {
+        "origin": "https://accounts.google.com",
+        "path": "/v3/signin/identifier"
+      },
+      "popupDismissed": true,
+      "credentialsEntered": false,
+      "accountSignInCompleted": false,
+      "result": "PASS"
+    }
+  ],
+  "repeat": {
+    "command": "npm run test:google-signin-live --workspace frontend/react-app",
+    "script": "frontend/react-app/tests/google-signin-live.browser.js",
+    "sha256": "10d093dfdea1693e2b77ad0686e7b02d4777e3c6c799ea01659d6913e1e4e12d"
+  },
+  "scope": "Live domain authorization, Google provider-page handoff and popup-dismissal recovery. No identity selection, credentials, full account/session validation, password-reset email or shared-data submission.",
+  "remaining": "Issue #116 stays open: selecting a real Google identity, completing login, reloading/restoring that session and password-reset email/password-change behavior have not been verified by this check."
+}

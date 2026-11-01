@@ -28,6 +28,7 @@
     "test:notifications-rules": "npm run test:notifications-rules --workspace @campusvibes/backend",
     "test:notifications-browser": "node tests/notifications.browser.js",
     "test:smoke": "playwright test",
+    "test:google-signin-live": "node tests/google-signin-live.browser.js",
     "test:toast-mobile": "node tests/toast-mobile.browser.js"
   },
   "dependencies": {
