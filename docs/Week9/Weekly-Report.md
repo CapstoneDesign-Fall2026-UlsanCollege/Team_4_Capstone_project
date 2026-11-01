@@ -67,7 +67,7 @@ Each student must complete their own entry and add at least one evidence link.
 | Student | What they did | Evidence link |
 |---|---|---|
 | DevyanaCT | Updated project documentation and the Final Demo Roadmap, organized testing evidence, performed regression testing on supporting features, tested the deployed CampusVibes website, and tested the local setup as a backup demo option. | [Final Demo Roadmap](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week9/Final-demo-Roadmap.md),  [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118), [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133)|
-|  |  |  |
+| ujjalpoudel75 | Performed independent authentication testing on the deployed CampusVibes website. Successfully verified the complete Password Reset process, including reset email delivery, password change, and login with the new password. Identified that Google Sign-In is blocked due to incomplete configuration. Documented the expected results, actual results, and three screenshot evidence items in Issue #116. Recommended fixing Google Sign-In and retesting before the final demo.  |  [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
 |  |  |  |
 |  |  |  |
 
