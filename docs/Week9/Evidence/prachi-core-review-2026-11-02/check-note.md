@@ -1,7 +1,7 @@
 # Week 9 core-path evidence review — prachi2061
 
 **Review date:** 2026-11-02, Asia/Seoul.<br>
-**Owner:** `prachi2061`; Codex-assisted Playwright execution and documentation.<br>
+**Owner:** `prachi2061`; assisted Playwright execution and documentation.<br>
 **Website:** [Production CampusVibes](https://campusvibe-theta.vercel.app/).<br>
 **Entry used:** **Explore events / guest demo**, with Firebase `currentUser === null`.
 
