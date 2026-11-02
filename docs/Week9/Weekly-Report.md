@@ -70,12 +70,14 @@ Existing supporting features were reviewed and tested to check whether they cont
 
 Each student must complete their own entry and add at least one evidence link.
 
+**Evidence-review note (prachi2061, November 2):** Existing member-authored rows are preserved below. The full password-reset claim in ujjalpoudel75's row is not yet supported by the linked form/dashboard screenshots; its status for the demo remains **NOT TESTED** until email receipt, password change and login with the changed password are recorded step by step. Google provider-page readiness likewise does not establish a completed Google login. Each member owns correcting or completing their own row.
+
 | Student | What they did | Evidence link |
 |---|---|---|
 | DevyanaCT | Updated project documentation and the Final Demo Roadmap, organized testing evidence, performed regression testing on supporting features, tested the deployed CampusVibes website, and tested the local setup as a backup demo option. | [Final Demo Roadmap](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week9/Final-demo-Roadmap.md),  [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118), [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133)|
 | ujjalpoudel75 | Performed independent authentication testing on the deployed CampusVibes website. Successfully verified the complete Password Reset process, including reset email delivery, password change, and login with the new password. Identified that Google Sign-In is blocked due to incomplete configuration. Documented the expected results, actual results, and three screenshot evidence items in Issue #116. Recommended fixing Google Sign-In and retesting before the final demo.  |  [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
-|  |  |  |
-|  |  |  |
+| prachi2061 | Diagnosed and repaired the missing production Firebase authorized domain; added desktop/mobile Google provider-page and cancellation checks with a redacted receipt. Recorded the current guest Dashboard → Discover/search/filter → Event Details and empty-state recovery checks. These are Codex-assisted technical checks, not completed Google authentication or independent teammate testing. Maps/notifications/social additions remain extensions outside the core demo promise. Next: support a named tester's real-account login/session check and keep the Firestore Event boundary explicit. | [PR #135](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/135), [Google readiness receipt](../../frontend/react-app/verification/google-signin-domain/results.json), [dated core review](Evidence/prachi-core-review-2026-11-02/check-note.md) |
+| tulseyy8848 | Pending this member's own Week 9 wording: add the setup steps and exact local journey followed. A dated backup-setup receipt is already available; linking it here does not claim a new deployed-site or independent authentication check. | [tulseyy8848's October 31 local-backup receipt](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6539563367) |
 
 ## Blockers or risks
 
