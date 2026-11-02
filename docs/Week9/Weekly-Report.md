@@ -2,7 +2,7 @@
 
 **Team:** 4  
 **Project:** CampusVibes  
-**Week:** 9  
+**Week:** 9<br>
 **Evidence review / update date:** 2026/11/02 (Asia/Seoul)
 
 This is the single shared Week 9 report. The date above records this evidence review, not a future class meeting. Week 10/11 work below is forward planning, not completed Week 9 verification.

@@ -1,8 +1,8 @@
 # Week 9 core-path evidence review — prachi2061
 
-**Review date:** 2026-11-02, Asia/Seoul.  
-**Owner:** `prachi2061`; Codex-assisted Playwright execution and documentation.  
-**Website:** [Production CampusVibes](https://campusvibe-theta.vercel.app/).  
+**Review date:** 2026-11-02, Asia/Seoul.<br>
+**Owner:** `prachi2061`; Codex-assisted Playwright execution and documentation.<br>
+**Website:** [Production CampusVibes](https://campusvibe-theta.vercel.app/).<br>
 **Entry used:** **Explore events / guest demo**, with Firebase `currentUser === null`.
 
 This is a fresh, read-only navigation check. It is not independent teammate testing, a completed Firebase login, a physical-phone test, or a timed/narrated team rehearsal. No account was created and no shared data was submitted.
