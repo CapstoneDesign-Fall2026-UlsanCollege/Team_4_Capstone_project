@@ -2,10 +2,16 @@
 
 **Team:** 4  
 **Project:** CampusVibes  
-**Week:** 10  
-**Date:** 2026/11/05
+**Week:** 9  
+**Evidence review / update date:** 2026/11/02 (Asia/Seoul)
+
+This is the single shared Week 9 report. The date above records this evidence review, not a future class meeting. Week 10/11 work below is forward planning, not completed Week 9 verification.
 
 ## This week's goal
+
+**Week 9 review priority:** Keep the proposed core path at Login → Dashboard → Discover/Search → Event Details, record exactly what the available evidence proves, and retain a documented local/guest fallback. Complete named authentication verification before expanding the demo promise.
+
+**Forward plan retained from the team:**
 
 Prepare CampusVibes for final MVP development by reviewing code ownership, checking AI-assisted development, identifying unfinished features, and organizing existing project evidence. The team will also prepare for Week 11 verification of the main user journey, Firebase authentication, and Firestore event loading.
 
@@ -25,17 +31,17 @@ If it is not linked, it does not count.
 | Evidence | Link |
 |---|---|
 | Issue(s) | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53), [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64), [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118), [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116), [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117), [Issue #129](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/129) |
-| PR(s) / commits | [GitHub Commits](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main) |
+| PR(s) / commits | [Google domain repair/readiness PR #135](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/135), [readiness-check commit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/c104df8), [repository history](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commits/main) |
 | Screenshot / demo | [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118) |
 | Test/check note | Existing independent rehearsal and Events testing records in Issues #53 and #64 |
 | Deployed website | [CampusVibes Website](https://campusvibe-theta.vercel.app/) |
-| Final Demo Roadmap | [Final Demo Roadmap](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/Final-demo-Roadmap.md) |
-| Previous Weekly Report | [Week 9 Weekly Report](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/Weekly-Report.md) |
-| Week 9 work checklist | [Week 9 Work Checklist](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/Week9-Work-Checklist.md) |
-| Week 9 Action Plan | [Week 9 Action Plan](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/Week9-Action-Plan.md) |
-| Sprint quality check | [Sprint Quality Quick Check](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/Sprint-quality-quick-check.md) |
-| MVP contract | [MVP Contract](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/MVP-Contract.md) |
-| Supporting Features Regression Testing | [Related Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133)
+| Final Demo Roadmap | [Current shared roadmap](Final-demo-Roadmap.md) |
+| Historical report snapshot | [Earlier Week 9 snapshot — historical, not a second current report](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/a5fd38275767242d629f7cd90063f132bae7817f/docs/Week9/Weekly-Report.md) |
+| Week 9 work checklist | [Current work checklist](Week9-Work-Checklist.md) |
+| Week 9 Action Plan | [Current action plan](Week9-Action-Plan.md) |
+| Sprint quality check | [Shared quick-check document](Sprint-quality-quick-check.md) |
+| MVP contract | [Current MVP contract](MVP-Contract.md) |
+| Supporting Features Regression Testing | [Related Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) |
 
 ## Supporting Features Regression Testing
 
