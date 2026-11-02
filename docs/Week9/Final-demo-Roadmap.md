@@ -2,13 +2,13 @@
 
 **Team:** 4  
 **Project:** CampusVibes  
-**Last updated:** 2026/10/31
+**Last evidence review:** 2026/11/02 (Asia/Seoul)
 
 Use this shared roadmap to connect what the project can prove now to the final demo and handoff. Each student should understand the next milestone and add their own contribution and evidence to the shared Weekly Report.
 
 ## Final demo promise
 
-Our final demo will show:
+Our verification target for the final demo is:
 
 > CampusVibes is a student-focused platform that helps university students discover campus events and activities, search and filter events, and view event details through a simple and accessible interface.
 
@@ -16,32 +16,41 @@ Our final demo will show:
 CampusVibes helps university students who have difficulty finding campus events, clubs, and activities because information may be scattered across different platforms or websites.
 
 **What the evidence will prove:**  
-The evidence will demonstrate that users can access the application, register or log in, navigate the dashboard, discover events, use search and filters, select an event, and view its basic details. Supporting features will be demonstrated only when their behavior has been verified.
+The narrow target is Login → Dashboard → Discover/Search → Event Details. Current November 2 automation verifies the guest/sample-data navigation and recovery path. A named human's completed login and session result is still needed before presenting the current authenticated path as verified. Registration, Google login and password reset are separate checks, not outcomes inferred from guest access or a dashboard image.
 
 **What the demo will not claim:**  
-We will not claim that Firestore event loading is fully implemented and verified until testing is completed. We will not claim external push notifications, ticket purchasing, or advanced AI personalization beyond the current sample-data-based suggestions.
+Firestore Event loading remains NOT TESTED; the visible Events page uses code-based sample data. Maps, notifications, RSVP, social/messages, Assistant, profile, suggestions, badges, uploads and theme behavior stay outside the core promise unless the team explicitly selects a named flow with its own owner and matching evidence. No new feature work is authorized by this roadmap update.
 
 ## Current state
 
 **MVP progress:** Gap to close
 
 **If a gap remains, link the Week 11 recovery path:**  
-Week 11 will focus on verifying Firestore event loading, completing and testing Google sign-in and password reset, checking the main user journey, identifying critical issues, and deciding which features are ready for the final MVP.
+The [shared report's core matrix](Weekly-Report.md#core-evidence-matrix--reviewed-november-2) is the current status record. The November 4 checkpoint below collects missing member wording and test receipts; Week 11 retains the MVP/data-boundary and freeze decision. Future milestones are plans, not completed tests. A repaired Google domain and a provider-page screenshot do not establish completed account authentication.
 
 | Status | Behavior, quality, or handoff item | Evidence link | What is still uncertain? |
 |---|---|---|---|
-| Working | Landing page and application navigation | [Deployed Website](https://campusvibe-theta.vercel.app/) | Final cross-device verification |
-| Working | Registration, email/password login, logout, and persistent authentication using Firebase Authentication | [Authentication Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) | Complete verification of all authentication flows |
-| Working | Dashboard and Discover/Events navigation | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) | Firestore event loading |
-| Working | Events search and filters using sample data | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) | Behavior with larger or database-loaded event data |
-| Working | Selecting an event and viewing basic details | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) | Additional edge-case testing |
-| Partial | Google sign-in | [Authentication Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) | Complete configuration and successful end-to-end sign-in testing |
-| Partial | Password reset | [Authentication Issue #35](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/35) | Successful reset-email delivery and password-reset testing |
-| Working | Saved Events and Profile supporting features | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) | Further regression testing |
-| Working | Light/dark theme toggle | [Theme Toggle Evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week7/Evidence/theme-toggle.md) | Final visual verification on different screens |
-| Partial | AI Assistant and event suggestions | [Project Repository](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project) | Currently relies on sample event data |
-| Not tested | Firestore event loading | Planned: Week 11 verification | Successful database loading and permissions |
-| Partial | Documentation and setup handoff | README and setup guide in project repository | Another teammate must verify setup independently |
+| PASS — automated live guest check | Landing, guest Dashboard → Discover/search/filter → sample Details, empty search and recovery | [November 2 expected/actual record](Evidence/prachi-core-review-2026-11-02/check-note.md), [raw results](Evidence/prachi-core-review-2026-11-02/results.json) | Two Chrome viewports, not physical-phone or completed authentication proof. |
+| Historical PASS; current completed login NOT TESTED | Email/password login and session behavior | [October 20 technical record](../Week7/Evidence/core-path-2026-10-20/check-note.md), [current #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | A named tester must record the current completed login, Dashboard access and reload/session result. |
+| Repaired blocker; readiness PASS | Google authorized-domain failure and provider-page handoff/cancellation | [Bug #134](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/134), [domain/readiness receipt](../../frontend/react-app/verification/google-signin-domain/results.json) | No Google identity was selected; this is not completed Google authentication. |
+| NOT TESTED | Completed Google identity login and session restoration | [#116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | Select the tester's own identity, verify Dashboard and reload, and retain actual results. |
+| NOT TESTED | Reset email → password change → login with the changed password | [#116 form/dashboard screenshots](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116#issuecomment-6559100739) | These screenshots do not prove email receipt or changed-password login; the completion claim needs stepwise evidence. |
+| NOT TESTED | Firestore Event loading | [#117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117), [sample catalog](../../frontend/events.json) | Auth/account/social persistence does not verify database-loaded Events. |
+| Reported independent local PASS — October 31 | Prepared local setup / backup demo | [tulseyy8848's dated result](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6539563367) | A historical local result, not a fresh clean-checkout or deployed-authentication check. |
+| Reported supporting checks — November 1 | Saved/Profile/Assistant/Suggestions/theme checks | [DevyanaCT's #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) | Supporting scope only; keep the stated Suggestions upload limitation and unverified flow details visible. |
+
+### Evidence types and independence
+
+| Evidence type | What it can establish | Boundary for this project |
+|---|---|---|
+| Planned work | A proposed owner, check and intended proof. | An unchecked milestone or template is not a test result. |
+| Code review / implementation | What source code or configuration change exists. | A commit does not establish successful live behavior. |
+| Local check | What ran in the stated local setup. | State prepared vs clean checkout, sample/emulator/cloud use, tester and date. |
+| CI check | What the named pipeline actually ran. | A green Vercel build is not a browser login, reset-email or Firestore Event test. |
+| Live-system result | What happened on the stated deployed URL at the recorded time. | Separate human testing from automation. The November 2 guest and Google-page checks are automated; their scopes exclude completed login. |
+| Independent teammate result | A named person checks work they did not implement and records actual outcomes. | Use the dated #118 local result with its limits; do not relabel automation or code review as a teammate test. |
+
+Canonical enrolled logins are `DevyanaCT`, `prachi2061`, `ujjalpoudel75`, and `tulseyy8848`. `Tulseyy8848` in the linked receipt is display text for `tulseyy8848`, not a fifth member. Historical aliases stay attached to their original receipts.
 
 ## Lessons that change our route
 
