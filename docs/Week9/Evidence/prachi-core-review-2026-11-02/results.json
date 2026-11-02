@@ -1,0 +1,127 @@
+{
+  "checkedAt": "2026-11-02T11:05:47.088Z",
+  "reviewDate": "2026-11-02",
+  "timezone": "Asia/Seoul",
+  "owner": "prachi2061",
+  "execution": "Codex-assisted automated Chrome check",
+  "url": "https://campusvibe-theta.vercel.app/",
+  "checkoutCommit": "78b2ada25942e95276daf4b98fac551e711c5b85",
+  "checkoutRevisionIsNotDeploymentAttestation": true,
+  "results": [
+    {
+      "view": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "browser": "156.0.8078.74",
+      "entry": "guest demo",
+      "firebaseUserAuthenticated": false,
+      "steps": [
+        {
+          "check": "Landing",
+          "expected": "Sign-in landing is visible.",
+          "actual": "Sign-in landing is visible.",
+          "status": "PASS"
+        },
+        {
+          "check": "Guest entry",
+          "expected": "Explore events opens the guest Discover view; Firebase currentUser is null.",
+          "actual": "Explore events opens the guest Discover view; Firebase currentUser is null.",
+          "status": "PASS"
+        },
+        {
+          "check": "Dashboard",
+          "expected": "Dashboard is visible from Community navigation.",
+          "actual": "Dashboard is visible from Community navigation.",
+          "status": "PASS"
+        },
+        {
+          "check": "Discover/search/filter",
+          "expected": "Tech + HackNight returns exactly the selected sample event.",
+          "actual": "Tech + HackNight returns exactly the selected sample event.",
+          "status": "PASS"
+        },
+        {
+          "check": "Event details",
+          "expected": "HackNight details show the listed venue, time, host and description.",
+          "actual": "HackNight details show the listed venue, time, host and description.",
+          "status": "PASS"
+        },
+        {
+          "check": "Empty search and recovery",
+          "expected": "Unmatched search shows no events; Clear filters restores all nine sample listings.",
+          "actual": "Unmatched search shows no events; Clear filters restores all nine sample listings.",
+          "status": "PASS"
+        }
+      ],
+      "pageErrors": [],
+      "observedRuntimeAssets": [
+        "https://campusvibe-theta.vercel.app/assets/index-MhqdYgEk.js"
+      ],
+      "runtimeAssetsUnchangedDuringCheck": true
+    },
+    {
+      "view": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "browser": "156.0.8078.74",
+      "entry": "guest demo",
+      "firebaseUserAuthenticated": false,
+      "steps": [
+        {
+          "check": "Landing",
+          "expected": "Sign-in landing is visible.",
+          "actual": "Sign-in landing is visible.",
+          "status": "PASS"
+        },
+        {
+          "check": "Guest entry",
+          "expected": "Explore events opens the guest Discover view; Firebase currentUser is null.",
+          "actual": "Explore events opens the guest Discover view; Firebase currentUser is null.",
+          "status": "PASS"
+        },
+        {
+          "check": "Dashboard",
+          "expected": "Dashboard is visible from Community navigation.",
+          "actual": "Dashboard is visible from Community navigation.",
+          "status": "PASS"
+        },
+        {
+          "check": "Discover/search/filter",
+          "expected": "Tech + HackNight returns exactly the selected sample event.",
+          "actual": "Tech + HackNight returns exactly the selected sample event.",
+          "status": "PASS"
+        },
+        {
+          "check": "Event details",
+          "expected": "HackNight details show the listed venue, time, host and description.",
+          "actual": "HackNight details show the listed venue, time, host and description.",
+          "status": "PASS"
+        },
+        {
+          "check": "Empty search and recovery",
+          "expected": "Unmatched search shows no events; Clear filters restores all nine sample listings.",
+          "actual": "Unmatched search shows no events; Clear filters restores all nine sample listings.",
+          "status": "PASS"
+        }
+      ],
+      "pageErrors": [],
+      "observedRuntimeAssets": [
+        "https://campusvibe-theta.vercel.app/assets/index-MhqdYgEk.js"
+      ],
+      "runtimeAssetsUnchangedDuringCheck": true
+    }
+  ],
+  "notTested": [
+    "Current completed email/password login",
+    "Completed Google-account login and session restoration",
+    "Reset email delivery, password change and changed-password login",
+    "Firestore Event loading",
+    "Physical-device or independent teammate test",
+    "Narrated/timed team rehearsal"
+  ],
+  "scope": "Read-only deployed guest/sample-data navigation and empty-state recovery. No account creation, private credentials, shared-data submissions or new feature work."
+}
