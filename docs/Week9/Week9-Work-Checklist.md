@@ -26,10 +26,10 @@
 
 ### Map the route through Week 16
 
-- [ ] Fill the Week 10–16 milestone rows in the Final Demo Roadmap.
-- [ ] Give each milestone a checkable result, an owner, an evidence path, and a relevant dependency or risk.
+- [x] Fill the Week 10–16 milestone rows in the Final Demo Roadmap.
+- [x] Give each milestone a checkable result, a proposed named owner/checker, evidence to save, and a failure fallback.
 - [x] Keep Week 11 focused on MVP verification and the feature-freeze decision.
-- [ ] Include QA and bug triage, the Week 13 handoff trial, the Week 14 demo lock, Week 15 readiness, and Week 16 handoff.
+- [x] Include QA and bug triage, the Week 13 handoff trial, the Week 14 demo lock, Week 15 readiness, and Week 16 handoff in the plan.
 - [x] Create or update Issues with owners for the next one or two weeks; do not create detailed tickets for every distant milestone before its dependencies are known.
 - [x] Add a fallback for the biggest risk that could disrupt the final demo or handoff.
 
@@ -38,11 +38,13 @@
 - [ ] Compare roadmaps with another team; make sure each team can explain its route.
 - [ ] Ask one question that tests a claim, assumption, or checkpoint.
 - [ ] Offer one specific suggestion tied to evidence, ownership, route, or a milestone.
-- [ ] Revise one weak or unclear part of the roadmap using the feedback.
-- [x] Update the team's one shared Weekly Report; each student adds their own contribution and evidence row.
+- [x] Revise the roadmap's broad completion claims and unnamed checkpoints using the feedback.
+- [ ] Complete the shared report requirement: each student authors or confirms their own contribution and evidence row.
 - [ ] Check that shared evidence contains no secrets, private data, or unapproved real-user data.
 
 ## Evidence to link
+
+**November 2 status:** [The roadmap](Final-demo-Roadmap.md) now has scoped current results and seven planned milestone rows with named proposed owner/checker, check, evidence and fallback. These checked documentation items do not certify owner acceptance or execution of a future milestone. The [single shared report](Weekly-Report.md) names all four logins and links receipts, but member-authored/confirmed wording remains incomplete; that combined requirement stays unchecked. Use the [independent-test handoff](Evidence/independent-test-handoff.md) for the existing October 31 local result and its limits.
 
 - [x] Final Demo Roadmap, with lessons, current-state proof, milestones, and owners.
 - [ ] Evidence behind the course and project lessons.
@@ -76,8 +78,8 @@ If a core item is incomplete, record the reason, owner, and next action in GitHu
 
 | Item | Owner | Next action | Review point |
 |---|---|---|---|
-| Firestore event loading is unverified. | Prachi2061 and Ujjalpoudel75 | Test Firestore event loading and record the result. | Week 11 |
-| Google Sign-In and password reset need end-to-end testing. | Prachi2061 and Ujjalpoudel75 | Complete configuration and test both flows. | Week 11 |
+| Firestore Event loading is unverified. | prachi2061 and ujjalpoudel75 | Test an identified database Event and record actual success/failure or the specific blocker in #117. | Week 11 |
+| Completed Google authentication and password reset need stepwise evidence; the domain is repaired. | prachi2061 and ujjalpoudel75 | Record completed account/session and reset-email → change → changed-password-login results in #116, or keep the missing steps NOT TESTED. | Before Nov 4 / Week 11 |
 | Supporting-feature regression testing has remaining checks. | DevyanaCT | Finish AI Assistant and Suggestions verification and document upload limitations. | Week 11 |
 | Local setup must remain available as a demo fallback. | DevyanaCT and tulseyy8848 | Keep the local setup instructions and testing evidence available. | Before final demo |
 

@@ -103,7 +103,7 @@ Canonical enrolled logins are `DevyanaCT`, `prachi2061`, `ujjalpoudel75`, and `t
 - [x] The proposed core claim and fallback separate verified behavior from missing tests.
 - [x] Each planned milestone names an owner/checker, repeatable check, evidence to save and failure fallback.
 - [x] The Week 11 plan includes MVP verification and a feature-freeze decision.
-- [ ] Google sign-in and password reset are completed and tested or clearly documented as unfinished.
+- [x] Missing completed Google/reset receipts are explicitly NOT TESTED, separate from the repaired domain and passing provider-page readiness check.
 - [x] The Week 13 plan includes another person's clean setup/handoff trial.
 - [x] The Week 14 plan defines the demo-lock and contribution checks.
 - [x] The Week 15 plan covers readiness/hardening without new scope.
