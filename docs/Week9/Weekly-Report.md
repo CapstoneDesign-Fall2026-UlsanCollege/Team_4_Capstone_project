@@ -44,6 +44,7 @@ If it is not linked, it does not count.
 | Supporting Features Regression Testing | [Related Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) |
 | November 2 core review | [Expected/actual check note and screenshots](Evidence/prachi-core-review-2026-11-02/check-note.md), [raw results](Evidence/prachi-core-review-2026-11-02/results.json) |
 | Google configuration repair | [Bug #134](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/134), [provider-page readiness receipt](../../frontend/react-app/verification/google-signin-domain/results.json) |
+| Wednesday independent-test handoff | [October 31 local result, setup/limits and evidence-type distinctions](Evidence/independent-test-handoff.md) |
 
 ## Core evidence matrix — reviewed November 2
 
@@ -106,6 +107,8 @@ Existing supporting features were reviewed and tested to check whether they cont
 
 Each student must complete their own entry and add at least one evidence link.
 
+**Before Wednesday:** Each member authors or confirms their own wording here. The [independent-test handoff](Evidence/independent-test-handoff.md) links the existing local result and lists the remaining confirmations; this report does not mark all four student-authored entries complete. The [updated roadmap](Final-demo-Roadmap.md#roadmap-milestones) names proposed milestone owners/checkers and keeps future checks PLANNED.
+
 **Evidence-review note (prachi2061, November 2):** Existing member-authored rows are preserved below. The full password-reset claim in ujjalpoudel75's row is not yet supported by the linked form/dashboard screenshots; its status for the demo remains **NOT TESTED** until email receipt, password change and login with the changed password are recorded step by step. Google provider-page readiness likewise does not establish a completed Google login. Each member owns correcting or completing their own row.
 
 | Student | What they did | Evidence link |
@@ -119,8 +122,8 @@ Each student must complete their own entry and add at least one evidence link.
 
 | Blocker/risk | Owner | Next action |
 |---|---|---|
-| Firestore event loading remains unverified. | Prachi2061 and Ujjalpoudel75 | Verify database loading and record the actual result. |
-| Completed Google authentication and the full password-reset flow remain unverified; the domain blocker is repaired. | Authentication developer: Prachi2061; Tester: Ujjalpoudel75 | Link a real Google-account/session result and reset email → password change → changed-password login evidence in #116. |
+| Firestore event loading remains unverified. | prachi2061 and ujjalpoudel75 | Verify database loading and record the actual result. |
+| Completed Google authentication and the full password-reset flow remain unverified; the domain blocker is repaired. | Authentication developer: prachi2061; Tester: ujjalpoudel75 | Link a real Google-account/session result and reset email → password change → changed-password login evidence in #116. |
 | Some supporting features need additional regression testing. | DevyanaCT | Complete remaining tests, document actual results, and report any issues. |
 | Photo and file uploads in Suggestions are unavailable while billing is disabled. | DevyanaCT / Team | Keep text-based suggestions as the testing path and document upload limitations. |
 | Individual code ownership and AI-use records need review. | All team members | Review commits and document individual contributions. |
@@ -130,7 +133,7 @@ Each student must complete their own entry and add at least one evidence link.
 | Decision | Why we chose it | Owner | Evidence / Issue link |
 |---|---|---|---|
 | Keep sample event data as a fallback until Firestore loading is verified. | The team should not claim database functionality without successful testing. | All team members | [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) |
-| Complete Google Sign-In and password reset before deciding whether to include them in the final MVP. | These authentication options still need successful end-to-end testing. | Authentication developer(prachi2061), Tester(Ujjalpoudel75) | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
+| Complete Google Sign-In and password reset before deciding whether to include them in the final MVP. | These authentication options still need successful end-to-end testing. | Authentication developer(prachi2061), Tester(ujjalpoudel75) | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
 | Prioritize existing features and testing instead of adding unnecessary new features. | The team needs a stable and reliable final demonstration. | All team members | [Final Demo Roadmap](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week9/Final-demo-Roadmap.md) |
 | Keep photo and file uploads as a documented limitation while billing is disabled. | The team should not claim unavailable upload functionality as completed. | All team members | [Supporting Features Regression Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133)|
 
