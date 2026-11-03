@@ -175,7 +175,7 @@ Each student must provide or confirm their own contribution wording and evidence
 |---|---|---|---|
 | Keep sample Event data as a fallback until Firestore loading is verified. | Database functionality must not be claimed without successful testing. | All members | [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) |
 | Complete Google Sign-In and password reset before deciding whether to include them in the final MVP. | Both flows require successful end-to-end evidence. | prachi2061 and ujjalpoudel75 | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
-| Prioritize existing features and testing instead of adding unnecessary new features. | The team needs a stable and reliable final demonstration. | All members | [Final Demo Roadmap](Final-demo-Roadmap.md) |
+| Prioritize existing features and testing and seperating  new features as supporting features. | The team needs a stable and reliable final demonstration. | All members | [Final Demo Roadmap](Final-demo-Roadmap.md) |
 | Keep photo and file uploads as documented limitations while billing is disabled. | Unavailable functionality must not be claimed as completed. | All members | [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) |
 
 ---
