@@ -52,6 +52,7 @@ If it is not linked, it does not count.
 | November 2 core review | [Check note](Evidence/prachi-core-review-2026-11-02/check-note.md), [Raw results](Evidence/prachi-core-review-2026-11-02/results.json) |
 | Google configuration repair | [Bug #134](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/134), [Provider-page readiness receipt](../../frontend/react-app/verification/google-signin-domain/results.json) |
 | Independent-test handoff | [October 31 local result and evidence limitations](Evidence/independent-test-handoff.md) |
+| Core domo evidence matrix  | [Core domo evidence matrix](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/777d896fa868274f51eaabd4d7c69f5d67938a4c/docs/Week9/Core-Demo-Evidence-Matrix.md)|
 
 ---
 
