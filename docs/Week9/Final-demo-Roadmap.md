@@ -158,7 +158,7 @@ Historical aliases should remain connected to their original evidence.
 | Course lesson | [Professor's Week 8 feedback](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/grades-and-feedback/blob/main/Week%208/feedback.md) | Present actual results instead of promising unfinished functionality. |
 | Testing lesson | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) and [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) | Independent testing helps identify problems that developers may overlook. |
 | Development lesson | Firebase integration and sample Event implementation | Verify database functionality before claiming Firestore integration is complete. |
-| Regression lesson | November 2 core test and Issue #133 | Retest existing functionality after changes and preserve evidence. |
+| Regression lesson | [November 2 core test](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/tree/0f55bb56a6f4c1710cd637fd79428566647d6a58/docs/Week9/Evidence/prachi-core-review-2026-11-02) and [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) | Retest existing functionality after changes and preserve evidence. |
 | Teamwork lesson | [Shared Weekly Report](Weekly-Report.md) | Every member should provide their own contribution and evidence. |
 
 ---
