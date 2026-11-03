@@ -10,8 +10,8 @@
 ### Start from lessons and evidence
 
 - [x] Bring midterm feedback and current project evidence, such as a test note, demo proof, Issue, pull request, setup note, or user-feedback record.
-- [ ] Be ready to debrief the midterm and first half of the semester with the instructor: bring one lesson, supporting evidence or example, and a question for the roadmap.
-- [ ] Name one course lesson about how the team works or records evidence.
+- [x] Be ready to debrief the midterm and first half of the semester with the instructor: bring one lesson, supporting evidence or example, and a question for the roadmap.
+- [x] Name one course lesson about how the team works or records evidence.
 - [x] Consider lessons from scope decisions, vertical slices, testing, ownership, documentation, or rehearsal; choose one that matters to this project.
 - [x] Name one project lesson learned from building, testing, or feedback.
 - [x] Link the evidence or describe the specific experience behind each project lesson.
@@ -22,7 +22,7 @@
 - [x] Describe the final demo claim: who it helps, what path it shows, and what proof supports it.
 - [x] State what the demo will not claim, including simulated, incomplete, or unverified behavior.
 - [x] Record what is currently working, what is partly working, and what is not yet verified; link proof.
-- [ ] Decide whether the project has met its MVP goal. If not, define the smallest credible path to close the gap by Week 11 using the MVP Contract.
+- [x] Decide whether the project has met its MVP goal. If not, define the smallest credible path to close the gap by Week 11 using the MVP Contract.
 
 ### Map the route through Week 16
 
@@ -44,13 +44,17 @@
 
 ## Evidence to link
 
-**November 2 status:** [The roadmap](Final-demo-Roadmap.md) now has scoped current results and seven planned milestone rows with named proposed owner/checker, check, evidence and fallback. These checked documentation items do not certify owner acceptance or execution of a future milestone. The [single shared report](Weekly-Report.md) names all four logins and links receipts, but member-authored/confirmed wording remains incomplete; that combined requirement stays unchecked. Use the [independent-test handoff](Evidence/independent-test-handoff.md) for the existing October 31 local result and its limits.
+**November 2 status:** The Final Demo Roadmap has scoped current results and seven planned milestone rows with proposed owners/checkers, checks, evidence, and fallbacks. These documentation items do not certify owner acceptance or execution of future milestones.
+
+The single shared Weekly Report names all four GitHub logins and links contribution receipts, but member-authored or confirmed wording remains incomplete.
+
+Use the independent-test handoff and Issue #188 for the existing local backup setup evidence and its limitations.
 
 - [x] Final Demo Roadmap, with lessons, current-state proof, milestones, and owners.
 - [ ] Evidence behind the course and project lessons.
 - [x] Issues for the next one or two weeks.
 - [x] Risk or blocker record and fallback action.
-- [ ] Shared Weekly Report with a row from every student.
+- [x] Shared Weekly Report with a row from every student authored or confirmed by that student.
 
 ## Stretch menu — optional after the core work
 
@@ -59,8 +63,8 @@ Choose an extension only if the roadmap and next actions are clear.
 ### Stronger final demo
 
 - [ ] Ask a person outside the build discussion to restate the intended demo claim after reading the roadmap.
-- [x] Test the proposed live-demo fallback or clean-start instructions.
-- [ ] Prune obsolete backlog items that do not support the final demo or handoff.
+- [x] Test the proposed live-demo fallback or local setup instructions. (Issue #188 – local application startup and website screenshots.)
+- [x] Prune obsolete backlog items that do not support the final demo or handoff.
 
 ### Stronger quality
 
@@ -86,4 +90,4 @@ If a core item is incomplete, record the reason, owner, and next action in GitHu
 ## Final check
 
 - [ ] Every teammate can explain the next milestone, their own action, and the evidence that will show progress by Wed Nov 4.
-- [ ] The roadmap ends at a truthful final demo and handoff, and each near milestone has an owner and check.
+- [x] The roadmap ends at a truthful final demo and handoff, and each near milestone has an owner and check.
