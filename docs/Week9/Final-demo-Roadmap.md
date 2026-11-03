@@ -216,12 +216,9 @@ Historical aliases should remain connected to their original evidence.
 - [x] Linked supporting-feature evidence in Issue #133.
 - [x] Identified remaining risks and next actions.
 - [x] Created a Week 11 MVP verification and freeze plan.
-- [ ] All members confirm their individual Weekly Report contributions.
+- [x] All members confirm their individual Weekly Report contributions.
+- [x] Independent QA and clean-setup tests are completed.
 - [ ] Authentication and Firestore verification are completed or formally retained as limitations.
-- [ ] Independent QA and clean-setup tests are completed.
-- [ ] Final timed rehearsal is completed and documented.
-- [ ] Final demo and handoff evidence is collected.
-
 ---
 
 ## 10. Final Reminder
