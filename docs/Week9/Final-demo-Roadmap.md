@@ -1,114 +1,235 @@
+# Team 4 – CampusVibes
 # Final Demo Roadmap
 
+**Last updated:** 2026/11/03  
+**Last evidence review:** 2026/11/02  
 **Team:** 4  
-**Project:** CampusVibes  
-**Last evidence review:** 2026/11/02 (Asia/Seoul)
+**Project:** CampusVibes
 
-Use this shared roadmap to connect what the project can prove now to the final demo and handoff. Each student should understand the next milestone and add their own contribution and evidence to the shared Weekly Report.
+This roadmap connects the current project status, testing evidence, remaining work, and preparation for the final demonstration. All completed work must be supported by actual evidence. Planned activities must not be presented as completed tests.
 
-## Final demo promise
+---
 
-Our verification target for the final demo is:
+## 1. Final Demo Promise
+
+Our final demo aims to demonstrate:
 
 > CampusVibes is a student-focused platform that helps university students discover campus events and activities, search and filter events, and view event details through a simple and accessible interface.
 
-**Who it helps and what problem it addresses:**  
-CampusVibes helps university students who have difficulty finding campus events, clubs, and activities because information may be scattered across different platforms or websites.
+### Problem we are solving
 
-**What the evidence will prove:**  
-The narrow target is Login → Dashboard → Discover/Search → Event Details. Current November 2 automation verifies the guest/sample-data navigation and recovery path. A named human's completed login and session result is still needed before presenting the current authenticated path as verified. Registration, Google login and password reset are separate checks, not outcomes inferred from guest access or a dashboard image.
+University students may have difficulty finding campus events, clubs, and activities because information is scattered across different platforms and websites.
 
-**What the demo will not claim:**  
-Firestore Event loading remains NOT TESTED; the visible Events page uses code-based sample data. Maps, notifications, RSVP, social/messages, Assistant, profile, suggestions, badges, uploads and theme behavior stay outside the core promise unless the team explicitly selects a named flow with its own owner and matching evidence. No new feature work is authorized by this roadmap update.
+CampusVibes aims to make discovering campus activities easier through one accessible platform.
 
-## Current state
+### Core demonstration journey
 
-**MVP progress:** Gap to close
+The intended core journey is:
 
-**If a gap remains, link the Week 11 recovery path:**  
-The [shared report's core matrix](Weekly-Report.md#core-evidence-matrix--reviewed-november-2) is the current status record. The November 4 checkpoint below collects missing member wording and test receipts; Week 11 retains the MVP/data-boundary and freeze decision. Future milestones are plans, not completed tests. A repaired Google domain and a provider-page screenshot do not establish completed account authentication.
+**Landing Page → Login/Available Demo Access → Dashboard → Discover/Search → Event Details**
 
-| Status | Behavior, quality, or handoff item | Evidence link | What is still uncertain? |
+The November 2 automated live check verified the guest/sample-data navigation and recovery path. However, a completed authenticated login and session-restoration result still needs to be recorded by a named tester.
+
+### What the final demo will not claim
+
+The following items are not part of the verified core promise unless separate evidence is collected:
+
+- Firestore Event loading (not tested).
+- Completed Google Sign-In.
+- Completed password-reset and changed-password login.
+- Maps and external notifications.
+- RSVP and social messaging.
+- Advanced AI personalization.
+- Profile, badges, suggestions, and supporting features not selected for the core demo.
+
+The Events page currently uses code-based sample data. It must not be described as loading Events from Firestore until that functionality is tested successfully.
+
+---
+
+## 2. Current Project Status
+
+**MVP progress: Gap to close**
+
+The project has a working guest/sample-data demonstration path, but authentication and Firestore verification remain outstanding.
+
+| Feature or behavior | Current status | Evidence | Remaining work |
 |---|---|---|---|
-| PASS — automated live guest check | Landing, guest Dashboard → Discover/search/filter → sample Details, empty search and recovery | [November 2 expected/actual record](Evidence/prachi-core-review-2026-11-02/check-note.md), [raw results](Evidence/prachi-core-review-2026-11-02/results.json) | Two Chrome viewports, not physical-phone or completed authentication proof. |
-| Historical PASS; current completed login NOT TESTED | Email/password login and session behavior | [October 20 technical record](../Week7/Evidence/core-path-2026-10-20/check-note.md), [current #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | A named tester must record the current completed login, Dashboard access and reload/session result. |
-| Repaired blocker; readiness PASS | Google authorized-domain failure and provider-page handoff/cancellation | [Bug #134](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/134), [domain/readiness receipt](../../frontend/react-app/verification/google-signin-domain/results.json) | No Google identity was selected; this is not completed Google authentication. |
-| NOT TESTED | Completed Google identity login and session restoration | [#116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | Select the tester's own identity, verify Dashboard and reload, and retain actual results. |
-| NOT TESTED | Reset email → password change → login with the changed password | [#116 form/dashboard screenshots](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116#issuecomment-6559100739) | These screenshots do not prove email receipt or changed-password login; the completion claim needs stepwise evidence. |
-| NOT TESTED | Firestore Event loading | [#117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117), [sample catalog](../../frontend/events.json) | Auth/account/social persistence does not verify database-loaded Events. |
-| Reported independent local PASS — October 31 | Prepared local setup / backup demo | [tulseyy8848's dated result](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6539563367) | A historical local result, not a fresh clean-checkout or deployed-authentication check. |
-| Reported supporting checks — November 1 | Saved/Profile/Assistant/Suggestions/theme checks | [DevyanaCT's #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) | Supporting scope only; keep the stated Suggestions upload limitation and unverified flow details visible. |
+| Landing page | PASS – automated guest check | November 2 core review | Continue regression checks |
+| Guest dashboard access | PASS – automated guest check | November 2 core review | Keep demo access available |
+| Discover / Events navigation | PASS – automated guest check | November 2 core review | Continue testing |
+| Event search and filters | PASS – automated guest check | November 2 core review | Retest after changes |
+| Sample Event details | PASS – automated guest check | November 2 core review | Keep sample data clearly identified |
+| Empty-search recovery | PASS – automated guest check | November 2 core review | Retain recovery behavior |
+| Email/password login | Historical PASS; current completed login NOT TESTED | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | Record a current successful login and session test |
+| Google Sign-In | Domain readiness PASS; completed login NOT TESTED | [Issue #134](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/134) | Complete identity selection, login, and reload test |
+| Password reset | NOT TESTED | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | Verify reset email, password change, and new-password login |
+| Firestore Event loading | NOT TESTED | [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) | Verify actual database Event loading |
+| Local setup / backup | Reported independent PASS – October 31 | [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118) | Conduct a separate clean-checkout setup test |
+| Saved Events, Profile, Assistant, Suggestions, and theme | Supporting-feature checks reported | [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) | Keep supporting limitations visible and retest selected features |
 
-### Evidence types and independence
+### Evidence links
 
-| Evidence type | What it can establish | Boundary for this project |
+- [November 2 automated test note](Evidence/prachi-core-review-2026-11-02/check-note.md)
+- [November 2 raw test results](Evidence/prachi-core-review-2026-11-02/results.json)
+- [Supporting-feature regression evidence – Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133)
+- [Authentication testing – Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116)
+- [Firestore testing – Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117)
+
+---
+
+## 3. Regression Testing Evidence
+
+Regression testing helps confirm that existing features continue working after project changes.
+
+### November 2 – Core Journey Regression Check
+
+**Result:** PASS for the tested automated guest/sample-data scope.
+
+Verified behaviors:
+
+- Landing page access.
+- Guest dashboard navigation.
+- Discover / Events navigation.
+- Event search and filters.
+- Opening sample Event details.
+- Empty-search handling and recovery.
+
+**Evidence:**
+- [Test note](Evidence/prachi-core-review-2026-11-02/check-note.md)
+- [Raw results](Evidence/prachi-core-review-2026-11-02/results.json)
+
+**Testing limitation:** The check used two Chrome viewports. It does not prove physical-device behavior or successful authenticated login.
+
+### November 1 – Supporting-Feature Checks
+
+Issue #133 records supporting-feature checks, including:
+
+- Saved Events.
+- Profile.
+- AI Assistant.
+- Suggestions.
+- Light/dark theme behavior.
+
+**Evidence:** [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133)
+
+**Limitation:** The Suggestions upload limitation and any unverified behavior must remain documented. These checks do not replace core journey testing.
+
+### Regression Testing Rule
+
+Whenever a change is made to an existing feature:
+
+1. Identify the changed feature.
+2. Repeat the relevant test.
+3. Record the expected result.
+4. Record the actual result.
+5. Attach screenshots or other appropriate evidence.
+6. Link the result to the related GitHub issue or pull request.
+
+A code commit alone does not prove that a feature works.
+
+---
+
+## 4. Evidence Types and Testing Boundaries
+
+| Evidence type | What it proves | Limitation |
 |---|---|---|
-| Planned work | A proposed owner, check and intended proof. | An unchecked milestone or template is not a test result. |
-| Code review / implementation | What source code or configuration change exists. | A commit does not establish successful live behavior. |
-| Local check | What ran in the stated local setup. | State prepared vs clean checkout, sample/emulator/cloud use, tester and date. |
-| CI check | What the named pipeline actually ran. | A green Vercel build is not a browser login, reset-email or Firestore Event test. |
-| Live-system result | What happened on the stated deployed URL at the recorded time. | Separate human testing from automation. The November 2 guest and Google-page checks are automated; their scopes exclude completed login. |
-| Independent teammate result | A named person checks work they did not implement and records actual outcomes. | Use the dated #118 local result with its limits; do not relabel automation or code review as a teammate test. |
+| Planned work | What the team intends to complete | Not a completed test |
+| Code review | What implementation or configuration exists | Does not prove successful behavior |
+| Local test | What worked in the recorded local environment | Does not automatically prove deployed behavior |
+| Automated test | What the named automation actually checked | Limited to its test scope |
+| Live-system test | What happened on the deployed application | Must include date, tester, and actual result |
+| Independent teammate test | What another team member verified | Must identify the person and evidence |
 
-Canonical enrolled logins are `DevyanaCT`, `prachi2061`, `ujjalpoudel75`, and `tulseyy8848`. `Tulseyy8848` in the linked receipt is display text for `tulseyy8848`, not a fifth member. Historical aliases stay attached to their original receipts.
+Canonical enrolled GitHub logins:
 
-## Lessons that change our route
+- `DevyanaCT`
+- `prachi2061`
+- `ujjalpoudel75`
+- `tulseyy8848`
 
-| Lesson | Source or evidence | What we will do differently |
+Historical aliases should remain connected to their original evidence.
+
+---
+
+## 5. Lessons That Changed Our Development Approach
+
+| Lesson | Evidence | What we learned |
 |---|---|---|
-| Course or team-process lesson | [Professor's midterm feedback](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/grades-and-feedback/blob/main/Week%208/feedback.md) and [Week 7 documention](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/tree/9670e9bd4c329c4cc31fead121dbb48e242fb9f3/docs/Week7) | Show actual results, provide evidence, and avoid claiming unfinished work as completed. |
-| Project lesson from building, testing, or feedback | [Issues#53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53), [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) | Test the main user journey independently, identify limitations, and prioritize reliable features over adding unnecessary features. |
-| Development lesson | Firebase integration and current sample-event implementation | Verify database functionality before presenting Firestore event loading as complete. |
-| Teamwork lesson | [Current single shared report](Weekly-Report.md) and [dated local tester receipt](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6539563367) | Each member authors/confirms their own row. A coordinator can link another person's receipt, but must not present that as new student-authored wording or a fresh test. |
+| Course lesson | [Professor's Week 8 feedback](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/grades-and-feedback/blob/main/Week%208/feedback.md) | Present actual results instead of promising unfinished functionality. |
+| Testing lesson | [Issue #53](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/53) and [Issue #64](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/64) | Independent testing helps identify problems that developers may overlook. |
+| Development lesson | Firebase integration and sample Event implementation | Verify database functionality before claiming Firestore integration is complete. |
+| Regression lesson | November 2 core test and Issue #133 | Retest existing functionality after changes and preserve evidence. |
+| Teamwork lesson | [Shared Weekly Report](Weekly-Report.md) | Every member should provide their own contribution and evidence. |
 
-## Roadmap milestones
+---
 
-**Status of every row below: PLANNED.** Named roles are proposed from the current project responsibilities and must be confirmed by those people; recording a role is not evidence that the person accepted it or performed the check. The checker should be different from the author of the work being checked. No future test, review, rehearsal or feature-freeze decision is marked complete here.
+## 6. Roadmap Milestones
 
-| Week / date | Owner / separate checker | Check another person can perform | Evidence to save | Fallback if the check fails |
-|---|---|---|---|---|
-| 10 / Nov 5 — Code ownership and AI-use audit | Lead: DevyanaCT; each enrolled member owns their row. Checker: tulseyy8848. | Follow each member's specific commit/Issue/PR link, compare it with that member's confirmed row and identify assistance and remaining limits. | Planned: four confirmed rows, exact receipt URLs/revisions, owner confirmations and the AI-use note in that week's shared report. | Leave missing/unconfirmed entries pending; retain the original receipt and give its owner one concrete correction. Do not write another student's reflection as completed work. |
-| 11 / Nov 12 — MVP verification and freeze decision | Lead: prachi2061 for implementation/data boundary. Checker: ujjalpoudel75; DevyanaCT coordinates the core demonstration. | From the recorded starting state, complete Login → Dashboard → Discover/Search → Details and reload. Separately verify a real Google login, full reset chain and an explicitly identified Firestore Event fixture, or record their actual failure/blocker. | Planned: #116 auth/session/reset steps and screenshots; #117 Event source/query/permissions result; tester, device/browser, URL/revision, expected/actual results and team MVP/freeze decision. | Keep unverified cases NOT TESTED or observed failures FAIL. Use labelled sample Events/guest access and the local backup; exclude unverified authentication and database claims from the promise. |
-| 12 / Nov 19 — Independent QA and bug triage | Lead/checker: ujjalpoudel75 for work they did not implement; prachi2061 owns relevant fixes. Retest coordinator: DevyanaCT. | Repeat the frozen path, empty-search recovery and one relevant failure case against the identified build; reproduce any bug and rerun it after its fix. | Planned: named independent QA receipt, reproduction steps, expected/actual results, before/after proof and linked fix PRs in the relevant Issues. | Prioritize blocking core bugs, defer optional features and keep the last actually verified path with its limitations. A code change alone does not close a test failure. |
-| 13 / Nov 26 — Clean setup / handoff trial | Lead: tulseyy8848. Separate checker: ujjalpoudel75, using instructions they did not author. | Start from a clean checkout on the stated environment, run the current root setup commands and follow the core/local fallback without undocumented help. | Planned: #118 follow-up with revision, OS/Node/browser, commands, setup output, journey, actual result, time taken and any missing instruction. | Fix the setup note and repeat. Until then, use a labelled prepared checkout or dated screenshots; do not call the old prepared local run a new clean-install pass. |
-| 14 / Dec 3 — Demo lock and contribution audit | Lead: DevyanaCT. Checker: tulseyy8848; each member confirms their own contribution. | A non-script author follows the locked script, times the actual narrated run, attempts the fallback and checks each spoken claim against its receipt. | Planned: versioned script/build, named participants, actual duration, expected/actual outcome, core/fallback proof and four confirmed contribution links. | Remove unstable steps from the promise, retain unresolved gaps and repeat the rehearsal. Do not replace missing duration/outcome fields with checkmarks. |
-| 15 / Dec 10 — Hardening and release readiness | Lead: prachi2061. Live checker: ujjalpoudel75; local-backup checker: tulseyy8848. | Repeat the locked path on the release candidate and verify the declared local/guest fallback, including current auth/data boundaries. | Planned: release-candidate revision/URL, named dated live/local results, CI results kept separate, remaining bugs and fallback instructions. | Stop optional scope, fix/retest blocking errors or use an actually verified earlier path; state limitations when switching to the backup. |
-| 16 / Dec 17 — Presentation and handoff | Coordinator: DevyanaCT; all four members deliver their own confirmed parts. Handoff checker: tulseyy8848 or another person who did not author the setup being checked. | Demonstrate only the locked verified steps, explain sample/auth/data limits, and have the recipient locate the setup and evidence from the handoff entry point. | Planned: final script/build, delivery/handoff record, recipient's check result, evidence index, contribution receipts and unresolved items with next owners. | Use the declared local/guest path or clearly labelled recorded proof; hand over unresolved work explicitly instead of asserting MVP completion. |
+**Important:** All future milestones below are PLANNED. The proposed owners and checkers must confirm their responsibilities. A planned assignment does not mean the work has been completed.
 
-## Next one or two weeks
-
-| Issue or action | Owner | Done when | Evidence path |
+| Week / Date | Owner / Checker | Planned work | Required evidence |
 |---|---|---|---|
-| Before Wed Nov 4: confirm own report wording and roles | Each member for their row; DevyanaCT coordinates. | Four member-authored/confirmed entries link specific evidence; pending confirmations stay visible. | [Single Week 9 report](Weekly-Report.md), member-owned Issue/PR comments and the role-confirmation record. |
-| Before Wed Nov 4: bring the existing independent working-path result | tulseyy8848 supplies/clarifies their receipt; prachi2061 links the scoped handoff. | The October 31 local result can be explained with its prepared setup, date and limits; a later test is labelled separately. | [Dated #118 result](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6539563367), [independent-test handoff](Evidence/independent-test-handoff.md). |
-| Before Wed Nov 4: update current auth results or state the blocker | prachi2061 supports implementation; ujjalpoudel75 is the proposed independent tester. | Record completed email/password/Google login and reload if performed; record reset email, password change and changed-password login separately. Otherwise retain NOT TESTED with the next required step. | [#116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116), not just provider-page or reset-form screenshots. |
-| Week 11: verify the Event-data boundary | prachi2061 supports implementation; ujjalpoudel75 checks independently. | An identified Firestore Event can be queried and shown under the tested permissions, or the exact missing implementation/configuration/permission blocker is recorded. | [#117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117); sample catalog remains labelled until this passes. |
-| Week 11: record the MVP/freeze decision | DevyanaCT coordinates; all four confirm their own roles and claims. | The promise includes only steps supported by current evidence; any retained extension has value, owner and its own test receipt. | Planned: dated decision in the shared report/roadmap, with unresolved limits and fallback. |
+| Week 10 – Nov 5 | Lead: DevyanaCT; Checker: tulseyy8848 | Review individual contributions, commit history, issue links, and AI-use documentation. | Four member-confirmed contribution rows and exact evidence links. |
+| Week 11 – Nov 12 | Implementation: prachi2061; Checker: ujjalpoudel75; Coordinator: DevyanaCT | Verify the MVP journey, authentication, reset flow, and Firestore Event loading. Make the MVP/freeze decision. | Completed test results, screenshots, issue updates, and a documented MVP decision. |
+| Week 12 – Nov 19 | Lead/checker: ujjalpoudel75; Fixes: relevant feature owners | Conduct independent QA, repeat the core journey, and identify critical bugs. | Independent QA results, reproduction steps, and retest evidence. |
+| Week 13 – Nov 26 | Lead: tulseyy8848; Checker: ujjalpoudel75 | Test local setup from a clean checkout and review setup instructions. | Clean-checkout test result, environment details, commands, and screenshots. |
+| Week 14 – Dec 3 | Lead: DevyanaCT; Checker: tulseyy8848 | Lock the final demo script, verify spoken claims, and conduct a timed team rehearsal. | Final script, actual duration, participant list, and rehearsal results. |
+| Week 15 – Dec 10 | Lead: prachi2061; Checkers: ujjalpoudel75 and tulseyy8848 | Complete final hardening and release-readiness checks. | Release candidate, live/local test results, CI evidence, and remaining bug list. |
+| Week 16 – Dec 17 | Coordinator: DevyanaCT; All members | Present the final project and complete the handoff. | Final demo evidence, setup instructions, contribution records, and handoff results. |
 
-## Top risks
+---
 
-| Risk | Why it matters | Owner | Response or fallback | Review week |
-|---|---|---|---|---|
-| Firestore Event loading remains unverified | The project cannot yet support a database-loaded Events claim. | prachi2061 (implementation); ujjalpoudel75 (proposed checker) | Record actual database success/failure in #117; retain clearly labelled sample Events. | Week 11 |
-| Completed authentication/reset evidence is missing | Provider-page readiness and form/dashboard images do not prove the full flows. | prachi2061; ujjalpoudel75 (proposed checker) | Retest and save stepwise results in #116. A fresh successful email/password fallback must also be recorded before claiming it for the current build; otherwise declare guest/local fallback. | Before Nov 4; Week 11 |
-| Authentication problems | Users may be unable to access the application. | prachi2061; named independent tester | State the failed login step, fix/retest it or explicitly switch to guest/sample demonstration without an authenticated-user claim. | Week 11–12 |
-| Bugs in supporting features | Unverified features could interrupt the final demonstration. | Respective feature owners; DevyanaCT coordinates testing | Keep supporting features optional and demonstrate only verified behavior. | Week 12–14 |
-| Incomplete setup documentation | Another teammate may be unable to run the application independently. | Documentation owner; independent setup tester | Conduct a separate setup and handoff trial. | Week 13 |
-| Last-minute changes | New changes could introduce bugs before the presentation. | All team members | Freeze the demo and focus on testing and stability. | Week 14–15 |
-| Missing individual contribution evidence | The professor may not be able to identify each student's work. | All team members | Update individual contributions and evidence in the shared Weekly Report. | Every week |
+## 7. Next Actions
 
-## Progress check
+| Action | Owner | Completion requirement | Evidence |
+|---|---|---|---|
+| Confirm individual Week 9 contributions | All members | Each student confirms their own contribution and evidence. | [Shared Weekly Report](Weekly-Report.md) |
+| Review independent local test | tulseyy8848 | Clarify the October 31 prepared local setup result and its limitations. | [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118) |
+| Verify authentication | prachi2061 supports implementation; ujjalpoudel75 is proposed independent tester | Record completed login, session restoration, Google login, and reset flow results if performed. | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
+| Verify Firestore Event loading | prachi2061 supports implementation; ujjalpoudel75 is proposed checker | Query and display an identified Firestore Event or record the actual blocker. | [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) |
+| Review regression results | DevyanaCT coordinates; relevant feature owners verify their work | Ensure test results and limitations are documented. | November 2 evidence and [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) |
+| Decide final MVP scope | All members | Agree on the features that can be demonstrated with evidence. | Dated decision in the Weekly Report and roadmap. |
 
-- [x] The documented route begins with dated evidence and explicit limits.
-- [x] The proposed core claim and fallback separate verified behavior from missing tests.
-- [x] Each planned milestone names an owner/checker, repeatable check, evidence to save and failure fallback.
-- [x] The Week 11 plan includes MVP verification and a feature-freeze decision.
-- [x] Missing completed Google/reset receipts are explicitly NOT TESTED, separate from the repaired domain and passing provider-page readiness check.
-- [x] The Week 13 plan includes another person's clean setup/handoff trial.
-- [x] The Week 14 plan defines the demo-lock and contribution checks.
-- [x] The Week 15 plan covers readiness/hardening without new scope.
-- [ ] The shared Weekly Report records each student's own contribution and evidence.
+---
 
-Update this roadmap when new tests, feedback, or constraints change the best route. Keep old decisions understandable by linking the relevant Issue or evidence.
+## 8. Top Project Risks
 
-Checked items above certify the documented plan only. Owner acceptance, future tests, team decisions, narrated rehearsals and missing member-authored rows remain pending until their actual receipts are saved.
+| Risk | Why it matters | Owner | Response |
+|---|---|---|---|
+| Firestore Event loading is unverified | Database-loaded Events cannot be claimed. | prachi2061; proposed checker ujjalpoudel75 | Test and document the actual database result. |
+| Authentication evidence is incomplete | A provider page or screenshot does not prove successful login. | prachi2061; named independent tester | Complete the authentication checks or use a clearly labelled guest/demo fallback. |
+| Supporting-feature bugs | Optional features could interrupt the final presentation. | Respective feature owners | Keep supporting features optional and retest selected functionality. |
+| Incomplete setup documentation | Another teammate may not be able to run the project independently. | Documentation owner | Conduct an independent clean-setup test. |
+| Last-minute changes | New changes could introduce regressions. | All members | Freeze scope and prioritize stability. |
+| Missing contribution evidence | Individual work may be difficult to evaluate. | All members | Maintain individual contribution rows with direct evidence links. |
+
+---
+
+## 9. Progress Checklist
+
+- [x] Updated project status using November 2 evidence.
+- [x] Documented the core guest/sample-data demonstration path.
+- [x] Separated authenticated login from guest access.
+- [x] Kept Google Sign-In and password reset unverified until completion evidence exists.
+- [x] Kept Firestore Event loading marked NOT TESTED.
+- [x] Linked core regression test results.
+- [x] Linked supporting-feature evidence in Issue #133.
+- [x] Identified remaining risks and next actions.
+- [x] Created a Week 11 MVP verification and freeze plan.
+- [ ] All members confirm their individual Weekly Report contributions.
+- [ ] Authentication and Firestore verification are completed or formally retained as limitations.
+- [ ] Independent QA and clean-setup tests are completed.
+- [ ] Final timed rehearsal is completed and documented.
+- [ ] Final demo and handoff evidence is collected.
+
+---
+
+## 10. Final Reminder
+
+CampusVibes should be presented based on what the team can actually demonstrate, not on what the team hopes to finish.
+
+The final demonstration will prioritize a reliable user journey, clear testing evidence, honest limitations, and understandable setup instructions.
+
+Update this roadmap whenever new test results, project changes, or professor feedback change the team's next steps.
+
+**A checked planning item confirms that the plan is documented. It does not certify that a future test, owner assignment, rehearsal, or feature has been completed.**
