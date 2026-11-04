@@ -129,6 +129,10 @@ The team will prioritize a stable, testable application over adding new features
 
 CampusVibes will focus on delivering a reliable campus event discovery experience for the final demonstration.
 
+**Current MVP Decision:** The team will prioritize the core CampusVibes event discovery journey and maintain the verified guest/sample-data fallback. Password Reset has been independently tested, while Google Sign-In and Firestore Event loading require further verification.
+
+**Feature-Freeze Status:** PENDING — The final Week 11 feature-freeze decision will be recorded after reviewing the remaining testing evidence, critical issues, and MVP readiness.
+
 Password Reset has been independently tested and documented. Google Sign-In and Firestore Event loading remain important verification tasks.
 
 The team will continue improving the core journey, fixing critical problems, completing independent testing, and preserving clear evidence of individual contributions.
