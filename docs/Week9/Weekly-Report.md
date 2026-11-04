@@ -78,6 +78,38 @@ PASS applies only to the stated test, environment, and date. FAIL records an obs
 | Firestore Event loading and permissions | NOT TESTED | Visible Events use the code-based sample catalog in `frontend/events.json`. | Verify actual database loading in #117. |
 | Local setup / backup journey | PASS – reported teammate result | October 31 local result provided by tulseyy8848. This is not a fresh clean-checkout or deployed-authentication test. | Retain the dated receipt and document exact setup steps. |
 
+
+### November 4 — Authentication Verification Update
+
+**Tester:** ujjalpoudel75
+
+**Test Date:** November 1, 2026
+
+**Documentation Updated:** November 4, 2026
+
+**Password Reset — PASS**
+
+Independent testing confirmed the following steps:
+
+1. Requested a password reset email.
+2. Received the reset email in the registered inbox.
+3. Opened the reset link.
+4. Successfully changed the password.
+5. Returned to the CampusVibes login page.
+6. Logged in using the changed password.
+7. Successfully accessed the student dashboard.
+
+These results were recorded step by step in Issue #116. Screenshots support the form and dashboard results, while email receipt and password change are documented through the tester's observations.
+
+**Google Sign-In — Retesting Required**
+
+The initial Google Sign-In test was blocked by a configuration error. A subsequent domain configuration repair was recorded, but successful end-to-end Google authentication has not yet been verified.
+
+**Evidence:** [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116)
+
+**Next Action:** Retest Google Sign-In and document successful authentication and session restoration.
+
+
 **MVP status: Gap to close.**
 
 Guest navigation and Google provider-page readiness do not establish completed authentication or Firestore Event loading.
@@ -153,7 +185,7 @@ Each student must provide or confirm their own contribution wording and evidence
 | Student | What they did | Evidence link |
 |---|---|---|
 | DevyanaCT | Updated project documentation and the Final Demo Roadmap, organized testing evidence, reviewed regression testing results, and tested supporting features including Saved Events, Profile, AI Assistant, and Light/Dark Theme. Documented the Suggestions upload limitation and organized final demo evidence. | [Final Demo Roadmap](Final-demo-Roadmap.md), [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) |
-| ujjalpoudel75 | Provided authentication testing evidence and identified the Google Sign-In configuration issue. The full password-reset process still requires step-by-step confirmation of email receipt, password change, and login using the changed password before it can be claimed as verified. | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
+| ujjalpoudel75 | Performed independent authentication testing on the deployed CampusVibes website. Verified the complete Password Reset process on November 1, including receiving the reset email, changing the password, and successfully logging in with the updated password. Documented the actual testing steps, expected results, observed results, and screenshots in Issue #116. Also identified the earlier Google Sign-In configuration error. The Google configuration was subsequently updated, but full Google-account authentication still requires retesting. | [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
 | prachi2061 | Diagnosed and repaired the missing production Firebase authorized domain. Added desktop/mobile Google provider-page and cancellation checks. Recorded the automated guest Dashboard → Discover/search/filter → Event Details and empty-search recovery checks. These checks do not establish completed Google authentication or independent teammate testing. | [PR #135](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/135), [November 2 core review](Evidence/prachi-core-review-2026-11-02/check-note.md) |
 | tulseyy8848 | Independently completed the local backup setup test on October 31, 2026, following Issue #118 instructions. Opened the CampusVibes repository in VS Code, used the terminal to install dependencies with `npm install` (if needed), started the development server using `npm run dev`, and accessed the local application through the Vite URL. Tested the local backup demo, including the Landing Page, Login, Dashboard, Discover / Events, Search and Filters, and Event Details. Confirmed that the local application started and opened successfully, and collected screenshots as evidence. No errors were encountered during the recorded test. Firebase authentication and Firestore event loading were not independently verified. Also test by deployed website | [Issue #118 comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6539563367) [Issue #188 comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6596380992)|
 
@@ -166,7 +198,7 @@ Each student must provide or confirm their own contribution wording and evidence
 | Blocker / risk | Owner | Next action |
 |---|---|---|
 | Firestore Event loading remains unverified. | prachi2061 and ujjalpoudel75 | Verify database loading and record the actual result. |
-| Completed Google authentication and full password-reset evidence are missing. | prachi2061 and ujjalpoudel75 | Record actual login, email receipt, password change, and changed-password login results in #116. |
+| Password Reset was tested end to end by ujjalpoudel75 and documented in Issue #116. Step-by-step observations and supporting screenshots are available; separate screenshots of email delivery and password-change confirmation should be retained if available. Google Sign-In still requires successful end-to-end retesting after the configuration repair. | prachi2061 and ujjalpoudel75 | Retest Google Sign-In, verify successful dashboard access and session restoration, and update [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) with the results. |
 | Photo and file uploads in Suggestions are unavailable while billing is disabled. | DevyanaCT | Keep the limitation documented. |
 | Individual code ownership and AI-use records need review. | All team members | Review commits and document individual contributions. |
 
