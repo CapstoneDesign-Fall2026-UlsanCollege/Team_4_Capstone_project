@@ -44,7 +44,7 @@
 
 ## Evidence to link
 
-**November 4 ownership update:** The [AI-use audit and code-area map](ai-use-and-code-ownership-audit.md), [source-review note](Evidence/prachi-ownership-review-2026-11-04.md) and [ownership section in the single Week 9 report](Weekly-Report.md#ai-use-and-code-ownership--november-4) record Prachi's contribution. Role acceptance, student explanation confirmations and the named independent check remain pending in [#139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139).
+**November 4 preparation for Week 10:** Prachi prepared the [ownership audit and area map](../Week10/ai-use-and-code-ownership-audit.md) and [source-review note](../Week10/Evidence/prachi-ownership-review-2026-11-04.md) for the professor's Week 10 assignment. The [dated Week 9 preparation note](Weekly-Report.md#week-10-audit-preparation--november-4) records when that preparation happened; the [Week 10 report](../Week10/Weekly-Report.md) tracks assignment progress. Role acceptance, student explanation confirmations and the named independent check remain pending in [#139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139).
 
 **November 2 status:** The Final Demo Roadmap has scoped current results and seven planned milestone rows with proposed owners/checkers, checks, evidence, and fallbacks. These documentation items do not certify owner acceptance or execution of future milestones.
 

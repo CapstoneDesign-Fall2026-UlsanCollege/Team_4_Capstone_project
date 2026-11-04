@@ -227,7 +227,8 @@ Use focused branches and pull requests. Link the relevant issue, include the act
 - [Pull requests](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pulls)
 - [Team documentation](docs/)
 - [Week 9 report](docs/Week9/Weekly-Report.md)
-- [AI use, code-area map and ownership audit](docs/Week9/ai-use-and-code-ownership-audit.md)
+- [Week 10 report — ownership assignment](docs/Week10/Weekly-Report.md)
+- [AI use, code-area map and ownership audit](docs/Week10/ai-use-and-code-ownership-audit.md)
 - [Feature verification records](frontend/react-app/verification/)
 
 ## Team

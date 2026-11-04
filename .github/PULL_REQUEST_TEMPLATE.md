@@ -1,6 +1,6 @@
 ## Problem and change
 
-Describe the trigger, resulting behavior and bounded scope. Link the roadmap slice or tracked issue and the relevant [code-area entry](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week9/ai-use-and-code-ownership-audit.md#codebase-area-map).
+Describe the trigger, resulting behavior and bounded scope. Link the roadmap slice or tracked issue and the relevant [code-area entry](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week10/ai-use-and-code-ownership-audit.md#codebase-area-map).
 
 - Issue / roadmap slice:
 - Author / area steward or backup consulted (state pending if not confirmed):
@@ -30,7 +30,7 @@ If AI helped, record:
 - Human who can explain the result, or explicit pending explain-back:
 - Review/test receipt and any unresolved understanding gap:
 
-Update the [ownership audit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week9/ai-use-and-code-ownership-audit.md#ai-use-disclosure) for relevant changes. Do not present automated inspection as a human review. An audit does not override assignment restrictions on AI use.
+Update the [ownership audit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week10/ai-use-and-code-ownership-audit.md#ai-use-disclosure) for relevant changes. Do not present automated inspection as a human review. An audit does not override assignment restrictions on AI use.
 
 ## Outside sources
 
