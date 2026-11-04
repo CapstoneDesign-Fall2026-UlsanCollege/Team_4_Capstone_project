@@ -30,7 +30,7 @@ This receipt is reused with its original date. No browser check, clean installat
 
 ## Documentation validation
 
-The figures below record the original audit change in [PR #140](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/140). The audit and this note are now filed under Week 9; the report links were consolidated separately. This relocation does not create a new runtime or teammate test result.
+The figures below record the original audit change in [PR #140](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/140). This November 4 source review is advance preparation for the Week 10 assignment; the audit and this note are filed under Week 10. Correcting the course-week filing does not create a new runtime or teammate test result.
 
 | Document/source check, November 4 | Expected | Actual |
 |---|---|---|
