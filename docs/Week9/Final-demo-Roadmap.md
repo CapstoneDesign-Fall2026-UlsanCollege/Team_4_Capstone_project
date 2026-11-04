@@ -35,8 +35,7 @@ The November 2 automated live check verified the guest/sample-data navigation an
 The following items are not part of the verified core promise unless separate evidence is collected:
 
 - Firestore Event loading (not tested).
-- Completed Google Sign-In.
-- Completed password-reset and changed-password login.
+- Password Reset was tested end to end by ujjalpoudel75 on November 1, 2026, and documented in Issue #116. The test was reported as PASS. However, the available screenshots do not independently demonstrate every step, so additional evidence should be retained where available.
 - Maps and external notifications.
 - RSVP and social messaging.
 - Advanced AI personalization.
@@ -62,7 +61,7 @@ The project has a working guest/sample-data demonstration path, but authenticati
 | Empty-search recovery | PASS – automated guest check | November 2 core review | Retain recovery behavior |
 | Email/password login | Historical PASS; current completed login NOT TESTED | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | Record a current successful login and session test |
 | Google Sign-In | Domain readiness PASS; completed login NOT TESTED | [Issue #134](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/134) | Complete identity selection, login, and reload test |
-| Password reset | NOT TESTED | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | Verify reset email, password change, and new-password login |
+| Password reset | PASS — End-to-end test reported by ujjalpoudel75 on November 1, 2026 | [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | Step-by-step verification documented; additional screenshots of email receipt and password-change confirmation should be retained if available. |
 | Firestore Event loading | NOT TESTED | [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) | Verify actual database Event loading |
 | Local setup / backup | Reported independent PASS – October 31 | [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118) | Conduct a separate clean-checkout setup test |
 | Saved Events, Profile, Assistant, Suggestions, and theme | Supporting-feature checks reported | [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) | Keep supporting limitations visible and retest selected features |
@@ -197,7 +196,7 @@ Historical aliases should remain connected to their original evidence.
 | Risk | Why it matters | Owner | Response |
 |---|---|---|---|
 | Firestore Event loading is unverified | Database-loaded Events cannot be claimed. | prachi2061; proposed checker ujjalpoudel75 | Test and document the actual database result. |
-| Authentication evidence is incomplete | A provider page or screenshot does not prove successful login. | prachi2061; named independent tester | Complete the authentication checks or use a clearly labelled guest/demo fallback. |
+| Google Sign-In and session-restoration testing remain incomplete. Password Reset passed the documented November 1 end-to-end test, but direct screenshot evidence for some steps is limited. | The final demo must distinguish verified authentication behavior from unfinished testing. | prachi2061; ujjalpoudel75 | Retest Google Sign-In, verify session restoration, and retain the password reset evidence in [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116). |
 | Supporting-feature bugs | Optional features could interrupt the final presentation. | Respective feature owners | Keep supporting features optional and retest selected functionality. |
 | Incomplete setup documentation | Another teammate may not be able to run the project independently. | Documentation owner | Conduct an independent clean-setup test. |
 | Last-minute changes | New changes could introduce regressions. | All members | Freeze scope and prioritize stability. |
@@ -205,20 +204,30 @@ Historical aliases should remain connected to their original evidence.
 
 ---
 
+
 ## 9. Progress Checklist
 
 - [x] Updated project status using November 2 evidence.
 - [x] Documented the core guest/sample-data demonstration path.
 - [x] Separated authenticated login from guest access.
-- [x] Kept Google Sign-In and password reset unverified until completion evidence exists.
+- [x] Documented the original Google Sign-In configuration error and subsequent configuration repair.
+- [x] Completed and documented independent Password Reset testing by ujjalpoudel75 on November 1, 2026, including reset email receipt, password change, and successful login using the changed password. Evidence recorded in Issue #116.
+- [x] Recorded the limitations of the available Password Reset screenshots.
 - [x] Kept Firestore Event loading marked NOT TESTED.
 - [x] Linked core regression test results.
 - [x] Linked supporting-feature evidence in Issue #133.
 - [x] Identified remaining risks and next actions.
 - [x] Created a Week 11 MVP verification and freeze plan.
-- [x] All members confirm their individual Weekly Report contributions.
-- [x] Independent QA and clean-setup tests are completed.
-- [ ] Authentication and Firestore verification are completed or formally retained as limitations.
+- [x] Confirm all team members' individual Weekly Report contributions and evidence.
+- [x] Complete independent QA and clean-checkout setup testing.
+- [ ] Complete Google Sign-In end-to-end testing and session-restoration verification.
+- [ ] Verify Firestore Event loading or formally document its limitations.
+- [ ] Finalize authentication and Firestore verification status for the final MVP.
+
+**Authentication Evidence:** [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116)
+
+**Firestore Evidence:** [Issue #117 — Firestore Event Loading](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117)
+
 ---
 
 ## 10. Final Reminder
