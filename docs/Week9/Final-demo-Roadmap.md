@@ -6,6 +6,8 @@
 **Team:** 4  
 **Project:** CampusVibes
 
+**Prachi's evidence follow-up — November 4:** [The dated review and updated matrix](Evidence/prachi-feedback-follow-up-2026-11-04.md) link `ujjalpoudel75`'s reported independent email/password core journey/session PASS in #138 and full reset observations in #116. The status tables below retain the earlier review snapshot. These newer teammate-reported results do not establish completed Google authentication or Firestore Event loading; the MVP/data gap, extension boundary and local/guest fallback remain in place. No new runtime test or team decision is claimed by this follow-up.
+
 This roadmap connects the current project status, testing evidence, remaining work, and preparation for the final demonstration. All completed work must be supported by actual evidence. Planned activities must not be presented as completed tests.
 
 ---
