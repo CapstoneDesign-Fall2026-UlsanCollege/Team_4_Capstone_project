@@ -55,6 +55,8 @@ If it is not linked, it does not count.
 | Core domo evidence matrix  | [Core domo evidence matrix](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/777d896fa868274f51eaabd4d7c69f5d67938a4c/docs/Week9/Core-Demo-Evidence-Matrix.md)|
 | Readme | [Reading Readme](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project#)|
 | Team Agreement | [Team Agreement](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/cd89ecb44f3de481aa80c18240cb554a5427e937/docs/Week1/team_agrement.md) |
+| Independent Authenticated MVP Journey Testing | [Independent Authenticated MVP Journey Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138)|
+
 
 ---
 
