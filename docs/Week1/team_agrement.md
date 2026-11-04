@@ -89,6 +89,6 @@ By signing, each member agrees to follow this plan, raise concerns early, and up
 
 **Team Commitment:** Make the work visible. Communicate early. Support each other.
 
-## Current code-area reference — Week 10 preparation
+## Current code-area reference — Week 9
 
-The [AI-use and code ownership audit](../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map) holds the current repository boundaries, proposed stewards/backups and area checks. It supplements the historical first-sprint roles above. Each member confirms or revises their own proposed role; the November 4 preparation does not establish team acceptance. Any teammate may contribute to any area. Revisit the map at the next sprint boundary or when responsibilities change.
+The [AI-use and code ownership audit](../Week9/ai-use-and-code-ownership-audit.md#codebase-area-map) holds the current repository boundaries, proposed stewards/backups and area checks. It supplements the historical first-sprint roles above. Each member confirms or revises their own proposed role; the November 4 preparation does not establish team acceptance. Any teammate may contribute to any area. Revisit the map at the next sprint boundary or when responsibilities change.

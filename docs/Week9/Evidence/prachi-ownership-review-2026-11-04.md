@@ -30,6 +30,8 @@ This receipt is reused with its original date. No browser check, clean installat
 
 ## Documentation validation
 
+The figures below record the original audit change in [PR #140](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/140). The audit and this note are now filed under Week 9; the report links were consolidated separately. This relocation does not create a new runtime or teammate test result.
+
 | Document/source check, November 4 | Expected | Actual |
 |---|---|---|
 | Relative links and headings | Every linked local target exists. | PASS — 96 local references checked across the eight changed/new files. |
