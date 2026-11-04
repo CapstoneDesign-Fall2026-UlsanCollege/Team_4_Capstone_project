@@ -166,7 +166,7 @@ Historical aliases should remain connected to their original evidence.
 
 **Important:** All future milestones below are PLANNED. The proposed owners and checkers must confirm their responsibilities. A planned assignment does not mean the work has been completed.
 
-**Week 10 preparation, November 4:** The [ownership audit and area map](../Week10/ai-use-and-code-ownership-audit.md) now contain Prachi's prepared Google entry/recovery trace, AI disclosures, historical expected/actual evidence and proposed area handoffs. [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) and the [single Week 10 report](../Week10/Weekly-Report.md) track the remaining student declarations, own explain-back and independent check. Those human steps remain pending; this preparation does not complete the Week 10 milestone or verify full authentication/Firestore Event loading.
+**Week 9 ownership update, November 4:** The [ownership audit and area map](ai-use-and-code-ownership-audit.md) contain Prachi's prepared Google entry/recovery trace, AI disclosures, historical expected/actual evidence and proposed area handoffs. [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) and the [single Week 9 report](Weekly-Report.md#ai-use-and-code-ownership--november-4) track the remaining student declarations, own explain-back and independent check. Those human steps remain pending; this Week 9 contribution does not complete a future milestone or verify full authentication/Firestore Event loading.
 
 | Week / Date | Owner / Checker | Planned work | Required evidence |
 |---|---|---|---|
