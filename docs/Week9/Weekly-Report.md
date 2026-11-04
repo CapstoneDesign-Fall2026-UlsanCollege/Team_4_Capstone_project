@@ -111,6 +111,28 @@ The initial Google Sign-In test was blocked by a configuration error. A subseque
 
 **Next Action:** Retest Google Sign-In and document successful authentication and session restoration.
 
+### November 4 — Independent MVP Journey Testing Follow-up
+
+**Tester:** ujjalpoudel75
+
+**Environment:** Deployed CampusVibes website, Google Chrome
+
+**Testing Scope:**
+- Email/password login
+- Authenticated Dashboard access
+- Discover/Events navigation
+- Event search and category filters
+- Event Details
+- Session restoration after refresh
+
+**Testing Activity:** Independent MVP journey testing was performed, and a separate GitHub issue was created to document the results.
+
+**Verification Status:** Final PASS/FAIL status to be recorded against the individual test steps and screenshot evidence in Issue #138.
+
+**Evidence:** [Issue #138 — Independent Authenticated MVP Journey Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138)
+
+**Next Action:** Complete the test result table, attach screenshots, and update the Sprint 2 MVP checklist based on the verified outcomes.
+
 
 **MVP status: Gap to close.**
 
@@ -187,7 +209,7 @@ Each student must provide or confirm their own contribution wording and evidence
 | Student | What they did | Evidence link |
 |---|---|---|
 | DevyanaCT | Updated project documentation and the Final Demo Roadmap, organized testing evidence, reviewed regression testing results, and tested supporting features including Saved Events, Profile, AI Assistant, and Light/Dark Theme. Documented the Suggestions upload limitation and organized final demo evidence. | [Final Demo Roadmap](Final-demo-Roadmap.md), [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) |
-| ujjalpoudel75 | Performed independent authentication testing on the deployed CampusVibes website. Verified the complete Password Reset process on November 1, including receiving the reset email, changing the password, and successfully logging in with the updated password. Documented the actual testing steps, expected results, observed results, and screenshots in Issue #116. Also identified the earlier Google Sign-In configuration error. The Google configuration was subsequently updated, but full Google-account authentication still requires retesting. | [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
+| ujjalpoudel75 | Independently tested the CampusVibes authentication functionality on the deployed website. Successfully completed Password Reset testing on November 1, 2026, including receiving the reset email, changing the password, and logging in with the updated password. Identified the earlier Google Sign-In configuration error and documented the results with screenshots in Issue #116. Also performed independent testing of the authenticated MVP user journey and created Issue #138 to record Login → Dashboard → Discover/Search → Event Details testing, including session-refresh verification. Final results and screenshot evidence for the MVP journey must be confirmed in Issue #138 before declaring the full journey PASS. | [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116), [Issue #138 — Independent MVP Journey Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138) |
 | prachi2061 | Diagnosed and repaired the missing production Firebase authorized domain. Added desktop/mobile Google provider-page and cancellation checks. Recorded the automated guest Dashboard → Discover/search/filter → Event Details and empty-search recovery checks. These checks do not establish completed Google authentication or independent teammate testing. | [PR #135](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/135), [November 2 core review](Evidence/prachi-core-review-2026-11-02/check-note.md) |
 | tulseyy8848 | Independently completed the local backup setup test on October 31, 2026, following Issue #118 instructions. Opened the CampusVibes repository in VS Code, used the terminal to install dependencies with `npm install` (if needed), started the development server using `npm run dev`, and accessed the local application through the Vite URL. Tested the local backup demo, including the Landing Page, Login, Dashboard, Discover / Events, Search and Filters, and Event Details. Confirmed that the local application started and opened successfully, and collected screenshots as evidence. No errors were encountered during the recorded test. Firebase authentication and Firestore event loading were not independently verified. Also test by deployed website | [Issue #118 comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6539563367) [Issue #188 comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6596380992)|
 
