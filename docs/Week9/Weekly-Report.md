@@ -56,6 +56,7 @@ If it is not linked, it does not count.
 | Readme | [Reading Readme](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project#)|
 | Team Agreement | [Team Agreement](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/cd89ecb44f3de481aa80c18240cb554a5427e937/docs/Week1/team_agrement.md) |
 | Independent Authenticated MVP Journey Testing | [Independent Authenticated MVP Journey Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138)|
+| Week 10 ownership preparation — November 4 | [AI-use audit / current area map](../Week10/ai-use-and-code-ownership-audit.md), [next week's single shared report](../Week10/Weekly-Report.md); member declarations and human review remain pending. |
 
 
 ---
