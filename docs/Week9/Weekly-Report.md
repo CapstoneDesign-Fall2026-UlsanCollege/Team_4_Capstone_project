@@ -53,6 +53,8 @@ If it is not linked, it does not count.
 | Google configuration repair | [Bug #134](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/134), [Provider-page readiness receipt](../../frontend/react-app/verification/google-signin-domain/results.json) |
 | Independent-test handoff | [October 31 local result and evidence limitations](Evidence/independent-test-handoff.md) |
 | Core domo evidence matrix  | [Core domo evidence matrix](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/777d896fa868274f51eaabd4d7c69f5d67938a4c/docs/Week9/Core-Demo-Evidence-Matrix.md)|
+| Readme | [Reading Readme](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project#)|
+| Team Agreement | [Team Agreement](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/cd89ecb44f3de481aa80c18240cb554a5427e937/docs/Week1/team_agrement.md) |
 
 ---
 
