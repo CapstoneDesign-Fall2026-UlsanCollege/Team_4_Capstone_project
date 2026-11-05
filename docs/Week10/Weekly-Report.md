@@ -36,7 +36,7 @@ If it is not linked, it does not count.
 | Student | What they did | Evidence link |
 |---|---|---|
 | prachi2061 | Prepared the Week 10 ownership audit, reviewed the authentication code structure, and documented Google Sign-In entry, cancellation, and Firebase SDK handoff with AI-assisted drafting. Primary area: frontend authentication. Final explanation and backup confirmation are pending. | [#139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139), [Source Review](Evidence/prachi-ownership-review-2026-11-04.md) |
-|  |   |
+| DevyanaCT | Proposed Week 10 slice: Automated UI/UX and Responsive Design Testing using Playwright. Primary area: Frontend UI/UX, Theme, and Accessibility (`frontend/style.css` and related React UI components). Will run `npm run test:smoke`, add or improve one UI-specific automated test, and document expected/actual results. Proposed backup: `prachi2061` (pending acceptance). New Week 10 results pending. | [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139), [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) |
 |   |    |
 |    |    |
 
