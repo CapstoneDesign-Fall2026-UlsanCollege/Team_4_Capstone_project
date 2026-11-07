@@ -71,6 +71,7 @@ I manually tested the deployed CampusVibes website using my student account.
 | Event Details | HackNight details displayed title, date, time, location, and description | PASS | [Screenshot 5](W10-05-details.png) |
 | Empty Search | Invalid keyword displayed an appropriate no-results message | PASS | [Screenshot 6](W10-06-empty-search.png) |
 | Session Refresh | Dashboard remained signed in after browser refresh | PASS | [Screenshot 8](W10-08-after-refresh.png) |
+| Category Filtering | Selected Tech category; 2 of 9 events displayed, both labeled Tech | PASS | [Screenshot 12](W10-12-category-filter.png) |
 
 ### Testing Observations
 
