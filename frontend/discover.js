@@ -1,6 +1,7 @@
 let currentEventSort = "date";
 let currentSavedOnly = false;
 const DISCOVER_STYLES = {
+  All: { color: "#8452d8", icon: "calendar-days" },
   Tech: { color: "#159eaa", icon: "monitor" },
   Arts: { color: "#ed7486", icon: "paintbrush" },
   Music: { color: "#8452d8", icon: "music" },
@@ -22,9 +23,9 @@ function discoverSaveMarkup(event, saved, extraClass = "") {
 
 function discoverCardMarkup(event, saved) {
   const date = new Date(event.date + "T00:00:00");
-  return `<article class="event-card discover-event-card" data-event-id="${event.id}" style="--event-color:${DISCOVER_STYLES[event.interest].color}">
+  return `<article class="event-card discover-event-card" data-event-id="${event.id}" style="--event-color:${DISCOVER_STYLES[event.interest].color}">${eventSourceMarkup(event)}
     <div class="discover-event-banner">${discoverPhotoMarkup(event)}<time class="discover-event-date" datetime="${event.date}"><span>${date.toLocaleDateString("en-US", { month: "short" })}</span><strong>${date.getDate()}</strong></time></div>
-    <div class="discover-event-body"><span class="discover-event-tag">${event.interest}</span><h3>${dashboardText(event.title)}</h3><div class="discover-event-meta"><p><i data-lucide="clock" aria-hidden="true"></i>${event.time} &middot; ${date.toLocaleDateString("en-US", { weekday: "short" })}</p><p><i data-lucide="map-pin" aria-hidden="true"></i>${eventMapLinkMarkup(event)}</p></div><p class="discover-event-description">${dashboardText(event.desc)}</p><button class="discover-host" type="button" data-discover-host="${discoverAttribute(event.host)}"><span class="discover-host-avatar">${event.host[0]}</span><span>Hosted by ${dashboardText(event.host)}</span></button><footer>${discoverSaveMarkup(event, saved)}<button class="discover-detail-button" type="button" data-discover-event="${event.id}">View details<i data-lucide="arrow-right" aria-hidden="true"></i></button></footer></div>
+    <div class="discover-event-body"><span class="discover-event-tag">${event.interest}</span><h3>${dashboardText(event.title)}</h3><div class="discover-event-meta"><p><i data-lucide="clock" aria-hidden="true"></i>${dashboardText(event.time)} &middot; ${date.toLocaleDateString("en-US", { weekday: "short" })}</p><p><i data-lucide="map-pin" aria-hidden="true"></i>${eventMapLinkMarkup(event)}</p></div><p class="discover-event-description">${dashboardText(event.desc)}</p><button class="discover-host" type="button" data-discover-host="${discoverAttribute(event.host)}"><span class="discover-host-avatar">${dashboardText(event.host[0])}</span><span>Hosted by ${dashboardText(event.host)}</span></button><footer>${discoverSaveMarkup(event, saved)}<button class="discover-detail-button" type="button" data-discover-event="${event.id}">View details<i data-lucide="arrow-right" aria-hidden="true"></i></button></footer></div>
   </article>`;
 }
 
@@ -32,7 +33,7 @@ function renderDiscoverSidebar() {
   const saved = getSaved();
   const hosts = [...new Set(EVENTS.map(event => event.host))];
   $("#discoverStats").innerHTML = [[hosts.length, "Event hosts", "users-round"], [EVENTS.length, "Listed events", "calendar-days"], [EVENTS.filter(event => saved.includes(event.id)).length, "Saved by you", "bookmark"]].map(([count, label, icon]) => `<div><i data-lucide="${icon}" aria-hidden="true"></i><strong>${count}</strong><span>${label}</span></div>`).join("");
-  $("#discoverPicks").innerHTML = [2, 4, 6].map(id => EVENTS.find(event => event.id === id)).map(event => `<article class="discover-pick" style="--event-color:${DISCOVER_STYLES[event.interest].color}"><button type="button" class="discover-pick-open" data-discover-event="${event.id}">${discoverPhotoMarkup(event)}<span><strong>${dashboardText(event.title)}</strong><small>${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })} &middot; ${event.time}</small></span></button>${discoverSaveMarkup(event, saved)}</article>`).join("");
+  $("#discoverPicks").innerHTML = [2, 4, 6].map(id => EVENTS.find(event => event.id === id)).map(event => `<article class="discover-pick" style="--event-color:${DISCOVER_STYLES[event.interest].color}"><button type="button" class="discover-pick-open" data-discover-event="${event.id}">${discoverPhotoMarkup(event)}<span><strong>${dashboardText(event.title)}</strong><small>${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })} &middot; ${dashboardText(event.time)}</small></span></button>${discoverSaveMarkup(event, saved)}</article>`).join("");
   const crews = [[9, "Photography", "camera"], [7, "Gaming", "gamepad-2"], [3, "Art & design", "paintbrush"], [6, "Study", "book-open"]];
   $("#discoverCrews").innerHTML = crews.map(([id, label, icon]) => {
     const event = EVENTS.find(item => item.id === id);
@@ -48,14 +49,15 @@ function openDiscoverEvent(id) {
   const event = EVENTS.find(item => item.id === id);
   if (!event) return;
   const saved = getSaved().includes(id);
-  showDashboardDialog(event.title, `${discoverPhotoMarkup(event, "discover-detail-photo")}<span class="recommendation-tag">${event.interest}</span><p class="dashboard-detail-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })} &middot; ${event.time}</p>${eventLocationMarkup(event)}<p class="dashboard-detail-description">${dashboardText(event.desc)}</p><button class="discover-host-link" type="button" data-discover-host="${discoverAttribute(event.host)}">Hosted by ${dashboardText(event.host)}<i data-lucide="arrow-right" aria-hidden="true"></i></button><button class="btn btn-primary" type="button" data-save="${id}" aria-pressed="${saved}"><i data-lucide="bookmark" aria-hidden="true"></i>${saved ? "Remove from saved" : "Save event"}</button>`);
+  showDashboardDialog(event.title, `${discoverPhotoMarkup(event, "discover-detail-photo")}<span class="recommendation-tag">${event.interest}</span><p class="dashboard-detail-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })} &middot; ${dashboardText(event.time)}</p>${eventLocationMarkup(event)}<p class="dashboard-detail-description">${dashboardText(event.desc)}</p><button class="discover-host-link" type="button" data-discover-host="${discoverAttribute(event.host)}">Hosted by ${dashboardText(event.host)}<i data-lucide="arrow-right" aria-hidden="true"></i></button><button class="btn btn-primary" type="button" data-save="${id}" aria-pressed="${saved}"><i data-lucide="bookmark" aria-hidden="true"></i>${saved ? "Remove from saved" : "Save event"}</button>`);
   $("#dashboardDialog").dataset.discoverEvent = String(id);
+  $("#dashboardDialogBody").insertAdjacentHTML('afterbegin',eventSourceMarkup(event));
 }
 
 function openDiscoverHost(host) {
   const events = EVENTS.filter(event => event.host === host);
   if (!events.length) return;
-  showDashboardDialog(host, `<p class="dashboard-detail-description">${events.length} ${events.length === 1 ? "event" : "events"} in the sample campus listings.</p>${events.map(event => `<button class="calendar-event-row" type="button" data-discover-event="${event.id}"><time datetime="${event.date}">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}</time><span><strong>${dashboardText(event.title)}</strong><small>${event.time} &middot; ${dashboardText(event.location)}</small></span><i data-lucide="arrow-right" aria-hidden="true"></i></button>`).join("")}`);
+  showDashboardDialog(host, `<p class="dashboard-detail-description">${events.length} ${events.length === 1 ? "event" : "events"} in the sample campus listings.</p>${events.map(event => `<button class="calendar-event-row" type="button" data-discover-event="${event.id}"><time datetime="${event.date}">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}</time><span><strong>${dashboardText(event.title)}</strong><small>${dashboardText(event.time)} &middot; ${dashboardText(event.location)}</small></span><i data-lucide="arrow-right" aria-hidden="true"></i></button>`).join("")}`);
 }
 
 function clearDiscoverFilters() {

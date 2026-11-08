@@ -31,6 +31,9 @@ const GRADIENTS = (hue) =>
 function eventPhoto(event){
   return `/assets/${event.photo}`;
 }
+function eventSourceMarkup(event){
+  return `<span class="event-source-label">${event.source === 'published' ? 'Published campus event' : 'Sample listing'}</span>`;
+}
 
 function eventBannerMedia(event){
   return `<img class="event-cover" src="${eventPhoto(event)}" alt="" loading="lazy">`;
@@ -50,6 +53,7 @@ function renderEvents(filter = currentInterestFilter, search = currentEventSearc
   grid.innerHTML = list.map(event => discoverCardMarkup(event, saved)).join("");
   $("#emptyState").classList.toggle("hidden", list.length > 0);
   $("#eventResults").textContent = `Showing ${list.length} of ${EVENTS.length} events`;
+  $("#eventCatalogEyebrow").textContent = EVENTS.some(event=>event.source === 'published') ? 'PUBLISHED & SAMPLE EVENTS' : 'SAMPLE EVENTS · ILLUSTRATIVE PHOTOS';
   $("#clearEventFilters").disabled = filter === "all" && !query && !currentSavedOnly && currentEventSort === "date";
   renderDiscoverSidebar();
   window.campusRenderIcons?.();
@@ -61,8 +65,8 @@ function renderUpcoming(){
     const date = new Date(e.date + "T00:00:00");
     return `<button class="upcoming-item" data-page="discover" data-interest-jump="${e.interest}">
       <span class="upcoming-date"><strong>${String(date.getDate()).padStart(2, "0")}</strong><span>${date.toLocaleString("en-US", {month:"short"})}</span></span>
-      <span><h3>${e.title}</h3><p>📍 ${e.location}</p></span>
-      <span class="upcoming-meta">${e.time}<br><span class="interest-mini">${e.interest}</span></span>
+      <span><h3>${dashboardText(e.title)}</h3><p>📍 ${dashboardText(e.location)}</p></span>
+      <span class="upcoming-meta">${dashboardText(e.time)}<br><span class="interest-mini">${e.interest}</span></span>
     </button>`;
   }).join("");
 }
@@ -85,9 +89,9 @@ function renderProfileDetails(){
 
 function eventCardMarkup(e, saved){
   const d = new Date(e.date + "T00:00:00");
-  return `<article class="event-card">
+  return `<article class="event-card">${eventSourceMarkup(e)}
     <div class="event-banner" style="background:${GRADIENTS(e.hue)}">${eventBannerMedia(e)}<button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button><div class="event-date"><strong>${d.getDate()}</strong><span>${d.toLocaleString("en-US",{month:"short"})}</span></div></div>
-    <div class="event-body"><span class="event-tag">${e.interest}</span><h3>${e.title}</h3><div class="event-meta"><span>🕐 ${e.time} · ${d.toLocaleDateString("en-US",{weekday:"long"})}</span><span>📍 ${eventMapLinkMarkup(e)}</span><span>${e.desc}</span></div><div class="event-host"><span class="host-avatar" style="background:${e.hue}">${e.host[0]}</span>Hosted by ${e.host}</div></div>
+    <div class="event-body"><span class="event-tag">${e.interest}</span><h3>${dashboardText(e.title)}</h3><div class="event-meta"><span>🕐 ${dashboardText(e.time)} · ${d.toLocaleDateString("en-US",{weekday:"long"})}</span><span>📍 ${eventMapLinkMarkup(e)}</span><span>${dashboardText(e.desc)}</span></div><div class="event-host"><span class="host-avatar" style="background:${e.hue}">${dashboardText(e.host[0])}</span>Hosted by ${dashboardText(e.host)}</div></div>
   </article>`;
 }
 
@@ -541,6 +545,12 @@ function switchWorkspace(mode, record = true){
 
 /* ── Boot ── */
 function bootCampusVibes(){
+  window.campusRefreshEvents=()=>{
+    if(!getSession())return;
+    renderEvents();renderSavedEvents();renderUpcoming();renderStats();
+    window.dispatchEvent(new Event('campus-saved-change'));
+    window.dispatchEvent(new Event('campus-profile-change'));
+  };
   window.campusAccountRefresh=()=>{
     renderEvents();renderSavedEvents();window.campusRenderIcons?.();
     window.dispatchEvent(new Event("campus-saved-change"));

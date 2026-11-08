@@ -2,6 +2,7 @@ import { collection, doc, getDocFromServer, limit, onSnapshot, orderBy, query, s
 import { auth } from './firebase';
 import { db } from './shared-feed-store';
 import { writeNotification } from './notification-write';
+import { publishSuggestion } from './published-events-store';
 
 export const SUGGESTION_CATEGORIES = ['All', 'Tech', 'Arts', 'Music', 'Sports', 'Social', 'Academics'];
 
@@ -75,10 +76,11 @@ export function watchMySuggestions(user, receive, fail) {
   return () => { stop(); children.forEach(unsubscribe => unsubscribe()); };
 }
 
-export async function reviewSuggestion(user, id, status, note) {
+export async function reviewSuggestion(user, id, status, note, publication) {
   const uid = uidFor(user);
   if (!['approved','declined'].includes(status)) throw new Error('Choose a review decision.');
   if (String(note).trim().length > 500) throw new Error('Review notes must be 500 characters or fewer.');
   if (!navigator.onLine) throw new Error('Reconnect before reviewing.');
+  if (status === 'approved') return publishSuggestion(user,id,note,publication);
   await updateDoc(doc(db, 'campusSuggestions', id), { status, reviewNote: String(note).trim(), reviewerId: uid, reviewedAt: serverTimestamp() });
 }

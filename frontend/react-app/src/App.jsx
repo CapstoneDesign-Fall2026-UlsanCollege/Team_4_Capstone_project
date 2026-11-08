@@ -62,7 +62,9 @@ import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
 import ThemeToggle from "./ThemeToggle";
-import eventCatalog from "../../events.json";
+import { eventCatalog,replacePublishedEvents } from './event-catalog';
+import { watchPublishedEvents } from './published-events-store';
+import './event-catalog.css';
 import { getEventMapLinks } from './event-maps';
 import { createEventJourneyController } from './event-journey';
 import Notifications from './Notifications';
@@ -83,6 +85,9 @@ export default function App() {
   const [account,setAccount] = useState(null);
   const [accountStatus,setAccountStatus] = useState({ready:false,pending:false,error:''});
   const [syncTarget,setSyncTarget] = useState(null);
+  const [catalogTarget,setCatalogTarget] = useState(null);
+  const [catalogStatus,setCatalogStatus] = useState({loading:false,error:'',count:0,cached:false});
+  const retryCatalog = useRef(null);
   const navPhoto = useProfilePhoto(feedUser?.id !== 'demo' ? feedUser?.id : '');
   useEffect(() => {
     const paint = () => {
@@ -106,6 +111,18 @@ export default function App() {
     window.campusEventJourney = eventJourney;
     let journeyUserId = null;
     let activeAccount=null,unsubscribeAccount=null,accountBadges=null;
+    let stopCatalog=null,catalogUser=null,catalogGeneration=0;
+    window.campusEventCatalog=eventCatalog;
+    const refreshCatalog = () => { window.campusRefreshEvents?.(); setCatalogStatus(value=>({...value})); };
+    const connectCatalog = user => {
+      stopCatalog?.(); const generation=++catalogGeneration;
+      setCatalogStatus(value=>({...value,loading:true,error:''}));
+      stopCatalog=watchPublishedEvents(user,(events,cached)=>{
+        if(generation !== catalogGeneration)return;
+        replacePublishedEvents(events);setCatalogStatus({loading:cached && !events.length,error:'',count:events.length,cached});refreshCatalog();
+      },()=>{if(generation === catalogGeneration)setCatalogStatus(value=>({...value,loading:false,error:'Shared events could not be loaded. Sample listings are still available.'}));});
+    };
+    retryCatalog.current=()=>{if(catalogUser && catalogUser.id !== 'demo')connectCatalog(catalogUser);};
     window.campusBadgeProgress = (user,points) => {
       if (!user || user.id === 'demo') return demoBadges(user,points);
       if (!activeAccount?.ready()) return {...badgeProgress(points),newlyEarned:[],warning:'Loading account badges...'};
@@ -141,8 +158,14 @@ export default function App() {
     setProfileTarget(mountRef.current.querySelector("#profileMount"));
     setNotificationsTarget(mountRef.current.querySelector('#notificationsMount'));
     setSyncTarget(mountRef.current.querySelector('#accountSyncMount'));
+    setCatalogTarget(mountRef.current.querySelector('#eventCatalogStatus'));
     const receiveSession = event => {
       const user=event.detail;
+      if (catalogUser?.id !== user?.id) {
+        stopCatalog?.();stopCatalog=null;++catalogGeneration;catalogUser=user;
+        replacePublishedEvents([]);setCatalogStatus({loading:false,error:'',count:0,cached:false});
+        if(user && user.id !== 'demo') connectCatalog(user);
+      }
       if (journeyUserId !== user?.id) { eventJourney.clear(); journeyUserId = user?.id; }
       setNotificationRequest(current => current?.userId === user?.id ? current : null);
       if (activeAccount?.user.id !== user?.id) {
@@ -159,6 +182,7 @@ export default function App() {
         window.campusAccount=activeAccount;setAccount(activeAccount);
       }
       setFeedUser(user);
+      if(user)window.campusRefreshEvents?.();
     };
     const guardUnload=event=>{if(activeAccount?.status().pending){event.preventDefault();event.returnValue='';}};
     const retryOnline=()=>activeAccount?.retry();
@@ -209,7 +233,7 @@ export default function App() {
 
     const appScript = document.createElement("script");
     appScript.textContent = `(() => {
-      const EVENTS = ${JSON.stringify(eventCatalog)};
+      const EVENTS = window.campusEventCatalog;
       ${dashboardScript}
       ${discoverScript}
       ${originalScript}
@@ -222,6 +246,7 @@ export default function App() {
 
     return () => {
       unsubscribeAuth();
+      stopCatalog?.();++catalogGeneration;replacePublishedEvents([]);retryCatalog.current=null;
       unsubscribeAccount?.();activeAccount?.close();
       window.removeEventListener('beforeunload',guardUnload);window.removeEventListener('online',retryOnline);
       delete window.campusAccount;delete window.campusAccountRefresh;
@@ -243,6 +268,7 @@ export default function App() {
       journeyDialog.removeEventListener('close', eventJourney.clear);
       eventJourney.clear();
       delete window.campusEventJourney;
+      delete window.campusEventCatalog;delete window.campusRefreshEvents;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
       window.campusNavigationCleanup?.();
@@ -272,6 +298,7 @@ export default function App() {
     <>
       <ThemeToggle />
       <div ref={mountRef} />
+      {catalogTarget && feedUser && createPortal(<div className={`event-catalog-status ${catalogStatus.error ? 'is-error' : ''}`} role={catalogStatus.error ? 'alert' : 'status'} aria-live="polite"><span>{feedUser.id === 'demo' ? 'Demo: sample listings. Sign in to see published campus events.' : catalogStatus.error || (catalogStatus.loading ? 'Loading shared campus events...' : `${catalogStatus.count === 100 ? 'Latest 100' : catalogStatus.count} published campus events · 9 sample listings${catalogStatus.cached ? ' · Cached results; reconnect to check for updates.' : ''}`)}</span>{catalogStatus.error && <button type="button" onClick={()=>retryCatalog.current?.()}>Retry shared events</button>}</div>,catalogTarget)}
       {notificationsTarget && feedUser && createPortal(<Notifications key={feedUser.id} user={feedUser} onOpen={followNotification} />, notificationsTarget)}
       {syncTarget && account && createPortal(<div className={`account-sync-status ${accountStatus.error ? 'is-error' : ''}`} role="status" aria-live="polite"><span>{accountStatus.error ? <RetryIcon size={15} /> : !accountStatus.ready || accountStatus.pending ? <LoaderCircle size={15} /> : <CloudCheck size={15} />}{accountStatus.error || (!accountStatus.ready ? 'Loading your account...' : accountStatus.pending ? 'Syncing changes. Keep this page open.' : 'Saved to your account')}</span>{accountStatus.error && <button type="button" title="Retry account sync" aria-label="Retry account sync" onClick={()=>account.retry()}><RetryIcon size={15} /></button>}</div>,syncTarget)}
       {profileTarget && feedUser && (feedUser.id === 'demo' || accountStatus.ready) && createPortal(

@@ -30,7 +30,8 @@ export function mergeDashboard(previous,next) {
 
 export function cleanAccountSection(name,value,user,events) {
   if (name === 'profile') return cleanProfile(value,user,[...new Set(events.map(event=>event.host))]);
-  if (name === 'saved') return [...new Set(Array.isArray(value) ? value.filter(id=>events.some(event=>event.id === id)) : [])];
+  // Published IDs stay saved while the shared catalogue loads or falls outside its current window.
+  if (name === 'saved') return [...new Set(Array.isArray(value) ? value.filter(id=>events.some(event=>event.id === id) || (Number.isSafeInteger(id) && id >= 1000 && id < Number.MAX_SAFE_INTEGER)) : [])];
   if (name === 'badges') return mergeBadges(value);
   if (name === 'dashboard') return { activity:cleanActivity(value?.activity),drafts:Array.isArray(value?.drafts) ? value.drafts.slice(0,50) : [] };
   if (name === 'assistant') return cleanSession(value,events);
