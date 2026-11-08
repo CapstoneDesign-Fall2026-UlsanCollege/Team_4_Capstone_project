@@ -32,3 +32,13 @@ test('published catalogue shows the current week and the actual weekend', async 
   await expect(page.locator('#dashboardDialogBody')).not.toContainText('Fixture Friday');
   await page.screenshot({ path: testInfo.outputPath('published-weekend.png'), fullPage: true });
 });
+
+test('a host panel distinguishes its published events from sample listings', async ({ page }, testInfo) => {
+  await page.locator('#filterBar [data-interest=all]').click();
+  await page.locator('#eventsGrid [data-event-id="1000"] [data-discover-host]').click();
+  await expect(page.locator('#dashboardDialogTitle')).toHaveText('Code Collective');
+  await expect(page.locator('#dashboardDialogBody > .dashboard-detail-description')).toHaveText('4 published campus events · 1 sample listing.');
+  await expect(page.locator('#dashboardDialogBody [data-discover-event="1000"]')).toContainText('Published campus event');
+  await expect(page.locator('#dashboardDialogBody [data-discover-event="1"]')).toContainText('Sample listing');
+  await page.screenshot({ path: testInfo.outputPath('host-sources.png'), fullPage: true });
+});
