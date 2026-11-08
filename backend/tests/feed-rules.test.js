@@ -2,6 +2,7 @@ import { after, before, beforeEach, test } from "node:test";
 import { readFileSync } from "node:fs";
 import { assertFails, assertSucceeds, initializeTestEnvironment } from "@firebase/rules-unit-testing";
 import { collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, setDoc, Timestamp, updateDoc, where, writeBatch } from "firebase/firestore";
+import { publicationBatch } from './published-event-fixture.js';
 
 let env;
 before(async () => {
@@ -101,7 +102,8 @@ test('only reviewers decide once and cannot rewrite an idea or its identity', as
   await assertFails(updateDoc(target(db('reviewer')), { ...decision, name: 'Changed idea' }));
   await assertFails(updateDoc(target(db('reviewer')), { ...decision, reviewerId: 'alice' }));
   await assertFails(updateDoc(target(db('reviewer')), { ...decision, reviewNote: 'x'.repeat(501) }));
-  await assertSucceeds(updateDoc(target(db('reviewer')), decision));
+  await assertFails(updateDoc(target(db('reviewer')), decision));
+  await assertSucceeds(publicationBatch(db('reviewer')).commit());
   await assertSucceeds(getDoc(target(db('alice'))));
   await assertFails(updateDoc(target(db('reviewer')), { ...decision, status: 'declined' }));
   await assertFails(deleteDoc(target(db('alice'))));

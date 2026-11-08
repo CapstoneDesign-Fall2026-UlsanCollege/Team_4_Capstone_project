@@ -114,7 +114,7 @@ test('suggestion receipts preserve anonymous ownership and follow an actual revi
   const approved=notification('suggestion-approved','idea','suggestion',{title:'Film night'});
   await assertFails(setDoc(inbox(database,'alice',approved),approved));
   await seed(['campusSuggestionReviewers','reviewer'],{enabled:true});
-  await updateDoc(doc(db('reviewer'),'campusSuggestions','idea'),{status:'approved',reviewNote:'Good idea',reviewerId:'reviewer',reviewedAt:serverTimestamp()});
+  await publicationBatch(db('reviewer'),{source:{name:'Film night',anonymous:true,host:'',description:'A film night'}}).commit();
   await assertFails(getDoc(doc(db('reviewer'),'campusSuggestionOwners','idea')));
   const reviewedAt=(await getDoc(doc(database,'campusSuggestions','idea'))).data().reviewedAt;
   await assertSucceeds(setDoc(inbox(database,'alice',approved),{...approved,createdAt:reviewedAt}));
@@ -122,3 +122,4 @@ test('suggestion receipts preserve anonymous ownership and follow an actual revi
   const wrong=notification('suggestion-declined','idea','suggestion',{title:'Film night',createdAt:reviewedAt});
   await assertFails(setDoc(inbox(database,'alice',wrong),wrong));
 });
+import { publicationBatch } from './published-event-fixture.js';
