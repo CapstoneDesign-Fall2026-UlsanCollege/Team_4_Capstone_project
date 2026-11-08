@@ -78,6 +78,12 @@ function recordDashboardActivity(type, title){
 }
 
 function dashboardWeekStart(){
+  if (EVENTS.some(event => event.source === 'published')) {
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    start.setDate(start.getDate() - (start.getDay() + 6) % 7);
+    return start;
+  }
   const first = new Date(EVENTS[0].date + "T00:00:00");
   first.setDate(first.getDate() - 3);
   return first;
@@ -129,7 +135,8 @@ function renderDashboard(){
   end.setDate(start.getDate() + 6);
   const dateOptions = {month:"short", day:"numeric"};
   $("#dashboardDate").textContent = "YOUR CAMPUS WEEK";
-  $("#weekRange").textContent = `Sample week · ${start.toLocaleDateString("en-US", dateOptions)}–${end.toLocaleDateString("en-US", dateOptions)}`;
+  const hasPublished = EVENTS.some(event => event.source === 'published');
+  $("#weekRange").textContent = `${hasPublished ? 'This week' : 'Sample week'} · ${start.toLocaleDateString("en-US", dateOptions)}–${end.toLocaleDateString("en-US", dateOptions)}`;
   let weekCount = 0;
   $("#dashboardWeek").innerHTML = Array.from({length:7}, (_, offset) => {
     const date = new Date(start);
@@ -139,7 +146,7 @@ function renderDashboard(){
     weekCount += count;
     return `<button class="week-day ${offset === 0 ? "week-day-first" : ""}" data-dashboard-day="${dateKey}" type="button" aria-label="${date.toLocaleDateString("en-US", {weekday:"long",month:"long",day:"numeric"})}, ${count} events"><span>${date.toLocaleDateString("en-US", {weekday:"short"})}</span><strong>${date.getDate()}</strong><small>${count ? `${count} ${count === 1 ? "event" : "events"}` : "No events"}</small></button>`;
   }).join("");
-  $("#eventsWeekNote").textContent = `${weekCount} in the sample week`;
+  $("#eventsWeekNote").textContent = `${weekCount} in ${hasPublished ? 'this' : 'the sample'} week`;
 
   const saved = getSaved();
   const data = readDashboardData();
@@ -172,7 +179,7 @@ function renderDashboard(){
   $("#progressBadgeAnnouncement").textContent=newMilestones.length ? `Badge unlocked: ${newMilestones.map(badge => badge.name).join(", ")}` : "";
   refreshProgressDialog(progress);
   const weekend = dashboardWeekendEvents();
-  $("#weekendNote").textContent = `${weekend.length} campus events in the sample weekend.`;
+  $("#weekendNote").textContent = `${weekend.length} campus events ${hasPublished ? 'this weekend' : 'in the sample weekend'}.`;
   if ($("#dashboardDialog").open && $("#dashboardDialog").dataset.eventId) {
     openDashboardEvent(Number($("#dashboardDialog").dataset.eventId));
   }
@@ -181,7 +188,7 @@ function renderDashboard(){
 
 function dashboardWeekendEvents(){
   const firstSaturday = dashboardWeekStart();
-  firstSaturday.setDate(firstSaturday.getDate() + 3);
+  firstSaturday.setDate(firstSaturday.getDate() + (6 - firstSaturday.getDay() + 7) % 7);
   const sunday = new Date(firstSaturday);
   sunday.setDate(sunday.getDate() + 1);
   return EVENTS.filter(event => event.date === dashboardDateKey(firstSaturday) || event.date === dashboardDateKey(sunday));
@@ -222,7 +229,7 @@ function setupDashboard(){
     const pool = options.length ? options : EVENTS;
     openDashboardEvent(pool[Math.floor(Math.random() * pool.length)].id);
   });
-  $("#exploreWeekend").addEventListener("click", () => showDashboardDialog("Your sample weekend", dashboardAgendaMarkup(dashboardWeekendEvents())));
+  $("#exploreWeekend").addEventListener("click", () => showDashboardDialog(EVENTS.some(event => event.source === 'published') ? "Your weekend" : "Your sample weekend", dashboardAgendaMarkup(dashboardWeekendEvents())));
   $("#viewDashboardActivity").addEventListener("click", () => showDashboardDialog("Your activity", dashboardActivityMarkup(readDashboardData().activity)));
   $("#viewProgress").addEventListener("click", () => {
     showDashboardDialog("Your badges",progressDetailsMarkup(dashboardBadgeState()));

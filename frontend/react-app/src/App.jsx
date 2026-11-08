@@ -64,6 +64,7 @@ import discoverScript from "../../discover.js?raw";
 import ThemeToggle from "./ThemeToggle";
 import { eventCatalog,replacePublishedEvents } from './event-catalog';
 import { watchPublishedEvents } from './published-events-store';
+import { catalogSnapshotStatus, catalogStatusText } from './event-catalog-status';
 import './event-catalog.css';
 import { getEventMapLinks } from './event-maps';
 import { createEventJourneyController } from './event-journey';
@@ -119,8 +120,8 @@ export default function App() {
       setCatalogStatus(value=>({...value,loading:true,error:''}));
       stopCatalog=watchPublishedEvents(user,(events,cached)=>{
         if(generation !== catalogGeneration)return;
-        replacePublishedEvents(events);setCatalogStatus({loading:cached && !events.length,error:'',count:events.length,cached});refreshCatalog();
-      },()=>{if(generation === catalogGeneration)setCatalogStatus(value=>({...value,loading:false,error:'Shared events could not be loaded. Sample listings are still available.'}));});
+        replacePublishedEvents(events);setCatalogStatus(catalogSnapshotStatus(events,cached));refreshCatalog();
+      },()=>{if(generation === catalogGeneration)setCatalogStatus(value=>({...value,loading:false,error:'Shared events could not be refreshed. Previously loaded events may be out of date; sample listings are still available.'}));});
     };
     retryCatalog.current=()=>{if(catalogUser && catalogUser.id !== 'demo')connectCatalog(catalogUser);};
     window.campusBadgeProgress = (user,points) => {
@@ -298,7 +299,7 @@ export default function App() {
     <>
       <ThemeToggle />
       <div ref={mountRef} />
-      {catalogTarget && feedUser && createPortal(<div className={`event-catalog-status ${catalogStatus.error ? 'is-error' : ''}`} role={catalogStatus.error ? 'alert' : 'status'} aria-live="polite"><span>{feedUser.id === 'demo' ? 'Demo: sample listings. Sign in to see published campus events.' : catalogStatus.error || (catalogStatus.loading ? 'Loading shared campus events...' : `${catalogStatus.count === 100 ? 'Latest 100' : catalogStatus.count} published campus events · 9 sample listings${catalogStatus.cached ? ' · Cached results; reconnect to check for updates.' : ''}`)}</span>{catalogStatus.error && <button type="button" onClick={()=>retryCatalog.current?.()}>Retry shared events</button>}</div>,catalogTarget)}
+      {catalogTarget && feedUser && createPortal(<div className={`event-catalog-status ${catalogStatus.error ? 'is-error' : ''}`} role={catalogStatus.error ? 'alert' : 'status'} aria-live="polite"><span>{catalogStatusText(catalogStatus,feedUser.id === 'demo')}</span>{feedUser.id !== 'demo' && (catalogStatus.error || catalogStatus.cached) && <button type="button" onClick={()=>retryCatalog.current?.()}>Retry shared events</button>}</div>,catalogTarget)}
       {notificationsTarget && feedUser && createPortal(<Notifications key={feedUser.id} user={feedUser} onOpen={followNotification} />, notificationsTarget)}
       {syncTarget && account && createPortal(<div className={`account-sync-status ${accountStatus.error ? 'is-error' : ''}`} role="status" aria-live="polite"><span>{accountStatus.error ? <RetryIcon size={15} /> : !accountStatus.ready || accountStatus.pending ? <LoaderCircle size={15} /> : <CloudCheck size={15} />}{accountStatus.error || (!accountStatus.ready ? 'Loading your account...' : accountStatus.pending ? 'Syncing changes. Keep this page open.' : 'Saved to your account')}</span>{accountStatus.error && <button type="button" title="Retry account sync" aria-label="Retry account sync" onClick={()=>account.retry()}><RetryIcon size={15} /></button>}</div>,syncTarget)}
       {profileTarget && feedUser && (feedUser.id === 'demo' || accountStatus.ready) && createPortal(

@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-11-08T14:08:25.225Z",
+  "owner": "prachi2061",
+  "assistance": "Codex-assisted implementation and automated verification; no independent human test claimed.",
+  "baseCommit": "eeeaf359f419ca051bbe8b70f5ba8fab2edc33ba",
+  "issues": {
+    "fixed": [
+      148,
+      149,
+      150
+    ],
+    "remaining": 151
+  },
+  "beforeFix": {
+    "calendar": {
+      "expectedWeekStart": "2026-11-02",
+      "actualWeekStart": "2026-11-17",
+      "expectedWeekendIds": [
+        1001,
+        1002
+      ],
+      "actualWeekendIds": [
+        1000,
+        1001
+      ],
+      "reproducedWith": "node --test tests/event-calendar.test.js: two failures against the baseline source"
+    },
+    "labels": "Baseline host/Profile code applies sample wording to the mixed published/sample catalogue.",
+    "cache": "Baseline cache snapshot handler sets loading=true for fromCache=true and an empty event array."
+  },
+  "checks": {
+    "focusedUnitTests": {
+      "passed": 39,
+      "command": "node --test frontend/react-app/tests/event-calendar.test.js frontend/react-app/tests/event-catalog-status.test.js frontend/react-app/tests/published-events.test.js frontend/react-app/tests/profile.test.js frontend/react-app/tests/account-sync.test.js"
+    },
+    "desktopMobileSmoke": {
+      "passed": 86,
+      "failed": 0,
+      "command": "SMOKE_BROWSER_CHANNEL=chrome npm run test:smoke -- --workers=2 --reporter=list,json",
+      "byProject": {
+        "desktop": 43,
+        "mobile": 43
+      },
+      "newUiChecks": [
+        {
+          "title": "published catalogue shows the current week and the actual weekend",
+          "project": "desktop",
+          "result": "PASS"
+        },
+        {
+          "title": "a host panel distinguishes its published events from sample listings",
+          "project": "desktop",
+          "result": "PASS"
+        },
+        {
+          "title": "published catalogue shows the current week and the actual weekend",
+          "project": "mobile",
+          "result": "PASS"
+        },
+        {
+          "title": "a host panel distinguishes its published events from sample listings",
+          "project": "mobile",
+          "result": "PASS"
+        },
+        {
+          "title": "Profile labels published recommendations and keeps following separate from membership",
+          "project": "desktop",
+          "result": "PASS"
+        },
+        {
+          "title": "Profile labels published recommendations and keeps following separate from membership",
+          "project": "mobile",
+          "result": "PASS"
+        }
+      ],
+      "initialRun": {
+        "passed": 84,
+        "failed": 2,
+        "reason": "Both new Profile cases injected the fixture before the mounted Profile effect could receive its refresh event."
+      },
+      "targetedRerun": {
+        "passed": 2,
+        "failed": 0,
+        "command": "SMOKE_BROWSER_CHANNEL=chrome npm run test:smoke -- --grep \"Profile labels published\" --reporter=list,json --output=test-results/publication-follow-up-profile",
+        "correction": "Wait for the Profile panel to mount before injecting and refreshing the fictional local catalogue. Application source was unchanged for this targeted rerun."
+      }
+    },
+    "productionBuild": "PASS",
+    "diffCheck": "PASS"
+  },
+  "scope": "Local automated UI with fictional in-memory published-event fixtures plus deterministic state/calendar tests. No real identity or Firestore record was created; no live reviewer approval, independent test or production offline outage is claimed.",
+  "remainingLimit": "Only the latest 100 published records are subscribed. Older saved IDs remain stored but their event cards need separate resolution; tracked openly in #151.",
+  "sourceHashes": {
+    "frontend/dashboard.js": "db805a942612f47fe04931cda63a2e646502d6ee1b14b740a0c5a0b592159c71",
+    "frontend/discover.js": "2c12824bd1f0cc9d5f8e5d6feb605bc265a3ef553bb893e1534e4b5fc0e24958",
+    "frontend/react-app/src/Profile.jsx": "e1dc3c96c033588166ec48e07725d1a7f877d845a0e6493bfa73b968e2c57b3a",
+    "frontend/react-app/src/App.jsx": "7c5181fef8d9e6ff3629c05e3373656554d54d960132eb429e505bfb87484ff2",
+    "frontend/react-app/src/event-catalog-status.js": "b36fe9926511b8e44a44378195a7d06faeffa9687fa1efc4a0b90a5effc676da",
+    "frontend/react-app/tests/event-calendar.test.js": "e6646cec46464a56970776d69af5f1d510e30564ac3f57cdde3ee901621c172a",
+    "frontend/react-app/tests/event-catalog-status.test.js": "91191f54c60776fee61c0bc65265d7725d769c471226748af230a609e6625632",
+    "frontend/react-app/tests/smoke/published-catalogue.spec.js": "659cdeaf51411181c72671f9275c74772b6d2e1531a74a538dd8d3abcb4b1098",
+    "frontend/react-app/tests/smoke/published-profile.spec.js": "eb1633937765bf97bcd9c0a9f88aa18eef994d857c195dd14fe22ed682d44600"
+  },
+  "screenshots": [
+    "desktop-profile-event-sources.png",
+    "mobile-profile-event-sources.png",
+    "desktop-host-sources.png",
+    "mobile-host-sources.png",
+    "desktop-published-weekend.png",
+    "mobile-published-weekend.png"
+  ],
+  "sourceHashFormat": "SHA-256 of UTF-8 source with LF line endings"
+}

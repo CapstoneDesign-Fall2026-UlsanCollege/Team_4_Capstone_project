@@ -57,7 +57,9 @@ function openDiscoverEvent(id) {
 function openDiscoverHost(host) {
   const events = EVENTS.filter(event => event.host === host);
   if (!events.length) return;
-  showDashboardDialog(host, `<p class="dashboard-detail-description">${events.length} ${events.length === 1 ? "event" : "events"} in the sample campus listings.</p>${events.map(event => `<button class="calendar-event-row" type="button" data-discover-event="${event.id}"><time datetime="${event.date}">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}</time><span><strong>${dashboardText(event.title)}</strong><small>${dashboardText(event.time)} &middot; ${dashboardText(event.location)}</small></span><i data-lucide="arrow-right" aria-hidden="true"></i></button>`).join("")}`);
+  const published = events.filter(event => event.source === 'published').length;
+  const samples = events.length - published;
+  showDashboardDialog(host, `<p class="dashboard-detail-description">${published} published campus ${published === 1 ? 'event' : 'events'} &middot; ${samples} sample ${samples === 1 ? 'listing' : 'listings'}.</p>${events.map(event => `<button class="calendar-event-row" type="button" data-discover-event="${event.id}"><time datetime="${event.date}">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}</time><span><strong>${dashboardText(event.title)}</strong>${eventSourceMarkup(event)}<small>${dashboardText(event.time)} &middot; ${dashboardText(event.location)}</small></span><i data-lucide="arrow-right" aria-hidden="true"></i></button>`).join("")}`);
 }
 
 function clearDiscoverFilters() {
