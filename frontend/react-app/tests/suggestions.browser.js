@@ -70,7 +70,7 @@ try {
   assert.ok(!(await queueItem.textContent()).includes('Private Film Club'));
   assert.ok(!(await queueItem.textContent()).includes('Suggestion Alice'));
   await queueItem.getByRole('textbox', { name: /Review note/ }).fill('Approved for planning; confirm venue first.');
-  await queueItem.getByRole('button', { name: 'Approve idea', exact: true }).click();
+  await queueItem.getByRole('button', { name: 'Approve and publish', exact: true }).click();
   await item.locator('.suggestion-status.approved').waitFor();
   await page.reload();
   await page.getByRole('button', { name: 'My suggestions', exact: true }).click();
@@ -117,7 +117,7 @@ try {
   console.log(JSON.stringify({ passed: true, checks: ['private draft reload','anonymous submission','named submission','reviewer-only queue','approve/decline','live author status','reload persistence','idempotent retry','offline recovery','responsive 1440/768/390/320'], pageErrors: errors }));
 } finally {
   await browser.close();
-  for (const id of ids) { await admin(`campusSuggestions/${id}`); await admin(`campusSuggestionOwners/${id}`); }
+  for (const id of ids) { await admin(`campusPublishedEvents/${id}`); await admin(`campusSuggestions/${id}`); await admin(`campusSuggestionOwners/${id}`); }
   for (const {uid,token} of users) {
     await admin(`campusSuggestionReviewers/${uid}`);await admin(`campusFeedProfiles/${uid}`);
     for(const name of ['profile','saved','dashboard','badges','suggestion','assistant'])await admin(`campusAccountData/${uid}/state/${name}`);

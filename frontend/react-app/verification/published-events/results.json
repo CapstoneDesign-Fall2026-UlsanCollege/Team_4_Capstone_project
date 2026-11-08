@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-11-08T13:32:31.127Z",
+  "execution": "Automated Chrome with two isolated emulator accounts per viewport",
+  "project": "demo-campusvibe-feed",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "result": "PASS",
+      "checks": [
+        "reviewer-only publication",
+        "missing-date recovery",
+        "offline approval leaves pending",
+        "student cross-account live Events",
+        "event details",
+        "anonymous attribution",
+        "safe literal rendering",
+        "save/reload/profile",
+        "legacy approved publication",
+        "idempotent retry",
+        "logout clears shared catalogue",
+        "demo sample boundary"
+      ],
+      "eventId": 1007
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "result": "PASS",
+      "checks": [
+        "reviewer-only publication",
+        "missing-date recovery",
+        "offline approval leaves pending",
+        "student cross-account live Events",
+        "event details",
+        "anonymous attribution",
+        "safe literal rendering",
+        "save/reload/profile",
+        "legacy approved publication",
+        "idempotent retry",
+        "logout clears shared catalogue",
+        "demo sample boundary"
+      ],
+      "eventId": 1009
+    }
+  ],
+  "pageErrors": [],
+  "cleanup": "PASS",
+  "scope": "Auth/Firestore emulators; fictional data; not independent human testing or proof of live campus announcements.",
+  "owner": "prachi2061",
+  "assistance": "Codex-assisted implementation and automated verification.",
+  "tests": {
+    "firestorePermissions": {
+      "passed": 40
+    },
+    "publicationModel": {
+      "passed": 4
+    },
+    "accountState": {
+      "passed": 15
+    },
+    "existingSmoke": {
+      "passed": 80,
+      "projects": [
+        "desktop",
+        "mobile"
+      ]
+    },
+    "existingSuggestionWorkflow": {
+      "passed": true
+    },
+    "productionBuild": {
+      "passed": true
+    }
+  },
+  "sourceSha256": {
+    "backend/firebase/firestore.rules": "18bfefa7320cf1e7f47eec14176ccc723cb976f8b9ae5e30dd6a201ad6e1db01",
+    "frontend/apps.js": "845e856da2f022d66650d298c30e0e4cc56501ad734ab589a23dc71d80bbf6ef",
+    "frontend/dashboard.js": "7d3ef66dbc8182752b157479fe7fb728f37e78c6a347d6a0f1b8c163f5f43015",
+    "frontend/discover.js": "2edcc607dac7b6df0ca5a187d407e4c0e92d4282450653a3005ab8ab51676e06",
+    "frontend/react-app/src/App.jsx": "93e0b2ff5e4715c6203f93b0ba344d3738b2e591fee1196861614c928e091621",
+    "frontend/react-app/src/Suggestions.jsx": "5fdd0a0daf4eacf50bd9372b02eac17ce27f5817253019af89da61b7d60057b4",
+    "frontend/react-app/src/published-events-model.js": "e6bef1597ce9d230d26f1f2b937a7f5aede3a013d928d9ba6102c7d564cf03a7",
+    "frontend/react-app/src/published-events-store.js": "98ccfab8c777190d19a2818e16c65ae0cba1657bb02e63ef9fbc22e2e2592889",
+    "frontend/react-app/src/event-catalog.js": "56cd4852b16d2d6062e0473640210f4dd17a97eea01f8d0d67ec278ec73caba2",
+    "frontend/react-app/tests/published-events.browser.js": "56b566982bbe2602a530147973c66fa74738fafd1c086d39ac480763907072e3"
+  },
+  "limits": [
+    "Fictional emulator accounts; not an independent human test.",
+    "Live reviewer approval was not performed by these checks.",
+    "Nine labelled sample listings remain alongside up to 100 latest published records.",
+    "Existing approved ideas require an explicit reviewer publication action.",
+    "Poster uploads remain deferred; missing time is not invented."
+  ]
+}
