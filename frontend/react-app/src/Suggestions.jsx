@@ -19,11 +19,12 @@ function ReviewItem({ item, user, canReview }) {
   const [note, setNote] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [publication,setPublication] = useState({date:item.date || '',location:item.location || '',time:''});
   const lock = useRef(false);
   async function decide(status) {
     if (lock.current) return;
     lock.current = true; setBusy(true); setError('');
-    try { await reviewSuggestion(user, item.id, status, note); }
+    try { await reviewSuggestion(user, item.id, status, note,publication); }
     catch (failure) { setError(suggestionError(failure)); }
     finally { lock.current = false; setBusy(false); }
   }
@@ -33,9 +34,18 @@ function ReviewItem({ item, user, canReview }) {
     <p className="suggestion-description">{item.description}</p>
     {(item.date || item.location) && <p className="suggestion-receipt-meta">{item.date}{item.date && item.location ? ' / ' : ''}{item.location}</p>}
     {item.reviewNote && <p className="suggestion-review-note"><strong>Review note:</strong> {item.reviewNote}</p>}
-    {canReview && item.status === 'pending' && <div className="suggestion-decision">
+    {item.publishedEventId && <p className="suggestion-publication"><strong>Published in Events</strong> <button type="button" className="suggestion-secondary" onClick={() => {
+      if (!window.campusEventCatalog?.some(event => event.id === item.publishedEventId)) { setError('This event is still syncing. Please try again shortly.'); return; }
+      window.campusAssistant?.navigate('discover'); window.campusAssistant?.openEvent(item.publishedEventId);
+    }}>View event</button></p>}
+    {canReview && !item.publishedEventId && ['pending','approved'].includes(item.status) && <div className="suggestion-decision">
+      <p>{item.status === 'approved' ? 'This previously approved idea has not been published yet.' : 'Approval publishes this suggestion to Events for signed-in students.'} Confirm the date and location first.</p>
+      <div className="suggestion-pair"><label>Event date<input aria-label={`Event date for ${item.name}`} type="date" required value={publication.date} disabled={busy} onChange={event => setPublication(value => ({...value,date:event.target.value}))} /></label><label>Event time (optional)<input aria-label={`Event time for ${item.name}`} type="time" value={publication.time} disabled={busy} onChange={event => setPublication(value => ({...value,time:event.target.value}))} /></label></div>
+      <label>Event location<input aria-label={`Event location for ${item.name}`} required maxLength={120} value={publication.location} disabled={busy} onChange={event => setPublication(value => ({...value,location:event.target.value}))} /></label>
+      {item.status === 'pending' && <>
       <label>Review note (optional)<textarea aria-label={`Review note for ${item.name}`} value={note} maxLength={500} onChange={event => setNote(event.target.value)} disabled={busy} rows={2} /></label>
-      <div><button type="button" className="suggestion-secondary" disabled={busy} onClick={() => decide('declined')}><X size={16} />Decline</button><button type="button" className="suggestion-primary" disabled={busy} onClick={() => decide('approved')}>{busy ? <LoaderCircle size={16} className="suggestion-spin" /> : <Check size={16} />}Approve idea</button></div>
+      </>}
+      <div>{item.status === 'pending' && <button type="button" className="suggestion-secondary" disabled={busy} onClick={() => decide('declined')}><X size={16} />Decline</button>}<button type="button" className="suggestion-primary" disabled={busy} onClick={() => decide('approved')}>{busy ? <LoaderCircle size={16} className="suggestion-spin" /> : <Check size={16} />}{item.status === 'approved' ? 'Publish to Events' : 'Approve and publish'}</button></div>
     </div>}
     {error && <p role="alert" className="suggestion-error">{error}</p>}
   </article>;
@@ -150,7 +160,7 @@ export default function Suggestions({ user,account,notification }) {
       <aside className="suggestion-tips"><div className="suggestion-tip-heading"><span><Lightbulb size={24} /></span><div><h2>Make it a standout idea</h2><p>Great suggestions help build an amazing campus.</p></div></div><ul>{[['Be clear and specific', 'Include what, when, where, and who it is for.'],['Explain the impact', 'Share how it benefits students or the community.'],['Think inclusive', 'Ideas that welcome everyone tend to get the most support.'],['Make it memorable', 'Give your idea a name students will remember.']].map(([title, text]) => <li key={title}><CheckCircle2 size={19} /><div><strong>{title}</strong><p>{text}</p></div></li>)}</ul><div className="suggestion-tip-photo"><img src="/assets/campus-login.jpg" alt="University campus" /><span><CalendarDays size={28} />Your next campus moment</span></div></aside>
     </div> : <section className="suggestion-list" aria-label={tab === 'review' ? 'Team review queue' : 'My submitted suggestions'}>
 <div className="suggestion-list-heading"><h2>{tab === 'review' ? 'Team review queue' : 'My suggestions'}</h2>{tab === 'review' && <label>Status<select aria-label="Review status" value={filter} onChange={event => setFilter(event.target.value)}><option value="pending">Pending</option><option value="approved">Approved</option><option value="declined">Declined</option><option value="all">All</option></select></label>}</div>
-      {tab === 'review' && <p className="suggestion-scope">Review decisions do not publish events to Discover.</p>}
+      {tab === 'review' && <p className="suggestion-scope">Approve and publish adds the event to Discover. Previously approved ideas can be published here after their date and location are confirmed.</p>}
       {loading ? <p role="status">Loading suggestions...</p> : !rows.filter(item => tab !== 'review' || filter === 'all' || item.status === filter).length ? <div className="suggestion-empty"><FileCheck2 size={28} /><p>{demo ? 'Sign in to send and track suggestions.' : 'No suggestions yet.'}</p></div> : rows.filter(item => tab !== 'review' || filter === 'all' || item.status === filter).map(item => <ReviewItem key={item.id} item={item} user={user} canReview={tab === 'review'} />)}
     </section>}
   </div>;

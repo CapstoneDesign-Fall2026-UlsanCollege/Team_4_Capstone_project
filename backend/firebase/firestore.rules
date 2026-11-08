@@ -128,7 +128,7 @@ service cloud.firestore {
     }
     function validSuggestion(data) {
       return data.keys().hasAll(['name','host','authorName','anonymous','category','date','location','description','createdAt','status','reviewNote','reviewerId','reviewedAt'])
-        && data.keys().hasOnly(['name','host','authorName','anonymous','category','date','location','description','createdAt','status','reviewNote','reviewerId','reviewedAt'])
+        && data.keys().hasOnly(['name','host','authorName','anonymous','category','date','location','description','createdAt','status','reviewNote','reviewerId','reviewedAt','publishedEventId'])
         && data.name is string && data.name.size() > 0 && data.name.size() <= 100
         && data.host is string && data.host.size() <= 100
         && data.authorName is string && data.authorName.size() <= 120 && data.anonymous is bool
@@ -150,19 +150,68 @@ service cloud.firestore {
         && getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.createdAt == request.time
         && getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.status == 'pending';
     }
+    function allocatedPublication(id, eventId) {
+      let counter = /databases/$(database)/documents/campusEventMetadata/publication;
+      return eventId is int && eventId >= 1000 && eventId < 9007199254740991
+        && eventId == (exists(counter) ? get(counter).data.nextId : 1000)
+        && getAfter(counter).data.nextId == eventId + 1
+        && getAfter(counter).data.lastSuggestionId == id && getAfter(counter).data.updatedAt == request.time;
+    }
+    function pairedPublication(id) {
+      let event = getAfter(/databases/$(database)/documents/campusPublishedEvents/$(id)).data;
+      return request.resource.data.publishedEventId is int
+        && event.id == request.resource.data.publishedEventId && event.publishedAt == request.time;
+    }
+    match /campusEventMetadata/publication {
+      allow get: if suggestionReviewer();
+      allow create, update: if suggestionReviewer()
+        && request.resource.data.keys().hasAll(['nextId','lastSuggestionId','updatedAt'])
+        && request.resource.data.keys().hasOnly(['nextId','lastSuggestionId','updatedAt'])
+        && request.resource.data.nextId is int && request.resource.data.nextId <= 9007199254740991
+        && request.resource.data.nextId == (resource == null ? 1001 : resource.data.nextId + 1)
+        && request.resource.data.lastSuggestionId is string
+        && request.resource.data.lastSuggestionId.matches('^[A-Za-z0-9-]{1,80}$')
+        && !exists(/databases/$(database)/documents/campusPublishedEvents/$(request.resource.data.lastSuggestionId))
+        && getAfter(/databases/$(database)/documents/campusPublishedEvents/$(request.resource.data.lastSuggestionId)).data.id == request.resource.data.nextId - 1
+        && request.resource.data.updatedAt == request.time;
+    }
+    match /campusPublishedEvents/{id} {
+      allow get: if member();
+      allow list: if member() && bounded(100);
+      allow create: if suggestionReviewer()
+        && id.matches('^[A-Za-z0-9-]{1,80}$')
+        && request.resource.data.keys().hasAll(['id','sourceSuggestionId','title','interest','host','desc','date','time','location','publishedAt'])
+        && request.resource.data.keys().hasOnly(['id','sourceSuggestionId','title','interest','host','desc','date','time','location','publishedAt'])
+        && request.resource.data.sourceSuggestionId == id
+        && allocatedPublication(id,request.resource.data.id)
+        && getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.status == 'approved'
+        && getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.publishedEventId == request.resource.data.id
+        && request.resource.data.title == getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.name
+        && request.resource.data.interest == getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.category
+        && request.resource.data.desc == getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.description
+        && request.resource.data.host == (getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.anonymous ? 'Campus community' : getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.host)
+        && request.resource.data.date is string && request.resource.data.date.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
+        && request.resource.data.time is string && (request.resource.data.time == '' || request.resource.data.time.matches('^([01][0-9]|2[0-3]):[0-5][0-9]$'))
+        && request.resource.data.location is string && request.resource.data.location.size() > 0 && request.resource.data.location.size() <= 120
+        && request.resource.data.publishedAt == request.time;
+    }
     match /campusSuggestions/{id} {
       allow get: if suggestionReviewer() || suggestionOwner(id);
       allow list: if suggestionReviewer() && bounded(100);
       allow create: if member() && validSuggestion(request.resource.data)
+        && !request.resource.data.keys().hasAny(['publishedEventId'])
         && request.resource.data.createdAt == request.time && request.resource.data.status == 'pending'
         && request.resource.data.reviewNote == '' && request.resource.data.reviewerId == '' && request.resource.data.reviewedAt == null
         && getAfter(/databases/$(database)/documents/campusSuggestionOwners/$(id)).data.uid == request.auth.uid
         && getAfter(/databases/$(database)/documents/campusSuggestionOwners/$(id)).data.createdAt == request.time;
-      allow update: if suggestionReviewer() && resource.data.status == 'pending'
+      allow update: if suggestionReviewer() && ((resource.data.status == 'pending'
         && request.resource.data.status in ['approved','declined']
         && request.resource.data.reviewNote is string && request.resource.data.reviewNote.size() <= 500
         && request.resource.data.reviewerId == request.auth.uid && request.resource.data.reviewedAt == request.time
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','reviewNote','reviewerId','reviewedAt']);
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','reviewNote','reviewerId','reviewedAt','publishedEventId'])
+        && (request.resource.data.status == 'declined' ? !request.resource.data.keys().hasAny(['publishedEventId']) : pairedPublication(id)))
+        || (resource.data.status == 'approved' && !resource.data.keys().hasAny(['publishedEventId'])
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['publishedEventId']) && pairedPublication(id)));
     }
     match /campusFeedConnections/{connectionId} {
       function canChat() {

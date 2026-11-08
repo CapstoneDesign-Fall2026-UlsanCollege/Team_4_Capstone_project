@@ -14,6 +14,8 @@
     "test:feed-photos": "node --test tests/feed-photo.test.js && npm run test:feed-photos --workspace @campusvibes/backend",
     "test:feed-photos-browser": "node tests/feed-photos.browser.js",
     "test:suggestions": "node tests/suggestions.browser.js",
+    "test:published-events": "node --test tests/published-events.test.js",
+    "test:published-events-browser": "node tests/published-events.browser.js",
     "test:assistant": "node --test tests/assistant.test.js",
     "test:gemini": "node --test tests/gemini.test.js && npm run test:assistant --workspace @campusvibes/backend",
     "test:gemini-browser": "node tests/gemini.browser.js",

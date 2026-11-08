@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, BadgeCheck, Bookmark, CalendarDays, Camera, Check, Clock, Copy, GraduationCap, House, LockKeyhole, Mail, MapPin, MessageCircle, Pencil, Plus, Settings, Share2, Sparkles, UserRound, UsersRound, X } from 'lucide-react';
-import events from '../../events.json';
+import { eventCatalog as events } from './event-catalog';
 import { cleanActivity, cleanProfile, loadProfile, PROFILE_INTERESTS, profileCompletion, profileSummary, saveProfile, STUDY_YEARS } from './profile-store';
 import './profile.css';
 import ProfilePhotoEditor from './ProfilePhotoEditor';
 import { useProfilePhoto } from './profile-photo-store';
 
-const hosts = [...new Set(events.map(event => event.host))];
 const rails = [['Home',House,'dashboard'],['Events',CalendarDays,'discover'],['Clubs',UsersRound,'hosts'],['Saved',Bookmark,'saved'],['Feed',MessageCircle,'feed'],['Profile',UserRound,'profile']];
 const dateLabel = date => new Intl.DateTimeFormat('en-US',{ month:'short',day:'numeric',timeZone:'Asia/Seoul' }).format(new Date(`${date}T12:00:00Z`));
 const activityLabel = item => ({ saved:'Saved',removed:'Removed',suggested:'Drafted' })[item.type];
@@ -17,6 +16,7 @@ function readSignals() {
 }
 
 export default function Profile({ user,account }) {
+  const hosts = [...new Set(events.map(event => event.host))];
   const [initial] = useState(() => account ? {data:account.read('profile'),warning:''} : loadProfile(browserStorage(),user,hosts));
   const [data,setData] = useState(initial.data);
   const [signals,setSignals] = useState(readSignals);

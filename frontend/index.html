@@ -117,7 +117,7 @@
     <div class="discover-layout">
       <div class="discover-main">
         <div class="discover-hero">
-          <div class="discover-intro"><p class="discover-eyebrow">SAMPLE EVENTS &middot; ILLUSTRATIVE PHOTOS</p><h1>Discover events</h1><p>Find what moves you. Join events, meet people,<br>and make every day on campus count.</p>
+          <div class="discover-intro"><p class="discover-eyebrow" id="eventCatalogEyebrow">SAMPLE EVENTS &middot; ILLUSTRATIVE PHOTOS</p><h1>Discover events</h1><p>Find what moves you. Join events, meet people,<br>and make every day on campus count.</p>
             <div class="event-tools"><label class="event-search" for="eventSearch"><i data-lucide="search" aria-hidden="true"></i><span class="sr-only">Search events, hosts, locations, or interests</span><input id="eventSearch" type="search" placeholder="Search events, hosts, or interests..." autocomplete="off"></label><button class="discover-filter-button" id="discoverFiltersButton" type="button" aria-label="More event filters" title="More event filters"><i data-lucide="sliders-horizontal" aria-hidden="true"></i></button></div>
           </div>
           <div class="discover-hero-photo discover-image discover-atlas" style="--photo-column:0"><img src="/assets/discover-campus-atlas.png" alt="Illustration of university friends chatting on campus"></div>
@@ -126,6 +126,7 @@
           <button class="chip active" type="button" aria-pressed="true" data-interest="all">All</button><button class="chip" type="button" aria-pressed="false" data-interest="Tech"><i data-lucide="monitor" aria-hidden="true"></i>Tech</button><button class="chip" type="button" aria-pressed="false" data-interest="Arts"><i data-lucide="paintbrush" aria-hidden="true"></i>Arts</button><button class="chip" type="button" aria-pressed="false" data-interest="Music"><i data-lucide="music" aria-hidden="true"></i>Music</button><button class="chip" type="button" aria-pressed="false" data-interest="Sports"><i data-lucide="trophy" aria-hidden="true"></i>Sports</button><button class="chip" type="button" aria-pressed="false" data-interest="Social"><i data-lucide="users-round" aria-hidden="true"></i>Social</button><button class="chip" type="button" aria-pressed="false" data-interest="Academics"><i data-lucide="book-open" aria-hidden="true"></i>Academics</button>
         </div>
         <div class="discover-results-row"><p class="event-results" id="eventResults" aria-live="polite"></p><button class="discover-clear" id="clearEventFilters" type="button"><i data-lucide="rotate-ccw" aria-hidden="true"></i>Clear filters</button></div>
+        <div id="eventCatalogStatus"></div>
         <div class="events-grid" id="eventsGrid"></div><p class="empty-state hidden" id="emptyState">No events found. Try another search or category.</p>
       </div>
       <aside class="discover-sidebar" aria-label="Campus highlights">

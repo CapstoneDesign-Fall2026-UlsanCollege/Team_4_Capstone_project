@@ -13,7 +13,7 @@ function readDashboardData(){
 function dashboardText(value){
   const element = document.createElement("span");
   element.textContent = String(value);
-  return element.innerHTML;
+  return element.innerHTML.replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
 function eventMapLinkMarkup(event){
@@ -150,7 +150,7 @@ function renderDashboard(){
     const score = event => (event.interest === interest ? 2 : 0) - (saved.includes(event.id) ? 3 : 0);
     return score(b) - score(a);
   }).slice(0, 3);
-  $("#dashboardRecommendations").innerHTML = recommendations.map(event => `<article class="dashboard-recommendation" style="--event-color:${event.hue}"><button class="recommendation-open" data-dashboard-event="${event.id}" type="button"><img src="${dashboardPhoto(event)}" alt="" loading="lazy"><span><strong>${event.title}</strong><small><i data-lucide="map-pin" aria-hidden="true"></i>${event.location}</small><span class="recommendation-tag">${event.interest}</span></span></button><button class="dashboard-save ${saved.includes(event.id) ? "is-saved" : ""}" data-save="${event.id}" aria-pressed="${saved.includes(event.id)}" aria-label="${saved.includes(event.id) ? "Remove from saved" : "Save"}: ${event.title}" title="${saved.includes(event.id) ? "Remove from saved" : "Save event"}"><i data-lucide="bookmark" aria-hidden="true"></i></button></article>`).join("");
+  $("#dashboardRecommendations").innerHTML = recommendations.map(event => `<article class="dashboard-recommendation" style="--event-color:${event.hue}"><button class="recommendation-open" data-dashboard-event="${event.id}" type="button"><img src="${dashboardPhoto(event)}" alt="" loading="lazy"><span><strong>${dashboardText(event.title)}</strong><small><i data-lucide="map-pin" aria-hidden="true"></i>${dashboardText(event.location)}</small><span class="recommendation-tag">${event.interest}</span></span></button><button class="dashboard-save ${saved.includes(event.id) ? "is-saved" : ""}" data-save="${event.id}" aria-pressed="${saved.includes(event.id)}" aria-label="${saved.includes(event.id) ? "Remove from saved" : "Save"}: ${dashboardText(event.title)}" title="${saved.includes(event.id) ? "Remove from saved" : "Save event"}"><i data-lucide="bookmark" aria-hidden="true"></i></button></article>`).join("");
   $("#dashboardActivity").innerHTML = dashboardActivityMarkup(data.activity.slice(0, 3));
 
   const progress=dashboardBadgeState();
@@ -193,7 +193,8 @@ function showDashboardDialog(title, markup, eventId = ""){
   delete dialog.dataset.discoverEvent;
   delete dialog.dataset.progressBadges;
   $("#dashboardDialogTitle").textContent = title;
-  $("#dashboardDialogBody").innerHTML = markup;
+  const sourceEvent = EVENTS.find(event => event.id === Number(eventId));
+  $("#dashboardDialogBody").innerHTML = (sourceEvent ? eventSourceMarkup(sourceEvent) : '') + markup;
   const journey = dialog.querySelector("[data-event-journey]");
   window.campusEventJourney?.attach(journey, EVENTS.find(event => event.id === Number(journey?.dataset.eventId)));
   window.campusRenderIcons?.();
@@ -201,14 +202,14 @@ function showDashboardDialog(title, markup, eventId = ""){
 }
 
 function dashboardAgendaMarkup(events){
-  return events.map(event => `<button class="calendar-event-row" data-dashboard-event="${event.id}" type="button"><time datetime="${event.date}">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", {month:"short", day:"numeric"})}</time><span><strong>${event.title}</strong><small>${event.time} · ${event.location}</small></span><i data-lucide="arrow-right" aria-hidden="true"></i></button>`).join("") || '<p class="dashboard-empty">No events on this day. There is more to explore in Discover.</p>';
+  return events.map(event => `<button class="calendar-event-row" data-dashboard-event="${event.id}" type="button"><time datetime="${event.date}">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", {month:"short", day:"numeric"})}</time><span><strong>${dashboardText(event.title)}</strong><small>${dashboardText(event.time)} · ${dashboardText(event.location)}</small></span><i data-lucide="arrow-right" aria-hidden="true"></i></button>`).join("") || '<p class="dashboard-empty">No events on this day. There is more to explore in Discover.</p>';
 }
 
 function openDashboardEvent(id){
   const event = EVENTS.find(item => item.id === id);
   if (!event) return;
   const saved = getSaved().includes(id);
-  showDashboardDialog(event.title, `<img class="dashboard-detail-image" src="${dashboardPhoto(event)}" alt=""><span class="recommendation-tag">${event.interest}</span><p class="dashboard-detail-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", {weekday:"long",month:"long",day:"numeric"})} · ${event.time}</p>${eventLocationMarkup(event)}<p class="dashboard-detail-description">${event.desc}</p><p class="dashboard-detail-host">Hosted by ${event.host}</p><button class="btn btn-primary" data-save="${id}" aria-pressed="${saved}"><i data-lucide="bookmark" aria-hidden="true"></i>${saved ? "Remove from saved" : "Save event"}</button>`, String(id));
+  showDashboardDialog(event.title, `<img class="dashboard-detail-image" src="${dashboardPhoto(event)}" alt=""><span class="recommendation-tag">${event.interest}</span><p class="dashboard-detail-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", {weekday:"long",month:"long",day:"numeric"})} · ${dashboardText(event.time)}</p>${eventLocationMarkup(event)}<p class="dashboard-detail-description">${dashboardText(event.desc)}</p><p class="dashboard-detail-host">Hosted by ${dashboardText(event.host)}</p><button class="btn btn-primary" data-save="${id}" aria-pressed="${saved}"><i data-lucide="bookmark" aria-hidden="true"></i>${saved ? "Remove from saved" : "Save event"}</button>`, String(id));
 }
 
 function setupDashboard(){
