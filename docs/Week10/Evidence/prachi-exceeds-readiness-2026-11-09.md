@@ -1,0 +1,37 @@
+# Prachi — Exceeds follow-up and review receipt
+
+**Date:** November 9, 2026, Asia/Seoul  
+**Owner:** `prachi2061`  
+**Status:** Handoff prepared; independent API/persistence review, backup acceptance and personal explain-back pending.
+
+Start at the [API/persistence handoff](../Prachi-API-Persistence-Handoff.md). The [shared roadmap](../../Week9/Final-demo-Roadmap.md#6-roadmap-milestones) leads to [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) and the [audit/area map](../ai-use-and-code-ownership-audit.md#codebase-area-map); the handoff links the completed [#153 / PR #154 implementation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/154), source checks and dated receipt. This adds navigation and check instructions for an existing supporting feature, not a new core promise.
+
+| Criterion | Available now | What still needs human evidence |
+|---|---|---|
+| Slice | Existing success and ownership/quota/provider failure checks; exact expected/actual results and test limits are linked in the handoff. | Another person repeats the selected expected/failure paths and records their own result. |
+| Area stewardship | Current API boundary, root health command, setup, proposed backup and an access-independent fallback are documented. The shared audit remains the role-map source. | Named backup accepts or the team selects another backup; a teammate locates and runs the check without coaching. |
+| Integration | Input → private claim → authenticated API → draft metadata → submission → approved publication is traced; API and Firestore tests cover different sides. | A non-author names and verifies both sides of that interface, rather than treating a 200 upload response as a persisted event. |
+| AI note | PR #154 discloses implementation/testing assistance. The new handoff discloses documentation assistance and separates automation from human review. | Prachi confirms/corrects the explanation and records any human changes or unresolved understanding. |
+| Gap | Cross-draft duplicates remain an explicit question owned by Prachi, decision due November 11 EOD KST. Same-ID retry protection is separately scoped. | Record a user/roadmap-based decision; any justified implementation requires its own issue and tests. |
+
+The November 9 technical receipt reports 36 unit/API/account cases, 44 permission cases, 12 related UI cases and 20 poster workflow checks. Its [JSON](../../../frontend/react-app/verification/suggestion-posters/results.json) records emulator and provider-mock scope. No application suite, provider upload, new live login, clean-install run or teammate test was performed for this documentation change.
+
+## Peer receipt to complete
+
+This is an uncompleted record format, **not a claimed test**. A non-author posts their own filled result in #139 and links it here in a later update.
+
+| Required field | Record after the check |
+|---|---|
+| Reviewer / date / revision | Own login; actual date/time KST; commit SHA. |
+| Setup and access | OS, Node/npm, Firebase CLI/Java, browser; commands run; whether the guide was followed without the author coaching. |
+| Expected and actual success | Selected API and persistence check; expected result; actual response/assertion; result PASS/FAIL/BLOCKED. |
+| Expected and actual failure | Ownership rejection or cleanup/submission boundary; actual API outcome and Firestore outcome; result and saved output. |
+| Source explanation | Functions traced; why upload success is not publication; where the rules protect the linked image. |
+| Evidence and limits | Redacted command output / result / screenshot links; mocks versus real services; any unrun part. |
+| Handoff and next action | Backup acceptance or alternative; what the reviewer could find independently; precise fix/blocker owner and due point. |
+
+If a check fails, retain that result and record the smallest follow-up. Do not turn this template into a pass by filling in expected behavior as actual evidence.
+
+## Documentation-only scope
+
+Codex assisted source/receipt inspection and preparation of these Prachi-owned additions. Existing human-authored teammate results keep their authors and dates. This change leaves the shared roadmap, friends' handoff files, rehearsal files and other members' report rows intact; it links from Prachi's own report row and appends only a Prachi addendum to the shared audit. The new [documentation validation record](prachi-exceeds-document-validation-2026-11-09.json) records the actual preservation/link/hash checks for this change.
