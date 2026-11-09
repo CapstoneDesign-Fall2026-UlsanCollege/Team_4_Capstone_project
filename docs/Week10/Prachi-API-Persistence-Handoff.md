@@ -85,7 +85,7 @@ These are **existing November 9 automated results**, not new tests performed whi
 
 The original Google recovery slice already has [ujjalpoudel75's reported cancellation/retry PASS](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139#issuecomment-6708776312). That is a different functional check; it does not confirm this API/persistence handoff, backup acceptance or Prachi's source explain-back.
 
-A non-author records their own comment in #139 using the [peer receipt fields](Evidence/prachi-exceeds-readiness-2026-11-09.md#peer-receipt-to-complete). They should locate the API and persistence tests from this page, repeat one success and one failure case, and answer: **Why does API upload success not publish an event, and what prevents cleanup from removing a submitted poster?** Record both the API outcome and the Firestore outcome, the source functions, and any limit or blocker. Status stays pending until that person supplies the result; automated preparation does not establish Exceeds.
+A non-author records their own comment in #139 using the [peer receipt fields](Evidence/prachi-2026-11-09.md#peer-receipt-to-complete). They should locate the API and persistence tests from this page, repeat one success and one failure case, and answer: **Why does API upload success not publish an event, and what prevents cleanup from removing a submitted poster?** Record both the API outcome and the Firestore outcome, the source functions, and any limit or blocker. Status stays pending until that person supplies the result; automated preparation does not establish Exceeds.
 
 ## Unresolved duplicate question
 
