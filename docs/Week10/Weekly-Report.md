@@ -47,9 +47,7 @@ If it is not linked, it does not count.
 | Google Sign-In end-to-end verification remains incomplete. | Authentication team / `prachi2061` | Confirm provider configuration and independently verify login and session recovery. |
 | Firestore published-event query and display verified for the tested event; broader search/filter and failure-handling checks remain pending. | Event/data implementation owner — to be confirmed; verification by `DevyanaCT` | Complete additional Firestore event search/filter, refresh, and error-handling tests. See [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117). |
 | Week 10 student ownership confirmations are incomplete. | All team members | Confirm primary area, backup reviewer, code explanation, and AI-use declaration in Issue #139. |
-
 | Independent core-journey QA testing was completed by ujjalpoudel75 on November 6–7, 2026. Six manual checks passed, and the complete Playwright rerun passed 80/80 tests. Google Sign-In popup cancellation and retry were verified, but full Google-account login and session restoration remain unverified. | ujjalpoudel75 — QA and Core Integration | Preserve the completed QA evidence in [Week 10 QA Report](Evidence/ujjalpoudel75-qa-testing.md) and [Issue #138](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138). Complete the remaining Google authentication verification in [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) and source-level ownership explanation in [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139). |
-
 | Historical testing could be mistaken for new Week 10 testing. | All team members | Clearly separate earlier results from tests independently executed during Week 10. |
 | Light/Dark Theme Toggle automated test received independent approval; documentation and final integration status should remain current. | `DevyanaCT`; reviewer `prachi2061` | PR #145 received an approving review and passed GitHub checks. Record this evidence in Issue #139 and the ownership audit; confirm merge status separately. |
 
@@ -62,10 +60,8 @@ Record only decisions that change scope, approach, ownership, or the next plan.
 |---|---|---|---|
 | Prioritize code ownership and verification instead of adding new features. | The MVP should remain stable for the final demonstration. | Team 4 | [Final Demo Roadmap](../Week9/Final-demo-Roadmap.md) |
 | Maintain one shared ownership audit and weekly report. | Ensures traceable responsibilities and avoids duplicate or conflicting records. | Team 4 | [Ownership Audit](ai-use-and-code-ownership-audit.md), [#139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) |
-
 | Confirm QA and Core Integration testing as Ujjal's Week 10 responsibility. | Ujjal completed six manual core-journey checks (6 PASS), ran the Playwright suite with a successful 80/80 full rerun, and verified Google Sign-In popup cancellation and retry. Full Google-account authentication and source-level explain-back remain pending. | ujjalpoudel75 — QA and Core Integration (backup acceptance pending) | [Issue #138](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138), [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) |
 
-| Keep incomplete authentication and Firestore checks explicitly unverified. | Avoids claiming untested functionality works and preserves accurate final-demo reporting. | Team 4 | [#116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116), [#117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) |
 
 ## Next week's bridge task
 
