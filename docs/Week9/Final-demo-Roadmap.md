@@ -1,8 +1,8 @@
 # Team 4 – CampusVibes
 # Final Demo Roadmap
 
-**Last updated:** 2026/11/03  
-**Last evidence review:** 2026/11/02  
+**Last updated:** 2026/11/09
+**Last evidence review:** 2026/11/09 — Firestore published-event verification and theme-toggle testing evidence
 **Team:** 4  
 **Project:** CampusVibes
 
@@ -36,14 +36,16 @@ The November 2 automated live check verified the guest/sample-data navigation an
 
 The following items are not part of the verified core promise unless separate evidence is collected:
 
-- Firestore Event loading (not tested).
+
+- Full Firestore Event loading across all event types and scenarios is not yet verified. The `campusPublishedEvents` query and display of `story time` were verified on November 9, but broader search/filter and error-handling checks remain pending.
 - Password Reset was tested end to end by ujjalpoudel75 on November 1, 2026, and documented in Issue #116. The test was reported as PASS. However, the available screenshots do not independently demonstrate every step, so additional evidence should be retained where available.
 - Maps and external notifications.
 - RSVP and social messaging.
 - Advanced AI personalization.
 - Profile, badges, suggestions, and supporting features not selected for the core demo.
 
-The Events page currently uses code-based sample data. It must not be described as loading Events from Firestore until that functionality is tested successfully.
+The application retains a code-based sample event catalog and also supports a Firestore-published-event path. On November 9, the `campusPublishedEvents` query and matching event display were verified. This does not establish that all event data or all search/filter behavior uses Firestore.
+
 
 ---
 
@@ -51,7 +53,7 @@ The Events page currently uses code-based sample data. It must not be described 
 
 **MVP progress: Gap to close**
 
-The project has a working guest/sample-data demonstration path, but authentication and Firestore verification remain outstanding.
+The project has a working guest/sample-data demonstration path and a verified Firestore published-event query/display path. Full Google authentication and broader Firestore integration verification remain outstanding.
 
 | Feature or behavior | Current status | Evidence | Remaining work |
 |---|---|---|---|
@@ -64,7 +66,7 @@ The project has a working guest/sample-data demonstration path, but authenticati
 | Email/password login | Historical PASS; current completed login NOT TESTED | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | Record a current successful login and session test |
 | Google Sign-In | Domain readiness PASS; completed login NOT TESTED | [Issue #134](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/134) | Complete identity selection, login, and reload test |
 | Password reset | PASS — End-to-end test reported by ujjalpoudel75 on November 1, 2026 | [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) | Step-by-step verification documented; additional screenshots of email receipt and password-change confirmation should be retained if available. |
-| Firestore Event loading | NOT TESTED | [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) | Verify actual database Event loading |
+| Firestore published-event loading | PASS for tested path; additional scenarios pending | [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) — November 9 verification by `DevyanaCT` | Test search/filter combinations, refresh behavior, and loading/permission errors. |
 | Local setup / backup | Reported independent PASS – October 31 | [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118) | Conduct a separate clean-checkout setup test |
 | Saved Events, Profile, Assistant, Suggestions, and theme | Supporting-feature checks reported | [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) | Keep supporting limitations visible and retest selected features |
 
@@ -166,7 +168,7 @@ Historical aliases should remain connected to their original evidence.
 
 ## 6. Roadmap Milestones
 
-**Important:** All future milestones below are PLANNED. The proposed owners and checkers must confirm their responsibilities. A planned assignment does not mean the work has been completed.
+**Important:** The November 4 preparation and November 9 verification updates record completed, dated work. Future roadmap milestones in the table remain PLANNED. Proposed owners and checkers must confirm their responsibilities.
 
 **Week 10 audit preparation, November 4:** The [ownership audit and area map](../Week10/ai-use-and-code-ownership-audit.md) and [Week 10 report](../Week10/Weekly-Report.md) belong to the professor's November 5–11 assignment. Prachi's actual November 4 preparation remains dated in the [Week 9 report](Weekly-Report.md#week-10-audit-preparation--november-4). [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) tracks pending student declarations, explanation confirmation, role acceptance and the independent check; this preparation does not complete that milestone or verify full authentication/Firestore Event loading.
 
@@ -219,7 +221,7 @@ Historical aliases should remain connected to their original evidence.
 | Confirm individual Week 9 contributions | All members | Each student confirms their own contribution and evidence. | [Shared Weekly Report](Weekly-Report.md) |
 | Review independent local test | tulseyy8848 | Clarify the October 31 prepared local setup result and its limitations. | [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118) |
 | Verify authentication | prachi2061 supports implementation; ujjalpoudel75 is proposed independent tester | Record completed login, session restoration, Google login, and reset flow results if performed. | [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116) |
-| Verify Firestore Event loading | prachi2061 supports implementation; ujjalpoudel75 is proposed checker | Query and display an identified Firestore Event or record the actual blocker. | [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) |
+| Complete remaining Firestore event-loading verification | Event/data implementation owner; `DevyanaCT` supports verification; independent checker to be confirmed | The `campusPublishedEvents` query and `story time` display passed the November 9 checks. Next, test multiple published events, search/filters, refresh behavior and permission/loading failures. | [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) |
 | Review regression results | DevyanaCT coordinates; relevant feature owners verify their work | Ensure test results and limitations are documented. | November 2 evidence and [Issue #133](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/133) |
 | Decide final MVP scope | All members | Agree on the features that can be demonstrated with evidence. | Dated decision in the Weekly Report and roadmap. |
 
@@ -229,7 +231,8 @@ Historical aliases should remain connected to their original evidence.
 
 | Risk | Why it matters | Owner | Response |
 |---|---|---|---|
-| Firestore Event loading is unverified | Database-loaded Events cannot be claimed. | prachi2061; proposed checker ujjalpoudel75 | Test and document the actual database result. |
+
+| Broader Firestore event-loading behavior remains partially unverified | A successful published-event query and display do not prove that all event types, search/filters, refresh and failure scenarios work. | Event/data implementation owner; verification support from `DevyanaCT` | Complete remaining integration tests and document results in [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117). |
 | Google Sign-In and session-restoration testing remain incomplete. Password Reset passed the documented November 1 end-to-end test, but direct screenshot evidence for some steps is limited. | The final demo must distinguish verified authentication behavior from unfinished testing. | prachi2061; ujjalpoudel75 | Retest Google Sign-In, verify session restoration, and retain the password reset evidence in [Issue #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116). |
 | Supporting-feature bugs | Optional features could interrupt the final presentation. | Respective feature owners | Keep supporting features optional and retest selected functionality. |
 | Incomplete setup documentation | Another teammate may not be able to run the project independently. | Documentation owner | Conduct an independent clean-setup test. |
@@ -247,7 +250,9 @@ Historical aliases should remain connected to their original evidence.
 - [x] Documented the original Google Sign-In configuration error and subsequent configuration repair.
 - [x] Completed and documented independent Password Reset testing by ujjalpoudel75 on November 1, 2026, including reset email receipt, password change, and successful login using the changed password. Evidence recorded in Issue #116.
 - [x] Recorded the limitations of the available Password Reset screenshots.
-- [x] Kept Firestore Event loading marked NOT TESTED.
+- [x] Verified the `campusPublishedEvents` query and published-event display for the tested path on November 9, 2026.
+- [x] Completed 34 Firestore security-rules tests successfully.
+- [ ] Complete broader Firestore event-loading, search/filter, refresh and failure-handling verification.
 - [x] Linked core regression test results.
 - [x] Linked supporting-feature evidence in Issue #133.
 - [x] Identified remaining risks and next actions.
@@ -255,7 +260,7 @@ Historical aliases should remain connected to their original evidence.
 - [x] Confirm all team members' individual Weekly Report contributions and evidence.
 - [x] Complete independent QA and clean-checkout setup testing.
 - [ ] Complete Google Sign-In end-to-end testing and session-restoration verification.
-- [ ] Verify Firestore Event loading or formally document its limitations.
+- [ ] Complete remaining Firestore event-loading verification and formally document unresolved limitations.
 - [ ] Finalize authentication and Firestore verification status for the final MVP.
 
 **Authentication Evidence:** [Issue #116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116)
