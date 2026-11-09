@@ -170,6 +170,36 @@ Historical aliases should remain connected to their original evidence.
 
 **Week 10 audit preparation, November 4:** The [ownership audit and area map](../Week10/ai-use-and-code-ownership-audit.md) and [Week 10 report](../Week10/Weekly-Report.md) belong to the professor's November 5–11 assignment. Prachi's actual November 4 preparation remains dated in the [Week 9 report](Weekly-Report.md#week-10-audit-preparation--november-4). [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) tracks pending student declarations, explanation confirmation, role acceptance and the independent check; this preparation does not complete that milestone or verify full authentication/Firestore Event loading.
 
+**Week 10 Verification Update — November 9, 2026**
+
+- **Theme Toggle Verification — PASS:** `DevyanaCT` completed automated Light/Dark Theme Toggle verification. The existing Playwright smoke suite passed 80 tests, and the dedicated theme-toggle test passed locally.
+- **Independent Review — PASS:** `prachi2061` approved PR #145, with 2 successful GitHub checks. Final merge status should be confirmed separately.
+- **Firestore Security Rules — PASS:** 34 automated security-rules tests passed with 0 failures.
+- **Firestore Published Events — PASS for tested path:** Confirmed a Firestore Listen query to `campusPublishedEvents` (HTTP 200). Verified that the published event `story time` appears in CampusVibes with matching details.
+- **Remaining Gaps:** Published-event search/filter combinations, refresh behavior, permission errors, and loading-error recovery have not been fully verified.
+
+**Evidence:**
+- [PR #145 — Theme Toggle Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/145)
+- [Issue #117 — Firestore Event Loading](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117)
+- [Issue #139 — Week 10 Ownership Audit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139)
+
+
+**Week 11 Verification Follow-up — November 12, 2026**
+
+- Verify event search and category filters using multiple Firestore-published events.
+- Confirm published events remain visible after refreshing the page.
+- Test Firestore permission errors and loading-failure recovery.
+- Confirm PR #145 merge status and preserve final theme-toggle testing evidence.
+- Review the remaining authentication and Firestore blockers before the final demonstration.
+- Record expected and actual results in the relevant GitHub issues.
+
+**Owner:** Relevant event/data implementation and QA owners; `DevyanaCT` supports Firestore verification.
+
+**Tracking:** [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117)
+
+**Status:** Additional integration and regression testing pending.
+
+
 | Week / Date | Owner / Checker | Planned work | Required evidence |
 |---|---|---|---|
 | Week 10 – Nov 5 | Lead: DevyanaCT; Checker: tulseyy8848 | Review individual contributions, commit history, issue links, and AI-use documentation. | Four member-confirmed contribution rows and exact evidence links. |
