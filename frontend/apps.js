@@ -29,7 +29,7 @@ const GRADIENTS = (hue) =>
   `linear-gradient(135deg, ${hue}, #4528a8)`;
 
 function eventPhoto(event){
-  return `/assets/${event.photo}`;
+  return event.poster?.src || `/assets/${event.photo}`;
 }
 function eventSourceMarkup(event){
   return `<span class="event-source-label">${event.source === 'published' ? 'Published campus event' : 'Sample listing'}</span>`;
@@ -477,7 +477,7 @@ function syncFirebaseUser(user){
   }
 }
 async function logout(){
-  if ((window.campusAccount?.status().pending || window.campusPhotoPending) && !window.confirm("Some changes have not synced to your account. Logging out now can lose them. Log out anyway?")) return;
+  if ((window.campusAccount?.status().pending || window.campusPhotoPending || window.campusSuggestionPhotoPending) && !window.confirm("Some changes have not synced to your account. Logging out now can lose them. Log out anyway?")) return;
   const { auth, signOut } = window.campusFirebaseAuth;
   try {
     if (auth.currentUser) await signOut(auth);
