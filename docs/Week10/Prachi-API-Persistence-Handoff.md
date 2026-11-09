@@ -87,11 +87,11 @@ The original Google recovery slice already has [ujjalpoudel75's reported cancell
 
 A non-author records their own comment in #139 using the [peer receipt fields](Evidence/prachi-2026-11-09.md#peer-receipt-to-complete). They should locate the API and persistence tests from this page, repeat one success and one failure case, and answer: **Why does API upload success not publish an event, and what prevents cleanup from removing a submitted poster?** Record both the API outcome and the Firestore outcome, the source functions, and any limit or blocker. Status stays pending until that person supplies the result; automated preparation does not establish Exceeds.
 
-## Unresolved duplicate question
+## Duplicate-draft decision
 
 **Question:** Should two separately created drafts describing the same real event be warned about, allowed, or sent to manual review? This is a product/scope decision, not a verified defect or a tested prevention feature.
 
-**Owner:** `prachi2061`. **Decision point:** November 11, 2026, end of day KST, before the Week 11 ownership checkpoint. Record the decision in #139 with the team input, user example and roadmap consequence. If it is not needed for the frozen core, defer it with a reason; if justified, define a separate bounded Issue and acceptance check before implementation. No prevention is added by this handoff.
+**Owner:** `prachi2061`. **Decision point:** November 11, 2026, end of day KST, before the Week 11 ownership checkpoint. **CONFIRMED by Prachi, November 9:** defer automatic semantic duplicate detection until after the Week 11 freeze and retain manual review. This resolves the current scope decision; it does not claim semantic duplicates are detected or blocked. See the [professor-feedback follow-up](Evidence/prachi-2026-11-09.md#professor-feedback-follow-up) for the decision, personal explanation and independent-review status. Record the decision in #139 with the team input, user example and roadmap consequence. If it is not needed for the frozen core, defer it with a reason; if justified, define a separate bounded Issue and acceptance check before implementation. No prevention is added by this handoff.
 
 Existing same-ID retry behavior in [submission](../../frontend/react-app/src/suggestions-store.js) and [publication](../../frontend/react-app/src/published-events-store.js) must not be described as semantic duplicate detection across different drafts. The [publication receipt](../../frontend/react-app/verification/published-events/results.json) covers idempotent retries, not that unresolved product rule.
 
