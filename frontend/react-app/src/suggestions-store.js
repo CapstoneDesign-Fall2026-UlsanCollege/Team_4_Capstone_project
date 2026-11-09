@@ -3,6 +3,7 @@ import { auth } from './firebase';
 import { db } from './shared-feed-store';
 import { writeNotification } from './notification-write';
 import { publishSuggestion } from './published-events-store';
+import { validSuggestionPoster } from './suggestion-poster';
 
 export const SUGGESTION_CATEGORIES = ['All', 'Tech', 'Arts', 'Music', 'Sports', 'Social', 'Academics'];
 
@@ -22,6 +23,10 @@ export function validateSuggestion(value, name) {
   result.anonymous = value.anonymous === true;
   result.category = SUGGESTION_CATEGORIES.includes(value.category) ? value.category : 'All';
   result.authorName = result.anonymous ? '' : String(name || 'Student').trim().slice(0, 120);
+  if (value.poster) {
+    if (!validSuggestionPoster(value.poster, value.id)) throw new Error('Remove the invalid poster and choose your image again.');
+    result.poster = value.poster;
+  }
   if (result.anonymous) result.host = '';
   if (!result.name || result.name.length > 100 || (!result.anonymous && !result.host) || result.host.length > 100) throw new Error('Add an event name and host of up to 100 characters.');
   if (!result.description || result.description.length > 500 || result.location.length > 120) throw new Error('Add a description of up to 500 characters and a location of up to 120 characters.');

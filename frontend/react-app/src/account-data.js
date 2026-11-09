@@ -1,6 +1,7 @@
 import { cleanActivity, cleanProfile } from './profile-store.js';
 import { cleanSession } from './assistant/session.js';
 import { BADGES } from './progress-badges.js';
+import { validSuggestionPoster } from './suggestion-poster.js';
 
 export const ACCOUNT_SECTIONS = ['profile','saved','dashboard','badges','suggestion','assistant'];
 export const sectionLimit = name => name === 'assistant' ? 200000 : 20000;
@@ -39,6 +40,7 @@ export function cleanAccountSection(name,value,user,events) {
     id:typeof value?.id === 'string' && /^[a-zA-Z0-9-]{1,80}$/.test(value.id) ? value.id : crypto.randomUUID(),
     name:text(value?.name,100),host:text(value?.host,100),date:text(value?.date,10),location:text(value?.location,120),description:text(value?.description,500),
     category:['All','Tech','Arts','Music','Sports','Social','Academics'].includes(value?.category) ? value.category : 'All',anonymous:value?.anonymous === true,
+    ...(validSuggestionPoster(value?.poster,value?.id) ? {poster:value.poster} : {}),
   };
   throw new Error('Unknown account data section.');
 }

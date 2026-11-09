@@ -20,5 +20,5 @@ test('demo suggestions save and restore private drafts without pretending to sub
   await expect(page.getByRole('alert')).toContainText('Sign in to send');
   await expect(page.locator('#suggestName')).toHaveValue('Campus open studio');
   await expect(page.getByRole('button', { name: 'Team review', exact: true })).toHaveCount(0);
-  await expect(page.getByRole('button', { name: /Attachments unavailable/ })).toBeDisabled();
+  await expect(page.getByRole('button', { name: /Upload poster/ })).toBeDisabled();
 });
