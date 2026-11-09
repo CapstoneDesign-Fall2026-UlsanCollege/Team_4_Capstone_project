@@ -15,7 +15,7 @@ Complete the Week 10 Code Ownership and Responsible AI Audit by identifying each
 - [x] Review existing authentication implementation and historical testing evidence.
 - [ ] Confirm each member's primary code ownership area and backup reviewer.
 - [ ] Complete individual code explanations and AI-use declarations.
-- [ ] Perform and document an independent test or clearly identify an unverified gap.
+- [x] Perform and document independent tests or clearly identify unverified gaps. Evidence includes theme-toggle automation, QA regression checks, Firestore published-event verification, and security-rules testing.
 - [ ] Update Issue #139 and the shared weekly report with confirmed evidence before November 11.
 
 ## Evidence links
@@ -26,7 +26,7 @@ If it is not linked, it does not count.
 |---|---|
 | Issue(s) | [#139 — Week 10 Ownership Audit](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139), [#116 — Authentication Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116), [#138 — Account Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138), [#117 — Firestore Event Loading](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) |
 | PR(s) / commits | [PR #145 — Theme Toggle Automated Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/145), [Test commit 0ab1359](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/145/commits/0ab135933dd46233ae0d0d2f3072607b9a204bc9), [Original theme implementation commit 108d8b6](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/commit/108d8b69181859d4c1ff2d6e049b26d353f9a094). PR #145 approved by `prachi2061`; GitHub checks passed. |
-| Screenshot / demo | [Week 10 Evidence Directory](Evidence/) — Existing preparation evidence; new screenshots pending. |
+| Screenshot / demo | [Week 10 Evidence Directory](Evidence/) [Available in Comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117#issuecomment-6731361245) |
 | Test/check note | [Prachi's November 4 Source Review](Evidence/prachi-ownership-review-2026-11-04.md), [Google Sign-In Historical Readiness Results](../../frontend/react-app/verification/google-signin-domain/results.json) |
 | Document update | [Week 10 Code Ownership and Responsible AI Audit](ai-use-and-code-ownership-audit.md), [Final Demo Roadmap](../Week9/Final-demo-Roadmap.md) |
 | Current codebase area map / ownership audit (link; update if changed) | [Codebase Area Map](ai-use-and-code-ownership-audit.md#codebase-area-map) |
@@ -45,11 +45,12 @@ If it is not linked, it does not count.
 | Blocker/risk | Owner | Next action |
 |---|---|---|
 | Google Sign-In end-to-end verification remains incomplete. | Authentication team / `prachi2061` | Confirm provider configuration and independently verify login and session recovery. |
-| Firestore event loading remains unverified. | Event/data implementation owner — to be confirmed | Verify event retrieval from Firestore and document actual results in Issue #117. |
+| Firestore published-event query and display verified for the tested event; broader search/filter and failure-handling checks remain pending. | Event/data implementation owner — to be confirmed; verification by `DevyanaCT` | Complete additional Firestore event search/filter, refresh, and error-handling tests. See [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117). |
 | Week 10 student ownership confirmations are incomplete. | All team members | Confirm primary area, backup reviewer, code explanation, and AI-use declaration in Issue #139. |
 | Independent authentication regression evidence is pending. | `ujjalpoudel75` — proposed | Run selected checks, document expected versus actual results, and attach screenshots or logs. |
 | Historical testing could be mistaken for new Week 10 testing. | All team members | Clearly separate earlier results from tests independently executed during Week 10. |
-| Independent review of the Light/Dark Theme Toggle automated test is pending. | `DevyanaCT`; proposed reviewer `prachi2061` | Request review of PR #145, record the reviewer's findings, address any requested changes and update Issue #139 and the ownership audit before November 11. |
+| Light/Dark Theme Toggle automated test received independent approval; documentation and final integration status should remain current. | `DevyanaCT`; reviewer `prachi2061` | PR #145 received an approving review and passed GitHub checks. Record this evidence in Issue #139 and the ownership audit; confirm merge status separately. |
+
 
 ## Decision record
 
@@ -66,5 +67,7 @@ Record only decisions that change scope, approach, ownership, or the next plan.
 
 - **Week 11 — November 12:** Review completed code ownership declarations, independent test evidence, and unresolved authentication or Firestore issues. Update the final-demo roadmap based on verified results.
 - Continue regression testing of the core CampusVibes user journey, resolve confirmed blockers where feasible, and preserve documented fallback behavior for features that remain incomplete.
+- **Firestore follow-up:** Continue verification of search and category filters with multiple Firestore-published events, event persistence after refresh, and loading/permission-error handling. Week 10 confirmed the `campusPublishedEvents` query, the published event `story time`, and 34 passing Firestore security-rules tests. Track remaining work in [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117).
+
 
 **Week 10 submission deadline:** November 11, 2026, end of day (KST).
