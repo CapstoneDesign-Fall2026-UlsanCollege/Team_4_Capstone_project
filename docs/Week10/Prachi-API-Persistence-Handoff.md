@@ -1,7 +1,7 @@
 # Prachi — API and persistence handoff
 
-**Owner:** `prachi2061`  
-**Prepared:** November 9, 2026, Asia/Seoul — Week 10  
+**Owner:** `prachi2061`<br>
+**Prepared:** November 9, 2026, Asia/Seoul — Week 10<br>
 **Status:** Repeatable technical evidence linked; human explain-back, backup acceptance and independent API/persistence review pending.
 
 This supports the [Week 10 ownership milestone](../Week9/Final-demo-Roadmap.md#6-roadmap-milestones) and [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139). It documents the existing poster slice delivered in [Issue #153](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/153) / [PR #154](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/154); it adds no feature or demo promise. Suggestions remain supporting work. Prachi's original Google entry/recovery slice remains in the [shared audit](ai-use-and-code-ownership-audit.md#prachis-prepared-source-explanation).

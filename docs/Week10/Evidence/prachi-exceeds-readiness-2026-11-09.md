@@ -1,7 +1,7 @@
 # Prachi — Exceeds follow-up and review receipt
 
-**Date:** November 9, 2026, Asia/Seoul  
-**Owner:** `prachi2061`  
+**Date:** November 9, 2026, Asia/Seoul<br>
+**Owner:** `prachi2061`<br>
 **Status:** Handoff prepared; independent API/persistence review, backup acceptance and personal explain-back pending.
 
 Start at the [API/persistence handoff](../Prachi-API-Persistence-Handoff.md). The [shared roadmap](../../Week9/Final-demo-Roadmap.md#6-roadmap-milestones) leads to [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) and the [audit/area map](../ai-use-and-code-ownership-audit.md#codebase-area-map); the handoff links the completed [#153 / PR #154 implementation](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/154), source checks and dated receipt. This adds navigation and check instructions for an existing supporting feature, not a new core promise.
