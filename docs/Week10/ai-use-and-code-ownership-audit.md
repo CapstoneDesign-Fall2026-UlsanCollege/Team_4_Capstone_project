@@ -82,3 +82,14 @@ This record describes known assistance for the selected changes. It is **not an 
 
 
 If the explanation/check fails, keep the corresponding status pending or record the observed failure, then link a precise correction. The audit does not expand the core demo promise or close auth/data testing issues.
+
+
+## Prachi's November 9 API stewardship follow-up
+
+Prachi's [API/persistence handoff](Prachi-API-Persistence-Handoff.md) adds current source boundaries, an access-independent health check, isolated setup, expected/failure checks and a backup procedure for the existing poster extension in [PR #154](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/154). The area map above remains the role reference; proposed API backup acceptance is still pending. This addendum changes no teammate's area declaration or result.
+
+The [Exceeds readiness and peer-receipt fields](Evidence/prachi-exceeds-readiness-2026-11-09.md) link existing November 9 automation and leave the new non-author API/persistence check and Prachi's explain-back pending. The existing [Ujjal Google cancellation/retry result](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139#issuecomment-6708776312) is acknowledged as a separate functional check. The original authentication slice remains in [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139).
+
+The semantic duplicate question is owned by `prachi2061`, with a November 11 end-of-day KST decision point. It is distinct from existing same-ID retry behavior and is not presented as tested prevention. No duplicate-prevention code or expanded core-demo promise is added.
+
+AI note for this addendum: Codex assisted source/receipt inspection and documentation preparation. Existing automated implementation evidence retains its own scope; personal explanation, role acceptance and new human review are not certified here.
