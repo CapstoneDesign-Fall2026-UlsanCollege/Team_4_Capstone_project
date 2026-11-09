@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-11-09T06:20:21.540Z",
+  "timeZone": "Asia/Seoul",
+  "owner": "prachi2061",
+  "baseCommit": "36084dddf9ef66c5d0393efd63af832db297745c",
+  "checks": {
+    "focusedUnitApiAndModels": 37,
+    "desktopMobileSmokeCases": 16,
+    "productionSourceHashesUnchanged": 7
+  },
+  "issues": {
+    "nativeInput": {
+      "number": 156,
+      "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/156"
+    },
+    "cleanupRecovery": {
+      "number": 157,
+      "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/157"
+    },
+    "liveTesting": {
+      "number": 158,
+      "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/158"
+    }
+  },
+  "reconstruction": "Controlled local DOM change removes only the inline display:none protection while leaving hidden present. The real form CSS then exposes the native file input; restoring the existing protection hides it. Not a new production incident.",
+  "cleanupScope": "Mocked provider destroy failure returns 503 without deleted=true, new uploads, quota consumption or credential disclosure. React cleanup retry persistence remains a source-inspected open bug, not fixed or end-to-end tested by this test.",
+  "historicalEvidence": "../results.json retains its November 9 date and original 36/44/12/20 check scopes. Those permission and signed-in emulator suites were not rerun for this test-only follow-up.",
+  "notPerformed": [
+    "production photo upload",
+    "new independent human test",
+    "cleanup retry persistence fix",
+    "fresh Firestore permission suite",
+    "complete application suite"
+  ],
+  "screenshots": [
+    "desktop-protected-native-input.png",
+    "desktop-reconstructed-native-input.png",
+    "mobile-protected-native-input.png",
+    "mobile-reconstructed-native-input.png"
+  ],
+  "assistance": "Codex inspected source, prepared tracking notes and added/ran these automated regressions. Fictional local demo UI and controlled API/provider fixtures only."
+}

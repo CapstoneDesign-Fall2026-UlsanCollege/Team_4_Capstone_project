@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createPhotoHandler} from '../src/feed-photo.js';
 const suggestionId='test-idea',photoId='01234567890123456789',image='data:image/jpeg;base64,/9j/AAAA';
 const env={CLOUDINARY_API_KEY:'test-key',CLOUDINARY_API_SECRET:'test-secret'};
-function setup({uid='alice',claimUid=uid,claimStatus='active',claimIdea=suggestionId,submitted=false,count=0,providerError=false}={}){
+function setup({uid='alice',claimUid=uid,claimStatus='active',claimIdea=suggestionId,submitted=false,count=0,providerError=false,cleanupError=false}={}){
  const calls={upload:[],destroy:[],budget:0};
  const request=async(url,init)=>{
   if(url.includes('accounts:lookup'))return Response.json({users:[{localId:uid,providerUserInfo:[{providerId:'password'}]}]});
@@ -14,7 +14,7 @@ function setup({uid='alice',claimUid=uid,claimStatus='active',claimIdea=suggesti
   if(url.endsWith(':commit')){calls.budget++;return Response.json({});}
   throw new Error('Unexpected test request.');
  };
- const media={uploader:{upload:async(file,options)=>{calls.upload.push(options);if(providerError)throw new Error(env.CLOUDINARY_API_SECRET);return{public_id:options.public_id,secure_url:`https://res.cloudinary.com/ghr7xnsl/image/upload/v123/${options.public_id}.jpg`,width:800,height:600};},destroy:async(id)=>{calls.destroy.push(id);return{result:'ok'};}}};
+ const media={uploader:{upload:async(file,options)=>{calls.upload.push(options);if(providerError)throw new Error(env.CLOUDINARY_API_SECRET);return{public_id:options.public_id,secure_url:`https://res.cloudinary.com/ghr7xnsl/image/upload/v123/${options.public_id}.jpg`,width:800,height:600};},destroy:async(id)=>{calls.destroy.push(id);if(cleanupError)throw new Error(env.CLOUDINARY_API_SECRET);return{result:'ok'};}}};
  const handler=createPhotoHandler({env,request,media,purpose:'suggestion'});
  const invoke=async(body={action:'upload',suggestionId,photoId,image},headers={})=>{
   const res={setHeader(){},end(value){this.body=JSON.parse(value);}};
@@ -43,4 +43,12 @@ test('the existing account photo quota covers suggestions and the API rejects un
 test('failed providers keep credentials private and reject cross-origin requests',async()=>{
  const result=await setup({providerError:true}).invoke();assert.equal(result.statusCode,503);assert.ok(!JSON.stringify(result.body).includes('test-secret'));
  assert.equal((await setup().invoke(undefined,{origin:'https://other.test'})).statusCode,403);
+});
+test('failed poster cleanup reports an error without claiming deletion or exposing credentials',async()=>{
+ const {invoke,calls}=setup({claimStatus:'discarded',cleanupError:true});
+ const result=await invoke({action:'discard',suggestionId,photoId});
+ assert.equal(result.statusCode,503);assert.equal(result.body.deleted,undefined);
+ assert.equal(calls.upload.length,0);assert.equal(calls.budget,0);
+ assert.deepEqual(calls.destroy,[`campusvibe-suggestions/${suggestionId}/${photoId}`]);
+ assert.ok(!JSON.stringify(result.body).includes(env.CLOUDINARY_API_SECRET));
 });
