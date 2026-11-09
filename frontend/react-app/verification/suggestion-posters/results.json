@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-11-09T05:41:21.920Z",
+  "project": "demo-campusvibe-feed",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "result": "PASS",
+      "checks": [
+        "file validation",
+        "compressed upload and retry",
+        "pending upload prevents incomplete send",
+        "draft reload",
+        "remove and reload",
+        "anonymous URL omits author UID",
+        "reviewer preview",
+        "published detail and Discover poster",
+        "saved reload and Profile poster",
+        "responsive layout"
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "result": "PASS",
+      "checks": [
+        "file validation",
+        "compressed upload and retry",
+        "pending upload prevents incomplete send",
+        "draft reload",
+        "remove and reload",
+        "anonymous URL omits author UID",
+        "reviewer preview",
+        "published detail and Discover poster",
+        "saved reload and Profile poster",
+        "responsive layout"
+      ]
+    }
+  ],
+  "scope": "Automated localhost Firebase emulator accounts with mocked Cloudinary transport. Real preparation, claim/permission, draft, review and publication code; no production user or real provider upload.",
+  "checks": {
+    "unitApiAndModels": 36,
+    "firestorePermissionCases": 44,
+    "relatedDesktopMobileSmokeCases": 12,
+    "posterWorkflowChecks": 20,
+    "productionBuild": "PASS",
+    "diffCheck": "PASS"
+  },
+  "owner": "prachi2061",
+  "assistance": "Codex-assisted implementation and automated checks; no independent human test claimed.",
+  "sourceHashFormat": "SHA-256 of UTF-8 source with LF line endings",
+  "sourceHashes": {
+    "backend/src/feed-photo.js": "e2c66009ad33ebe77b2d3b760efd8169b9fb7edd849549e7e7e0a4cee3d78419",
+    "backend/firebase/firestore.rules": "2655e99650f16badf096044946ba1640d75a34ac027968bc7f162ded64c7286f",
+    "frontend/react-app/src/SuggestionPoster.jsx": "a452d4e90f441da79718458ae3ce990eb51959c1434a4f1097c538ccdef0b5ab",
+    "frontend/react-app/src/suggestion-poster-store.js": "609e3e3a89fa5afccffed5845fd00ed987ff7b68065b998a931a8fe5a53eb8b2",
+    "frontend/react-app/src/suggestion-poster.js": "e1fce414de2ee5a0152a67fd473bf7048faf6ca810e8fef693e663f553551a59",
+    "frontend/react-app/src/Suggestions.jsx": "64f7752164b4be6833a638a9fc20b30d33afb49bf5c8c33049ac8d2859f1f7d5",
+    "frontend/react-app/src/published-events-model.js": "b1a9acec0fb473ee31b65a17a4840ef808f8867e8997b74de950bcb30f710927"
+  },
+  "limits": "One compressed JPG per suggestion, prepared from JPG/PNG/WebP up to 10 MB; existing shared 20-attempt daily quota. Cloudinary delivery URLs are accessible to anyone with the link. Submitted posters are immutable. Files/PDF/video and catalogue pagination remain outside this slice."
+}

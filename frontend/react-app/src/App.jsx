@@ -185,7 +185,7 @@ export default function App() {
       setFeedUser(user);
       if(user)window.campusRefreshEvents?.();
     };
-    const guardUnload=event=>{if(activeAccount?.status().pending){event.preventDefault();event.returnValue='';}};
+    const guardUnload=event=>{if(activeAccount?.status().pending || window.campusSuggestionPhotoPending){event.preventDefault();event.returnValue='';}};
     const retryOnline=()=>activeAccount?.retry();
     window.addEventListener('beforeunload',guardUnload);window.addEventListener('online',retryOnline);
     window.addEventListener("campus-session-change", receiveSession);

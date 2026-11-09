@@ -3,14 +3,15 @@ import { validFeedPhoto } from './feed-photo';
 
 const uploaded = new WeakMap();
 
-export async function photoRequest(user, body) {
+export async function photoRequest(user, body, endpoint = '/api/feed-photo') {
+  if (!['/api/feed-photo', '/api/suggestion-photo'].includes(endpoint)) throw new Error('Unknown photo service.');
   const current = auth.currentUser;
   if (!current || current.isAnonymous || current.uid !== user.id) throw new Error('Sign in to share photos.');
   const token = await current.getIdToken();
   if (auth.currentUser?.uid !== user.id) throw new Error('Your account changed. Sign in again before sharing.');
   let response;
   try {
-    response = await fetch('/api/feed-photo', { method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(60000) });
+    response = await fetch(endpoint, { method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(60000) });
   } catch { throw new Error('The photo request could not be confirmed. Check your connection and retry.'); }
   const data = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(data.error || 'Photo sharing is unavailable. Try again later.');

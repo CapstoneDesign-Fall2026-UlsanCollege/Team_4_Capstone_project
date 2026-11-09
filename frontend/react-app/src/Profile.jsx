@@ -99,7 +99,7 @@ export default function Profile({ user,account }) {
   function eventRow(event,compact = false) {
     const isSaved=signals.saved.includes(event.id);
     return <article className={`cvp-event ${compact ? 'cvp-event-compact' : ''}`} key={event.id} data-profile-event={event.id}>
-      <button className="cvp-event-open" type="button" onClick={() => action('event',event.id)} aria-label={`View details: ${event.title}`}><img src={`/assets/${event.photo}`} alt="" /><span><strong>{event.title}</strong><small className="cvp-event-source">{event.source === 'published' ? 'Published campus event' : 'Sample listing'}</small>{!compact && <small><MapPin size={11} />{event.location}</small>}<small><CalendarDays size={11} />{dateLabel(event.date)}<Clock size={11} />{event.time}</small></span></button>
+      <button className="cvp-event-open" type="button" onClick={() => action('event',event.id)} aria-label={`View details: ${event.title}`}><img src={event.poster?.src || `/assets/${event.photo}`} alt="" /><span><strong>{event.title}</strong><small className="cvp-event-source">{event.source === 'published' ? 'Published campus event' : 'Sample listing'}</small>{!compact && <small><MapPin size={11} />{event.location}</small>}<small><CalendarDays size={11} />{dateLabel(event.date)}<Clock size={11} />{event.time}</small></span></button>
       <button className="cvp-icon-button cvp-bookmark" type="button" aria-pressed={isSaved} title={isSaved ? 'Remove from saved' : 'Save event'} aria-label={`${isSaved ? 'Remove from saved' : 'Save event'}: ${event.title}`} onClick={() => action('save',event.id)}><Bookmark size={17} fill={isSaved ? 'currentColor' : 'none'} /></button>
     </article>;
   }
