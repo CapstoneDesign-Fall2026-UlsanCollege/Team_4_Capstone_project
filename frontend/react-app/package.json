@@ -14,6 +14,8 @@
     "test:feed-photos": "node --test tests/feed-photo.test.js && npm run test:feed-photos --workspace @campusvibes/backend",
     "test:feed-photos-browser": "node tests/feed-photos.browser.js",
     "test:suggestions": "node tests/suggestions.browser.js",
+    "test:suggestion-posters": "node --test tests/suggestion-poster.test.js",
+    "test:suggestion-posters-browser": "node tests/suggestion-posters.browser.js",
     "test:published-events": "node --test tests/published-events.test.js",
     "test:event-calendar": "node --test tests/event-calendar.test.js",
     "test:event-catalog-status": "node --test tests/event-catalog-status.test.js",
