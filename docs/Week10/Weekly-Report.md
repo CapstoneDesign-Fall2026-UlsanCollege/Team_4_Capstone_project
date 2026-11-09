@@ -62,7 +62,9 @@ Record only decisions that change scope, approach, ownership, or the next plan.
 |---|---|---|---|
 | Prioritize code ownership and verification instead of adding new features. | The MVP should remain stable for the final demonstration. | Team 4 | [Final Demo Roadmap](../Week9/Final-demo-Roadmap.md) |
 | Maintain one shared ownership audit and weekly report. | Ensures traceable responsibilities and avoids duplicate or conflicting records. | Team 4 | [Ownership Audit](ai-use-and-code-ownership-audit.md), [#139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) |
-| Propose authentication regression verification as Ujjal's Week 10 focus, subject to acceptance. | Builds on existing password reset and Google Sign-In testing evidence while identifying remaining session verification gaps. | `ujjalpoudel75` — proposed | [#116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116), [#138](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138) |
+
+| Confirm QA and Core Integration testing as Ujjal's Week 10 responsibility. | Ujjal completed six manual core-journey checks (6 PASS), ran the Playwright suite with a successful 80/80 full rerun, and verified Google Sign-In popup cancellation and retry. Full Google-account authentication and source-level explain-back remain pending. | ujjalpoudel75 — QA and Core Integration (backup acceptance pending) | [Issue #138](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138), [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139) |
+
 | Keep incomplete authentication and Firestore checks explicitly unverified. | Avoids claiming untested functionality works and preserves accurate final-demo reporting. | Team 4 | [#116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116), [#117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) |
 
 ## Next week's bridge task
