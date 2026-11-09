@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => ({
     name: 'local-feed-photos',
     configureServer(server) {
       server.middlewares.use('/api/feed-photo', createPhotoHandler({ env: { ...process.env, ...loadEnv(mode, process.cwd(), '') } }));
+      server.middlewares.use('/api/suggestion-photo', createPhotoHandler({ purpose: 'suggestion', env: { ...process.env, ...loadEnv(mode, process.cwd(), '') } }));
       server.middlewares.use('/api/assistant', createAssistantHandler({ env: { ...process.env, ...loadEnv(mode, process.cwd(), '') } }));
     },
   }],

@@ -7,11 +7,12 @@
     "./assistant": "./src/assistant.js",
     "./feed-photo": "./src/feed-photo.js",
     "./api/assistant": "./api/assistant.js",
-    "./api/feed-photo": "./api/feed-photo.js"
+    "./api/feed-photo": "./api/feed-photo.js",
+    "./api/suggestion-photo": "./api/suggestion-photo.js"
   },
   "scripts": {
-    "test": "node --test tests/assistant-api.test.js tests/feed-photo-api.test.js",
-    "test:rules": "node --test --test-concurrency=1 tests/feed-rules.test.js tests/notifications-rules.test.js tests/published-events-rules.test.js",
+    "test": "node --test tests/assistant-api.test.js tests/feed-photo-api.test.js tests/suggestion-poster-api.test.js",
+    "test:rules": "node --test --test-concurrency=1 tests/feed-rules.test.js tests/notifications-rules.test.js tests/published-events-rules.test.js tests/suggestion-poster-rules.test.js",
     "test:feed-rules": "node --test tests/feed-rules.test.js",
     "test:notifications-rules": "node --test tests/notifications-rules.test.js",
     "test:assistant": "node --test tests/assistant-api.test.js",

@@ -128,7 +128,7 @@ service cloud.firestore {
     }
     function validSuggestion(data) {
       return data.keys().hasAll(['name','host','authorName','anonymous','category','date','location','description','createdAt','status','reviewNote','reviewerId','reviewedAt'])
-        && data.keys().hasOnly(['name','host','authorName','anonymous','category','date','location','description','createdAt','status','reviewNote','reviewerId','reviewedAt','publishedEventId'])
+        && data.keys().hasOnly(['name','host','authorName','anonymous','category','date','location','description','createdAt','status','reviewNote','reviewerId','reviewedAt','publishedEventId','poster'])
         && data.name is string && data.name.size() > 0 && data.name.size() <= 100
         && data.host is string && data.host.size() <= 100
         && data.authorName is string && data.authorName.size() <= 120 && data.anonymous is bool
@@ -137,6 +137,29 @@ service cloud.firestore {
         && data.date is string && (data.date == '' || data.date.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$'))
         && data.location is string && data.location.size() <= 120
         && data.description is string && data.description.size() > 0 && data.description.size() <= 500;
+    }
+    function validSuggestionPoster(poster, id) {
+      return poster is map && poster.keys().hasAll(['id','publicId','src','width','height'])
+        && poster.keys().hasOnly(['id','publicId','src','width','height'])
+        && poster.id is string && poster.id.matches('^[A-Za-z0-9]{20}$')
+        && poster.publicId == 'campusvibe-suggestions/' + id + '/' + poster.id
+        && poster.src is string && poster.src.matches('^https://res[.]cloudinary[.]com/ghr7xnsl/image/upload/v[0-9]+/' + poster.publicId + '[.]jpg$')
+        && poster.width is int && poster.width > 0 && poster.width <= 1280
+        && poster.height is int && poster.height > 0 && poster.height <= 1280;
+    }
+    match /campusSuggestionPhotos/{photoId} {
+      allow get: if member() && (resource == null || resource.data.uid == request.auth.uid);
+      allow create: if member() && photoId.matches('^[A-Za-z0-9]{20}$')
+        && request.resource.data.keys().hasAll(['uid','suggestionId','status','createdAt'])
+        && request.resource.data.keys().hasOnly(['uid','suggestionId','status','createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.suggestionId is string && request.resource.data.suggestionId.matches('^[A-Za-z0-9-]{1,80}$')
+        && request.resource.data.status == 'active' && request.resource.data.createdAt == request.time
+        && !existsAfter(/databases/$(database)/documents/campusSuggestionOwners/$(request.resource.data.suggestionId));
+      allow update: if member() && resource.data.uid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])
+        && resource.data.status == 'active' && request.resource.data.status == 'discarded'
+        && !existsAfter(/databases/$(database)/documents/campusSuggestionOwners/$(resource.data.suggestionId));
     }
     match /campusSuggestionReviewers/{uid} {
       allow get: if member() && request.auth.uid == uid;
@@ -181,7 +204,7 @@ service cloud.firestore {
       allow create: if suggestionReviewer()
         && id.matches('^[A-Za-z0-9-]{1,80}$')
         && request.resource.data.keys().hasAll(['id','sourceSuggestionId','title','interest','host','desc','date','time','location','publishedAt'])
-        && request.resource.data.keys().hasOnly(['id','sourceSuggestionId','title','interest','host','desc','date','time','location','publishedAt'])
+        && request.resource.data.keys().hasOnly(['id','sourceSuggestionId','title','interest','host','desc','date','time','location','publishedAt','poster'])
         && request.resource.data.sourceSuggestionId == id
         && allocatedPublication(id,request.resource.data.id)
         && getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.status == 'approved'
@@ -190,6 +213,7 @@ service cloud.firestore {
         && request.resource.data.interest == getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.category
         && request.resource.data.desc == getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.description
         && request.resource.data.host == (getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.anonymous ? 'Campus community' : getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.host)
+        && request.resource.data.get('poster', null) == getAfter(/databases/$(database)/documents/campusSuggestions/$(id)).data.get('poster', null)
         && request.resource.data.date is string && request.resource.data.date.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
         && request.resource.data.time is string && (request.resource.data.time == '' || request.resource.data.time.matches('^([01][0-9]|2[0-3]):[0-5][0-9]$'))
         && request.resource.data.location is string && request.resource.data.location.size() > 0 && request.resource.data.location.size() <= 120
@@ -199,6 +223,10 @@ service cloud.firestore {
       allow get: if suggestionReviewer() || suggestionOwner(id);
       allow list: if suggestionReviewer() && bounded(100);
       allow create: if member() && validSuggestion(request.resource.data)
+        && (!request.resource.data.keys().hasAny(['poster']) || (validSuggestionPoster(request.resource.data.poster, id)
+          && getAfter(/databases/$(database)/documents/campusSuggestionPhotos/$(request.resource.data.poster.id)).data.uid == request.auth.uid
+          && getAfter(/databases/$(database)/documents/campusSuggestionPhotos/$(request.resource.data.poster.id)).data.suggestionId == id
+          && getAfter(/databases/$(database)/documents/campusSuggestionPhotos/$(request.resource.data.poster.id)).data.status == 'active'))
         && !request.resource.data.keys().hasAny(['publishedEventId'])
         && request.resource.data.createdAt == request.time && request.resource.data.status == 'pending'
         && request.resource.data.reviewNote == '' && request.resource.data.reviewerId == '' && request.resource.data.reviewedAt == null

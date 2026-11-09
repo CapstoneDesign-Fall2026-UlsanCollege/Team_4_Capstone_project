@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
 import { FEED_PHOTO_BYTES, FEED_PHOTO_CLOUD, FEED_PHOTO_DAILY_LIMIT, FEED_PHOTO_EDGE, validFeedPhoto } from '../../frontend/react-app/src/feed-photo.js';
+import { validSuggestionId, validSuggestionPoster } from '../../frontend/react-app/src/suggestion-poster.js';
 
 const firebaseKey = 'AIzaSyAn8ES7j5qykoUvXJtHF-_lF-9AyypaZEs';
 const productionProject = 'campus-vibe-7a95a';
@@ -22,7 +23,9 @@ async function readBody(req) {
   catch { throw failure(400, 'Invalid photo request.'); }
 }
 
-export function createPhotoHandler({ env = process.env, request = fetch, media = cloudinary } = {}) {
+export function createPhotoHandler({ env = process.env, request = fetch, media = cloudinary, purpose = 'feed' } = {}) {
+  if (!['feed', 'suggestion'].includes(purpose)) throw new Error('Unknown photo purpose.');
+  const suggestion = purpose === 'suggestion';
   const cloud = env.CLOUDINARY_CLOUD_NAME || FEED_PHOTO_CLOUD;
   const configured = cloud === FEED_PHOTO_CLOUD && !!env.CLOUDINARY_API_KEY && !!env.CLOUDINARY_API_SECRET;
   const local = !env.VERCEL_ENV && env.NODE_ENV !== 'production' && !!env.FIREBASE_AUTH_EMULATOR_HOST && !!env.FIRESTORE_EMULATOR_HOST;
@@ -36,7 +39,12 @@ export function createPhotoHandler({ env = process.env, request = fetch, media =
     return request(url, { ...init, headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) }, signal: AbortSignal.timeout(30000) });
   }
   async function readPost(postId, token) {
-    const response = await call(`${database}/v1/${documents}/campusFeedPosts/${postId}`, token);
+    if (suggestion) {
+      const owner = await call(`${database}/v1/${documents}/campusSuggestionOwners/${postId}`, token);
+      if (owner.status === 404) return null;
+      if (!owner.ok) throw failure(403, 'Only the suggestion author can change its poster.');
+    }
+    const response = await call(`${database}/v1/${documents}/${suggestion ? 'campusSuggestions' : 'campusFeedPosts'}/${postId}`, token);
     if (response.status === 404) return null;
     if (!response.ok) throw failure(503, 'Cannot verify the post. Reconnect and retry.');
     return (await response.json()).fields || {};
@@ -78,25 +86,34 @@ export function createPhotoHandler({ env = process.env, request = fetch, media =
       if (!user || user.disabled || !user.providerUserInfo?.length || !/^[A-Za-z0-9_-]{1,128}$/.test(user.localId)) throw failure(403, 'Sign in with a CampusVibe account to share photos.');
       if (!configured) throw failure(503, 'Photo sharing is not configured yet. Text posts are still available.');
       const body = await readBody(req);
-      if (!body || !['upload', 'delete', 'discard'].includes(body.action) || !/^[A-Za-z0-9]{20}$/.test(body.postId)) throw failure(400, 'Invalid photo request.');
-      const uid = user.localId, publicId = `campusvibe-feed/${uid}/${body.postId}`;
-      const post = await readPost(body.postId, token);
-      if (post && post.authorId?.stringValue !== uid) throw failure(403, 'Only the post author can change its photo.');
+      const itemId = suggestion ? body?.suggestionId : body?.postId;
+      if (!body || !(suggestion ? ['upload', 'discard'] : ['upload', 'delete', 'discard']).includes(body.action)
+        || !(suggestion ? validSuggestionId(itemId) && /^[A-Za-z0-9]{20}$/.test(body.photoId) : /^[A-Za-z0-9]{20}$/.test(itemId))) throw failure(400, 'Invalid photo request.');
+      const uid = user.localId, publicId = suggestion ? `campusvibe-suggestions/${itemId}/${body.photoId}` : `campusvibe-feed/${uid}/${itemId}`;
+      if (suggestion) {
+        const response = await call(`${database}/v1/${documents}/campusSuggestionPhotos/${body.photoId}`, token);
+        if (!response.ok) throw failure(403, 'Cannot verify ownership of this poster.');
+        const claim = (await response.json()).fields;
+        if (claim?.uid?.stringValue !== uid || claim.suggestionId?.stringValue !== itemId
+          || claim.status?.stringValue !== (body.action === 'upload' ? 'active' : 'discarded')) throw failure(403, 'Cannot change this poster.');
+      }
+      const post = await readPost(itemId, token);
+      if (!suggestion && post && post.authorId?.stringValue !== uid) throw failure(403, 'Only the post author can change its photo.');
       if (body.action === 'upload') {
-        if (post) throw failure(409, 'This post already exists. Reload the feed before retrying.');
+        if (post) throw failure(409, suggestion ? 'This suggestion was already sent. Its poster cannot be replaced.' : 'This post already exists. Reload the feed before retrying.');
         if (typeof body.image !== 'string' || !/^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]+={0,2}$/.test(body.image)) throw failure(400, 'Choose a prepared JPG photo.');
         const bytes = Buffer.from(body.image.slice(23), 'base64');
         if (!bytes.length || bytes.length > FEED_PHOTO_BYTES) throw failure(413, 'The prepared photo exceeds 300 KB.');
         await consumeUpload(uid, token);
         const result = await media.uploader.upload(body.image, { ...options, public_id: publicId, resource_type: 'image', type: 'upload', overwrite: false, allowed_formats: ['jpg'], format: 'jpg', transformation: [{ width: FEED_PHOTO_EDGE, height: FEED_PHOTO_EDGE, crop: 'limit', quality: 'auto:eco' }] });
-        const photo = { publicId: result.public_id, src: result.secure_url, width: result.width, height: result.height };
-        if (!validFeedPhoto(photo, uid, body.postId)) {
+        const photo = { ...(suggestion ? { id: body.photoId } : {}), publicId: result.public_id, src: result.secure_url, width: result.width, height: result.height };
+        if (!(suggestion ? validSuggestionPoster(photo, itemId) : validFeedPhoto(photo, uid, itemId))) {
           await media.uploader.destroy(publicId, { ...options, resource_type: 'image', invalidate: true });
           throw failure(502, 'The photo could not be prepared. Choose another image.');
         }
         return send(200, { photo });
       }
-      if (body.action === 'discard' && post) throw failure(409, 'The photo belongs to a published post and was not removed.');
+      if (body.action === 'discard' && post) throw failure(409, suggestion ? 'This poster belongs to a submitted suggestion and was not removed.' : 'The photo belongs to a published post and was not removed.');
       if (body.action === 'delete' && (!post || post.deleting?.booleanValue !== true)) throw failure(409, 'Start deleting the post before removing its photo.');
       const result = await media.uploader.destroy(publicId, { ...options, resource_type: 'image', type: 'upload', invalidate: true });
       if (!['ok', 'not found'].includes(result.result)) throw failure(502, 'Photo cleanup is incomplete. Retry deleting the post.');
