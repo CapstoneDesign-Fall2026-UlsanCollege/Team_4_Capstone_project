@@ -16,7 +16,7 @@ Complete the Week 10 Code Ownership and Responsible AI Audit by identifying each
 - [ ] Confirm each member's primary code ownership area and backup reviewer.
 - [ ] Complete individual code explanations and AI-use declarations.
 - [x] Perform and document independent tests or clearly identify unverified gaps. Evidence includes theme-toggle automation, QA regression checks, Firestore published-event verification, and security-rules testing.
-- [ ] Update Issue #139 and the shared weekly report with confirmed evidence before November 11.
+- [x] Update the shared weekly report with confirmed evidence before November 11.
 
 ## Evidence links
 
@@ -30,7 +30,9 @@ If it is not linked, it does not count.
 | Test/check note | [Prachi's November 4 Source Review](Evidence/prachi-ownership-review-2026-11-04.md), [Google Sign-In Historical Readiness Results](../../frontend/react-app/verification/google-signin-domain/results.json) |
 | Document update | [Week 10 Code Ownership and Responsible AI Audit](ai-use-and-code-ownership-audit.md), [Final Demo Roadmap](../Week9/Final-demo-Roadmap.md) |
 | Current codebase area map / ownership audit (link; update if changed) | [Codebase Area Map](ai-use-and-code-ownership-audit.md#codebase-area-map) |
-| Work-checklist | [Work-checlist.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week10/Work-checklist.md)
+| Work-checklist | [Work-checlist.md](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/blob/main/docs/Week10/Work-checklist.md) |
+| Evidence | [Evidence folder](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/tree/0108e39f2465e7e09b5093f73f6558ee678f3858/docs/Week10/Evidence)
+
 ## Individual contribution entries — one row per student
 
 | Student | What they did | Evidence link |
