@@ -194,14 +194,16 @@ function dashboardWeekendEvents(){
   return EVENTS.filter(event => event.date === dashboardDateKey(firstSaturday) || event.date === dashboardDateKey(sunday));
 }
 
-function showDashboardDialog(title, markup, eventId = ""){
+function showDashboardDialog(title, markup, eventId = "", options = {}){
   const dialog = $("#dashboardDialog");
   dialog.dataset.eventId = eventId;
   delete dialog.dataset.discoverEvent;
   delete dialog.dataset.progressBadges;
   $("#dashboardDialogTitle").textContent = title;
   const sourceEvent = EVENTS.find(event => event.id === Number(eventId));
-  $("#dashboardDialogBody").innerHTML = (sourceEvent ? eventSourceMarkup(sourceEvent) : '') + markup;
+  if (sourceEvent && options.record !== false) recordEventNavigation(sourceEvent.id);
+  else if (!sourceEvent && !options.keepEventRoute) clearEventNavigation();
+  $("#dashboardDialogBody").innerHTML = (sourceEvent ? eventSourceMarkup(sourceEvent) : '') + markup + (sourceEvent ? eventShareMarkup(sourceEvent.id) : '');
   const journey = dialog.querySelector("[data-event-journey]");
   window.campusEventJourney?.attach(journey, EVENTS.find(event => event.id === Number(journey?.dataset.eventId)));
   window.campusRenderIcons?.();
@@ -222,8 +224,8 @@ function openDashboardEvent(id){
 function setupDashboard(){
   const dialog = $("#dashboardDialog");
   $("#openCalendar").addEventListener("click", () => showDashboardDialog("Campus calendar", dashboardAgendaMarkup(EVENTS)));
-  $("#closeDashboardDialog").addEventListener("click", () => dialog.close());
-  dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
+  $("#closeDashboardDialog").addEventListener("click", closeDashboardDialog);
+  dialog.addEventListener("click", event => { if (event.target === dialog) closeDashboardDialog(); });
   $("#surpriseEvent").addEventListener("click", () => {
     const options = EVENTS.filter(event => !getSaved().includes(event.id));
     const pool = options.length ? options : EVENTS;

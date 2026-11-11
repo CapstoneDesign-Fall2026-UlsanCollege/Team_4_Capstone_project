@@ -46,6 +46,9 @@ test('deep links survive login and reload without bypassing authentication', asy
   await page.locator('#eventsGrid [data-discover-event="1"]').click();
   await expect(page.locator('#dashboardDialog')).toBeVisible();
   await page.goBack();
+  await expect(page.locator('#page-discover')).toBeVisible();
+  await expect(page.locator('#dashboardDialog')).not.toBeVisible();
+  await page.goBack();
   await expect(page.locator('#page-profile')).toBeVisible();
   await expect(page.locator('#dashboardDialog')).not.toBeVisible();
 });

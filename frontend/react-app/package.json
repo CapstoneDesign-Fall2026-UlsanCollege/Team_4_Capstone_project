@@ -18,6 +18,8 @@
     "test:suggestion-posters-browser": "node tests/suggestion-posters.browser.js",
     "test:published-events": "node --test tests/published-events.test.js",
     "test:event-calendar": "node --test tests/event-calendar.test.js",
+    "test:event-discovery": "node --test tests/event-dates.test.js tests/event-links.test.js tests/event-linked-catalog.test.js tests/event-calendar.test.js tests/event-catalog-status.test.js",
+    "test:event-links-browser": "node tests/event-links.browser.js",
     "test:event-catalog-status": "node --test tests/event-catalog-status.test.js",
     "test:published-events-browser": "node tests/published-events.browser.js",
     "test:assistant": "node --test tests/assistant.test.js",

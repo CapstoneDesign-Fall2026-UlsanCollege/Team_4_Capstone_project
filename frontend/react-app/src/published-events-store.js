@@ -1,7 +1,8 @@
-import { collection,doc,limit,onSnapshot,orderBy,query,runTransaction,serverTimestamp } from 'firebase/firestore';
+import { collection,doc,limit,onSnapshot,orderBy,query,runTransaction,serverTimestamp,where } from 'firebase/firestore';
 import { auth } from './firebase';
 import { db } from './shared-feed-store';
 import { FIRST_PUBLISHED_EVENT_ID,publicationPayload,publishedEvent } from './published-events-model';
+import { validEventLinkId } from './event-links';
 
 function owner(user) {
   if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.uid !== user.id) throw new Error('Sign in before accessing published campus events.');
@@ -11,6 +12,14 @@ export function watchPublishedEvents(user, receive, fail) {
   return onSnapshot(query(collection(db,'campusPublishedEvents'),orderBy('publishedAt','desc'),limit(100)),{includeMetadataChanges:true},snapshot => {
     receive(snapshot.docs.map(item => publishedEvent(item.id,item.data())).filter(Boolean),snapshot.metadata.fromCache);
   },fail);
+}
+export function watchPublishedEvent(user, id, receive, fail) {
+  owner(user);
+  if (!validEventLinkId(id)) throw new Error('This event link is invalid.');
+  return onSnapshot(query(collection(db,'campusPublishedEvents'),where('id','==',Number(id)),limit(1)), {includeMetadataChanges:true}, snapshot => {
+    const event = snapshot.docs.map(item => publishedEvent(item.id,item.data())).find(Boolean) || null;
+    receive(event, snapshot.metadata.fromCache);
+  }, fail);
 }
 export async function publishSuggestion(user,id,note,details) {
   owner(user);

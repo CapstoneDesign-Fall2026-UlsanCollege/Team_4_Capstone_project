@@ -47,6 +47,7 @@ function renderEvents(filter = currentInterestFilter, search = currentEventSearc
   const saved = getSaved();
   const list = EVENTS.filter(event =>
     (filter === "all" || event.interest === filter) &&
+    window.campusEventDates.matchesEventDate(event.date, currentEventDateFilter) &&
     (!currentSavedOnly || saved.includes(event.id)) &&
     (!query || [event.title, event.host, event.location, event.interest].join(" ").toLocaleLowerCase().includes(query))
   ).sort((a, b) => currentEventSort === "title" ? a.title.localeCompare(b.title) : (currentEventSort === "latest" ? -1 : 1) * a.date.localeCompare(b.date));
@@ -54,7 +55,11 @@ function renderEvents(filter = currentInterestFilter, search = currentEventSearc
   $("#emptyState").classList.toggle("hidden", list.length > 0);
   $("#eventResults").textContent = `Showing ${list.length} of ${EVENTS.length} events`;
   $("#eventCatalogEyebrow").textContent = EVENTS.some(event=>event.source === 'published') ? 'PUBLISHED & SAMPLE EVENTS' : 'SAMPLE EVENTS · ILLUSTRATIVE PHOTOS';
-  $("#clearEventFilters").disabled = filter === "all" && !query && !currentSavedOnly && currentEventSort === "date";
+  $('#emptyState').textContent = currentEventDateFilter === 'all'
+    ? 'No events found. Try another search or category.'
+    : 'No events match these dates and filters. Try All dates or clear your filters.';
+  syncDiscoverDateFilters();
+  $("#clearEventFilters").disabled = filter === "all" && !query && !currentSavedOnly && currentEventSort === "date" && currentEventDateFilter === 'all';
   renderDiscoverSidebar();
   window.campusRenderIcons?.();
 }
@@ -139,12 +144,16 @@ function setupFilter(){
 
 function readNavigationRoute(){
   if (location.hash === "#/feed") return {workspace: "feed"};
+  const eventId = window.campusEventLinks.parseEventLink(location.hash);
+  if (eventId) return {workspace:'community',page:'discover',eventId};
+  if (location.hash.startsWith('#/community/events/')) return {workspace:'community',page:'discover',invalidEventLink:true};
   const match = /^#\/community\/(dashboard|discover|chat|saved|suggest|profile)$/.exec(location.hash);
   return match ? {workspace: "community", page: match[1]} : null;
 }
 
 function recordNavigationRoute(workspace, page, replace = false){
   if (!getSession()) return;
+  window.campusSetEventLink?.(null);
   const hash = workspace === "feed" ? "#/feed" : `#/community/${page}`;
   if (location.hash === hash) return;
   history[replace ? "replaceState" : "pushState"](null, "", hash);
@@ -153,14 +162,22 @@ function recordNavigationRoute(workspace, page, replace = false){
 function restoreNavigationRoute(){
   if (!getSession()) return;
   const route = readNavigationRoute();
+  if (route?.eventId) {
+    window.campusSetEventLink?.(route.eventId);showPage('discover',false,true);renderRoutedEvent();return;
+  }
+  window.campusSetEventLink?.(null);
   if (route?.workspace === "feed") switchWorkspace("feed", false);
   else showPage(route?.page || "dashboard", false);
+  if (route?.invalidEventLink) {
+    history.replaceState(null,'','#/community/discover');
+    showDashboardDialog('Invalid event link','<p>This event link is invalid. Browse events to find the event you need.</p><button type="button" class="btn btn-primary" data-page="discover">Browse events</button>');
+  }
 }
 
-function showPage(page, record = true){
+function showPage(page, record = true, keepEventDialog = false){
   if (!document.getElementById(`page-${page}`)?.classList.contains("page-view")) return;
   if (getSession()) switchWorkspace("community", false);
-  document.querySelectorAll("#appMain dialog[open]").forEach(dialog => dialog.close());
+  document.querySelectorAll("#appMain dialog[open]").forEach(dialog => { if (!keepEventDialog || dialog.id !== 'dashboardDialog') dialog.close(); });
   document.querySelectorAll(".page-view").forEach(view => view.classList.toggle("active", view.id === `page-${page}`));
   document.querySelectorAll(".page-link").forEach(link => {
     const active = link.dataset.page === page;
@@ -183,6 +200,7 @@ function setupPageNavigation(){
       toggleSaved(Number(saveButton.dataset.save));
       return;
     }
+    if (handleEventSharing(event)) return;
     if (handleDiscoverNavigation(event)) return;
     if (handleDashboardNavigation(event)) return;
     const pageButton = event.target.closest("[data-page]");
@@ -490,6 +508,7 @@ async function logout(){
 }
 function updateNav(){
   const s = getSession();
+  if (!s) currentEventDateFilter = 'all';
   $("#authLanding").classList.toggle("hidden", !!s);
   $("#navAuthOut").classList.toggle("hidden", !!s);
   $("#navAuthIn").classList.toggle("hidden", !s);
@@ -548,6 +567,7 @@ function bootCampusVibes(){
   window.campusRefreshEvents=()=>{
     if(!getSession())return;
     renderEvents();renderSavedEvents();renderUpcoming();renderStats();
+    renderRoutedEvent();
     window.dispatchEvent(new Event('campus-saved-change'));
     window.dispatchEvent(new Event('campus-profile-change'));
   };
@@ -578,6 +598,7 @@ function bootCampusVibes(){
   };
   setupAuthControls();
   setupDashboard();
+  setupEventSharing();
   setupDiscover();
   renderStats();
   renderUpcoming();
@@ -593,7 +614,10 @@ function bootCampusVibes(){
     showToast("Welcome to your demo dashboard.");
   };
   $("#demoLogin").addEventListener("click", enterDemo);
-  $("#landingDemo").addEventListener("click", () => { enterDemo(); showPage("discover"); });
+  $("#landingDemo").addEventListener("click", () => {
+    const destination = readNavigationRoute();enterDemo();
+    if (!destination?.eventId && !destination?.invalidEventLink) showPage('discover');
+  });
 }
 
 if (document.readyState === "loading"){

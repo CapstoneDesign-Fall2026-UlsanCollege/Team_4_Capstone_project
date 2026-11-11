@@ -22,6 +22,27 @@ body:has(#appMain:not(.hidden) #page-discover.active) .app-main { max-width:1480
 #page-discover .discover-filter-button:hover { background:#f0e8fc; }
 #page-discover .discover-filter-button.has-filters::after { content:'';position:absolute;right:5px;top:5px;width:5px;height:5px;border-radius:50%;background:#9650df; }
 #page-discover .filter-bar { display:flex;gap:8px;flex-wrap:wrap;margin:0; }
+#page-discover .discover-date-filters { display:flex;gap:8px;flex-wrap:wrap;margin:0 0 8px; }
+#page-discover .discover-date-filters button { min-height:40px;padding:8px 12px;border:1px solid #d9cde9;border-radius:7px;background:#fff;color:#574767;font:600 12px/1.3 Inter,Arial,sans-serif;cursor:pointer; }
+#page-discover .discover-date-filters button[aria-pressed="true"] { background:#7340bb;border-color:#7340bb;color:#fff; }
+#page-discover .discover-date-filters button:focus-visible { outline:3px solid #269b9d;outline-offset:3px; }
+#page-discover .discover-date-note { color:#706478;font-size:11px;line-height:1.5;margin:0 0 14px; }
+html[data-theme="dark"] #page-discover .discover-date-filters button { background:#211c2e;color:#e5d9f7;border-color:#58426e; }
+html[data-theme="dark"] #page-discover .discover-date-filters button[aria-pressed="true"] { background:#cbb1f5;color:#211330;border-color:#cbb1f5; }
+html[data-theme="dark"] #page-discover .discover-date-note { color:#beb0cf; }
+.dashboard-dialog .event-share { margin-top:18px;padding-top:16px;border-top:1px solid #ddd1eb; }
+.dashboard-dialog .event-share-button { display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border:1px solid #cabce0;background:#f6f1fc;color:#573181;border-radius:8px;cursor:pointer; }
+.dashboard-dialog .event-share-button:focus-visible { outline:3px solid #269b9d;outline-offset:3px; }
+.dashboard-dialog .event-share-status { color:#5f506b;font-size:13px;margin:8px 0; }
+.dashboard-dialog .event-share-manual { display:block;color:#574767;font-size:13px; }
+.dashboard-dialog .event-share-manual[hidden] { display:none !important; }
+.dashboard-dialog .event-share-manual input { display:block;box-sizing:border-box;width:100%;min-width:0;margin-top:6px;padding:10px;background:#fff;color:#392b4a;border:1px solid #b8a6cb;border-radius:6px; }
+.dashboard-dialog .event-link-actions { display:flex;flex-wrap:wrap;gap:10px;margin-top:16px; }
+html[data-theme="dark"] .dashboard-dialog .event-share { border-color:#58426e; }
+html[data-theme="dark"] .dashboard-dialog .event-share-button { background:#2e2342;color:#eadfff;border-color:#9272b6; }
+html[data-theme="dark"] .dashboard-dialog .event-share-status,
+html[data-theme="dark"] .dashboard-dialog .event-share-manual { color:#d4c6e5; }
+html[data-theme="dark"] .dashboard-dialog .event-share-manual input { background:#211c2e;color:#eadfff;border-color:#9272b6; }
 #page-discover .chip { display:flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:7px 13px;border:1px solid #ebe6f1;border-radius:6px;background:#fff;color:#66616e;box-shadow:none;font-size:11px;font-weight:600; }
 #page-discover .chip svg { width:14px;height:14px; }
 #page-discover .chip[data-interest="Tech"] { color:#209caa; }
