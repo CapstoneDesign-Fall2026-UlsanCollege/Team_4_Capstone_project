@@ -2,7 +2,7 @@ import { before,after,beforeEach,test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { assertFails,assertSucceeds,initializeTestEnvironment } from '@firebase/rules-unit-testing';
-import { collection,doc,getDoc,getDocs,limit,orderBy,query,setDoc,serverTimestamp,Timestamp,updateDoc,deleteDoc } from 'firebase/firestore';
+import { collection,doc,getDoc,getDocs,limit,orderBy,query,setDoc,serverTimestamp,Timestamp,updateDoc,deleteDoc,where } from 'firebase/firestore';
 import { publicationBatch } from './published-event-fixture.js';
 let env;
 before(async()=>{
@@ -39,6 +39,16 @@ test('ordinary students cannot publish, self-approve, or access allocation metad
   await assertFails(getDoc(doc(db('alice'),'campusEventMetadata','publication')));
   await assertFails(setDoc(doc(db('alice'),'campusSuggestionReviewers','alice'),{enabled:true}));
   assert.equal((await getDoc(doc(db('alice'),'campusSuggestions','idea'))).data().status,'pending');
+});
+
+test('a shared-event ID lookup is bounded and available only to signed-in members',async()=>{
+  await publicationBatch(db('reviewer')).commit();
+  const lookup=database=>getDocs(query(collection(database,'campusPublishedEvents'),where('id','==',1000),limit(1)));
+  const found=await assertSucceeds(lookup(db('bob')));
+  assert.equal(found.docs.length,1);assert.equal(found.docs[0].data().title,'Campus film night');
+  assert.equal((await assertSucceeds(getDocs(query(collection(db('bob'),'campusPublishedEvents'),where('id','==',1999),limit(1))))).empty,true);
+  await assertFails(lookup(env.unauthenticatedContext().firestore()));
+  await assertFails(lookup(env.authenticatedContext('guest',{firebase:{sign_in_provider:'anonymous'}}).firestore()));
 });
 test('review decisions and catalogue writes must be paired with a unique allocated ID',async()=>{
   const reviewer=db('reviewer');
