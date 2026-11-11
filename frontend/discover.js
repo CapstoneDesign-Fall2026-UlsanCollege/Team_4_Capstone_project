@@ -1,5 +1,12 @@
 let currentEventSort = "date";
 let currentSavedOnly = false;
+let currentEventDateFilter = 'all';
+
+function syncDiscoverDateFilters() {
+  document.querySelectorAll('#eventDateFilters [data-event-date]').forEach(button => {
+    button.setAttribute('aria-pressed', String(button.dataset.eventDate === currentEventDateFilter));
+  });
+}
 const DISCOVER_STYLES = {
   All: { color: "#8452d8", icon: "calendar-days" },
   Tech: { color: "#159eaa", icon: "monitor" },
@@ -40,18 +47,18 @@ function renderDiscoverSidebar() {
     const count = EVENTS.filter(item => item.host === event.host).length;
     return `<button type="button" data-discover-host="${discoverAttribute(event.host)}" style="--crew-color:${DISCOVER_STYLES[event.interest].color}"><span class="discover-crew-icon"><i data-lucide="${icon}" aria-hidden="true"></i></span><strong>${label}</strong><small>${count} ${count === 1 ? "event" : "events"}</small></button>`;
   }).join("");
-  $("#discoverFiltersButton").classList.toggle("has-filters", currentSavedOnly || currentEventSort !== "date" || currentInterestFilter !== "all");
+  $("#discoverFiltersButton").classList.toggle("has-filters", currentSavedOnly || currentEventSort !== "date" || currentInterestFilter !== "all" || currentEventDateFilter !== 'all');
   const dialog = $("#dashboardDialog");
   if (dialog.open && dialog.dataset.discoverEvent) openDiscoverEvent(Number(dialog.dataset.discoverEvent));
 }
 
-function openDiscoverEvent(id) {
+function openDiscoverEvent(id, record = true) {
   const event = EVENTS.find(item => item.id === id);
   if (!event) return;
   const saved = getSaved().includes(id);
-  showDashboardDialog(event.title, `${discoverPhotoMarkup(event, "discover-detail-photo")}<span class="recommendation-tag">${event.interest}</span><p class="dashboard-detail-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })} &middot; ${dashboardText(event.time)}</p>${eventLocationMarkup(event)}<p class="dashboard-detail-description">${dashboardText(event.desc)}</p><button class="discover-host-link" type="button" data-discover-host="${discoverAttribute(event.host)}">Hosted by ${dashboardText(event.host)}<i data-lucide="arrow-right" aria-hidden="true"></i></button><button class="btn btn-primary" type="button" data-save="${id}" aria-pressed="${saved}"><i data-lucide="bookmark" aria-hidden="true"></i>${saved ? "Remove from saved" : "Save event"}</button>`);
+  showDashboardDialog(event.title, `${discoverPhotoMarkup(event, "discover-detail-photo")}<span class="recommendation-tag">${event.interest}</span><p class="dashboard-detail-date">${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })} &middot; ${dashboardText(event.time)}</p>${eventLocationMarkup(event)}<p class="dashboard-detail-description">${dashboardText(event.desc)}</p><button class="discover-host-link" type="button" data-discover-host="${discoverAttribute(event.host)}">Hosted by ${dashboardText(event.host)}<i data-lucide="arrow-right" aria-hidden="true"></i></button><button class="btn btn-primary" type="button" data-save="${id}" aria-pressed="${saved}"><i data-lucide="bookmark" aria-hidden="true"></i>${saved ? "Remove from saved" : "Save event"}</button>`, String(id), {record});
   $("#dashboardDialog").dataset.discoverEvent = String(id);
-  $("#dashboardDialogBody").insertAdjacentHTML('afterbegin',eventSourceMarkup(event));
+  // Source and sharing controls are supplied by the common event dialog.
 }
 
 function openDiscoverHost(host) {
@@ -65,6 +72,7 @@ function openDiscoverHost(host) {
 function clearDiscoverFilters() {
   currentEventSort = "date";
   currentSavedOnly = false;
+  currentEventDateFilter = 'all';
   $("#eventSearch").value = "";
   $("#filterBar").querySelectorAll(".chip").forEach(chip => {
     const active = chip.dataset.interest === "all";
@@ -76,10 +84,17 @@ function clearDiscoverFilters() {
 
 function setupDiscover() {
   const dialog = $("#discoverFilterDialog");
+  $('#eventDateFilters').addEventListener('click', event => {
+    const button = event.target.closest('[data-event-date]');
+    if (!button) return;
+    currentEventDateFilter = button.dataset.eventDate;
+    renderEvents();
+  });
   $("#discoverFiltersButton").addEventListener("click", () => {
     $("#discoverCategory").value = currentInterestFilter;
     $("#discoverSort").value = currentEventSort;
     $("#discoverSavedOnly").checked = currentSavedOnly;
+    $('#discoverDate').value = currentEventDateFilter;
     dialog.showModal();
   });
   $("#closeDiscoverFilters").addEventListener("click", () => dialog.close());
@@ -88,6 +103,7 @@ function setupDiscover() {
     event.preventDefault();
     currentEventSort = $("#discoverSort").value;
     currentSavedOnly = $("#discoverSavedOnly").checked;
+    currentEventDateFilter = $('#discoverDate').value;
     const category = $("#discoverCategory").value;
     $("#filterBar").querySelectorAll(".chip").forEach(chip => {
       chip.classList.toggle("active", chip.dataset.interest === category);

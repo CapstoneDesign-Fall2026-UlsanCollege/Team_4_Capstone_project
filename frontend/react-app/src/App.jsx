@@ -55,19 +55,23 @@ import {
   ShieldCheck,
   Crown,
   Check,
+  Share2,
 } from "lucide";
 import { badgeProgress, createBadgeTracker } from "./progress-badges";
 import originalMarkup from "../../index.html?raw";
 import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
+import eventSharingScript from '../../event-sharing.js?raw';
 import ThemeToggle from "./ThemeToggle";
-import { eventCatalog,replacePublishedEvents } from './event-catalog';
-import { watchPublishedEvents } from './published-events-store';
+import { eventCatalog,replacePublishedEvents,rememberLinkedEvent,clearLinkedEvents,linkedEventCount } from './event-catalog';
+import { watchPublishedEvents,watchPublishedEvent } from './published-events-store';
 import { catalogSnapshotStatus, catalogStatusText } from './event-catalog-status';
 import './event-catalog.css';
 import { getEventMapLinks } from './event-maps';
 import { createEventJourneyController } from './event-journey';
+import { campusDateKey, matchesEventDate } from './event-dates';
+import { eventLinkHash, eventShareUrl, parseEventLink, validEventLinkId } from './event-links';
 import Notifications from './Notifications';
 const Feed = lazy(() => import("./FeedEntry"));
 const Suggestions = lazy(() => import("./Suggestions"));
@@ -107,14 +111,42 @@ export default function App() {
 
   useEffect(() => {
     const demoBadges=createBadgeTracker();
+    window.campusEventDates = { campusDateKey, matchesEventDate };
+    window.campusEventLinks = { eventLinkHash, eventShareUrl, parseEventLink, validEventLinkId };
     window.campusEventMapLinks = getEventMapLinks;
     const eventJourney = createEventJourneyController();
     window.campusEventJourney = eventJourney;
     let journeyUserId = null;
     let activeAccount=null,unsubscribeAccount=null,accountBadges=null;
     let stopCatalog=null,catalogUser=null,catalogGeneration=0;
+    let linkedId=null,stopLinked=null,linkedGeneration=0,linkedTimeout=null;
     window.campusEventCatalog=eventCatalog;
-    const refreshCatalog = () => { window.campusRefreshEvents?.(); setCatalogStatus(value=>({...value})); };
+    const refreshCatalog = () => { window.campusRefreshEvents?.(); setCatalogStatus(value=>({...value,linkedCount:linkedEventCount()})); };
+    const releaseLinked = keepId => {
+      if (linkedId === keepId) return;
+      stopLinked?.();stopLinked=null;clearTimeout(linkedTimeout);++linkedGeneration;linkedId=null;
+      window.campusLinkedEventStatus=null;
+    };
+    window.campusSetEventLink = releaseLinked;
+    window.campusRequestLinkedEvent = (id,retry=false) => {
+      if (!validEventLinkId(id) || !catalogUser || catalogUser.id === 'demo' || (linkedId === id && !retry)) return;
+      releaseLinked(null);linkedId=id;const generation=++linkedGeneration;
+      window.campusLinkedEventStatus={id,loading:true};
+      const fail = () => {
+        if (generation !== linkedGeneration) return;
+        window.campusLinkedEventStatus={id,error:true};refreshCatalog();
+      };
+      linkedTimeout=setTimeout(fail,15000);
+      try {
+        stopLinked=watchPublishedEvent(catalogUser,id,(event,cached)=>{
+          if (generation !== linkedGeneration) return;
+          if (event || !cached) clearTimeout(linkedTimeout);
+          if (event) rememberLinkedEvent(event);
+          window.campusLinkedEventStatus={id,loading:!event && cached,missing:!event && !cached,cached};
+          refreshCatalog();
+        },fail);
+      } catch { clearTimeout(linkedTimeout);fail(); }
+    };
     const connectCatalog = user => {
       stopCatalog?.(); const generation=++catalogGeneration;
       setCatalogStatus(value=>({...value,loading:true,error:''}));
@@ -163,6 +195,7 @@ export default function App() {
     const receiveSession = event => {
       const user=event.detail;
       if (catalogUser?.id !== user?.id) {
+        releaseLinked(null);clearLinkedEvents();
         stopCatalog?.();stopCatalog=null;++catalogGeneration;catalogUser=user;
         replacePublishedEvents([]);setCatalogStatus({loading:false,error:'',count:0,cached:false});
         if(user && user.id !== 'demo') connectCatalog(user);
@@ -228,6 +261,7 @@ export default function App() {
           ShieldCheck,
           Crown,
           Check,
+          Share2,
         },
         attrs: { "aria-hidden": "true", "stroke-width": 1.8 },
       });
@@ -237,6 +271,7 @@ export default function App() {
       const EVENTS = window.campusEventCatalog;
       ${dashboardScript}
       ${discoverScript}
+      ${eventSharingScript}
       ${originalScript}
       Object.assign(window, { openAuth, closeAuth, closeOnBackdrop, switchTab, handleLogin, handleSignup, logout, syncFirebaseUser, campusSwitchWorkspace: switchWorkspace });
     })();`;
@@ -248,6 +283,8 @@ export default function App() {
     return () => {
       unsubscribeAuth();
       stopCatalog?.();++catalogGeneration;replacePublishedEvents([]);retryCatalog.current=null;
+      releaseLinked(null);clearLinkedEvents();
+      delete window.campusSetEventLink;delete window.campusRequestLinkedEvent;delete window.campusLinkedEventStatus;
       unsubscribeAccount?.();activeAccount?.close();
       window.removeEventListener('beforeunload',guardUnload);window.removeEventListener('online',retryOnline);
       delete window.campusAccount;delete window.campusAccountRefresh;
@@ -270,10 +307,12 @@ export default function App() {
       eventJourney.clear();
       delete window.campusEventJourney;
       delete window.campusEventCatalog;delete window.campusRefreshEvents;
+      delete window.campusEventDates;delete window.campusEventLinks;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
       window.campusNavigationCleanup?.();
       delete window.campusNavigationCleanup;
+      window.campusEventSharingCleanup?.();delete window.campusEventSharingCleanup;
       window.campusBadgeCleanup?.();
       delete window.campusBadgeCleanup;
     };
