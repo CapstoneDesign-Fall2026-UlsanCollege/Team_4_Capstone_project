@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-11-11T04:12:29.497Z",
+  "startedAt": "2026-11-11T04:11:47.097Z",
+  "sourceCommit": "db5bc20003889c5e6ca5a920a3fd8ded8468be6e",
+  "executedBy": "Codex, at prachi2061 request",
+  "method": "Source inspection and local automated execution",
+  "independentHumanReview": false,
+  "status": "PASS",
+  "platform": "win32",
+  "node": "v20.18.0",
+  "api": {
+    "command": "node --test --test-reporter=tap backend/tests/suggestion-poster-api.test.js",
+    "passed": 6,
+    "failed": 0,
+    "cases": [
+      "poster uploads require a private matching active claim and never expose the author UID in the public URL",
+      "submitted suggestion images cannot be replaced or deleted through the upload API",
+      "cleanup requires a retired claim and cannot call the feed delete path",
+      "the existing account photo quota covers suggestions and the API rejects unsafe media and IDs",
+      "failed providers keep credentials private and reject cross-origin requests",
+      "failed poster cleanup reports an error without claiming deletion or exposing credentials"
+    ],
+    "scope": "Controlled Firebase/provider responses; no real Cloudinary request."
+  },
+  "persistence": {
+    "command": "node --test --test-reporter=tap backend/tests/suggestion-poster-rules.test.js",
+    "passed": 4,
+    "failed": 0,
+    "cases": [
+      "poster claims are private, immutable and restricted to the signed-in owner",
+      "a suggestion can attach only its active owner-bound Cloudinary poster",
+      "discard and submission cannot race to remove an attached poster",
+      "reviewer publication must preserve the poster and never expose its private ownership claim"
+    ],
+    "projectId": "demo-campusvibe-feed",
+    "emulatorHost": "127.0.0.1:18280",
+    "scope": "Dedicated local Firestore Emulator; test-owned data only, loaded repository rules."
+  },
+  "sourceHashes": {
+    "backend/src/feed-photo.js": "e2c66009ad33ebe77b2d3b760efd8169b9fb7edd849549e7e7e0a4cee3d78419",
+    "backend/firebase/firestore.rules": "2655e99650f16badf096044946ba1640d75a34ac027968bc7f162ded64c7286f",
+    "backend/tests/suggestion-poster-api.test.js": "d8006f11c4dd343eced48916eefd88ef73aff2fa596271316eaffc61209aeeba",
+    "backend/tests/suggestion-poster-rules.test.js": "bf0470ad2c8d3e46fa8e488b6bd42b6797100c7bf72f48ff9c08dbbc0dac5cfe",
+    "frontend/react-app/src/SuggestionPoster.jsx": "a452d4e90f441da79718458ae3ce990eb51959c1434a4f1097c538ccdef0b5ab",
+    "frontend/react-app/src/Suggestions.jsx": "64f7752164b4be6833a638a9fc20b30d33afb49bf5c8c33049ac8d2859f1f7d5",
+    "frontend/react-app/src/suggestion-poster-store.js": "609e3e3a89fa5afccffed5845fd00ed987ff7b68065b998a931a8fe5a53eb8b2",
+    "frontend/react-app/src/suggestions-store.js": "a3ee7896336b4a912e7bfe5b209ffd70cb2c334701425c65344ae07b3a3c574e",
+    "frontend/react-app/src/published-events-store.js": "98ccfab8c777190d19a2818e16c65ae0cba1657bb02e63ef9fbc22e2e2592889"
+  },
+  "limits": [
+    "Not a named teammate review or accepted backup role.",
+    "No live provider upload or production database write.",
+    "No successful Google identity/login/session check.",
+    "No new browser workflow or full suite run.",
+    "No student source explain-back is certified."
+  ]
+}
