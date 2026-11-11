@@ -1,0 +1,626 @@
+{
+  "checkedAt": "2026-11-11T09:34:17.400Z",
+  "owner": "prachi2061",
+  "assistance": "Codex implementation, source inspection and automated verification at user request.",
+  "baselineCommit": "2423d1acdd0a32bff067a4c12c20e5e5a0769d7b",
+  "sourceRevision": "Implementation working tree identified by the normalized SHA-256 hashes below; committed with this receipt.",
+  "unit": {
+    "passed": 22,
+    "failed": 0,
+    "command": "npm run test:event-discovery --workspace frontend/react-app"
+  },
+  "browser": {
+    "passed": 86,
+    "failed": 0,
+    "flaky": 0,
+    "retries": 0,
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "tests": [
+      {
+        "file": "event-discovery-upgrades.spec.js",
+        "title": "date ranges combine with search/category and the dialog stays synchronized",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-discovery-upgrades.spec.js",
+        "title": "date/category empty results explain recovery and campus midnight refreshes the active date",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-discovery-upgrades.spec.js",
+        "title": "published catalogue fixtures use the same campus date filter as sample events",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-discovery-upgrades.spec.js",
+        "title": "date ranges combine with search/category and the dialog stays synchronized",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-discovery-upgrades.spec.js",
+        "title": "date/category empty results explain recovery and campus midnight refreshes the active date",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-discovery-upgrades.spec.js",
+        "title": "published catalogue fixtures use the same campus date filter as sample events",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "a shared sample link survives demo entry, copy and reload without bypassing sign-in",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "event history restores the event and closing returns to its originating page",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "cancelled native sharing stays usable and denied clipboard reveals a selectable fallback",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "unavailable and malformed links have a route back to event discovery",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "published links require a real member and the sign-in action preserves their destination",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "a shared sample link survives demo entry, copy and reload without bypassing sign-in",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "event history restores the event and closing returns to its originating page",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "cancelled native sharing stays usable and denied clipboard reveals a selectable fallback",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "unavailable and malformed links have a route back to event discovery",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-sharing.spec.js",
+        "title": "published links require a real member and the sign-in action preserves their destination",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "events.spec.js",
+        "title": "demo student reaches the selected sample event details",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "events.spec.js",
+        "title": "unmatched search has an empty state and clear filters restores events",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "events.spec.js",
+        "title": "demo student reaches the selected sample event details",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "events.spec.js",
+        "title": "unmatched search has an empty state and clear filters restores events",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "navigation.spec.js",
+        "title": "browser Back and Forward restore Community pages and the Feed workspace",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "navigation.spec.js",
+        "title": "deep links survive login and reload without bypassing authentication",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "navigation.spec.js",
+        "title": "browser Back and Forward restore Community pages and the Feed workspace",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "navigation.spec.js",
+        "title": "deep links survive login and reload without bypassing authentication",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "assistant.spec.js",
+        "title": "local assistant searches follows up opens details and saves only on explicit clicks",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "assistant.spec.js",
+        "title": "composer preserves multiline drafts and logout clears tab history",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "assistant.spec.js",
+        "title": "reference workspace filters, restores conversations, and keeps real saved answers",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "assistant.spec.js",
+        "title": "date filters show honest empty results and sample host controls use catalog data",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "assistant.spec.js",
+        "title": "local assistant searches follows up opens details and saves only on explicit clicks",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "assistant.spec.js",
+        "title": "composer preserves multiline drafts and logout clears tab history",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "assistant.spec.js",
+        "title": "reference workspace filters, restores conversations, and keeps real saved answers",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "assistant.spec.js",
+        "title": "date filters show honest empty results and sample host controls use catalog data",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-dialog-close.spec.js",
+        "title": "event title and Close stay reachable after scrolling the trip planner in light mode",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-dialog-close.spec.js",
+        "title": "event title and Close stay reachable after scrolling the trip planner in dark mode",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-dialog-close.spec.js",
+        "title": "event title and Close stay reachable after scrolling the trip planner in light mode",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-dialog-close.spec.js",
+        "title": "event title and Close stay reachable after scrolling the trip planner in dark mode",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "the event destination is prefilled without an automatic location request and can be restored",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "selecting each event fills its own destination while the starting point can be typed",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "an organizer address fills the destination and missing location data does not reuse a previous venue",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "home address, travel modes and nearby stops open the intended map only on demand",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "location permission supplies a route and an explicitly straight-line distance to a pin",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "declined permission, unavailable position and timeout all keep manual directions usable",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "late GPS results cannot overwrite a manually entered or cleared starting point",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "saving retains a trip, while closing or opening another event clears private inputs",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "closing the dialog or changing account invalidates pending location callbacks",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "an unsupported location API falls back to a manual address",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "trip controls fit mobile and desktop and remain usable in dark mode",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "the event destination is prefilled without an automatic location request and can be restored",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "selecting each event fills its own destination while the starting point can be typed",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "an organizer address fills the destination and missing location data does not reuse a previous venue",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "home address, travel modes and nearby stops open the intended map only on demand",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "location permission supplies a route and an explicitly straight-line distance to a pin",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "declined permission, unavailable position and timeout all keep manual directions usable",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "late GPS results cannot overwrite a manually entered or cleared starting point",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "saving retains a trip, while closing or opening another event clears private inputs",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "closing the dialog or changing account invalidates pending location callbacks",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "an unsupported location API falls back to a manual address",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-journey.spec.js",
+        "title": "trip controls fit mobile and desktop and remain usable in dark mode",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-maps.spec.js",
+        "title": "all nine events expose safe map links; map only opens when clicked",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-maps.spec.js",
+        "title": "map actions survive saving and appear through Saved and Dashboard",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-maps.spec.js",
+        "title": "organizer address supports directions and safe text rendering; dialog works in dark mode",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-maps.spec.js",
+        "title": "map button passes contrast checks and detects the reconstructed pre-release surface bug",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-maps.spec.js",
+        "title": "all nine events expose safe map links; map only opens when clicked",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-maps.spec.js",
+        "title": "map actions survive saving and appear through Saved and Dashboard",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-maps.spec.js",
+        "title": "organizer address supports directions and safe text rendering; dialog works in dark mode",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-maps.spec.js",
+        "title": "map button passes contrast checks and detects the reconstructed pre-release surface bug",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-photos.spec.js",
+        "title": "each event has a distinct loaded photo shared across cards and details",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-photos.spec.js",
+        "title": "each event has a distinct loaded photo shared across cards and details",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "notifications.spec.js",
+        "title": "demo notifications start empty and saved-event read status survives reload",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "notifications.spec.js",
+        "title": "Feed and Community share the bell, filters and real guest-action receipts",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "notifications.spec.js",
+        "title": "small-screen dark notification panel fits and storage failures stay visible",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "notifications.spec.js",
+        "title": "demo notifications start empty and saved-event read status survives reload",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "notifications.spec.js",
+        "title": "Feed and Community share the bell, filters and real guest-action receipts",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "notifications.spec.js",
+        "title": "small-screen dark notification panel fits and storage failures stay visible",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "profile.spec.js",
+        "title": "profile edits and interests persist without inventing account details",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "profile.spec.js",
+        "title": "saved events, real activity and followed hosts update the reference panels",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "profile.spec.js",
+        "title": "profile sharing protects email and reset requires explicit confirmation",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "profile.spec.js",
+        "title": "profile edits and interests persist without inventing account details",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "profile.spec.js",
+        "title": "saved events, real activity and followed hosts update the reference panels",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "profile.spec.js",
+        "title": "profile sharing protects email and reset requires explicit confirmation",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "published-catalogue.spec.js",
+        "title": "published catalogue shows the current week and the actual weekend",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "published-catalogue.spec.js",
+        "title": "a host panel distinguishes its published events from sample listings",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "published-catalogue.spec.js",
+        "title": "published catalogue shows the current week and the actual weekend",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "published-catalogue.spec.js",
+        "title": "a host panel distinguishes its published events from sample listings",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "published-profile.spec.js",
+        "title": "Profile labels published recommendations and keeps following separate from membership",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "published-profile.spec.js",
+        "title": "Profile labels published recommendations and keeps following separate from membership",
+        "project": "mobile",
+        "status": "passed"
+      }
+    ],
+    "scope": "Local Chrome demo/UI fixtures. Native-share cancellation and clipboard failure use controlled browser API fixtures."
+  },
+  "permission": {
+    "passed": 7,
+    "failed": 0,
+    "command": "node --test backend/tests/published-events-rules.test.js",
+    "scope": "Actual repository rules in a dedicated local Firestore Emulator, demo-campusvibe-feed."
+  },
+  "signedInWorkflow": {
+    "passed": 16,
+    "results": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "checks": [
+          "Signed-out link keeps account guard",
+          "Signup restores a linked Firestore event outside the latest 100",
+          "Authenticated reload restores the event and saved state",
+          "Fetched older event remains available in Saved for this session",
+          "Server-confirmed missing ID shows unavailable",
+          "Empty offline cache reports retryable loading error, not false missing",
+          "Reconnect/retry fetches the actual event by bounded ID query",
+          "Logout clears linked event records and restores account guard"
+        ],
+        "passed": 8
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "checks": [
+          "Signed-out link keeps account guard",
+          "Signup restores a linked Firestore event outside the latest 100",
+          "Authenticated reload restores the event and saved state",
+          "Fetched older event remains available in Saved for this session",
+          "Server-confirmed missing ID shows unavailable",
+          "Empty offline cache reports retryable loading error, not false missing",
+          "Reconnect/retry fetches the actual event by bounded ID query",
+          "Logout clears linked event records and restores account guard"
+        ],
+        "passed": 8
+      }
+    ],
+    "command": "npm run test:event-links-browser --workspace frontend/react-app",
+    "scope": "Fictional accounts in dedicated Auth/Firestore emulators. Seeds 101 public fixture events to test bounded lookup outside the latest 100, then missing/offline/retry/logout behavior."
+  },
+  "build": "PASS",
+  "buildWarning": "Existing Vite chunk-size advisory; no dependency changes.",
+  "sourceHashes": {
+    "backend/tests/published-events-rules.test.js": "4c1d559722dbfe5c40963c344324b6fa70657653decf825f207d97983b21126d",
+    "frontend/apps.js": "3af8fc13d31922c2ce8b0bc270cd71a1c083de0433e9a4d9f883477347ab70d8",
+    "frontend/dashboard.js": "080f663ac04e89cf0c69ec77fbb5016a137079e3c0daa570523bb21e0ba433b4",
+    "frontend/discover.js": "d711f408ae1d57259bf992b3cc272177e87da24debcb8ce95b114a9467b37287",
+    "frontend/index.html": "98706f0cfd062733734a063477adac7c17b45d4cb7b8c417584fd1892e188942",
+    "frontend/react-app/package.json": "177d55082db548828aa470b1922c3295ee9f8b9a0efc0e3cc4004009f2ed88f9",
+    "frontend/react-app/src/App.jsx": "b6c434e019dae9e8d5a708ddfe5d4377dccb8951d826c4bd35195ad732d3f680",
+    "frontend/react-app/src/discover.css": "68a4905232db66a557c11d5373b13abcb6feec02fec65319e1921f295925a6f6",
+    "frontend/react-app/src/event-catalog-status.js": "c92ba0299c4c72b264010acdb7c56ae14120fea87d0a9fe7c059fd15805c6061",
+    "frontend/react-app/src/event-catalog.js": "de0d42db0f10a6f697c08b3020a895feaa5c1f7e105d41176884b90c1cb09a0a",
+    "frontend/react-app/src/published-events-store.js": "60ebadb3ae43180ddf2b521a25ccbdeccb34c1d6cb7fbc22b45e8efa9d713268",
+    "frontend/react-app/tests/smoke/navigation.spec.js": "022e3a69ae99b1a8c439f5fe12c928ca818f527780e2f12516cf1453b745c495",
+    "frontend/event-sharing.js": "a38e50fc8ef9cb8fdc952ac7d800aa9b3323607107be83a6457957fca6883d5c",
+    "frontend/react-app/src/event-dates.js": "01a5eeae681a6332748190240d605badb1f551d999d018046392f911830037fe",
+    "frontend/react-app/src/event-links.js": "c8c3341c172b7a500b82b67d2adbf44aba1045d045252f284d1e4517b9d0185e",
+    "frontend/react-app/tests/event-dates.test.js": "b16ad956c421ec3a4937ca57acdd66a30e88a13c3420580a2d1364f76116ed48",
+    "frontend/react-app/tests/event-linked-catalog.test.js": "448033e392b071f6844679a7aa6fc2bf0b81ea06eab81813e65d341d6f9017cd",
+    "frontend/react-app/tests/event-links.browser.js": "cae509288c24a1c6585927655f05209c8f6083b7730f03bb4f211eb30c297caf",
+    "frontend/react-app/tests/event-links.test.js": "e06c63fbd10094dc86cecebed9671fd40ec3cdccf37578bc358b64d3d782433d",
+    "frontend/react-app/tests/smoke/event-discovery-upgrades.spec.js": "e34a0894ed14176e22bfc95f223df375651ea7a01e2e5e7677cc3c99af233c21",
+    "frontend/react-app/tests/smoke/event-sharing.spec.js": "2573310edd0d08c9e074fe18f54443b5779b64c569dd9949b5e42b11cf8642f9"
+  },
+  "limits": [
+    "No real Google identity/login check.",
+    "No production Firestore write, provider upload, rules deployment, billing or access change.",
+    "No named human independent review is certified.",
+    "Production guest readiness is a separate post-deployment check.",
+    "Calendar date filters use Asia/Seoul; Upcoming includes the entire current day."
+  ]
+}
