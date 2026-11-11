@@ -1,247 +1,409 @@
 
 # Week 10 Work Checklist — Code Ownership and Responsible AI Audit
 
-**Date:** November 5–11, 2026  
-**Team:** Team 4 — CampusVibes  
+**Project:** CampusVibes  
+**Team:** 4  
+**Week:** 10 — November 5–11, 2026  
 **Sprint:** Sprint 2 — MVP and Freeze  
-**Status:** In Progress — Testing Documented; Remaining Handoffs Pending
-
-> Advance the roadmap with work the team can explain, review, and verify. Each student keeps a bounded delivery slice and helps steward a codebase area. Stewardship supports shared work and does not make anyone the only person allowed to change an area. AI use must be disclosed and reviewed.
+**Status:** PARTIALLY COMPLETE — Technical Review Completed; Remaining Human Handoffs and Integration Checks Pending
 
 ---
 
 ## 1. Map the Codebase Areas
 
-- [x] Look at the actual repository and identify useful codebase areas.
-  - **Result:** Six areas identified: Frontend Authentication and Navigation; Backend Provider APIs; Data, Account Privacy and Persistence; UI, Theme and Accessibility; QA and Core Integration; Build, Local Setup and Handoff.
+- [x] Identify the major codebase areas.
+  - Six areas identified: Frontend Authentication, Backend Provider APIs, Data/Privacy/Persistence, UI/Theme/Accessibility, QA/Core Integration, and Build/Local Setup.
 
-- [x] Record actual folders, files, and responsibilities.
-  - **Result:** The Codebase Area Map identifies the repository boundaries and relevant files for each area.
+- [x] Record actual repository folders and responsible areas.
 
 - [x] Propose primary stewards and backup reviewers.
-  - **Result:** Primary and backup roles are recorded in the ownership audit.
 
-- [x] Record one repeatable health or review check for each area.
-  - **Result:** The audit includes Playwright checks, authentication readiness checks, backend tests, Firestore security-rules tests, QA regression tests, and setup checks.
+- [x] Record a repeatable health check for each area.
 
-- [x] Confirm teammates can contribute to shared areas.
-  - **Result:** The audit states that stewardship does not reserve code or make one student the only reviewer.
+- [x] Document that teammates can contribute across areas.
+
+- [ ] Confirm all remaining primary/backup ownership assignments.
 
 **Evidence:** [Codebase Area Map](ai-use-and-code-ownership-audit.md#codebase-area-map)
 
-**Section Status:** PARTIALLY COMPLETE — Role confirmations pending.
+**Status:** PARTIALLY COMPLETE — Some team-wide confirmations remain pending.
 
 ---
 
 ## 2. Choose a Roadmap Slice
 
-- [x] Open the Final Demo Roadmap and select the next milestone.
-  - **Result:** Week 10 ownership verification and Week 11 MVP freeze preparation.
+- [x] Select the Week 10 roadmap milestone.
 
-- [x] Identify bounded roadmap slices.
-  - **Result:** `DevyanaCT` selected Light/Dark Theme Toggle Automated Verification; `ujjalpoudel75` selected Authenticated Core Journey and Regression Testing.
+- [x] Identify individual roadmap slices.
 
-- [x] Define how the selected behaviors will be checked.
-  - **Result:** Playwright theme-toggle tests, manual core journey checks, and independent review.
+  - `DevyanaCT` — Light/Dark Theme Toggle Automated Verification.
+  - `ujjalpoudel75` — Authenticated Core Journey and Regression Testing.
+  - `prachi2061` — Google Provider Entry and Popup-Dismissal Recovery.
+  - `tulseyy8848` — Independent Local Setup and Development Handoff.
 
-- [x] Link relevant Issues and PRs.
-  - **Result:** Theme verification PR #145, core journey Issue #138, Firestore Issue #117, and ownership tracking Issue #139.
+- [x] Define expected behavior and verification methods.
 
-- [x] Adjust slices to actual MVP progress.
-  - **Result:** The team prioritized verification and stability instead of expanding the core MVP.
+- [x] Link supporting Issues, PRs and commits.
+
+- [x] Prioritize verification and stability before the MVP freeze.
 
 **Evidence:**
 - [Final Demo Roadmap](../Week9/Final-demo-Roadmap.md)
 - [PR #145](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/145)
-- [Issue #138](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138)
 - [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139)
 
-**Section Status:** COMPLETE for the documented slices.
+**Status:** COMPLETE for the documented roadmap slices.
 
 ---
 
 ## 3. Explain One Slice Per Student
 
-- [x] Identify relevant functions, components, files, and tests.
-  - **Result:** Theme-toggle files, authentication handlers, QA tests, and local setup boundaries are documented in the ownership audit.
+- [x] Identify relevant functions, components and tests.
 
-- [x] Record each student's roadmap slice and proposed primary area.
-  - **Result:** The Individual Slice and Stewardship Record contains entries for all four students.
+- [x] Document each student's selected roadmap slice.
 
-- [x] Document purpose, input, output, and dependencies for the theme-toggle slice.
-  - **Result:** `DevyanaCT` documented theme switching, localStorage persistence, DOM theme attributes, accessible labels, and React/CSS dependencies.
+- [x] Record the theme-toggle implementation explanation.
 
-- [x] Link relevant code, PRs, commits, and tests.
-  - **Result:** PR #145, and other existing evidence are linked.
+  - `readStoredTheme()` — Reads the saved theme and handles invalid/unavailable values.
+  - `applyTheme()` — Applies the theme to the document and metadata.
+  - `toggleTheme()` — Switches between light and dark mode.
+  - `ThemeToggle()` — Renders the accessible theme control.
 
-- [x] Record unclear or unverified behavior instead of guessing.
-  - **Result:** Google Sign-In completion and broader Firestore event integration remain explicitly limited.
+- [x] Document the theme-toggle input, output and dependencies.
 
-- [ ] Confirm every student's personal explain-back and independent teammate check.
-  - **Result:** Independent explanations and some backup confirmations remain pending.
+- [x] Link PR #145, implementation commit `108d8b6` and supporting tests.
+
+- [x] Record independent technical source-review findings.
+
+- [ ] Obtain a documented unaided human explain-back where required.
+
+- [ ] Complete remaining team-wide individual explanation and backup confirmations.
 
 ### Individual Slice Records
 
-| Student | Roadmap Slice / Responsibility | Primary Area | Explanation Status |
-|---|---|---|---|
-| `prachi2061` | Google provider entry and popup-dismissal recovery | Frontend Authentication | Source trace prepared; personal explain-back pending |
-| `DevyanaCT` | Light/Dark Theme Toggle Automated Verification | UI, Theme and Accessibility | Explanation documented; peer handoff confirmation pending |
-| `ujjalpoudel75` | Authenticated Core Journey and Regression Testing | QA and Core Integration | Functional checks documented; detailed source explain-back pending |
-| `tulseyy8848` | Local Setup and Repeatable Handoff | Build and Local Setup | Setup contribution documented; independent clean-checkout confirmation pending |
+| Student | Area | Current Status |
+|---|---|---|
+| `prachi2061` | Frontend Authentication | Source trace and technical evidence available; personal explain-back pending |
+| `DevyanaCT` | UI, Theme and Accessibility | Theme explanation completed; technical review and automated rerun completed; unaided human explain-back not certified |
+| `ujjalpoudel75` | QA and Core Integration | QA checks completed; detailed source explain-back remains pending |
+| `tulseyy8848` | Build and Local Setup | Local testing documented; independent clean-checkout handoff pending |
 
 **Evidence:**
 - [Ownership Audit](ai-use-and-code-ownership-audit.md)
-- [DevyanaCT Theme Handoff](DevyanaCT-UI-Theme-Handoff.md)
+- [UI/UX and Theme Handoff](DevyanaCT-UI-Theme-Handoff.md)
 - [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139)
 
-**Section Status:** PARTIALLY COMPLETE — Independent explanations pending.
+**Status:** PARTIALLY COMPLETE.
 
 ---
 
 ## 4. Review and Verify the Behavior
 
-- [x] Identify one bounded behavior with an expected result.
-  - **Expected:** Light/Dark Theme Toggle switches themes, persists after refresh, and has accessible labels.
+### A. Theme Toggle Verification
 
-- [x] Perform the theme-toggle check and record the actual result.
-  - **Actual:** Dedicated Playwright theme-toggle test passed locally.
+- [x] Identify expected theme-toggle behavior.
+  - Light/dark switching, accessible button labels, theme persistence and switching back to light.
+
+- [x] Run the original dedicated theme-toggle test.
+  - Result: PASS locally.
 
 - [x] Run the existing Playwright smoke suite.
-  - **Actual:** 80 tests passed.
+  - Result: 80 PASS.
 
-- [x] Obtain independent code review.
-  - **Result:** `prachi2061` approved PR #145; 2 GitHub checks passed.
+- [x] Obtain independent PR code review.
+  - Result: `prachi2061` approved PR #145.
 
-- [ ] Record a teammate's independently reproduced theme check and explain-back.
-  - **Result:** Pending in `DevyanaCT-UI-Theme-Handoff.md`.
+- [x] Confirm PR #145 was merged.
+  - Result: Merge confirmed in the November 11 review record.
 
-- [x] Record QA and Core Integration testing.
-  - **Result:** `ujjalpoudel75` completed six manual checks and a full Playwright rerun with 80 passing tests.
+- [x] Complete November 11 technical theme review.
+  - Reviewer: `prachi2061`.
+  - Source commit: `050673f`.
+  - Desktop viewport: 1440×900.
+  - Mobile viewport: 390×844.
+  - Result: 2 PASS, 0 FAIL.
 
-- [x] Record Firestore security-rules testing.
-  - **Actual:** 34 tests passed, 0 failed using the local Firestore Emulator.
+- [x] Review theme implementation source.
+  - Confirmed saved-theme handling, document updates, accessible labels and fallback logic.
 
-- [x] Verify a published-event Firestore query and display.
-  - **Actual:** November 9 — `campusPublishedEvents` Listen query returned HTTP 200; `story time` appeared with matching details.
+- [x] Document the repeatable theme-test command.
 
-- [ ] Complete broader Firestore search/filter, refresh, and loading-error verification.
-  - **Result:** Pending in Issue #117.
+- [ ] Record an unaided teammate explain-back and independently performed human verification, if required by the professor.
+  - Technical source review and Codex-assisted automated rerun are already recorded but do not certify this separate requirement.
 
-- [x] Review and disclose AI-assisted work.
-  - **Result:** The ownership audit records AI assistance, manual checking, and verification limitations.
+**Theme Status:** AUTOMATED TESTING AND TECHNICAL REVIEW COMPLETE; HUMAN EXPLAIN-BACK PENDING.
 
-- [x] Link available review and test evidence.
-  - **Result:** PR #145, Issues #117, #138, and #139 are referenced.
+### B. Notification UI Verification
 
-**Evidence:**
-- [PR #145 — Theme Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/145)
-- [Issue #117 — Firestore Testing](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117)
-- [Issue #138 — Core Journey](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138)
-- [Theme Handoff](DevyanaCT-UI-Theme-Handoff.md)
+- [x] Perform November 11 automated notification checks.
 
-**Section Status:** PARTIALLY COMPLETE — Additional peer and Firestore checks pending.
+- [x] Verify saved-event read status after reload.
+
+- [x] Verify Community/Feed filters and navigation links.
+
+- [x] Verify Escape restores notification-bell focus.
+
+- [x] Verify narrow notification panel layout.
+
+- [x] Verify browser-storage failure handling.
+
+- [x] Inspect generated desktop/mobile screenshots.
+
+**Results:**
+- Notification tests: 6 PASS.
+- Combined theme/notification tests: 8 PASS.
+- Failed: 0.
+- Skipped: 0.
+- Flaky: 0.
+
+**Limitations:**
+- Tests used demo activity/browser storage.
+- Live Firestore notification delivery was not verified.
+- Full cross-browser and keyboard-only accessibility testing remains outside this review.
+
+**Evidence:** [November 11 Review Comment](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139#issuecomment-6786608721)
+
+**Status:** PASS — Tested automated scenarios.
+
+### C. QA and Core Integration
+
+- [x] Record six manual core-journey checks.
+  - Result: 6 PASS.
+
+- [x] Record the existing Playwright regression test.
+  - Final full rerun: 80 PASS.
+
+- [x] Verify Google popup cancellation and retry behavior.
+
+- [ ] Complete real Google-account authentication and session verification.
+
+**Evidence:** [Issue #138](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138)
+
+**Status:** PARTIALLY VERIFIED.
+
+### D. Firestore Security-Rules Verification
+
+- [x] Run local Firestore Emulator tests.
+
+- [x] Record the earlier result.
+  - 34 PASS, 0 FAIL.
+
+- [x] Record the latest November 10 result.
+  - 40 PASS, 0 FAIL.
+
+- [x] Document permission-test limitations.
+
+**Command:** `npm run test:rules`
+
+**Status:** PASS — Existing automated security-rules suite.
+
+### E. Firestore Event Loading
+
+- [x] Confirm `campusPublishedEvents` collection.
+
+- [x] Verify Firestore Listen query.
+  - HTTP 200.
+
+- [x] Verify published event `story time` appears.
+
+- [x] Test event search and category filtering.
+
+- [x] Report successful search/filtering using another published event.
+
+- [x] Verify published-event visibility after refresh.
+
+- [x] Record active search/category behavior after refresh.
+  - Search cleared.
+  - Category reset to All.
+  - Event remained visible.
+
+- [x] Verify event details and missing-field fallback.
+
+- [x] Test temporary network interruption and recovery.
+
+- [x] Verify Firestore network reconnection.
+  - HTTP 200 after reconnecting.
+
+- [ ] Confirm whether search/category reset after refresh is intended.
+
+- [ ] Verify application-level Firestore permission-denied handling.
+
+- [ ] Verify application-level Firestore loading-error handling.
+
+- [ ] Complete field mapping for additional published events.
+
+- [ ] Complete independent Firestore integration review.
+
+**Evidence:** [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117)
+
+**Status:** PARTIALLY VERIFIED — IN PROGRESS.
 
 ---
 
-## 5. Record Ownership and Advance the Roadmap
+## 5. Responsible AI Use
 
-- [x] Prepare and update the AI Use and Code Ownership Audit.
-  - **Result:** Codebase areas, individual slices, testing evidence, AI-use notes, and remaining gaps are documented.
+- [x] Disclose ChatGPT assistance in theme-toggle testing.
 
-- [x] Record AI use for relevant changes.
-  - **Result:** ChatGPT and Codex assistance are disclosed for the relevant recorded work.
+- [x] Disclose ChatGPT assistance in Firestore testing and documentation.
 
-- [x] Record individual slices, primary areas, backups, explanation status, and checks.
-  - **Result:** All four students have entries; some declarations remain pending confirmation.
+- [x] Record Codex assistance in the November 11 technical review.
 
-- [x] Map codebase areas to actual repository boundaries.
-  - **Result:** Six areas include real source paths and repeatable checks.
+- [x] Distinguish automated test results from human explain-back.
 
-- [x] Link the Codebase Area Map from the shared Weekly Report.
-  - **Result:** The Weekly Report links the ownership audit and its area map.
+- [x] Record source inspection and test limitations.
 
-- [ ] Confirm the Working Agreement links to the Codebase Area Map.
-  - **Result:** Not independently confirmed from the documents reviewed.
+- [x] Link the responsible AI audit to supporting evidence.
 
-- [ ] Confirm all unresolved gaps have named owners and due points.
-  - **Result:** Some team ownership and backup assignments are still proposed.
+**Evidence:** [AI Use and Code Ownership Audit](ai-use-and-code-ownership-audit.md)
 
-- [x] Record Week 10 results and Week 11 follow-ups in the Final Demo Roadmap.
-  - **Result:** Theme verification, published-event verification, and remaining tests are documented.
+**Status:** DOCUMENTED for the activities recorded.
 
-- [x] Add individual contributions to the shared Weekly Report.
-  - **Result:** The shared report includes rows for `prachi2061`, `DevyanaCT`, and `ujjalpoudel75`; `tulseyy8848`'s individual contribution row still needs confirmation in the supplied report snapshot.
+---
 
-- [ ] Confirm all updated documentation is committed and linked.
-  - **Result:** Current GitHub commit status has not been independently confirmed.
+## 6. Record Ownership and Advance the Roadmap
+
+- [x] Prepare the AI Use and Code Ownership Audit.
+
+- [x] Document the six codebase areas.
+
+- [x] Record individual roadmap slices and proposed ownership.
+
+- [x] Document `DevyanaCT` theme implementation and verification evidence.
+
+- [x] Record Prachi's November 11 technical review of theme and notifications.
+
+- [x] Add individual contribution rows for all four members.
+
+- [x] Record Firestore event-loading and security-rules testing.
+
+- [x] Link the Weekly Report and Codebase Area Map.
+
+- [ ] Confirm remaining team-wide primary/backup assignments.
+
+- [ ] Confirm the Working Agreement links to the area map.
+
+- [ ] Confirm every student has completed their own explanation.
+
+- [ ] Verify all updated GitHub documentation is committed and linked.
 
 **Evidence:**
-- [Ownership Audit](ai-use-and-code-ownership-audit.md)
 - [Weekly Report](Weekly-Report.md)
+- [Ownership Audit](ai-use-and-code-ownership-audit.md)
 - [Final Demo Roadmap](../Week9/Final-demo-Roadmap.md)
 - [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139)
 
-**Section Status:** PARTIALLY COMPLETE — Team-wide confirmations pending.
+**Status:** PARTIALLY COMPLETE.
 
 ---
 
-## Evidence to Link in GitHub
+## 7. Evidence Checklist
 
-- [x] Roadmap milestone and related Issues.
-- [x] Codebase Area Map with repository boundaries and checks.
-- [x] Theme-toggle implementation and verification PR.
-- [x] Individual ownership audit entries.
-- [x] Theme testing expected/actual results.
-- [x] Firestore testing results and limitations.
-- [x] AI-use notes and human review references.
-- [x] Shared Weekly Report with documented individual contributions.
-- [x] Theme handoff document.
-- [ ] Independent theme handoff completion receipt.
-- [ ] Confirmed contribution and ownership records for every student.
+### Completed or Documented
 
----
+- [x] Theme-toggle implementation and PR #145.
+- [x] Original theme-toggle automated tests.
+- [x] Original 80-test Playwright smoke suite.
+- [x] PR #145 independent approval and merge record.
+- [x] November 11 theme/notification technical review — 8 PASS.
+- [x] Theme source inspection and findings.
+- [x] Firestore event query/display results.
+- [x] Firestore search/filter and refresh observations.
+- [x] Firestore network reconnection.
+- [x] Firestore security-rules results — 40 PASS.
+- [x] Responsible AI-use documentation.
+- [x] Shared Weekly Report contributions.
 
-## Optional Stretch
+### Still Pending
 
-- [ ] Improve unclear code and verify its behavior.
-- [ ] Add an automated test for an important edge case.
-- [ ] Ask a teammate outside the area to independently reproduce a test.
-- [ ] Improve the handoff documentation so another student can run the check.
-
----
-
-## Homework — Due November 11, 2026
-
-Prepare for the Week 11 roadmap checkpoint on November 12.
-
-### Completed Preparation
-
-- [x] Document the existing guest and authenticated core-journey QA evidence.
-- [x] Record theme-toggle verification and independent PR approval.
-- [x] Verify the Firestore published-event query and display for the tested event.
-- [x] Run Firestore security-rules tests.
-- [x] Record known authentication and Firestore limitations.
-- [x] Update the Final Demo Roadmap with Week 10 evidence and Week 11 follow-ups.
-
-### Remaining Homework
-
-- [ ] Confirm the independent theme handoff and explanation.
-- [ ] Confirm outstanding primary/backup area roles.
-- [ ] Ensure all four student contribution rows and evidence links are complete.
-- [ ] Confirm the latest GitHub documents and Issues are consistent.
-- [ ] Confirm the working area map and handoff links are accessible.
+- [ ] Confirm human explain-back and independent handoff acceptance.
+- [ ] Verify the latest Firestore 40/40 screenshot is linked.
+- [ ] Verify all public screenshots are redacted.
+- [ ] Complete outstanding application-level Firestore error tests.
+- [ ] Confirm all required ownership and backup declarations.
+- [ ] Complete final GitHub link and documentation review.
 
 ---
 
-## Final Check
+## 8. Week 11 Follow-up Work
 
-- [ ] Every student has independently confirmed their slice and can explain it.
-- [ ] Every student has a confirmed primary area and backup/contact.
-- [ ] Another teammate can independently locate and reproduce the area check.
-- [x] Existing automated tests and documented manual checks have supporting results.
-- [x] Known AI assistance is disclosed.
-- [x] Firestore verification distinguishes the successful narrow check from untested scenarios.
-- [ ] All unresolved gaps have confirmed owners and next checks.
-- [ ] All final links and team-wide documentation statuses have been checked.
+**Checkpoint:** November 12, 2026
 
-**Final Status:** IN PROGRESS — Week 10 verification evidence is substantially documented, but team-wide ownership confirmations, independent handoffs, and some integration checks remain outstanding.
+### DevyanaCT — UI/UX and Theme
+
+- [x] Complete theme-toggle automated verification.
+- [x] Obtain PR #145 independent approval.
+- [x] Record November 11 theme technical review — 2 PASS.
+- [x] Record notification technical review — 6 PASS.
+- [ ] Obtain any still-required unaided human explain-back receipt.
+- [ ] Consider additional theme tests for invalid saved values and blocked storage.
+- [ ] Review contrast and keyboard-only accessibility where required.
+- [ ] Confirm final screenshot evidence is redacted.
+
+### Firestore Integration Support
+
+- [x] Verify published-event query/display.
+- [x] Verify search/filtering and refresh visibility.
+- [x] Verify Firestore reconnection.
+- [x] Run 40 passing security-rules tests.
+- [ ] Verify application-level permission-denied handling.
+- [ ] Verify application-level loading-error handling.
+- [ ] Complete additional event field mapping.
+- [ ] Obtain independent final integration review.
+
+### Team Handoffs
+
+- [ ] Complete remaining individual explanations.
+- [ ] Confirm outstanding primary/backup assignments.
+- [ ] Complete independent setup handoff verification.
+- [ ] Complete real Google Sign-In verification.
+- [ ] Review GitHub documentation and outstanding Issues.
+
+---
+
+## 9. Final Check
+
+- [x] Codebase areas identified and documented.
+- [x] Roadmap slices recorded.
+- [x] Theme-toggle implementation explained.
+- [x] Theme-toggle automated verification completed.
+- [x] PR #145 independently reviewed and merged.
+- [x] November 11 technical theme/notification review completed.
+- [x] Core QA results documented.
+- [x] Firestore published-event verification documented.
+- [x] Firestore security-rules suite — 40 PASS.
+- [x] Responsible AI assistance disclosed.
+
+- [ ] Complete all remaining personal explain-backs.
+- [ ] Confirm all team-wide backup assignments.
+- [ ] Complete remaining application-level Firestore tests.
+- [ ] Verify all evidence redaction and links.
+- [ ] Confirm final Week 11 readiness.
+
+---
+
+## 10. Final Status
+
+**PARTIALLY COMPLETE — Technical Verification Completed; Remaining Human Handoffs and Integration Checks Pending**
+
+### Verified
+
+- Theme-toggle automated testing.
+- PR #145 approval and merge.
+- November 11 theme/notification technical review — 8 PASS.
+- Existing 80-test Playwright smoke suite.
+- Core-journey QA checks.
+- Firestore published-event search/display/refresh checks.
+- Firestore network reconnection.
+- Local Firestore security-rules tests — 40 PASS, 0 FAIL.
+- Responsible AI-use disclosure.
+
+### Remaining
+
+- Unaided human explain-back and any required independent manual handoff.
+- Team-wide ownership confirmations.
+- Application-level Firestore error handling.
+- Additional field-mapping verification.
+- Screenshot evidence and redaction checks.
+- Final Week 11 integration review.
+
+**Conclusion:** CampusVibes completed the documented Week 10 theme-toggle automated verification, technical review, core QA checks, and scoped Firestore tests. The November 11 theme/notification review found no blocking defects in the checked scenarios. Remaining handoff and application-level integration checks are tracked separately and must not be marked complete without evidence.
