@@ -29,6 +29,7 @@ No new stretch features will be added during the MVP freeze unless a change is n
 - [ ] Update testing evidence and documentation.
 - [ ] Confirm outstanding code ownership and handoff requirements.
 - [ ] Prepare the final demonstration and backup setup.
+- [ ] Verify the CampusVibes local development setup on the selected MVP freeze candidate.
 
 ### Previously Completed Verification
 
@@ -88,6 +89,8 @@ If it is not linked, it does not count.
 | Final freeze-candidate regression has not been recorded. | QA and Core Integration: `ujjalpoudel75` | Identify the freeze commit and run the core demo journey again. |
 | Outstanding human explain-backs and handoff confirmations. | Relevant team members | Record required personal explanations, backup acceptance and independent checks in Issue #139. |
 | Public testing screenshots may contain sensitive information. | Evidence contributors | Review and redact tokens, credentials and session identifiers before publication. |
+| Final-demo local setup and backup handoff have not yet been independently verified on the MVP freeze candidate. | `tulseyy8848` — Build, Local Setup and Handoff | Repeat the setup using the documented commands, record the environment and results, verify README instructions, and prepare an independently reproducible backup demo. Evidence: [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118). |
+
 
 ---
 
