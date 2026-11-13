@@ -47,7 +47,7 @@ Community features and additional services may be demonstrated where stable but 
 - [x] Session Refresh tested.
 - [x] Google popup cancellation and retry behavior checked.
 - [x] Complete Playwright regression rerun: 80 PASS.
-- [ ] Complete real Google-account Sign-In and session verification.
+- [ ] Complete real Google-account Sign-In and session verification. [Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167)
 
 **Evidence:** Issues #116, #138 and #139.
 
@@ -88,12 +88,12 @@ Community features and additional services may be demonstrated where stable but 
 - [x] Tested network interruption and reconnection.
 - [x] Confirmed Firestore communication resumed with HTTP 200.
 - [x] Local Firestore security-rules tests: 40 PASS, 0 FAIL.
-- [ ] Verify application-level permission-denied handling.
-- [ ] Verify application-level loading-error handling.
-- [ ] Complete field mapping for additional published events.
-- [ ] Confirm intended search/filter persistence after refresh.
+- [ ] Verify application-level permission-denied handling. [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+- [ ] Verify application-level loading-error handling.[Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+- [ ] Complete field mapping for additional published events.[Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+- [ ] Confirm intended search/filter persistence after refresh.[Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
 
-**Evidence:** Issue #117.
+**Evidence:** [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
 
 **Status:** PARTIALLY VERIFIED.
 
