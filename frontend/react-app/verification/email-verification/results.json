@@ -1,0 +1,353 @@
+{
+  "dateKST": "2026-11-14",
+  "preparedAt": "2026-11-14T06:37:42.086Z",
+  "owner": "prachi2061",
+  "executor": "Codex-assisted implementation, source inspection and automated execution",
+  "issue": 170,
+  "baseline": "ee7605a485cd9402675bccc5ef49a2af8c09f4b9",
+  "sources": [
+    {
+      "file": "backend/firebase/firestore.rules",
+      "sha256NormalizedLF": "3c1a592fdba54c3189bdd360d57c2892383a20dee945766700bff2dbe6f73105"
+    },
+    {
+      "file": "backend/package.json",
+      "sha256NormalizedLF": "83544ff09c6499574b0c62bf49ee38fa0b98cdc55d8f21d49c0ab008b41aa49b"
+    },
+    {
+      "file": "backend/src/assistant.js",
+      "sha256NormalizedLF": "248a27bfe3440abc8c6fb9113116a524a4cd7d022e541dbd9e585a15a015dca4"
+    },
+    {
+      "file": "backend/src/feed-photo.js",
+      "sha256NormalizedLF": "c0c8f7ff651da0867246fc95f3f4c9e19bab7eb44ec494912894bb335b22955c"
+    },
+    {
+      "file": "backend/tests/assistant-api.test.js",
+      "sha256NormalizedLF": "1e5f9dedc71a66ce28d695f9b9a84591857b79e268343c10fb1f194bf703d60b"
+    },
+    {
+      "file": "backend/tests/email-verification-rules.test.js",
+      "sha256NormalizedLF": "3358d5b5560165162926d892278ead6f9d12b8f63ad747d5eca8b765afc0cb16"
+    },
+    {
+      "file": "backend/tests/feed-photo-api.test.js",
+      "sha256NormalizedLF": "1d96c65e556d989fe4c853320a2a68b5081004c969475414cd93b2dac959ce75"
+    },
+    {
+      "file": "backend/tests/feed-rules.test.js",
+      "sha256NormalizedLF": "575164c27d8e12610f32dce5926b9bb5d3147467c4dd0cd6d50b6f6acb9d8f00"
+    },
+    {
+      "file": "backend/tests/notifications-rules.test.js",
+      "sha256NormalizedLF": "f4c18280522f14bdc6b9511c53910088445f5ea6ae6c872ca310681cb86f8fb8"
+    },
+    {
+      "file": "backend/tests/published-events-rules.test.js",
+      "sha256NormalizedLF": "8a56bbebc966d2586fe9837e43aa663f67aab6d78c3411b1a58e031ac0ff58f3"
+    },
+    {
+      "file": "backend/tests/suggestion-poster-api.test.js",
+      "sha256NormalizedLF": "8ed1cfea0e4f7d900152eb865bf9f64d6ca5021a49eb986924c5cbfe667e92ad"
+    },
+    {
+      "file": "backend/tests/suggestion-poster-rules.test.js",
+      "sha256NormalizedLF": "cf2df31c6b0de85d457de47feb9c3f34739e2b9eab144193a63344d18ec4b4c0"
+    },
+    {
+      "file": "frontend/apps.js",
+      "sha256NormalizedLF": "3425d272ffe126bd5053cf9876d4f145b929a6f09235203794739250599eaa40"
+    },
+    {
+      "file": "frontend/email-verification.js",
+      "sha256NormalizedLF": "f4d467bc70ceac8451edb169848a2c6bed5125487f9ac1d8298df373a5fb0fff"
+    },
+    {
+      "file": "frontend/index.html",
+      "sha256NormalizedLF": "d3fc6488dc8f32f128984f7157b3544ed537917cef3947a0acf3865364a04a71"
+    },
+    {
+      "file": "frontend/react-app/package.json",
+      "sha256NormalizedLF": "16690cdd0fb3869689cd78506de7ae274efe9790d07aaed2e147f4cbd0104bb1"
+    },
+    {
+      "file": "frontend/react-app/src/App.jsx",
+      "sha256NormalizedLF": "fbddda0e6bd20561cb4682dd360f21840ca0dc4e16a246837b729e03eb08655f"
+    },
+    {
+      "file": "frontend/react-app/src/account-store.js",
+      "sha256NormalizedLF": "f7f5d7a469b5f238109771b4db813a5780622cf8351d077433438b6f688de5e6"
+    },
+    {
+      "file": "frontend/react-app/src/auth.css",
+      "sha256NormalizedLF": "95ea23dbe8d4a44a13d9cbd6537f0b2fc1c33716253fe55a0d395ffef8ae27d9"
+    },
+    {
+      "file": "frontend/react-app/src/email-verification.js",
+      "sha256NormalizedLF": "8f5ac17a732f2ba85c395cc753c447f97485df57082437dc5eb800ea4e9c8507"
+    },
+    {
+      "file": "frontend/react-app/src/profile-photo-store.js",
+      "sha256NormalizedLF": "3135d8950a00c1fc5150bfc844f8d9691baaf15e23b7b7379bb2e430e7ca7d3a"
+    },
+    {
+      "file": "frontend/react-app/src/published-events-store.js",
+      "sha256NormalizedLF": "607b84cee47c98a419b34c688b34041ccf9ea58de5f51e36767a6223922e73e2"
+    },
+    {
+      "file": "frontend/react-app/src/shared-feed-store.js",
+      "sha256NormalizedLF": "7f2e1c84709b941d662ab94022c5a797283d9491dee01606def852e34cb95f48"
+    },
+    {
+      "file": "frontend/react-app/src/shared-photo-store.js",
+      "sha256NormalizedLF": "aedaf096d2b4a8c905e0040dd8def6908fad3febfd8e238c4efceb8318d70de9"
+    },
+    {
+      "file": "frontend/react-app/src/suggestion-poster-store.js",
+      "sha256NormalizedLF": "af4fc2cffd48f6c89d2840d7bd75db03bfb9c9894b4bff9502076be63782dac5"
+    },
+    {
+      "file": "frontend/react-app/src/suggestions-store.js",
+      "sha256NormalizedLF": "de71003ea98bda7aeaa246f2883b909f3422373e44f75dca1adaae92b07900a1"
+    },
+    {
+      "file": "frontend/react-app/tests/account-persistence.browser.js",
+      "sha256NormalizedLF": "0a9421574e3133e192e5054c258b2ae6b81845466ef0c88fd13536e9349d3eec"
+    },
+    {
+      "file": "frontend/react-app/tests/email-verification.browser.js",
+      "sha256NormalizedLF": "38a93661ace1968dc4079a272aa6c5bdf23ea1d2ff1154cb5e265c46c02bab33"
+    },
+    {
+      "file": "frontend/react-app/tests/email-verification.test.js",
+      "sha256NormalizedLF": "ffb4a98b7b1e79fef900c4b6835c574e6223b46e64275b0f3ed96014f06bc3b0"
+    },
+    {
+      "file": "frontend/react-app/tests/event-links.browser.js",
+      "sha256NormalizedLF": "847c77f062575dd858b568db7f05c66ed827e6f3b56481d2f19566fe719b6869"
+    },
+    {
+      "file": "frontend/react-app/tests/feed-photos.browser.js",
+      "sha256NormalizedLF": "fe24b411493fc2e095040abb14db84c7e0e6fbef24fb67f0547c0779112ca240"
+    },
+    {
+      "file": "frontend/react-app/tests/gemini.browser.js",
+      "sha256NormalizedLF": "4a96c887e4b6b3364d724cc40c923a1d88392c72eed41a8776e6eba49840e8e1"
+    },
+    {
+      "file": "frontend/react-app/tests/notifications.browser.js",
+      "sha256NormalizedLF": "a32ec0bbdd9360caffa2bada28df9bc7bbe15c1ab346a86c8923c48030ac2a30"
+    },
+    {
+      "file": "frontend/react-app/tests/profile-photos.browser.js",
+      "sha256NormalizedLF": "05f7d024de709ede21822ce055204759fa3a97e20e0e691ae5b2480cf2ffb942"
+    },
+    {
+      "file": "frontend/react-app/tests/published-events.browser.js",
+      "sha256NormalizedLF": "dd8cf36a6e808f095ae914de832f695da150fa6859defbe91cfe7503e35f87ef"
+    },
+    {
+      "file": "frontend/react-app/tests/shared-feed.browser.js",
+      "sha256NormalizedLF": "b3aed61a4bd90397cba56a5d38047289e440ab857fa72b327caa037923f397e1"
+    },
+    {
+      "file": "frontend/react-app/tests/social-regressions.browser.js",
+      "sha256NormalizedLF": "7e45aa6ca991e450344b28ecf456359d4198891c058c4f87a221a0281c3a60a2"
+    },
+    {
+      "file": "frontend/react-app/tests/suggestion-posters.browser.js",
+      "sha256NormalizedLF": "c7d36d120f20f2dc35196b5fc860fd9cd456e3ef7f2d0f5e0d7d8745217631df"
+    },
+    {
+      "file": "frontend/react-app/tests/suggestions.browser.js",
+      "sha256NormalizedLF": "266a50336ee6376f388ff1637fbed8e686eac2aea43691625620e65a5317a2e2"
+    },
+    {
+      "file": "frontend/react-app/tests/verify-emulator-email.js",
+      "sha256NormalizedLF": "a50b7b2bdc803f9648ece7df473c835cac0addfb1cbd3dcea36ff2c978ef223f"
+    }
+  ],
+  "local": {
+    "checkedAt": "2026-11-14T06:34:03.038Z",
+    "status": "PASS",
+    "rulesPassed": 49,
+    "apiAndUnitPassed": 24,
+    "verification": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "status": "PASS",
+        "checks": [
+          "New signup requests verification, shows the correct inbox, keeps deep link and blocks member mounts",
+          "Checking before opening the link does not grant access",
+          "Direct Firestore reads and private writes are denied for the real unverified emulator token",
+          "Restored unverified session remains gated after reload",
+          "Send throttling and verification-check failures recover without granting access or stranding controls",
+          "Different-email action signs out; an existing unverified password account must also verify and can resend",
+          "Real emulator verification code plus SDK reload/token refresh admits the same account and restores the selected event",
+          "Verified account can persist data, reload, sign out and sign back in without another verification gate"
+        ],
+        "passed": 8
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "status": "PASS",
+        "checks": [
+          "New signup requests verification, shows the correct inbox, keeps deep link and blocks member mounts",
+          "Checking before opening the link does not grant access",
+          "Direct Firestore reads and private writes are denied for the real unverified emulator token",
+          "Restored unverified session remains gated after reload",
+          "Send throttling and verification-check failures recover without granting access or stranding controls",
+          "Different-email action signs out; an existing unverified password account must also verify and can resend",
+          "Real emulator verification code plus SDK reload/token refresh admits the same account and restores the selected event",
+          "Verified account can persist data, reload, sign out and sign back in without another verification gate"
+        ],
+        "passed": 8
+      }
+    ],
+    "linkedEvents": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "checks": [
+          "Signed-out link keeps account guard",
+          "Signup restores a linked Firestore event outside the latest 100",
+          "Authenticated reload restores the event and saved state",
+          "Fetched older event remains available in Saved for this session",
+          "Server-confirmed missing ID shows unavailable",
+          "Empty offline cache reports retryable loading error, not false missing",
+          "Reconnect/retry fetches the actual event by bounded ID query",
+          "Logout clears linked event records and restores account guard"
+        ],
+        "passed": 8
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "checks": [
+          "Signed-out link keeps account guard",
+          "Signup restores a linked Firestore event outside the latest 100",
+          "Authenticated reload restores the event and saved state",
+          "Fetched older event remains available in Saved for this session",
+          "Server-confirmed missing ID shows unavailable",
+          "Empty offline cache reports retryable loading error, not false missing",
+          "Reconnect/retry fetches the actual event by bounded ID query",
+          "Logout clears linked event records and restores account guard"
+        ],
+        "passed": 8
+      }
+    ],
+    "smokeStats": {
+      "startTime": "2026-11-14T06:31:31.990Z",
+      "duration": 151017.701,
+      "expected": 48,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "visual": {
+    "checkedAt": "2026-11-14T06:36:51.324Z",
+    "scope": "Visual-only local verification-card fixture; no authentication or email delivery is claimed.",
+    "results": [
+      {
+        "width": 1440,
+        "theme": "light",
+        "contrast": 8.6065791013692,
+        "fits": true,
+        "status": "PASS"
+      },
+      {
+        "width": 1440,
+        "theme": "dark",
+        "contrast": 9.591251131935438,
+        "fits": true,
+        "status": "PASS"
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "contrast": 8.6065791013692,
+        "fits": true,
+        "status": "PASS"
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "contrast": 9.591251131935438,
+        "fits": true,
+        "status": "PASS"
+      }
+    ]
+  },
+  "build": {
+    "command": "npm run build",
+    "status": "PASS",
+    "note": "Rebuilt after the final dark-mode link contrast adjustment; existing Vite chunk-size advisory remains."
+  },
+  "dataBoundary": "Only isolated demo-campusvibe-feed Auth/Firestore emulators, fictional inboxes and existing guest sample data. No production accounts created, existing users auto-verified, reviewer roles changed, provider uploads or real verification emails sent.",
+  "expected": "Member features require a strictly verified email. Syntax alone does not establish that an inbox exists or belongs to the user.",
+  "behavior": [
+    "Signup creates a pending account and requests Firebase verification; access stays blocked until the link is applied.",
+    "Existing unverified email login and restored sessions are also gated.",
+    "Resend has a one-minute local cooldown and displays Firebase throttling/network failures.",
+    "Checking verification reloads the user and refreshes the ID token before restoring the original destination.",
+    "Firestore member checks and photo/AI account lookup checks independently require verification.",
+    "Verified Google email claims remain eligible; this is not a new real Google account-login result.",
+    "Different-email action signs out; no account or saved data is deleted."
+  ],
+  "repeat": {
+    "environment": {
+      "VITE_FIREBASE_EMULATORS": "true",
+      "VITE_FIREBASE_AUTH_EMULATOR_PORT": "9099",
+      "VITE_FIREBASE_FIRESTORE_EMULATOR_PORT": "8080",
+      "FIREBASE_AUTH_EMULATOR_HOST": "127.0.0.1:9099",
+      "FIRESTORE_EMULATOR_HOST": "127.0.0.1:8080",
+      "EMAIL_VERIFICATION_ISOLATED": "1",
+      "EMAIL_VERIFICATION_TEST_URL": "http://127.0.0.1:5173"
+    },
+    "steps": [
+      "Use a dedicated empty local Firebase demo project. Start auth/firestore with backend/firebase/firebase.json and project demo-campusvibe-feed.",
+      "Start npm run dev -- --host 127.0.0.1 --port 5173 --strictPort with the VITE emulator environment above.",
+      "Run npm run test:rules and npm run test:backend from the repository root.",
+      "Run npm run test:email-verification --workspace frontend/react-app, then npm run test:email-verification-browser --workspace frontend/react-app with the explicit test environment above.",
+      "For UI regressions run the smoke specs listed below and npm run build."
+    ],
+    "smokeSpecs": [
+      "event-sharing",
+      "navigation",
+      "events",
+      "theme-toggle",
+      "profile",
+      "published-profile",
+      "suggestions",
+      "assistant"
+    ],
+    "actualPorts": {
+      "auth": 29299,
+      "firestore": 28380,
+      "vite": 25189
+    },
+    "helper": "tests/verify-emulator-email.js applies only a locally issued OOB verification code, refuses production URLs/project IDs, and uses the actual SDK verification check; it does not bypass the gate."
+  },
+  "limitations": [
+    "No real mailbox delivery/receipt is certified; a user must open their actual verification email after deployment.",
+    "No new Google identity selection/session proof, independent teammate test or personal source explain-back.",
+    "Provider calls in API tests use fixtures; the visual card screenshots are explicitly static UI fixtures.",
+    "Live deployment and exact rules-source verification are recorded separately in Issue #170."
+  ],
+  "preservation": "All docs/, README and .github files are unchanged.",
+  "references": [
+    "https://firebase.google.com/docs/auth/web/manage-users#send_a_user_a_verification_email",
+    "https://firebase.google.com/docs/rules/rules-and-auth"
+  ]
+}
