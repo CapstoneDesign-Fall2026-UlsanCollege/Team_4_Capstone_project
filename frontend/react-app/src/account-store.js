@@ -8,7 +8,7 @@ import { writeNotification } from './notification-write';
 
 export function createAccountStore(user,events) {
   function owner() {
-    if(!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.uid !== user.id) throw new Error('Sign in to save your account data.');
+    if(!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.emailVerified !== true || auth.currentUser.uid !== user.id) throw new Error('Sign in to save your account data.');
   }
   return createAccountSync({user,events,online:()=>navigator.onLine,
     legacy:name=>{try{return legacyAccountData(name,user,localStorage,sessionStorage);}catch{return null;}},

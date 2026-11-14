@@ -6,7 +6,7 @@ const uploaded = new WeakMap();
 export async function photoRequest(user, body, endpoint = '/api/feed-photo') {
   if (!['/api/feed-photo', '/api/suggestion-photo'].includes(endpoint)) throw new Error('Unknown photo service.');
   const current = auth.currentUser;
-  if (!current || current.isAnonymous || current.uid !== user.id) throw new Error('Sign in to share photos.');
+  if (!current || current.isAnonymous || current.emailVerified !== true || current.uid !== user.id) throw new Error('Sign in to share photos.');
   const token = await current.getIdToken();
   if (auth.currentUser?.uid !== user.id) throw new Error('Your account changed. Sign in again before sharing.');
   let response;

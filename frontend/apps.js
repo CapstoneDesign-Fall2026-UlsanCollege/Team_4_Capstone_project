@@ -324,9 +324,10 @@ async function handleSignup(ev){
     const credential = await createUserWithEmailAndPassword(auth, em, password);
     localStorage.setItem(`cv_interest_${credential.user.uid}`, selectedInterest);
     await updateProfile(credential.user, { displayName });
-    startSession(credential.user, selectedInterest);
+    const ready = startSession(credential.user, selectedInterest);
     closeAuth();
-    showToast(`Welcome to CampusVibes, ${displayName.split(" ")[0]}! You're logged in.`);
+    if (ready) showToast(`Welcome to CampusVibes, ${displayName.split(" ")[0]}! You're logged in.`);
+    else await sendVerificationEmail();
   } catch (error) {
     showAuthError(formErr, error);
   } finally {
@@ -356,9 +357,9 @@ async function handleLogin(ev, scope = "modal"){
     await applyLoginPersistence();
     const credential = await signInWithEmailAndPassword(auth, em, password);
     formErr.classList.add("hidden");
-    startSession(credential.user);
+    const ready = startSession(credential.user);
     closeAuth();
-    showToast(`Welcome back, ${(credential.user.displayName || credential.user.email).split(" ")[0]}!`);
+    if (ready) showToast(`Welcome back, ${(credential.user.displayName || credential.user.email).split(" ")[0]}!`);
   } catch (error) {
     showAuthError(formErr, error);
   } finally {
@@ -393,9 +394,9 @@ async function handleGoogleLogin(){
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({prompt: "select_account"});
     const credential = await signInWithPopup(auth, provider);
-    startSession(credential.user);
+    const ready = startSession(credential.user);
     closeAuth();
-    showToast("Welcome to Campus Vibes!");
+    if (ready) showToast("Welcome to Campus Vibes!");
   } catch (error) {
     showAuthError(formErr, error);
   } finally {
@@ -441,6 +442,7 @@ function showResetConfirmation(){
 }
 
 function setupAuthControls(){
+  setupEmailVerification();
   $("#landingPasswordToggle").addEventListener("click", () => {
     $("#landingPass").type = $("#landingPass").type === "password" ? "text" : "password";
     updatePasswordToggle();
@@ -470,11 +472,16 @@ function setupAuthControls(){
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   };
   document.addEventListener("keydown", modalKeys);
-  window.campusAuthCleanup = () => document.removeEventListener("keydown", modalKeys);
+  window.campusAuthCleanup = () => { document.removeEventListener("keydown", modalKeys);resetEmailVerification(); };
 }
 
 /* ── Session ── */
 function startSession(user, interest = ""){
+  if (user.uid && window.campusFirebaseAuth.auth.currentUser?.uid !== user.uid) return false;
+  if (user.uid && !window.campusFirebaseAuth.hasVerifiedEmail(user)) {
+    beginEmailVerification(user);return false;
+  }
+  resetEmailVerification();
   const name = user.displayName || user.name || "Student";
   currentSession = {
     id: user.uid || "demo",
@@ -484,10 +491,12 @@ function startSession(user, interest = ""){
     interest: interest || localStorage.getItem(`cv_interest_${user.uid}`) || user.interest || ""
   };
   updateNav();
+  return true;
 }
 function syncFirebaseUser(user){
   if (user) startSession(user);
   else {
+    resetEmailVerification();
     // Firebase's initial signed-out callback can arrive after demo entry.
     if (currentSession?.id === "demo") return;
     currentSession = null;
@@ -509,7 +518,8 @@ async function logout(){
 function updateNav(){
   const s = getSession();
   if (!s) currentEventDateFilter = 'all';
-  $("#authLanding").classList.toggle("hidden", !!s);
+  $("#authLanding").classList.toggle("hidden", !!s || !!verificationUser);
+  $("#emailVerification").classList.toggle("hidden", !!s || !verificationUser);
   $("#navAuthOut").classList.toggle("hidden", !!s);
   $("#navAuthIn").classList.toggle("hidden", !s);
   $("#workspaceSwitch").classList.toggle("hidden", !s);

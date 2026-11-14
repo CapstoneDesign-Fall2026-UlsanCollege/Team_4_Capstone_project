@@ -5,7 +5,7 @@ import { photoRequest } from './shared-photo-store';
 import { validSuggestionId, validSuggestionPoster } from './suggestion-poster';
 
 function owner(user, suggestionId) {
-  if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.uid !== user.id) throw new Error('Sign in to add a suggestion poster.');
+  if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.emailVerified !== true || auth.currentUser.uid !== user.id) throw new Error('Sign in to add a suggestion poster.');
   if (!validSuggestionId(suggestionId)) throw new Error('The suggestion draft is invalid.');
   if (!navigator.onLine) throw new Error('Reconnect before changing your poster. Your draft is safe.');
 }
