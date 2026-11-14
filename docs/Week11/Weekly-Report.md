@@ -69,7 +69,7 @@ If it is not linked, it does not count.
 | Student | What they did | Evidence link |
 |---|---|---|
 | `DevyanaCT` |  |  |
-| `prachi2061` | |   |
+| `prachi2061` | November 15: owned the member-ID display privacy fix across Feed, Friends, Messages, Profile and accessible labels; public names/colleges/photos remain. Codex-assisted checks: 49 rules, 5 units, 7 privacy assertions within the photo workflow, five social workflow suites and 46 desktop/mobile smoke cases PASS; build PASS. Production evidence covers guest UI/served code only; authenticated production privacy and independent human review remain pending. Supporting work outside the frozen Events demo path. | [Bug #172](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/172), [PR #173](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/173), [Week 11 bug report](Evidence/prachi-member-id-privacy-bug-report-2026-11-15.md), [recorded production check](Evidence/prachi-member-id-privacy-production-2026-11-15.json), [code/test receipt](../../frontend/react-app/verification/member-id-privacy/results.json) |
 | `ujjalpoudel75` | |  |
 | `tulseyy8848` |  |  |
 
