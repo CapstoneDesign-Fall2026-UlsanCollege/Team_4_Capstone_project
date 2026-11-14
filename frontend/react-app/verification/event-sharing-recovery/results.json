@@ -1,0 +1,491 @@
+{
+  "dateKST": "2026-11-14",
+  "preparedAt": "2026-11-14T05:28:30.755Z",
+  "owner": "prachi2061",
+  "executor": "Codex-assisted automated checks",
+  "issue": 168,
+  "baseline": "82c02ed",
+  "sources": [
+    {
+      "file": "frontend/event-sharing.js",
+      "sha256NormalizedLF": "5d61385198a06cc4bc4c37470df9fffd181872a6a80077c928016fc4526137ea"
+    },
+    {
+      "file": "frontend/react-app/src/discover.css",
+      "sha256NormalizedLF": "09a878512c8eea44cec37ca28f5b82c944c5eaaaf9d6241eca75462678403b4a"
+    },
+    {
+      "file": "frontend/react-app/tests/smoke/event-sharing.spec.js",
+      "sha256NormalizedLF": "870251f5e90a25dec553755472a1204b00cb91c2c90004faecbe84c18ec37c21"
+    }
+  ],
+  "before": {
+    "checkedAt": "2026-11-14T04:58:22.825Z",
+    "results": [
+      {
+        "width": 1440,
+        "capabilities": {
+          "share": "function",
+          "canShare": "function",
+          "clipboard": "function",
+          "secure": true
+        },
+        "state": {
+          "url": "https://campusvibe-theta.vercel.app/#/community/events/1",
+          "disabled": true,
+          "status": "",
+          "manualVisible": false,
+          "manualURL": "https://campusvibe-theta.vercel.app/#/community/events/1"
+        },
+        "errors": []
+      },
+      {
+        "width": 390,
+        "capabilities": {
+          "share": "function",
+          "canShare": "function",
+          "clipboard": "function",
+          "secure": true
+        },
+        "state": {
+          "url": "https://campusvibe-theta.vercel.app/#/community/events/1",
+          "disabled": true,
+          "status": "",
+          "manualVisible": false,
+          "manualURL": "https://campusvibe-theta.vercel.app/#/community/events/1"
+        },
+        "errors": []
+      }
+    ],
+    "observation": "Native share remained pending after 1.8 seconds: primary button disabled, blank status, URL hidden in both viewports. Headless Chrome does not establish whether a visible OS sharing sheet opens on a real user device."
+  },
+  "local": {
+    "browser": {
+      "checkedAt": "2026-11-14T05:27:27.521Z",
+      "exitCode": 0,
+      "stats": {
+        "startTime": "2026-11-14T05:01:04.088Z",
+        "duration": 1583401.062,
+        "expected": 32,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "tests": [
+        {
+          "title": "event title and Close stay reachable after scrolling the trip planner in light mode",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5806,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "event title and Close stay reachable after scrolling the trip planner in dark mode",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4481,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "event title and Close stay reachable after scrolling the trip planner in light mode",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3483,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "event title and Close stay reachable after scrolling the trip planner in dark mode",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3054,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a shared sample link survives demo entry, copy and reload without bypassing sign-in",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4705,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "event history restores the event and closing returns to its originating page",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3593,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "cancelled native sharing stays usable and denied clipboard reveals a selectable fallback",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3250,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "unavailable and malformed links have a route back to event discovery",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2344,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "published links require a real member and the sign-in action preserves their destination",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2584,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a pending native share cannot hide or block Copy link and its late completion cannot replace copy feedback",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3210,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "blocked app sharing gives a visible recovery and Copy link gets a fresh user gesture",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2562,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a browser without clipboard or native sharing can select and manually copy the full URL",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2609,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a real clipboard URL opens the same event for a fresh recipient after guest entry",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5662,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a late clipboard result cannot change a different event dialog",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2818,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a shared sample link survives demo entry, copy and reload without bypassing sign-in",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3498,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "event history restores the event and closing returns to its originating page",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4728,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "cancelled native sharing stays usable and denied clipboard reveals a selectable fallback",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2429,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "unavailable and malformed links have a route back to event discovery",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2071,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "published links require a real member and the sign-in action preserves their destination",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2047,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a pending native share cannot hide or block Copy link and its late completion cannot replace copy feedback",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2549,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "blocked app sharing gives a visible recovery and Copy link gets a fresh user gesture",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2264,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a browser without clipboard or native sharing can select and manually copy the full URL",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2097,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a real clipboard URL opens the same event for a fresh recipient after guest entry",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3887,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "a late clipboard result cannot change a different event dialog",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2529,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "demo student reaches the selected sample event details",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3042,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "unmatched search has an empty state and clear filters restores events",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2888,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "demo student reaches the selected sample event details",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3008,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "unmatched search has an empty state and clear filters restores events",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2416,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "browser Back and Forward restore Community pages and the Feed workspace",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3063,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "deep links survive login and reload without bypassing authentication",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3530,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "browser Back and Forward restore Community pages and the Feed workspace",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2897,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "deep links survive login and reload without bypassing authentication",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3033,
+              "errors": []
+            }
+          ]
+        }
+      ]
+    },
+    "unit": {
+      "command": "npm run test:event-discovery --workspace frontend/react-app",
+      "passed": 22,
+      "failed": 0
+    },
+    "productionBuild": {
+      "command": "npm run build",
+      "status": "PASS",
+      "advisory": "Existing Vite chunk over 500 kB advisory."
+    },
+    "runnerNote": "All 32 browser cases passed without retries. Windows Vite cleanup stalled after checks; the run-owned server was verified by command line and port 4178 and stopped. Runner then exited 0. Report duration includes cleanup wait; no retry counted."
+  },
+  "behavior": {
+    "shareButton": "Immediately reveals URL, Copy link and optional Share with apps; does not call native share.",
+    "copy": "Separate trusted click, real clipboard roundtrip on local Chrome verified in desktop/mobile.",
+    "recovery": "Visible selection on denied/absent clipboard; pending/cancelled/blocked native share leaves Copy link usable; late async results cannot overwrite newer copy feedback or a different event."
+  },
+  "boundaries": [
+    "No production authenticated published-event check or shared-data writes.",
+    "Native API success/cancellation/failure/pending behavior is mocked locally; no OS app delivery or human recipient is certified.",
+    "Real local clipboard is exercised with browser-granted clipboard permissions and a fresh guest recipient context.",
+    "No new Google account login, provider upload, independent human review or personal source explanation.",
+    "Post-deploy guest/sample clipboard readiness is recorded separately on the issue."
+  ],
+  "docs": "No docs/, README or teammate work changed.",
+  "references": [
+    "https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText"
+  ]
+}
