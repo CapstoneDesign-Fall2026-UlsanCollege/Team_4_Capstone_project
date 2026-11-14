@@ -13,7 +13,6 @@ body:has(#appMain:not(.hidden) #page-profile.active) .nav-inner{max-width:1460px
 .cvp-avatar>span,.cvp-avatar>button{position:absolute;bottom:-6px;left:calc(50% - 15px);display:grid;place-items:center;width:30px;height:30px;border:3px solid #fff;background:#8c5ad5;border-radius:50%;color:#fff;padding:0}
 .cvp-avatar>img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 .cvp-avatar>button{cursor:pointer}.cvp-avatar>button:disabled{opacity:.5;cursor:wait}
-.cvp-member-id{display:flex;align-items:center;gap:5px;flex-wrap:wrap}.cvp-member-id code{overflow-wrap:anywhere;word-break:break-all;font-size:10px;user-select:all}
 .cvp-photo-preview{width:128px;height:128px;margin:20px auto;border-radius:50%;overflow:hidden;background:#eee5fb;display:grid;place-items:center;color:#7541c9;font-size:50px}
 .cvp-photo-preview img{width:100%;height:100%;object-fit:cover}.cvp-photo-tools{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.cvp-photo-editor>p{text-align:center}
 .cvp-identity{min-width:0;flex:1}.cvp-identity h1{display:flex;align-items:center;gap:12px;font:800 25px/1.4 'Sora',sans-serif;letter-spacing:0;color:#211936;overflow-wrap:anywhere;margin:0 0 7px}.cvp-identity h1 svg{color:#46a0df;flex:0 0 17px}

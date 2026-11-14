@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 import { expect as baseExpect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { randomBytes } from 'node:crypto';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const url = process.env.ACCOUNT_TEST_URL || 'http://127.0.0.1:5186';
@@ -13,6 +13,13 @@ const browser = await chromium.launch({ channel: 'chrome' }), contexts = [], use
 const project = 'demo-campusvibe-feed', endpoint = `http://${process.env.FIRESTORE_EMULATOR_HOST || '127.0.0.1:8180'}/v1/projects/${project}/databases/(default)/documents`;
 const output = new URL('profile-photos/', process.env.CAMPUS_TEST_ARTIFACTS_URL || new URL('../verification/', import.meta.url));
 await mkdir(output, { recursive: true });
+const privacyChecks = [];
+async function assertNoAccountIds(page, label) {
+  const strings = await page.evaluate(() => [document.body.innerText, ...[...document.querySelectorAll('[aria-label],[title]')].flatMap(el => [el.getAttribute('aria-label') || '', el.getAttribute('title') || '']), ...[...document.querySelectorAll('input')].filter(el => el.getClientRects().length).map(el => el.value)]);
+  for (const person of users) assert.ok(strings.every(text => !text.includes(person.uid)), `Account ID leaked in ${label}`);
+  assert.equal(await page.locator('.feed-member-id,.cvp-member-id').count(), 0);
+  privacyChecks.push({ label, viewport: page.viewportSize(), status: 'PASS' });
+}
 const nav = page => page.getByRole('navigation', { name: 'Shared feed navigation' });
 const directoryFixtures = Array.from({ length: 100 }, (_, index) => `!photo-directory-${String(index).padStart(3, '0')}`);
 async function adminWrite(id, fields, collection = 'campusFeedProfiles') {
@@ -68,6 +75,9 @@ try {
     return result.fields?.name?.stringValue;
   }).toBe(person.credentials.name);
   console.log('PASS: shared profiles converge to the completed signup display name, even when Auth name updates are delayed.');
+  await adminWrite(owner.uid, { name: 'Photo Tester', college: 'Privacy Test College' });
+  await adminWrite(first.uid, { name: 'Same Name', college: 'North Test College' });
+  await adminWrite(second.uid, { name: 'Same Name', college: 'South Test College' });
   const red = await editPhoto(first, '#c33e53'), blue = await editPhoto(second, '#206bb5'); assert.notEqual(red, blue);
   await first.page.getByRole('button', { name: 'Change profile photo', exact: true }).click();
   const input = first.page.getByLabel('Choose profile photo', { exact: true });
@@ -84,43 +94,46 @@ try {
   assert.equal(await fresh.page.evaluate(() => localStorage.getItem('cv_profile_photo')), null);
   console.log('PASS: profile photo restores in a fresh signed-in browser without local photo storage.');
 
-  for (const id of directoryFixtures) await adminWrite(id, { name: 'Directory fixture', college: 'Emulator only' });
+
 
   await feed(owner); await nav(owner.page).getByRole('button', { name: 'Friends', exact: true }).click();
   for (const person of [first, second]) {
-    await owner.page.getByRole('searchbox', { name: 'Search people', exact: true }).fill(person.uid);
-    const card = owner.page.locator(`[data-person="${person.uid}"]`); await expect(card).toContainText(`Member ID: ${person.uid}`);
+    await owner.page.getByRole('searchbox', { name: 'Search people', exact: true }).fill(person === first ? 'North Test College' : 'South Test College');
+    const card = owner.page.locator('[data-person]'); await expect(card).toHaveCount(1); await expect(card).not.toContainText(person.uid);
     await expect(card.locator('img')).toHaveAttribute('src', person === first ? red : blue);
     await card.getByRole('button', { name: 'Add friend', exact: true }).click();
     await feed(person); await nav(person.page).getByRole('button', { name: 'Friends', exact: true }).click();
-    await person.page.getByRole('button', { name: `Accept request from Photo Tester, member ${owner.uid}`, exact: true }).click();
+    await person.page.getByRole('button', { name: 'Accept request from Photo Tester, Privacy Test College', exact: true }).click();
   }
+  for (const id of directoryFixtures) await adminWrite(id, { name: 'Directory fixture', college: 'Emulator only' });
   await owner.page.getByRole('searchbox', { name: 'Search people', exact: true }).fill(first.uid);
-  await expect(owner.page.locator('[data-person]')).toHaveCount(1);
+  await expect(owner.page.locator('[data-person]')).toHaveCount(0);
   await owner.page.getByRole('searchbox', { name: 'Search people', exact: true }).fill('Same Name');
   await expect(owner.page.locator('[data-person]')).toHaveCount(2);
+  await assertNoAccountIds(owner.page, 'Friends with same-name contacts beyond the directory window');
   await owner.page.screenshot({ path: fileURLToPath(new URL('same-name-friends-desktop.png', output)), fullPage: true });
   for (const width of [390, 320]) {
-    await owner.page.setViewportSize({ width, height: 844 }); assert.ok(await owner.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await owner.page.setViewportSize({ width, height: 844 }); await assertNoAccountIds(owner.page, 'Mobile Friends'); assert.ok(await owner.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   }
   await owner.page.setViewportSize({ width: 1440, height: 1000 });
   await nav(owner.page).getByRole('button', { name: 'Messages', exact: true }).click();
-  await owner.page.getByRole('button', { name: `Message Same Name, member ${first.uid}`, exact: true }).click();
-  await expect(owner.page.locator('.feed-conversation header')).toContainText(first.uid);
+  await owner.page.getByRole('button', { name: 'Message Same Name, North Test College', exact: true }).click();
+  await expect(owner.page.locator('.feed-conversation header')).not.toContainText(first.uid);
   await expect(owner.page.locator('.feed-conversation header img')).toHaveAttribute('src', red);
   await owner.page.getByRole('textbox', { name: 'Message text', exact: true }).fill('This is only for the first same-name member.');
   await owner.page.getByRole('button', { name: 'Send message', exact: true }).click();
   for (const person of [first, second]) {
     await nav(person.page).getByRole('button', { name: 'Messages', exact: true }).click();
-    await person.page.getByRole('button', { name: `Message Photo Tester, member ${owner.uid}`, exact: true }).click();
+    await person.page.getByRole('button', { name: 'Message Photo Tester, Privacy Test College', exact: true }).click();
   }
   await expect(first.page.locator('.feed-message-history')).toContainText('This is only for the first same-name member.');
   await expect(second.page.locator('.feed-message-history')).not.toContainText('This is only for the first same-name member.');
-  await owner.page.getByRole('button', { name: `Message Same Name, member ${second.uid}`, exact: true }).click();
+  await owner.page.getByRole('button', { name: 'Message Same Name, South Test College', exact: true }).click();
   await expect(owner.page.locator('.feed-conversation header img')).toHaveAttribute('src', blue);
   await owner.page.getByRole('textbox', { name: 'Message text', exact: true }).fill('A different private message for the second member.');
   await owner.page.getByRole('button', { name: 'Send message', exact: true }).click();
   await expect(second.page.locator('.feed-message-history')).toContainText('A different private message for the second member.');
+  await assertNoAccountIds(owner.page, 'Inbox and active conversation');
   console.log('PASS: duplicate display names remain distinct in Friends, requests, inbox, chat headers and actual private delivery.');
 
   const green = await editPhoto(second, '#27845a');
@@ -130,9 +143,9 @@ try {
   await second.page.getByRole('button', { name: 'Save photo', exact: true }).click();
   await expect(second.page.getByRole('dialog', { name: 'Profile photo', exact: true })).toBeHidden();
   await expect(owner.page.locator('.feed-conversation header img')).toHaveCount(0);
-  await expect(owner.page.locator('.feed-conversation header')).toContainText(second.uid);
+  await expect(owner.page.locator('.feed-conversation header')).not.toContainText(second.uid);
   await second.page.reload(); await profile(second); await expect(second.page.locator('#profileAvatar img')).toHaveCount(0);
-  console.log('PASS: replacement/removal reaches another browser live; initials and member ID remain when no photo exists.');
+  console.log('PASS: replacement/removal reaches another browser live; initials and public college context remain without exposing account IDs.');
 
   await feed(first); await nav(first.page).getByRole('button', { name: 'Latest posts', exact: true }).click();
   await first.page.getByRole('textbox', { name: 'Your college', exact: true }).fill('Photo Test College');
@@ -144,32 +157,35 @@ try {
   await first.page.getByRole('textbox', { name: 'Write a comment', exact: true }).fill('Identity follows the commenter too.');
   await first.page.getByRole('button', { name: 'Send comment', exact: true }).click();
   await expect(ownPost.locator('.feed-comment img')).toHaveAttribute('src', red);
-  assert.ok(await first.page.getByRole('button', { name: 'Photos unavailable', exact: true }).isDisabled());
+  await expect(first.page.getByRole('button', { name: 'Photos', exact: true })).toBeEnabled();
+  await assertNoAccountIds(first.page, 'Shared posts and comments');
   await profile(first); await expect(first.page.locator('#profileAvatar img')).toHaveAttribute('src', red);
+  await assertNoAccountIds(first.page, 'Own profile and privacy copy');
   await first.page.getByRole('button', { name: 'Change profile photo', exact: true }).click(); await first.context.setOffline(true);
   await first.page.getByRole('button', { name: 'Remove photo', exact: true }).click(); await first.page.getByRole('button', { name: 'Save photo', exact: true }).click();
   await expect(first.page.getByRole('alert')).toContainText('Reconnect'); await first.context.setOffline(false);
   await first.page.getByRole('button', { name: 'Cancel', exact: true }).click();
   await expect(first.page.locator('#profileAvatar img')).toHaveAttribute('src', red);
-  console.log('PASS: changing Feed college preserves photo; posts/comments use it, shared attachments remain disabled and offline changes are not called saved.');
+  console.log('PASS: changing Feed college preserves photo; posts/comments use it, identity remains private and offline changes are not called saved.');
 
   await adminWrite(first.uid, { photo: 'data:image/jpeg;base64,/9j/AAAA==' }, 'campusProfilePhotos');
   await expect(first.page.locator('#profileAvatar img')).toHaveCount(0);
-  await expect(owner.page.locator('.feed-message-inbox button').filter({ hasText: first.uid }).locator('img')).toHaveCount(0);
+  await expect(owner.page.locator('.feed-message-inbox button').filter({ hasText: 'Photo Test College' }).locator('img')).toHaveCount(0);
   await adminWrite(first.uid, { photo: red }, 'campusProfilePhotos');
   await expect(fresh.page.locator('#profileAvatar img')).toHaveAttribute('src', red);
-  console.log('PASS: malformed image bytes from a bypass client fall back to initials; exact-ID contact lookup works outside the bounded directory.');
+  console.log('PASS: malformed image bytes from a bypass client fall back to initials; known contacts resolve outside the bounded directory without ID search.');
 
   await fresh.page.locator('#toast').waitFor({ state: 'hidden' });
   await fresh.page.screenshot({ path: fileURLToPath(new URL('profile-photo-desktop.png', output)), fullPage: true });
   await fresh.page.setViewportSize({ width: 390, height: 844 }); await fresh.page.screenshot({ path: fileURLToPath(new URL('profile-photo-mobile.png', output)), fullPage: true });
   assert.ok(await fresh.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-  await owner.page.getByRole('button', { name: `Message Same Name, member ${first.uid}`, exact: true }).click();
-  await owner.page.setViewportSize({ width: 390, height: 844 }); await owner.page.screenshot({ path: fileURLToPath(new URL('same-name-chat-mobile.png', output)), fullPage: true });
+  await owner.page.getByRole('button', { name: 'Message Same Name, Photo Test College', exact: true }).click();
+  await owner.page.setViewportSize({ width: 390, height: 844 }); await assertNoAccountIds(owner.page, 'Mobile private conversation'); await owner.page.screenshot({ path: fileURLToPath(new URL('same-name-chat-mobile.png', output)), fullPage: true });
   assert.ok(await owner.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   await fresh.page.getByRole('button', { name: 'Log out', exact: true }).click(); await fresh.page.locator('#landingDemo').click();
   await expect(fresh.page.locator('#navAvatar img')).toHaveCount(0); await fresh.page.locator('#mainNav [data-page=profile]').click(); await expect(fresh.page.locator('#profileAvatar img')).toHaveCount(0);
-  assert.deepEqual(errors, []); console.log('PASS: desktop/320px/390px layouts fit, thumbnails have nonblank pixels, and logout/demo does not retain the previous avatar.');
+  assert.deepEqual(errors, []);
+  await writeFile(new URL('privacy-results.json', output), JSON.stringify({ checkedAt: new Date().toISOString(), checks: privacyChecks, scope: 'Local Auth/Firestore emulator workflow with fictional verified accounts. UI text/labels/search privacy and correct recipient delivery; internal IDs remain in client/server data.' }, null, 2));
 } finally {
   await Promise.all(contexts.map(context => context.close()));
   const docs = await fetch(`${endpoint}/campusFeedPosts`, { headers: { Authorization: 'Bearer owner' } }).then(response => response.json());

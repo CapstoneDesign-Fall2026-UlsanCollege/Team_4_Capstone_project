@@ -77,7 +77,8 @@ try {
   await source(bob,'shared-friends-store','requestFriend',[alice.uid]);
   await openPanel(alice.page,'feed');
   await panel(alice.page).getByRole('button').filter({hasText:'Notification Bob sent you a friend request'}).click();
-  await alice.page.getByRole('button',{name:new RegExp(`^Accept request from Notification Bob, member ${bob.uid}`)}).click();
+  await expect(alice.page.getByRole('searchbox',{name:'Search people',exact:true})).toHaveValue('');
+  await alice.page.getByRole('button',{name:/^Accept request from Notification Bob(?:,|$)/}).click();
   await openPanel(bob.page,'feed');
   await expect(panel(bob.page)).toContainText('Notification Alice accepted your friend request');
   await bob.page.keyboard.press('Escape');
@@ -123,7 +124,7 @@ try {
   const suggestionId = randomUUID();
   await source(alice,'suggestions-store','submitSuggestion',[{id:suggestionId,name:'Anonymous notification film night',host:'',anonymous:true,category:'Arts',date:'',location:'',description:'A synthetic review fixture.'}]);
   await fetch(`${endpoint}/campusSuggestionReviewers/${bob.uid}`,{method:'PATCH',signal:AbortSignal.timeout(15000),headers:{Authorization:'Bearer owner','Content-Type':'application/json'},body:JSON.stringify({fields:{enabled:{booleanValue:true}}})}).then(async response => assert.ok(response.ok,await response.text()));
-  await source(bob,'suggestions-store','reviewSuggestion',[suggestionId,'approved','Approved test idea']);
+  await source(bob,'suggestions-store','reviewSuggestion',[suggestionId,'approved','Approved test idea',{date:'2026-11-20',time:'18:00',location:'Synthetic Test Hall'}]);
   await openPanel(alice.page,'community');
   await expect(panel(alice.page)).toContainText('Your suggestion was approved');
   await panel(alice.page).getByRole('button').filter({hasText:'Your suggestion was approved'}).click();

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowUp, CheckCheck, LoaderCircle, MessageCircle, Send, Trash2 } from 'lucide-react';
 import { Avatar } from './Feed';
-import MemberId from './MemberId';
-import { memberLabel } from './profile-photo';
+import { matchesPublicMember, publicMemberLabel } from './member-identity';
 import { deleteMessage, loadOlderMessages, markConversationRead, messageError, sendMessage, watchLoadedMessage, watchMessages, watchReadReceipt } from './shared-messages-store';
 
 function Conversation({ user, connection, profile, ready, draft, onDraft, onSent, onBack }) {
@@ -63,8 +62,8 @@ function Conversation({ user, connection, profile, ready, draft, onDraft, onSent
     catch (error) { if (alive.current) setFailure(messageError(error)); }
     finally { sendLock.current = false; if (alive.current) setBusy(false); }
   };
-  return <section className="feed-conversation" aria-label={`Conversation with ${memberLabel(profile?.name, peerId)}`}>
-    <header><button type="button" className="feed-chat-back feed-icon-button" title="Back to conversations" aria-label="Back to conversations" onClick={onBack}><ArrowLeft size={18} /></button><Avatar name={profile?.name || 'Student'} memberId={peerId} small /><div><strong>{profile?.name || 'Student'}</strong><MemberId uid={peerId} /><small>{profile?.college || 'Campus member'}</small></div></header>
+  return <section className="feed-conversation" aria-label={`Conversation with ${publicMemberLabel(profile)}`}>
+    <header><button type="button" className="feed-chat-back feed-icon-button" title="Back to conversations" aria-label="Back to conversations" onClick={onBack}><ArrowLeft size={18} /></button><Avatar name={profile?.name || 'Student'} memberId={peerId} small /><div><strong>{profile?.name || 'Student'}</strong><small>{profile?.college || 'Campus member'}</small></div></header>
     {failure && <div className="feed-error" role="alert"><p>{failure}</p><button type="button" onClick={() => setRetry(value => value + 1)}>Try again</button></div>}
     <div className="feed-message-history" aria-label="Message history" aria-live="polite">
       {hasOlder && <button type="button" className="feed-quiet-button feed-load-messages" disabled={loadingOlder} onClick={async () => {
@@ -98,13 +97,13 @@ export default function SharedMessages({ user, profiles, connections, query, rea
   const emptyText = unavailable ? connectionsReady ? 'This conversation is unavailable in your current connections.' : 'Loading conversation...' : friends.length ? 'Select a conversation' : 'No conversations yet';
   const list = friends.filter(item => {
     const profile = profiles.find(value => value.id === item.members.find(id => id !== user.id));
-    return `${profile?.name || ''} ${profile?.college || ''} ${item.members.find(id => id !== user.id)}`.toLowerCase().includes(query.toLowerCase());
+    return matchesPublicMember(profile, query);
   }).sort((a, b) => (inbox[b.id]?.latest?.createdAt || 0) - (inbox[a.id]?.latest?.createdAt || 0));
   return <div className={`feed-messenger ${active || unavailable ? 'has-conversation' : ''}`}>
     <aside className="feed-message-inbox" aria-label="Conversations"><h2>Messages</h2>{list.map(item => {
       const peerId = item.members.find(id => id !== user.id);
       const profile = profiles.find(value => value.id === peerId);
-      return <button type="button" key={item.id} className={active?.id === item.id ? 'active' : ''} aria-label={`Message ${memberLabel(profile?.name, peerId)}`} aria-current={active?.id === item.id ? 'page' : undefined} onClick={() => setSelected(item.id)}><Avatar name={profile?.name || 'Student'} memberId={peerId} small /><span><strong>{profile?.name || 'Student'}</strong><MemberId uid={peerId} /><small>{inbox[item.id]?.error ? 'Unavailable' : inbox[item.id]?.latest?.body || profile?.college || 'Start a conversation'}</small></span>{unread(item.id) && <span className="feed-unread-dot" aria-label="Unread messages" />}</button>;
+      return <button type="button" key={item.id} className={active?.id === item.id ? 'active' : ''} aria-label={`Message ${publicMemberLabel(profile)}`} aria-current={active?.id === item.id ? 'page' : undefined} onClick={() => setSelected(item.id)}><Avatar name={profile?.name || 'Student'} memberId={peerId} small /><span><strong>{profile?.name || 'Student'}</strong><small>{inbox[item.id]?.error ? 'Unavailable' : inbox[item.id]?.latest?.body || profile?.college || 'Start a conversation'}</small></span>{unread(item.id) && <span className="feed-unread-dot" aria-label="Unread messages" />}</button>;
     })}{!list.length && <p className="feed-side-empty">{!connectionsReady ? 'Loading conversations...' : query ? 'No matching friends' : 'No accepted friends yet'}</p>}</aside>
     {active ? <Conversation key={active.id} user={user} connection={active} profile={profiles.find(value => value.id === active.members.find(id => id !== user.id))} ready={ready} draft={drafts[active.id] || ''} onDraft={value => onDraft(active.id, value)} onSent={submitted => onDraft(active.id, '', submitted)} onBack={() => setSelected(null)} /> : <div className="feed-chat-empty" role={unavailable ? 'status' : undefined}><MessageCircle size={32} /><p>{emptyText}</p>{unavailable && <button type="button" className="feed-quiet-button" onClick={() => setSelected(null)}>Back to conversations</button>}</div>}
   </div>;
