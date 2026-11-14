@@ -3,7 +3,6 @@ import { ArrowLeft, ArrowRight, Bookmark, GraduationCap, House, MessageCircle, R
 import { Avatar, Composer, Modal } from './Feed';
 import { deleteSharedPost, editSharedPost, feedError, FEED_PAGE_SIZE, publishSharedPost, watchSharedPosts } from './shared-feed-store';
 import { ensureFeedProfile, saveFeedProfile, watchFeedProfile, watchFeedProfiles } from './shared-profile-store';
-import MemberId from './MemberId';
 import { watchConnections } from './shared-friends-store';
 import { watchSavedPostContent, watchSavedPosts } from './shared-saved-store';
 import SharedFriends from './SharedFriends';
@@ -47,7 +46,7 @@ export default function SharedFeed({ user, notification }) {
     if (!notificationItem) return;
     setQuery(''); setFilter('all'); setNotificationPost(null); setNotificationMissing(false);
     if (notificationItem.kind === 'message') { setView('messages'); return; }
-    if (notificationItem.kind.startsWith('friend-')) { setView('friends'); setQuery(notificationItem.actorId); return; }
+    if (notificationItem.kind.startsWith('friend-')) { setView('friends'); return; }
     setView('feed');
     const postId = notificationItem.kind === 'post-published' ? notificationItem.sourceId : notificationItem.parentId;
     let active = true;
@@ -62,9 +61,8 @@ export default function SharedFeed({ user, notification }) {
     const element = document.querySelector(`[data-shared-post="${CSS.escape(notificationPost.id)}"]`);
     if (element) { element.tabIndex = -1; element.scrollIntoView({ block: 'center' }); element.focus({ preventScroll: true }); }
   }, [notificationPost?.id, notification?.requestId, view]);
-  // Resolve contacts and exact member-ID searches even outside the first 100 directory entries.
-  const searchedId = /^[A-Za-z0-9_-]{20,128}$/.test(query.trim()) ? query.trim() : '';
-  const neededIds = [...new Set([user.id, ...connections.flatMap(item => item.members), ...posts.map(item => item.authorId), ...Object.values(savedContent).filter(Boolean).map(item => item.authorId), searchedId].filter(Boolean))].filter(id => !directory.some(item => item.id === id)).sort();
+  // Resolve known contacts and post authors outside the first 100 directory entries.
+  const neededIds = [...new Set([user.id, ...connections.flatMap(item => item.members), ...posts.map(item => item.authorId), ...Object.values(savedContent).filter(Boolean).map(item => item.authorId)].filter(Boolean))].filter(id => !directory.some(item => item.id === id)).sort();
   const profiles = [...directory, ...neededIds.map(id => extraProfiles[id]).filter(Boolean)];
   useEffect(() => {
     let active = true;
@@ -181,7 +179,7 @@ export default function SharedFeed({ user, notification }) {
     <div className="shared-feed-status" role="status"><span className={ready ? 'connected' : ''}>{ready ? 'Online' : !online ? 'Offline' : failure ? 'Unavailable' : 'Connecting'}</span>{!ready && busy && <span>Waiting for server confirmation</span>}</div>
     <div className={`feed-layout shared-feed-layout ${view === 'messages' ? 'is-messages' : ''}`}>
       <aside className="feed-left">
-        <div className="feed-current-user"><Avatar name={user.name} memberId={user.id} /><div><strong>{user.name}</strong><span>{college || 'Your campus connection'}</span><MemberId uid={user.id} /></div></div>
+        <div className="feed-current-user"><Avatar name={user.name} memberId={user.id} /><div><strong>{user.name}</strong><span>{college || 'Your campus connection'}</span></div></div>
         <nav aria-label="Shared feed navigation">{[['feed', 'Latest posts', House], ['friends', 'Friends', Users], ['messages', 'Messages', MessageCircle], ['saved', 'Saved posts', Bookmark], ['mine', 'My posts', UserRound]].map(([id, title, Icon]) => <button key={id} type="button" aria-label={title} aria-describedby={id === 'messages' && messaging.unreadCount > 0 ? 'feed-messages-unread' : undefined} className={view === id ? 'active' : ''} aria-current={view === id ? 'page' : undefined} onClick={() => selectView(id)}><Icon size={19} /><span>{title}</span>{id === 'friends' && incoming.length > 0 && <span className="feed-nav-badge">{incoming.length}</span>}{id === 'messages' && messaging.unreadCount > 0 && <span id="feed-messages-unread" className="feed-nav-badge" aria-label={`${messaging.unreadCount} unread conversations`}>{messaging.unreadCount}</span>}</button>)}</nav>
         <button type="button" className="feed-community-link" onClick={() => window.campusSwitchWorkspace('community')}><ArrowLeft size={16} />Back to Community</button>
       </aside>
@@ -199,7 +197,7 @@ export default function SharedFeed({ user, notification }) {
       </div>
       <aside className="feed-right">
         <section className="feed-card"><div className="feed-section-heading"><h2>Your friends</h2><button type="button" aria-label="View friends" title="View friends" onClick={() => selectView('friends')}><Users size={17} /></button></div>
-          {friends.map(id => { const profile = profiles.find(item => item.id === id); return <button type="button" className="feed-friend-shortcut" key={id} onClick={() => selectView('friends')}><Avatar name={profile?.name || 'Student'} memberId={id} small /><span><strong>{profile?.name || 'Student'}</strong><small>{profile?.college || 'Campus member'}</small><MemberId uid={id} /></span></button>; })}
+          {friends.map(id => { const profile = profiles.find(item => item.id === id); return <button type="button" className="feed-friend-shortcut" key={id} onClick={() => selectView('friends')}><Avatar name={profile?.name || 'Student'} memberId={id} small /><span><strong>{profile?.name || 'Student'}</strong><small>{profile?.college || 'Campus member'}</small></span></button>; })}
           {!friends.length && <p className="feed-side-empty">No friends yet.</p>}
         </section>
         <section className="feed-card feed-campus-note"><span className="feed-note-icon"><GraduationCap size={24} /></span><h2>Different campuses.<br />Shared good vibes.</h2><button type="button" className="feed-quiet-button" onClick={() => selectView('friends')}>Find people<ArrowRight size={14} /></button></section>

@@ -28,7 +28,6 @@ import {
 import { loadFeed, PEOPLE, preparePhoto, saveFeed } from "./feed-store";
 import "./feed.css";
 import { useProfilePhoto } from './profile-photo-store';
-import MemberId from './MemberId';
 import { feedPhotoMedia, prepareFeedPhoto } from './feed-photo';
 
 const initials = (name) =>
@@ -421,7 +420,6 @@ export function Post({
         <Avatar name={post.authorName} color={profile?.color} memberId={shared ? post.authorId : undefined} />
         <div className="feed-post-identity">
           <strong>{post.authorName}</strong>
-          {shared && <MemberId uid={post.authorId} />}
           <span>
             {post.college} <span aria-hidden="true">·</span>{" "}
             <time dateTime={new Date(post.createdAt).toISOString()}>
@@ -572,7 +570,6 @@ export function Post({
               />
               <div>
                 <strong>{item.name}</strong>
-                {shared && <MemberId uid={item.authorId} />}
                 <p>{item.body}</p>
               </div>
               {(item.authorId === user.id || (shared && post.authorId === user.id)) && (
