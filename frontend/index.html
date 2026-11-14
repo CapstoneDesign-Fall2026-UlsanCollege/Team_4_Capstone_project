@@ -78,6 +78,19 @@
   </section>
 </main>
 
+<main id="emailVerification" class="email-verification hidden" aria-labelledby="emailVerificationTitle" aria-busy="false">
+  <section class="email-verification-card">
+    <img src="/assets/campusvibes-logo.png" alt="CampusVibes" width="48" height="48">
+    <h1 id="emailVerificationTitle" tabindex="-1">Verify your email</h1>
+    <p>Confirm that you can receive mail at <strong id="verificationEmail"></strong> before using your account.</p>
+    <p>Open the verification link in your inbox, then return here. Check your spam folder too.</p>
+    <p id="emailVerificationFeedback" class="email-verification-feedback" role="status" aria-live="polite"></p>
+    <button type="button" class="auth-command auth-login-command" id="checkEmailVerification">I have verified my email</button>
+    <button type="button" class="auth-command auth-create-command" id="sendVerificationEmail">Send verification email</button>
+    <button type="button" class="auth-text-button" id="verificationDifferentEmail">Use a different email</button>
+  </section>
+</main>
+
 <dialog class="auth-reset-dialog" id="passwordResetDialog" aria-labelledby="passwordResetTitle">
   <button type="button" class="auth-reset-close" id="closePasswordReset" title="Close" aria-label="Close password reset"><i data-lucide="x"></i></button>
   <h2 id="passwordResetTitle">Reset your password</h2>

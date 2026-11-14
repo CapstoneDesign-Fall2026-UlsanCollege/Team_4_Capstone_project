@@ -1,3 +1,4 @@
+import { verifyEmulatorEmail } from './verify-emulator-email.js';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import { randomBytes } from 'node:crypto';
@@ -31,7 +32,7 @@ try {
     await page.locator('#suPass').fill(password);
     await page.locator('#suPass2').fill(password);
     await page.locator('#suInterest').selectOption('Tech');
-    await page.locator('#signupForm button[type=submit]').click();
+    await page.locator('#signupForm button[type=submit]').click();await verifyEmulatorEmail(page);
     await page.locator('#appMain').waitFor({ state: 'visible' });
     const uid = await page.evaluate(() => window.campusFirebaseAuth.auth.currentUser.uid);
     users.push({uid,token:await page.evaluate(()=>window.campusFirebaseAuth.auth.currentUser.getIdToken())});

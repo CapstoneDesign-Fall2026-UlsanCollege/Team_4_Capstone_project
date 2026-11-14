@@ -11,7 +11,7 @@ before(async () => {
 });
 beforeEach(() => env.clearFirestore());
 after(async () => { if (env) { await env.clearFirestore(); await env.cleanup(); } });
-const db = uid => env.authenticatedContext(uid).firestore();
+const db = uid => env.authenticatedContext(uid, { email_verified: true }).firestore();
 const notification = (kind = 'like', sourceId = 'alice_like', parentId = 'p', extra = {}) => ({ kind, sourceId, parentId, actorId: 'alice', actorName: 'Alice', title: '', createdAt: serverTimestamp(), ...extra });
 const inbox = (database, uid, data) => doc(database, 'campusAccountData', uid, 'notifications', `${data.kind}_${data.parentId}_${data.sourceId}`);
 const post = (uid = 'bob') => ({ authorId: uid, authorName: uid, college: 'Test College', body: 'Test post', event: null, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });

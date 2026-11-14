@@ -5,10 +5,17 @@ import { createAssistantHandler } from '../src/assistant.js';
 
 const env = { GEMINI_API_KEY:'test-gemini-secret-not-a-real-key' };
 const question = { text:'How can I prepare for my first campus event?', history:[], filters:{}, consent:true, adult:true };
-function setup({ count=null, anonymous=false, configured=true, conflict=false, providerError, reply={text:'Start with a small event and prepare a short introduction.',eventIds:[],pages:[]} }={}) {
+test('unverified email cannot consume an AI budget or call the provider', async () => {
+  for (const emailVerified of [false, null, 'true']) {
+    const fixture = setup({ emailVerified });const response = await fixture.invoke();
+    assert.equal(response.statusCode, 403);assert.match(response.body.error, /Verify your email/);
+    assert.equal(fixture.calls.provider.length, 0);assert.equal(fixture.calls.writes.length, 0);
+  }
+});
+function setup({ emailVerified=true, count=null, anonymous=false, configured=true, conflict=false, providerError, reply={text:'Start with a small event and prepare a short introduction.',eventIds:[],pages:[]} }={}) {
   const calls={provider:[],writes:[],auth:0}; let raced=false;
   const request=async (url,init)=>{
-    if(url.includes('accounts:lookup')){calls.auth++;return JSON.parse(init.body).idToken === 'valid-token' ? Response.json({users:[{localId:'private-test-uid',providerUserInfo:anonymous?[]:[{providerId:'password'}],email:'private-account@example.com'}]}) : Response.json({},{status:400});}
+    if(url.includes('accounts:lookup')){calls.auth++;return JSON.parse(init.body).idToken === 'valid-token' ? Response.json({users:[{localId:'private-test-uid',emailVerified,providerUserInfo:anonymous?[]:[{providerId:'password'}],email:'private-account@example.com'}]}) : Response.json({},{status:400});}
     if(url.includes('/campusAssistantUsage/'))return count===null ? Response.json({},{status:404}) : Response.json({fields:{count:{integerValue:String(count)},windowStart:{timestampValue:new Date(Date.now()-60000).toISOString()},lastRequestAt:{timestampValue:new Date(Date.now()-10000).toISOString()}},updateTime:'2026-10-18T00:00:00Z'});
     if(url.endsWith(':commit')){calls.writes.push(JSON.parse(init.body));if(conflict&&!raced){raced=true;return Response.json({},{status:409});}return Response.json({});}
     throw new Error('Unexpected test URL.');

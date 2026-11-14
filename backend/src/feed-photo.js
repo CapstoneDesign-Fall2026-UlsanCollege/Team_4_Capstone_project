@@ -84,6 +84,7 @@ export function createPhotoHandler({ env = process.env, request = fetch, media =
       if (!identityResponse.ok) throw failure(401, 'Your sign-in expired. Sign in again.');
       const user = (await identityResponse.json()).users?.[0];
       if (!user || user.disabled || !user.providerUserInfo?.length || !/^[A-Za-z0-9_-]{1,128}$/.test(user.localId)) throw failure(403, 'Sign in with a CampusVibe account to share photos.');
+      if (user.emailVerified !== true) throw failure(403, 'Verify your email before sharing photos.');
       if (!configured) throw failure(503, 'Photo sharing is not configured yet. Text posts are still available.');
       const body = await readBody(req);
       const itemId = suggestion ? body?.suggestionId : body?.postId;

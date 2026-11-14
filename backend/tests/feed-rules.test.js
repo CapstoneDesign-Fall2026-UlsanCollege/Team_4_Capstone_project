@@ -15,7 +15,7 @@ after(async () => {
   try { await env.clearFirestore(); }
   finally { await env.cleanup(); }
 });
-const db = uid => env.authenticatedContext(uid).firestore();
+const db = uid => env.authenticatedContext(uid, { email_verified: true }).firestore();
 const ref = (database, id = "post") => doc(database, "campusFeedPosts", id);
 const post = (uid = "alice", extra = {}) => ({ authorId: uid, authorName: "Alice", college: "Ulsan College", body: "A real shared text post", event: null, createdAt: serverTimestamp(), updatedAt: serverTimestamp(), ...extra });
 

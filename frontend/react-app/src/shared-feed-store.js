@@ -19,7 +19,7 @@ export function feedError(error) {
 }
 
 export function account(user) {
-  if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.uid !== user.id) throw new Error("Sign in with your account to use the shared feed.");
+  if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.emailVerified !== true || auth.currentUser.uid !== user.id) throw new Error("Sign in with your account to use the shared feed.");
   return auth.currentUser.uid;
 }
 

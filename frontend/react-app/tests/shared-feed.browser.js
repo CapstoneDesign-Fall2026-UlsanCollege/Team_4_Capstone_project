@@ -1,3 +1,4 @@
+import { verifyEmulatorEmail } from './verify-emulator-email.js';
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { randomBytes } from "node:crypto";
@@ -26,7 +27,7 @@ try {
     await page.locator("#suPass").fill(password);
     await page.locator("#suPass2").fill(password);
     await page.locator("#suInterest").selectOption("Tech");
-    await page.locator('#signupForm button[type="submit"]').click();
+    await page.locator('#signupForm button[type="submit"]').click();await verifyEmulatorEmail(page);
     await page.waitForFunction(() => !document.querySelector('#appMain').classList.contains('hidden') || !document.querySelector('#signupFormErr').classList.contains('hidden'));
     if (await page.locator('#signupFormErr').isVisible()) throw new Error(await page.locator('#signupFormErr').textContent());
     await page.locator('[data-workspace="feed"]').click();

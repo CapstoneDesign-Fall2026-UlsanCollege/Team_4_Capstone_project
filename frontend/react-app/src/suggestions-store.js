@@ -8,7 +8,7 @@ import { validSuggestionPoster } from './suggestion-poster';
 export const SUGGESTION_CATEGORIES = ['All', 'Tech', 'Arts', 'Music', 'Sports', 'Social', 'Academics'];
 
 function uidFor(user) {
-  if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.uid !== user.id) throw new Error('Sign in to send an event suggestion. Your draft stays in this browser.');
+  if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.emailVerified !== true || auth.currentUser.uid !== user.id) throw new Error('Sign in to send an event suggestion. Your draft stays in this browser.');
   return user.id;
 }
 

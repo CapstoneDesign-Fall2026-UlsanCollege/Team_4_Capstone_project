@@ -5,7 +5,7 @@ import { FIRST_PUBLISHED_EVENT_ID,publicationPayload,publishedEvent } from './pu
 import { validEventLinkId } from './event-links';
 
 function owner(user) {
-  if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.uid !== user.id) throw new Error('Sign in before accessing published campus events.');
+  if (!auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.emailVerified !== true || auth.currentUser.uid !== user.id) throw new Error('Sign in before accessing published campus events.');
 }
 export function watchPublishedEvents(user, receive, fail) {
   owner(user);

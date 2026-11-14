@@ -19,7 +19,7 @@ beforeEach(async()=>{
   });
 });
 after(async()=>{if(env){await env.clearFirestore();await env.cleanup();}});
-const db=uid=>env.authenticatedContext(uid).firestore();
+const db=uid=>env.authenticatedContext(uid, { email_verified: true }).firestore();
 const publication=database=>doc(database,'campusPublishedEvents','idea');
 
 test('reviewer publication is atomic, visible to another student, and omits private fields',async()=>{

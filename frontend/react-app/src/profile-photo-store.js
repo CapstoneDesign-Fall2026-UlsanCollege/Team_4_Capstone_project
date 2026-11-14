@@ -22,7 +22,7 @@ export function saveProfilePhoto(user, photo) {
 export function useProfilePhoto(uid, retry = 0) {
   const [result, setResult] = useState({ uid: '', photo: '', loading: true, error: '' });
   useEffect(() => {
-    if (!uid || uid === 'demo' || !auth.currentUser || auth.currentUser.isAnonymous) return;
+    if (!uid || uid === 'demo' || !auth.currentUser || auth.currentUser.isAnonymous || auth.currentUser.emailVerified !== true) return;
     let active = true;
     setResult({ uid, photo: '', loading: true, error: '' });
     const stop = onSnapshot(reference(uid), { includeMetadataChanges: true }, snapshot => {

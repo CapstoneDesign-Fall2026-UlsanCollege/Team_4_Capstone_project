@@ -10,7 +10,7 @@ const idea={name:'Campus film night',category:'Arts',host:'',authorName:'',anony
 before(async()=>{const url=new URL(`http://${process.env.FIRESTORE_EMULATOR_HOST||'127.0.0.1:8180'}`);env=await initializeTestEnvironment({projectId:'demo-campusvibe-feed',firestore:{host:url.hostname,port:Number(url.port),rules:readFileSync(new URL('../firebase/firestore.rules',import.meta.url),'utf8')}});});
 beforeEach(async()=>{await env.clearFirestore();await env.withSecurityRulesDisabled(context=>setDoc(doc(context.firestore(),'campusSuggestionReviewers','reviewer'),{enabled:true}));});
 after(async()=>{if(env){await env.clearFirestore();await env.cleanup();}});
-const database=uid=>env.authenticatedContext(uid).firestore();
+const database=uid=>env.authenticatedContext(uid, { email_verified: true }).firestore();
 const claim=db=>doc(db,'campusSuggestionPhotos',imageId);
 const claimData=()=>({uid:'alice',suggestionId:id,status:'active',createdAt:serverTimestamp()});
 function submit(db,photo=poster){const batch=writeBatch(db);batch.set(doc(db,'campusSuggestionOwners',id),{uid:'alice',createdAt:serverTimestamp()});batch.set(doc(db,'campusSuggestions',id),{...idea,createdAt:serverTimestamp(),poster:photo});return batch.commit();}

@@ -3,10 +3,15 @@ import assert from 'node:assert/strict';
 import {createPhotoHandler} from '../src/feed-photo.js';
 const suggestionId='test-idea',photoId='01234567890123456789',image='data:image/jpeg;base64,/9j/AAAA';
 const env={CLOUDINARY_API_KEY:'test-key',CLOUDINARY_API_SECRET:'test-secret'};
-function setup({uid='alice',claimUid=uid,claimStatus='active',claimIdea=suggestionId,submitted=false,count=0,providerError=false,cleanupError=false}={}){
+test('unverified email cannot upload a suggestion poster or spend quota',async()=>{
+ for(const emailVerified of [false,null,'true']){const fixture=setup({emailVerified}),response=await fixture.invoke();
+ assert.equal(response.statusCode,403);assert.match(response.body.error,/Verify your email/);
+ assert.equal(fixture.calls.upload.length,0);assert.equal(fixture.calls.destroy.length,0);assert.equal(fixture.calls.budget,0);}
+});
+function setup({emailVerified=true,uid='alice',claimUid=uid,claimStatus='active',claimIdea=suggestionId,submitted=false,count=0,providerError=false,cleanupError=false}={}){
  const calls={upload:[],destroy:[],budget:0};
  const request=async(url,init)=>{
-  if(url.includes('accounts:lookup'))return Response.json({users:[{localId:uid,providerUserInfo:[{providerId:'password'}]}]});
+  if(url.includes('accounts:lookup'))return Response.json({users:[{localId:uid,emailVerified,providerUserInfo:[{providerId:'password'}]}]});
   if(url.includes('/campusSuggestionPhotos/'))return Response.json({fields:{uid:{stringValue:claimUid},suggestionId:{stringValue:claimIdea},status:{stringValue:claimStatus}}});
   if(url.includes('/campusSuggestionOwners/'))return submitted?Response.json({fields:{uid:{stringValue:uid}}}):Response.json({},{status:404});
   if(url.includes('/campusSuggestions/'))return Response.json({fields:{poster:{mapValue:{fields:{id:{stringValue:photoId}}}}}});

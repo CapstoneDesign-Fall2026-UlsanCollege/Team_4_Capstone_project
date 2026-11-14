@@ -13,6 +13,9 @@ import {
   browserLocalPersistence,
   browserSessionPersistence,
   sendPasswordResetEmail,
+  sendEmailVerification,
+  reload,
+  getIdToken,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
@@ -63,6 +66,8 @@ import originalScript from "../../apps.js?raw";
 import dashboardScript from "../../dashboard.js?raw";
 import discoverScript from "../../discover.js?raw";
 import eventSharingScript from '../../event-sharing.js?raw';
+import emailVerificationScript from '../../email-verification.js?raw';
+import { hasVerifiedEmail } from './email-verification';
 import ThemeToggle from "./ThemeToggle";
 import { eventCatalog,replacePublishedEvents,rememberLinkedEvent,clearLinkedEvents,linkedEventCount } from './event-catalog';
 import { watchPublishedEvents,watchPublishedEvent } from './published-events-store';
@@ -172,6 +177,10 @@ export default function App() {
       browserLocalPersistence,
       browserSessionPersistence,
       sendPasswordResetEmail,
+      sendEmailVerification,
+      reload,
+      getIdToken,
+      hasVerifiedEmail,
       GoogleAuthProvider,
       signInWithPopup,
     };
@@ -272,6 +281,7 @@ export default function App() {
       ${dashboardScript}
       ${discoverScript}
       ${eventSharingScript}
+      ${emailVerificationScript}
       ${originalScript}
       Object.assign(window, { openAuth, closeAuth, closeOnBackdrop, switchTab, handleLogin, handleSignup, logout, syncFirebaseUser, campusSwitchWorkspace: switchWorkspace });
     })();`;

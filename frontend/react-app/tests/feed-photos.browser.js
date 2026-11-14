@@ -1,3 +1,4 @@
+import { verifyEmulatorEmail } from './verify-emulator-email.js';
 import { chromium } from 'playwright';
 import { expect as baseExpect } from '@playwright/test';
 import assert from 'node:assert/strict';
@@ -40,7 +41,7 @@ async function enter(name) {
   await page.locator('.auth-signup-small').click();
   const password = `Cv!${randomBytes(12).toString('hex')}A1`;
   for (const [id, value] of [['suName', name], ['suEmail', `feed-photo-${randomBytes(8).toString('hex')}@example.com`], ['suPass', password], ['suPass2', password]]) await page.locator(`#${id}`).fill(value);
-  await page.locator('#suInterest').selectOption('Tech'); await page.locator('#signupForm button[type=submit]').click();
+  await page.locator('#suInterest').selectOption('Tech'); await page.locator('#signupForm button[type=submit]').click();await verifyEmulatorEmail(page);
   await expect(page.locator('.account-sync-status')).toHaveText('Saved to your account');
   uid = await page.evaluate(() => window.campusFirebaseAuth.auth.currentUser.uid);
   await page.locator('[data-workspace=feed]').click(); await page.locator('.shared-feed-status .connected').waitFor();
