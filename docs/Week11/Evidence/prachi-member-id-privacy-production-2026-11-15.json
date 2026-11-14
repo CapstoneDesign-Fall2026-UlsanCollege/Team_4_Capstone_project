@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-11-14T18:37:34.092Z",
+  "target": "https://campusvibe-theta.vercel.app",
+  "results": [
+    {
+      "width": 1440,
+      "status": "PASS",
+      "guestProfileAndFeed": true,
+      "newPrivacyCopyInServedProfile": true,
+      "servedSocialCodeHasNoIdRenderer": true,
+      "realLogin": false,
+      "productionWrites": false,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "status": "PASS",
+      "guestProfileAndFeed": true,
+      "newPrivacyCopyInServedProfile": true,
+      "servedSocialCodeHasNoIdRenderer": true,
+      "realLogin": false,
+      "productionWrites": false,
+      "pageErrors": []
+    }
+  ],
+  "scope": "Read-only guest UI and actual served JS asset readiness. Signed-in privacy/private delivery proof is local emulator evidence; no real production account login, data write or independent human test."
+}
