@@ -6,7 +6,14 @@ import { FEED_PHOTO_BYTES } from '../../frontend/react-app/src/feed-photo.js';
 const postId = '01234567890123456789';
 const image = 'data:image/jpeg;base64,/9j/AAAA';
 const env = { CLOUDINARY_API_KEY: 'test-private-key', CLOUDINARY_API_SECRET: 'test-private-secret' };
-function setup({ post = null, count = null, anonymous = false, uploadError = false, conflict = false, configured = true, cleanup = 'ok' } = {}) {
+test('unverified email cannot upload or clean up a shared photo', async () => {
+  for (const emailVerified of [false, null, 'true']) {
+    const fixture = setup({ emailVerified });const response = await fixture.invoke();
+    assert.equal(response.statusCode, 403);assert.match(response.body.error, /Verify your email/);
+    assert.equal(fixture.calls.upload.length, 0);assert.equal(fixture.calls.destroy.length, 0);assert.equal(fixture.calls.budget.length, 0);
+  }
+});
+function setup({ emailVerified = true, post = null, count = null, anonymous = false, uploadError = false, conflict = false, configured = true, cleanup = 'ok' } = {}) {
   const calls = { upload: [], destroy: [], budget: [], auth: 0 }; let conflicted = false;
   const media = { uploader: {
     upload: async (file, options) => {
@@ -20,7 +27,7 @@ function setup({ post = null, count = null, anonymous = false, uploadError = fal
     if (url.includes('accounts:lookup')) {
       calls.auth++;
       if (JSON.parse(init.body).idToken !== 'alice-token') return Response.json({}, { status: 400 });
-      return Response.json({ users: [{ localId: 'alice', providerUserInfo: anonymous ? [] : [{ providerId: 'password' }] }] });
+      return Response.json({ users: [{ localId: 'alice', emailVerified, providerUserInfo: anonymous ? [] : [{ providerId: 'password' }] }] });
     }
     if (url.includes('/campusFeedPosts/')) return post ? Response.json({ fields: post }) : Response.json({}, { status: 404 });
     if (url.includes('/campusFeedPhotoUploads/')) return count === null ? Response.json({}, { status: 404 }) : Response.json({ fields: { count: { integerValue: String(count) }, windowStart: { timestampValue: new Date().toISOString() } }, updateTime: '2026-10-18T00:00:00Z' });

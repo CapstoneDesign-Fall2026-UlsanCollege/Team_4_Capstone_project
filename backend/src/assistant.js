@@ -53,6 +53,7 @@ export function createAssistantHandler({ env = process.env, request = fetch, gen
       if (!checked.ok) throw error(401, 'Your sign-in expired. Sign in again to use AI.');
       const user = (await checked.json()).users?.[0];
       if (!user || user.disabled || !user.providerUserInfo?.length || !/^[A-Za-z0-9_-]{1,128}$/.test(user.localId)) throw error(403, 'Sign in with a CampusVibe account to use AI.');
+      if (user.emailVerified !== true) throw error(403, 'Verify your email before using AI.');
       if (!configured) throw error(503, 'Gemini is not configured. The local helper is still available.', true);
       let body = req.body;
       if (body === undefined) {
