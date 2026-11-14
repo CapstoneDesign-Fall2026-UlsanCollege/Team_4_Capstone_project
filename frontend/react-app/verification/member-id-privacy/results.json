@@ -1,0 +1,208 @@
+{
+  "dateKST": "2026-11-15",
+  "preparedAt": "2026-11-14T18:32:16.670Z",
+  "owner": "prachi2061",
+  "executor": "Codex-assisted implementation, source inspection and automated checks",
+  "issue": 172,
+  "baseline": "35567e5",
+  "sourceHashes": [
+    {
+      "file": "frontend/react-app/package.json",
+      "sha256NormalizedLF": "c16037d29cbf1b164f2fbe70d0bb8a7ffa96c259ce19fa5a7be6357720a2b4bf"
+    },
+    {
+      "file": "frontend/react-app/src/Feed.jsx",
+      "sha256NormalizedLF": "9db465a81bff16671c0568fdd35402ec8b304d79cde3cebfa2f89b03119ea287"
+    },
+    {
+      "file": "frontend/react-app/src/MemberId.jsx",
+      "removed": true
+    },
+    {
+      "file": "frontend/react-app/src/Profile.jsx",
+      "sha256NormalizedLF": "c0ecbf4fb2ad73a71237e7dc6aa4842c6a505f67224a78f3c763b6adc596bb6d"
+    },
+    {
+      "file": "frontend/react-app/src/SharedFeed.jsx",
+      "sha256NormalizedLF": "d4d2b9cf28cdded6031e8b7f9cb358c146cfd45c61a8db06bf4947372c42d4ed"
+    },
+    {
+      "file": "frontend/react-app/src/SharedFriends.jsx",
+      "sha256NormalizedLF": "c1d12a56765b9db14e5fb0826a345b262c9bb6808452f24c73ebd1250ef0c8c0"
+    },
+    {
+      "file": "frontend/react-app/src/SharedMessages.jsx",
+      "sha256NormalizedLF": "a8f823e007fa506a67473d59e9fb9015d8e97cf5eda00fa2825cbd687b0c7a9e"
+    },
+    {
+      "file": "frontend/react-app/src/member-identity.js",
+      "sha256NormalizedLF": "0392290bf27bc5473bebf32b571f7cbe64921ab7e25a73d777e382132c6788f6"
+    },
+    {
+      "file": "frontend/react-app/src/profile-photo.js",
+      "sha256NormalizedLF": "a61917ec05c3a93d665ae37e605925f1d8c1b2b95910d1dc65e8e707ed996fb7"
+    },
+    {
+      "file": "frontend/react-app/src/profile.css",
+      "sha256NormalizedLF": "16564c4a4d56b1cd08b3931f71daf08b25e39877a1163a40b01f53d9bba0840c"
+    },
+    {
+      "file": "frontend/react-app/src/shared-feed.css",
+      "sha256NormalizedLF": "b54fe2486272ed98f719c7be2ea1806bf0ad14c7bad656793e967382641c10da"
+    },
+    {
+      "file": "frontend/react-app/tests/member-identity.test.js",
+      "sha256NormalizedLF": "b45ff3c08512687dfd61322bb37894b7f173a191aff190decf18504b934b4a50"
+    },
+    {
+      "file": "frontend/react-app/tests/notifications.browser.js",
+      "sha256NormalizedLF": "09bb6f3b5dba69246d555bd1dae3da33c4c91348ac5aff6628b583fab18a62ff"
+    },
+    {
+      "file": "frontend/react-app/tests/profile-photo.test.js",
+      "sha256NormalizedLF": "777888ccdf932b122d6a8806bea148e0889e4e409185aff53f6c26e285b296bf"
+    },
+    {
+      "file": "frontend/react-app/tests/profile-photos.browser.js",
+      "sha256NormalizedLF": "db2ff5a02da39d7c5f7ed5990d1b8000e35a35f526e980a1b7eeaf992d70ebaf"
+    },
+    {
+      "file": "frontend/react-app/tests/shared-feed.browser.js",
+      "sha256NormalizedLF": "96bcd952dbef5037816f301f56f09e7f37dfe4f907fc100fc4e49e85389f7748"
+    },
+    {
+      "file": "frontend/react-app/tests/social-regressions.browser.js",
+      "sha256NormalizedLF": "6e2704d9f377c5570aa75f9ba4b2b973419790bca340fabfc79350a13cf64c93"
+    }
+  ],
+  "result": {
+    "checkedAt": "2026-11-14T18:31:30.930Z",
+    "status": "PASS",
+    "rules": 49,
+    "units": 5,
+    "privacy": {
+      "checkedAt": "2026-11-14T18:06:44.062Z",
+      "checks": [
+        {
+          "label": "Friends with same-name contacts beyond the directory window",
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "Mobile Friends",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "Mobile Friends",
+          "viewport": {
+            "width": 320,
+            "height": 844
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "Inbox and active conversation",
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "Shared posts and comments",
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "Own profile and privacy copy",
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "Mobile private conversation",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "status": "PASS"
+        }
+      ],
+      "scope": "Local Auth/Firestore emulator workflow with fictional verified accounts. UI text/labels/search privacy and correct recipient delivery; internal IDs remain in client/server data."
+    },
+    "workflowSuites": [
+      "profile-photos",
+      "notifications",
+      "social-regressions",
+      "social-components",
+      "shared-feed"
+    ],
+    "smoke": {
+      "startTime": "2026-11-14T18:28:31.584Z",
+      "duration": 179298.245,
+      "expected": 46,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "build": {
+    "command": "npm run build",
+    "status": "PASS",
+    "advisory": "Existing Vite bundle-size advisory."
+  },
+  "behavior": [
+    "Post/comment, Friends/request/shortcut, conversation and own Profile screens no longer render raw account IDs.",
+    "Public identity labels and name/college search ignore internal IDs and email fields.",
+    "Friend notifications open Friends without inserting an actor ID into the search input.",
+    "Known contacts still resolve outside the first-100 directory; arbitrary ID-driven profile lookup is removed. New people discovery retains the bounded directory scope.",
+    "Different colleges/photos distinguish the same-name fixtures; existing connection IDs still deliver to the correct participant."
+  ],
+  "privacyBoundary": "UI metadata minimization, not anonymization or a new server identity layer. Internal IDs remain in authenticated Firebase responses/document paths and existing asset/request data. Rules, provider settings, billing and data schemas are unchanged.",
+  "verificationNotes": [
+    "Successful checks are retained across initial and resumed runs; this is not a claim that all suites passed on the first attempt.",
+    "A stale notification fixture omitted required reviewer publication details. The fixture now supplies date/time/location explicitly; the complete notification workflow passed afterward.",
+    "The old photo workflow expected shared attachments to be disabled; its assertion was aligned with the existing enabled Photos action. No upload feature was added.",
+    "A previously occupied emulator port was avoided. The last Feed workflow used installed Chrome because the separate Playwright headless executable was absent.",
+    "All application code stayed unchanged while completing these fixture/environment corrections. Passed checks were not repeated without a new concern."
+  ],
+  "repeat": {
+    "commands": [
+      "npm run test:profile-photos --workspace frontend/react-app",
+      "npm run test:rules",
+      "npm run test:profile-photos-browser --workspace frontend/react-app",
+      "npm run test:notifications-browser --workspace frontend/react-app",
+      "npm run test:social-regressions --workspace frontend/react-app",
+      "npm run test:social-components --workspace frontend/react-app",
+      "npm run test:shared-feed --workspace frontend/react-app",
+      "npm run build"
+    ],
+    "setup": "Use an isolated demo-campusvibe-feed Auth/Firestore emulator and a localhost Vite server. Set VITE_FIREBASE_EMULATORS=true and the matching VITE/auth/Firestore emulator ports. Set ACCOUNT_TEST_URL and FEED_TEST_URL to the localhost server; direct CAMPUS_TEST_ARTIFACTS_URL to a temporary output folder. The legacy shared-feed script accepts PLAYWRIGHT_CHROME_PATH for installed Chrome.",
+    "smokeSpecs": [
+      "profile",
+      "published-profile",
+      "notifications",
+      "notification-failures",
+      "navigation",
+      "event-sharing"
+    ]
+  },
+  "limits": [
+    "Signed-in validation uses fictional verified emulator accounts and generated thumbnails, not production users or independent human testers.",
+    "No production authenticated data read/write, provider upload, verification email or Google login is certified.",
+    "Read-only deployed guest/asset readiness is recorded separately on Issue #172."
+  ],
+  "preservation": "All backend, docs, README and .github files are unchanged; no application dependencies were added."
+}
