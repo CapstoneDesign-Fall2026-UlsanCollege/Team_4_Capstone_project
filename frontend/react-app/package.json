@@ -30,6 +30,8 @@
     "test:profile-photos-browser": "node tests/profile-photos.browser.js",
     "test:badges": "node --test tests/progress-badges.test.js",
     "test:account": "node --test tests/account-sync.test.js",
+    "test:email-verification": "node --test tests/email-verification.test.js",
+    "test:email-verification-browser": "node tests/email-verification.browser.js",
     "test:account-browser": "node tests/account-persistence.browser.js",
     "test:notifications": "node --test tests/notifications.test.js",
     "test:maps": "node --test tests/event-maps.test.js",

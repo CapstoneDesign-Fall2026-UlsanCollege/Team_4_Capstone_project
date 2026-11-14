@@ -1,3 +1,4 @@
+import { verifyEmulatorEmail } from './verify-emulator-email.js';
 import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { randomBytes, randomUUID } from 'node:crypto';
@@ -39,7 +40,7 @@ async function account(name, existing) {
     await page.locator('#suName').fill(name); await page.locator('#suEmail').fill(email);
     await page.locator('#suPass').fill(password); await page.locator('#suPass2').fill(password);
     await page.locator('#suInterest').selectOption('Tech');
-    await page.locator('#signupForm button[type=submit]').click();
+    await page.locator('#signupForm button[type=submit]').click();await verifyEmulatorEmail(page);
   }
   await expect(page.locator('#appMain')).toBeVisible();
   await page.waitForFunction(() => window.campusAccount?.ready());

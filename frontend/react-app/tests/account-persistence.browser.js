@@ -1,3 +1,4 @@
+import { verifyEmulatorEmail } from './verify-emulator-email.js';
 import { chromium } from 'playwright';
 import { expect } from '@playwright/test';
 import assert from 'node:assert/strict';
@@ -18,7 +19,7 @@ async function enter(page,credentials,signup=false){
   assert.equal(await page.evaluate(()=>window.campusFirebaseAuth.auth.app.options.projectId),project);
   if(signup){
     await page.locator('.auth-signup-small').click();await page.locator('#suName').fill(credentials.name);await page.locator('#suEmail').fill(credentials.email);
-    await page.locator('#suPass').fill(credentials.password);await page.locator('#suPass2').fill(credentials.password);await page.locator('#suInterest').selectOption('Tech');await page.locator('#signupForm button[type=submit]').click();
+    await page.locator('#suPass').fill(credentials.password);await page.locator('#suPass2').fill(credentials.password);await page.locator('#suInterest').selectOption('Tech');await page.locator('#signupForm button[type=submit]').click();await verifyEmulatorEmail(page);
   }else{
     await page.locator('#landingEmail').fill(credentials.email);await page.locator('#landingPass').fill(credentials.password);await page.locator('#landingLoginForm button[type=submit]').click();
   }

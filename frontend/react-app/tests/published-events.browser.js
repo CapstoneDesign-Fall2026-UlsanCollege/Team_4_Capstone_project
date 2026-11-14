@@ -1,3 +1,4 @@
+import { verifyEmulatorEmail } from './verify-emulator-email.js';
 import { chromium } from 'playwright';
 import { expect } from '@playwright/test';
 import assert from 'node:assert/strict';
@@ -32,7 +33,7 @@ async function create(name,viewport) {
   await page.locator('#suName').fill(name);await page.locator('#suEmail').fill(`publish-${randomBytes(7).toString('hex')}@example.com`);
   const password=`Cv!${randomBytes(12).toString('hex')}A1`;
   await page.locator('#suPass').fill(password);await page.locator('#suPass2').fill(password);await page.locator('#suInterest').selectOption('Tech');
-  await page.locator('#signupForm button[type=submit]').click();await expect(page.locator('#appMain')).toBeVisible();
+  await page.locator('#signupForm button[type=submit]').click();await verifyEmulatorEmail(page);await expect(page.locator('#appMain')).toBeVisible();
   const user=await page.evaluate(async()=>({uid:window.campusFirebaseAuth.auth.currentUser.uid,token:await window.campusFirebaseAuth.auth.currentUser.getIdToken()}));
   users.push(user);await page.waitForFunction(()=>window.campusAccount?.ready());return {page,context,...user};
 }

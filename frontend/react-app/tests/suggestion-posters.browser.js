@@ -1,3 +1,4 @@
+import { verifyEmulatorEmail } from './verify-emulator-email.js';
 import { chromium } from 'playwright';
 import { expect as baseExpect } from '@playwright/test';
 import assert from 'node:assert/strict';
@@ -35,7 +36,7 @@ async function enter(name,viewport){
  assert.ok(await page.evaluate(()=>window.campusFirebaseAuth.auth.emulatorConfig));
  await page.locator('.auth-signup-small').click();const password=`Cv!${randomBytes(12).toString('hex')}A1`;
  for(const [field,value] of [['suName',name],['suEmail',`poster-${randomBytes(7).toString('hex')}@example.com`],['suPass',password],['suPass2',password]])await page.locator(`#${field}`).fill(value);
- await page.locator('#suInterest').selectOption('Tech');await page.locator('#signupForm button[type=submit]').click();await expect(page.locator('.account-sync-status')).toHaveText('Saved to your account');
+ await page.locator('#suInterest').selectOption('Tech');await page.locator('#signupForm button[type=submit]').click();await verifyEmulatorEmail(page);await expect(page.locator('.account-sync-status')).toHaveText('Saved to your account');
  const user=await page.evaluate(async()=>({uid:window.campusFirebaseAuth.auth.currentUser.uid,token:await window.campusFirebaseAuth.auth.currentUser.getIdToken()}));users.push(user);return{page,...user};
 }
 try{

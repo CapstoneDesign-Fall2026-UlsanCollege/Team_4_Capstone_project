@@ -1,3 +1,4 @@
+import { verifyEmulatorEmail } from './verify-emulator-email.js';
 import { chromium } from 'playwright';
 import { expect as baseExpect } from '@playwright/test';
 import assert from 'node:assert/strict';
@@ -28,7 +29,7 @@ async function setup(){
 async function enter(page,user,signup=true){
   await page.goto(url);await page.waitForFunction(()=>window.campusFirebaseAuth?.auth);
   assert.ok(await page.evaluate(()=>window.campusFirebaseAuth.auth.emulatorConfig));assert.equal(await page.evaluate(()=>window.campusFirebaseAuth.auth.app.options.projectId),'demo-campusvibe-feed');
-  if(signup){await page.locator('.auth-signup-small').click();for(const [id,value]of[['suName',user.name],['suEmail',user.email],['suPass',user.password],['suPass2',user.password]])await page.locator(`#${id}`).fill(value);await page.locator('#suInterest').selectOption('Tech');await page.locator('#signupForm button[type=submit]').click();}
+  if(signup){await page.locator('.auth-signup-small').click();for(const [id,value]of[['suName',user.name],['suEmail',user.email],['suPass',user.password],['suPass2',user.password]])await page.locator(`#${id}`).fill(value);await page.locator('#suInterest').selectOption('Tech');await page.locator('#signupForm button[type=submit]').click();await verifyEmulatorEmail(page);}
   else{await page.locator('#landingEmail').fill(user.email);await page.locator('#landingPass').fill(user.password);await page.locator('#landingLoginForm button[type=submit]').click();}
   await expect(page.locator('.account-sync-status')).toHaveText('Saved to your account');await page.locator('#mainNav [data-page=chat]').click();
 }
