@@ -18,33 +18,46 @@ function clearEventNavigation() {
 
 function eventShareMarkup(id) {
   const url = window.campusEventLinks.eventShareUrl(id, location.href);
-  return `<section class="event-share" aria-label="Share this event"><button type="button" class="btn event-share-button" data-share-event="${id}"><i data-lucide="share-2" aria-hidden="true"></i>Share event</button><p class="event-share-status" role="status" aria-live="polite"></p><label class="event-share-manual" hidden>Event link<input type="text" readonly aria-label="Event link" value="${dashboardText(url)}"></label></section>`;
+  const native = typeof navigator.share === 'function' ? `<button type="button" class="btn event-share-button" data-share-event-apps="${id}">Share with apps</button>` : '';
+  return `<section class="event-share" aria-label="Share this event"><button type="button" class="btn event-share-button" data-share-event="${id}" aria-expanded="false" aria-controls="event-share-options"><i data-lucide="share-2" aria-hidden="true"></i>Share event</button><p class="event-share-status" role="status" aria-live="polite"></p><div id="event-share-options" class="event-share-options" hidden><label class="event-share-manual">Event link<input type="text" readonly aria-label="Event link" value="${dashboardText(url)}"></label><div class="event-share-actions"><button type="button" class="btn event-share-button" data-copy-event="${id}">Copy link</button>${native}</div></div></section>`;
 }
 
-async function shareEvent(button) {
-  const id = Number(button.dataset.shareEvent), dialog = $('#dashboardDialog');
+function revealEventShare(button) {
+  const section = button.closest('.event-share');
+  section.querySelector('.event-share-options').hidden = false;
+  button.setAttribute('aria-expanded', 'true');
+  section.querySelector('.event-share-status').textContent = 'Copy the event link or share it with an app.';
+  section.querySelector('[data-copy-event]').focus();
+}
+
+async function shareEvent(button, withApps = false) {
+  const id = Number(withApps ? button.dataset.shareEventApps : button.dataset.copyEvent), dialog = $('#dashboardDialog');
   if (button.disabled || !window.campusEventLinks.validEventLinkId(id)) return;
   const section = button.closest('.event-share'), status = section.querySelector('.event-share-status');
-  const url = window.campusEventLinks.eventShareUrl(id, location.href);
-  const current = () => button.isConnected && dialog.open && dialog.dataset.eventId === String(id);
-  button.disabled = true;status.textContent = '';
+  const url = section.querySelector('.event-share-manual input').value;
+  const operation = Number(section.dataset.operation || 0) + 1;
+  section.dataset.operation = String(operation);
+  const current = () => button.isConnected && dialog.open && dialog.dataset.eventId === String(id) && section.dataset.operation === String(operation);
+  button.disabled = true;
+  status.textContent = withApps ? 'Opening app sharing. You can still copy the event link.' : 'Copying event link...';
   try {
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: $('#dashboardDialogTitle').textContent, url });
-        if (current()) status.textContent = 'Event shared.';
-        return;
-      } catch (error) { if (error.name === 'AbortError') return; }
-    }
-    try {
+    if (withApps) {
+      if (typeof navigator.share !== 'function') throw new Error('App sharing unavailable');
+      await navigator.share({ title: $('#dashboardDialogTitle').textContent, url });
+      if (current()) status.textContent = 'App sharing opened. You can also copy the event link.';
+    } else {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(url);
-      if (current()) status.textContent = 'Event link copied.';
-    } catch {
-      if (!current()) return;
-      const manual = section.querySelector('.event-share-manual');
-      manual.hidden = false;manual.querySelector('input').focus();manual.querySelector('input').select();
-      status.textContent = 'Copy this link to share the event.';
+      if (current()) status.textContent = 'Event link copied. Paste it into a message to share.';
+    }
+  } catch (error) {
+    if (!current()) return;
+    if (withApps) {
+      status.textContent = error?.name === 'AbortError' ? 'App sharing was cancelled or no app is available. You can still copy the event link.' : 'App sharing is unavailable. Use Copy link or copy the link below.';
+    } else {
+      const input = section.querySelector('.event-share-manual input');
+      input.focus();input.select();
+      status.textContent = 'Automatic copying is unavailable. Select and copy the event link below.';
     }
   } finally { if (button.isConnected) button.disabled = false; }
 }
@@ -97,7 +110,11 @@ function closeDashboardDialog() {
 
 function handleEventSharing(event) {
   const share = event.target.closest('[data-share-event]');
-  if (share) { shareEvent(share);return true; }
+  if (share) { revealEventShare(share);return true; }
+  const copy = event.target.closest('[data-copy-event]');
+  if (copy) { shareEvent(copy);return true; }
+  const apps = event.target.closest('[data-share-event-apps]');
+  if (apps) { shareEvent(apps, true);return true; }
   if (event.target.closest('[data-retry-event-link]')) { window.campusRequestLinkedEvent?.(readNavigationRoute()?.eventId, true);renderRoutedEvent();return true; }
   if (event.target.closest('[data-event-signin]')) {
     $('#dashboardDialog').close();openAuth('login');return true;
