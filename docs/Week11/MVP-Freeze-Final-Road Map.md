@@ -47,7 +47,7 @@ Community features and additional services may be demonstrated where stable but 
 - [x] Session Refresh tested.
 - [x] Google popup cancellation and retry behavior checked.
 - [x] Complete Playwright regression rerun: 80 PASS.
-- [ ] Complete real Google-account Sign-In and session verification. [Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167)
+- [x] Complete real Google-account Sign-In and session verification. [Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167)
 
 **Evidence:** Issues #116, #138 and #139.
 
