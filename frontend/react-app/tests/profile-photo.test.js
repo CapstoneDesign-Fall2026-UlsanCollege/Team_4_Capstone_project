@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { memberId, memberLabel, PHOTO_MAX_LENGTH, publicMemberName, validatePhotoFile, validProfilePhoto } from '../src/profile-photo.js';
+import { PHOTO_MAX_LENGTH, publicMemberName, validatePhotoFile, validProfilePhoto } from '../src/profile-photo.js';
 
 test('shared names use the completed Auth display name, not an email-derived session fallback', () => {
   assert.equal(publicMemberName(null), 'Student');
@@ -9,12 +9,6 @@ test('shared names use the completed Auth display name, not an email-derived ses
   assert.equal(publicMemberName('x'.repeat(140)).length, 120);
 });
 
-test('same names retain their complete distinct member identifiers, not an ambiguous prefix', () => {
-  assert.notEqual(memberLabel('Alex', 'same-prefix-one'), memberLabel('Alex', 'same-prefix-two'));
-  assert.equal(memberId('same-prefix-one'), 'same-prefix-one');
-  assert.equal(memberId('demo'), '');
-  assert.equal(memberLabel('Alex', 'demo'), 'Alex');
-});
 test('only small JPEG data is accepted, never remote URLs, SVGs or arbitrary data', () => {
   assert.equal(validProfilePhoto('data:image/jpeg;base64,/9j/AAAA=='), true);
   for (const value of [null, {}, '', 'https://example.com/a.jpg', 'data:image/svg+xml;base64,AAAA', 'data:image/jpeg;base64,AAAA', 'data:image/jpeg;base64,/9j/<script>', `data:image/jpeg;base64,/9j/${'A'.repeat(PHOTO_MAX_LENGTH)}`]) assert.equal(validProfilePhoto(value), false);

@@ -26,7 +26,7 @@
     "test:gemini": "node --test tests/gemini.test.js && npm run test:assistant --workspace @campusvibes/backend",
     "test:gemini-browser": "node tests/gemini.browser.js",
     "test:profile": "node --test tests/profile.test.js",
-    "test:profile-photos": "node --test tests/profile-photo.test.js",
+    "test:profile-photos": "node --test tests/profile-photo.test.js tests/member-identity.test.js",
     "test:profile-photos-browser": "node tests/profile-photos.browser.js",
     "test:badges": "node --test tests/progress-badges.test.js",
     "test:account": "node --test tests/account-sync.test.js",

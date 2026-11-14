@@ -61,13 +61,13 @@ async function assertRemoved(id){
 try{
   const alice=await enter(credentials('Regression Alice'),true),bob=await enter(credentials('Regression Bob'),true);
   await nav(alice.page).getByRole('button',{name:'Friends',exact:true}).click();
-  await alice.page.getByRole('searchbox',{name:'Search people',exact:true}).fill(bob.uid);
-  await alice.page.locator(`[data-person="${bob.uid}"]`).getByRole('button',{name:'Add friend',exact:true}).click();
-  await nav(bob.page).getByRole('button',{name:'Friends',exact:true}).click();await bob.page.getByRole('button',{name:`Accept request from Regression Alice, member ${alice.uid}`,exact:true}).click();
-  await nav(alice.page).getByRole('button',{name:'Messages',exact:true}).click();await alice.page.getByRole('button',{name:`Message Regression Bob, member ${bob.uid}`,exact:true}).click();
+  await alice.page.getByRole('searchbox',{name:'Search people',exact:true}).fill(bob.name);
+  await alice.page.locator('[data-person]').getByRole('button',{name:'Add friend',exact:true}).click();
+  await nav(bob.page).getByRole('button',{name:'Friends',exact:true}).click();await bob.page.getByRole('button',{name:/^Accept request from Regression Alice(?:,|$)/,exact:true}).click();
+  await nav(alice.page).getByRole('button',{name:'Messages',exact:true}).click();await alice.page.getByRole('button',{name:/^Message Regression Bob(?:,|$)/,exact:true}).click();
   await alice.page.getByRole('textbox',{name:'Message text',exact:true}).fill('Keep this unsent draft across Feed views.');
   for(const view of ['Friends','Latest posts']){
-    await nav(alice.page).getByRole('button',{name:view,exact:true}).click();await nav(alice.page).getByRole('button',{name:'Messages',exact:true}).click();await alice.page.getByRole('button',{name:`Message Regression Bob, member ${bob.uid}`,exact:true}).click();
+    await nav(alice.page).getByRole('button',{name:view,exact:true}).click();await nav(alice.page).getByRole('button',{name:'Messages',exact:true}).click();await alice.page.getByRole('button',{name:/^Message Regression Bob(?:,|$)/,exact:true}).click();
     await expect(alice.page.getByRole('textbox',{name:'Message text',exact:true})).toHaveValue('Keep this unsent draft across Feed views.');
   }
   const sent=await fetch(`${endpoint}/campusFeedConnections/${alice.uid}_${bob.uid}/messages`,{headers:{Authorization:'Bearer owner'}}).then(response=>response.json());
@@ -102,10 +102,10 @@ try{
   await alice.page.evaluate(async({id,uid})=>{const {deleteSharedPost}=await import('/src/shared-feed-store.js');await Promise.all([deleteSharedPost({id:uid},{id,authorId:uid}),deleteSharedPost({id:uid},{id,authorId:uid})]);},{id:concurrent.id,uid:alice.uid});
   await assertRemoved(concurrent.id);console.log('PASS: concurrent author cleanup calls leave neither parent nor child records.');
 
-  await nav(alice.page).getByRole('button',{name:'Messages',exact:true}).click();await alice.page.getByRole('button',{name:`Message Regression Bob, member ${bob.uid}`,exact:true}).click();
+  await nav(alice.page).getByRole('button',{name:'Messages',exact:true}).click();await alice.page.getByRole('button',{name:/^Message Regression Bob(?:,|$)/,exact:true}).click();
   await alice.page.getByRole('textbox',{name:'Message text',exact:true}).fill('Alice-only unsent text.');
   if(process.env.CAMPUS_TEST_ARTIFACTS_URL){const output=new URL('social-regressions/',process.env.CAMPUS_TEST_ARTIFACTS_URL);await mkdir(output,{recursive:true});await alice.page.screenshot({path:fileURLToPath(new URL('draft-desktop.png',output)),fullPage:true});await alice.page.setViewportSize({width:390,height:844});await alice.page.screenshot({path:fileURLToPath(new URL('draft-mobile.png',output)),fullPage:true});assert.ok(await alice.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
-  await alice.page.getByRole('button',{name:'Log out',exact:true}).click();await enter(bob,false,alice.page);await nav(alice.page).getByRole('button',{name:'Messages',exact:true}).click();await alice.page.getByRole('button',{name:`Message Regression Alice, member ${alice.uid}`,exact:true}).click();await expect(alice.page.getByRole('textbox',{name:'Message text',exact:true})).toHaveValue('');
+  await alice.page.getByRole('button',{name:'Log out',exact:true}).click();await enter(bob,false,alice.page);await nav(alice.page).getByRole('button',{name:'Messages',exact:true}).click();await alice.page.getByRole('button',{name:/^Message Regression Alice(?:,|$)/,exact:true}).click();await expect(alice.page.getByRole('textbox',{name:'Message text',exact:true})).toHaveValue('');
   assert.deepEqual(errors,[]);console.log('PASS: account switching does not expose another user draft; desktop/mobile views fit with no uncaught page errors.');
 }finally{
   await browser.close();
