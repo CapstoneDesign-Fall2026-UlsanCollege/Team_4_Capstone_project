@@ -6,6 +6,7 @@ import { ensureFeedProfile, saveFeedProfile, watchFeedProfile, watchFeedProfiles
 import { watchConnections } from './shared-friends-store';
 import { watchSavedPostContent, watchSavedPosts } from './shared-saved-store';
 import SharedFriends from './SharedFriends';
+import SharedFriendsSidebar from './SharedFriendsSidebar';
 import SharedPost from './SharedPost';
 import SharedMessages from './SharedMessages';
 import useMessageInbox from './use-message-inbox';
@@ -20,6 +21,7 @@ export default function SharedFeed({ user, notification }) {
   const [savedIds, setSavedIds] = useState([]);
   const [savedContent, setSavedContent] = useState({});
   const [view, setView] = useState('feed');
+  const [friendsTab, setFriendsTab] = useState('discover');
   const [filter, setFilter] = useState('all');
   const [query, setQuery] = useState('');
   const [college, setCollege] = useState('');
@@ -46,7 +48,7 @@ export default function SharedFeed({ user, notification }) {
     if (!notificationItem) return;
     setQuery(''); setFilter('all'); setNotificationPost(null); setNotificationMissing(false);
     if (notificationItem.kind === 'message') { setView('messages'); return; }
-    if (notificationItem.kind.startsWith('friend-')) { setView('friends'); return; }
+    if (notificationItem.kind.startsWith('friend-')) { setFriendsTab(notificationItem.kind === 'friend-request' ? 'requests' : 'discover'); setView('friends'); return; }
     setView('feed');
     const postId = notificationItem.kind === 'post-published' ? notificationItem.sourceId : notificationItem.parentId;
     let active = true;
@@ -161,7 +163,7 @@ export default function SharedFeed({ user, notification }) {
     if (success && alive.current) { setCollege(value.college); setView('feed'); setQuery(''); }
     return success;
   };
-  const selectView = value => { setView(value); setQuery(''); };
+  const selectView = (value, tab = 'discover') => { setView(value); setQuery(''); if (value === 'friends') setFriendsTab(tab); };
   const updateMessageDraft = (id, value, submitted) => setMessageDrafts(current => {
     if (submitted !== undefined && current[id] !== submitted) return current;
     return { ...current, [id]: value };
@@ -174,10 +176,10 @@ export default function SharedFeed({ user, notification }) {
   return <div className="feed-shell shared-feed-shell">
     <div className="feed-heading">
       <div><span className="feed-eyebrow"><Rss size={14} />ACROSS CAMPUSES</span><h1>Campus Vibe-Feed</h1></div>
-      <label className="feed-search"><Search size={17} /><input type="search" aria-label={view === 'messages' ? 'Search conversations' : view === 'friends' ? 'Search people' : 'Search shared posts'} placeholder={view === 'messages' ? 'Search conversations...' : view === 'friends' ? 'Search people or colleges...' : 'Search posts or colleges...'} value={query} onChange={event => setQuery(event.target.value)} /></label>
+      {view !== 'friends' && <label className="feed-search"><Search size={17} /><input type="search" aria-label={view === 'messages' ? 'Search conversations' : view === 'friends' ? 'Search people' : 'Search shared posts'} placeholder={view === 'messages' ? 'Search conversations...' : view === 'friends' ? 'Search people or colleges...' : 'Search posts or colleges...'} value={query} onChange={event => setQuery(event.target.value)} /></label>}
     </div>
     <div className="shared-feed-status" role="status"><span className={ready ? 'connected' : ''}>{ready ? 'Online' : !online ? 'Offline' : failure ? 'Unavailable' : 'Connecting'}</span>{!ready && busy && <span>Waiting for server confirmation</span>}</div>
-    <div className={`feed-layout shared-feed-layout ${view === 'messages' ? 'is-messages' : ''}`}>
+    <div className={`feed-layout shared-feed-layout ${view === 'messages' ? 'is-messages' : view === 'friends' ? 'is-friends' : ''}`}>
       <aside className="feed-left">
         <div className="feed-current-user"><Avatar name={user.name} memberId={user.id} /><div><strong>{user.name}</strong><span>{college || 'Your campus connection'}</span></div></div>
         <nav aria-label="Shared feed navigation">{[['feed', 'Latest posts', House], ['friends', 'Friends', Users], ['messages', 'Messages', MessageCircle], ['saved', 'Saved posts', Bookmark], ['mine', 'My posts', UserRound]].map(([id, title, Icon]) => <button key={id} type="button" aria-label={title} aria-describedby={id === 'messages' && messaging.unreadCount > 0 ? 'feed-messages-unread' : undefined} className={view === id ? 'active' : ''} aria-current={view === id ? 'page' : undefined} onClick={() => selectView(id)}><Icon size={19} /><span>{title}</span>{id === 'friends' && incoming.length > 0 && <span className="feed-nav-badge">{incoming.length}</span>}{id === 'messages' && messaging.unreadCount > 0 && <span id="feed-messages-unread" className="feed-nav-badge" aria-label={`${messaging.unreadCount} unread conversations`}>{messaging.unreadCount}</span>}</button>)}</nav>
@@ -185,7 +187,7 @@ export default function SharedFeed({ user, notification }) {
       </aside>
       <div className="feed-timeline">
         {failure && <div className="feed-error" role="alert"><p>{failure}</p><button type="button" disabled={busy} onClick={() => setRetry(value => value + 1)}>Try again</button></div>}
-        {view === 'messages' ? <SharedMessages user={user} profiles={profiles} connections={connections} connectionsReady={connectionsReady} query={query} ready={ready} drafts={messageDrafts} onDraft={updateMessageDraft} notification={notification} {...messaging} /> : view === 'friends' ? <SharedFriends user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
+        {view === 'messages' ? <SharedMessages user={user} profiles={profiles} connections={connections} connectionsReady={connectionsReady} query={query} ready={ready} drafts={messageDrafts} onDraft={updateMessageDraft} notification={notification} {...messaging} /> : view === 'friends' ? <SharedFriends key={friendsTab} initialTab={friendsTab} onTabChange={setFriendsTab} user={user} profiles={profiles} connections={connections} query={query} busy={busy || !ready} act={act} /> : <>
           {notificationMissing && view === 'feed' && <p className="feed-side-empty" role="status">This post is no longer available.</p>}
           {view !== 'saved' && <Composer user={user} college={college} busy={busy} disabled={!ready} shared onPublish={publish} />}
           <div className="feed-timeline-heading"><h2>{heading}</h2><span className="shared-feed-count">{visible.length}{view !== 'saved' && posts.length === FEED_PAGE_SIZE ? ' / latest 50' : ''}</span></div>
@@ -196,10 +198,7 @@ export default function SharedFeed({ user, notification }) {
         </>}
       </div>
       <aside className="feed-right">
-        <section className="feed-card"><div className="feed-section-heading"><h2>Your friends</h2><button type="button" aria-label="View friends" title="View friends" onClick={() => selectView('friends')}><Users size={17} /></button></div>
-          {friends.map(id => { const profile = profiles.find(item => item.id === id); return <button type="button" className="feed-friend-shortcut" key={id} onClick={() => selectView('friends')}><Avatar name={profile?.name || 'Student'} memberId={id} small /><span><strong>{profile?.name || 'Student'}</strong><small>{profile?.college || 'Campus member'}</small></span></button>; })}
-          {!friends.length && <p className="feed-side-empty">No friends yet.</p>}
-        </section>
+        <SharedFriendsSidebar user={user} profiles={profiles} connections={connections} busy={busy || !ready} act={act} />
         <section className="feed-card feed-campus-note"><span className="feed-note-icon"><GraduationCap size={24} /></span><h2>Different campuses.<br />Shared good vibes.</h2><button type="button" className="feed-quiet-button" onClick={() => selectView('friends')}>Find people<ArrowRight size={14} /></button></section>
       </aside>
     </div>
