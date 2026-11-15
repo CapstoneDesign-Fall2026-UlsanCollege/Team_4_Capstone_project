@@ -249,3 +249,14 @@ Our goal is to present CampusVibes as a reliable campus activity discovery platf
 Team 4 will focus on completing MVP verification, improving application stability, maintaining transparent testing evidence, explaining individual contributions, and delivering a successful final demonstration.
 
 **Final Principle: Stabilize the MVP, verify the core user journey, document evidence honestly, and demonstrate only features that the team can support with actual results.**
+
+
+## November 16 Week 11 verification checkpoint
+
+Use the [filled MVP Verification Checklist](MVP-Verification-Checklist.md) for the current expected/actual core-path assessment, separate severity/P-levels, owners, evidence limits and smallest recovery actions. This dated assessment supersedes older unqualified readiness statements above; historical test results keep their own dates.
+
+The existing feature promise stays unchanged. Devyana's [November 15 independent Google/session receipt](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167#issuecomment-6889397205) establishes five reported scenarios, so full Google login is no longer described as wholly untested. It does not identify the final freeze SHA. The recommendation is to retain scope and follow the recovery/verification route until required #166 runtime gaps, final candidate regression and approval are recorded. Final team freeze approval is **PENDING**.
+
+Prachi coordinates [#177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177): record the candidate/URL with QA; arrange a named core-path and boundary repeat; carry exact Firestore gaps from #166; confirm setup/backup in #118; and record the actual team decision. **Next checkpoint: November 18, 2026, end of day KST.** P1 required verification precedes P2 reliability/setup/handoff; P3 features remain deferred. No P0 application blocker is established by this documentation assessment.
+
+The [Sprint 2 quality record](Sprint-quality-quick-checks.md), [Prachi contribution/next actions](Evidence/prachi-week11-requirements-2026-11-16.md), [shared report](Weekly-Report.md) and [current area map](../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map) complete the links. Privacy/Friends corrections remain supporting work; their automated success does not certify the entire Events demo. No new runtime, human review or team vote is claimed here.
