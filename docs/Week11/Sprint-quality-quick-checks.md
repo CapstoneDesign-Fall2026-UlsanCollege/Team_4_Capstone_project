@@ -30,11 +30,24 @@ The new proof uses only a synthetic account, masks login inputs, and records del
 
 ## Sprint 2 - MVP and Freeze (Week 11)
 
-- [ ] The MVP happy path has been tested and recorded.
-- [ ] Known bugs are labeled by severity and have an owner or plan.
-- [ ] New features are frozen or explicitly justified against the MVP contract.
-- [ ] The project has basic input/error handling or a documented limitation.
-- [ ] AI-assisted or outside material is reviewed, explainable, and attributed where relevant.
+Updated November 16, 2026 KST from the [filled MVP checklist](MVP-Verification-Checklist.md). These are scoped evidence checks, not team approval. Open items have an owner/support path and next check in [#177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177), due November 18 EOD KST.
+
+- [ ] The MVP happy path has been tested and recorded on the selected final candidate.
+- [ ] Demo-relevant known bugs have an appropriate severity and owner/plan, with required runtime risks resolved or explicitly accepted.
+- [ ] The team confirms frozen scope and its evidence-based route.
+- [x] Basic input/error handling has evidence or a documented limitation: see the checklist's explicit #166 runtime gaps and existing automated proof.
+- [ ] AI assistance is attributed and the affected work has the required personal explain-back/independent handoff.
+- [ ] Current areas/checks/support are linked and the necessary independent candidate repeat is recorded.
+
+| Item still open | Existing evidence / exact gap | Owner or support | Next check |
+|---|---|---|---|
+| Candidate happy path | Ujjal's November 14 core checks and Devyana's November 15 Google/session checks passed; neither records the exact final freeze revision | Prachi coordinates; Ujjal QA and Devyana independent auth evidence | Record SHA and expected/actual required steps, including a boundary, in #138/#167 and #177 |
+| Bugs/risks | [Checklist risk table](MVP-Verification-Checklist.md); closed privacy/Friends fixes retain their scope; #166 runtime errors/mapping remain untested | Prachi coordinates with Devyana; implementation owner confirmed before a fix | Complete exact runtime checks or document blocker and team fallback decision; do not label an assumption a bug |
+| Team freeze decision | Recovery/verification route recommended; final approval pending | Prachi and team | Ratify scope/candidate/route from evidence by November 18 EOD KST |
+| Personal understanding | [AI-use audit](../Week10/ai-use-and-code-ownership-audit.md); prepared explanations are not human explain-backs | Prachi for her own changes | Explain one source path and a meaningful failure, record unclear parts, obtain a named check or exact blocker |
+| Area/independent repeat | [Area map](../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map); Ujjal accepted bounded QA backup; Devyana's independent auth receipt exists | Existing stewards/QA, Prachi coordinates | Candidate-specific independent attempt with tester/setup/result and limits; keep role acceptance separate from completed API tests |
+
+[Roadmap checkpoint](<MVP-Freeze-Final-Road Map.md>) and [one shared report](Weekly-Report.md) link this evidence. No application change or new runtime result was produced for this quality-record update. Historical Sprint 0/1 records and Sprint 3/4 sections below are unchanged.
 
 ## Sprint 3 - QA and Handoff (Week 14)
 

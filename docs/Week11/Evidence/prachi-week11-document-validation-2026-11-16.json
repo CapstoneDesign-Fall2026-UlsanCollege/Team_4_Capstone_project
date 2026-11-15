@@ -1,0 +1,356 @@
+{
+  "checkedAt": "2026-11-15T16:09:11.897231+00:00",
+  "clientDate": "2026-11-16",
+  "timezone": "Asia/Seoul",
+  "inspectionBaseline": "377b3bd",
+  "executor": "Codex automated documentation checks",
+  "courseWeek11Revision": "0d4cd0bab57e7f96bd0b8f4bb7e50fb775f65098",
+  "scope": "New/added Markdown links and local anchors; report-row preservation; application unchanged. Existing historical links are outside this changed-line validation. No new runtime or human acceptance proof.",
+  "localLinksAndAnchors": {
+    "pass": 48,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "from": "docs/Week10/ai-use-and-code-ownership-audit.md",
+      "target": "../Week11/MVP-Verification-Checklist.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week10/ai-use-and-code-ownership-audit.md",
+      "target": "../Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Final demo road map.md",
+      "target": "MVP-Verification-Checklist.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Final demo road map.md",
+      "target": "Sprint-quality-quick-checks.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Final demo road map.md",
+      "target": "Evidence/prachi-week11-requirements-2026-11-16.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Final demo road map.md",
+      "target": "Weekly-Report.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Final demo road map.md",
+      "target": "../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Issue priority file.md",
+      "target": "MVP-Verification-Checklist.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Freeze-Final-Road Map.md",
+      "target": "MVP-Verification-Checklist.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Freeze-Final-Road Map.md",
+      "target": "Sprint-quality-quick-checks.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Freeze-Final-Road Map.md",
+      "target": "Evidence/prachi-week11-requirements-2026-11-16.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Freeze-Final-Road Map.md",
+      "target": "Weekly-Report.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Freeze-Final-Road Map.md",
+      "target": "../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Sprint-quality-quick-checks.md",
+      "target": "MVP-Verification-Checklist.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Sprint-quality-quick-checks.md",
+      "target": "MVP-Verification-Checklist.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Sprint-quality-quick-checks.md",
+      "target": "../Week10/ai-use-and-code-ownership-audit.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Sprint-quality-quick-checks.md",
+      "target": "../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Sprint-quality-quick-checks.md",
+      "target": "MVP-Freeze-Final-Road Map.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Sprint-quality-quick-checks.md",
+      "target": "Weekly-Report.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Weekly-Report.md",
+      "target": "Evidence/prachi-member-id-privacy-bug-report-2026-11-15.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Weekly-Report.md",
+      "target": "Evidence/prachi-member-id-privacy-production-2026-11-15.json",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Weekly-Report.md",
+      "target": "../../frontend/react-app/verification/member-id-privacy/results.json",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Weekly-Report.md",
+      "target": "Evidence/friends-sidebar-2026-11-15.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Weekly-Report.md",
+      "target": "MVP-Verification-Checklist.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Weekly-Report.md",
+      "target": "Evidence/prachi-week11-requirements-2026-11-16.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Weekly-Report.md",
+      "target": "MVP-Verification-Checklist.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Weekly-Report.md",
+      "target": "Evidence/prachi-week11-requirements-2026-11-16.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "MVP-Freeze-Final-Road Map.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "Final demo road map.md#5-final-demo-user-journey",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "../../frontend/react-app/verification/friends-directory/results.json",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "../../frontend/react-app/verification/friends-directory/results.json",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "../../frontend/react-app/tests/smoke/events.spec.js",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "../../frontend/react-app/verification/friends-directory/results.json",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "Evidence/prachi-member-id-privacy-bug-report-2026-11-15.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "Evidence/friends-sidebar-2026-11-15.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "Sprint-quality-quick-checks.md#sprint-2---mvp-and-freeze-week-11",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "Evidence/prachi-week11-requirements-2026-11-16.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "Weekly-Report.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "../MVP-Verification-Checklist.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "../Sprint-quality-quick-checks.md#sprint-2---mvp-and-freeze-week-11",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "../Weekly-Report.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "../../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "prachi-member-id-privacy-bug-report-2026-11-15.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "prachi-member-id-privacy-production-2026-11-15.json",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "friends-sidebar-2026-11-15.md",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "../../../frontend/react-app/verification/friends-directory/results.json",
+      "status": "PASS"
+    },
+    {
+      "from": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "prachi-week11-document-validation-2026-11-16.json",
+      "status": "PASS"
+    }
+  ],
+  "otherStudents": [
+    {
+      "member": "DevyanaCT",
+      "contributionRowUnchanged": true
+    },
+    {
+      "member": "ujjalpoudel75",
+      "contributionRowUnchanged": true
+    },
+    {
+      "member": "tulseyy8848",
+      "contributionRowUnchanged": true
+    }
+  ],
+  "applicationChanged": false,
+  "baselineApplicationMatchesDocumentedRelease": "cd405a7",
+  "newRuntimeTests": false,
+  "sourceSha256": {
+    "docs/Week10/ai-use-and-code-ownership-audit.md": "b0eb58c70b923e1f5e7c418f5e9810476b01578cb0e66ed2d719619fc766a00a",
+    "docs/Week11/Final demo road map.md": "35b3b1a774d20fab0d90326f71c4d430e96c2314f4ce097cfba0459d1f6eadec",
+    "docs/Week11/Issue priority file.md": "4393f1b5de3fa46e30b790c184a8699ee7c93ad08f852e1d7a00e0deb28f6671",
+    "docs/Week11/MVP-Freeze-Final-Road Map.md": "17d69c130dc65e79ca710ac79a05adab751de3a1f9bc08e22d47376d1c45f2ff",
+    "docs/Week11/Sprint-quality-quick-checks.md": "2502398377f6c10bb45f122c079a555a23947008115138b8ce8a434342924297",
+    "docs/Week11/Weekly-Report.md": "c3074cba63c5be9449de283ef91f2a9e210bb63abf67b9aee11596ecc8794b9d",
+    "docs/Week11/MVP-Verification-Checklist.md": "2aff1859c362310c185548b90b8e009923446762621c1e24d0106eaa8a12526f",
+    "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md": "d4de9dba4bab6eca22786a87fc6c9eb89bb0921d6b1282242aaeef04bc45e6ee"
+  },
+  "githubReferences": {
+    "pass": 17,
+    "fail": 0,
+    "checks": [
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138#issuecomment-6878868546",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139#issuecomment-6787716484",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167#issuecomment-6889397205",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/172",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/175",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/175#issuecomment-6890050286",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/173",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/176",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/0d4cd0bab57e7f96bd0b8f4bb7e50fb775f65098/student-starter-kit/docs/issue-priority-guide.md",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/0d4cd0bab57e7f96bd0b8f4bb7e50fb775f65098/student-starter-kit/templates/mvp-verification-checklist.md",
+        "status": "PASS"
+      },
+      {
+        "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/0d4cd0bab57e7f96bd0b8f4bb7e50fb775f65098/week-11/work-checklist.md",
+        "status": "PASS"
+      }
+    ]
+  }
+}
