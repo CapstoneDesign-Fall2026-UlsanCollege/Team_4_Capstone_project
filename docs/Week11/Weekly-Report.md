@@ -81,7 +81,7 @@ If it is not linked, it does not count.
 
 | Blocker/risk | Owner | Next action |
 |---|---|---|
-| Real Google-account Sign-In and session persistence are not fully verified. | Authentication implementation support: `prachi2061`; QA: `ujjalpoudel75` | Verify successful Google login, session refresh, logout and re-login using an authorized test account. Determine whether this is required for the frozen core demo. |
+| Final authentication regression on the approved freeze candidate remains pending. | QA: `ujjalpoudel75`; Independent reviewer: `DevyanaCT` | Real Google Sign-In and session testing passed, and DevyanaCT independently verified 5 scenarios (5 PASS, 0 FAIL) in #167. Repeat regression on the approved freeze candidate when selected. |
 | Firestore application-level permission-denied handling remains unverified. | Event/data implementation owner to confirm; verification: `DevyanaCT` | Test a controlled denied published-event read using the local Firebase Emulator. |
 | Firestore application-level loading-error handling remains unverified. | Event/data implementation owner to confirm; verification: `DevyanaCT` | Test a controlled Firestore-specific failure and recovery without modifying production security rules. |
 | Complete field mapping for additional published events is pending. | `DevyanaCT` — verification support | Compare additional Firestore documents against displayed event details. |
