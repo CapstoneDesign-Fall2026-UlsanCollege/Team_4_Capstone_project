@@ -1,4 +1,4 @@
-> **November 16 Week 11 clarification:** The general examples below are not the team's current issue assignments. Use the [MVP checklist's evidence-based priority table](MVP-Verification-Checklist.md) for this freeze gate and the [course priority guide](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/0d4cd0bab57e7f96bd0b8f4bb7e50fb775f65098/student-starter-kit/docs/issue-priority-guide.md): P0 = blocked promised path; P1 = required behavior/checkpoint at risk; P2 = bounded reliability/testing/setup/handoff; P3 = deferred polish/stretch. A missing required test may be P1 even without a demonstrated bug. Setup/documentation can be P2 when it protects the demo. Keep observed bug severity separate from P-level; do not assign severity to an untested risk. Current owner/reason/next checks are recorded in #177 and the linked checklist.
+
 
 # CampusVibes – Issue Priority Guide
 
