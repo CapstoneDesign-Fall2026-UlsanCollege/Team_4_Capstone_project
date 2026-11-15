@@ -52,3 +52,20 @@ For browser installation, emulator ports, server environment variables, and depl
 Discover uses the checked-in sample event catalog. Signed-in account and social features use Firestore; guest activity remains browser-local. The Assistant has a local mode and optional Gemini mode. Signed-in photo posts use the authenticated Cloudinary backend when configured.
 
 Feature receipts in `verification/` retain their original date and tested scope. Use the project README and current package scripts for setup instructions.
+
+## Signed-in friends list
+
+Campus Vibe-Feed > Friends shows people to add and pending requests in the middle. Accepted friends appear only in the Your friends sidebar. It previews five friends; View all friends expands a searchable, scrollable list in that same section. At tablet/mobile sizes the section is available below the main Friends panel. Removing a friend is available in the expanded sidebar.
+
+The connection watcher reads additional live pages of at most 100 documents each, preserving the existing Firestore query rule limit. Discovery still uses the existing first-100 public-profile directory; this fix does not implement global people search. Guest/demo data is a separate local experience.
+
+Repeat checks from the repository root:
+
+```sh
+npm run test:friends --workspace frontend/react-app
+npm run dev -- --host 127.0.0.1 --port 5186 --strictPort
+# In another terminal:
+npm run test:friends-browser --workspace frontend/react-app
+```
+
+For the real Firestore SDK/rules integration test, start a local Firestore emulator on port 8180 with the existing account-test configuration, then run `npm run test:friends-emulator --workspace frontend/react-app`. It uses a fictional `demo-campusvibe-friends` project and never production records. See the [dated bug and verification receipt](../../docs/Week11/Evidence/friends-sidebar-2026-11-15.md).

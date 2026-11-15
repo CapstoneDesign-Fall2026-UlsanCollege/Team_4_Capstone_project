@@ -63,3 +63,24 @@
 @media(max-width:1000px) { .shared-feed-layout.is-messages { grid-template-columns:160px minmax(0,1fr); }.feed-messenger { grid-template-columns:170px minmax(0,1fr); } }
 @media(max-width:780px) { .shared-feed-layout.is-messages { grid-template-columns:minmax(0,1fr); }.shared-feed-shell .feed-left nav { grid-template-columns:repeat(5,minmax(0,1fr)); }.shared-feed-shell .feed-left nav button { min-width:0;padding:12px 4px; }.shared-feed-shell .feed-left nav button > span { font-size:10px; } }
 @media(max-width:600px) { .feed-messenger { grid-template-columns:minmax(0,1fr);height:580px;max-height:75vh;min-height:360px; }.feed-messenger:not(.has-conversation) > .feed-chat-empty { display:none; }.feed-messenger.has-conversation > .feed-message-inbox { display:none; }.feed-message-inbox { border-right:0; }.feed-chat-back { display:grid; }.feed-message-history { padding:16px 12px; }.feed-conversation > header { padding:10px 12px; } }
+.shared-feed-shell .feed-friends-intro { margin:-6px 0 20px;color:#807684;font-size:13px;line-height:1.6; }
+.shared-feed-shell .feed-people-tabs { flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid #eee6f4; }
+.shared-feed-shell .feed-people-tabs button { display:inline-flex;align-items:center;gap:7px;min-height:40px; }
+.feed-people-tabs button > span { padding:2px 6px;border-radius:12px;background:rgba(133,104,153,.1);font-size:11px; }
+.shared-feed-shell .feed-people-search { display:flex;width:100%;box-sizing:border-box;margin-bottom:12px; }
+.shared-feed-shell .feed-person > .feed-person-actions { grid-column:3;grid-row:1 / 3;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end; }
+.shared-feed-shell .feed-request-direction { display:block;margin-top:4px;color:#807684;font-size:11px; }
+.feed-people-pagination { display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid #eee6f4;padding-top:18px;margin-top:8px;color:#807684;font-size:12px; }
+.feed-people-pagination > div { display:flex;align-items:center;gap:10px; }
+.feed-people-pagination button { display:grid;place-items:center;width:36px;height:36px;border:1px solid #e5dcef;border-radius:7px;background:transparent;color:inherit; }
+.feed-people-pagination button:disabled { opacity:.35;cursor:default; }
+.shared-feed-shell .feed-view-all-friends { display:flex;justify-content:space-between;width:100%;margin-top:12px; }
+@media(max-width:600px) { .shared-feed-shell .feed-person > .feed-person-actions { grid-column:2;grid-row:3;justify-content:flex-start;margin-top:10px; }.shared-feed-shell .feed-people-tabs { gap:4px; }.shared-feed-shell .feed-people-tabs button { padding:7px 9px;font-size:12px; } }
+.shared-feed-shell .feed-sidebar-search { display:flex;width:100%;box-sizing:border-box;margin-bottom:12px;min-width:0; }
+.shared-feed-shell .feed-sidebar-search input { min-width:0; }
+.feed-sidebar-friends-list { max-height:380px;overflow-y:auto; }
+.feed-friends-sidebar .feed-friend-shortcut > span:not(.feed-avatar) { flex:1;min-width:0;overflow-wrap:anywhere; }
+.feed-friends-sidebar .feed-friend-shortcut > button { flex-shrink:0; }
+.feed-friends-sidebar h2 small { font-size:11px;font-weight:400; }
+@media(max-width:1200px) { .shared-feed-layout.is-friends > .feed-right { display:block;grid-column:2; } }
+@media(max-width:780px) { .shared-feed-layout.is-friends > .feed-right { grid-column:1; } }

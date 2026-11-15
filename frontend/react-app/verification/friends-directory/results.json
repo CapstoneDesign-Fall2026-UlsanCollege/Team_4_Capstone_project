@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-11-15T05:16:39.874365+00:00",
+  "clientDate": "2026-11-15",
+  "timezone": "Asia/Seoul",
+  "executor": "Codex automated checks on Windows / Google Chrome",
+  "issue": 175,
+  "scope": "Signed-in friends discovery/sidebar; synthetic UI callbacks and real SDK/rules watcher checks. No signed-in production or independent human test.",
+  "results": {
+    "watcherUnits": {
+      "pass": 3,
+      "fail": 0
+    },
+    "watcherSdkRulesIntegration": {
+      "pass": 1,
+      "fail": 0,
+      "connections": 225,
+      "project": "demo-campusvibe-friends",
+      "endpoint": "127.0.0.1:8180"
+    },
+    "browser": {
+      "status": "PASS",
+      "friends": 125,
+      "centralDiscovery": 23,
+      "pendingRequests": 14,
+      "viewports": [
+        {
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "width": 375,
+          "height": 812
+        }
+      ],
+      "operations": "Mocked UI callbacks only; no production writes"
+    },
+    "existingRules": {
+      "pass": 49,
+      "fail": 0
+    },
+    "smoke": {
+      "pass": 118,
+      "fail": 0,
+      "exitCode": 0,
+      "note": "Windows preview teardown stalled after all cases passed; terminated only confirmed test-owned Vite PID, then runner completed with 118 passed (12.5m). No test cases rerun."
+    },
+    "build": "PASS",
+    "whitespace": "PASS"
+  },
+  "sourceSha256": {
+    "frontend/react-app/src/SharedFeed.jsx": "aeb9fcbfd7f3735cbb30996a8ab9f19b76f24904c5ec71589c88355a006244fc",
+    "frontend/react-app/src/SharedFriends.jsx": "e62059849995901bf5d5651ef1670e950303c2ca7e79c28b4eb0dc585c0ddb10",
+    "frontend/react-app/src/SharedFriendsSidebar.jsx": "dcfa604a0a16f9466c53a2c466e01589a466b8b084496c98230d7e1bd4dd9563",
+    "frontend/react-app/src/shared-feed.css": "c89a31e9621512a7929eb275994523a48f3fca82c02685faef01112069af3e85",
+    "frontend/react-app/src/shared-friends-store.js": "6e155ead43d1323beaf13fdf1294189efd26b8b20cf0eb47a4406d1a96db9d63",
+    "frontend/react-app/tests/friends-connections.test.js": "72b3ab8079ec0dbe97745320b2019a9da472ca0ae2475c80d9fcaa8b724b0482",
+    "frontend/react-app/tests/friends-connections.emulator.test.js": "50d0fbf2697268b9579b5fdba3cbed41b315dc376bd8ab01ae55d49c413a1a35",
+    "frontend/react-app/tests/friends-directory.browser.js": "8944ed0048ac745cb5f05f2b2447a5cf17899fd37fcda61bb847dcbd3a0ec5e2"
+  }
+}

@@ -39,7 +39,10 @@
     "test:notifications-browser": "node tests/notifications.browser.js",
     "test:smoke": "playwright test",
     "test:google-signin-live": "node tests/google-signin-live.browser.js",
-    "test:toast-mobile": "node tests/toast-mobile.browser.js"
+    "test:toast-mobile": "node tests/toast-mobile.browser.js",
+    "test:friends": "node --test tests/friends-connections.test.js",
+    "test:friends-browser": "node tests/friends-directory.browser.js",
+    "test:friends-emulator": "node --test tests/friends-connections.emulator.test.js"
   },
   "dependencies": {
     "@campusvibes/backend": "*",
