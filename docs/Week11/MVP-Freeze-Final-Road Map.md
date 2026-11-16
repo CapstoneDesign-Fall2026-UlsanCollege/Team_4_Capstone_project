@@ -90,7 +90,7 @@ Community features and additional services may be demonstrated where stable but 
 - [x] Local Firestore security-rules tests: 40 PASS, 0 FAIL.
 - [ ] Verify application-level permission-denied handling. [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
 - [ ] Verify application-level loading-error handling.[Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
-- [ ] Complete field mapping for additional published events.[Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+- [x] Completed second published-event manual field comparison — 8 PASS, 0 FAIL (tester-reported, November 16). Supporting screenshots and independent review pending. [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
 - [ ] Confirm intended search/filter persistence after refresh.[Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
 
 **Evidence:** [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117) [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
@@ -127,7 +127,7 @@ Community features and additional services may be demonstrated where stable but 
 - [ ] Resolve or document the Google Sign-In limitation.
 - [ ] Complete controlled Firestore permission-error testing.
 - [ ] Complete controlled Firestore loading-error testing.
-- [ ] Compare additional Firestore event fields with the displayed UI.
+- [x] Compare an additional published Firestore event with the displayed UI — 8/8 manual checks passed; screenshots and independent review pending.
 - [ ] Verify the intended search/filter behavior after refresh.
 - [ ] Review outstanding high-priority defects.
 - [ ] Run relevant automated regression tests again.
@@ -249,7 +249,7 @@ Passing individual tests does not automatically mean that the entire MVP is read
 |---|---|---|
 | Google Sign-In not fully verified | Authentication demo may fail | Confirm real provider flow or approved fallback |
 | Firestore application-level errors untested | Loading or permission failures may not display correctly | Controlled local testing |
-| Additional event field mapping incomplete | Some event details may be inconsistent | Compare Firestore documents with UI |
+| Second-event comparison evidence incomplete | Manual comparison passed 8/8 | request independent review |
 | Search/category selections reset on refresh | Potential UX mismatch | Confirm product requirements |
 | Missing independent handoff confirmations | Week 10 audit remains incomplete | Obtain named reviewer evidence |
 | Unredacted network screenshots | Security/privacy exposure | Redact and replace affected evidence |
@@ -327,6 +327,8 @@ Passing individual tests does not automatically mean that the entire MVP is read
 | Technical Theme/Notification Review | [November 11 Review](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139#issuecomment-6786608721) |
 | Weekly Report | [Week 10 Weekly Report](../Week10/Weekly-Report.md) |
 | AI/Code Ownership | [Code Ownership Audit](../Week10/ai-use-and-code-ownership-audit.md) |
+| Week 11 Firestore Final Verification | [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166) |
+
 
 ---
 
@@ -357,7 +359,17 @@ Passing individual tests does not automatically mean that the entire MVP is read
 - Event visibility after refresh.
 - Firestore network reconnection.
 - Local Firestore security-rules tests: 40 PASS, 0 FAIL.
-- Code ownership and responsible AI documentation.
+- Code ownership and responsible AI documentation.  
+- November 16 Firestore verification by `DevyanaCT`:
+  - Local Firebase Authentication and Firestore Emulator connections verified.
+  - Firestore security rules and published-event listener inspected.
+  - Application error handling, loading messages and Retry controls verified in source.
+  - Published-event mapping and Discover/Event Details rendering inspected.
+  - Second published-event field comparison: 8 PASS, 0 FAIL (tester-reported).
+  - Search/category reset behavior documented; requirement confirmation pending.
+  - No application code, Firestore rules or database records modified.
+  - Evidence: [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166).
+
 
 ### Remaining Priorities
 
