@@ -62,29 +62,81 @@ Recorded local security-rules result: 40 PASS, 0 FAIL.
 
 Application-level error handling must be verified separately.
 
-### D. Google Authentication Evidence
+### C.1 — Week 11 Firestore Integration Verification
 
-The Week 11 Evidence folder contains:
+**Tester:** `DevyanaCT`  
+**Independent Reviewer:** `tulseyy8848`  
+**Testing Dates:** November 16–17, 2026
 
-1. `W11-01-google-dashboard.png`
-2. `W11-02-google-refresh.png`
+- [x] Firebase Authentication and Firestore Emulator connections verified.
+- [x] Published-event security rules and listener inspected.
+- [x] Unauthenticated Firestore Emulator GET returned HTTP 403 Forbidden.
+- [x] Published-event field mapping reviewed in source code.
+- [x] Second published-event comparison — 8 PASS, 0 FAIL.
+- [x] Independent reviewer also reported 8 PASS, 0 FAIL.
+- [x] Supporting published-event screenshots attached in Issue #166.
+- [x] Offline Discover retained 14 cached published events and 9 sample listings.
+- [x] Cached-data warning and Retry button were visible.
+- [x] Cached warning disappeared after reconnecting.
+- [x] Production Firestore Listen returned HTTP 200 after recovery.
 
-These files are included as Google Dashboard and refresh testing evidence.
+**Remaining:**
+- [ ] Verify actual application-level permission-denied error UI.
+- [ ] Verify application-level Firestore loading-error callback and error-state Retry.
+- [ ] Confirm intended search/filter persistence after refresh.
 
-The final report should link these screenshots to the corresponding verification results.
+**Evidence:** [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166), [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117)
 
-### E. Privacy Bug and Production Evidence
+**Status:** Published-event mapping and network recovery verified; application-level runtime error checks pending.
 
-The Evidence folder also contains:
+**Note:** Direct Emulator HTTP 403 and production network recovery do not prove the application-level error callbacks.
 
-1. `prachi-member-id-privacy-bug-report-2026-11-15.md`
-2. `prachi-member-id-privacy-production-2026-11-15.json`
 
-These files document the privacy-related bug report and production verification receipt.
+### D. Google Authentication and Email Verification Evidence
 
-The team should review the report and receipt before marking the privacy issue as resolved.
+**Primary QA:** `ujjalpoudel75`  
+**Independent QA Reviewer:** `DevyanaCT`
 
-Do not expose member IDs, private user information, credentials, or sensitive production data in public screenshots or presentation slides.
+#### Week 11 — Google Sign-In and Session Verification
+
+- [x] Real Google Sign-In and Dashboard access tested.
+- [x] Session persistence after refresh tested.
+- [x] Logout and Google re-login tested.
+- [x] Browser-restart session scenarios documented.
+- [x] Remember Me behavior tested in reported scenarios.
+- [x] Independent Google/session verification completed by `DevyanaCT` — 5 PASS, 0 FAIL.
+
+**Existing Screenshots:**
+- `W11-01-google-dashboard.png`
+- `W11-02-google-refresh.png`
+
+#### November 16 — Email Verification Testing
+
+**Tester:** `ujjalpoudel75`
+
+- [x] EV-01 — Email verification requirement displayed.
+- [x] EV-02 — Firebase verification email received.
+- [x] EV-03 — Verification link opened Firebase action page.
+- [x] EV-04 — Firebase confirmed successful email verification.
+- [x] EV-05 — Authenticated Dashboard opened.
+
+**Result:** 5 PASS, 0 FAIL.
+
+**Screenshot Evidence:**
+- `W11-09-email-verification-required.png`
+- `W11-10-verification-email-received.png`
+- `W11-11-verification-action.png`
+- `W11-12-email-verified.png`
+- `W11-13-verified-dashboard.png`
+
+**Remaining:**
+- [ ] Confirm Remember Me unchecked behavior after browser restart.
+- [ ] Confirm password-recovery evidence where required.
+- [ ] Repeat final authentication regression on the selected MVP freeze candidate.
+
+**Evidence:** [Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167)
+
+**Status:** Google authentication and email-verification scenarios passed; final freeze-candidate regression pending.
 
 ## 4. MVP Freeze Roadmap
 
@@ -160,14 +212,19 @@ Evidence: GitHub Issue #118.
 
 The following evidence is available in `docs/Week11/Evidence/`:
 
-| Evidence File | Purpose |
+| Evidence File / Location | Purpose |
 |---|---|
-| W11-01-google-dashboard.png | Google Dashboard verification |
-| W11-02-google-refresh.png | Google refresh verification |
-| prachi-member-id-privacy-bug-report-2026-11-15.md | Privacy bug documentation |
-| prachi-member-id-privacy-production-2026-11-15.json | Production verification receipt |
-
-All evidence should be reviewed and linked to its corresponding issue or testing result.
+| `W11-01-google-dashboard.png` | Google Dashboard verification |
+| `W11-02-google-refresh.png` | Google session refresh verification |
+| `W11-09-email-verification-required.png` | Email-verification requirement |
+| `W11-10-verification-email-received.png` | Firebase verification email delivery |
+| `W11-11-verification-action.png` | Verification action page |
+| `W11-12-email-verified.png` | Email verification successful |
+| `W11-13-verified-dashboard.png` | Authenticated Dashboard access |
+| `prachi-member-id-privacy-bug-report-2026-11-15.md` | Privacy bug documentation |
+| `prachi-member-id-privacy-production-2026-11-15.json` | Production verification receipt |
+| [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166) | Firestore field-mapping screenshots, Emulator HTTP 403, and network recovery findings |
+| [Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167) | Google authentication and email-verification testing |
 
 ## 8. Individual Responsibilities
 
@@ -201,16 +258,24 @@ Next action: Verify the latest MVP freeze candidate and record updated results.
 
 | Task | Priority | Status |
 |---|---|---|
-| Final authentication verification | P1 | To verify |
-| Firestore error handling | P1 | To verify |
-| Privacy bug review | P1 | Review evidence |
-| Event discovery regression | P1 | Retest freeze candidate |
-| Search and filters | P1 | Retest freeze candidate |
-| Theme and accessibility | P2 | Previously tested |
-| Local backup verification | P1 | Repeat on freeze candidate |
-| Final screenshots and evidence | P2 | Organize |
-| Presentation preparation | P2 | Pending |
-| Team rehearsal | P2 | Pending |
+| Google Sign-In and session verification | P1 | PASS — Previous Week 11 scenarios |
+| Email-verification workflow | P1 | PASS — 5/5 |
+| Final authentication regression on freeze candidate | P1 | PENDING |
+| Firestore unauthorized Emulator read | P1 | PASS — HTTP 403 |
+| Firestore cached/offline recovery | P1 | PASS |
+| Published-event field mapping | P1 | PASS — 8/8 |
+| Independent published-event review | P2 | PASS — 8/8 reviewer-reported |
+| Application-level Firestore permission-denied UI | P1 | PENDING |
+| Application-level Firestore loading-error/retry | P1 | PENDING |
+| Search/filter refresh requirement | P2 | PENDING CONFIRMATION |
+| Privacy bug evidence and final regression | P2 | Follow-up verification |
+| Event discovery regression on freeze candidate | P1 | PENDING |
+| Theme and accessibility on final candidate | P2 | PENDING |
+| Local backup verification | P2 | PENDING |
+| Evidence organization and privacy review | P2 | IN PROGRESS |
+| Final presentation preparation | P2 | PENDING |
+| Team rehearsal | P2 | PENDING |
+
 
 ## 10. Final Demo Success Criteria
 
@@ -228,6 +293,21 @@ The final demonstration is ready when:
 - Local backup setup is reproducible.
 - Evidence is organized and accessible.
 - Every team member can explain their contribution.
+
+### Final MVP Freeze Candidate Requirements
+
+- [ ] Record the exact team-selected freeze candidate commit SHA.
+- [ ] Record the deployed URL corresponding to that SHA.
+- [ ] Repeat the full authenticated core journey on the candidate.
+- [ ] Verify existing event discovery and published-event display.
+- [ ] Review outstanding Firestore runtime error limitations with the team.
+- [ ] Confirm local setup and backup demo on the same candidate.
+- [ ] Verify all screenshots and evidence links.
+- [ ] Record the final team freeze decision.
+
+**Final MVP Freeze Approval:** PENDING.
+
+**Evidence:** [Issue #177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177)
 
 ## 11. Future Improvements
 
@@ -260,3 +340,45 @@ The existing feature promise stays unchanged. Devyana's [November 15 independent
 Prachi coordinates [#177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177): record the candidate/URL with QA; arrange a named core-path and boundary repeat; carry exact Firestore gaps from #166; confirm setup/backup in #118; and record the actual team decision. **Next checkpoint: November 18, 2026, end of day KST.** P1 required verification precedes P2 reliability/setup/handoff; P3 features remain deferred. No P0 application blocker is established by this documentation assessment.
 
 The [Sprint 2 quality record](Sprint-quality-quick-checks.md), [Prachi contribution/next actions](Evidence/prachi-week11-requirements-2026-11-16.md), [shared report](Weekly-Report.md) and [current area map](../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map) complete the links. Privacy/Friends corrections remain supporting work; their automated success does not certify the entire Events demo. No new runtime, human review or team vote is claimed here.
+
+
+## November 17 — Week 11 Verification Progress Update
+
+### Authentication — `ujjalpoudel75`
+
+- Real Google Sign-In, Dashboard, session and logout/re-login scenarios previously tested.
+- Independent Google authentication QA by `DevyanaCT`: 5 PASS, 0 FAIL.
+- November 16 email-verification workflow: EV-01 to EV-05 — 5 PASS, 0 FAIL.
+- Five email-verification screenshots recorded.
+- Final freeze-candidate regression remains pending.
+
+**Evidence:** [Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167)
+
+### Firestore — `DevyanaCT`
+
+- Local Firebase Emulator connectivity verified.
+- Unauthenticated Firestore Emulator GET returned HTTP 403 Forbidden.
+- Second published-event manual comparison: 8 PASS, 0 FAIL.
+- Independent reviewer `tulseyy8848` also reported 8 PASS, 0 FAIL.
+- Cached published events remained available offline.
+- Production Firestore Listen returned HTTP 200 after reconnection.
+- Application-level permission-denied and loading-error/retry behavior remain unverified.
+- Search/filter persistence requirement confirmation remains pending.
+
+**Evidence:** [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+
+### Final MVP Freeze
+
+- [ ] Team-selected freeze candidate SHA recorded.
+- [ ] Final candidate regression completed.
+- [ ] Backup demo independently verified on selected candidate.
+- [ ] Remaining required Firestore limitations formally resolved or accepted.
+- [ ] Team freeze approval recorded.
+
+**Freeze Status:** PENDING.
+
+**Coordinator:** `prachi2061`  
+**Tracking:** [Issue #177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177)
+
+No new features are included in this update. The team remains focused on stabilizing and demonstrating the existing MVP.
+
