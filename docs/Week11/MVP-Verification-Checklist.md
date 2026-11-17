@@ -141,3 +141,10 @@ Prachi confirmed on November 18 that **no freeze candidate has been approved**. 
 The [dated follow-up](Evidence/prachi-week11-feedback-2026-11-18.md) links the current named receipts and next-check owners. Issue #166 already records Devyana's second-event comparison, tulseyy8848's independent 8/8 review and screenshots; actual listener permission-denied, terminal loading-error and error-state Retry remain pending. The existing QA owner is ujjalpoudel75 for the candidate regression, DevyanaCT supports the remaining Firestore runtime checks, and tulseyy8848 owns the candidate setup/backup check in #118. Prachi coordinates the candidate/scope decision in #177. These are existing responsibility references, not new acceptances or completed tests.
 
 No new runtime test, human source explanation or team approval is supplied by this documentation checkpoint. Record the actual SHA, URL, scope decision, named tester and proof before changing the gate status.
+
+
+## November 18 MVP scope freeze and pinned candidate - Prachi
+
+Prachi instructed a scope freeze. The [freeze record](MVP-Freeze-Record.md) pins candidate `e5f1888aa4600ac2013d6bda34a55554ba68195f` / `mvp-candidate-2026-11-18`, binds its recorded deployment and limits work to the existing core journey, defect fixes and verification. Build, 28 unit checks and 24 local desktop/mobile browser cases passed; this is Codex-assisted automation with reused dependencies and guest/fixture data.
+
+**Team release approval remains PENDING.** The candidate is now identified; actual team sign-off, independent authenticated candidate regression, terminal Firestore error/Retry results, candidate clean setup/backup and Prachi's personal explanation remain open. This dated scope-freeze instruction supersedes the earlier "candidate not selected" coordination status, without changing earlier test dates or claiming a team vote.

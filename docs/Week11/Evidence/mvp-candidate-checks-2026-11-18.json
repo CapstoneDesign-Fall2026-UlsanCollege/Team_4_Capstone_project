@@ -1,0 +1,453 @@
+{
+  "dateKST": "2026-11-18",
+  "candidateSHA": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+  "candidateTag": "mvp-candidate-2026-11-18",
+  "scopeFreezeAuthorizedBy": "prachi2061, user instruction in this conversation: freeze MvP",
+  "teamReleaseApproval": false,
+  "independentCandidateRegression": "PENDING",
+  "executor": "Codex-assisted local automation",
+  "environment": {
+    "os": "win32",
+    "node": "v20.18.0",
+    "browser": "Installed Google Chrome; desktop/mobile viewport emulation",
+    "dependencies": "Existing installed dependencies reused through a local node_modules junction; not a clean install or deployment-runtime parity check."
+  },
+  "checks": [
+    {
+      "name": "build",
+      "command": "npm run build",
+      "startedAt": "2026-11-17T17:48:58.607Z",
+      "finishedAt": "2026-11-17T17:49:19.125Z",
+      "durationSeconds": 20.5,
+      "exitCode": 0,
+      "nodeVersion": "v20.18.0",
+      "candidateSHA": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+      "stdoutSHA256": "c3cf4264c9c0117cb7782a7dedb3ab73768512300be0512a9ea40c081f2e925a",
+      "stderrSHA256": "2d0397183b8313e15fe4be1ea61729705f9bca05b2c31b0ad05535154e7ed072"
+    },
+    {
+      "name": "event-discovery",
+      "command": "npm run test:event-discovery --workspace frontend/react-app",
+      "startedAt": "2026-11-17T17:48:58.267Z",
+      "finishedAt": "2026-11-17T17:49:03.140Z",
+      "durationSeconds": 4.9,
+      "exitCode": 0,
+      "nodeVersion": "v20.18.0",
+      "candidateSHA": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+      "stdoutSHA256": "91e1397bf8e21b0a13052ad9f072f43c20537513997acd00648b7c12e814c8a7",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "counts": {
+        "tests": 22,
+        "pass": 22,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "name": "published-events",
+      "command": "npm run test:published-events --workspace frontend/react-app",
+      "startedAt": "2026-11-17T17:49:03.145Z",
+      "finishedAt": "2026-11-17T17:49:04.680Z",
+      "durationSeconds": 1.5,
+      "exitCode": 0,
+      "nodeVersion": "v20.18.0",
+      "candidateSHA": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+      "stdoutSHA256": "766648ae7dddf0cbde265181eb3a2782ef872bbf5414cbcee22cd03beb87a7c1",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "counts": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "name": "email-verification",
+      "command": "npm run test:email-verification --workspace frontend/react-app",
+      "startedAt": "2026-11-17T17:49:04.684Z",
+      "finishedAt": "2026-11-17T17:49:06.223Z",
+      "durationSeconds": 1.5,
+      "exitCode": 0,
+      "nodeVersion": "v20.18.0",
+      "candidateSHA": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+      "stdoutSHA256": "798f67ebd3edf18fb1577913689ec5f8e37e4ada3e012f614bbe71a0cef267cc",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "name": "core-smoke",
+      "command": "npm run test:smoke --workspace frontend/react-app -- events.spec.js navigation.spec.js event-discovery-upgrades.spec.js published-catalogue.spec.js theme-toggle.spec.js event-dialog-close.spec.js --reporter=json",
+      "startedAt": "2026-11-17T17:49:19.719Z",
+      "finishedAt": "2026-11-17T17:54:00.265Z",
+      "durationSeconds": 280.5,
+      "exitCode": 0,
+      "nodeVersion": "v20.18.0",
+      "candidateSHA": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+      "stdoutSHA256": "5563cd103f5271235dc7050b3196b704207b3da45c56e76c00621cddf42c6d8e",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stats": {
+        "startTime": "2026-11-17T17:49:22.915Z",
+        "duration": 277302.69800000003,
+        "expected": 24,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "projects": [
+        {
+          "name": "desktop"
+        },
+        {
+          "name": "mobile"
+        }
+      ]
+    }
+  ],
+  "unitPass": 28,
+  "browserPass": 24,
+  "browserCases": [
+    {
+      "title": "event-dialog-close.spec.js / event title and Close stay reachable after scrolling the trip planner in light mode",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 29948
+        }
+      ]
+    },
+    {
+      "title": "event-dialog-close.spec.js / event title and Close stay reachable after scrolling the trip planner in dark mode",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3734
+        }
+      ]
+    },
+    {
+      "title": "event-dialog-close.spec.js / event title and Close stay reachable after scrolling the trip planner in light mode",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2824
+        }
+      ]
+    },
+    {
+      "title": "event-dialog-close.spec.js / event title and Close stay reachable after scrolling the trip planner in dark mode",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2675
+        }
+      ]
+    },
+    {
+      "title": "event-discovery-upgrades.spec.js / date ranges combine with search/category and the dialog stays synchronized",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4084
+        }
+      ]
+    },
+    {
+      "title": "event-discovery-upgrades.spec.js / date/category empty results explain recovery and campus midnight refreshes the active date",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2830
+        }
+      ]
+    },
+    {
+      "title": "event-discovery-upgrades.spec.js / published catalogue fixtures use the same campus date filter as sample events",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2186
+        }
+      ]
+    },
+    {
+      "title": "event-discovery-upgrades.spec.js / date ranges combine with search/category and the dialog stays synchronized",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3071
+        }
+      ]
+    },
+    {
+      "title": "event-discovery-upgrades.spec.js / date/category empty results explain recovery and campus midnight refreshes the active date",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2302
+        }
+      ]
+    },
+    {
+      "title": "event-discovery-upgrades.spec.js / published catalogue fixtures use the same campus date filter as sample events",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1925
+        }
+      ]
+    },
+    {
+      "title": "events.spec.js / demo student reaches the selected sample event details",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3237
+        }
+      ]
+    },
+    {
+      "title": "events.spec.js / unmatched search has an empty state and clear filters restores events",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2733
+        }
+      ]
+    },
+    {
+      "title": "events.spec.js / demo student reaches the selected sample event details",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3065
+        }
+      ]
+    },
+    {
+      "title": "events.spec.js / unmatched search has an empty state and clear filters restores events",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2250
+        }
+      ]
+    },
+    {
+      "title": "navigation.spec.js / browser Back and Forward restore Community pages and the Feed workspace",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3186
+        }
+      ]
+    },
+    {
+      "title": "navigation.spec.js / deep links survive login and reload without bypassing authentication",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3228
+        }
+      ]
+    },
+    {
+      "title": "navigation.spec.js / browser Back and Forward restore Community pages and the Feed workspace",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2461
+        }
+      ]
+    },
+    {
+      "title": "navigation.spec.js / deep links survive login and reload without bypassing authentication",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2563
+        }
+      ]
+    },
+    {
+      "title": "published-catalogue.spec.js / published catalogue shows the current week and the actual weekend",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3283
+        }
+      ]
+    },
+    {
+      "title": "published-catalogue.spec.js / a host panel distinguishes its published events from sample listings",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3336
+        }
+      ]
+    },
+    {
+      "title": "published-catalogue.spec.js / published catalogue shows the current week and the actual weekend",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2694
+        }
+      ]
+    },
+    {
+      "title": "published-catalogue.spec.js / a host panel distinguishes its published events from sample listings",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2455
+        }
+      ]
+    },
+    {
+      "title": "theme-toggle.spec.js / Light/Dark Theme Toggle works and persists after reload",
+      "project": "desktop",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2567
+        }
+      ]
+    },
+    {
+      "title": "theme-toggle.spec.js / Light/Dark Theme Toggle works and persists after reload",
+      "project": "mobile",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2109
+        }
+      ]
+    }
+  ],
+  "deployment": {
+    "id": 7861261466,
+    "sha": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+    "environment": "Production",
+    "state": "success",
+    "createdAt": "2026-11-17T17:41:12Z",
+    "statusCreatedAt": "2026-11-17T17:41:13Z",
+    "environmentURL": "https://campusvibe-fnh5f79me-campus-vibe.vercel.app",
+    "source": "https://api.github.com/repos/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/deployments/7861261466",
+    "statusSource": "https://api.github.com/repos/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/deployments/7861261466/statuses",
+    "scope": "GitHub/Vercel deployment metadata only; not a new live authenticated test."
+  },
+  "limits": [
+    "No new Google identity login, real verification email or password-reset test",
+    "No application-level Firestore terminal permission-denied/loading-error/Retry result",
+    "Published-catalogue browser cases use fictional local fixtures, not real Firestore",
+    "No independent candidate regression, fresh-install/backup check or personal explain-back",
+    "Scope freeze instructed by Prachi; team release approval remains pending"
+  ],
+  "applicationChanges": 0,
+  "runnerCleanup": {
+    "observation": "Playwright completed the browser cases, but Windows web-server teardown stalled after the worker exited.",
+    "action": "Stopped only the identity-verified local Vite verification server on port 4178; Playwright then emitted its report and exited 0.",
+    "result": "24 expected, 0 unexpected, 0 flaky, 0 skipped; no test case changed or retried.",
+    "durationLimit": "The reported duration includes waiting for teardown and is not a timed demo rehearsal."
+  },
+  "documentationPreservation": {
+    "status": "PASS",
+    "candidateSHA": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+    "tag": "mvp-candidate-2026-11-18",
+    "trackedFilesPreserved": 457,
+    "otherStudentRowsUnchanged": true,
+    "existingRoadmapUnchanged": true,
+    "checklistAppendOnly": true,
+    "originalLocalEditsPreserved": 5,
+    "applicationUnchanged": true,
+    "localReferences": 14,
+    "changedFiles": [
+      "docs/Week11/MVP-Freeze-Record.md",
+      "docs/Week11/Evidence/mvp-candidate-checks-2026-11-18.json",
+      "docs/Week11/MVP-Verification-Checklist.md",
+      "docs/Week11/Weekly-Report.md"
+    ]
+  }
+}
