@@ -41,3 +41,9 @@ Record in #177: tester/date; candidate SHA and URL; browser/setup; one core step
 ## Preparation, AI use and validation
 
 Codex compared the four Week 11 course files and reusable verification/quality/priority templates with the latest project documents and issue receipts, then prepared the checklist, report links, roadmap/quality checkpoint and audit addendum. This update is documentation only. Validation checks local links/anchors, selected GitHub evidence references, unchanged application files and preservation of other students' contribution rows. It does not establish new runtime behavior, a human source explanation, peer reproduction or team approval. The [validation receipt](prachi-week11-document-validation-2026-11-16.json) records the actual checks.
+
+## November 18 professor-feedback follow-up
+
+See the [current gate status and next-check owners](prachi-week11-feedback-2026-11-18.md). Prachi confirmed that no candidate has been approved. Team sign-off, a candidate SHA and the final candidate regression remain pending; no approval is inferred from merged fixes or earlier screenshots.
+
+The current #166 record already includes the independent 8/8 review and screenshots. Its permission-denied, terminal loading-error and error-state Retry checks remain open. Existing QA, Firestore and setup owners are linked in the dated note; optional social changes remain outside the frozen Events promise. No new runtime or independent human result was produced for this follow-up.
