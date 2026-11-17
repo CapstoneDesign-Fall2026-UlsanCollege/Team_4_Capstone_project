@@ -116,12 +116,28 @@ Smallest next action: Prachi records the proposed candidate with QA, carries #16
 
 
 ### Final MVP Freeze Gate
+**November 18 — Tulsey's Frozen Candidate Local Setup and Smoke Test**
 
-- [ ] Record the team-selected freeze candidate commit SHA and corresponding deployed URL.
+Tester: `tulseyy8848`  
+Candidate: `mvp-candidate-2026-11-18`  
+Commit: `e5f1888aa4600ac2013d6bda34a55554ba68195f`
+
+- [x] Checked out the pinned candidate and confirmed the exact commit SHA.
+- [x] Confirmed the working tree was clean.
+- [x] Installed dependencies successfully using `npm.cmd ci`.
+- [x] Started the local Vite development server and opened CampusVibes.
+- [x] Checked Discover Events and Event Details.
+- [x] Completed the production build successfully.
+- [x] Installed Playwright Chromium.
+- [x] Ran the complete Playwright smoke-test suite: **118 PASS, 0 FAIL, 0 skipped** (5.5 minutes).
+- [x] Attached screenshots and test evidence to [Issue #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6958484427).
+
+- [x] Record the pinned candidate commit SHA and corresponding deployed URL: `e5f1888aa4600ac2013d6bda34a55554ba68195f` — [Candidate deployment](https://campusvibe-fnh5f79me-campus-vibe.vercel.app/)
 - [ ] Repeat the required authenticated core journey on that candidate.
-- [ ] Confirm local setup and backup demonstration on the same candidate.
+- [ ] Confirm independent teammate setup and backup handoff on the same candidate.
 - [ ] Resolve or explicitly decide how to handle remaining required Firestore runtime gaps.
 - [ ] Record team approval or the required recovery route.
+**Result:** Tulsey's own frozen-candidate local setup and automated smoke testing are complete. Independent teammate retest and backup handoff confirmation remain pending. This does not replace authenticated candidate regression, Firestore runtime error/Retry verification, or team release approval.
 
 **Freeze Decision:** PENDING.
 
