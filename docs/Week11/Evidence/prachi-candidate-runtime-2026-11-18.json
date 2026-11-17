@@ -1,0 +1,250 @@
+{
+  "status": "PASS",
+  "candidateSHA": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+  "node": "v20.18.0",
+  "checkedAt": "2026-11-17T18:13:11.599Z",
+  "api": {
+    "pass": 7,
+    "fail": 0
+  },
+  "posterRules": {
+    "pass": 4,
+    "fail": 0
+  },
+  "browser": {
+    "status": "PASS",
+    "checkedAt": "2026-11-17T18:13:11.577Z",
+    "project": "demo-campusvibe-feed",
+    "target": "http://127.0.0.1:5390/",
+    "authHost": "127.0.0.1:19499",
+    "firestoreHost": "127.0.0.1:18480",
+    "execution": "Codex-assisted local Chrome, Auth and Firestore Emulators",
+    "independentHumanReview": false,
+    "results": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "name": "verified emulator authentication",
+        "status": "PASS",
+        "actual": "Signup requests a local verification code; applying that code and checking verification opens the app.",
+        "method": "Real local Auth Emulator, not Gmail/Google or inbox delivery"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "name": "authenticated published-event core path",
+        "status": "PASS",
+        "actual": "Dashboard, category/search and Event Details show the seeded emulator event and its location.",
+        "method": "Unmocked Auth/Firestore Emulators and application"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "name": "empty-search recovery",
+        "status": "PASS",
+        "actual": "A search with no matches shows an empty state; Clear filters restores published and sample events.",
+        "method": "Application UI against local Firestore"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "name": "refresh and restored session",
+        "status": "PASS",
+        "actual": "The verified local session and server-backed published event return after reload.",
+        "method": "Auth/Firestore Emulators, not deployed Google-session proof"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "name": "application permission-denied runtime",
+        "status": "PASS",
+        "actual": "The actual emulator query returns permission-denied; the application displays its terminal error and Retry while sample listings remain available.",
+        "method": "Changed rules only in dedicated local emulator; same-query SDK diagnostic, unmodified App/store"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "name": "Retry after permission restoration",
+        "status": "PASS",
+        "actual": "Clicking the real Retry control reconnects the application, restores the published event and removes the terminal alert.",
+        "method": "Unmodified application and restored local repository rules"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "name": "application terminal loading-error runtime",
+        "status": "PASS",
+        "actual": "A controlled failed-precondition callback produces the actual application error UI and Retry control.",
+        "method": "Browser-controlled store-boundary injection; not a real Firestore/provider failure"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "name": "Retry after controlled loading error",
+        "status": "PASS",
+        "actual": "Retry starts the original SDK listener, loads the emulator event and clears the alert.",
+        "method": "Injected first callback only; recovery uses actual local Firestore"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "name": "logout",
+        "status": "PASS",
+        "actual": "Logout returns to the landing view.",
+        "method": "Actual local Firebase signOut"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "name": "verified emulator authentication",
+        "status": "PASS",
+        "actual": "Signup requests a local verification code; applying that code and checking verification opens the app.",
+        "method": "Real local Auth Emulator, not Gmail/Google or inbox delivery"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "name": "authenticated published-event core path",
+        "status": "PASS",
+        "actual": "Dashboard, category/search and Event Details show the seeded emulator event and its location.",
+        "method": "Unmocked Auth/Firestore Emulators and application"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "name": "empty-search recovery",
+        "status": "PASS",
+        "actual": "A search with no matches shows an empty state; Clear filters restores published and sample events.",
+        "method": "Application UI against local Firestore"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "name": "refresh and restored session",
+        "status": "PASS",
+        "actual": "The verified local session and server-backed published event return after reload.",
+        "method": "Auth/Firestore Emulators, not deployed Google-session proof"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "name": "application permission-denied runtime",
+        "status": "PASS",
+        "actual": "The actual emulator query returns permission-denied; the application displays its terminal error and Retry while sample listings remain available.",
+        "method": "Changed rules only in dedicated local emulator; same-query SDK diagnostic, unmodified App/store"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "name": "Retry after permission restoration",
+        "status": "PASS",
+        "actual": "Clicking the real Retry control reconnects the application, restores the published event and removes the terminal alert.",
+        "method": "Unmodified application and restored local repository rules"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "name": "application terminal loading-error runtime",
+        "status": "PASS",
+        "actual": "A controlled failed-precondition callback produces the actual application error UI and Retry control.",
+        "method": "Browser-controlled store-boundary injection; not a real Firestore/provider failure"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "name": "Retry after controlled loading error",
+        "status": "PASS",
+        "actual": "Retry starts the original SDK listener, loads the emulator event and clears the alert.",
+        "method": "Injected first callback only; recovery uses actual local Firestore"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "name": "logout",
+        "status": "PASS",
+        "actual": "Logout returns to the landing view.",
+        "method": "Actual local Firebase signOut"
+      }
+    ],
+    "pageErrors": [],
+    "limits": [
+      "Fictional local accounts/events; no production data/provider change.",
+      "Terminal loading failure is controlled callback injection.",
+      "Not an independent teammate check or team freeze approval."
+    ]
+  },
+  "inspectionBaseline": "f81f63c72c6656291d3bb31b2861518f6baab184",
+  "candidateApplicationFilesUnchanged": true,
+  "sourceHashes": {
+    "frontend/react-app/src/App.jsx": "fbddda0e6bd20561cb4682dd360f21840ca0dc4e16a246837b729e03eb08655f",
+    "frontend/react-app/src/published-events-store.js": "607b84cee47c98a419b34c688b34041ccf9ea58de5f51e36767a6223922e73e2",
+    "frontend/react-app/src/event-catalog-status.js": "c92ba0299c4c72b264010acdb7c56ae14120fea87d0a9fe7c059fd15805c6061",
+    "backend/firebase/firestore.rules": "3c1a592fdba54c3189bdd360d57c2892383a20dee945766700bff2dbe6f73105"
+  },
+  "harness": "frontend/react-app/tests/published-events-recovery.browser.js",
+  "harnessSHA256": "9e302da9e1a1376a8f4c9a9d2a38b80775b92cfc91dfa1122f2982a6d47c8ad2",
+  "commands": {
+    "api": "node --test backend/tests/suggestion-poster-api.test.js",
+    "rules": "node --test backend/tests/suggestion-poster-rules.test.js",
+    "browser": "npm run test:published-events-recovery-browser --workspace frontend/react-app"
+  },
+  "screenshots": [
+    "docs/Week11/Evidence/prachi-candidate-runtime-2026-11-18/permission-denied-1440.png",
+    "docs/Week11/Evidence/prachi-candidate-runtime-2026-11-18/permission-denied-390.png",
+    "docs/Week11/Evidence/prachi-candidate-runtime-2026-11-18/terminal-load-error-1440.png",
+    "docs/Week11/Evidence/prachi-candidate-runtime-2026-11-18/terminal-load-error-390.png",
+    "docs/Week11/Evidence/prachi-candidate-runtime-2026-11-18/recovered-1440.png",
+    "docs/Week11/Evidence/prachi-candidate-runtime-2026-11-18/recovered-390.png"
+  ],
+  "backupAcceptance": {
+    "student": "ujjalpoudel75",
+    "scope": "Existing bounded QA support for auth/navigation, backend API and persistence. Not an independent poster handoff result.",
+    "receipt": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139#issuecomment-6787716484"
+  },
+  "teamApproval": false,
+  "personalExplainBack": "Pending actual student answer; prepared explanation is not certification.",
+  "independentAPIReview": "Pending named non-author result",
+  "providerUpload": "Not tested by this run",
+  "setupNotes": [
+    "Firebase CLI 15.36.0; Java 21.0.6; Node v20.18.0; existing dependency install reused.",
+    "Initial globally installed older CLI could not replace a JAR held by a separate emulator. The completed run used the current cached CLI and dedicated ports.",
+    "Only selected local Auth/Firestore instances on ports 19499/18480 and Vite 5390 were started/stopped. No production rules, database, account, billing or provider settings changed.",
+    "Raw Firebase CLI logs and environment data are private and excluded from published artifacts."
+  ]
+}
