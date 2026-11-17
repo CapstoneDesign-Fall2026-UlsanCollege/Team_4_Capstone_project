@@ -2,7 +2,7 @@
 
 **Owner:** `prachi2061`<br>
 **Prepared:** November 9, 2026, Asia/Seoul — Week 10<br>
-**Status:** Repeatable technical evidence linked; human explain-back, backup acceptance and independent API/persistence review pending.
+**Status:** Repeatable technical evidence linked; bounded QA backup accepted by Ujjal in his own receipt. Prachi's personal source explanation and independent API/persistence review remain pending.
 
 This supports the [Week 10 ownership milestone](../Week9/Final-demo-Roadmap.md#6-roadmap-milestones) and [Issue #139](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139). It documents the existing poster slice delivered in [Issue #153](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/153) / [PR #154](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/154); it adds no feature or demo promise. Suggestions remain supporting work. Prachi's original Google entry/recovery slice remains in the [shared audit](ai-use-and-code-ownership-audit.md#prachis-prepared-source-explanation).
 
@@ -17,7 +17,7 @@ The [audit area map](ai-use-and-code-ownership-audit.md#codebase-area-map) remai
 | Primary health check | From the repository root: `npm run test:backend`. This runs controlled API fixtures, including valid upload, ownership rejection, quota and provider failures. It needs no Firebase project access or real provider credentials. |
 | Cross-area check | Run `npm run test:rules`, then `npm run test:suggestion-posters-browser --workspace frontend/react-app` against the isolated emulators below. |
 | Support contact | `prachi2061`; any teammate may inspect, test or change the area. No personal permission from Prachi is required to run the local fixtures. |
-| Backup person | `ujjalpoudel75` is the existing proposed backup in the audit. API-area acceptance is **pending**; this guide does not assign or certify that person's work. Any available non-author may record the review. |
+| Backup person | `ujjalpoudel75` [accepted bounded QA support on November 11](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139#issuecomment-6787716484) for auth/navigation, backend API checks and data/privacy/persistence verification. This is acceptance of support, not an independent poster review or a completed test. Any available non-author may record the review. |
 | If the backup is unavailable | A non-author can start with the API fixture and source links without production access. If Java/Chrome/setup is blocked, record that blocker in #139; the isolated API/model checks remain available. Do not count an unrun browser check as a pass. |
 | If the provider fails | Keep the text draft; retry or remove the optional poster before sending. For the core demo, follow the roadmap's tested event-discovery path and omit this optional upload. Production configuration changes follow the deployment process, not a request for the steward's password. |
 
@@ -104,3 +104,8 @@ Course field structure comes from the user-supplied Week 10 checklist and [cours
 ## November 11 follow-up
 
 The [current source guide and technical receipt](Evidence/prachi-handoff-2026-11-11.md) distinguish upload, pending submission and reviewer publication; record Prachi's partial retry answer and request for help with the walkthrough; and link 6 API plus 4 Firestore permission cases passing on the stated revision. The [machine-readable result](Evidence/prachi-handoff-2026-11-11.json) identifies controlled provider fixtures and the dedicated emulator. The confirmed duplicate deferral is retained. Prachi's complete source explain-back, accepted API backup and a named non-author API/persistence review remain pending. The separate [real-provider check #158](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/158) is still open.
+
+
+## November 18 current technical follow-up
+
+The [candidate runtime and handoff receipt](../Week11/Evidence/prachi-candidate-runtime-2026-11-18.md) records 7 API cases, 4 poster permission cases and 18 local authenticated/error/recovery browser checks passing on the frozen application sources. Ujjal's existing bounded QA backup acceptance is linked above. Earlier dated sections keep their original history; the personal explanation, named non-author API/persistence result and genuine provider workflow remain separate. Issue #158 is now closed without an attached tester-result comment; closure alone is not proof of a genuine provider upload.
