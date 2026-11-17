@@ -133,3 +133,11 @@ This checkpoint records dated verification evidence. It does not claim a new aut
 ## Course source and preparation disclosure
 
 Based on the [Week 11 checklist](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/0d4cd0bab57e7f96bd0b8f4bb7e50fb775f65098/week-11/work-checklist.md), [verification template](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/0d4cd0bab57e7f96bd0b8f4bb7e50fb775f65098/student-starter-kit/templates/mvp-verification-checklist.md) and [priority guide](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/0d4cd0bab57e7f96bd0b8f4bb7e50fb775f65098/student-starter-kit/docs/issue-priority-guide.md). Structure adapted for the course assignment; no fictional worked-example evidence was reused. Codex read linked records and prepared this assessment. No runtime tests, genuine login, human explanation, teammate request/acceptance or team vote were performed by this documentation update.
+
+## November 18 coordination checkpoint - Prachi
+
+Prachi confirmed on November 18 that **no freeze candidate has been approved**. Candidate SHA, team sign-off and the final candidate regression remain **PENDING**; the inspected repository revision is not a selected candidate. Continue the existing recovery/verification route and defer optional Community/Feed features.
+
+The [dated follow-up](Evidence/prachi-week11-feedback-2026-11-18.md) links the current named receipts and next-check owners. Issue #166 already records Devyana's second-event comparison, tulseyy8848's independent 8/8 review and screenshots; actual listener permission-denied, terminal loading-error and error-state Retry remain pending. The existing QA owner is ujjalpoudel75 for the candidate regression, DevyanaCT supports the remaining Firestore runtime checks, and tulseyy8848 owns the candidate setup/backup check in #118. Prachi coordinates the candidate/scope decision in #177. These are existing responsibility references, not new acceptances or completed tests.
+
+No new runtime test, human source explanation or team approval is supplied by this documentation checkpoint. Record the actual SHA, URL, scope decision, named tester and proof before changing the gate status.

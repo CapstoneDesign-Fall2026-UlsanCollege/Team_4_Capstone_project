@@ -1,0 +1,175 @@
+{
+  "dateKST": "2026-11-18",
+  "checkedAt": "2026-11-17T17:38:57.007Z",
+  "scope": "Documentation/evidence reconciliation only; no new application, runtime, independent human or team-approval result.",
+  "status": "PASS",
+  "inspectionBaseline": "8e100ae890bf83d7e372f66097d5fe6d3d6232e6",
+  "approvedCandidateSHA": null,
+  "teamSignoffRecorded": false,
+  "userConfirmation": {
+    "dateKST": "2026-11-18",
+    "statement": "No approved candidate yet",
+    "source": "User response in this conversation"
+  },
+  "preservedTrackedFiles": 454,
+  "existingNotesAppendOnly": true,
+  "sharedReportOutsidePrachiRowUnchanged": true,
+  "otherStudentRowsUnchanged": true,
+  "originalLocalEditsPreserved": 5,
+  "issue166": {
+    "state": "OPEN",
+    "independentReview": "Existing reviewer-reported 8/8 and screenshots recorded",
+    "remaining": [
+      "Application listener permission-denied",
+      "Terminal loading-error callback",
+      "Retry from terminal error state"
+    ]
+  },
+  "nextCheckOwners": {
+    "candidateAndScopeCoordination": "prachi2061",
+    "candidateCoreRegression": "ujjalpoudel75 (existing QA role)",
+    "firestoreRuntimeVerification": "DevyanaCT (existing verification contact)",
+    "candidateSetupBackup": "tulseyy8848 (existing setup role)"
+  },
+  "checkedSourceIssues": [
+    {
+      "number": 177,
+      "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177",
+      "updatedAt": "2026-11-17T15:26:22Z"
+    },
+    {
+      "number": 166,
+      "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166",
+      "updatedAt": "2026-11-17T15:23:19Z"
+    },
+    {
+      "number": 167,
+      "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167",
+      "updatedAt": "2026-11-16T04:24:37Z"
+    },
+    {
+      "number": 138,
+      "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138",
+      "updatedAt": "2026-11-14T14:31:53Z"
+    },
+    {
+      "number": 118,
+      "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118",
+      "updatedAt": "2026-11-17T05:47:05Z"
+    },
+    {
+      "number": 139,
+      "url": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139",
+      "updatedAt": "2026-11-14T17:57:19Z"
+    }
+  ],
+  "localReferences": 10,
+  "issueAndCommentReferences": 9,
+  "references": [
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177",
+      "type": "checked-issue-or-comment"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166",
+      "type": "checked-issue-or-comment"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166#issuecomment-6906530940",
+      "type": "checked-issue-or-comment"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167#issuecomment-6889397205",
+      "type": "checked-issue-or-comment"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167#issuecomment-6906894511",
+      "type": "checked-issue-or-comment"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138#issuecomment-6878868546",
+      "type": "checked-issue-or-comment"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6939873828",
+      "type": "checked-issue-or-comment"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "prachi-member-id-privacy-bug-report-2026-11-15.md",
+      "type": "local-file"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "friends-sidebar-2026-11-15.md",
+      "type": "local-file"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177#issuecomment-6937462551",
+      "type": "checked-issue-or-comment"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "../../../README.md#quick-start",
+      "type": "local-heading"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139#issuecomment-6787716484",
+      "type": "checked-issue-or-comment"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "../MVP-Verification-Checklist.md",
+      "type": "local-file"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "prachi-week11-requirements-2026-11-16.md",
+      "type": "local-file"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "../Weekly-Report.md",
+      "type": "local-file"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+      "target": "prachi-week11-feedback-validation-2026-11-18.json",
+      "type": "local-file"
+    },
+    {
+      "file": "docs/Week11/MVP-Verification-Checklist.md",
+      "target": "Evidence/prachi-week11-feedback-2026-11-18.md",
+      "type": "local-file"
+    },
+    {
+      "file": "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+      "target": "prachi-week11-feedback-2026-11-18.md",
+      "type": "local-file"
+    },
+    {
+      "file": "docs/Week11/Weekly-Report.md",
+      "target": "Evidence/prachi-week11-feedback-2026-11-18.md",
+      "type": "local-file"
+    }
+  ],
+  "noApplicationTestsRun": true,
+  "noProductionSettingsChanged": true,
+  "noNewTeammateAcceptanceClaimed": true,
+  "changedFiles": [
+    "docs/Week11/Evidence/prachi-week11-feedback-2026-11-18.md",
+    "docs/Week11/Evidence/prachi-week11-feedback-validation-2026-11-18.json",
+    "docs/Week11/MVP-Verification-Checklist.md",
+    "docs/Week11/Evidence/prachi-week11-requirements-2026-11-16.md",
+    "docs/Week11/Weekly-Report.md"
+  ]
+}
