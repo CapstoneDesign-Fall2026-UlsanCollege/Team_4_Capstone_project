@@ -79,6 +79,12 @@ Application-level error handling must be verified separately.
 - [x] Cached-data warning and Retry button were visible.
 - [x] Cached warning disappeared after reconnecting.
 - [x] Production Firestore Listen returned HTTP 200 after recovery.
+- [x] Tested temporary Firestore request blocking using Chrome DevTools.
+- [x] Confirmed Firestore network requests were blocked.
+- [x] Confirmed Discover remained accessible with 9 sample listings during request blocking.
+- [x] Verified the no-cached-events warning and Retry button were displayed.
+- [x] Disabled browser request blocking and confirmed 14 published events and 9 sample listings returned.
+- [x] Confirmed the warning disappeared and normal Discover functionality was restored.
 
 **Remaining:**
 - [ ] Verify actual application-level permission-denied error UI.
@@ -275,6 +281,7 @@ Next action: Verify the latest MVP freeze candidate and record updated results.
 | Evidence organization and privacy review | P2 | IN PROGRESS |
 | Final presentation preparation | P2 | PENDING |
 | Team rehearsal | P2 | PENDING |
+| Firestore browser request-blocking and recovery | P1 | PASS — Discover remained usable and published events returned |
 
 
 ## 10. Final Demo Success Criteria
@@ -354,18 +361,28 @@ The [Sprint 2 quality record](Sprint-quality-quick-checks.md), [Prachi contribut
 
 **Evidence:** [Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167)
 
+
 ### Firestore — `DevyanaCT`
 
-- Local Firebase Emulator connectivity verified.
+- Local Firebase Authentication and Firestore Emulator connectivity verified.
 - Unauthenticated Firestore Emulator GET returned HTTP 403 Forbidden.
+- Published-event field mapping inspected in source code.
 - Second published-event manual comparison: 8 PASS, 0 FAIL.
 - Independent reviewer `tulseyy8848` also reported 8 PASS, 0 FAIL.
-- Cached published events remained available offline.
+- Supporting published-event screenshots attached in Issue #166.
+- Offline Discover retained 14 cached published events and 9 sample listings.
+- Cached-results warning and Retry button appeared during offline testing.
 - Production Firestore Listen returned HTTP 200 after reconnection.
-- Application-level permission-denied and loading-error/retry behavior remain unverified.
+- Temporary Firestore request blocking tested using Chrome DevTools.
+- Discover remained accessible with 9 sample listings while Firestore requests were blocked.
+- Disabling request blocking restored 14 published events and 9 sample listings.
+- Actual application-level permission-denied and terminal loading-error/retry behavior remain unverified.
 - Search/filter persistence requirement confirmation remains pending.
+- No application source code, Firestore rules or database records were modified.
 
-**Evidence:** [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+**Evidence:** [Issue #166 — Firestore Final Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+
+**Status:** Completed network-resilience and published-event checks PASS; application-level runtime error tests remain open.
 
 ### Final MVP Freeze
 
