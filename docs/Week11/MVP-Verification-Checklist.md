@@ -106,7 +106,7 @@ Smallest next action: Prachi records the proposed candidate with QA, carries #16
 - [ ] Verify actual application-level permission-denied UI handling.
 - [ ] Verify actual terminal Firestore loading-error callback.
 - [ ] Verify Retry recovery specifically from the terminal application error state.
-- [ ] Confirm required search/filter persistence behavior.
+- [x] Confirm required search/filter persistence behavior.
 
 **Evidence:** [Issue #166 — Firestore Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
 
