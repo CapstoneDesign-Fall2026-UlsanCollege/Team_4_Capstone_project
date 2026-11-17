@@ -21,7 +21,7 @@ The existing [Week 11 roadmap, core demo journey](<MVP-Freeze-Final-Road Map.md>
 | Email-verification workflow | Verification requirement appears; email is received; link opens; verification succeeds; authenticated Dashboard opens | November 16: `ujjalpoudel75` reported EV-01 through EV-05 PASS — 5 observed checkpoints, 0 FAIL. Five screenshots were recorded for the user-facing verification stages. | [#167 — Authentication and Email Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167). This proves observed workflow stages, not independent backend restrictions on unverified accounts. | PASS for reported workflow; final candidate repeat pending |
 | Discover, search and category | Matching events appear; selection opens the intended event | Ujjal reported Discover, search, category and Details PASS November 14 | [Five checks](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138#issuecomment-6878868546); does not establish every published-event field or failure | PASS for reported scenarios; final revision gap |
 | Refresh/session and logout/re-login | Session remains on refresh; logout signs out; Google re-login works | Devyana reported all three PASS November 15 | [Independent five-scenario receipt](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167#issuecomment-6889397205); do not reattribute to Prachi or Ujjal | PASS for reported scenarios; candidate retest pending |
-| Published-event data and recovery | Published fields match Firestore documents; denied/loading failures have usable recovery | November 16–17: `DevyanaCT` verified Firebase Emulator connectivity, inspected security rules, listeners and error-handling source, and completed the second-event comparison (8 PASS, 0 FAIL). Independent reviewer `tulseyy8848` also reported 8 PASS, 0 FAIL. An unauthenticated Emulator GET returned HTTP 403. Offline Discover retained 14 cached published events and 9 sample listings; reconnecting cleared the cached warning, and production Firestore Listen returned HTTP 200. Actual application-level permission-denied and loading-error/retry callbacks remain unverified. | [#166 — Firestore Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166), [#117 — Earlier Evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117). Second-event screenshots attached; reviewer result reported. | PARTIAL PASS — Field comparison and ordinary recovery passed; application error tests pending |
+| Published-event data and recovery | Published fields match Firestore documents; denied/loading failures have usable recovery | November 16–17: `DevyanaCT` verified Firebase Emulator connectivity, inspected security rules, listeners and error-handling source, and completed a second published-event comparison (8 PASS, 0 FAIL). Independent reviewer `tulseyy8848` also reported 8 PASS, 0 FAIL. An unauthenticated Emulator GET returned HTTP 403. Offline Discover retained 14 cached published events and 9 sample listings; reconnecting cleared the warning, and production Firestore Listen returned HTTP 200. A separate Chrome DevTools request-blocking test confirmed Discover remained accessible with 9 sample listings and a no-cached-events warning while Firestore requests were blocked. After disabling blocking, 14 published events and 9 sample listings returned, and the warning disappeared. Actual application-level permission-denied and terminal loading-error/Retry callbacks remain unverified. | [#166 — Firestore Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166), [#117 — Earlier Evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117). Second-event screenshots attached; independent review separately reported. | PARTIAL PASS — Field comparison and network recovery passed; application-level runtime error tests pending |
 | Theme, responsive UI and existing club information | Toggle works, layout fits, existing club details are reachable | November 15 automated smoke receipt: 118 desktop/mobile cases PASS; older setup note records club details | [Automated receipt](../../frontend/react-app/verification/friends-directory/results.json), [setup #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118); automation is not a presentation-device or fresh independent setup check | Scoped automated proof; candidate/device confirmation pending |
 | Password reset/email delivery, where required by the existing authentication scope | Authorized user receives and can use the recovery flow | No new genuine delivery/reset receipt assembled for this checkpoint | [Authentication #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116), [#167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167); displayed resend UI is not delivery proof | GAP until required scope/evidence is confirmed |
 | Meaningful boundary: empty search and recovery | No matches is explained; clearing search restores results | November 15 smoke run includes desktop/mobile empty-search recovery | [Test](../../frontend/react-app/tests/smoke/events.spec.js), [dated receipt](../../frontend/react-app/verification/friends-directory/results.json); no new November 16 execution | Scoped automated PASS; named candidate repeat pending |
@@ -58,7 +58,7 @@ Smallest next action: Prachi records the proposed candidate with QA, carries #16
 - Devyana's independent Google/session check is recorded above. It supports those five scenarios, not a new November 16 run, entire final candidate or API review. A new unaided candidate repeat remains pending.
 - **November 16 — Published-event verification:** `DevyanaCT` completed the source-level field-mapping inspection and reported a second published-event comparison with **8 PASS, 0 FAIL**.
 - **Independent review:** `tulseyy8848` also reported **8 PASS, 0 FAIL** for the published-event field comparison. Supporting screenshots are recorded in Issue #166. The independent review does not establish application-level Firestore error handling.
-- **November 17 — Firestore runtime observations:** `DevyanaCT` performed a read-only unauthenticated Firestore Emulator GET request that returned HTTP 403 Forbidden. Offline Discover displayed 14 cached published events and 9 sample listings. After connectivity was restored, the cached warning disappeared and production Firestore Listen returned HTTP 200.
+- **November 17 — Firestore runtime observations:** `DevyanaCT` performed a read-only unauthenticated Firestore Emulator GET request that returned HTTP 403 Forbidden. Offline Discover displayed 14 cached published events and 9 sample listings. After connectivity was restored, the cached warning disappeared and production Firestore Listen returned HTTP 200. A separate Chrome DevTools request-blocking test confirmed that Firestore requests were blocked while Discover remained accessible with 9 sample listings and a no-cached-events warning. After disabling request blocking, 14 published events and 9 sample listings returned, and the warning disappeared. Browser-level request-blocking and recovery passed; actual terminal Firestore listener error handling was not reproduced.
 - **Remaining Firestore gaps:** Actual application-level permission-denied UI handling and terminal loading-error/retry behavior remain unverified. Search/filter persistence still requires requirement confirmation.
 - **Evidence:** [#166 — Firestore Final Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166), [#117 — Earlier Firestore Evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117).
 
@@ -81,23 +81,39 @@ Smallest next action: Prachi records the proposed candidate with QA, carries #16
 
 **Evidence:** [Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167)
 
+
 ### Firestore Integration
 
 **Tester:** `DevyanaCT`  
-**Independent Reviewer:** `tulseyy8848`
+**Independent Reviewer:** `tulseyy8848`  
+**Testing Date:** November 16–17, 2026
 
-- [x] Local Firebase Emulator connection verified.
+- [x] Local Firebase Authentication and Firestore Emulator connections verified.
+- [x] Published-event security rules, Firestore listeners and error-handling source inspected.
 - [x] Unauthenticated Firestore Emulator GET returned HTTP 403 Forbidden.
 - [x] Second published-event comparison — 8 PASS, 0 FAIL.
 - [x] Independent reviewer also reported 8 PASS, 0 FAIL.
 - [x] Published-event screenshots attached in #166.
-- [x] Offline cached-event availability verified.
+- [x] Offline Discover retained 14 cached published events and 9 sample listings.
+- [x] Cached-data warning and Retry button displayed during offline testing.
+- [x] Restored connectivity and confirmed the cached warning disappeared.
 - [x] Production Firestore Listen returned HTTP 200 after reconnection.
+- [x] Temporarily blocked Firestore requests through Chrome DevTools.
+- [x] Confirmed Discover remained accessible with 9 sample listings during request blocking.
+- [x] Confirmed the no-cached-events warning and Retry button were displayed.
+- [x] Disabled request blocking and confirmed 14 published events and 9 sample listings returned.
+- [x] Confirmed normal Discover status was restored.
 - [ ] Verify actual application-level permission-denied UI handling.
-- [ ] Verify actual loading-error callback and error-state Retry.
+- [ ] Verify actual terminal Firestore loading-error callback.
+- [ ] Verify Retry recovery specifically from the terminal application error state.
 - [ ] Confirm required search/filter persistence behavior.
 
-**Evidence:** [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+**Evidence:** [Issue #166 — Firestore Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+
+**Result:** PARTIAL PASS — Browser-level Firestore interruption and recovery verified. Actual application-level runtime error handling remains unverified.
+
+**Changes Made:** No application source code, Firestore security rules or database records were modified. Temporary browser request blocking was disabled after testing.
+
 
 ### Final MVP Freeze Gate
 
