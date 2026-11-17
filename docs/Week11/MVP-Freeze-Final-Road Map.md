@@ -139,14 +139,20 @@ Community features and additional services may be demonstrated where stable but 
 - [x] Confirmed production Firestore Listen returned HTTP 200 after reconnection.
 - [x] Completed second published-event manual comparison — 8 PASS, 0 FAIL.
 - [x] Independent reviewer `tulseyy8848` also reported 8 PASS, 0 FAIL.
-- [x] Attached second-event comparison screenshots in Issue #166.
+- [x] Attached second-event comparison screenshots in Issue #166.   
+- [x] Tested temporary Firestore request blocking using Chrome DevTools.
+- [x] Confirmed Firestore requests were blocked without modifying application code or Firebase data.
+- [x] Confirmed Discover remained accessible with 9 sample listings during request blocking.
+- [x] Observed the no-cached-events warning and "Retry shared events" button.
+- [x] Disabled request blocking and verified 14 published events and 9 sample listings returned.
+- [x] Confirmed the warning disappeared and normal Discover functionality was restored.
 - [ ] Verify actual application-level permission-denied error message.
 - [ ] Verify actual application-level loading-error callback and error-state Retry recovery.
 - [ ] Confirm expected search/filter persistence after refresh.
 
 **Evidence:** [Issue #117](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117), [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
 
-**Status:** PARTIALLY VERIFIED — Published-event comparison and ordinary network recovery passed; application-level error runtime tests remain open.
+**Status:** PARTIALLY VERIFIED — Published-event comparison, offline/online recovery, and browser-level Firestore request-blocking recovery passed. Actual application-level permission-denied and terminal loading-error/Retry checks remain pending.
 
 **Note:** The HTTP 403 result came from a direct read-only request to the local Emulator. The HTTP 200 recovery result came from production Firestore. Neither proves that the application's actual permission-denied or loading-error callback works.
 
@@ -188,7 +194,10 @@ Community features and additional services may be demonstrated where stable but 
 - [x] Verify unauthorized Emulator read rejection — HTTP 403.
 - [x] Verify offline cached-event availability and production Firestore reconnection.
 - [x] Compare a second published Firestore event against the displayed UI — 8 PASS, 0 FAIL.
-- [x] Record the separate reviewer's 8 PASS, 0 FAIL result.
+- [x] Record the separate reviewer's 8 PASS, 0 FAIL result. 
+- [x] Verify browser-level Firestore request blocking and published-event recovery.
+- [x] Confirm Discover remains accessible with sample listings during blocked Firestore requests.
+- [x] Confirm 14 published events return after disabling request blocking.
 - [ ] Verify application-level permission-denied UI behavior.
 - [ ] Verify application-level loading-error callback and Retry recovery.
 - [ ] Confirm intended search/filter persistence after refresh.
@@ -434,13 +443,19 @@ Passing individual tests does not automatically mean that the entire MVP is read
   - Unauthenticated Firestore Emulator GET returned HTTP 403 Forbidden.
   - Offline Discover displayed 14 cached published events and 9 sample listings.
   - Cached-data warning and Retry button were visible during offline testing.
+  - Temporary Firestore request blocking tested using Chrome DevTools.
+  - Discover remained accessible with 9 sample listings while Firestore requests were blocked.
+  - No-cached-events warning and "Retry shared events" button were displayed.
+  - Disabling browser request blocking restored 14 published events and 9 sample listings.
+  - The warning disappeared and normal Discover functionality returned.
+  - Browser-level request-blocking and recovery — PASS.
+  - Actual application-level permission-denied and terminal loading-error/Retry behavior remain unverified.
   - Restoring connectivity removed the cached warning.
   - Production Firestore Listen returned HTTP 200 after reconnection.
   - Second published-event field comparison: 8 PASS, 0 FAIL.
   - Independent reviewer `tulseyy8848` also reported 8 PASS, 0 FAIL.
   - Supporting second-event screenshots attached in Issue #166.
   - Search/category reset after refresh documented.
-  - Actual application-level permission-denied and loading-error/retry runtime checks remain pending.
   - No application source code, Firestore rules or database records were modified.
   - **Evidence:** [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166).
 
@@ -483,12 +498,15 @@ Passing individual tests does not automatically mean that the entire MVP is read
 - [ ] Confirm the intended search/filter refresh behavior.
 - [ ] Record final evidence links and team approval.
 
-**Conclusion:** CampusVibes has verified its published-event field mapping, Firebase Emulator connectivity, unauthorized-read rejection and cached-event network recovery. The second-event comparison and independent reviewer both reported 8 PASS, 0 FAIL.
+**Conclusion:** CampusVibes has verified Firebase Emulator connectivity, unauthorized-read rejection (HTTP 403), published-event mapping, offline/online cached-data recovery and temporary browser-level Firestore request-blocking recovery.
 
-However, application-level Firestore permission-denied and loading-error/retry tests remain unverified. The final freeze candidate, regression and team approval are also pending.
+During request blocking, Discover remained accessible with 9 sample listings and displayed a no-cached-events warning. After disabling blocking, 14 published events and 9 sample listings returned and the warning disappeared.
 
-The team will continue the recovery/verification process under [Issue #177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177). Stretch features remain deferred until the MVP freeze is approved.
+The second published-event comparison and independent reviewer both reported 8 PASS, 0 FAIL.
 
+However, actual application-level Firestore permission-denied and terminal loading-error/Retry callbacks remain unverified. Search/filter persistence requirements, final freeze-candidate regression and team approval are also pending.
+
+The team will continue verification under [Issue #177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177). Stretch features remain deferred until the MVP freeze is approved.
 
 ## November 16 Week 11 verification checkpoint
 
