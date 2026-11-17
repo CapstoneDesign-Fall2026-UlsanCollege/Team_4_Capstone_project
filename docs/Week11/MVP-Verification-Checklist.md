@@ -18,9 +18,10 @@ The existing [Week 11 roadmap, core demo journey](<MVP-Freeze-Final-Road Map.md>
 |---|---|---|---|---|
 | Open the deployed app | Landing page loads on desktop/mobile | November 15: HTTP 200 and guest Feed readiness passed at 1440px/390px | [Release receipt](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/175#issuecomment-6890050286); read-only guest/served-code check | PASS for that dated scope; candidate retest pending |
 | Verified login and Dashboard | A genuine verified account reaches Dashboard | Ujjal reported login/Dashboard PASS November 14; Devyana independently reported Google login/Dashboard PASS November 15 | [Core QA](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138#issuecomment-6878868546), [Google QA](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167#issuecomment-6889397205); exact freeze commit not recorded | PASS for reported scenarios; final revision gap |
+| Email-verification workflow | Verification requirement appears; email is received; link opens; verification succeeds; authenticated Dashboard opens | November 16: `ujjalpoudel75` reported EV-01 through EV-05 PASS — 5 observed checkpoints, 0 FAIL. Five screenshots were recorded for the user-facing verification stages. | [#167 — Authentication and Email Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167). This proves observed workflow stages, not independent backend restrictions on unverified accounts. | PASS for reported workflow; final candidate repeat pending |
 | Discover, search and category | Matching events appear; selection opens the intended event | Ujjal reported Discover, search, category and Details PASS November 14 | [Five checks](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138#issuecomment-6878868546); does not establish every published-event field or failure | PASS for reported scenarios; final revision gap |
 | Refresh/session and logout/re-login | Session remains on refresh; logout signs out; Google re-login works | Devyana reported all three PASS November 15 | [Independent five-scenario receipt](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167#issuecomment-6889397205); do not reattribute to Prachi or Ujjal | PASS for reported scenarios; candidate retest pending |
-| Published-event data and recovery | Published fields match the Firestore document; denied/loading failures have usable recovery | November 16: `DevyanaCT` verified the local Firebase Emulator connection, inspected the published-event model and application error-handling source, and reported a second published-event comparison with **8 PASS, 0 FAIL**. Actual permission-denied and loading-error runtime testing remain pending. | [#166 — Week 11 Firestore Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166), [#117 — Firestore Event Loading](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117). Second-event screenshots and independent review complete. | PARTIAL PASS — Field comparison passed; runtime error/recovery gap remains |
+| Published-event data and recovery | Published fields match Firestore documents; denied/loading failures have usable recovery | November 16–17: `DevyanaCT` verified Firebase Emulator connectivity, inspected security rules, listeners and error-handling source, and completed the second-event comparison (8 PASS, 0 FAIL). Independent reviewer `tulseyy8848` also reported 8 PASS, 0 FAIL. An unauthenticated Emulator GET returned HTTP 403. Offline Discover retained 14 cached published events and 9 sample listings; reconnecting cleared the cached warning, and production Firestore Listen returned HTTP 200. Actual application-level permission-denied and loading-error/retry callbacks remain unverified. | [#166 — Firestore Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166), [#117 — Earlier Evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117). Second-event screenshots attached; reviewer result reported. | PARTIAL PASS — Field comparison and ordinary recovery passed; application error tests pending |
 | Theme, responsive UI and existing club information | Toggle works, layout fits, existing club details are reachable | November 15 automated smoke receipt: 118 desktop/mobile cases PASS; older setup note records club details | [Automated receipt](../../frontend/react-app/verification/friends-directory/results.json), [setup #118](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118); automation is not a presentation-device or fresh independent setup check | Scoped automated proof; candidate/device confirmation pending |
 | Password reset/email delivery, where required by the existing authentication scope | Authorized user receives and can use the recovery flow | No new genuine delivery/reset receipt assembled for this checkpoint | [Authentication #116](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/116), [#167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167); displayed resend UI is not delivery proof | GAP until required scope/evidence is confirmed |
 | Meaningful boundary: empty search and recovery | No matches is explained; clearing search restores results | November 15 smoke run includes desktop/mobile empty-search recovery | [Test](../../frontend/react-app/tests/smoke/events.spec.js), [dated receipt](../../frontend/react-app/verification/friends-directory/results.json); no new November 16 execution | Scoped automated PASS; named candidate repeat pending |
@@ -32,7 +33,7 @@ Priority orders work against the promised path. Severity applies only to observe
 | Bug/risk | Severity | Priority and evidence-based reason | Owner/support and next check |
 |---|---|---|---|
 | Final candidate, unified authenticated regression and approval not recorded | N/A, verification risk | **P1**: near-term freeze gate at risk despite viable dated paths | Prachi coordinates [#177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177); QA `ujjalpoudel75`, independent auth checker `DevyanaCT` per their existing receipts. Record SHA and repeat required steps in #138/#167 |
-| Published-event runtime error/recovery and independent evidence gaps | N/A, untested required runtime behavior | **P1**: Permission-denied and loading-error recovery remain unverified at application level. The second-event field comparison passed 8/8 manually, but supporting evidence and independent review remain pending. | `DevyanaCT` coordinates verification in #166. Proposed independent reviewer: `tulseyy8848`. Obtain reviewer results and complete or precisely document remaining runtime tests. |
+| Published-event application-level runtime error handling remains unverified | N/A — required runtime verification gap, not an observed application defect | **P1:** Emulator HTTP 403 and ordinary offline recovery passed, but actual application permission-denied and terminal loading-error/retry behavior remain unverified. Second-event comparison and reviewer both reported 8 PASS, 0 FAIL. | `DevyanaCT` provides verification support in [#166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166). `prachi2061` coordinates a safe runtime verification approach or an explicit team decision on remaining limitations. |
 | Search/filter reset requirement uncertain | N/A until a requirement is approved | **P2**: current path works; need a bounded requirement decision | Prachi coordinates with UI/implementation owner in #166. Record intended refresh behavior before reporting a bug |
 | Candidate setup/backup and unaided handoff not repeated | N/A, handoff risk | **P2** after P1 verification: preserve a reproducible demo fallback | `tulseyy8848` setup area in #118; Prachi coordinates a dated candidate check and a named non-author receipt |
 | Internal member-ID display exposure, delivered | Reported UI privacy defect; historical severity was not assigned, not a proven authorization bypass | Closed #172 / PR #173; **P2 follow-up** only for independent regression of existing correction | Prachi; [bug evidence](Evidence/prachi-member-id-privacy-bug-report-2026-11-15.md). Use fictional accounts and verify public labels/routing; do not claim ID anonymization |
@@ -55,11 +56,63 @@ Smallest next action: Prachi records the proposed candidate with QA, carries #16
 - [Current area map](../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map): auth/navigation, API/data support, UI/accessibility, QA and setup remain distinct.
 - Ujjal [accepted bounded auth/API/data QA backup](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/139#issuecomment-6787716484). Acceptance is recorded; it is not completion of API/persistence testing or a personal source explain-back.
 - Devyana's independent Google/session check is recorded above. It supports those five scenarios, not a new November 16 run, entire final candidate or API review. A new unaided candidate repeat remains pending.
-- **November 16 — Published-event verification:** `DevyanaCT` completed source-level field-mapping inspection and reported a second published-event manual comparison with **8 PASS, 0 FAIL** (title, category, date, time, location, host, description and image/fallback).
-- **Independent reviewer proposed:** `tulseyy8848` for a separate published-event comparison. Reviewer accepted, independent results and screenshots is completed.
-- **Evidence:** [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166). The tester's reported result does not replace a named independent review or runtime failure testing.
+- **November 16 — Published-event verification:** `DevyanaCT` completed the source-level field-mapping inspection and reported a second published-event comparison with **8 PASS, 0 FAIL**.
+- **Independent review:** `tulseyy8848` also reported **8 PASS, 0 FAIL** for the published-event field comparison. Supporting screenshots are recorded in Issue #166. The independent review does not establish application-level Firestore error handling.
+- **November 17 — Firestore runtime observations:** `DevyanaCT` performed a read-only unauthenticated Firestore Emulator GET request that returned HTTP 403 Forbidden. Offline Discover displayed 14 cached published events and 9 sample listings. After connectivity was restored, the cached warning disappeared and production Firestore Listen returned HTTP 200.
+- **Remaining Firestore gaps:** Actual application-level permission-denied UI handling and terminal loading-error/retry behavior remain unverified. Search/filter persistence still requires requirement confirmation.
+- **Evidence:** [#166 — Firestore Final Verification](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166), [#117 — Earlier Firestore Evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/117).
+
 
 - [Sprint 2 quality checks](Sprint-quality-quick-checks.md#sprint-2---mvp-and-freeze-week-11), [Prachi's contribution and next actions](Evidence/prachi-week11-requirements-2026-11-16.md), [one shared report](Weekly-Report.md), and [follow-up #177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177) form the evidence loop.
+
+
+## November 17 — Week 11 Verification Update
+
+### Authentication and Email Verification
+
+**Primary QA:** `ujjalpoudel75`
+
+- [x] Real Google Sign-In and authenticated Dashboard tested in previously reported Week 11 scenarios.
+- [x] Independent Google/session QA by `DevyanaCT` — 5 PASS, 0 FAIL.
+- [x] November 16 email-verification workflow EV-01 to EV-05 — 5 PASS, 0 FAIL.
+- [x] Five email-verification screenshots recorded.
+- [ ] Confirm any required password-reset or unverified-account boundary evidence.
+- [ ] Repeat the required authentication/core journey on the selected freeze candidate.
+
+**Evidence:** [Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167)
+
+### Firestore Integration
+
+**Tester:** `DevyanaCT`  
+**Independent Reviewer:** `tulseyy8848`
+
+- [x] Local Firebase Emulator connection verified.
+- [x] Unauthenticated Firestore Emulator GET returned HTTP 403 Forbidden.
+- [x] Second published-event comparison — 8 PASS, 0 FAIL.
+- [x] Independent reviewer also reported 8 PASS, 0 FAIL.
+- [x] Published-event screenshots attached in #166.
+- [x] Offline cached-event availability verified.
+- [x] Production Firestore Listen returned HTTP 200 after reconnection.
+- [ ] Verify actual application-level permission-denied UI handling.
+- [ ] Verify actual loading-error callback and error-state Retry.
+- [ ] Confirm required search/filter persistence behavior.
+
+**Evidence:** [Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+
+### Final MVP Freeze Gate
+
+- [ ] Record the team-selected freeze candidate commit SHA and corresponding deployed URL.
+- [ ] Repeat the required authenticated core journey on that candidate.
+- [ ] Confirm local setup and backup demonstration on the same candidate.
+- [ ] Resolve or explicitly decide how to handle remaining required Firestore runtime gaps.
+- [ ] Record team approval or the required recovery route.
+
+**Freeze Decision:** PENDING.
+
+**Coordinator:** `prachi2061`  
+**Tracking:** [Issue #177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177)
+
+This checkpoint records dated verification evidence. It does not claim a new automated regression run or team freeze approval.
 
 ## Course source and preparation disclosure
 
