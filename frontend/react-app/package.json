@@ -22,6 +22,7 @@
     "test:event-links-browser": "node tests/event-links.browser.js",
     "test:event-catalog-status": "node --test tests/event-catalog-status.test.js",
     "test:published-events-browser": "node tests/published-events.browser.js",
+    "test:published-events-recovery-browser": "node tests/published-events-recovery.browser.js",
     "test:assistant": "node --test tests/assistant.test.js",
     "test:gemini": "node --test tests/gemini.test.js && npm run test:assistant --workspace @campusvibes/backend",
     "test:gemini-browser": "node tests/gemini.browser.js",
