@@ -1,0 +1,90 @@
+{
+  "dateKST": "2026-11-18",
+  "checkedAt": "2026-11-18T04:47:31.339Z",
+  "repair": {
+    "checkedAt": "2026-11-18T04:39:05.109Z",
+    "dateKST": "2026-11-18",
+    "project": "campus-vibe-7a95a",
+    "candidateSHA": "e5f1888aa4600ac2013d6bda34a55554ba68195f",
+    "domain": "campusvibe-fnh5f79me-campus-vibe.vercel.app",
+    "publicConfigReadStatus": 200,
+    "authorizedBefore": false,
+    "publicAuthorizedBefore": false,
+    "googleProviderEnabled": true,
+    "changed": true,
+    "allExistingDomainsPreserved": true,
+    "authorizedAfter": true,
+    "newDomains": [
+      "campusvibe-fnh5f79me-campus-vibe.vercel.app"
+    ]
+  },
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "siteDomain": "campusvibe-fnh5f79me-campus-vibe.vercel.app",
+      "projectId": "campus-vibe-7a95a",
+      "authorizedDomain": true,
+      "googlePage": {
+        "origin": "https://accounts.google.com",
+        "path": "/v3/signin/identifier"
+      },
+      "credentialsEntered": false,
+      "accountSignInCompleted": false,
+      "popupDismissed": true,
+      "popupRecovered": true,
+      "recoveryMilliseconds": 9120,
+      "recoveryWaitLimitMilliseconds": 30000,
+      "outcome": {
+        "state": "rejected",
+        "code": "auth/popup-closed-by-user"
+      },
+      "busy": "false",
+      "signedIn": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "siteDomain": "campusvibe-fnh5f79me-campus-vibe.vercel.app",
+      "projectId": "campus-vibe-7a95a",
+      "authorizedDomain": true,
+      "googlePage": {
+        "origin": "https://accounts.google.com",
+        "path": "/v3/signin/identifier"
+      },
+      "credentialsEntered": false,
+      "accountSignInCompleted": false,
+      "popupDismissed": true,
+      "popupRecovered": true,
+      "recoveryMilliseconds": 8603,
+      "recoveryWaitLimitMilliseconds": 30000,
+      "outcome": {
+        "state": "rejected",
+        "code": "auth/popup-closed-by-user"
+      },
+      "busy": "false",
+      "signedIn": false
+    }
+  ],
+  "initialAttempt": {
+    "command": "Existing google-signin-live.browser.js, 10-second recovery assertion",
+    "result": "FAILED",
+    "failure": "Google button remained disabled within the 10-second post-popup-close wait; account-page handoff had already succeeded."
+  },
+  "scope": "Live exact-candidate public auth configuration and Google provider-page readiness. No credentials, complete login, session or independent human test.",
+  "changeScope": "Only the exact owned candidate hostname was added to Firebase Authentication authorized domains; existing domains and provider configuration preserved.",
+  "applicationSourceChanged": false,
+  "candidateTagMoved": false,
+  "fullGoogleAuthentication": "Pending Ujjal real-account retest",
+  "teamApproval": false,
+  "namedEvidence": {
+    "candidateRegression": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/138#issuecomment-6968940271",
+    "independentBackup": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/118#issuecomment-6968864555",
+    "reportedGoogleBlocker": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177#issuecomment-6969006762",
+    "pendingFirestoreReview": "https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177#issuecomment-6967784523"
+  }
+}
