@@ -164,3 +164,10 @@ No new runtime test, human source explanation or team approval is supplied by th
 Prachi instructed a scope freeze. The [freeze record](MVP-Freeze-Record.md) pins candidate `e5f1888aa4600ac2013d6bda34a55554ba68195f` / `mvp-candidate-2026-11-18`, binds its recorded deployment and limits work to the existing core journey, defect fixes and verification. Build, 28 unit checks and 24 local desktop/mobile browser cases passed; this is Codex-assisted automation with reused dependencies and guest/fixture data.
 
 **Team release approval remains PENDING.** The candidate is now identified; actual team sign-off, independent authenticated candidate regression, terminal Firestore error/Retry results, candidate clean setup/backup and Prachi's personal explanation remain open. This dated scope-freeze instruction supersedes the earlier "candidate not selected" coordination status, without changing earlier test dates or claiming a team vote.
+
+
+## November 18 received candidate checks and remaining auth gate - Prachi
+
+The [updated candidate handoff](Evidence/prachi-candidate-google-domain-2026-11-18.md) links Tulsey's nine candidate regression checks and Devyana's independent clean-worktree/setup/build receipt. Those scopes are complete and supersede their earlier pending entries. Ujjal's separate Google re-login check was blocked; the exact candidate hostname was missing from Firebase authorized domains and has now been added. Fresh desktop/mobile provider-page and popup recovery were observed, with the first timing failure retained. Ujjal must still record the completed real-account login/session retest.
+
+**Final team approval remains PENDING.** Devyana's review/acceptance of the newer terminal-runtime evidence and the team's search/filter expectation/limitation decision still need their actual records. This checkpoint records received receipts and a configuration repair, not new teammate tests or a team vote.
