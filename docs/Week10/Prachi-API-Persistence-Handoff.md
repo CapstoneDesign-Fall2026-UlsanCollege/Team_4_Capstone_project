@@ -109,3 +109,8 @@ The [current source guide and technical receipt](Evidence/prachi-handoff-2026-11
 ## November 18 current technical follow-up
 
 The [candidate runtime and handoff receipt](../Week11/Evidence/prachi-candidate-runtime-2026-11-18.md) records 7 API cases, 4 poster permission cases and 18 local authenticated/error/recovery browser checks passing on the frozen application sources. Ujjal's existing bounded QA backup acceptance is linked above. Earlier dated sections keep their original history; the personal explanation, named non-author API/persistence result and genuine provider workflow remain separate. Issue #158 is now closed without an attached tester-result comment; closure alone is not proof of a genuine provider upload.
+
+
+## Short source explanation - November 18
+
+The [short source explanation](../Week11/Evidence/prachi-short-code-explanation.md) traces poster upload, pending submission, reviewer publication and failed-upload recovery to their implementation functions. Existing technical receipts, attribution and human review records remain unchanged.
