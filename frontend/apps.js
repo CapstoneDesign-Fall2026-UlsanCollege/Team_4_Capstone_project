@@ -599,6 +599,8 @@ function bootCampusVibes(){
     ...window.campusAssistant,
     getActivity: () => readDashboardData().activity,
     getDraftCount: () => readDashboardData().drafts.length,
+    getProgress: readDashboardProgress,
+    openProgress: openProgressDetails,
   };
   window.addEventListener("popstate", restoreNavigationRoute);
   window.addEventListener("hashchange", restoreNavigationRoute);
