@@ -40,6 +40,6 @@ The observed candidate search/category behavior resets on a full reload. The cur
 **Final MVP release approval remains PENDING.** The feature scope stays frozen; this restores existing authentication. No new runtime test or approval is attributed to a teammate by this note.
 
 
-## November 18 manual normal-Chrome follow-up
+## November 18 manual normal Chrome follow up
 
-After Google rejected the separate automated test browser, the exact candidate was opened in normal Chrome. Prachi then reported **"IT PASSED"** for the requested Google -> Dashboard -> refresh -> logout -> re-login check. The [manual receipt](prachi-google-manual-pass-2026-11-18.md) records this as one overall user-reported PASS, with no per-step breakdown or new screenshots. Earlier blocked/automated results remain historical; no new result is attributed to Ujjal and other review/sign-off conditions remain separate.
+Prachi reported **"IT PASSED"** after the requested normal-Chrome Google -> Dashboard -> refresh -> logout -> re-login check following the candidate-hostname repair. The [manual receipt](prachi-google-manual-pass-2026-11-18.md) records one overall user confirmation, without a per-step breakdown or new screenshots. The earlier automated-browser rejection remains a separate blocked attempt.
