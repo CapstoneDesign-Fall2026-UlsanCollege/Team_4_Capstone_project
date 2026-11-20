@@ -49,7 +49,16 @@ test('saved events, real activity and followed hosts update the reference panels
   await page.locator('.cvp-explore').getByRole('button',{name:'Save event: HackNight: Build-a-Thon',exact:true}).click();
   await expect(page.locator('#profileSavedEvents')).toContainText('HackNight');
   await expect(page.locator('#profileActivity')).toContainText('Saved HackNight');
-  await expect(page.getByRole('progressbar',{name:'Profile completion'})).toHaveAttribute('value','100');
+  const progress=page.locator('.cvp-completion');
+  await expect(progress.getByRole('heading',{name:'Your vibes progress',exact:true})).toBeVisible();
+  await expect(progress.locator('.progress-points strong')).toHaveText(await page.locator('#progressPoints').textContent());
+  await expect(progress.locator('.progress-points strong')).toHaveText('20');
+  await expect(progress.getByRole('progressbar',{name:'Progress to next level'})).toHaveAttribute('aria-valuenow','20');
+  await expect(progress.getByRole('button',{name:'Add your study program'})).toHaveCount(0);
+  await progress.getByRole('button',{name:'View details',exact:true}).click();
+  await expect(page.getByRole('dialog',{name:'Your badges',exact:true})).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(progress.getByRole('button',{name:'View details',exact:true})).toBeFocused();
   await page.locator('#profileSavedEvents').getByRole('button',{name:'View details: HackNight: Build-a-Thon',exact:true}).click();
   await expect(page.locator('#dashboardDialogTitle')).toHaveText('HackNight: Build-a-Thon');
   await page.locator('#closeDashboardDialog').click();
@@ -61,6 +70,8 @@ test('saved events, real activity and followed hosts update the reference panels
   await page.locator('#profileSavedEvents').getByRole('button',{name:'Remove from saved: HackNight: Build-a-Thon',exact:true}).click();
   await expect(page.locator('#profileSavedEvents')).toContainText('No saved events yet');
   await expect(page.locator('#profileActivity')).toContainText('Removed HackNight');
+  await expect(page.getByRole('progressbar',{name:'Profile completion'})).toHaveAttribute('value','83');
+  await expect(progress.getByRole('button',{name:'Save your first event',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'View all activity',exact:true}).click();
   await expect(page.getByRole('dialog')).toContainText('Saved HackNight');
   await expect(page.getByRole('dialog')).toContainText('Removed HackNight');
