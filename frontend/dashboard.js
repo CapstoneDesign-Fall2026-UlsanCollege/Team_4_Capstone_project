@@ -1,4 +1,9 @@
 const dashboardStorageKey = () => `cv_dashboard_${getSession()?.email || "guest"}`;
+let dashboardProgressSnapshot = null;
+
+function readDashboardProgress(){
+  return dashboardProgressSnapshot?.userId === getSession()?.id ? dashboardProgressSnapshot.progress : null;
+}
 
 function readDashboardData(){
   if (getSession() && getSession().id !== "demo") return window.campusAccount?.read("dashboard") || {activity:[],drafts:[]};
@@ -161,6 +166,7 @@ function renderDashboard(){
   $("#dashboardActivity").innerHTML = dashboardActivityMarkup(data.activity.slice(0, 3));
 
   const progress=dashboardBadgeState();
+  dashboardProgressSnapshot={userId:getSession()?.id,progress};
   $("#progressPoints").textContent=progress.points;
   $("#progressLevel").textContent=`Lv. ${progress.level}`;
   $("#progressRing").style.setProperty("--progress",`${progress.levelPercent}%`);
@@ -178,6 +184,7 @@ function renderDashboard(){
   if (getSession()?.id === 'demo') for (const badge of newMilestones) window.dispatchEvent(new CustomEvent('campus-local-notification', { detail: { userId: 'demo', source: { kind: 'badge', parentId: 'badges', sourceId: badge.id, title: badge.name } } }));
   $("#progressBadgeAnnouncement").textContent=newMilestones.length ? `Badge unlocked: ${newMilestones.map(badge => badge.name).join(", ")}` : "";
   refreshProgressDialog(progress);
+  window.dispatchEvent(new Event('campus-progress-change'));
   const weekend = dashboardWeekendEvents();
   $("#weekendNote").textContent = `${weekend.length} campus events ${hasPublished ? 'this weekend' : 'in the sample weekend'}.`;
   if ($("#dashboardDialog").open && $("#dashboardDialog").dataset.eventId) {
@@ -233,13 +240,15 @@ function setupDashboard(){
   });
   $("#exploreWeekend").addEventListener("click", () => showDashboardDialog(EVENTS.some(event => event.source === 'published') ? "Your weekend" : "Your sample weekend", dashboardAgendaMarkup(dashboardWeekendEvents())));
   $("#viewDashboardActivity").addEventListener("click", () => showDashboardDialog("Your activity", dashboardActivityMarkup(readDashboardData().activity)));
-  $("#viewProgress").addEventListener("click", () => {
-    showDashboardDialog("Your badges",progressDetailsMarkup(dashboardBadgeState()));
-    $("#dashboardDialog").dataset.progressBadges="true";
-  });
+  $("#viewProgress").addEventListener("click", openProgressDetails);
   const syncBadges=event => { if (getSession() && (!event.key || event.key === SAVED_KEY || event.key === dashboardStorageKey() || event.key.startsWith("cv_progress_badges_"))) renderDashboard(); };
   window.addEventListener("storage",syncBadges);
   window.campusBadgeCleanup=() => window.removeEventListener("storage",syncBadges);
+}
+
+function openProgressDetails(){
+  showDashboardDialog("Your badges",progressDetailsMarkup(dashboardBadgeState()));
+  $("#dashboardDialog").dataset.progressBadges="true";
 }
 
 function handleDashboardNavigation(event){

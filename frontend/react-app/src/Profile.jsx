@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, BadgeCheck, Bookmark, CalendarDays, Camera, Check, Clock, Copy, GraduationCap, House, LockKeyhole, Mail, MapPin, MessageCircle, Pencil, Plus, Settings, Share2, Sparkles, UserRound, UsersRound, X } from 'lucide-react';
+import { ArrowRight, Award, BadgeCheck, Bookmark, CalendarDays, Camera, Check, Clock, Compass, Copy, Crown, GraduationCap, House, LockKeyhole, Mail, MapPin, Medal, MessageCircle, Pencil, Plus, Settings, Share2, ShieldCheck, Sparkles, UserRound, UsersRound, X } from 'lucide-react';
 import { eventCatalog as events } from './event-catalog';
 import { cleanActivity, cleanProfile, loadProfile, PROFILE_INTERESTS, profileCompletion, profileSummary, saveProfile, STUDY_YEARS } from './profile-store';
 import './profile.css';
@@ -7,12 +7,13 @@ import ProfilePhotoEditor from './ProfilePhotoEditor';
 import { useProfilePhoto } from './profile-photo-store';
 
 const rails = [['Home',House,'dashboard'],['Events',CalendarDays,'discover'],['Clubs',UsersRound,'hosts'],['Saved',Bookmark,'saved'],['Feed',MessageCircle,'feed'],['Profile',UserRound,'profile']];
+const badgeIcons = { compass:Compass,'shield-check':ShieldCheck,medal:Medal,award:Award,crown:Crown };
 const dateLabel = date => new Intl.DateTimeFormat('en-US',{ month:'short',day:'numeric',timeZone:'Asia/Seoul' }).format(new Date(`${date}T12:00:00Z`));
 const activityLabel = item => ({ saved:'Saved',removed:'Removed',suggested:'Drafted' })[item.type];
 function browserStorage() { try { return window.localStorage; } catch { return null; } }
 function readSignals() {
-  try { return { saved:window.campusProfile?.getSaved() || [],activity:cleanActivity(window.campusProfile?.getActivity()),drafts:window.campusProfile?.getDraftCount() || 0 }; }
-  catch { return { saved:[],activity:[],drafts:0 }; }
+  try { return { saved:window.campusProfile?.getSaved() || [],activity:cleanActivity(window.campusProfile?.getActivity()),drafts:window.campusProfile?.getDraftCount() || 0,progress:window.campusProfile?.getProgress?.() || null }; }
+  catch { return { saved:[],activity:[],drafts:0,progress:null }; }
 }
 
 export default function Profile({ user,account }) {
@@ -38,6 +39,9 @@ export default function Profile({ user,account }) {
   const savedEvents = events.filter(event => signals.saved.includes(event.id));
   const completion = profileCompletion(data,savedEvents.length);
   const remainingTasks = completion.tasks.filter(task => !task.done);
+  const progress = signals.progress;
+  const showVibes = !remainingTasks.length && !!progress;
+  const ProgressIcon = badgeIcons[progress?.currentBadge.icon] || Compass;
   const suggestions = events.filter(event => !signals.saved.includes(event.id)).slice(0,3);
   const summary = profileSummary(user,data,includeEmail);
   useEffect(() => {
@@ -48,8 +52,8 @@ export default function Profile({ user,account }) {
         const result=loadProfile(browserStorage(),user,hosts); setData(result.data); if(result.warning) setMessage(result.warning);
       }
     };
-    window.addEventListener('campus-profile-change',update); window.addEventListener('campus-saved-change',update); window.addEventListener('storage',storage);
-    return () => { window.removeEventListener('campus-profile-change',update); window.removeEventListener('campus-saved-change',update); window.removeEventListener('storage',storage); };
+    window.addEventListener('campus-profile-change',update); window.addEventListener('campus-saved-change',update); window.addEventListener('campus-progress-change',update); window.addEventListener('storage',storage);
+    return () => { window.removeEventListener('campus-profile-change',update); window.removeEventListener('campus-saved-change',update); window.removeEventListener('campus-progress-change',update); window.removeEventListener('storage',storage); };
   },[user.id,user.email]);
   useEffect(()=>account?.subscribe(()=>{setData(account.read('profile'));if(syncFailure.current && !account.status().error && !account.status().pending){syncFailure.current=false;setFailure('');}}),[account]);
   useEffect(() => {
@@ -60,7 +64,8 @@ export default function Profile({ user,account }) {
   function action(kind,value) {
     try {
       if (!window.campusProfile) throw new Error('Profile navigation is not ready. Retry in a moment.');
-      if (kind === 'save') window.campusProfile.saveEvent(value);
+      if (kind === 'badges') window.campusProfile.openProgress();
+      else if (kind === 'save') window.campusProfile.saveEvent(value);
       else if (kind === 'event') { setModal(''); window.campusProfile.openEvent(value); }
       else { setModal(''); window.campusProfile.navigate(value); }
       setFailure('');
@@ -114,9 +119,20 @@ export default function Profile({ user,account }) {
         <div className="cvp-hero-actions"><button className="cvp-privacy" type="button" onClick={() => open('settings')}><LockKeyhole size={13} /><span>Profile visibility</span><strong>{account ? 'Private details / Shared photo' : 'Only this browser'}</strong></button><div><button className="cvp-button" id="profileEdit" type="button" onClick={() => open('edit')}><Pencil size={13} />Edit profile</button><button className="cvp-button cvp-primary" type="button" onClick={() => open('share')}><Share2 size={13} />Share profile</button></div></div>
       </div>
       <div className="cvp-completion">
+        {showVibes ? <>
+          <div><h2>Your vibes progress</h2><button className="cvp-progress-details" type="button" onClick={() => action('badges')}>View details</button></div>
+          <section className="vibes-progress cvp-progress-summary" aria-label="Your vibes progress">
+            <div className="progress-symbol" style={{color:progress.currentBadge.color}}><ProgressIcon size={25} aria-hidden="true" /></div>
+            <div className="progress-copy"><h3>{progress.currentBadge.name} badge</h3><p>{progress.nextBadge ? `${progress.pointsToNextBadge} points to ${progress.nextBadge.name}` : 'All current badges earned'}</p><small>{progress.earnedCount} / {progress.badges.length} badges earned</small></div>
+            <div className="progress-ring" style={{'--progress':`${progress.levelPercent}%`}} role="progressbar" aria-label="Progress to next level" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.levelPercent} aria-valuetext={`Level ${progress.level}; ${progress.levelPercent} of 100 points toward the next level`}><strong>Lv. {progress.level}</strong><span>{progress.currentBadge.name}</span></div>
+            <div className="progress-points"><strong>{progress.points}</strong><span>points</span></div>
+          </section>
+          {progress.warning && <p className="progress-storage-warning" role="status">{progress.warning}</p>}
+        </> : <>
         <div><h2>{remainingTasks.length ? 'Profile completion' : 'Profile complete'}</h2><strong>{completion.percent}% complete</strong></div>
         <progress aria-label="Profile completion" value={completion.percent} max={100} />
         {remainingTasks.length ? <ul>{remainingTasks.map(task => <li key={task.label}><button type="button" onClick={() => task.action === 'discover' ? action('navigate','discover') : open(task.action)}><span aria-hidden="true" />{task.label}</button></li>)}</ul> : <p className="cvp-completion-success" role="status"><BadgeCheck size={20} aria-hidden="true" /><span>You're all set! You can update your details anytime.</span></p>}
+        </>}
       </div>
       <figure className="cvp-campus-photo"><img src="/assets/campus-dashboard.jpg" alt="Illustrative university building and campus garden" /><figcaption>Campus inspiration</figcaption></figure>
     </header>
