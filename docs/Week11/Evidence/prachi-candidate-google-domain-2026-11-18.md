@@ -38,3 +38,8 @@ The observed candidate search/category behavior resets on a full reload. The cur
 3. **Team, coordinated by Prachi:** record search/filter expectations, accepted limitations and actual APPROVE/BLOCKED comments for the exact candidate. No such final approval is supplied by checkbox completion, deployment metadata or this repair.
 
 **Final MVP release approval remains PENDING.** The feature scope stays frozen; this restores existing authentication. No new runtime test or approval is attributed to a teammate by this note.
+
+
+## November 18 manual normal Chrome follow up
+
+Prachi reported **"IT PASSED"** after the requested normal-Chrome Google -> Dashboard -> refresh -> logout -> re-login check following the candidate-hostname repair. The [manual receipt](prachi-google-manual-pass-2026-11-18.md) records one overall user confirmation, without a per-step breakdown or new screenshots. The earlier automated-browser rejection remains a separate blocked attempt.

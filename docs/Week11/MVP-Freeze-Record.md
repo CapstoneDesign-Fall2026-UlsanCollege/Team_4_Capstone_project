@@ -71,3 +71,8 @@ Codex pinned the candidate, ran the local checks and prepared the freeze record 
 ## November 18 candidate auth repair and received team checks
 
 The [current handoff](Evidence/prachi-candidate-google-domain-2026-11-18.md) supersedes earlier setup-pending entries for the linked scopes: independent backup setup and Tulsey's nine candidate checks are recorded. Ujjal's separately reported Google re-login blocker led to adding only the exact candidate hostname to Firebase authorized domains. Live provider-page/popup readiness is recorded with its initial timing failure; a real-account re-login retest and final team approval remain pending. Devyana's newer Firestore evidence review and the team's refresh/filter expectation decision remain open.
+
+
+## November 18 manual Google receipt
+
+[Prachi's reported manual follow-up](Evidence/prachi-google-manual-pass-2026-11-18.md) records one overall PASS in normal Chrome after the hostname repair. This source keeps its November 18 date and does not create a new independent result or change the team's conditional-approval record.
