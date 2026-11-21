@@ -135,6 +135,47 @@ test('a browser without clipboard or native sharing can select and manually copy
   expect(await input.evaluate(element => element.selectionEnd - element.selectionStart === element.value.length)).toBe(true);
   await expect(page.locator('.event-share-status')).toContainText('Select and copy');
   await expect(page.getByRole('button', { name: 'Copy link', exact: true })).toBeEnabled();
+  await page.getByRole('button', { name: 'Select link', exact: true }).click();
+  await expect(input).toBeFocused();
+  await expect(page.locator('.event-share-status')).toContainText('Press Ctrl+C');
+  const modifier=process.platform==='darwin' ? 'Meta' : 'Control';
+  await page.keyboard.press(`${modifier}+C`);
+  // A temporary local field checks a real keyboard copy/paste without the Clipboard API.
+  await page.locator('.event-share-options').evaluate(section => {
+    const target=document.createElement('textarea');target.setAttribute('aria-label','Manual copy verification');section.append(target);
+  });
+  const target=page.getByRole('textbox',{name:'Manual copy verification',exact:true});
+  await target.focus();await page.keyboard.press(`${modifier}+V`);
+  await expect(target).toHaveValue(await input.inputValue());
+});
+
+test('a pending clipboard request offers manual selection without waiting for permission', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:()=>new Promise(resolve=>{window.finishPendingCopy=resolve;})}});
+  });
+  await page.goto('/#/community/events/2');await page.locator('#landingDemo').click();
+  await page.getByRole('button',{name:'Share event',exact:true}).click();
+  const copy=page.getByRole('button',{name:'Copy link',exact:true});await copy.click();
+  await expect(page.locator('.event-share-status')).toContainText('Automatic copying is still waiting',{timeout:9000});
+  const select=page.getByRole('button',{name:'Select link',exact:true});await expect(select).toBeEnabled();await select.click();
+  const input=page.getByRole('textbox',{name:'Event link',exact:true});await expect(input).toBeFocused();
+  expect(await input.evaluate(element=>element.selectionEnd-element.selectionStart)).toBe((await input.inputValue()).length);
+  await page.evaluate(()=>window.finishPendingCopy());await expect(copy).toBeEnabled();
+  await expect(page.locator('.event-share-status')).toContainText('Link selected.');
+});
+
+test('a pending app picker offers manual sharing and late cancellation preserves its instructions', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator,'share',{configurable:true,value:()=>new Promise((_resolve,reject)=>{window.cancelPendingShare=()=>reject(new DOMException('Cancelled','AbortError'));})});
+  });
+  await page.goto('/#/community/events/2');await page.locator('#landingDemo').click();
+  await page.getByRole('button',{name:'Share event',exact:true}).click();
+  const apps=page.getByRole('button',{name:'Share with apps',exact:true});await apps.click();
+  await expect(page.locator('.event-share-status')).toContainText('App sharing is still waiting',{timeout:9000});
+  await page.getByRole('button',{name:'Select link',exact:true}).click();
+  await expect(page.getByRole('textbox',{name:'Event link',exact:true})).toBeFocused();
+  await page.evaluate(()=>window.cancelPendingShare());await expect(apps).toBeEnabled();
+  await expect(page.locator('.event-share-status')).toContainText('Link selected.');
 });
 
 test('a real clipboard URL opens the same event for a fresh recipient after guest entry', async ({ page, context, browser }) => {
