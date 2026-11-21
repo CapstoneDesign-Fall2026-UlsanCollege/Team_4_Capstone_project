@@ -305,6 +305,48 @@
         if (event) renderRsvp(mount, event);
       });
     });
+
+    /* ── MutationObserver fallback ───────────────────────────────────────
+       Handles two failure modes:
+         1. Race condition: campusEventJourney.attach() was called BEFORE
+            rsvp.js finished booting (setTimeout deferred boot).
+         2. Code paths (e.g. discover.js openDiscoverEvent) that call
+            showDashboardDialog without passing eventId, so the attach()
+            in dashboard.js fires with the correct journey element but
+            window.campusEventJourney may not be set yet.
+       The observer watches the shared dashboard dialog for the `open`
+       attribute being added and injects the RSVP block directly.
+    ── */
+    function tryInjectRsvp() {
+      const dialog = document.getElementById('dashboardDialog');
+      if (!dialog || !dialog.open) return;
+      const journey = dialog.querySelector('[data-event-journey]');
+      if (!journey) return;
+      const eventId = Number(journey.dataset.eventId);
+      const event = window.EVENTS?.find(e => e.id === eventId);
+      if (!event) return;
+      const parent = journey.parentElement;
+      if (!parent) return;
+      /* Skip if an up-to-date RSVP block is already present */
+      const existing = parent.querySelector('[data-rsvp-event]');
+      if (existing && existing.dataset.rsvpEvent === String(eventId)) return;
+      /* Remove any stale mount then render fresh */
+      parent.querySelectorAll('[data-rsvp-event]').forEach(el => el.remove());
+      const rsvpMount = document.createElement('div');
+      rsvpMount.dataset.rsvpEvent = String(eventId);
+      parent.insertBefore(rsvpMount, journey);
+      renderRsvp(rsvpMount, event);
+    }
+
+    const dialogEl = document.getElementById('dashboardDialog');
+    if (dialogEl) {
+      new MutationObserver(tryInjectRsvp).observe(dialogEl, {
+        attributes: true,
+        attributeFilter: ['open']
+      });
+      /* Also fire immediately in case the dialog is already open when we boot */
+      tryInjectRsvp();
+    }
   }
 
   /* Wait for the React app bundle to load first (it may set campusEventJourney),
