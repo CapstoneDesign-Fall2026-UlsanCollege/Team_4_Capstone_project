@@ -45,7 +45,7 @@ async function enter(credentials, signup = false) {
   const person = { page, context, uid, token, credentials }; if (signup) users.push(person); return person;
 }
 const credentials = name => ({ name, email: `photo-${randomBytes(8).toString('hex')}@example.com`, password: `Cv!${randomBytes(12).toString('hex')}A1` });
-async function profile(person) { await person.page.locator('[data-workspace=community]').click(); await person.page.locator('#mainNav [data-page=profile]').click(); }
+async function profile(person) { await person.page.locator('[data-workspace=community]').click(); await person.page.getByRole('button', { name: 'Open your profile', exact: true }).click(); }
 async function feed(person) { await person.page.locator('[data-workspace=feed]').click(); await person.page.locator('.shared-feed-status .connected').waitFor(); }
 async function editPhoto(person, color) {
   await profile(person); await person.page.getByRole('button', { name: 'Change profile photo', exact: true }).click();
@@ -183,7 +183,7 @@ try {
   await owner.page.setViewportSize({ width: 390, height: 844 }); await assertNoAccountIds(owner.page, 'Mobile private conversation'); await owner.page.screenshot({ path: fileURLToPath(new URL('same-name-chat-mobile.png', output)), fullPage: true });
   assert.ok(await owner.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   await fresh.page.getByRole('button', { name: 'Log out', exact: true }).click(); await fresh.page.locator('#landingDemo').click();
-  await expect(fresh.page.locator('#navAvatar img')).toHaveCount(0); await fresh.page.locator('#mainNav [data-page=profile]').click(); await expect(fresh.page.locator('#profileAvatar img')).toHaveCount(0);
+  await expect(fresh.page.locator('#navAvatar img')).toHaveCount(0); await fresh.page.getByRole('button', { name: 'Open your profile', exact: true }).click(); await expect(fresh.page.locator('#profileAvatar img')).toHaveCount(0);
   assert.deepEqual(errors, []);
   await writeFile(new URL('privacy-results.json', output), JSON.stringify({ checkedAt: new Date().toISOString(), checks: privacyChecks, scope: 'Local Auth/Firestore emulator workflow with fictional verified accounts. UI text/labels/search privacy and correct recipient delivery; internal IDs remain in client/server data.' }, null, 2));
 } finally {

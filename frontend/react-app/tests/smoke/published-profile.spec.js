@@ -5,7 +5,7 @@ test('Profile labels published recommendations and keeps following separate from
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
   await page.locator('#landingDemo').click();
-  await page.locator('#mainNav [data-page=profile]').click();
+  await page.getByRole('button', { name: 'Open your profile', exact: true }).click();
   await expect(page.locator('#profileName')).toHaveText('Alex Rivera');
   // Fictional, in-memory catalogue fixture; no account or production data is written.
   await page.evaluate(() => {

@@ -29,7 +29,7 @@ const credentials=name=>({name,email:`account-${randomBytes(8).toString('hex')}@
 try{
   const alice=credentials('Account Alice'),bob=credentials('Account Bob');
   const first=await context(),page=first.page;const uid=await enter(page,alice,true);
-  await page.locator('#mainNav [data-page=profile]').click();await page.locator('#profileEdit').click();
+  await page.getByRole('button', { name: 'Open your profile', exact: true }).click();await page.locator('#profileEdit').click();
   await page.locator('#editProgram').fill('Persistent Computer Science');await page.locator('#editBio').fill('This profile follows my account, not this browser.');
   await page.getByRole('button',{name:'Save changes',exact:true}).click();await expect(page.locator('#profileBio')).toHaveText('This profile follows my account, not this browser.');await saved(page);
   await page.locator('#mainNav [data-page=discover]').click();await page.locator('#filterBar [data-interest=all]').click();
@@ -43,7 +43,7 @@ try{
 
   const fresh=await context();await enter(fresh.page,alice);
   assert.equal(await fresh.page.evaluate(()=>localStorage.getItem('cv_saved')),null);
-  await fresh.page.locator('#mainNav [data-page=profile]').click();await expect(fresh.page.locator('#profileProgram')).toHaveText('Persistent Computer Science');await expect(fresh.page.locator('#profileSavedEvents [data-profile-event]')).toHaveCount(3);
+  await fresh.page.getByRole('button', { name: 'Open your profile', exact: true }).click();await expect(fresh.page.locator('#profileProgram')).toHaveText('Persistent Computer Science');await expect(fresh.page.locator('#profileSavedEvents [data-profile-event]')).toHaveCount(3);
   await fresh.page.locator('#toast').waitFor({state:'hidden'});await fresh.page.screenshot({path:fileURLToPath(new URL('profile-desktop.png',output)),fullPage:true});
   await fresh.page.locator('#mainNav [data-page=suggest]').click();await expect(fresh.page.locator('#suggestName')).toHaveValue('An account-backed draft');
   await fresh.page.locator('#mainNav [data-page=chat]').click();await expect(fresh.page.getByRole('log')).toContainText('Show me music events');await expect(fresh.page.getByRole('complementary',{name:'Assistant activity'})).toContainText('Show me music events');
@@ -55,11 +55,11 @@ try{
   await expect(fresh.page.locator('#progressPoints')).toHaveText('80');await expect(fresh.page.locator('#progressBadgeCount')).toHaveText('2 / 5 badges earned');
   console.log('PASS: separate browser contexts update live, with earned badges retained after point loss.');
 
-  await fresh.page.locator('#mainNav [data-page=profile]').click();await fresh.page.locator('#profileEdit').click();await fresh.ctx.setOffline(true);
+  await fresh.page.getByRole('button', { name: 'Open your profile', exact: true }).click();await fresh.page.locator('#profileEdit').click();await fresh.ctx.setOffline(true);
   await fresh.page.locator('#editBio').fill('Recovered after an offline save.');await fresh.page.getByRole('button',{name:'Save changes',exact:true}).click();
   await expect(fresh.page.locator('.account-sync-status')).toContainText('Offline');await expect(fresh.page.getByRole('dialog',{name:'Edit profile',exact:true})).toBeVisible();
   await fresh.ctx.setOffline(false);await saved(fresh.page);await expect(fresh.page.locator('.cvp-error')).toHaveCount(0);await fresh.page.getByRole('button',{name:'Close profile panel',exact:true}).click();
-  await page.locator('#mainNav [data-page=profile]').click();await expect(page.locator('#profileBio')).toHaveText('Recovered after an offline save.');
+  await page.getByRole('button', { name: 'Open your profile', exact: true }).click();await expect(page.locator('#profileBio')).toHaveText('Recovered after an offline save.');
   await fresh.page.setViewportSize({width:390,height:844});await fresh.page.locator('#toast').waitFor({state:'hidden'});await fresh.page.screenshot({path:fileURLToPath(new URL('profile-mobile.png',output)),fullPage:true});
   assert.equal(await fresh.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   console.log('PASS: offline saves are not called saved; reconnect retries safely and updates the other device.');
@@ -72,14 +72,14 @@ try{
   console.log('PASS: concurrent saves on different devices retain both additions.');
 
   const second=await context();await second.ctx.addInitScript(({email})=>{localStorage.setItem(`cv_profile_${email}`,JSON.stringify({bio:'My older browser profile'}));localStorage.setItem('cv_saved','[1,2,3]');},{email:bob.email});
-  await enter(second.page,bob,true);await second.page.locator('#mainNav [data-page=profile]').click();await expect(second.page.locator('#profileBio')).toHaveText('My older browser profile');
+  await enter(second.page,bob,true);await second.page.getByRole('button', { name: 'Open your profile', exact: true }).click();await expect(second.page.locator('#profileBio')).toHaveText('My older browser profile');
   assert.deepEqual(await second.page.evaluate(()=>window.campusAccount.read('saved')),[]);
   await second.page.locator('.cvp-rail-settings').click();await second.page.getByRole('button',{name:'Import previous saved events',exact:true}).click();await expect(second.page.getByRole('dialog')).toContainText('including demo mode');await second.page.getByRole('button',{name:'Confirm import',exact:true}).click();await saved(second.page);
   assert.deepEqual(await second.page.evaluate(()=>window.campusAccount.read('saved')),[1,2,3]);
   await page.getByRole('button',{name:'Log out',exact:true}).click();await expect(page.locator('#authLanding')).toBeVisible();
   await page.locator('#landingDemo').click();await page.locator('#mainNav [data-page=saved]').click();await expect(page.locator('#savedGrid .event-card')).toHaveCount(0);
   await page.getByRole('button',{name:'Log out',exact:true}).click();await enter(page,bob);
-  await page.locator('#mainNav [data-page=profile]').click();await expect(page.locator('#profileBio')).toHaveText('My older browser profile');
+  await page.getByRole('button', { name: 'Open your profile', exact: true }).click();await expect(page.locator('#profileBio')).toHaveText('My older browser profile');
   assert.deepEqual(await page.evaluate(()=>window.campusAccount.read('saved')),[1,2,3]);
   await page.locator('#mainNav [data-page=suggest]').click();await expect(page.locator('#suggestName')).toHaveValue('');
   await page.locator('#mainNav [data-page=chat]').click();await expect(page.getByRole('log').locator('[data-chat-message]')).toHaveCount(0);

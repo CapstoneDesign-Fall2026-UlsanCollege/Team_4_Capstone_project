@@ -1,7 +1,7 @@
 import { test,expect } from '@playwright/test';
 async function enter(page) {
   await page.goto('/'); await page.locator('#landingDemo').click();
-  await page.locator('#mainNav [data-page=profile]').click();
+  await page.getByRole('button',{name:'Open your profile',exact:true}).click();
   await expect(page.locator('#profileName')).toHaveText('Alex Rivera');
   const rail=await page.locator('.cvp-rail').boundingBox(), hero=await page.locator('.cvp-hero').boundingBox();
   if (page.viewportSize().width > 640) expect(rail.x+rail.width).toBeLessThan(hero.x);

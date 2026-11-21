@@ -179,7 +179,7 @@ function showPage(page, record = true, keepEventDialog = false){
   if (getSession()) switchWorkspace("community", false);
   document.querySelectorAll("#appMain dialog[open]").forEach(dialog => { if (!keepEventDialog || dialog.id !== 'dashboardDialog') dialog.close(); });
   document.querySelectorAll(".page-view").forEach(view => view.classList.toggle("active", view.id === `page-${page}`));
-  document.querySelectorAll(".page-link").forEach(link => {
+  document.querySelectorAll(".page-link, #navProfile").forEach(link => {
     const active = link.dataset.page === page;
     link.classList.toggle("active", active);
     if (active) link.setAttribute("aria-current", "page");
@@ -566,6 +566,10 @@ function switchWorkspace(mode, record = true){
   $("#appMain").classList.toggle("hidden", !session || feed);
   $("#feedMain").classList.toggle("hidden", !feed);
   document.body.classList.toggle("feed-workspace", feed);
+  const profileActive=!!session && !feed && $("#page-profile").classList.contains("active");
+  $("#navProfile").classList.toggle("active",profileActive);
+  if (profileActive) $("#navProfile").setAttribute("aria-current","page");
+  else $("#navProfile").removeAttribute("aria-current");
   document.querySelectorAll("[data-workspace]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.workspace === (feed ? "feed" : "community"))));
   if (session) localStorage.setItem(`cv_workspace_${session.email}`, feed ? "feed" : "community");
   if (record) recordNavigationRoute(feed ? "feed" : "community", document.querySelector(".page-view.active")?.id.slice(5) || "dashboard");
