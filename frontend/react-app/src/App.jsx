@@ -75,6 +75,7 @@ import { catalogSnapshotStatus, catalogStatusText } from './event-catalog-status
 import './event-catalog.css';
 import { getEventMapLinks } from './event-maps';
 import { createEventJourneyController } from './event-journey';
+import { createRsvpController } from '../../rsvp.js';
 import { campusDateKey, matchesEventDate } from './event-dates';
 import { eventLinkHash, eventShareUrl, parseEventLink, validEventLinkId } from './event-links';
 import Notifications from './Notifications';
@@ -124,6 +125,8 @@ export default function App() {
     let journeyUserId = null;
     let activeAccount=null,unsubscribeAccount=null,accountBadges=null;
     let stopCatalog=null,catalogUser=null,catalogGeneration=0;
+    const eventRsvp=createRsvpController({getUser:()=>catalogUser,getAccount:()=>activeAccount,getEvents:()=>eventCatalog});
+    window.campusRsvp=eventRsvp;
     let linkedId=null,stopLinked=null,linkedGeneration=0,linkedTimeout=null;
     window.campusEventCatalog=eventCatalog;
     const refreshCatalog = () => { window.campusRefreshEvents?.(); setCatalogStatus(value=>({...value,linkedCount:linkedEventCount()})); };
@@ -193,7 +196,8 @@ export default function App() {
       .forEach((script) => script.remove());
     mountRef.current.innerHTML = parsedMarkup.body.innerHTML;
     const journeyDialog = mountRef.current.querySelector('#dashboardDialog');
-    journeyDialog.addEventListener('close', eventJourney.clear);
+    const clearClosedDialog=()=>{if(!journeyDialog.open){eventJourney.clear();eventRsvp.clear();}};
+    journeyDialog.addEventListener('close',clearClosedDialog);
     setFeedTarget(mountRef.current.querySelector("#feedMount"));
     setSuggestTarget(mountRef.current.querySelector("#suggestMount"));
     setAssistantTarget(mountRef.current.querySelector("#assistantMount"));
@@ -209,7 +213,7 @@ export default function App() {
         replacePublishedEvents([]);setCatalogStatus({loading:false,error:'',count:0,cached:false});
         if(user && user.id !== 'demo') connectCatalog(user);
       }
-      if (journeyUserId !== user?.id) { eventJourney.clear(); journeyUserId = user?.id; }
+      if (journeyUserId !== user?.id) { journeyDialog.close();eventJourney.clear();eventRsvp.clear(); journeyUserId = user?.id; }
       setNotificationRequest(current => current?.userId === user?.id ? current : null);
       if (activeAccount?.user.id !== user?.id) {
         unsubscribeAccount?.();activeAccount?.close();activeAccount=null;accountBadges=null;
@@ -313,7 +317,8 @@ export default function App() {
       delete window.campusProfile;
       delete window.campusBadgeProgress;
       delete window.campusEventMapLinks;
-      journeyDialog.removeEventListener('close', eventJourney.clear);
+      journeyDialog.removeEventListener('close',clearClosedDialog);
+      eventRsvp.destroy();delete window.campusRsvp;
       eventJourney.clear();
       delete window.campusEventJourney;
       delete window.campusEventCatalog;delete window.campusRefreshEvents;

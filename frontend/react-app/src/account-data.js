@@ -3,7 +3,7 @@ import { cleanSession } from './assistant/session.js';
 import { BADGES } from './progress-badges.js';
 import { validSuggestionPoster } from './suggestion-poster.js';
 
-export const ACCOUNT_SECTIONS = ['profile','saved','dashboard','badges','suggestion','assistant'];
+export const ACCOUNT_SECTIONS = ['profile','saved','dashboard','badges','suggestion','assistant','saved_rsvps'];
 export const sectionLimit = name => name === 'assistant' ? 200000 : 20000;
 export const freshSuggestion = () => ({ id:crypto.randomUUID(),name:'',host:'',category:'All',date:'',location:'',description:'',anonymous:false });
 const text = (value,max) => typeof value === 'string' ? value.slice(0,max) : '';
@@ -32,7 +32,7 @@ export function mergeDashboard(previous,next) {
 export function cleanAccountSection(name,value,user,events) {
   if (name === 'profile') return cleanProfile(value,user,[...new Set(events.map(event=>event.host))]);
   // Published IDs stay saved while the shared catalogue loads or falls outside its current window.
-  if (name === 'saved') return [...new Set(Array.isArray(value) ? value.filter(id=>events.some(event=>event.id === id) || (Number.isSafeInteger(id) && id >= 1000 && id < Number.MAX_SAFE_INTEGER)) : [])];
+  if (name === 'saved' || name === 'saved_rsvps') return [...new Set(Array.isArray(value) ? value.filter(id=>events.some(event=>event.id === id) || (Number.isSafeInteger(id) && id >= 1000 && id < Number.MAX_SAFE_INTEGER)) : [])];
   if (name === 'badges') return mergeBadges(value);
   if (name === 'dashboard') return { activity:cleanActivity(value?.activity),drafts:Array.isArray(value?.drafts) ? value.drafts.slice(0,50) : [] };
   if (name === 'assistant') return cleanSession(value,events);

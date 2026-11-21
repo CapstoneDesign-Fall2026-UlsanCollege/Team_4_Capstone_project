@@ -111,7 +111,7 @@ service cloud.firestore {
     }
     match /campusAccountData/{uid}/state/{section} {
       function ownAccount() { return member() && request.auth.uid == uid; }
-      function knownSection() { return section in ['profile','saved','dashboard','badges','suggestion','assistant']; }
+      function knownSection() { return section in ['profile','saved','dashboard','badges','suggestion','assistant','saved_rsvps']; }
       allow get: if ownAccount() && knownSection();
       allow create, update: if ownAccount() && knownSection()
         && request.resource.data.keys().hasAll(['version','value','updatedAt'])
