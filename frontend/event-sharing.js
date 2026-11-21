@@ -19,15 +19,22 @@ function clearEventNavigation() {
 function eventShareMarkup(id) {
   const url = window.campusEventLinks.eventShareUrl(id, location.href);
   const native = typeof navigator.share === 'function' ? `<button type="button" class="btn event-share-button" data-share-event-apps="${id}">Share with apps</button>` : '';
-  return `<section class="event-share" aria-label="Share this event"><button type="button" class="btn event-share-button" data-share-event="${id}" aria-expanded="false" aria-controls="event-share-options"><i data-lucide="share-2" aria-hidden="true"></i>Share event</button><p class="event-share-status" role="status" aria-live="polite"></p><div id="event-share-options" class="event-share-options" hidden><label class="event-share-manual">Event link<input type="text" readonly aria-label="Event link" value="${dashboardText(url)}"></label><div class="event-share-actions"><button type="button" class="btn event-share-button" data-copy-event="${id}">Copy link</button>${native}</div></div></section>`;
+  return `<section class="event-share" aria-label="Share this event"><button type="button" class="btn event-share-button" data-share-event="${id}" aria-expanded="false" aria-controls="event-share-options"><i data-lucide="share-2" aria-hidden="true"></i>Share event</button><p class="event-share-status" role="status" aria-live="polite"></p><div id="event-share-options" class="event-share-options" hidden><label class="event-share-manual">Event link<input type="text" readonly aria-label="Event link" aria-describedby="event-share-help" value="${dashboardText(url)}"></label><div class="event-share-actions"><button type="button" class="btn event-share-button" data-copy-event="${id}">Copy link</button><button type="button" class="btn event-share-button" data-select-event-link>Select link</button>${native}</div><p class="event-share-help" id="event-share-help">If copying or app sharing is blocked, choose Select link, then press Ctrl+C (Command+C on Mac) and paste it into your message.</p><p class="event-share-help">For published events, recipients need to sign in to CampusVibes.</p></div></section>`;
 }
 
 function revealEventShare(button) {
   const section = button.closest('.event-share');
   section.querySelector('.event-share-options').hidden = false;
   button.setAttribute('aria-expanded', 'true');
-  section.querySelector('.event-share-status').textContent = 'Copy the event link or share it with an app.';
+  section.querySelector('.event-share-status').textContent = 'Copy the event link, or use Select link to copy it manually.';
   section.querySelector('[data-copy-event]').focus();
+}
+
+function selectEventShareLink(button) {
+  const section=button.closest('.event-share'), input=section.querySelector('.event-share-manual input');
+  section.dataset.operation=String(Number(section.dataset.operation || 0)+1);
+  input.focus();input.select();
+  section.querySelector('.event-share-status').textContent='Link selected. Press Ctrl+C (Command+C on Mac), then paste it into your message.';
 }
 
 async function shareEvent(button, withApps = false) {
@@ -40,6 +47,11 @@ async function shareEvent(button, withApps = false) {
   const current = () => button.isConnected && dialog.open && dialog.dataset.eventId === String(id) && section.dataset.operation === String(operation);
   button.disabled = true;
   status.textContent = withApps ? 'Opening app sharing. You can still copy the event link.' : 'Copying event link...';
+  const waitNotice=setTimeout(() => {
+    if (current()) status.textContent=withApps
+      ? 'App sharing is still waiting. Use Copy link or Select link instead.'
+      : 'Automatic copying is still waiting. Use Select link, then press Ctrl+C (Command+C on Mac).';
+  },5000);
   try {
     if (withApps) {
       if (typeof navigator.share !== 'function') throw new Error('App sharing unavailable');
@@ -53,13 +65,13 @@ async function shareEvent(button, withApps = false) {
   } catch (error) {
     if (!current()) return;
     if (withApps) {
-      status.textContent = error?.name === 'AbortError' ? 'App sharing was cancelled or no app is available. You can still copy the event link.' : 'App sharing is unavailable. Use Copy link or copy the link below.';
+      status.textContent = error?.name === 'AbortError' ? 'App sharing was cancelled or no app is available. You can still copy the event link.' : 'App sharing is unavailable. Use Copy link or Select link below.';
     } else {
       const input = section.querySelector('.event-share-manual input');
       input.focus();input.select();
       status.textContent = 'Automatic copying is unavailable. Select and copy the event link below.';
     }
-  } finally { if (button.isConnected) button.disabled = false; }
+  } finally { clearTimeout(waitNotice);if (button.isConnected) button.disabled = false; }
 }
 
 function renderRoutedEvent() {
@@ -109,6 +121,8 @@ function closeDashboardDialog() {
 }
 
 function handleEventSharing(event) {
+  const select=event.target.closest('[data-select-event-link],.event-share-manual input');
+  if (select) { selectEventShareLink(select);return true; }
   const share = event.target.closest('[data-share-event]');
   if (share) { revealEventShare(share);return true; }
   const copy = event.target.closest('[data-copy-event]');

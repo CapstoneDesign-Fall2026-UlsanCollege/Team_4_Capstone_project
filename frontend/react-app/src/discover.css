@@ -37,6 +37,7 @@ html[data-theme="dark"] #page-discover .discover-date-note { color:#beb0cf; }
 .dashboard-dialog .event-share-options[hidden] { display:none !important; }
 .dashboard-dialog .event-share-actions { display:flex;flex-wrap:wrap;gap:8px;margin-top:10px; }
 .dashboard-dialog .event-share-status { color:#5f506b;font-size:13px;margin:8px 0; }
+.dashboard-dialog .event-share-help { color:#5f506b;font-size:12px;line-height:1.6;margin:10px 0 0; }
 .dashboard-dialog .event-share-manual { display:block;color:#574767;font-size:13px; }
 .dashboard-dialog .event-share-manual[hidden] { display:none !important; }
 .dashboard-dialog .event-share-manual input { display:block;box-sizing:border-box;width:100%;min-width:0;margin-top:6px;padding:10px;background:#fff;color:#392b4a;border:1px solid #b8a6cb;border-radius:6px; }
@@ -44,6 +45,7 @@ html[data-theme="dark"] #page-discover .discover-date-note { color:#beb0cf; }
 html[data-theme="dark"] .dashboard-dialog .event-share { border-color:#58426e; }
 html[data-theme="dark"] .dashboard-dialog .event-share-button { background:#2e2342;color:#eadfff;border-color:#9272b6; }
 html[data-theme="dark"] .dashboard-dialog .event-share-status,
+html[data-theme="dark"] .dashboard-dialog .event-share-help,
 html[data-theme="dark"] .dashboard-dialog .event-share-manual { color:#d4c6e5; }
 html[data-theme="dark"] .dashboard-dialog .event-share-manual input { background:#211c2e;color:#eadfff;border-color:#9272b6; }
 #page-discover .chip { display:flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:7px 13px;border:1px solid #ebe6f1;border-radius:6px;background:#fff;color:#66616e;box-shadow:none;font-size:11px;font-weight:600; }
