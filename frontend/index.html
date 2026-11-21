@@ -151,7 +151,12 @@
         <div class="discover-stats" id="discoverStats"></div>
         <section class="discover-picks"><div class="discover-sidebar-heading"><h2>Campus picks</h2><button type="button" data-discover-all>View all<i data-lucide="arrow-right" aria-hidden="true"></i></button></div><div id="discoverPicks"></div></section>
         <section class="discover-crews"><div class="discover-sidebar-heading"><h2>Find your crew</h2><button type="button" id="discoverAllHosts">View all<i data-lucide="arrow-right" aria-hidden="true"></i></button></div><div class="discover-crew-grid" id="discoverCrews"></div></section>
-        <div class="discover-stamp" aria-hidden="true"><i data-lucide="sparkles"></i><span>GOOD VIBES.<br>GREAT CAMPUS.</span></div>
+        <div class="discover-stamp" aria-hidden="true">
+          <span class="discover-stamp-brand"><img src="/assets/campusvibes-logo.png" alt="" width="26" height="29">CampusVibes</span>
+          <strong>Good vibes.<br><span>Great campus.</span></strong>
+          <p>Find your people. Make your plans.</p>
+          <i class="discover-stamp-sparkle" data-lucide="sparkles"></i>
+        </div>
       </aside>
     </div>
     <dialog class="dashboard-dialog discover-filter-dialog" id="discoverFilterDialog" aria-labelledby="discoverFilterTitle"><div class="dashboard-section-heading"><h2 id="discoverFilterTitle">Event filters</h2><button class="dashboard-icon-button" id="closeDiscoverFilters" type="button" aria-label="Close event filters" title="Close event filters"><i data-lucide="x" aria-hidden="true"></i></button></div><form id="discoverFilterForm"><label>Category<select id="discoverCategory"><option value="all">All categories</option><option>Tech</option><option>Arts</option><option>Music</option><option>Sports</option><option>Social</option><option>Academics</option></select></label><label>Date<select id="discoverDate"><option value="all">All dates</option><option value="today">Today</option><option value="weekend">This weekend</option><option value="upcoming">Upcoming</option><option value="past">Past events</option></select></label><label>Sort by<select id="discoverSort"><option value="date">Date: earliest first</option><option value="latest">Date: latest first</option><option value="title">Title: A to Z</option></select></label><label class="discover-checkbox"><input id="discoverSavedOnly" type="checkbox">Saved events only</label><button class="btn btn-primary" type="submit">Apply filters</button></form></dialog>
