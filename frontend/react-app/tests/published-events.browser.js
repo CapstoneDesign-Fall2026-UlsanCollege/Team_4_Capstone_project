@@ -80,7 +80,7 @@ try {
     await expect(card.locator('[data-save]')).toHaveAttribute('aria-pressed','true');
     await author.page.reload();await author.page.waitForFunction(()=>window.campusAccount?.ready());
     await author.page.locator('#mainNav [data-page=saved]').click();await expect(author.page.locator('#savedGrid')).toContainText(title);
-    await author.page.locator('#mainNav [data-page=profile]').click();await expect(author.page.locator('#profileMount')).toContainText(title);
+    await author.page.getByRole('button', { name: 'Open your profile', exact: true }).click();await expect(author.page.locator('#profileMount')).toContainText(title);
     assert.equal(await author.page.evaluate(()=>window.__eventXss || 0),0);
     await author.page.locator('#mainNav [data-page=discover]').click();await author.page.locator('#filterBar [data-interest=all]').click();await author.page.locator('#eventSearch').fill(title);
     await expect(author.page.locator('#eventsGrid .discover-event-card')).toHaveCount(1);

@@ -69,7 +69,7 @@ try{
   await expect(page.locator('#dashboardDialog')).toContainText('Campus community');await page.locator('#closeDashboardDialog').click();
   await page.locator('#filterBar [data-interest=all]').click();await page.locator('#eventSearch').fill(title);const card=page.locator('#eventsGrid .discover-event-card');await expect(card).toHaveCount(1);await expect(card.locator('img')).toHaveAttribute('src',posterSrc);await card.locator('[data-save]').click();await expect(card.locator('[data-save]')).toHaveAttribute('aria-pressed','true');
   await page.reload();await page.waitForFunction(()=>window.campusAccount?.ready());await page.locator('#mainNav [data-page=saved]').click();await expect(page.locator('#savedGrid img')).toHaveAttribute('src',posterSrc);
-  await page.locator('#mainNav [data-page=profile]').click();await expect(page.locator('.cvp-event-open img[src*="campusvibe-suggestions/"]').first()).toHaveAttribute('src',posterSrc);
+  await page.getByRole('button', { name: 'Open your profile', exact: true }).click();await expect(page.locator('.cvp-event-open img[src*="campusvibe-suggestions/"]').first()).toHaveAttribute('src',posterSrc);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:`${output}/poster-profile-${viewport.width}.png`,fullPage:true});
   results.push({viewport,result:'PASS',checks:['file validation','compressed upload and retry','pending upload prevents incomplete send','draft reload','remove and reload','anonymous URL omits author UID','reviewer preview','published detail and Discover poster','saved reload and Profile poster','responsive layout']});
  }
