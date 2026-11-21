@@ -26,6 +26,23 @@ test('badges merge without revocation and converge on the earliest valid earn da
   assert.equal(mergeBadges(a,b).earned.length,2);
   assert.equal(mergeBadges(a,b).earned[1].earnedAt,'2026-10-17T09:00:00.000Z');
 });
+
+test('RSVP records keep valid distinct event IDs and do not import shared-browser RSVP history',()=>{
+  assert(ACCOUNT_SECTIONS.includes('saved_rsvps'));
+  assert.deepEqual(cleanAccountSection('saved_rsvps',[1,1,2,99,'1',1005,Number.MAX_SAFE_INTEGER],user,events),[1,2,1005]);
+  const local={getItem:()=>JSON.stringify([1,2])};
+  assert.equal(legacyAccountData('saved_rsvps',user,local,local),null);
+});
+
+test('RSVP changes wait for server confirmation and can retry the same intent after an offline failure',async t=>{
+  const f=fixture(t);await f.load();f.offline();
+  await assert.rejects(f.store.write('saved_rsvps',[1]),/Offline/);
+  assert.equal(f.store.sectionStatus('saved_rsvps').pending,true);
+  f.online();await f.store.write('saved_rsvps',f.store.read('saved_rsvps'));
+  assert.deepEqual(f.server.get('saved_rsvps'),[1]);
+  assert.equal(f.store.sectionStatus('saved_rsvps').pending,false);
+  await f.store.write('saved_rsvps',[]);assert.deepEqual(f.server.get('saved_rsvps'),[]);
+});
 test('concurrent event saves preserve other-device additions and apply only explicit removals',()=>{
   assert.deepEqual(mergeSavedEvents([], [1], [2]),[2,1]);
   assert.deepEqual(mergeSavedEvents([1], [1,2], []),[2]);

@@ -220,8 +220,9 @@ test('closing the dialog or changing account invalidates pending location callba
   await planner.getByRole('button', { name: 'Use my current location', exact: true }).click();
   await page.evaluate(() => window.dispatchEvent(new CustomEvent('campus-session-change', { detail: null })));
   await page.evaluate(() => window.deliverLocation({ coords: { latitude: 1, longitude: 2, accuracy: 5 } }));
-  await expect(planner).not.toContainText('Private origin before sign-out');
-  await expect(planner.locator('input')).toHaveCount(0);
+  await expect(page.locator('#dashboardDialog')).not.toBeVisible();
+  await expect(page.locator('#dashboardDialog [data-event-journey]')).not.toContainText('Private origin before sign-out');
+  await expect(page.locator('#dashboardDialog [data-event-journey] input')).toHaveCount(0);
 });
 
 test('an unsupported location API falls back to a manual address', async ({ page }) => {
