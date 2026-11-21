@@ -213,6 +213,7 @@ function showDashboardDialog(title, markup, eventId = "", options = {}){
   $("#dashboardDialogBody").innerHTML = (sourceEvent ? eventSourceMarkup(sourceEvent) : '') + markup + (sourceEvent ? eventShareMarkup(sourceEvent.id) : '');
   const journey = dialog.querySelector("[data-event-journey]");
   window.campusEventJourney?.attach(journey, EVENTS.find(event => event.id === Number(journey?.dataset.eventId)));
+  window.campusRsvp?.attach($("#dashboardDialogBody"),sourceEvent);
   window.campusRenderIcons?.();
   if (!dialog.open) dialog.showModal();
 }

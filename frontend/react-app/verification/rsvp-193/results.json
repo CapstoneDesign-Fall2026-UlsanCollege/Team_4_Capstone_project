@@ -1,0 +1,84 @@
+{
+  "issue": 193,
+  "recordedDateKst": "2026-11-22",
+  "baseRevision": "1a39836682228ca6f8a21071d27273f1480c0715",
+  "implementationRevision": "1d272777ff5d5d5ccf2f99f49dc87d668dded954",
+  "before": {
+    "scope": "Read-only automated live desktop check in a fictional demo session; no real-member RSVP write or code change",
+    "checkedAt": "2026-11-21T05:06:15.468Z",
+    "observations": [
+      {
+        "attempt": 1,
+        "eventId": 1,
+        "title": "HackNight: Build-a-Thon",
+        "sourceEventExists": true,
+        "journeyMounts": 1,
+        "rsvpMounts": 0,
+        "rsvpButtons": 0,
+        "rsvpStylesLoaded": false,
+        "legacySessionExport": "undefined",
+        "legacyEventsExport": "undefined"
+      },
+      {
+        "attempt": 2,
+        "eventId": 1,
+        "title": "HackNight: Build-a-Thon",
+        "sourceEventExists": true,
+        "journeyMounts": 1,
+        "rsvpMounts": 0,
+        "rsvpButtons": 0,
+        "rsvpStylesLoaded": false,
+        "legacySessionExport": "undefined",
+        "legacyEventsExport": "undefined"
+      }
+    ],
+    "pageErrors": []
+  },
+  "checks": {
+    "unit": {
+      "status": "PASS",
+      "pass": 28,
+      "fail": 0,
+      "command": "node --test tests/account-sync.test.js tests/profile.test.js"
+    },
+    "browser": {
+      "status": "PASS",
+      "pass": 60,
+      "fail": 0,
+      "scope": "Desktop/mobile RSVP, event journey, sharing and event smoke specs; local Vite server"
+    },
+    "securityRules": {
+      "pass": 25,
+      "fail": 0
+    },
+    "accountPersistence": {
+      "status": "PASS",
+      "checkedAt": "2026-11-21T16:20:43.406Z",
+      "scope": "Local Auth/Firestore emulators with fictional verified accounts; no production identity or attendance registration",
+      "checks": [
+        "Verified owner RSVP is acknowledged by the emulator, not browser-only storage",
+        "A fresh browser restores the RSVP and cancellation reaches the other browser",
+        "Concurrent joins retain both event IDs",
+        "Offline cancellation is unconfirmed until reconnect/retry is acknowledged",
+        "Another verified account has separate intent and cannot read the owner RSVP",
+        "Sign-out closes the event dialog and removes the previous account RSVP"
+      ]
+    },
+    "productionBuild": "PASS",
+    "gitDiffCheck": "PASS"
+  },
+  "rulesDeployment": {
+    "status": "PASS",
+    "project": "campus-vibe-7a95a",
+    "scope": "Firestore rules only; adds saved_rsvps to the existing verified-owner account section allowlist",
+    "rulesSha256": "82286e44ea4f0a7d185c6472467175596a777adfb9bcbb30050aad29225f7a6d",
+    "checkedAt": "2026-11-21T16:22:12.212Z",
+    "exitCode": 0
+  },
+  "limitations": [
+    "Independent manual RSVP confirmation is pending.",
+    "No production member RSVP write or real Google-account login was performed.",
+    "Demo RSVP uses isolated browser storage; member persistence is verified using fictional verified accounts in local emulators.",
+    "RSVP records personal intent, not host registration, ticketing or attendance; no peer totals are claimed."
+  ]
+}

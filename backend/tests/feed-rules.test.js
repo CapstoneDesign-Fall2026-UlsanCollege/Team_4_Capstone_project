@@ -49,9 +49,23 @@ test('account records reject unknown sections, oversized values, extra fields, f
   await assertFails(setDoc(doc(database,...base,'saved'),{...value,value:'x'.repeat(20001)}));
   await assertFails(setDoc(doc(database,...base,'assistant'),{...value,value:'x'.repeat(200001)}));
   await assertFails(setDoc(doc(database,...base,'profile'),{...value,updatedAt:Timestamp.fromMillis(1)}));
-  for(const name of ['profile','saved','dashboard','badges','suggestion','assistant'])await assertSucceeds(setDoc(doc(database,...base,name),value));
+  for(const name of ['profile','saved','dashboard','badges','suggestion','assistant','saved_rsvps'])await assertSucceeds(setDoc(doc(database,...base,name),value));
   await assertFails(getDocs(collection(database,...base)));
   await assertFails(deleteDoc(doc(database,...base,'profile')));
+});
+
+test('RSVP intent is private to its verified owner, including cancellation updates',async()=>{
+  const ref=database=>doc(database,'campusAccountData','alice','state','saved_rsvps');
+  const value={version:1,value:'[1,1000]',updatedAt:serverTimestamp()};
+  await assertSucceeds(setDoc(ref(db('alice')),value));
+  await assertSucceeds(getDoc(ref(db('alice'))));
+  await assertFails(getDoc(ref(db('bob'))));
+  await assertFails(setDoc(ref(db('bob')),value));
+  await assertFails(getDoc(ref(env.unauthenticatedContext().firestore())));
+  await assertFails(getDoc(ref(env.authenticatedContext('alice',{email_verified:false}).firestore())));
+  await assertFails(getDoc(ref(env.authenticatedContext('alice',{email_verified:true,firebase:{sign_in_provider:'anonymous'}}).firestore())));
+  await assertFails(setDoc(ref(db('alice')),{...value,value:'x'.repeat(20001)}));
+  await assertSucceeds(setDoc(ref(db('alice')),{...value,value:'[]'}));
 });
 
 test('suggestions require an authenticated owner and an atomic private receipt', async () => {

@@ -1,115 +1,107 @@
-/* ══════════════════════════════════════════════════════════════════════
-   rsvp.js — CampusVibes Event RSVP
-   Implements window.campusEventJourney.attach() — the plugin hook that
-   dashboard.js calls every time an event detail dialog opens.
-   No existing files are modified (except the <script> tag in index.html).
-   ══════════════════════════════════════════════════════════════════════ */
+import { validEventLinkId } from './react-app/src/event-links.js';
 
-(function () {
-  'use strict';
+const DEMO_KEY = 'cv_rsvps_demo';
 
-  /* ── Storage key ── */
-  const RSVP_KEY = 'cv_rsvps';
+// Explicit lifecycle: the React entry creates this before any event dialog opens.
+export function createRsvpController({ getUser, getAccount, getEvents, getStorage = () => window.localStorage }) {
+  let container=null, event=null, actor=null, account=null, unsubscribe=null;
+  let pending=false, failure='', intent=null, generation=0;
+  injectStyles();
 
-  /* ── Read RSVP list (array of event IDs) ── */
-  function readRsvps() {
-    const session = window.getSession?.();
-    if (session && session.id !== 'demo') {
-      return window.campusAccount?.read('saved_rsvps') || [];
+  function clear() {
+    generation++;
+    unsubscribe?.();unsubscribe=null;
+    container?.querySelectorAll('[data-rsvp-event]').forEach(node=>node.remove());
+    container=null;event=null;actor=null;account=null;pending=false;failure='';intent=null;
+  }
+
+  function snapshot() {
+    if (actor === 'demo') {
+      const stored=JSON.parse(getStorage().getItem(DEMO_KEY) || '[]');
+      if (!Array.isArray(stored)) throw new Error('Unreadable RSVP data');
+      return { ids:[...new Set(stored.filter(id=>typeof id==='number' && validEventLinkId(id)))],ready:true,pending:false,error:'' };
     }
-    try {
-      const value = JSON.parse(localStorage.getItem(RSVP_KEY) || '[]');
-      return Array.isArray(value) ? value : [];
-    } catch { return []; }
+    if (!account) return {ids:[],ready:false,pending:false,error:'Sign in again to load your RSVP.'};
+    const section=account.sectionStatus('saved_rsvps');
+    return { ids:account.read('saved_rsvps') || [],ready:account.ready(),pending:section.pending,error:section.error || (!account.ready() && account.status().error) || '' };
   }
 
-  /* ── Write RSVP list ── */
-  function writeRsvps(ids) {
-    const session = window.getSession?.();
-    if (session && session.id !== 'demo' && window.campusAccount) {
-      window.campusAccount.write('saved_rsvps', ids);
-    } else {
-      localStorage.setItem(RSVP_KEY, JSON.stringify(ids));
+  function render() {
+    if (!container?.isConnected || !event) return;
+    if (getUser()?.id !== actor || getAccount() !== account) { clear();return; }
+    let state,readError=false;
+    try { state=snapshot(); }
+    catch { readError=true;state={ids:[],ready:false,pending:false,error:'RSVPs could not be read in this browser.'}; }
+    let mount=container.querySelector('[data-rsvp-event]');
+    if (!mount) {
+      mount=document.createElement('div');
+      const journey=container.querySelector('[data-event-journey]');
+      if (journey?.parentElement) journey.before(mount);
+      else container.append(mount);
     }
-  }
-
-  /* ── Check if user is RSVPed to an event ── */
-  function isRsvped(eventId) {
-    return readRsvps().includes(eventId);
-  }
-
-  /* ── Toggle RSVP ── */
-  function toggleRsvp(eventId, eventTitle, onUpdate) {
-    const current = readRsvps();
-    const joined = current.includes(eventId);
-    const next = joined
-      ? current.filter(id => id !== eventId)
-      : [...current, eventId];
-    writeRsvps(next);
-
-    /* Record in dashboard activity log if available */
-    if (typeof recordDashboardActivity === 'function') {
-      recordDashboardActivity(joined ? 'rsvp-cancel' : 'rsvp-join', eventTitle);
-    }
-
-    /* Notify rest of app */
-    window.dispatchEvent(new CustomEvent('campus-rsvp-change', {
-      detail: { eventId, joined: !joined }
-    }));
-
-    if (typeof onUpdate === 'function') onUpdate();
-  }
-
-  /* ── Render the RSVP block into the mount element ── */
-  function renderRsvp(mount, event) {
-    if (!mount || !event) return;
-
-    const rsvped = isRsvped(event.id);
-    const allRsvps = readRsvps();
-    /* Count is own join + a random plausible peer count seeded by event id */
-    const seed = (event.id * 17 + 5) % 23;
-    const peerCount = seed;
-    const totalCount = peerCount + (rsvped ? 1 : 0);
-
-    mount.className = 'rsvp-block';
-    mount.setAttribute('role', 'region');
-    mount.setAttribute('aria-label', 'RSVP');
-    mount.innerHTML = `
-      <div class="rsvp-inner">
-        <div class="rsvp-count">
-          <span class="rsvp-count-icon" aria-hidden="true">${rsvped ? '✅' : '🎟️'}</span>
-          <span class="rsvp-count-text">
-            <strong id="rsvp-count-number-${event.id}">${totalCount}</strong>
-            ${totalCount === 1 ? 'person going' : 'people going'}
-          </span>
-          ${rsvped ? '<span class="rsvp-you-badge">You\'re going!</span>' : ''}
-        </div>
-        <button
-          id="rsvp-btn-${event.id}"
-          class="rsvp-btn ${rsvped ? 'rsvp-btn--cancel' : 'rsvp-btn--join'}"
-          type="button"
-          aria-pressed="${rsvped}"
-          aria-label="${rsvped ? 'Cancel your RSVP for ' : 'Join '}${event.title}"
-        >
-          <span class="rsvp-btn-icon" aria-hidden="true">${rsvped ? '✕' : '🎟️'}</span>
-          <span>${rsvped ? 'Cancel RSVP' : 'Join event'}</span>
-        </button>
-      </div>
-    `;
-
-    /* Wire up button */
-    const btn = mount.querySelector(`#rsvp-btn-${event.id}`);
-    btn.addEventListener('click', () => {
-      toggleRsvp(event.id, event.title, () => renderRsvp(mount, event));
+    mount.className='rsvp-block';mount.dataset.rsvpEvent=String(event.id);
+    mount.setAttribute('role','region');mount.setAttribute('aria-label','Your RSVP');
+    const problem=failure || state.error;
+    const busy=pending || (state.pending && !problem);
+    const going=state.ids.includes(event.id) && !busy && !problem;
+    const label=busy ? 'Saving RSVP...' : problem ? 'Retry RSVP' : !state.ready ? 'Loading RSVP...' : going ? 'Cancel RSVP' : 'Join event';
+    mount.innerHTML='<div class="rsvp-inner"><div class="rsvp-count"><span class="rsvp-count-icon" aria-hidden="true">🎟️</span><span class="rsvp-count-text"><strong>Your RSVP</strong><span class="rsvp-status" role="status" aria-live="polite"></span></span></div><button class="rsvp-btn" type="button"></button></div><p class="rsvp-note"></p>';
+    const status=mount.querySelector('.rsvp-status'), button=mount.querySelector('button');
+    status.textContent=problem ? 'Your RSVP is not confirmed. Reconnect or retry.' : busy ? 'Saving your RSVP...' : !state.ready ? 'Loading your account RSVP...' : going ? "You're planning to go." : 'You have not joined this event.';
+    button.id='rsvp-btn-'+event.id;button.textContent=label;
+    button.classList.add(going ? 'rsvp-btn--cancel' : 'rsvp-btn--join');
+    button.disabled=busy || (!state.ready && !problem);
+    button.setAttribute('aria-pressed',String(going));
+    button.setAttribute('aria-label',problem ? 'Retry RSVP for '+event.title : going ? 'Cancel your RSVP for '+event.title : 'Join '+event.title);
+    mount.querySelector('.rsvp-note').textContent=actor === 'demo'
+      ? 'Sample event. Your RSVP stays in this browser; contact the host for registration or tickets.'
+      : 'Your RSVP is private to your account; contact the host for registration or tickets.';
+    button.addEventListener('click',async()=>{
+      if (pending || getUser()?.id !== actor || getAccount() !== account) return;
+      if (readError) { failure='';render();return; }
+      if (!state.ready) { account?.retry();return; }
+      const next=intent || (state.error ? state.ids : state.ids.includes(event.id) ? state.ids.filter(id=>id!==event.id) : [...state.ids,event.id]);
+      const token=generation, userId=actor, currentAccount=account;
+      intent=next;pending=true;failure='';render();
+      const current=()=>generation===token && getUser()?.id===userId && getAccount()===currentAccount;
+      try {
+        if (userId==='demo') getStorage().setItem(DEMO_KEY,JSON.stringify(next));
+        else await currentAccount.write('saved_rsvps',next);
+        if (current()) intent=null;
+      } catch { if(current()) failure='RSVP save failed'; }
+      finally {
+        if(current()) {
+          pending=false;render();
+          container?.querySelector('[data-rsvp-event] button:not(:disabled)')?.focus({preventScroll:true});
+        }
+      }
     });
   }
 
-  /* ── Inject scoped styles once ── */
-  function injectStyles() {
-    if (document.getElementById('rsvp-styles')) return;
-    const style = document.createElement('style');
-    style.id = 'rsvp-styles';
-    style.textContent = `
+  function attach(body,candidate) {
+    const id=candidate?.id ?? Number(body?.querySelector('[data-event-journey]')?.dataset.eventId || body?.closest('dialog')?.dataset.eventId);
+    const actual=validEventLinkId(id) ? getEvents().find(row=>row.id===Number(id)) : null;
+    const user=getUser(), nextAccount=getAccount();
+    if (!body || !actual || !user) { clear();return; }
+    if (event?.id!==actual.id || actor!==user.id || account!==nextAccount) clear();
+    container=body;event=actual;actor=user.id;account=nextAccount;
+    if (account && !unsubscribe) unsubscribe=account.subscribe(()=>{
+      const section=account.sectionStatus('saved_rsvps');
+      if (!pending && failure && !section.pending && !section.error) { failure='';intent=null; }
+      render();
+    });
+    render();
+  }
+
+  const storageChanged=change=>{if(actor==='demo' && (change.key===DEMO_KEY || change.key===null))render();};
+  window.addEventListener('storage',storageChanged);
+  return {attach,clear,destroy(){clear();window.removeEventListener('storage',storageChanged);}};
+}
+
+function injectStyles() {
+  if(document.getElementById('rsvp-styles'))return;
+  const style=document.createElement('style');style.id='rsvp-styles';
+  style.textContent=`
       /* ── RSVP block ── */
       .rsvp-block {
         margin: 1rem 0;
@@ -216,145 +208,21 @@
           justify-content: center;
         }
       }
-    `;
-    document.head.appendChild(style);
-  }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     The main export: window.campusEventJourney
-     dashboard.js calls: window.campusEventJourney?.attach(journeyDiv, event)
-     every time an event detail dialog opens.
-     We wrap the existing journey controller (if present) and prepend our
-     RSVP block into the same mount element's parent.
-     ══════════════════════════════════════════════════════════════════════ */
-  function createRsvpJourneyController() {
-    /* If the real journey controller is already set (from App.jsx / react-app),
-       we do NOT override it — instead we listen for the dialog opening and
-       inject our RSVP block adjacent to the journey div. */
-
-    injectStyles();
-
-    function attach(journeyElement, event) {
-      if (!journeyElement || !event) return;
-
-      /* Find or create a dedicated RSVP mount sibling BEFORE the journey div */
-      const parent = journeyElement.parentElement;
-      if (!parent) return;
-
-      let rsvpMount = parent.querySelector('.rsvp-block[data-rsvp-event]');
-      if (!rsvpMount || rsvpMount.dataset.rsvpEvent !== String(event.id)) {
-        /* Remove any stale mount for a different event */
-        parent.querySelectorAll('[data-rsvp-event]').forEach(el => el.remove());
-        rsvpMount = document.createElement('div');
-        rsvpMount.dataset.rsvpEvent = String(event.id);
-        /* Insert right before the journey element */
-        parent.insertBefore(rsvpMount, journeyElement);
-      }
-
-      renderRsvp(rsvpMount, event);
-    }
-
-    function clear() {
-      document.querySelectorAll('[data-rsvp-event]').forEach(el => el.remove());
-    }
-
-    return { attach, clear };
-  }
-
-  /* ── Boot: set up window.campusEventJourney if not already set ── */
-  function boot() {
-    injectStyles();
-
-    if (window.campusEventJourney) {
-      /* Real journey controller already registered by the React app.
-         Wrap it so we also inject the RSVP block on every attach call. */
-      const original = window.campusEventJourney;
-      window.campusEventJourney = {
-        attach(journeyElement, event) {
-          original.attach(journeyElement, event);
-          /* Inject RSVP block alongside the journey widget */
-          if (journeyElement && event) {
-            const parent = journeyElement.parentElement;
-            if (parent) {
-              let rsvpMount = parent.querySelector('[data-rsvp-event]');
-              if (!rsvpMount || rsvpMount.dataset.rsvpEvent !== String(event.id)) {
-                parent.querySelectorAll('[data-rsvp-event]').forEach(el => el.remove());
-                rsvpMount = document.createElement('div');
-                rsvpMount.dataset.rsvpEvent = String(event.id);
-                parent.insertBefore(rsvpMount, journeyElement);
-              }
-              renderRsvp(rsvpMount, event);
-            }
-          }
-        },
-        clear() {
-          original.clear?.();
-          document.querySelectorAll('[data-rsvp-event]').forEach(el => el.remove());
-        }
-      };
-    } else {
-      /* No journey controller yet — register ours as the sole handler */
-      window.campusEventJourney = createRsvpJourneyController();
-    }
-
-    /* Re-render RSVP buttons when RSVP state changes (e.g. from another dialog instance) */
-    window.addEventListener('campus-rsvp-change', () => {
-      document.querySelectorAll('[data-rsvp-event]').forEach(mount => {
-        const eventId = Number(mount.dataset.rsvpEvent);
-        const event = window.EVENTS?.find(e => e.id === eventId);
-        if (event) renderRsvp(mount, event);
-      });
-    });
-
-    /* ── MutationObserver fallback ───────────────────────────────────────
-       Handles two failure modes:
-         1. Race condition: campusEventJourney.attach() was called BEFORE
-            rsvp.js finished booting (setTimeout deferred boot).
-         2. Code paths (e.g. discover.js openDiscoverEvent) that call
-            showDashboardDialog without passing eventId, so the attach()
-            in dashboard.js fires with the correct journey element but
-            window.campusEventJourney may not be set yet.
-       The observer watches the shared dashboard dialog for the `open`
-       attribute being added and injects the RSVP block directly.
-    ── */
-    function tryInjectRsvp() {
-      const dialog = document.getElementById('dashboardDialog');
-      if (!dialog || !dialog.open) return;
-      const journey = dialog.querySelector('[data-event-journey]');
-      if (!journey) return;
-      const eventId = Number(journey.dataset.eventId);
-      const event = window.EVENTS?.find(e => e.id === eventId);
-      if (!event) return;
-      const parent = journey.parentElement;
-      if (!parent) return;
-      /* Skip if an up-to-date RSVP block is already present */
-      const existing = parent.querySelector('[data-rsvp-event]');
-      if (existing && existing.dataset.rsvpEvent === String(eventId)) return;
-      /* Remove any stale mount then render fresh */
-      parent.querySelectorAll('[data-rsvp-event]').forEach(el => el.remove());
-      const rsvpMount = document.createElement('div');
-      rsvpMount.dataset.rsvpEvent = String(eventId);
-      parent.insertBefore(rsvpMount, journey);
-      renderRsvp(rsvpMount, event);
-    }
-
-    const dialogEl = document.getElementById('dashboardDialog');
-    if (dialogEl) {
-      new MutationObserver(tryInjectRsvp).observe(dialogEl, {
-        attributes: true,
-        attributeFilter: ['open']
-      });
-      /* Also fire immediately in case the dialog is already open when we boot */
-      tryInjectRsvp();
-    }
-  }
-
-  /* Wait for the React app bundle to load first (it may set campusEventJourney),
-     then boot. Using a short defer so we run after all synchronous scripts. */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(boot, 0), { once: true });
-  } else {
-    setTimeout(boot, 0);
-  }
-
-})();
+      .rsvp-block{background:#f6f1fc;border-color:#dfd0ee}
+      .rsvp-count{color:#574767;min-width:0}
+      .rsvp-count-text{font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+      .rsvp-count-text strong{font-size:14px;line-height:1.7;color:#573181}
+      .rsvp-btn{min-height:44px}
+      .rsvp-btn--join{background:#7541db;color:#fff}
+      .rsvp-btn--cancel{background:#fff;color:#6b348f;border-color:#c8b2db}
+      .rsvp-btn:disabled{opacity:.65;cursor:wait;transform:none}
+      .rsvp-btn:focus-visible{outline:3px solid #269b9d;outline-offset:3px}
+      .rsvp-note{font:11px/1.6 Inter,Arial,sans-serif;color:#6b5d79;margin:12px 0 0}
+      html[data-theme="dark"] .rsvp-block{background:#2b213b;border-color:#58426e}
+      html[data-theme="dark"] .rsvp-count,html[data-theme="dark"] .rsvp-note{color:#dfd2ee}
+      html[data-theme="dark"] .rsvp-count-text strong{color:#d2b4f9}
+      html[data-theme="dark"] .rsvp-btn--cancel{background:#3b284a;color:#ebcffb;border-color:#9470aa}
+`;
+  document.head.append(style);
+}

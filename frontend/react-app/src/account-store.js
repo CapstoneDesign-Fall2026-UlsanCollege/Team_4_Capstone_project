@@ -19,11 +19,11 @@ export function createAccountStore(user,events) {
       owner();
       const reference=doc(db,'campusAccountData',user.id,'state',name);
       const payload=data=>({version:1,value:encodeAccountSection(name,data,user,events).json,updatedAt:serverTimestamp()});
-      if(ifMissing || ['badges','saved','dashboard'].includes(name)) return runTransaction(db,async transaction=>{
+      if(ifMissing || ['badges','saved','saved_rsvps','dashboard'].includes(name)) return runTransaction(db,async transaction=>{
         const snapshot=await transaction.get(reference);
         const previous=snapshot.exists() ? cleanAccountSection(name,JSON.parse(snapshot.data().value),user,events) : null;
         if(ifMissing && snapshot.exists()) return previous;
-        const data=name === 'badges' ? mergeBadges(previous,value) : name === 'saved' ? mergeSavedEvents(base || [],value,previous || []) : name === 'dashboard' ? mergeDashboard(previous,value) : value;
+        const data=name === 'badges' ? mergeBadges(previous,value) : ['saved','saved_rsvps'].includes(name) ? mergeSavedEvents(base || [],value,previous || []) : name === 'dashboard' ? mergeDashboard(previous,value) : value;
         transaction.set(reference,payload(data));
         if (!ifMissing) for (const source of accountNotifications(name,previous,data,events)) writeNotification(transaction,db,user,user.id,source);
         return data;
