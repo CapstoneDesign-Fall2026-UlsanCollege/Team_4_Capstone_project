@@ -61,31 +61,46 @@ test('published-first ordering and source filters combine with dates and text se
   await page.screenshot({path:testInfo.outputPath('discovery-upcoming.png'),fullPage:true});
 });
 
-test('dashboard search and upcoming cards lead to the intended event', async ({ page }, testInfo) => {
+test('classic dashboard shows its calendar and panels while event links still work', async ({ page }, testInfo) => {
+  const errors=[]; page.on('pageerror',error=>errors.push(error.message));
   await enter(page,true);
   await page.locator('#mainNav [data-page="dashboard"]').click();
   await expect(page.locator('#upcomingList [data-dashboard-event]')).toHaveCount(3);
   await expect(page.locator('#upcomingList')).not.toContainText('Published yesterday');
   await expect(page.locator('#upcomingList [data-dashboard-event]').first()).toHaveAttribute('data-dashboard-event','1001');
-  await expect(page.locator('#dashboardMore')).not.toHaveAttribute('open','');
+  await expect(page.locator('#dashboardMore, #dashboardSearchForm')).toHaveCount(0);
+  await expect(page.locator('#dashboardWeek')).toBeVisible();
+  await expect(page.locator('#page-dashboard .stat-card')).toHaveCount(3);
+  await expect(page.locator('#page-dashboard .quick-panel')).toBeVisible();
+  await expect(page.locator('#dashboardActivity')).toBeVisible();
   await expect(page.locator('#viewProgress')).toBeVisible();
-  await page.screenshot({path:testInfo.outputPath('dashboard-simple.png'),fullPage:true});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  const columns=await page.locator('#page-dashboard .dashboard-grid').evaluate(element=>getComputedStyle(element).gridTemplateColumns.split(' ').length);
+  expect(columns).toBe(page.viewportSize().width>1100?3:1);
+  await page.screenshot({path:testInfo.outputPath('dashboard-classic.png'),fullPage:true});
+  await page.locator('#openCalendar').click();
+  await expect(page.locator('#dashboardDialogTitle')).toHaveText('Campus calendar');
+  await page.locator('#closeDashboardDialog').click();
+  await page.locator('#viewProgress').click();
+  await expect(page.locator('#dashboardDialogTitle')).toHaveText('Your badges');
+  await page.locator('#closeDashboardDialog').click();
   await page.locator('#upcomingList [data-dashboard-event="1000"]').click();
   await expect(page.locator('#dashboardDialogTitle')).toHaveText('Published workshop');
   await page.locator('#closeDashboardDialog').click();
-  await page.locator('#dashboardSearch').fill('Published workshop');
-  await page.locator('#dashboardSearchForm button').click();
+  await page.locator('#page-dashboard .upcoming-panel [data-dashboard-discover="upcoming"]').click();
   await expect(page.locator('#page-discover')).toBeVisible();
+  await expect(page.locator('#eventsGrid .event-card')).toHaveCount(3);
+  await page.locator('#eventSearch').fill('Published workshop');
   await expect(page.locator('#eventSearch')).toHaveValue('Published workshop');
   await expect(page.locator('#eventsGrid .event-card')).toHaveCount(1);
+  expect(errors).toEqual([]);
 });
 
-test('empty dashboard stays honest and supporting panels can be expanded', async ({ page }) => {
+test('empty classic dashboard keeps shortcuts visible and past events accessible', async ({ page }) => {
   await enter(page);
   await page.locator('#mainNav [data-page="dashboard"]').click();
   await expect(page.locator('#upcomingList')).toContainText('No upcoming events yet');
   await expect(page.locator('#surpriseEvent')).toBeDisabled();
-  await page.locator('#dashboardMore > summary').click();
   await expect(page.locator('#dashboardWeek')).toBeVisible();
   await expect(page.locator('#dashboardActivity')).toBeVisible();
   await page.locator('#upcomingList [data-dashboard-discover="past"]').click();

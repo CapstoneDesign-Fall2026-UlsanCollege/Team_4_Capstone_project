@@ -244,10 +244,6 @@ function setupDashboard(){
     if (!pool.length) return;
     openDashboardEvent(pool[Math.floor(Math.random() * pool.length)].id);
   });
-  $('#dashboardSearchForm').addEventListener('submit', event => {
-    event.preventDefault();
-    openDashboardDiscovery($('#dashboardSearch').value);
-  });
   $("#exploreWeekend").addEventListener("click", () => showDashboardDialog(EVENTS.some(event => event.source === 'published') ? "Your weekend" : "Your sample weekend", dashboardAgendaMarkup(dashboardWeekendEvents())));
   $("#viewDashboardActivity").addEventListener("click", () => showDashboardDialog("Your activity", dashboardActivityMarkup(readDashboardData().activity)));
   $("#viewProgress").addEventListener("click", openProgressDetails);
