@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 const dateFilters = page => page.getByRole('group', { name: 'Filter events by date' });
 const cards = page => page.locator('#eventsGrid .discover-event-card');
@@ -9,7 +9,7 @@ async function demo(page) {
 
 test('date ranges combine with search/category and the dialog stays synchronized', async ({ page }, testInfo) => {
   await page.clock.setFixedTime(new Date('2026-10-04T03:00:00Z'));
-  await demo(page);await expect(cards(page)).toHaveCount(9);
+  await demo(page);await expect(cards(page)).toHaveCount(3);
   await dateFilters(page).getByRole('button', { name: 'Today', exact: true }).click();
   await expect(cards(page)).toHaveCount(1);await expect(cards(page)).toContainText('Indie Game Showcase');
   await dateFilters(page).getByRole('button', { name: 'This weekend', exact: true }).click();
@@ -20,8 +20,8 @@ test('date ranges combine with search/category and the dialog stays synchronized
   await expect(cards(page)).toHaveCount(3);
   await page.locator('#eventSearch').fill('Jazz');await page.locator('#filterBar [data-interest="Music"]').click();
   await expect(cards(page)).toHaveCount(1);await expect(cards(page)).toContainText('Jazz Under the Stars');
-  await page.locator('#clearEventFilters').click();await expect(cards(page)).toHaveCount(9);
-  await expect(dateFilters(page).getByRole('button', { name: 'All dates', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('#clearEventFilters').click();await expect(cards(page)).toHaveCount(3);
+  await expect(dateFilters(page).getByRole('button', { name: 'Upcoming', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#discoverFiltersButton').click();
   await page.locator('#discoverDate').selectOption('today');await page.locator('#discoverCategory').selectOption('Tech');
   await page.getByRole('button', { name: 'Apply filters', exact: true }).click();
@@ -41,7 +41,7 @@ test('date/category empty results explain recovery and campus midnight refreshes
   await page.clock.setFixedTime(new Date('2026-10-04T15:00:00Z'));
   await page.evaluate(() => window.dispatchEvent(new Event('focus')));
   await expect(cards(page)).toHaveCount(1);await expect(cards(page)).toContainText('Jazz Under the Stars');
-  await page.locator('#clearEventFilters').click();await expect(cards(page)).toHaveCount(9);
+  await page.locator('#clearEventFilters').click();await expect(cards(page)).toHaveCount(2);
 });
 
 test('published catalogue fixtures use the same campus date filter as sample events', async ({ page }) => {

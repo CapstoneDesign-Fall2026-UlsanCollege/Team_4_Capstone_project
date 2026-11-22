@@ -1,5 +1,5 @@
 
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 test('Light/Dark Theme Toggle works and persists after reload', async ({ page }) => {
 

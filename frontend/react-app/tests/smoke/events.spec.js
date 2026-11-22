@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 test('demo student reaches the selected sample event details', async ({ page }) => {
   const pageErrors = [];

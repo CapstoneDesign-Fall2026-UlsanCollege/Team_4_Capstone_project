@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 test('Profile labels published recommendations and keeps following separate from membership', async ({ page }, testInfo) => {
   const errors = [];
@@ -19,7 +19,7 @@ test('Profile labels published recommendations and keeps following separate from
   await expect(page.locator('[data-profile-event="1000"] .cvp-event-source')).toHaveText('Published campus event');
   await expect(page.locator('[data-profile-event="1"] .cvp-event-source')).toHaveText('Sample listing');
   await expect(page.locator('.cvp-explore > .cvp-section-note')).toContainText('Published campus events and sample listings');
-  await page.getByRole('navigation', { name: 'Profile workspace navigation' }).getByRole('button', { name: 'Clubs', exact: true }).click();
+  await page.locator('.cvp-section').filter({has:page.getByRole('heading',{name:'Campus Involvement',exact:true})}).getByRole('button',{name:'Manage',exact:true}).click();
   await expect(page.locator('#cvp-dialog-title')).toHaveText('Follow event hosts');
   await expect(page.locator('.cvp-host-editor')).toContainText('Following does not join a club or send a request.');
   await expect(page.getByLabel('Fixture campus host', { exact: true })).toBeVisible();

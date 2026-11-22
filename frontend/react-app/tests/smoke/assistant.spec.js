@@ -1,13 +1,11 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 async function enter(page) {
   await page.goto('/');
   await page.locator('#landingDemo').click();
   await page.locator('#mainNav [data-page=chat]').click();
   await expect(page.locator('#chatInput')).toBeVisible();
-  const rail = await page.locator('.assistant-rail').boundingBox();
-  const panel = await page.locator('.assistant-panel').boundingBox();
-  if (page.viewportSize().width > 640) expect(rail.x + rail.width).toBeLessThan(panel.x);
+  await expect(page.locator('.assistant-rail')).toHaveCount(0);
 }
 
 test('local assistant searches follows up opens details and saves only on explicit clicks', async ({ page }, testInfo) => {
@@ -121,7 +119,7 @@ test('date filters show honest empty results and sample host controls use catalo
   await page.locator('#chatInput').press('Enter');
   await expect(page.getByRole('log')).toContainText('No sample events match the selected filters');
   await page.getByRole('button',{ name:'Clear search filters',exact:true }).click();
-  await page.getByRole('navigation',{ name:'Assistant workspace navigation' }).getByRole('button',{ name:'Clubs',exact:true }).click();
+  await page.getByRole('button',{ name:'Event hosts',exact:true }).click();
   const hosts = page.getByRole('dialog',{ name:'Sample event hosts',exact:true });
   await expect(hosts).toContainText('Membership and contact details are not verified');
   await hosts.getByRole('button',{ name:'Code Collective',exact:true }).click();

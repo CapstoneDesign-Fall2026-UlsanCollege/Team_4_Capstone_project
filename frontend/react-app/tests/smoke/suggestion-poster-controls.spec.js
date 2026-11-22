@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './sample-fixture.js';
 
 async function enter(page){
  await page.goto('/');await page.locator('#landingDemo').click();

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 test('demo suggestions save and restore private drafts without pretending to submit', async ({ page }) => {
   await page.goto('/');

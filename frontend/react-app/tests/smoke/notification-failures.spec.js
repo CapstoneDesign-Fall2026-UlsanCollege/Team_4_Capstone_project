@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 const notificationModule = `
   export function watchNotifications(user, receive, fail) {
