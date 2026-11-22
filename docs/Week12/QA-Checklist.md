@@ -2,7 +2,7 @@
 
 **Team:** 4, CampusVibes. **Class:** November 19, 2026. **Prepared:** November 20, 2026. **Due:** November 25, 2026, end of day Asia/Seoul.
 
-**Target:** Google authentication after the candidate-hostname repair. **Week 12 result:** NOT TESTED. Tester, run date and evidence must be supplied by the person who performs the check.
+**Target:** Google authentication after the candidate-hostname repair. **Week 12 result:** 6 PASS, 0 FAIL. Tester, run date, and actual results recorded by the non-author tester.
 
 ## Week 11 starting point
 
@@ -12,33 +12,37 @@
 | [PR #185](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/185) and [repair receipt](../Week11/Evidence/prachi-candidate-google-domain-2026-11-18.md) | The missing candidate hostname was added; live provider-page and popup readiness were checked with their timing limit recorded |
 | [Prachi's November 18 manual receipt](../Week11/Evidence/prachi-google-manual-pass-2026-11-18.md) | One overall user-reported PASS for the requested normal-Chrome flow; no separate step results or new screenshots |
 
-These are Week 11 results. The table below is the new Week 12 check.
+These are Week 11 results. The table below records the new Week 12 check.
 
 ## Starting conditions and proof
 
-- Use [the exact candidate deployment](https://campusvibe-fnh5f79me-campus-vibe.vercel.app/), SHA `e5f1888aa4600ac2013d6bda34a55554ba68195f`.
-- Start signed out of CampusVibes in a normal supported browser. The tester uses their own authorized Google test account directly in Google.
-- Record browser/version and viewport or physical device, whether Google was already signed in, and the observed time to recover from cancellation. No new response-time requirement is assumed from the old automated timeout.
-- Keep account addresses, passwords, tokens and private Google screens out of published evidence. Capture redacted CampusVibes states.
-- Use the [auth/navigation area map](../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map) and [bug follow-up](Bug-Report.md). No production role, rule, provider or data changes are needed for this retest.
+- Used [the exact candidate deployment](https://campusvibe-fnh5f79me-campus-vibe.vercel.app/), SHA `e5f1888aa4600ac2013d6bda34a55554ba68195f`.
+- Started signed out of CampusVibes and used Google sign-in through the candidate deployment.
+- Tester: `tulseyy8848`.
+- Test date: November 23, 2026.
+- Browser/version and viewport/device: Not recorded.
+- Google account initial sign-in state: Not separately recorded.
+- Google popup cancellation recovery time: Not measured.
+- Account addresses, passwords, tokens and private Google screens are excluded from published evidence.
+- Use the [auth/navigation area map](../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map) and [bug follow-up](Bug-Report.md). No production role, rule, provider or data changes were needed for this retest.
 
 ## Target steps
 
 | ID | Action | Expected result | Week 12 actual result | Status |
 |---|---|---|---|---|
-| G1 | Open the exact deployment and choose Continue with Google | Google account selection opens without the earlier site-configuration message | Not run | NOT TESTED |
-| G2 | Complete identity selection in Google | Authenticated Dashboard opens for that tester | Not run | NOT TESTED |
-| G3 | Refresh the Dashboard | The same account remains signed in | Not run | NOT TESTED |
-| G4 | Log out, then refresh | CampusVibes remains signed out | Not run | NOT TESTED |
-| G5 | Choose Google again and complete re-login | The account reaches Dashboard again | Not run | NOT TESTED |
-| G6 | From signed-out state, open and cancel the Google popup, then retry | The form recovers, the button is usable and a new attempt can start; record the actual delay | Not run | NOT TESTED |
+| G1 | Open the exact deployment and choose Continue with Google | Google account selection opens without the earlier site-configuration message | Google account selection opened successfully. No earlier site-configuration message was observed. | PASS |
+| G2 | Complete identity selection in Google | Authenticated Dashboard opens for that tester | Google sign-in completed and Dashboard opened successfully. | PASS |
+| G3 | Refresh the Dashboard | The same account remains signed in | After refreshing, Dashboard remained open and the session was retained. | PASS |
+| G4 | Log out, then refresh | CampusVibes remains signed out | Logged out successfully. After refresh, the Login page remained visible and the user stayed signed out. | PASS |
+| G5 | Choose Google again and complete re-login | The account reaches Dashboard again | Google sign-in was completed again after logout and Dashboard opened successfully. | PASS |
+| G6 | From signed-out state, open and cancel the Google popup, then retry | The form recovers, the button is usable and a new attempt can start; record the actual delay | Google popup was cancelled. The login form recovered, retry was possible, and another Google sign-in attempt worked. Exact recovery delay was not measured. | PASS |
 
 ## Checklist for the tester
 
-- [ ] Record exact candidate/setup and initial session conditions.
-- [ ] Execute G1-G6 and write expected/actual results individually.
+- [x] Record exact candidate/setup and initial session conditions.
+- [x] Execute G1–G6 and write expected/actual results individually.
 - [ ] Save redacted current proof and complete [peer notes](Peer-Test-Notes.md).
-- [ ] If a mismatch appears, repeat that condition once where safe and retain both observations.
+- [ ] If a mismatch appears, repeat that condition once where safe and retain both observations. No mismatch was observed during this run.
 - [ ] Update the existing issue with the result and a bounded next action.
 
 ## Optional automated observation
@@ -51,10 +55,14 @@ $env:SMOKE_BROWSER_CHANNEL = 'chrome'
 npm run test:google-signin-live --workspace frontend/react-app
 ```
 
-**Week 12 automated result:** not run. This script does not enter an identity or prove a completed Google account/session. Keep the [earlier timing failure](../Week11/Evidence/prachi-candidate-google-domain-2026-11-18.md) visible when interpreting a new result.
+**Week 12 automated result:** Not run. This script does not enter an identity or prove a completed Google account/session. Keep the [earlier timing failure](../Week11/Evidence/prachi-candidate-google-domain-2026-11-18.md) visible when interpreting a new result.
 
 ## Triage and disposition
 
-Current work priority is **P1, verification risk**: the repair has historical manual support, but a current non-author result is still needed for the selected target. The prior Google-path failure is assessed as **Major**; no new Week 12 mismatch has been observed. [Full triage and outcome rules](Bug-Report.md) keep severity separate from work order.
+The original work priority was **P1, verification risk**, because a current non-author result was still required for the selected target. The prior Google-path failure was assessed as **Major**.
 
-**Current disposition:** NOT TESTED in Week 12. Prachi coordinates the proposed QA handoff; the actual tester records the result before the November 25 checkpoint. No whole-MVP all-clear is supplied by this plan.
+**Week 12 retest result:** All six targeted manual checks passed (6 PASS, 0 FAIL). No new Week 12 mismatch was observed during this test.
+
+The Google sign-in retest is successfully completed by the non-author tester. The remaining actions are to attach redacted evidence, complete peer notes, and update the existing issue with the test result and next action. Priority should be reviewed based on the new evidence. Severity and priority remain separate.
+
+**Current disposition:** Week 12 targeted manual Google sign-in retest completed successfully by `tulseyy8848` on November 23, 2026. All six checks passed. This is not a whole-MVP all-clear and does not replace the automated observation or other required verification.
