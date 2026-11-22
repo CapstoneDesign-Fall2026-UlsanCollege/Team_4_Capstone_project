@@ -16,7 +16,6 @@ const prompts = [
   { title:"What's happening today?", detail:"See today's sample listings", question:"What's happening today?", icon:Megaphone },
   { title:'How do I save an event?', detail:'Keep your favorite plans', question:'How do I save an event?', icon:Bookmark },
 ];
-const railLinks = [['Home',House,'dashboard'],['Events',CalendarDays,'discover'],['Clubs',UsersRound,'clubs'],['Saved',Bookmark,'saved'],['Feed',MessageCircle,'feed'],['Profile',UserRound,'profile']];
 const titleOf = conversation => conversation.messages.find(message => message.role === 'user')?.text || 'Conversation';
 
 export default function Assistant({ user,account }) {
@@ -59,8 +58,8 @@ export default function Assistant({ user,account }) {
     return <AssistantMessage key={message.id} message={message} copyText={copyText} onSave={allowSave && message.role === 'assistant' ? () => chat.toggleAnswer(message.id) : undefined} saved={chat.savedAnswers.some(item => item.id === message.id)}><EventResults events={matches} pages={message.pages} savedIds={savedIds} onAction={(kind,value) => { setDialog(null); act(kind,value); }} /></AssistantMessage>;
   }
   return <div className="campus-assistant">
-    <nav className="assistant-rail" aria-label="Assistant workspace navigation">{railLinks.map(([name,Icon,page]) => <button key={page} type="button" title={name === 'Clubs' ? 'Sample event hosts' : name} onClick={() => page === 'clubs' ? setDialog({ type:'clubs' }) : act('navigate',page)}><Icon size={21} /><span>{name}</span></button>)}</nav>
     <header className="assistant-heading"><div><h1>CampusVibes <span>Assistant</span></h1><p>{chat.mode === 'gemini' ? 'Everyday questions, new ideas, and campus life.' : 'Get help finding events and using CampusVibes.'}</p></div><button id="chatClear" type="button" className="assistant-new" onClick={clear}><Plus size={17} />New chat</button></header>
+    <div className="assistant-context-actions"><button type="button" onClick={() => setDialog({type:'clubs'})}><UsersRound size={16} />Event hosts</button></div>
     <div className="assistant-workspace">
       <div className="assistant-main-column">
         <section className={`assistant-panel ${chat.messages.length ? 'has-conversation' : ''}`} aria-label={chat.mode === 'gemini' ? 'CampusVibes Gemini assistant' : 'CampusVibes local assistant'}>
