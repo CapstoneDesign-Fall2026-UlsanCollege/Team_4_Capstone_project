@@ -55,12 +55,7 @@ html[data-theme="dark"] #appMain { --readable-muted: #d5c8e1; }
 #dashboardMore .dashboard-activity-row p, #dashboardMore .dashboard-activity-row time, #dashboardMore .quick-action { font-size: 12px; line-height: 1.6; color: var(--readable-muted); }
 #dashboardMore .stat-card small, #dashboardMore .week-day small { font-size: 12px; color: var(--readable-muted); }
 
-/* One persistent, labelled navigation replaces page-specific duplicate rails. */
-body:has(#appMain:not(.hidden)) #mainNav { gap: 6px; }
-body:has(#appMain:not(.hidden)) #mainNav .page-link { display: flex; flex: 0 0 auto; flex-direction: row; align-items: center; justify-content: center; gap: 7px; width: auto; height: auto; min-height: 44px; padding: 10px 12px; border-radius: 10px; color: #594269; }
-body:has(#appMain:not(.hidden)) #mainNav .page-link .lucide { width: 19px; height: 19px; flex: 0 0 19px; }
-body:has(#appMain:not(.hidden)) #mainNav .page-link.active { color: #52287b; border-color: #a986d8; background: #f3edfc; }
-#mainNav .nav-label { display: inline; font-size: 13px; line-height: 1.4; white-space: nowrap; }
+/* Contextual controls replace page-specific duplicate rails. */
 body:has(#appMain:not(.hidden) #page-profile.active) #appMain.app-main,
 body:has(#appMain:not(.hidden) #page-chat.active) #appMain.app-main { padding-left: 32px; padding-right: 32px; }
 #page-profile .cvp-hero-actions > div { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
@@ -80,13 +75,6 @@ html[data-theme="dark"] #dashboardSearchForm > label, html[data-theme="dark"] #d
 html[data-theme="dark"] #dashboardSearch { background: #191420; color: #f1e8fb; border-color: #9b7cba; }
 html[data-theme="dark"] #dashboardSearch::placeholder { color: #c3b0d4; }
 html[data-theme="dark"] #appMain .event-source-label { color: #dcc9ee; }
-html[data-theme="dark"] body:has(#appMain:not(.hidden)) #mainNav .page-link { color: #e3d2f5; }
-html[data-theme="dark"] body:has(#appMain:not(.hidden)) #mainNav .page-link.active { color: #f1e5ff; border-color: #b28be0; background: #493267; }
-@media (max-width: 1250px) {
-  body:has(#appMain:not(.hidden)) .nav-inner { flex-wrap: wrap; gap: 10px 14px; }
-  body:has(#appMain:not(.hidden)) #mainNav { order: 3; flex: 1 0 100%; justify-content: center; margin-left: 0; }
-  #mainNav .page-link { flex-shrink: 0; }
-}
 @media (max-width: 780px) {
   #page-dashboard .dashboard-overview, #page-dashboard .dashboard-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   #page-dashboard .upcoming-panel, #page-dashboard .recommendations-panel, #page-dashboard .dashboard-side { grid-column: 1; grid-row: auto; min-height: 0; }
@@ -98,13 +86,6 @@ html[data-theme="dark"] body:has(#appMain:not(.hidden)) #mainNav .page-link.acti
   #page-profile .cvp-hero-actions > div { justify-content: flex-start; }
 }
 @media (max-width: 640px) {
-  body:has(#appMain:not(.hidden)) .nav-inner { gap: 8px; }
-  body:has(#appMain:not(.hidden)) .nav-inner > .logo { font-size: 17px; margin-right: auto; }
-  body:has(#appMain:not(.hidden)) .nav-user { display: flex; margin-left: 0; gap: 7px; }
-  body:has(#appMain:not(.hidden)) .workspace-switch { flex: 1 0 100%; order: 2; justify-content: center; margin: 0; }
-  body:has(#appMain:not(.hidden)) #mainNav { order: 3; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); overflow: visible; gap: 4px; padding-bottom: 3px; }
-  body:has(#appMain:not(.hidden)) #mainNav .page-link { flex-direction: column; min-width: 0; width: 100%; gap: 5px; padding: 8px 3px; }
-  #mainNav .nav-label { font-size: 12px; }
   #dashboardSearchForm { padding: 16px; }
   #dashboardSearchForm > div { flex-direction: column; }
   #page-dashboard .upcoming-panel, #page-dashboard .recommendations-panel { padding: 18px; }
