@@ -93,21 +93,25 @@ test('empty dashboard stays honest and supporting panels can be expanded', async
   await expect(page.locator('#eventsGrid .event-card')).toHaveCount(9);
 });
 
-test('navigation labels, Profile settings and readable mobile text replace duplicate rails', async ({ page }, testInfo) => {
+test('compact icon navigation, Profile settings and readable mobile text remain usable', async ({ page }, testInfo) => {
   const errors=[]; page.on('pageerror',error=>errors.push(error.message));
   await enter(page,true);
-  for(const name of ['Home dashboard','Discover','Assistant','Saved','Suggest']) {
+  await expect(page.locator('#mainNav .nav-label')).toHaveCount(0);
+  await page.keyboard.press('Tab');
+  for(const name of ['Dashboard','Discover','Assistant','Saved','Suggest']) {
     const button=page.locator('#mainNav').getByRole('button',{name,exact:true});
-    await expect(button.locator('.nav-label')).toBeVisible();
+    await expect(button.locator('.lucide')).toBeVisible();
+    await button.focus();
+    await expect(button.locator('.nav-tooltip')).toBeVisible();
     const bounds=await button.boundingBox();
     expect(bounds.x).toBeGreaterThanOrEqual(0);
     expect(bounds.x+bounds.width).toBeLessThanOrEqual(page.viewportSize().width);
-    expect(bounds.height).toBeGreaterThanOrEqual(44);
+    expect(bounds.width).toBeLessThanOrEqual(44);
+    expect(bounds.height).toBeGreaterThanOrEqual(42);
   }
   const meta=page.locator('#eventsGrid .discover-event-meta p').first();
   expect(await meta.evaluate(element=>parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(13);
   expect(await textContrast(meta)).toBeGreaterThanOrEqual(4.5);
-  expect(await textContrast(page.locator('#mainNav [data-page="discover"] .nav-label'))).toBeGreaterThanOrEqual(4.5);
   await page.getByRole('button',{name:'Open your profile',exact:true}).click();
   await expect(page.locator('.cvp-rail')).toHaveCount(0);
   await page.getByRole('button',{name:'Settings',exact:true}).click();
@@ -120,7 +124,6 @@ test('navigation labels, Profile settings and readable mobile text replace dupli
   await page.locator('#mainNav [data-page="discover"]').click();
   await expect(page.locator('#eventsGrid .event-card')).toHaveCount(3);
   expect(await textContrast(page.locator('#eventsGrid .discover-event-meta p').first())).toBeGreaterThanOrEqual(4.5);
-  expect(await textContrast(page.locator('#mainNav [data-page="discover"] .nav-label'))).toBeGreaterThanOrEqual(4.5);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await page.screenshot({path:testInfo.outputPath('readable-dark.png'),fullPage:true});
   expect(errors).toEqual([]);
