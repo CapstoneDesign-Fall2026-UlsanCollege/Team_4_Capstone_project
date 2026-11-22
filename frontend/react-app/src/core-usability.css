@@ -1,7 +1,7 @@
 /* Shared discovery controls and readable secondary text. */
 #appMain { --readable-muted: #62536e; }
 html[data-theme="dark"] #appMain { --readable-muted: #d5c8e1; }
-#appMain [hidden] { display: none !important; }
+#emptyBrowsePast[hidden] { display: none !important; }
 #eventSourceFilters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 17px 0 12px; }
 #eventSourceFilters > span { margin-right: 3px; color: var(--readable-muted); font-size: 13px; font-weight: 600; }
 #eventSourceFilters button { min-height: 42px; padding: 9px 13px; border: 1px solid #d7c9e9; border-radius: 8px; background: #fff; color: #594569; font: 500 13px Inter, sans-serif; cursor: pointer; }
