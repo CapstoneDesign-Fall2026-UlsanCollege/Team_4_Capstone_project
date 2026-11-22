@@ -105,7 +105,8 @@ function setupEventSharing() {
   const refreshDates = () => {
     const next = window.campusEventDates.campusDateKey();
     if (next === date) return;
-    date = next;if (getSession()) renderEvents();
+    date = next;
+    if (getSession()) { renderEvents(); renderUpcoming(); renderDashboard(); }
   };
   const timer = setInterval(refreshDates, 60000);
   window.addEventListener('focus', refreshDates);

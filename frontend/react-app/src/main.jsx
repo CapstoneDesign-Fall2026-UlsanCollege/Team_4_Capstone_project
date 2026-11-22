@@ -7,6 +7,7 @@ import "./auth.css";
 import "./discover.css";
 import "./event-maps.css";
 import "./theme.css";
+import "./core-usability.css";
 
 applyTheme(readStoredTheme());
 

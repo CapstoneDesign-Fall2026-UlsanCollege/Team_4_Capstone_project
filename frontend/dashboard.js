@@ -158,11 +158,14 @@ function renderDashboard(){
   $("#statSuggestions").textContent = data.drafts.length;
   $("#savedHint").textContent = saved.length ? "Your next plans are taking shape" : "Start saving your favorites!";
   const interest = getSession()?.interest;
-  const recommendations = [...EVENTS].sort((a, b) => {
+  const upcoming = window.campusDiscovery.filter(EVENTS);
+  const recommendations = [...upcoming].sort((a, b) => {
     const score = event => (event.interest === interest ? 2 : 0) - (saved.includes(event.id) ? 3 : 0);
-    return score(b) - score(a);
+    return Number(b.source === 'published') - Number(a.source === 'published') || score(b) - score(a) || a.date.localeCompare(b.date);
   }).slice(0, 3);
-  $("#dashboardRecommendations").innerHTML = recommendations.map(event => `<article class="dashboard-recommendation" style="--event-color:${event.hue}"><button class="recommendation-open" data-dashboard-event="${event.id}" type="button"><img src="${dashboardPhoto(event)}" alt="" loading="lazy"><span><strong>${dashboardText(event.title)}</strong><small><i data-lucide="map-pin" aria-hidden="true"></i>${dashboardText(event.location)}</small><span class="recommendation-tag">${event.interest}</span></span></button><button class="dashboard-save ${saved.includes(event.id) ? "is-saved" : ""}" data-save="${event.id}" aria-pressed="${saved.includes(event.id)}" aria-label="${saved.includes(event.id) ? "Remove from saved" : "Save"}: ${dashboardText(event.title)}" title="${saved.includes(event.id) ? "Remove from saved" : "Save event"}"><i data-lucide="bookmark" aria-hidden="true"></i></button></article>`).join("");
+  $("#dashboardRecommendations").innerHTML = recommendations.map(event => `<article class="dashboard-recommendation" style="--event-color:${event.hue}"><button class="recommendation-open" data-dashboard-event="${event.id}" type="button"><img src="${dashboardPhoto(event)}" alt="" loading="lazy"><span><strong>${dashboardText(event.title)}</strong><small><i data-lucide="map-pin" aria-hidden="true"></i>${dashboardText(event.location)}</small><span class="recommendation-tag">${event.interest}</span>${eventSourceMarkup(event)}</span></button><button class="dashboard-save ${saved.includes(event.id) ? "is-saved" : ""}" data-save="${event.id}" aria-pressed="${saved.includes(event.id)}" aria-label="${saved.includes(event.id) ? "Remove from saved" : "Save"}: ${dashboardText(event.title)}" title="${saved.includes(event.id) ? "Remove from saved" : "Save event"}"><i data-lucide="bookmark" aria-hidden="true"></i></button></article>`).join("");
+  if (!recommendations.length) $('#dashboardRecommendations').innerHTML = '<p class="dashboard-empty">New recommendations will appear when upcoming events are available.</p>';
+  $('#surpriseEvent').disabled = upcoming.length === 0;
   $("#dashboardActivity").innerHTML = dashboardActivityMarkup(data.activity.slice(0, 3));
 
   const progress=dashboardBadgeState();
@@ -235,9 +238,15 @@ function setupDashboard(){
   $("#closeDashboardDialog").addEventListener("click", closeDashboardDialog);
   dialog.addEventListener("click", event => { if (event.target === dialog) closeDashboardDialog(); });
   $("#surpriseEvent").addEventListener("click", () => {
-    const options = EVENTS.filter(event => !getSaved().includes(event.id));
-    const pool = options.length ? options : EVENTS;
+    const upcoming = window.campusDiscovery.filter(EVENTS);
+    const options = upcoming.filter(event => !getSaved().includes(event.id));
+    const pool = options.length ? options : upcoming;
+    if (!pool.length) return;
     openDashboardEvent(pool[Math.floor(Math.random() * pool.length)].id);
+  });
+  $('#dashboardSearchForm').addEventListener('submit', event => {
+    event.preventDefault();
+    openDashboardDiscovery($('#dashboardSearch').value);
   });
   $("#exploreWeekend").addEventListener("click", () => showDashboardDialog(EVENTS.some(event => event.source === 'published') ? "Your weekend" : "Your sample weekend", dashboardAgendaMarkup(dashboardWeekendEvents())));
   $("#viewDashboardActivity").addEventListener("click", () => showDashboardDialog("Your activity", dashboardActivityMarkup(readDashboardData().activity)));
@@ -253,6 +262,8 @@ function openProgressDetails(){
 }
 
 function handleDashboardNavigation(event){
+  const discovery = event.target.closest('[data-dashboard-discover]');
+  if (discovery) { openDashboardDiscovery('', discovery.dataset.dashboardDiscover); return true; }
   const day = event.target.closest("[data-dashboard-day]");
   if (day) {
     showDashboardDialog(new Date(day.dataset.dashboardDay + "T00:00:00").toLocaleDateString("en-US", {weekday:"long",month:"long",day:"numeric"}), dashboardAgendaMarkup(EVENTS.filter(item => item.date === day.dataset.dashboardDay)));
@@ -261,4 +272,13 @@ function handleDashboardNavigation(event){
   const card = event.target.closest("[data-dashboard-event]");
   if (card) { openDashboardEvent(Number(card.dataset.dashboardEvent)); return true; }
   return false;
+}
+
+function openDashboardDiscovery(search = '', date = 'upcoming') {
+  clearDiscoverFilters();
+  currentEventDateFilter = date === 'past' ? 'past' : 'upcoming';
+  $('#eventSearch').value = search;
+  showPage('discover');
+  renderEvents('all', search);
+  $('#eventSearch').focus({ preventScroll: true });
 }

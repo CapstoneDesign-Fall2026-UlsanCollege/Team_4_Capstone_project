@@ -45,35 +45,31 @@ function renderEvents(filter = currentInterestFilter, search = currentEventSearc
   const grid = $("#eventsGrid");
   const query = search.trim().toLocaleLowerCase();
   const saved = getSaved();
-  const list = EVENTS.filter(event =>
-    (filter === "all" || event.interest === filter) &&
-    window.campusEventDates.matchesEventDate(event.date, currentEventDateFilter) &&
-    (!currentSavedOnly || saved.includes(event.id)) &&
-    (!query || [event.title, event.host, event.location, event.interest].join(" ").toLocaleLowerCase().includes(query))
-  ).sort((a, b) => currentEventSort === "title" ? a.title.localeCompare(b.title) : (currentEventSort === "latest" ? -1 : 1) * a.date.localeCompare(b.date));
+  const list = window.campusDiscovery.filter(EVENTS, { category: filter, search, date: currentEventDateFilter, source: currentEventSourceFilter, savedOnly: currentSavedOnly, saved, sort: currentEventSort });
   grid.innerHTML = list.map(event => discoverCardMarkup(event, saved)).join("");
   $("#emptyState").classList.toggle("hidden", list.length > 0);
   $("#eventResults").textContent = `Showing ${list.length} of ${EVENTS.length} events`;
   $("#eventCatalogEyebrow").textContent = EVENTS.some(event=>event.source === 'published') ? 'PUBLISHED & SAMPLE EVENTS' : 'SAMPLE EVENTS · ILLUSTRATIVE PHOTOS';
-  $('#emptyState').textContent = currentEventDateFilter === 'all'
-    ? 'No events found. Try another search or category.'
-    : 'No events match these dates and filters. Try All dates or clear your filters.';
+  $('#emptyState').textContent = currentEventDateFilter === 'upcoming'
+    ? `No upcoming ${currentEventSourceFilter === 'published' ? 'published ' : currentEventSourceFilter === 'sample' ? 'sample ' : ''}events match your filters. Try another search, or browse past events.`
+    : 'No events match these filters. Try All dates, a different listing source, or clear your filters.';
+  $('#emptyBrowsePast').hidden = list.length > 0 || currentEventDateFilter !== 'upcoming';
   syncDiscoverDateFilters();
-  $("#clearEventFilters").disabled = filter === "all" && !query && !currentSavedOnly && currentEventSort === "date" && currentEventDateFilter === 'all';
+  $("#clearEventFilters").disabled = filter === "all" && !query && !currentSavedOnly && currentEventSort === "date" && currentEventDateFilter === window.campusDiscovery.defaultDate && currentEventSourceFilter === 'all';
   renderDiscoverSidebar();
   window.campusRenderIcons?.();
 }
 
 function renderUpcoming(){
   const list = $("#upcomingList");
-  list.innerHTML = EVENTS.slice(0, 5).map(e => {
+  list.innerHTML = window.campusDiscovery.filter(EVENTS).slice(0, 5).map(e => {
     const date = new Date(e.date + "T00:00:00");
-    return `<button class="upcoming-item" data-page="discover" data-interest-jump="${e.interest}">
+    return `<button class="upcoming-item" data-dashboard-event="${e.id}" type="button">
       <span class="upcoming-date"><strong>${String(date.getDate()).padStart(2, "0")}</strong><span>${date.toLocaleString("en-US", {month:"short"})}</span></span>
-      <span><h3>${dashboardText(e.title)}</h3><p>📍 ${dashboardText(e.location)}</p></span>
+      <span><h3>${dashboardText(e.title)}</h3><p>${dashboardText(e.location)}</p>${eventSourceMarkup(e)}</span>
       <span class="upcoming-meta">${dashboardText(e.time)}<br><span class="interest-mini">${e.interest}</span></span>
     </button>`;
-  }).join("");
+  }).join("") || '<div class="dashboard-empty"><p>No upcoming events yet. Check back for new campus plans.</p><button class="text-button" type="button" data-dashboard-discover="past">Browse past events</button></div>';
 }
 
 function renderSavedEvents(){
@@ -517,7 +513,7 @@ async function logout(){
 }
 function updateNav(){
   const s = getSession();
-  if (!s) currentEventDateFilter = 'all';
+  if (!s) { currentEventDateFilter = window.campusDiscovery.defaultDate; currentEventSourceFilter = 'all'; }
   $("#authLanding").classList.toggle("hidden", !!s || !!verificationUser);
   $("#emailVerification").classList.toggle("hidden", !!s || !verificationUser);
   $("#navAuthOut").classList.toggle("hidden", !!s);

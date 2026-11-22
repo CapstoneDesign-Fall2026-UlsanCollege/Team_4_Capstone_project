@@ -77,6 +77,7 @@ import { getEventMapLinks } from './event-maps';
 import { createEventJourneyController } from './event-journey';
 import { createRsvpController } from '../../rsvp.js';
 import { campusDateKey, matchesEventDate } from './event-dates';
+import { DEFAULT_EVENT_DATE, discoverEvents } from './event-discovery';
 import { eventLinkHash, eventShareUrl, parseEventLink, validEventLinkId } from './event-links';
 import Notifications from './Notifications';
 const Feed = lazy(() => import("./FeedEntry"));
@@ -118,6 +119,7 @@ export default function App() {
   useEffect(() => {
     const demoBadges=createBadgeTracker();
     window.campusEventDates = { campusDateKey, matchesEventDate };
+    window.campusDiscovery = { defaultDate: DEFAULT_EVENT_DATE, filter: discoverEvents };
     window.campusEventLinks = { eventLinkHash, eventShareUrl, parseEventLink, validEventLinkId };
     window.campusEventMapLinks = getEventMapLinks;
     const eventJourney = createEventJourneyController();
@@ -323,6 +325,7 @@ export default function App() {
       delete window.campusEventJourney;
       delete window.campusEventCatalog;delete window.campusRefreshEvents;
       delete window.campusEventDates;delete window.campusEventLinks;
+      delete window.campusDiscovery;
       window.campusAuthCleanup?.();
       delete window.campusAuthCleanup;
       window.campusNavigationCleanup?.();
