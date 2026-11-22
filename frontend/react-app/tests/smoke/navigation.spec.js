@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 test('avatar opens Profile from Community and Feed with mouse or keyboard', async ({ page }, testInfo) => {
   const profile=page.getByRole('button',{name:'Open your profile',exact:true});

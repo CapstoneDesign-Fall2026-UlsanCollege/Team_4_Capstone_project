@@ -1,10 +1,9 @@
-import { test,expect } from '@playwright/test';
+import { test,expect } from './sample-fixture.js';
 async function enter(page) {
   await page.goto('/'); await page.locator('#landingDemo').click();
   await page.getByRole('button',{name:'Open your profile',exact:true}).click();
   await expect(page.locator('#profileName')).toHaveText('Alex Rivera');
-  const rail=await page.locator('.cvp-rail').boundingBox(), hero=await page.locator('.cvp-hero').boundingBox();
-  if (page.viewportSize().width > 640) expect(rail.x+rail.width).toBeLessThan(hero.x);
+  await expect(page.locator('.cvp-rail')).toHaveCount(0);
 }
 async function edit(page) {
   await page.getByRole('button',{name:'Edit profile',exact:true}).click();
@@ -62,7 +61,7 @@ test('saved events, real activity and followed hosts update the reference panels
   await page.locator('#profileSavedEvents').getByRole('button',{name:'View details: HackNight: Build-a-Thon',exact:true}).click();
   await expect(page.locator('#dashboardDialogTitle')).toHaveText('HackNight: Build-a-Thon');
   await page.locator('#closeDashboardDialog').click();
-  await page.getByRole('navigation',{name:'Profile workspace navigation'}).getByRole('button',{name:'Clubs',exact:true}).click();
+  await page.locator('.cvp-section').filter({has:page.getByRole('heading',{name:'Campus Involvement',exact:true})}).getByRole('button',{name:'Manage',exact:true}).click();
   await page.getByRole('checkbox',{name:'Code Collective',exact:true}).check();
   await page.getByRole('button',{name:'Save followed hosts',exact:true}).click();
   await expect(page.locator('.cvp-hosts')).toContainText('Code Collective');
@@ -76,7 +75,7 @@ test('saved events, real activity and followed hosts update the reference panels
   await expect(page.getByRole('dialog')).toContainText('Saved HackNight');
   await expect(page.getByRole('dialog')).toContainText('Removed HackNight');
   await page.keyboard.press('Escape');
-  await page.getByRole('navigation',{name:'Profile workspace navigation'}).getByRole('button',{name:'Events',exact:true}).click();
+  await page.locator('#mainNav [data-page="discover"]').click();
   await expect(page.locator('#page-discover')).toBeVisible(); await page.goBack();
   await expect(page.locator('#page-profile')).toBeVisible();
 });
@@ -92,7 +91,7 @@ test('profile sharing protects email and reset requires explicit confirmation',a
   await page.getByRole('button',{name:'Copy summary',exact:true}).click();
   expect(await page.evaluate(()=>window.profileCopied)).toContain('BSc in Computer Science');
   expect(await page.evaluate(()=>window.profileCopied)).not.toContain('alex@campus.edu');
-  await page.getByRole('navigation',{name:'Profile workspace navigation'}).getByRole('button',{name:'Settings',exact:true}).click();
+  await page.getByRole('button',{name:'Settings',exact:true}).click();
   await page.getByRole('button',{name:'Reset local profile',exact:true}).click();
   await expect(page.locator('#profileProgram')).toHaveText('BSc in Computer Science');
   await page.getByRole('button',{name:'Confirm reset',exact:true}).click();

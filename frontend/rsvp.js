@@ -44,7 +44,7 @@ export function createRsvpController({ getUser, getAccount, getEvents, getStorag
     const problem=failure || state.error;
     const busy=pending || (state.pending && !problem);
     const going=state.ids.includes(event.id) && !busy && !problem;
-    const label=busy ? 'Saving RSVP...' : problem ? 'Retry RSVP' : !state.ready ? 'Loading RSVP...' : going ? 'Cancel RSVP' : 'Join event';
+    const label=busy ? 'Saving RSVP...' : problem ? 'Retry RSVP' : !state.ready ? 'Loading RSVP...' : going ? 'Remove plan' : 'Plan to go';
     mount.innerHTML='<div class="rsvp-inner"><div class="rsvp-count"><span class="rsvp-count-icon" aria-hidden="true">🎟️</span><span class="rsvp-count-text"><strong>Your RSVP</strong><span class="rsvp-status" role="status" aria-live="polite"></span></span></div><button class="rsvp-btn" type="button"></button></div><p class="rsvp-note"></p>';
     const status=mount.querySelector('.rsvp-status'), button=mount.querySelector('button');
     status.textContent=problem ? 'Your RSVP is not confirmed. Reconnect or retry.' : busy ? 'Saving your RSVP...' : !state.ready ? 'Loading your account RSVP...' : going ? "You're planning to go." : 'You have not joined this event.';
@@ -52,7 +52,7 @@ export function createRsvpController({ getUser, getAccount, getEvents, getStorag
     button.classList.add(going ? 'rsvp-btn--cancel' : 'rsvp-btn--join');
     button.disabled=busy || (!state.ready && !problem);
     button.setAttribute('aria-pressed',String(going));
-    button.setAttribute('aria-label',problem ? 'Retry RSVP for '+event.title : going ? 'Cancel your RSVP for '+event.title : 'Join '+event.title);
+    button.setAttribute('aria-label',problem ? 'Retry RSVP for '+event.title : going ? 'Remove plan: '+event.title : 'Plan to go: '+event.title);
     mount.querySelector('.rsvp-note').textContent=actor === 'demo'
       ? 'Sample event. Your RSVP stays in this browser; contact the host for registration or tickets.'
       : 'Your RSVP is private to your account; contact the host for registration or tickets.';

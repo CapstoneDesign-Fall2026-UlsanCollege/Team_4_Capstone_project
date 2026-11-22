@@ -1,10 +1,14 @@
 let currentEventSort = "date";
 let currentSavedOnly = false;
-let currentEventDateFilter = 'all';
+let currentEventDateFilter = window.campusDiscovery.defaultDate;
+let currentEventSourceFilter = 'all';
 
 function syncDiscoverDateFilters() {
   document.querySelectorAll('#eventDateFilters [data-event-date]').forEach(button => {
     button.setAttribute('aria-pressed', String(button.dataset.eventDate === currentEventDateFilter));
+  });
+  document.querySelectorAll('#eventSourceFilters [data-event-source]').forEach(button => {
+    button.setAttribute('aria-pressed', String(button.dataset.eventSource === currentEventSourceFilter));
   });
 }
 const DISCOVER_STYLES = {
@@ -40,14 +44,14 @@ function renderDiscoverSidebar() {
   const saved = getSaved();
   const hosts = [...new Set(EVENTS.map(event => event.host))];
   $("#discoverStats").innerHTML = [[hosts.length, "Event hosts", "users-round"], [EVENTS.length, "Listed events", "calendar-days"], [EVENTS.filter(event => saved.includes(event.id)).length, "Saved by you", "bookmark"]].map(([count, label, icon]) => `<div><i data-lucide="${icon}" aria-hidden="true"></i><strong>${count}</strong><span>${label}</span></div>`).join("");
-  $("#discoverPicks").innerHTML = [2, 4, 6].map(id => EVENTS.find(event => event.id === id)).map(event => `<article class="discover-pick" style="--event-color:${DISCOVER_STYLES[event.interest].color}"><button type="button" class="discover-pick-open" data-discover-event="${event.id}">${discoverPhotoMarkup(event)}<span><strong>${dashboardText(event.title)}</strong><small>${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })} &middot; ${dashboardText(event.time)}</small></span></button>${discoverSaveMarkup(event, saved)}</article>`).join("");
+  $("#discoverPicks").innerHTML = window.campusDiscovery.filter(EVENTS, {source:currentEventSourceFilter}).slice(0, 3).map(event => `<article class="discover-pick" style="--event-color:${DISCOVER_STYLES[event.interest].color}"><button type="button" class="discover-pick-open" data-discover-event="${event.id}">${discoverPhotoMarkup(event)}<span><strong>${dashboardText(event.title)}</strong>${eventSourceMarkup(event)}<small>${new Date(event.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })} &middot; ${dashboardText(event.time)}</small></span></button>${discoverSaveMarkup(event, saved)}</article>`).join("") || '<p class="dashboard-empty">Upcoming campus picks will appear here.</p>';
   const crews = [[9, "Photography", "camera"], [7, "Gaming", "gamepad-2"], [3, "Art & design", "paintbrush"], [6, "Study", "book-open"]];
   $("#discoverCrews").innerHTML = crews.map(([id, label, icon]) => {
     const event = EVENTS.find(item => item.id === id);
     const count = EVENTS.filter(item => item.host === event.host).length;
     return `<button type="button" data-discover-host="${discoverAttribute(event.host)}" style="--crew-color:${DISCOVER_STYLES[event.interest].color}"><span class="discover-crew-icon"><i data-lucide="${icon}" aria-hidden="true"></i></span><strong>${label}</strong><small>${count} ${count === 1 ? "event" : "events"}</small></button>`;
   }).join("");
-  $("#discoverFiltersButton").classList.toggle("has-filters", currentSavedOnly || currentEventSort !== "date" || currentInterestFilter !== "all" || currentEventDateFilter !== 'all');
+  $("#discoverFiltersButton").classList.toggle("has-filters", currentSavedOnly || currentEventSort !== "date" || currentInterestFilter !== "all" || currentEventDateFilter !== window.campusDiscovery.defaultDate || currentEventSourceFilter !== 'all');
   const dialog = $("#dashboardDialog");
   if (dialog.open && dialog.dataset.discoverEvent) openDiscoverEvent(Number(dialog.dataset.discoverEvent));
 }
@@ -72,7 +76,8 @@ function openDiscoverHost(host) {
 function clearDiscoverFilters() {
   currentEventSort = "date";
   currentSavedOnly = false;
-  currentEventDateFilter = 'all';
+  currentEventDateFilter = window.campusDiscovery.defaultDate;
+  currentEventSourceFilter = 'all';
   $("#eventSearch").value = "";
   $("#filterBar").querySelectorAll(".chip").forEach(chip => {
     const active = chip.dataset.interest === "all";
@@ -84,6 +89,16 @@ function clearDiscoverFilters() {
 
 function setupDiscover() {
   const dialog = $("#discoverFilterDialog");
+  $('#eventSourceFilters').addEventListener('click', event => {
+    const button = event.target.closest('[data-event-source]');
+    if (!button) return;
+    currentEventSourceFilter = button.dataset.eventSource;
+    renderEvents();
+  });
+  $('#emptyBrowsePast').addEventListener('click', () => {
+    currentEventDateFilter = 'past';
+    renderEvents();
+  });
   $('#eventDateFilters').addEventListener('click', event => {
     const button = event.target.closest('[data-event-date]');
     if (!button) return;
@@ -95,6 +110,7 @@ function setupDiscover() {
     $("#discoverSort").value = currentEventSort;
     $("#discoverSavedOnly").checked = currentSavedOnly;
     $('#discoverDate').value = currentEventDateFilter;
+    $('#discoverSource').value = currentEventSourceFilter;
     dialog.showModal();
   });
   $("#closeDiscoverFilters").addEventListener("click", () => dialog.close());
@@ -104,6 +120,7 @@ function setupDiscover() {
     currentEventSort = $("#discoverSort").value;
     currentSavedOnly = $("#discoverSavedOnly").checked;
     currentEventDateFilter = $('#discoverDate').value;
+    currentEventSourceFilter = $('#discoverSource').value;
     const category = $("#discoverCategory").value;
     $("#filterBar").querySelectorAll(".chip").forEach(chip => {
       chip.classList.toggle("active", chip.dataset.interest === category);
@@ -126,7 +143,7 @@ function handleDiscoverNavigation(event) {
   if (event.target.closest("[data-discover-all]")) {
     clearDiscoverFilters();
     $("#eventsGrid").scrollIntoView({ behavior: "smooth", block: "start" });
-    $("#eventsGrid button").focus({ preventScroll: true });
+    $("#eventsGrid button")?.focus({ preventScroll: true });
     return true;
   }
   return false;

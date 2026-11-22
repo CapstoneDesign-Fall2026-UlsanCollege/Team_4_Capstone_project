@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 test('a shared sample link survives demo entry, copy and reload without bypassing sign-in', async ({ page }) => {
   await page.addInitScript(() => {

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 import { readFileSync } from 'node:fs';
 
 const events = JSON.parse(readFileSync(new URL('../../../events.json', import.meta.url), 'utf8'));

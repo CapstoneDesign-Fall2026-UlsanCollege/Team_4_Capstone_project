@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 async function openTrip(page) {
   await page.goto('/#/community/events/1');

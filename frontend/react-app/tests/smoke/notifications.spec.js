@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 const bell = page => page.getByRole('button', { name: /^Notifications(?:,|$)/ });
 const panel = page => page.getByRole('dialog', { name: 'Notifications', exact: true });

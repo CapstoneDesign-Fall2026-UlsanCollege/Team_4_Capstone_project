@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './sample-fixture.js';
 import {fileURLToPath} from 'node:url';
 
 async function enter(page) {
@@ -11,19 +11,19 @@ test('RSVP appears on first open, persists across reopening and cancels without 
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await enter(page);
   await expect(region(page)).toHaveCount(1);
-  await page.locator('#rsvp-btn-1').click();await expect(page.locator('#rsvp-btn-1')).toHaveText('Cancel RSVP');
+  await page.locator('#rsvp-btn-1').click();await expect(page.locator('#rsvp-btn-1')).toHaveText('Remove plan');
   await expect(region(page)).toContainText("You're planning to go.");
   await expect(region(page)).not.toContainText(/people going|person going/);
   await page.locator('#closeDashboardDialog').click();await expect(region(page)).toHaveCount(0);
   await page.locator('#eventsGrid [data-discover-event="1"]').click();
-  await expect(region(page)).toHaveCount(1);await expect(page.locator('#rsvp-btn-1')).toHaveText('Cancel RSVP');
+  await expect(region(page)).toHaveCount(1);await expect(page.locator('#rsvp-btn-1')).toHaveText('Remove plan');
   // Rebuilding the dialog to save the event keeps the RSVP and the trip planner available.
   await page.locator('#dashboardDialog [data-save="1"]').click();
-  await expect(region(page)).toHaveCount(1);await expect(page.locator('#rsvp-btn-1')).toHaveText('Cancel RSVP');
+  await expect(region(page)).toHaveCount(1);await expect(page.locator('#rsvp-btn-1')).toHaveText('Remove plan');
   await expect(page.getByRole('region',{name:'Plan your trip',exact:true})).toHaveCount(1);
   await page.reload();await page.locator('#landingDemo').click();
-  await expect(page.locator('#rsvp-btn-1')).toHaveText('Cancel RSVP');
-  await page.locator('#rsvp-btn-1').click();await expect(page.locator('#rsvp-btn-1')).toHaveText('Join event');
+  await expect(page.locator('#rsvp-btn-1')).toHaveText('Remove plan');
+  await page.locator('#rsvp-btn-1').click();await expect(page.locator('#rsvp-btn-1')).toHaveText('Plan to go');
   await expect(page.locator('#rsvp-btn-1')).toHaveAttribute('aria-pressed','false');
   expect(await page.evaluate(()=>document.querySelectorAll('#rsvp-styles').length)).toBe(1);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
@@ -38,12 +38,12 @@ test('blocked demo storage shows an unconfirmed save and retries the intended jo
     Storage.prototype.setItem=function(key,value){if(key==='cv_rsvps_demo'&&window.blockRsvp)throw new Error('blocked');return write.call(this,key,value);};
     localStorage.setItem('cv_rsvps','[1]');
   });
-  await enter(page);await expect(page.locator('#rsvp-btn-1')).toHaveText('Join event');
+  await enter(page);await expect(page.locator('#rsvp-btn-1')).toHaveText('Plan to go');
   await page.locator('#rsvp-btn-1').click();await expect(page.locator('#rsvp-btn-1')).toHaveText('Retry RSVP');
   await expect(region(page)).toContainText('not confirmed');
   await expect(page.locator('#rsvp-btn-1')).toHaveAttribute('aria-pressed','false');
   await page.evaluate(()=>{window.blockRsvp=false;});
-  await page.locator('#rsvp-btn-1').click();await expect(page.locator('#rsvp-btn-1')).toHaveText('Cancel RSVP');
+  await page.locator('#rsvp-btn-1').click();await expect(page.locator('#rsvp-btn-1')).toHaveText('Remove plan');
 });
 
 test('missing event data has no invented RSVP and event titles are handled as text',async({page})=>{
@@ -67,7 +67,7 @@ test('RSVP attachment does not depend on a trip planner mount or duplicate an ex
     window.campusRsvp.attach(body,window.campusEventCatalog[0]);
     window.campusRsvp.attach(body,window.campusEventCatalog[0]);
   });
-  await expect(region(page)).toHaveCount(1);await expect(page.locator('#rsvp-btn-1')).toHaveText('Join event');
+  await expect(region(page)).toHaveCount(1);await expect(page.locator('#rsvp-btn-1')).toHaveText('Plan to go');
 });
 
 test('an old account save cannot change the RSVP displayed for another account',async({page})=>{
@@ -89,6 +89,6 @@ test('an old account save cannot change the RSVP displayed for another account',
     window.rsvpFixture.attach(document.querySelector('#dashboardDialogBody'),window.campusEventCatalog[0]);
     window.finishOldRsvp();
   });
-  await expect(page.locator('#rsvp-btn-1')).toHaveText('Join event');
+  await expect(page.locator('#rsvp-btn-1')).toHaveText('Plan to go');
   await expect(region(page)).not.toContainText("You're planning to go.");
 });

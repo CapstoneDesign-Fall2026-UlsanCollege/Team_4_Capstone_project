@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './sample-fixture.js';
 
 for (const theme of ['light', 'dark']) {
   test(`event title and Close stay reachable after scrolling the trip planner in ${theme} mode`, async ({ page }, testInfo) => {
