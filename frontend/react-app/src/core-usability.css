@@ -17,6 +17,10 @@ html[data-theme="dark"] #appMain { --readable-muted: #d5c8e1; }
 #page-discover .discover-event-meta p { gap: 7px; }
 #page-discover .discover-sidebar-heading h2 { font-size: 15px; }
 #appMain .dashboard-empty { color: var(--readable-muted); font-size: 14px; line-height: 1.7; }
+#savedGrid .saved-event-actions { padding: 0 22px 18px; }
+#savedGrid .saved-event-details { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 44px; font-size: 13px; }
+#savedGrid .saved-event-details .lucide { width: 16px; height: 16px; }
+#savedGrid .saved-event-details:focus-visible { outline: 3px solid #159eaa; outline-offset: 3px; }
 
 #page-dashboard .surprise-button:disabled { color: var(--readable-muted); background: transparent; box-shadow: none; cursor: default; opacity: .7; }
 

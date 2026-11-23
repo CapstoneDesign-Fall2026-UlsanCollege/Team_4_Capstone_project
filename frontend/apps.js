@@ -90,9 +90,10 @@ function renderProfileDetails(){
 
 function eventCardMarkup(e, saved){
   const d = new Date(e.date + "T00:00:00");
-  return `<article class="event-card">${eventSourceMarkup(e)}
+  return `<article class="event-card" data-event-id="${e.id}">${eventSourceMarkup(e)}
     <div class="event-banner" style="background:${GRADIENTS(e.hue)}">${eventBannerMedia(e)}<button class="save-event ${saved.includes(e.id) ? "saved" : ""}" data-save="${e.id}" aria-label="${saved.includes(e.id) ? "Remove from saved" : "Save event"}">${saved.includes(e.id) ? "★" : "☆"}</button><div class="event-date"><strong>${d.getDate()}</strong><span>${d.toLocaleString("en-US",{month:"short"})}</span></div></div>
     <div class="event-body"><span class="event-tag">${e.interest}</span><h3>${dashboardText(e.title)}</h3><div class="event-meta"><span>🕐 ${dashboardText(e.time)} · ${d.toLocaleDateString("en-US",{weekday:"long"})}</span><span>📍 ${eventMapLinkMarkup(e)}</span><span>${dashboardText(e.desc)}</span></div><div class="event-host"><span class="host-avatar" style="background:${e.hue}">${dashboardText(e.host[0])}</span>Hosted by ${dashboardText(e.host)}</div></div>
+    <footer class="saved-event-actions"><button class="btn btn-primary saved-event-details" type="button" data-discover-event="${e.id}" aria-label="View details: ${discoverAttribute(e.title)}">View details<i data-lucide="arrow-right" aria-hidden="true"></i></button></footer>
   </article>`;
 }
 

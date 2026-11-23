@@ -88,6 +88,11 @@ test('map actions survive saving and appear through Saved and Dashboard', async 
   await page.locator('#closeDashboardDialog').click();
   await page.locator('#mainNav [data-page="saved"]').click();
   await expect(page.locator('#savedGrid .event-map-inline')).toHaveText(events[0].location);
+  await page.locator('#savedGrid').getByRole('button', { name: `View details: ${events[0].title}`, exact: true }).click();
+  await expect(page.locator('#dashboardDialogTitle')).toHaveText(events[0].title);
+  await expect(page.locator('#dashboardDialog .event-location-action')).toBeVisible();
+  await page.locator('#closeDashboardDialog').click();
+  await expect(page.locator('#page-saved')).toBeVisible();
   await page.locator('#mainNav [data-page="dashboard"]').click();
   await page.locator('#dashboardRecommendations .recommendation-open').first().click();
   await expect(page.locator('#dashboardDialog .event-location-action')).toBeVisible();
