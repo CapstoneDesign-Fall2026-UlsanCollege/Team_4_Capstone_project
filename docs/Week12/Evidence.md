@@ -17,7 +17,35 @@ G5-relogin-dashboard.png
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/21393c6d-a707-406b-8c94-e1efd4a6daca" />
 
 
+---
 
+---
 
+## Week 12 — UI Regression Testing — Ujjal Poudel
 
+**Tester:** `ujjalpoudel75`
+**Date:** November 23, 2026
 
+### Updated Discover Events
+![Updated Discover](Evidence/W12-05-updated-discover.png)
+
+### Event Filters
+![Event Filters](Evidence/W12-06-updated-filters.png)
+
+### Dashboard Search
+![Dashboard Search](Evidence/W12-07-dashboard-search.png)
+
+### Navigation
+![Navigation](Evidence/W12-08-navigation.png)
+
+### Mobile Navigation
+![Mobile Navigation](Evidence/W12-09-mobile-navigation.png)
+
+### Plan to go
+![Plan to go](Evidence/W12-10-plan-to-go.png)
+
+### Plan Persistence
+![Plan Persistence](Evidence/W12-11-plan-persistence.png)
+
+### Remove Plan
+![Remove Plan](Evidence/W12-12-remove-plan.png)
