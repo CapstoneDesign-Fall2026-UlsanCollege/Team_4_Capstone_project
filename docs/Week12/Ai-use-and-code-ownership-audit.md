@@ -26,7 +26,7 @@ Record one row for each relevant PR, commit, or file. If no AI was used for the 
 Use the real structure and needs of your project. Frontend, backend/API, data/storage, UI/UX/accessibility, testing/integration, and deployment are examples; your project may combine, split, or name areas differently. Area stewardship keeps context and checks visible. It does not give one person exclusive control of files or reviews.
 
 | Area in this project | Repository boundary / responsibility | Steward(s) matched to current strengths | Backup / learning partner | Health, documentation, or review check | Evidence link |
-|---|---|---|---|---|
+|---|---|---|---|---|---|
 | Frontend / UI | `frontend/react-app/` — React pages, components, navigation, and user interactions | Frontend contributors — team confirmation | Team member backup — team confirmation | Application pages, navigation, responsive behavior, and component review | Repository frontend |
 | Backend / authentication | Firebase authentication and application service integration | Backend contributors — team confirmation | Team member backup — team confirmation | Authentication flow and service integration review | Repository / related issues |
 | Data / storage | Firestore event and club data, published records, and data integration | Data/backend contributors — team confirmation | Team member backup — team confirmation | Verify published data and consistency between database and displayed information | Week 11 published-event verification |
