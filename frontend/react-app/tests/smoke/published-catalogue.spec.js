@@ -20,7 +20,6 @@ test.beforeEach(async ({ page }) => {
 
 test('published catalogue shows the current week and the actual weekend', async ({ page }, testInfo) => {
   await page.locator('#mainNav [data-page=dashboard]').click();
-  await page.locator('#dashboardMore > summary').click();
   await expect(page.locator('#weekRange')).toHaveText('This week · Nov 2–Nov 8');
   await expect(page.locator('#eventsWeekNote')).toHaveText('3 in this week');
   await expect(page.locator('#weekendNote')).toHaveText('2 campus events this weekend.');
