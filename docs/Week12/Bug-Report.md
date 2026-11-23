@@ -22,7 +22,9 @@ On November 18, Ujjal reported that Google re-login on the exact candidate displ
 
 - Boundary: [Google login and session handling](../../frontend/apps.js), [Firebase client project](../../frontend/react-app/src/firebase.js) and Firebase Authentication authorized domains.
 - [Current area map](../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map); [existing roadmap](../Week11/Final%20demo%20road%20map.md).
-- Coordinator/implementation support: `prachi2061`. Existing QA support: `ujjalpoudel75`; independent auth backup: `DevyanaCT`. Availability for the new run is pending.
+- Coordinator/implementation support: `prachi2061`. Existing QA support: `ujjalpoudel75`. Availability for the new run is pending.
+- **Independent authentication backup — `DevyanaCT`:** Available to support the Week 12 Google Sign-In peer retest if assigned. No additional candidate-specific verification result is claimed in this document.
+
 
 ## Reproduction and retest conditions
 
