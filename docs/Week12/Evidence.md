@@ -49,3 +49,26 @@ G5-relogin-dashboard.png
 
 ### Remove Plan
 ![Remove Plan](Evidence/W12-12-remove-plan.png)
+
+---
+
+## Week 12 — Navigation Icon Regression Testing (PR #202)
+
+**Tester:** `ujjalpoudel75`
+**Date:** November 23, 2026
+**Website:** https://campusvibe-theta.vercel.app/
+
+### Desktop Navigation
+![Desktop Navigation](Evidence/W12-13-updated-header-icons.png)
+
+### Mobile Navigation
+![Mobile Navigation](Evidence/W12-14-mobile-header-icons.png)
+
+### Result
+- Desktop navigation icons and tooltips: PASS
+- Navigation between pages: PASS
+- Mobile navigation at 390 x 844: PASS
+- No horizontal overflow observed: PASS
+
+**Status:** Manual testing completed.
+
