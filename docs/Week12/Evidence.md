@@ -81,12 +81,12 @@ G5-relogin-dashboard.png
 **Candidate:** `e5f1888aa4600ac2013d6bda34a55554ba68195f`
 
 ### G1 — Google Account Selection
-![Google Popup](Evidence/W12-G6-google-popup-retry-ujjal(1).png)
+![Google Popup](Evidence/W12-G6-google-popup-retry-ujjal.png)
 
 **Observation:** Google account-selection popup opened successfully.
 
 ### G4 — Signed-Out Login Page
-![Login Page](Evidence/W12-G4-logout-refresh-ujjal(1).png)
+![Login Page](Evidence/W12-G4-logout-refresh-ujjal.png)
 
 **Observation:** CampusVibes Login page displayed. Logout-and-refresh result documented separately in the manual QA report.
 
