@@ -63,7 +63,14 @@ https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/
 
 **Independent teammate result:** `tulseyy8848` — 6 PASS, 0 FAIL, documented separately in #177.
 
-**My authentication screenshots:** Not yet attached.
+**My authentication screenshots:** Available evidence uploaded to [Week 12 Evidence.md](Evidence.md#week-12--google-authentication-evidence-ujjal).
+
+- G1 — Google account-selection popup: Screenshot attached.
+- G4 — Signed-out Login page: Screenshot attached (supporting visual evidence only).
+- G2, G3, G5 and G6: Results documented through manual testing; no individual screenshots attached.
+
+**Evidence limitation:** The G4 screenshot alone does not establish that refresh occurred. The complete test result is recorded separately in the manual QA report.
+
 
 **Other limitations:**
 - Browser version and popup recovery duration were not recorded.
