@@ -72,3 +72,28 @@ G5-relogin-dashboard.png
 
 **Status:** Manual testing completed.
 
+---
+
+## Week 12 — Google Authentication Evidence (Ujjal)
+
+**Tester:** `ujjalpoudel75`
+**Date:** November 23, 2026
+**Candidate:** `e5f1888aa4600ac2013d6bda34a55554ba68195f`
+
+### G1 — Google Account Selection
+![Google Popup](Evidence/W12-G6-google-popup-retry-ujjal(1).png)
+
+**Observation:** Google account-selection popup opened successfully.
+
+### G4 — Signed-Out Login Page
+![Login Page](Evidence/W12-G4-logout-refresh-ujjal(1).png)
+
+**Observation:** CampusVibes Login page displayed. Logout-and-refresh result documented separately in the manual QA report.
+
+### Testing Summary
+
+**G1-G6 Manual Testing:** 6 PASS, 0 reported FAIL.
+
+These screenshots provide supporting visual evidence for selected authentication states. The complete test steps and results are recorded in Peer-Test-Notes.md and Issue #167.
+
+
