@@ -52,13 +52,8 @@ Keep this section inside the single shared team report. Each student must enter 
 
 | Blocker/risk | Owner | Next action |
 |---|---|---|
-
-## Blockers or risks
-
-| Blocker/risk | Owner | Next action |
-|---|---|---|
 | Google Sign-In was previously BLOCKED in Week 11. Following the Firebase authorized-domain repair, Week 12 targeted retesting reported 6 PASS, 0 FAIL by `ujjalpoudel75` and 6 PASS, 0 FAIL by `tulseyy8848`. No authentication failure was reported during these retests. | `ujjalpoudel75` — Primary QA; `prachi2061` — Implementation coordinator | Review the completed evidence in #167 and #177, reassess the original P1 verification risk, and record the final issue disposition. |
-| Ujjal's own Google authentication screenshots are not yet attached, although the manual results and peer-test notes are documented. | `ujjalpoudel75` | Attach redacted authentication screenshots if available, or explicitly retain the evidence limitation in the final QA handoff. |
+| Primary QA authentication screenshot coverage is partial. G1 Google popup and G4 signed-out Login page screenshots are linked; individual screenshots for G2, G3, G5 and G6 were not captured. | `ujjalpoudel75` — Primary QA | Retain this evidence limitation. G1-G6 manual results are documented in Peer-Test-Notes.md and #167; available screenshots are linked in Evidence.md. |
 | Final MVP approval remains conditional. Targeted authentication results do not establish complete MVP readiness. | `prachi2061` — Team coordinator | Review remaining team-level verification and approval requirements before recording the final decision. |
 
 ## Decision record
