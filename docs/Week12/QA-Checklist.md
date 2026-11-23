@@ -41,9 +41,9 @@ These are Week 11 results. The table below records the new Week 12 check.
 
 - [x] Record exact candidate/setup and initial session conditions.
 - [x] Execute G1–G6 and write expected/actual results individually.
-- [ ] Save redacted current proof and complete [peer notes](Peer-Test-Notes.md).
-- [ ] If a mismatch appears, repeat that condition once where safe and retain both observations. No mismatch was observed during this run.
-- [ ] Update the existing issue with the result and a bounded next action.
+- [x] Save available redacted proof and complete peer notes.
+- [x] Update the existing issue with the result and a bounded next action.
+- [ ] Repeat a mismatch if one is observed — Not applicable; no mismatch was observed.
 
 ## Optional automated observation
 
@@ -65,4 +65,6 @@ The original work priority was **P1, verification risk**, because a current non-
 
 The Google sign-in retest is successfully completed by the non-author tester. The remaining actions are to attach redacted evidence, complete peer notes, and update the existing issue with the test result and next action. Priority should be reviewed based on the new evidence. Severity and priority remain separate.
 
-**Current disposition:** Week 12 targeted manual Google sign-in retest completed successfully by `tulseyy8848` on November 23, 2026. All six checks passed. This is not a whole-MVP all-clear and does not replace the automated observation or other required verification.
+
+**Current disposition:** Week 12 targeted manual Google Sign-In retesting completed successfully by `tulseyy8848` on November 23, 2026, with 6 PASS and 0 FAIL. No new authentication mismatch was observed. Available evidence and issue updates should be linked to the tester's own records. The original P1 verification risk can be reassessed by the implementation owner based on the successful post-fix retest. This result does not constitute whole-MVP approval.
+
