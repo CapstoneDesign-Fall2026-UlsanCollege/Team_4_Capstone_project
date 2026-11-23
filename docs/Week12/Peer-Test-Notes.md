@@ -1,45 +1,97 @@
-# Week 12 Peer Test Notes
 
-**Project:** CampusVibes, Team 4. **Prepared:** November 20, 2026. **Status:** NOT STARTED.
+# Week 12 — Independent Peer Test Notes
 
-**Testing person:** pending the actual reviewer's own entry. **Actual test date/setup:** pending.
+**Project:** CampusVibes — Team 4
+**Tester:** `ujjalpoudel75`
+**Role:** QA and Core Integration
+**Test Date:** November 23, 2026
+**Status:** TARGETED MANUAL RETEST COMPLETED
 
-**Proposed non-author:** `ujjalpoudel75` through the existing QA role; availability and acceptance for this run are not yet recorded. Prachi coordinates the handoff. This form does not supply another student's test results.
+**Candidate SHA:** `e5f1888aa4600ac2013d6bda34a55554ba68195f`
+**Deployment:** https://campusvibe-fnh5f79me-campus-vibe.vercel.app/
+**Browser:** Google Chrome (version not recorded)
+**Test Type:** Independent manual authentication retest
 
-## What to try
+## 1. Week 11 Finding
 
-Follow G1-G6 in the [targeted QA checklist](QA-Checklist.md) before receiving a full implementation walkthrough. Use the exact candidate `e5f1888aa4600ac2013d6bda34a55554ba68195f` at [its deployment URL](https://campusvibe-fnh5f79me-campus-vibe.vercel.app/).
+During Week 11, Google Sign-In failed on the selected CampusVibes MVP candidate.
 
-Record the original [Week 11 failure and repair](Bug-Report.md) beside the new result. Keep the [one overall manual confirmation](../Week11/Evidence/prachi-google-manual-pass-2026-11-18.md) separate from the new peer observations.
+**Expected:** Google authentication should open the Dashboard.
 
-## Area map and handoff
+**Actual:** The website displayed a Google Sign-In configuration error.
 
-- Area/boundary: auth/navigation -> Firebase Authentication configuration and session state.
-- [Current area map](../Week10/ai-use-and-code-ownership-audit.md#codebase-area-map); support is available from the existing QA/implementation roles.
-- Could you locate the exact URL, steps and check without asking the steward for credentials or access? **Pending reviewer entry.**
-- Setup friction and cross-area dependency observed: **Pending reviewer entry.**
+**Original Severity:** Major
+**Original Priority:** P1 — Verification risk
+**Previous Result:** BLOCKED
 
-## Actual observations
+## 2. Repair
 
-| Field | Reviewer entry |
-|---|---|
-| Browser/version, device or viewport and candidate SHA | Pending |
-| Starting Google and CampusVibes session state | Pending |
-| G1-G6 expected/actual results and cancellation delay | Pending |
-| What worked | Pending |
-| What confused the reviewer | Pending |
-| Mismatch reproduced / not reproduced / not tested / post-fix retest passed | NOT TESTED |
-| Redacted current screenshots or recording | Pending |
-| One useful suggestion inside the frozen scope | Pending |
+`prachi2061` added the missing candidate hostname to Firebase authorized domains.
 
-## Problem and disposition
+The frozen candidate source code was not modified for this repair.
 
-| Observed problem | Severity | P-level and reason | Existing/new issue and next owner |
+## 3. Week 12 — Independent Testing Results
+
+| ID | Test Case | Actual Result | Status |
 |---|---|---|---|
-| None evaluated; target not run | Unassigned for a new result | P1 inherited verification risk; reconsider from the new evidence | #167 / #177; actual next action pending |
+| G1 | Open Google account selection | Google account selection opened | PASS |
+| G2 | Complete Google login | Authenticated Dashboard opened | PASS |
+| G3 | Refresh while logged in | Session remained active | PASS |
+| G4 | Logout and refresh | Website remained logged out after refresh | PASS |
+| G5 | Google re-login | Dashboard opened after re-login | PASS |
+| G6 | Cancel Google popup and retry | Login page recovered, retry worked and Dashboard opened | PASS |
 
-The reviewer adds their own conclusion and proof to #167/#177. A blank form is not an independent check. Keep account addresses, private Google screens, passwords and tokens out of published proof.
+**Testing Summary: 6 PASS, 0 reported FAIL.**
 
-## Week 13 handoff trial
+**Cancellation recovery time:** Not measured.
 
-Reserved for the later required handoff: access/setup path, area/check located, ability to run without team guidance, and actual result/friction. No Week 13 trial is claimed here.
+## 4. Observations
+
+- Google authentication worked after the Firebase configuration repair.
+- Dashboard access and session persistence worked.
+- Logout and refresh did not restore the previous session.
+- Google popup cancellation did not prevent a new login attempt.
+- No mismatch was reported during these checks.
+
+## 5. Evidence and Limitations
+
+**My detailed QA report:**
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167#issuecomment-7088936229
+
+**My handoff update:**
+https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177#issuecomment-7088958749
+
+**Independent teammate result:** `tulseyy8848` — 6 PASS, 0 FAIL, documented separately in #177.
+
+**My authentication screenshots:** Not yet attached.
+
+**Other limitations:**
+- Browser version and popup recovery duration were not recorded.
+- This is a targeted authentication retest, not a complete MVP regression test.
+- No new backend, Firebase rules or application code changes were made by the tester.
+
+## 6. QA Disposition
+
+**Original Finding:** Google Sign-In BLOCKED
+
+**Current Finding:** Post-repair authentication retest PASS for the tested scope.
+
+**Severity:** Originally Major
+**Priority:** Originally P1; reassessment requested based on completed retest.
+
+**Next Owner / Action:**
+- `ujjalpoudel75`: Complete evidence links and Week 12 report.
+- `prachi2061`: Review final authentication QA disposition and handoff.
+- Team: Retain conditional MVP approval boundaries.
+
+## 7. Week 13 Handoff Trial
+
+Not tested. To be completed during the Week 13 handoff.
+
+## Conclusion
+
+The Week 11 Google Sign-In failure was followed by a Firebase configuration repair and a successful Week 12 targeted manual retest.
+
+**Final Targeted Result: 6 PASS, 0 reported FAIL.**
+
+**Status:** RETEST COMPLETED — AUTHENTICATION SCREENSHOT EVIDENCE AND FINAL TRIAGE REVIEW PENDING.
