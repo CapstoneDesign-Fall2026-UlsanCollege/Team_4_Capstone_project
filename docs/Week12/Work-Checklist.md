@@ -37,7 +37,7 @@ Follow the Week 11 candidate Google sign-in hostname repair through to a current
 
 - [ ] For a confirmed mismatch, safely repeat the same condition once and update #167/#177 with proof, separate severity and P-level, owner and next check.
 - [ ] For a genuine blocker, record the exact failing step, available path, owner and next discriminating check.
-- [ ] For a successful post-fix check, link before/repair/after evidence and limit the conclusion to the authentication cases exercised.
+- [x] For a successful post-fix check, link before/repair/after evidence and limit the conclusion to the authentication cases exercised.
 - [ ] Do not call an old bug fixed solely because it did not recur under different conditions.
 - [ ] Keep P1 until current evidence justifies a change. P0 applies if the promised path is actually blocked; P2 follows only after the inherited target has a supported disposition.
 - [ ] Open a fix PR only if a new bounded change is justified. Use the course [work policy](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/800d105afab78813afa42cd84ebfc27baa527eea/student-starter-kit/docs/project-work-policy.md) and [PR note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/800d105afab78813afa42cd84ebfc27baa527eea/student-starter-kit/templates/pr-with-ai-use-note.md).
@@ -62,6 +62,54 @@ Follow the Week 11 candidate Google sign-in hostname repair through to a current
 |---|---|---|
 | Arrange and record the targeted peer retest | Prachi coordinates; Ujjal proposed through the existing QA role; Devyana is the existing auth QA backup | Reviewer acceptance, actual QA results and peer note |
 | Decide whether the inherited validation risk can change priority | Prachi with the actual tester | New proof linked to #167/#177; no priority change from documentation alone |
+
+
+## Optional Week 12 Stretch Work — DevyanaCT
+
+**Activity:** Trip Planner Refactor and Automated Regression Testing  
+**Date:** November 24, 2026  
+**Tester:** `DevyanaCT`  
+**Imlemented owner:** `prachi2026`
+**Environment:** Separate local copy, `CampusVibes-Stretch-QA`  
+**Branch:** `devyana-safe-stretch`  
+**Baseline SHA:** `2f455f20aad660c4cccb4a50622f2f359145c4a4`  
+**Status:** Local verification completed — team review pending
+
+### Stretch Work Checklist
+
+- [x] Recorded the original Trip Planner automated-testing baseline — 16 PASS, 0 FAIL.
+- [x] Added a reusable `createGoogleMapsUrl()` helper in `frontend/react-app/src/event-maps.js`.
+- [x] Updated `getEventMapLinks()` to use the helper for Google Maps search and directions links.
+- [x] Added an automated regression test verifying organizer-address consistency.
+- [x] Reran Trip Planner tests — 17 PASS, 0 FAIL.
+- [x] Ran Event Discovery regression tests — 29 PASS, 0 FAIL.
+- [x] Verified the local Vite production build — PASS.
+- [x] Verified `git diff --check` — PASS.
+- [x] Captured before/after testing and source-diff evidence.
+- [x] Documented the results in a separate GitHub issue.
+- [x] Preserved the updated files in a separate local backup.
+- [x] Kept the team's shared application code unchanged.
+- [ ] Obtain frontend-owner review if the team chooses to adopt the refactor.
+- [ ] Merge or deploy changes — not requested or performed.
+
+### Results and Limitations
+
+| Verification | Result |
+|---|---|
+| Trip Planner baseline | 16 PASS, 0 FAIL |
+| Trip Planner after refactor | 17 PASS, 0 FAIL |
+| Event Discovery regression | 29 PASS, 0 FAIL |
+| Final automated verification | 46 PASS, 0 FAIL |
+| Local production build | PASS |
+| Git whitespace check | PASS |
+| Shared repository integration | Not performed |
+
+**Scope boundary:** This was a limited local refactor of `getEventMapLinks()`. The separate `getJourneyLinks()` function was not modified. No post-refactor live browser verification was performed.
+
+**Evidence:** [Week 12 Trip Planner Issue](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/209)
+
+**Next action:** Preserve the local branch and evidence. Request review before any shared-repository integration. This optional work does not change the frozen MVP promise or the Google authentication QA disposition.
+
 
 ## Course sources
 
