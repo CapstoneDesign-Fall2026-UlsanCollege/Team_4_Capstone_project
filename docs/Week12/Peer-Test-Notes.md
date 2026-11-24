@@ -2,14 +2,25 @@
 # Week 12 — Independent Peer Test Notes
 
 **Project:** CampusVibes — Team 4
+
 **Tester:** `ujjalpoudel75`
+
 **Role:** QA and Core Integration
+
 **Test Date:** November 23, 2026
+
 **Status:** TARGETED MANUAL RETEST COMPLETED
 
 **Candidate SHA:** `e5f1888aa4600ac2013d6bda34a55554ba68195f`
+
 **Deployment:** https://campusvibe-fnh5f79me-campus-vibe.vercel.app/
-**Browser:** Google Chrome (version not recorded)
+
+**Browser:** Google Chrome on Windows (64-bit).
+
+**Current Verified Browser Version:** 158.0.8127.89 (November 24, 2026).
+
+**Browser Version During November 23 Testing:** Not recorded; Chrome was updated before the current version was checked.
+
 **Test Type:** Independent manual authentication retest
 
 ## 1. Week 11 Finding
