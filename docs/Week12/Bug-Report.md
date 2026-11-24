@@ -1,8 +1,15 @@
 # Candidate Google Sign In Follow Up
 
-**Team:** 4, CampusVibes. **Class:** November 19, 2026. **Prepared:** November 20, 2026. **Due:** November 25, 2026, end of day Asia/Seoul.
+**Team:** 4, CampusVibes.
 
-**Tracking:** existing [#167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167) and [#177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177). **Status:** Week 11 hostname repair delivered; Week 12 targeted manual post-fix retests completed on the named candidate: 6 PASS, 0 reported FAIL by `ujjalpoudel75` and 6 PASS, 0 FAIL by `tulseyy8848`. The carried authentication P1 is cleared for G1–G6; final whole-MVP approval remains pending. This follows an existing failure and does not create a duplicate bug.
+**Class:** November 19, 2026.
+
+**Prepared:** November 20, 2026.
+
+**Due:** November 25, 2026, end of day Asia/Seoul.
+
+**Tracking:**
+existing [#167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167) and [#177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177). **Status:** Week 11 hostname repair delivered; Week 12 targeted manual post-fix retests completed on the named candidate: 6 PASS, 0 reported FAIL by `ujjalpoudel75` and 6 PASS, 0 FAIL by `tulseyy8848`. The carried authentication P1 is cleared for G1–G6; final whole-MVP approval remains pending. This follows an existing failure and does not create a duplicate bug.
 
 ## Summary and evidence
 
