@@ -59,12 +59,12 @@ npm run test:google-signin-live --workspace frontend/react-app
 
 ## Triage and disposition
 
-The original work priority was **P1, verification risk**, because a current non-author result was still required for the selected target. The prior Google-path failure was assessed as **Major**.
+The original work priority was **P1, verification risk**, because a current non-author result was required for the selected target. Following the successful Week 12 retest and November 24 reassessment, the scoped authentication verification risk is cleared. The original severity was assessed as **Major**; severity and priority remain separate.
 
 **Week 12 retest result:** All six targeted manual checks passed (6 PASS, 0 FAIL). No new Week 12 mismatch was observed during this test.
 
-The Google sign-in retest is successfully completed by the non-author tester. Available redacted evidence, peer notes, and issue updates have been recorded as completed in the checklist. Any outstanding evidence links should be checked against the tester's original records. The implementation owner may reassess the original P1 verification risk based on the successful retest. Priority should be reviewed based on the new evidence. Severity and priority remain separate.
+The Week 12 targeted manual retest was completed by the non-author tester, `tulseyy8848`, on November 23, 2026. The tester recorded 6 PASS and 0 FAIL and updated the existing issue with the result. The tester's November 23 screenshots must be attributed separately to `tulseyy8848` in Evidence.md; Ujjal Poudel's independent test notes and screenshots remain attributed to `ujjalpoudel75`.
 
+**Current disposition:** Week 12 targeted manual Google Sign-In retesting was completed successfully by `tulseyy8848` on November 23, 2026, with 6 PASS and 0 FAIL. On November 24, 2026, `prachi2061` completed the targeted P1 reassessment and accepted the G1–G6 authentication recovery within the tested candidate scope. The scoped authentication verification risk is cleared. This does not constitute whole-MVP approval; final team approval and accepted-limitations confirmation remain pending.
 
-**Current disposition:** Week 12 targeted manual Google Sign-In retesting completed successfully by `tulseyy8848` on November 23, 2026, with 6 PASS and 0 FAIL. No new authentication mismatch was observed. Available evidence and issue updates should be linked to the tester's own records. The original P1 verification risk can be reassessed by the implementation owner based on the successful post-fix retest. This result does not constitute whole-MVP approval.
 
