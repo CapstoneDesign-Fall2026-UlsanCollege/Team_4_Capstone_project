@@ -30,7 +30,7 @@ On November 18, Ujjal reported that Google re-login on the exact candidate displ
 
 Use SHA `e5f1888aa4600ac2013d6bda34a55554ba68195f` and [its exact URL](https://campusvibe-fnh5f79me-campus-vibe.vercel.app/). Record normal-browser version, signed-in Google state and CampusVibes signed-out starting state. Follow G1-G6 in the [QA checklist](QA-Checklist.md).
 
-**Expected:** the repaired candidate completes Google entry, session refresh, logout, re-login and safe cancellation/retry. **Week 12 actual:** both named testers report all six targeted checks PASS on the exact candidate after the repair; see their linked final records below. Browser versions were not recorded and popup recovery duration was not measured. The original hostname omission must not be recreated in production merely to reproduce the old failure.
+**Expected:** the repaired candidate completes Google entry, session refresh, logout, re-login and safe cancellation/retry. **Week 12 actual:** both named testers report all six targeted checks PASS on the exact candidate after the repair; see their linked final records below.Environment clarification (November 24, 2026): Google Chrome Version 158.0.8127.89 (Official Build, 64-bit) was confirmed up to date on November 24, after the November 23 retest. The exact browser version used during the November 23 retest was not recorded. Popup cancellation recovery duration was not measured. The original hostname omission must not be recreated in production merely to reproduce the old failure.
 
 ## Current and next proof
 
