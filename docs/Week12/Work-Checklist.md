@@ -41,7 +41,9 @@ Follow the Week 11 candidate Google sign-in hostname repair through to a current
 - [ ] Keep P1 until current evidence justifies a change. P0 applies if the promised path is actually blocked; P2 follows only after the inherited target has a supported disposition.
 - [ ] Open a fix PR only if a new bounded change is justified. Use the course [work policy](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/800d105afab78813afa42cd84ebfc27baa527eea/student-starter-kit/docs/project-work-policy.md) and [PR note](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/course-materials/blob/800d105afab78813afa42cd84ebfc27baa527eea/student-starter-kit/templates/pr-with-ai-use-note.md).
 
-**Week 12 actual disposition — November 23, 2026:** The targeted post-repair Google Sign-In verification completed successfully on the exact candidate deployment. `ujjalpoudel75` reported 6 PASS, 0 FAIL, and `tulseyy8848` independently reported 6 PASS, 0 FAIL. No new authentication mismatch was reported. The original Major severity remains a historical assessment; the P1 verification risk is ready for reassessment by `prachi2061`. This result does not establish whole-MVP approval or justify a new code fix.
+**Week 12 actual disposition — November 23–24, 2026:** The targeted post-repair Google Sign-In verification completed successfully on the exact frozen candidate deployment. `ujjalpoudel75` reported 6 PASS, 0 FAIL, and `tulseyy8848` independently reported 6 PASS, 0 FAIL. On November 24, `prachi2061` completed the P1 reassessment and cleared the scoped authentication verification risk. No new authentication mismatch was reported. Final whole-MVP approval and accepted-limitations confirmation remain separate pending team decisions.
+
+This result does not establish whole-MVP approval or justify a new code fix.
 
 ## Close the evidence loop
 
