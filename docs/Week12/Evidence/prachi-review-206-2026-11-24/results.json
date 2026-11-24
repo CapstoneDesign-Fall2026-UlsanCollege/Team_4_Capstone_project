@@ -1,0 +1,136 @@
+{
+  "checkedAt": "2026-11-24T04:20:28.459Z",
+  "testedRevision": "bda69b5efe85f7a7f7c77bcb6d6a8d3aea30bbe0",
+  "method": "Automated Chrome with real local Auth and Firestore Emulators",
+  "project": "demo-campusvibe-feed",
+  "target": "http://127.0.0.1:5397/",
+  "authHost": "127.0.0.1:19599",
+  "dbHost": "127.0.0.1:18580",
+  "pass": 4,
+  "fail": 0,
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "storedBrowserInterest": "Tech",
+      "status": "PASS",
+      "before": {
+        "query": "matching Music fixture",
+        "category": "Music",
+        "navigation": "preserved within loaded page",
+        "emptyBoundary": "Music + saved-only shows empty state"
+      },
+      "after": {
+        "query": "",
+        "category": "Tech",
+        "date": "upcoming",
+        "source": "all",
+        "sort": "date",
+        "savedOnly": false,
+        "session": "same fictional member",
+        "savedEvents": 1,
+        "publishedFixtureCards": 1
+      },
+      "clearFiltersCategory": "all",
+      "beforeScreenshot": "before-1440-saved-Tech.png",
+      "afterScreenshot": "after-1440-saved-Tech.png"
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "storedBrowserInterest": "none",
+      "status": "PASS",
+      "before": {
+        "query": "matching Music fixture",
+        "category": "Music",
+        "navigation": "preserved within loaded page",
+        "emptyBoundary": "Music + saved-only shows empty state"
+      },
+      "after": {
+        "query": "",
+        "category": "all",
+        "date": "upcoming",
+        "source": "all",
+        "sort": "date",
+        "savedOnly": false,
+        "session": "same fictional member",
+        "savedEvents": 1,
+        "publishedFixtureCards": 2
+      },
+      "clearFiltersCategory": "all",
+      "beforeScreenshot": "before-1440-no-saved-interest.png",
+      "afterScreenshot": "after-1440-no-saved-interest.png"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "storedBrowserInterest": "Tech",
+      "status": "PASS",
+      "before": {
+        "query": "matching Music fixture",
+        "category": "Music",
+        "navigation": "preserved within loaded page",
+        "emptyBoundary": "Music + saved-only shows empty state"
+      },
+      "after": {
+        "query": "",
+        "category": "Tech",
+        "date": "upcoming",
+        "source": "all",
+        "sort": "date",
+        "savedOnly": false,
+        "session": "same fictional member",
+        "savedEvents": 1,
+        "publishedFixtureCards": 1
+      },
+      "clearFiltersCategory": "all",
+      "beforeScreenshot": "before-390-saved-Tech.png",
+      "afterScreenshot": "after-390-saved-Tech.png"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "storedBrowserInterest": "none",
+      "status": "PASS",
+      "before": {
+        "query": "matching Music fixture",
+        "category": "Music",
+        "navigation": "preserved within loaded page",
+        "emptyBoundary": "Music + saved-only shows empty state"
+      },
+      "after": {
+        "query": "",
+        "category": "all",
+        "date": "upcoming",
+        "source": "all",
+        "sort": "date",
+        "savedOnly": false,
+        "session": "same fictional member",
+        "savedEvents": 1,
+        "publishedFixtureCards": 2
+      },
+      "clearFiltersCategory": "all",
+      "beforeScreenshot": "before-390-no-saved-interest.png",
+      "afterScreenshot": "after-390-no-saved-interest.png"
+    }
+  ],
+  "limits": [
+    "Fictional local accounts/events; no production changes.",
+    "No manual terminal-error or Retry check was performed.",
+    "Not a full frozen-candidate or deployed Google-auth retest."
+  ],
+  "sourceHashes": {
+    "frontend/apps.js": "9bdb2dcda1a347f3359c727f9812fbcb5c95bb078f346c265af6b1e81e81083c",
+    "frontend/discover.js": "6f6f332d2903e3126cabc0e12a6a1869a17548d21c16b17bc0ad23b7bde0b291",
+    "frontend/react-app/src/event-discovery.js": "0d852f32eb330bb21d0decc499f2d9a1bc9d95ca082c7bf6e7f137a5c960cdb1",
+    "frontend/react-app/src/published-events-store.js": "cbb372984a8d4b44a34f925e353a6c790d8211a4550f8afca45c243d2c989a9d"
+  }
+}
