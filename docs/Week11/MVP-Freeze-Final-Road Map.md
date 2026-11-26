@@ -5,7 +5,8 @@
 **Team:** 4  
 **Course:** Capstone Design — Fall 2026  
 **Originally Prepared:** November 12, 2026  
-**Updated:** November 18, 2026  
+**Updated:** November 26, 2026
+**Latest Progress:** Week 12 QA and final handoff follow-up — see Section 13
 **Sprint:** Sprint 2 — MVP Freeze and Final Demo Preparation  
 **Candidate Tag:** `mvp-candidate-2026-11-18`  
 **Candidate SHA:** `e5f1888aa4600ac2013d6bda34a55554ba68195f`  
@@ -37,10 +38,10 @@ The frozen MVP focuses on five core areas.
 
 | Area | Required Functionality | November 18 Status |
 |---|---|---|
-| Authentication | Verified login, logout, email verification, password recovery and session management | PARTIAL PASS — Candidate Google re-login retest and session confirmation remain |
+| Authentication | Verified login, logout, email verification, password recovery and session management | WEEK 12 FOLLOW-UP — Targeted Google retesting PASS (6 primary QA, 6 independent QA); see Section 13 |
 | Dashboard | Student Dashboard and navigation | PASS — Candidate regression |
 | Event Discovery | Event listings, search, categories, empty-search recovery and event details | PASS — Documented candidate checks |
-| Firestore Integration | Published-event querying, display and recovery | PARTIALLY VERIFIED — Local error-handling automation PASS; independent acceptance pending |
+| Firestore Integration | Published-event querying, display and recovery | WEEK 12 FOLLOW-UP — Independent local automation 18 PASS; manual permission-denied UI PASS; see Section 13 |
 | UI/UX | Responsive interface, theme and accessible controls | Previous theme tests PASS; final-demo checks remain |
 
 ### Frozen Core Demonstration
@@ -453,11 +454,11 @@ The selected MVP candidate has undergone substantial verification and has a link
 | Candidate automated unit/browser checks | PASS |
 | Main event-discovery journey | PASS — Documented candidate checks |
 | Previous authentication verification | PASS — Earlier scenarios |
-| Candidate Google re-login | RETEST REQUIRED |
-| Candidate session behavior | PENDING CONFIRMATION |
+| Candidate Google re-login | PASS — Targeted Week 12 retest; evidence #167/#177 |
+| Candidate session behavior | PASS within targeted Week 12 retest scope; broader approval separate |
+| Independent Firestore runtime acceptance | Independent local automated QA PASS; partial manual verification; final acceptance separate |
 | Firestore published-event mapping | PASS |
 | Firestore local error/Retry automation | PASS — Reported |
-| Independent Firestore runtime acceptance | PENDING |
 | Local backup setup | PASS |
 | Independent backup review | PASS |
 | Theme and notification technical testing | PASS — Previous scope |
@@ -485,9 +486,9 @@ Conditional approval does not mean every remaining test has passed.
 
 | Risk / Limitation | Impact | Responsible Member / Action |
 |---|---|---|
-| Google re-login requires retest | Candidate provider authentication not fully confirmed | `ujjalpoudel75` — Retest after hostname repair |
+| Google authentication follow-up | Targeted Week 12 Google retests passed; final whole-MVP approval remains separate | `prachi2061` — Review final evidence and release conditions |
+| Firestore remaining limitations | Local automated 18 PASS, manual permission-denied UI PASS; manual Retry click/terminal callback not performed | `DevyanaCT` / `prachi2061` — Record formal acceptance or further testing decision |
 | Session refresh outcomes pending | Final candidate session persistence not fully verified | `ujjalpoudel75` — Confirm login and logout refresh |
-| Independent Firestore runtime review pending | Local automation has not been independently accepted | `DevyanaCT` — Review Prachi's runtime receipt |
 | Search/category resets after refresh | Expected persistence behavior not decided | Team / QA — Confirm requirement |
 | Five high-severity npm dependency findings | Security impact not yet assessed | Coordinator / Implementation Owner — Review findings |
 | Source explanation pending | Required human ownership evidence remains open | `prachi2061` — Complete source explain-back |
@@ -625,6 +626,218 @@ Conditional approval does not mean every remaining test has passed.
 - [x] Ujjal's candidate regression report submitted — PARTIAL PASS.
 - [x] Candidate hostname authorization update documented.
 - [x] Conditional team approval linked in Issue #177.
+
+## 13. Week 12 — QA Progress, UI Improvements and Final Handoff Update
+
+**Update Date:** November 26, 2026  
+**Project:** CampusVibes — Team 4  
+**Sprint:** Sprint 3 — QA and Handoff  
+**Release Status:** CONDITIONALLY APPROVED — Final MVP approval remains a separate team decision
+
+### A. Objective
+
+Document Week 12 verification, improvements and remaining final-demo requirements without changing the original November 18 frozen MVP candidate or treating newer stretch features as part of the frozen core.
+
+### B. Authentication — Google Sign-In Retesting
+
+**Primary QA:** `ujjalpoudel75`  
+**Independent QA:** `tulseyy8848`
+
+- [x] Google account selection verified.
+- [x] Login and Dashboard access verified.
+- [x] Session persistence after refresh verified within the tested scope.
+- [x] Logout persistence verified.
+- [x] Google re-login verified.
+- [x] Cancelled-popup recovery verified.
+
+**Primary QA:** 6 PASS, 0 reported FAIL.  
+**Independent QA:** 6 PASS, 0 FAIL.
+
+**Status:** PASS — Targeted Week 12 authentication retesting.
+
+**Limitation:** These results apply to the tested candidate and recorded scenarios. They do not independently establish complete application readiness or replace final team approval.
+
+**Evidence:**
+- [Authentication QA — Issue #167](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/167)
+- [Final Handoff — Issue #177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177)
+
+### C. Independent Firestore Runtime QA
+
+**Tester:** `DevyanaCT`
+
+**Automated Verification — November 19:**
+- [x] Independent automated test execution.
+- [x] Desktop and mobile test coverage.
+- [x] Authenticated Firestore session.
+- [x] Permission-denied error handling.
+- [x] Controlled terminal loading error.
+- [x] Retry recovery.
+- [x] Authenticated core flow and logout.
+
+**Automated Result:** 18 PASS, 0 FAIL.
+
+**Manual Verification — November 23:**
+- [x] Application-level permission-denied error reproduced.
+- [x] User-friendly error message verified.
+- [x] `Retry shared events` button visibility verified.
+- [x] Sample event listings remained accessible.
+- [x] Original local security rules restored — HTTP 200.
+- [x] Normal Discover recovery observed.
+- [ ] Retry button manually clicked and verified.
+- [ ] Separate terminal loading-error callback manually reproduced.
+
+**Manual Status:** PARTIAL — Permission-denied UI PASS; normal recovery observed; separate manual terminal-error and button-driven Retry checks not performed.
+
+**Testing Boundary:** Isolated Firebase Emulators, fictional test accounts and a separate QA revision. Production Firebase rules and records were not changed.
+
+**Evidence:**
+- [Firestore QA — Issue #166](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+- [Independent Automated QA — 18 PASS](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166#issuecomment-7003471002)
+
+### D. Search and Category Filtering
+
+**Manual Functional Result:** PASS
+
+- [x] Existing-event search verified.
+- [x] Social category filtering verified.
+- [x] Combined search/category filtering verified.
+- [x] Appropriate empty-state message verified.
+- [x] Matching event restored after changing filters.
+- [x] Search behavior after refresh documented.
+- [x] Category behavior after refresh documented.
+
+**Observed Refresh Behavior:**
+- Search query cleared after refresh.
+- Category selection reset to default.
+- Event listings remained available.
+
+**Outstanding Requirement:** Confirm whether the search/category settings are intended to persist or reset.
+
+**Owner:** `prachi2061` / responsible Discover implementation owner.
+
+**Status:** Functional PASS — Refresh persistence requirement pending.
+
+**Evidence:** [Issue #166 — Manual QA and Screenshots](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/166)
+
+### E. RSVP — Independent Manual QA
+
+**Tester:** `DevyanaCT`
+
+**Result:** 12 PASS, 0 FAIL within the tested scenarios.
+
+Verified:
+
+- [x] Joining an event.
+- [x] Cancelling RSVP.
+- [x] Refresh persistence.
+- [x] Fresh-session account persistence.
+- [x] Cross-account isolation.
+- [x] Offline failure handling.
+- [x] Reconnection and recovery.
+- [x] Save/Share regression checks.
+- [x] Responsive mobile behavior.
+
+**Status:** PASS — Documented independent manual testing scope.
+
+**Important:** This verification supports the newer RSVP implementation and must not be treated as proof that the feature belonged to the November 18 frozen core.
+
+**Evidence:**
+- [RSVP QA — Issue #193](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/193)
+- [RSVP Repair — PR #195](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/195)
+
+### F. Event Trip Planner — Independent Manual QA
+
+**Tester:** `DevyanaCT`
+
+Verified within the tested scope:
+
+- [x] Event destination handling.
+- [x] Google Maps integration.
+- [x] Public transit availability.
+- [x] Location permission behavior.
+- [x] Copy address.
+- [x] Nearby bus stops.
+- [x] Responsive simulated mobile layout.
+- [x] Keyboard accessibility.
+- [x] Trip lifecycle.
+
+**Known Limitations:**
+- Google Maps did not provide walking, driving and cycling directions for the tested Ulsan route.
+- Theme switching required closing Event Details in the tested UI.
+- Physical-device coverage was not established.
+
+**Status:** PASS within the documented tested scope, with external provider and UI limitations.
+
+**Evidence:**
+- [Trip Planner QA — Issue #197](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/197)
+- [Trip Planner — PR #196](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/196)
+
+### G. Additional UI and Navigation Regression
+
+**Primary QA:** `ujjalpoudel75`
+
+Reported Week 12 results:
+
+- Updated Discover, filtering, navigation, responsive layout and personal-plan actions: **12 PASS, 0 reported FAIL**.
+- Restored navigation icon regression on desktop and simulated mobile: **6 PASS, 0 reported FAIL**.
+
+Additional implementation work was documented for:
+
+- Discover usability and event presentation.
+- Restored compact navigation header.
+- Restored Dashboard sections.
+- Saved-event View Details behavior.
+
+**Evidence:**
+- [Discover Usability — PR #200](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/200)
+- [Navigation Header — PR #202](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/202)
+- [Dashboard Restoration — PR #203](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/203)
+- [Saved View Details — PR #204](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/204)
+
+These newer UI changes have their own verification records and should not be silently included in the pinned November 18 candidate.
+
+### H. Updated Verification Summary
+
+| Verification Area | Latest Documented Result |
+|---|---|
+| November 18 MVP freeze | Conditionally approved |
+| Google Sign-In targeted retest | 6 PASS primary QA; 6 PASS independent QA |
+| Independent Firestore automation | 18 PASS, 0 FAIL |
+| Manual permission-denied UI | PASS |
+| Firestore rule restoration | HTTP 200 — PASS |
+| Manual Retry button execution | NOT TESTED |
+| Manual terminal-error callback | NOT TESTED |
+| Search and category filtering | PASS |
+| Search/filter refresh requirement | PENDING |
+| RSVP independent QA | 12 PASS, 0 FAIL |
+| Event Trip Planner | PASS within tested scope |
+| Updated Discover regression | 12 PASS, 0 reported FAIL |
+| Navigation icon regression | 6 PASS, 0 reported FAIL |
+| Final whole-MVP release approval | NOT YET ESTABLISHED |
+
+### I. Remaining Risks and Next Actions
+
+| Remaining Item | Owner / Action |
+|---|---|
+| Search/filter refresh persistence requirement | `prachi2061` — Confirm expected behavior |
+| Manual terminal error and Retry coverage | `DevyanaCT` / coordinator — Accept documented automated coverage or request additional manual tests |
+| Trip Planner provider/theme limitations | UI implementation owner — Review if additional changes are required |
+| Dependency security findings | Implementation coordinator — Review and document disposition |
+| Presentation-device verification | Team 4 — Verify final demonstration environment |
+| Final rehearsal | Team 4 — Complete team rehearsal |
+| Final MVP approval | Coordinator/team — Review remaining conditions and record the decision |
+
+### J. Final Week 12 Handoff Position
+
+The Week 12 activities strengthened the existing MVP verification evidence.
+
+Targeted Google authentication retesting, independent Firestore automation, manual Firestore error handling, RSVP lifecycle testing, Event Trip Planner testing, and additional UI/navigation regression checks were documented.
+
+The frozen November 18 candidate remains the formal reference for the existing conditional approval. Later feature work and deployed-app testing have separate evidence and release boundaries.
+
+**Final Status: CONDITIONAL MVP APPROVAL RETAINED — Week 12 Verification Advanced; Outstanding Decisions and Demonstration Readiness Checks Remain.**
+
+Do not claim unconditional release approval until the responsible team records that decision.
 
 ### Remaining Follow-Up
 
