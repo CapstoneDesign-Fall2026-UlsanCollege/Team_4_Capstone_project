@@ -43,7 +43,7 @@ Guest-mode setup does not require private API keys or exclusive access to a team
 ### Option 1 — View the live application
 
 1. Open [CampusVibes](https://campusvibe-theta.vercel.app/).
-2. Select **Explore Events** to access the guest demo.
+2. Select **Explore Events** to access the guest demo/ signup.
 3. Browse available events using Discover.
 4. Search or filter events by category or interest.
 5. Open an event to view its details.
