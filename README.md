@@ -5,6 +5,7 @@
   <p>Team 4 · Ulsan College · Capstone Design, Fall 2026</p>
   <p>
     <a href="https://campusvibe-theta.vercel.app/">Live website</a> ·
+    <a href="#explore-events">Explore events</a> ·
     <a href="#quick-start">Quick start</a> ·
     <a href="#project-structure">Project structure</a> ·
     <a href="#testing">Testing</a> ·
@@ -14,7 +15,7 @@
 
 CampusVibes brings event discovery, campus updates, and student conversations into two connected workspaces: **Community** and **Campus Vibe-Feed**. It combines a React interface with Firebase account persistence and server-side integrations for AI conversations and photo sharing.
 
-> **Current data boundary:** Discover displays nine code-based sample events from [the event catalog](frontend/events.json). Live Firestore event loading remains unverified. Signed-in account records, shared Feed posts, messages, suggestions, and notifications use real Firestore data. Guest demo activity stays in the browser.
+> **Event data:** Guest mode uses the nine illustrative events in [the sample catalog](frontend/events.json). Verified, signed-in accounts can also load published campus events from Firestore. Event cards label each listing as **Sample listing** or **Published campus event**. Published-event counts vary with available records and filters; guest demo activity stays in the browser. See [verification status](#verification-status) for the limits of the recorded checks.
 
 ## Preview
 
@@ -29,26 +30,46 @@ CampusVibes brings event discovery, campus updates, and student conversations in
 
 These screenshots were captured from the local guest demo. The mobile image uses a browser viewport, not a physical-device test.
 
+## Explore events
+
+Open the [live website](https://campusvibe-theta.vercel.app/) and choose **Explore events** for the guest demo, or sign in with a verified account to access published listings and account features.
+
+| Access | Event listings | Saved activity |
+|---|---|---|
+| **Guest demo** | Nine sample events; choosing Published events can return no results. | Guest saves stay in that browser. |
+| **Verified account** | Sample events plus published campus events available through the account's Firestore permissions. | Saved events and personal plans synchronize with the account. |
+
+Discover starts with **Upcoming**, which includes today in campus time (**KST**). Use the date controls to choose **Today**, **This weekend**, **All dates**, or **Past events**. Under **Listings**, choose **Published events**, **Sample listings**, or **All listings**; search, category and saved-only filters combine with that selection.
+
+If no events appear:
+
+1. Choose **All dates** or **Past events** to find older listings.
+2. Clear the search text and category, select **All listings**, and turn off **Saved events only** if it is enabled.
+3. Use **Clear filters** to restore the defaults. This returns the date to **Upcoming**, so an empty upcoming list can still be expected when the available events are in the past.
+4. If a shared-events warning appears while signed in, check the connection and use **Retry shared events**. Follow the cached-data warning; sample listings remain a separate fallback.
+
 ## Features
 
 | Area | Implemented behavior |
 |---|---|
 | **Event discovery** | Dashboard, event search and interest filters, sorting, event details, bookmarks, and Google Maps venue links. The trip planner fills the destination from the selected event and accepts a typed starting point or optional current location. It opens bus/train, walking, driving or cycling directions and searches nearby bus stops. |
 | **Campus Vibe-Feed** | Shared text and event posts, one compressed photo per post through Cloudinary, likes, comments, interest, and private saved posts. |
-| **Friends and messages** | Friend requests, accepted-friend conversations, unread indicators, read receipts, and earlier message history. Avatars and member IDs distinguish people with the same name. |
+| **Friends and messages** | Friend requests, accepted-friend conversations, unread indicators, read receipts, and earlier message history. Shared names, profile photos and college labels help distinguish people with the same name; internal member IDs are not displayed. |
 | **Notifications** | One header inbox for both workspaces, Community/Feed filters, unread-only filtering, source links, and account-persistent read status. The inbox displays the latest 50 alerts. |
-| **Event suggestions** | Saved drafts, a shared review queue, reviewer decisions, and personal submission status. Anonymous submissions hide attribution from reviewers; project administrators retain access. |
+| **Event suggestions** | Saved drafts, an optional poster image, a shared review queue, reviewer decisions, and personal submission status. Authorized reviewer approval publishes an event into Discover. Anonymous submissions hide attribution from reviewers; project administrators retain access. |
 | **Profile and badges** | Optional profile photo, editable bio/study details/interests, saved-event activity, and persistent progress badges. |
 | **Assistant** | A local event helper with category/date/location filters and optional Gemini conversations for signed-in users, with privacy confirmation, usage controls, and local fallback. |
 | **Authentication and persistence** | Firebase email/password accounts, Google sign-in and password-reset flows, session preferences, and private account synchronization. |
 
 ### Scope and limitations
 
-- Events and their venue names are samples. The trip destination automatically uses the event’s organizer-provided pin/address when present, otherwise its venue name, with an explicit unconfirmed-address note. Users can correct the destination for their trip or restore the event location; map searches do not establish a verified real-world pin. Google Maps supplies route distances, times and transit services where available; CampusVibes only estimates straight-line distance when both endpoints have coordinates. Starting points stay in memory for the open dialog and are cleared on close or account change.
-- Suggestion approval records a review decision; it does not publish an event into Discover. Suggestion attachments and Assistant Attach/Voice controls are unavailable.
+The frozen demo path is **Landing → verified login → Dashboard → Discover → search/category → Event Details → session refresh → logout**. Feed, Assistant, profile, badges, suggestions, maps and notifications are supporting features. Their individual checks do not expand the frozen promise or provide final team approval.
+
+- Sample events use illustrative venues; published-event locations come from their publication records. The trip destination automatically uses the event’s organizer-provided pin/address when present, otherwise its venue name, with an explicit unconfirmed-address note. Users can correct the destination for their trip or restore the event location; map searches do not establish a verified real-world pin. Google Maps supplies route distances, times and transit services where available; CampusVibes only estimates straight-line distance when both endpoints have coordinates. Starting points stay in memory for the open dialog and are cleared on close or account change.
+- Suggestion poster uploads require Cloudinary configuration. Uploading a poster does not submit or publish the suggestion; submission and authorized reviewer approval are separate steps. Existing poster API/emulator checks do not establish a new live provider-upload result. Assistant Attach/Voice controls remain unavailable.
 - Gemini has no live web search or access to private student messages. Its availability depends on server configuration and provider limits.
 - Badges represent planning progress, not verified attendance or club membership.
-- Google sign-in reaches Google's account page on the production site in desktop/mobile viewport checks. Completing a real-account login, restoring that session and receiving a reset email still require separate verification.
+- Google account/session results are recorded for the [named frozen candidate](docs/Week12/QA-Checklist.md). Provider-page readiness automation does not complete a real-account login or prove password-reset email delivery. Broader Firestore error/recovery verification and final team approval remain separate open checks.
 
 ## Quick start
 
@@ -63,13 +84,15 @@ npm run dev
 
 Open the URL printed by Vite. Choose **Explore events** to use the guest demo without creating an account. Real-account features require Firebase Authentication and the project's Firestore permissions.
 
+The [Week 13 Setup Guide](docs/Week13/Setup-guide.md) provides the detailed live-access, local-setup and handoff instructions. The [Architecture Sketch](docs/Week13/Architecture-Sketch.md) explains the main code and service boundaries.
+
 For a production build:
 
 ```sh
 npm run build
 ```
 
-The build output is `frontend/react-app/dist/`. Local development also mounts the backend handlers at `/api/assistant` and `/api/feed-photo`.
+The build output is `frontend/react-app/dist/`. Local development also mounts the backend handlers at `/api/assistant`, `/api/feed-photo` and `/api/suggestion-photo`.
 
 ## Project structure
 
@@ -107,8 +130,8 @@ The root Firebase configuration points to the resources in `backend/firebase/`. 
 ```mermaid
 flowchart LR
     UI["Frontend: React + Vite"] --> Catalog["Sample event catalog"]
-    UI -->|"Sign-in and account/shared records"| Firebase["Firebase Auth + Firestore"]
-    UI -->|"/api/assistant and /api/feed-photo"| API["Backend: Vercel Functions"]
+    UI -->|"Sign-in, published events and account/shared records"| Firebase["Firebase Auth + Firestore"]
+    UI -->|"Assistant and photo API requests"| API["Backend: Vercel Functions"]
     API -->|"Identity, ownership and usage checks"| Firebase
     API -->|"Optional conversations"| Gemini["Gemini"]
     API -->|"Photo operations"| Cloudinary["Cloudinary"]
@@ -198,6 +221,12 @@ The client emulator switch is restricted to development on localhost. The test p
 
 Feature-specific [verification records](frontend/react-app/verification/) contain dated screenshots and test scopes. Automated browser checks and mobile viewports supplement the team's independent rehearsal evidence; they do not replace it. Older receipts describe the version they tested.
 
+### Verification status
+
+- **Candidate authentication:** November 23 manual retests by `ujjalpoudel75` and `tulseyy8848` each reported six passing Google sign-in/session checks on candidate `e5f1888`. See the [QA checklist](docs/Week12/QA-Checklist.md) and [peer notes](docs/Week12/Peer-Test-Notes.md) for the exact revision, steps and evidence limitations.
+- **Outside-team handoff:** On November 28, `jn-oli` from Team 5 reported 22 passing documentation, guest and authenticated manual checks on the live website, including observed published-event listings. The [final reviewer feedback](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/211#issuecomment-7224367502) records that no team assistance was needed. Local installation and automated suites were not run during that trial; an exact deployed SHA and browser version were not recorded.
+- **Remaining checks:** Manual Firestore terminal-error/Retry verification remains tracked in [#206](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/206). The actual final team approval decision remains tracked in [#177](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/177). Published-event display observations do not certify every database/security/error path or approve the full MVP.
+
 ## Deployment
 
 The current Vercel project uses:
@@ -228,7 +257,13 @@ Use focused branches and pull requests. Link the relevant issue, include the act
 - [Team documentation](docs/)
 - [Week 9 report](docs/Week9/Weekly-Report.md)
 - [Week 10 report — ownership assignment](docs/Week10/Weekly-Report.md)
-- [AI use, code-area map and ownership audit](docs/Week10/ai-use-and-code-ownership-audit.md)
+- [Week 12 QA report](docs/Week12/Weekly-Report.md)
+- [Week 13 report and handoff plan](docs/Week13/Weekly%20Report.md)
+- [Week 13 Setup Guide](docs/Week13/Setup-guide.md)
+- [Architecture Sketch](docs/Week13/Architecture-Sketch.md)
+- [Current code-area map and ownership audit](docs/Week13/Ai-use-audit-ownership.md)
+- [Earlier area map and accepted backup contacts](docs/Week10/ai-use-and-code-ownership-audit.md#codebase-area-map)
+- [Independent handoff feedback and documentation follow-up #211](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/211)
 - [Feature verification records](frontend/react-app/verification/)
 
 ## Team
