@@ -1,13 +1,15 @@
 # Peer Test Notes and Handoff Trial
 
-**Testing person or team:** Oli J.N. Taj (`jn-oli`) — Team 5  
-**Project tested:** CampusVibes — Team 4  
-**Date:** November 28, 2026  
-**Course:** Capstone Design — Fall 2026  
-**Week:** 13 — Documentation, Setup, and Handoff Proof  
-**Operating System:** Windows 11  
-**Browser:** Google Chrome  
-**Testing Environment:** Live deployment  
+**Testing person or team:** Oli J.N. Taj (`jn-oli`) — Team 5<br>
+**Project tested:** CampusVibes — Team 4<br>
+**Date:** November 28, 2026<br>
+**Course:** Capstone Design — Fall 2026<br>
+**Week:** 13 — Documentation, Setup, and Handoff Proof<br>
+**Operating System:** Windows 11<br>
+**Browser:** Google Chrome<br>
+**Testing Environment:** Live deployment
+
+**Documentation maintenance — November 28, `prachi2061`:** Linked the reviewer's final confirmation and completed README follow-up, and reconciled the pending items below. Email/verification screenshot embeds containing private details were removed from the linked public evidence. The original 22 reported manual results remain attributed to `jn-oli`; no new test or altered screenshot is supplied by this update.
 
 ## What we tried
 
@@ -111,7 +113,7 @@
 
 ## What confused us
 
-The following documentation observations were identified during the review and should be confirmed against the reviewer's final feedback:
+The following documentation observations were confirmed in the [reviewer's final feedback](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/211#issuecomment-7224367502):
 
 - The README describes nine sample event listings, but authenticated event discovery displayed 24 listings during the trial.
 
@@ -161,7 +163,7 @@ The observations above are documentation improvement opportunities and verificat
 
   The reviewer located the relevant architecture documentation, source code boundaries, verification commands, and backup support contact.
 
-  The reviewer should confirm whether any assistance or coaching was required during the trial.
+  In the [final feedback](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/211#issuecomment-7224367502), the reviewer confirmed that no Team 4 assistance was required and that the manual trial and documentation review were completed independently.
 
   Local development setup and automated test execution were not performed.
 
@@ -175,7 +177,7 @@ The observations above are documentation improvement opportunities and verificat
 
   Additional guidance for date filters and empty search results would improve the experience for new users.
 
-  Documentation improvements and any subsequent independent retest remain to be recorded.
+  The README clarification was merged in [PR #213](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/213). The Setup Guide follow-up and an independent reread/retest of corrected documentation remain pending.
 
 ## Manual Testing Summary
 
@@ -195,6 +197,8 @@ The observations above are documentation improvement opportunities and verificat
 - **Firestore Security Verification:** Outside the trial scope.
 - **Full MVP Approval:** Not established by this trial.
 
+The live alias was tested; the exact deployed commit SHA and browser version were not recorded. These results do not certify the pinned MVP candidate. Registration and verification-email receipt remain reviewer-reported observations; the private email/verification images are omitted from the public evidence.
+
 ## Evidence and GitHub Links
 
 - [Independent Manual Testing and Handoff Verification — Issue #211](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/211)
@@ -203,9 +207,9 @@ The observations above are documentation improvement opportunities and verificat
 
 - [Authenticated Student Journey Evidence](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/211#issuecomment-7224085540)
 
-- Final Independent Reviewer Feedback: See Issue #211.
+- [Final independent reviewer confirmation and no-assistance statement](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/issues/211#issuecomment-7224367502).
 
-- Documentation Improvement PR: Pending.
+- README documentation improvement: [PR #213 — merged](https://github.com/CapstoneDesign-Fall2026-UlsanCollege/Team_4_Capstone_project/pull/213). Setup Guide improvement remains pending.
 
 - Corrected Documentation Retest: Pending, if applicable.
 
@@ -233,10 +237,11 @@ This independent handoff trial does not automatically upgrade the project's froz
 - [x] Test authenticated student functionality.
 - [x] Record reported manual test results.
 - [x] Link screenshot evidence in GitHub.
-- [ ] Confirm final reviewer feedback and assistance details.
-- [ ] Confirm this Peer Test Notes document with the reviewer.
-- [ ] Update README and Setup Guide based on confirmed feedback.
-- [ ] Submit documentation improvement PR.
+- [x] Link the final reviewer feedback and confirmed no-assistance statement.
+- [ ] Ask the reviewer to reread these documentation corrections.
+- [x] Update README based on confirmed feedback — PR #213.
+- [ ] Update Setup Guide based on confirmed feedback.
+- [x] Merge the README documentation improvement PR — #213; remaining guide work stays separate.
 - [ ] Independently retest corrected documentation, if applicable.
 - [ ] Link the completed handoff records in the Week 13 Weekly Report.
 
@@ -252,11 +257,11 @@ The final documentation improvement and follow-up verification will strengthen t
 
 ---
 
-**Independent Reviewer:** Oli J.N. Taj (`jn-oli`)  
-**Reviewer Team:** Team 5  
-**Project Team:** Team 4 — CampusVibes  
-**Setup Guide Prepared By:** Devyana (`DevyanaCT`)  
-**Testing Date:** November 28, 2026  
-**Manual Testing Status:** 22/22 Reported PASS  
-**Handoff Trial:** Performed — live application and documentation scope  
-**Documentation Follow-up:** Pending  
+**Independent Reviewer:** Oli J.N. Taj (`jn-oli`)<br>
+**Reviewer Team:** Team 5<br>
+**Project Team:** Team 4 — CampusVibes<br>
+**Setup Guide Prepared By:** Devyana (`DevyanaCT`)<br>
+**Testing Date:** November 28, 2026<br>
+**Manual Testing Status:** 22/22 Reported PASS<br>
+**Handoff Trial:** Performed — live application and documentation scope<br>
+**Documentation Follow-up:** README updated; Setup Guide and independent reread/retest pending
